@@ -20,9 +20,10 @@ public class CyActivator extends AbstractCyActivator{
 	@Override
 	public void start(BundleContext context) {
 		
-		// CyApplicationManager = getService()
-		// DotWriterFactory = getService()
-		// CyFileFilter = getService()
+		// TODO
+		// CyApplicationManager cyAppMgr = getService()
+		// CyFileFilter fileFilter = getService()
+		// DotWriterFac(cyAppMan, CyFileWriter) dotFac
 
 	}
 
