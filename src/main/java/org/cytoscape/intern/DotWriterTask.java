@@ -2,13 +2,15 @@ package org.cytoscape.intern;
 
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.io.write.CyWriter;
+import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.work.TaskMonitor;
 
 
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 /**
- * Task factory that creates the file writing task.
+ * Task object that writes the network view to a .dot file
  * 
  * @author Massoud Maher
  * @author Braxton Fitts
@@ -16,10 +18,27 @@ import java.io.OutputStream;
  */
 public class DotWriterTask implements CyWriter {
 	
-	// CyApplicationManager cyAppMgr
-	// DataManager dataMgr
-	// VisualLexicon visualLex
-	// OutputStreamWriter outputWriter
+	/**
+	 * Object used to retrieve the currently selected network view from
+	 * the program
+	 */
+	CyApplicationManager cyAppMgr;
+	
+	/**
+	 * Object used to handle the creation of the .dot node and edge declarations
+	 */
+	DataManager dataMgr;
+	
+	/**
+	 * Object that contains all the VisualProperty objects associated with each
+	 * View object
+	 */
+	VisualLexicon visualLex;
+	
+	/**
+	 * Object used to write the .dot file
+	 */
+	OutputStreamWriter outputWriter;
 	
 	/**
 	 * Constructs a DotWriterTask object with a given CyApplicationManager
@@ -42,11 +61,17 @@ public class DotWriterTask implements CyWriter {
 		// TODO
 	}
 	
+	/**
+	 * Causes the task to stop execution.
+	 */
 	@Override
 	public void cancel() {
 		// TODO
 	}
 	
+	/**
+	 * Writes the network properties
+	 */
 	public void writeProps() {
 		// TODO
 	}
