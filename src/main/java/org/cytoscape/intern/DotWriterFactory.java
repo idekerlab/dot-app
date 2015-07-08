@@ -17,8 +17,10 @@ import java.io.OutputStream;
  */
 public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	
-	// CyApplicationManager cyAppMgr
-	// CyFileFilter fileFilter
+	// used to get Network/Node/Edge data from Cytoscape
+	CyApplicationManager cyAppMgr;
+	// TODO
+	CyFileFilter fileFilter;
 	
 	/**
 	 * Constructs a DotWriterFactory object with a given CyApplicationManager
