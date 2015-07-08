@@ -29,8 +29,9 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 * @param cyAppMgr CyApplicationManager used in this factory to get network data
 	 */
 	public DotWriterFactory(CyApplicationManager cyAppMgr, CyFileFilter fileFilter) {
-		// TODO
 		super();
+		this.cyAppMgr = cyAppMgr;
+		this.fileFilter = fileFilter;
 	}
 
 	/**
@@ -40,9 +41,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 */
 	@Override
 	public CyFileFilter getFileFilter() {
-		// TODO
-		// to prevent compiler error
-		return null;
+		return fileFilter;
 	}
 	
 	/**
