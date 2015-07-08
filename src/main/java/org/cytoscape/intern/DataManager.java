@@ -15,7 +15,7 @@ import org.cytoscape.view.model.CyNetworkView;
  * @author Braxton Fitts
  * @author Ziran Zhang
  */
-public class DataManager{
+public class DataManager {
   
   //instance of NodePropertyMapper class
   NodePropertyMapper nodeMapper;
@@ -24,32 +24,32 @@ public class DataManager{
   EdgePropertyMapper edgeMapper;
 
   
-  /*
+  /**
    * checks out which method,either getEdgeString or getNodeString, 
    * will be called based on the parameter 
    *
    * @param pass in the View (Edge's or Node's), 
    * which determines Edge property or Node property
    */
-  public String getElementString (View <Object>) {
+  public String getElementString (View<Object> elementView) {
     //TODO
   }
  
-  /*
+  /**
    * Calls method mapVisToDot in EdgePropertyManager class 
    *
    * @param pass in the Edge View
    */
-  public String getEdgeString(View<CyEdge>){
+  public String getEdgeString(View<CyEdge> edgeView) {
     //TODO
   }
 
-  /*
+  /**
    * Calls method mapVisToDot in NodePropertyManager class 
    *
    * @param pass in the Node View
    */
-   public String getNodeString(View<CyNode>){
+   public String getNodeString(View<CyNode> nodeView) {
      //TODO
    }
 
