@@ -19,7 +19,7 @@ import java.io.OutputStream;
 public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	
 	// used to get Network/Node/Edge data from Cytoscape
-	CyApplicationManager cyAppMgr;
+	// CyApplicationManager cyAppMgr;
 	// TODO
 	CyFileFilter fileFilter;
 	
@@ -27,10 +27,11 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 * Constructs a DotWriterFactory object with a given CyApplicationManager
 	 * 
 	 * @param cyAppMgr CyApplicationManager used in this factory to get network data
+	 * @param fileFilter CyFileFilter associated with this factory
 	 */
-	public DotWriterFactory(CyApplicationManager cyAppMgr, CyFileFilter fileFilter) {
+	public DotWriterFactory(/* CyApplicationManager cyAppMgr , */CyFileFilter fileFilter) {
 		super();
-		this.cyAppMgr = cyAppMgr;
+		//this.cyAppMgr = cyAppMgr;
 		this.fileFilter = fileFilter;
 	}
 
@@ -54,9 +55,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 */
 	@Override
 	public CyWriter createWriter(OutputStream outStream, CyNetwork network) {
-		// TODO
-		// to prevent compiler error
-		return null;
+		return new DotWriterTask(outStream, network);
 	}
 	
 	/**
@@ -69,8 +68,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 */
 	@Override
 	public CyWriter createWriter(OutputStream outStream, CyNetworkView view) {
-		// TODO
-		// to prevent compiler error
+		// TODO-- thing we'll just leave this blank
 		return null;
 	}
 	
