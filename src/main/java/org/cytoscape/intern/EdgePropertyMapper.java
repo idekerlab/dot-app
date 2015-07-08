@@ -19,7 +19,7 @@ public class EdgePropertyMapper extends Mapper {
 	/**
 	 * Maps Cytoscape VisualProperty types by their String ID to their dot equivalent
 	 */
-	private HashMap<String, String> simpleVisToDot; // TODO fill in
+	private HashMap<String, String> simpleVisPropsToDot; // TODO fill in
 	/**
 	 * Maps Cytoscape VisualProperty types by their String ID to a HashMap that
 	 * contains the Cytoscape to *.dot mappings for that type
