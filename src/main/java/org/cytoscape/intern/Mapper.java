@@ -3,6 +3,7 @@ package org.cytoscape.intern;
 import java.util.HashMap;
 import java.awt.Color;
 import java.awt.Font;
+
 import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
 import org.cytoscape.view.model.VisualProperty;
 
@@ -17,18 +18,17 @@ import org.cytoscape.view.model.VisualProperty;
  */
 public abstract class Mapper {
 
-	// TODO -- access level of 3 variables below
 	// maps Cytoscape properties  by their ID Strings to their .dot equivalents if relationship is simple equivalency
-	HashMap<String, String> simpleVisPropsToDot; // TODO fill in
+	private HashMap<String, String> simpleVisPropsToDot; 
 	
 	/**
 	 * maps Cytoscape VisualProperty TYPES by their String ID to a HashMap that contains the 
 	 * cytoscape to *.dot mappings for that type
 	 */
-	HashMap<String, HashMap<Object, Object> >discreteMappingTypes; // TODO
+	private HashMap<String, HashMap<Object, Object> >discreteMappingTypes;
 	
 	// maps Cytoscape line types to the equivalent string used in .dot
-	HashMap<LineTypeVisualProperty, String> lineTypeMap; // TODO
+	protected HashMap<LineTypeVisualProperty, String> lineTypeMap; // TODO
 	
 	
 	/**
@@ -50,7 +50,7 @@ public abstract class Mapper {
 	 * @param alpha alpha level of that color-- cytoscape does not use alpha in Paint class
 	 * @return String representation of color in .dot format of rgba
 	 */
-	public String mapColorToDot(Color color, Integer alpha) {
+	protected String mapColorToDot(Color color, Integer alpha) {
 		// TODO
 		return null;
 	}
@@ -62,7 +62,7 @@ public abstract class Mapper {
 	 * @param size size of font to be converted
 	 * @return String that is .dot representation of the provided font
 	 */
-	public String mapFont(Font font, Integer size) {
+	protected String mapFont(Font font, Integer size) {
 		// TODO
 		return null;
 	}
