@@ -26,6 +26,13 @@ public class CyActivator extends AbstractCyActivator{
 		 * CyApplicationManager cyAppMgr = getService(context, CyApplicationManager.class)
 		 * CyFileFilter fileFilter = getService(context, CyFileFilter.class)
 		 * DotWriterFactory dotFac = new DotWriterFactory(cyAppMgr, cyFileFilter);
+		 * 
+		 * Not sure if we need this below because of all the fileFilter stuff
+		 * Properties menuProperties = new Properties();
+		 * props.setProperty("preferredMenu","Apps.dot");
+		 * props.setProperty("title","Export network to dot");
+		 * 
+		 * registerService(context, dotFac, TaskFactory.class, props);
 		 */
 		
 
