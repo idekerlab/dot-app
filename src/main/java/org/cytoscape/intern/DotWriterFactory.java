@@ -6,6 +6,7 @@ import org.cytoscape.io.CyFileFilter;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.application.CyApplicationManager;
+
 import java.io.OutputStream;
 
 /**
