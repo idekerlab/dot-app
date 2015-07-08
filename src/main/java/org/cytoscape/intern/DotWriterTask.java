@@ -4,6 +4,7 @@ import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.io.write.CyWriter;
 import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.work.TaskMonitor;
+import org.cytoscape.model.CyNetwork;
 
 
 import java.io.OutputStream;
@@ -22,7 +23,7 @@ public class DotWriterTask implements CyWriter {
 	 * Object used to retrieve the currently selected network view from
 	 * the program
 	 */
-	CyApplicationManager cyAppMgr;
+	// CyApplicationManager cyAppMgr;
 	
 	/**
 	 * Object used to handle the creation of the .dot node and edge declarations
@@ -30,22 +31,22 @@ public class DotWriterTask implements CyWriter {
 	DataManager dataMgr;
 	
 	/**
-	 * Object that contains all the VisualProperty objects associated with each
-	 * View object
-	 */
-	VisualLexicon visualLex;
-	
-	/**
 	 * Object used to write the .dot file
 	 */
 	OutputStreamWriter outputWriter;
 	
 	/**
+	 * Network being converted to .dot
+	 */
+	CyNetwork network;
+	
+	/**
 	 * Constructs a DotWriterTask object with a given CyApplicationManager
 	 * 
 	 * @param cyAppMgr CyApplicationManager used to get network data
+	 * @param output OutputStream that is being written to
 	 */
-	public DotWriterTask(CyApplicationManager cyAppMgr, OutputStream output) {
+	public DotWriterTask(/*CyApplicationManager cyAppMgr,*/ OutputStream output, CyNetwork network) {
 		// TODO
 		super();
 	}
