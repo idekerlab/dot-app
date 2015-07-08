@@ -28,7 +28,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 * 
 	 * @param cyAppMgr CyApplicationManager used in this factory to get network data
 	 */
-	public DotWriterFactory(CyApplicationManager cyAppMgr) {
+	public DotWriterFactory(CyApplicationManager cyAppMgr, CyFileFilter fileFilter) {
 		// TODO
 		super();
 	}
