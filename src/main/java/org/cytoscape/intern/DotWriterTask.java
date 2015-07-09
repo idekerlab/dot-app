@@ -17,12 +17,6 @@ import java.io.OutputStreamWriter;
 public class DotWriterTask implements CyWriter {
 	
 	/**
-	 * Object used to retrieve the currently selected network view from
-	 * the program
-	 */
-	// CyApplicationManager cyAppMgr;
-	
-	/**
 	 * Object used to handle the creation of the .dot node and edge declarations
 	 */
 	DataManager dataMgr;
@@ -41,7 +35,7 @@ public class DotWriterTask implements CyWriter {
 	 * Constructs a DotWriterTask object with a given CyApplicationManager
 	 * 
 	 * @param output OutputStream that is being written to
-	 * @param networkView CyNetworkView of network being converted
+	 * @param networkView CyNetworkView that is being exported
 	 */
 	public DotWriterTask(OutputStream output, CyNetworkView networkView) {
 		super();
@@ -58,6 +52,7 @@ public class DotWriterTask implements CyWriter {
 	 */
 	@Override
 	public void run(TaskMonitor taskMonitor) {
+		dataMgr = new DataManager();
 		writeProps();
 		writeNodes();
 		writeEdges();

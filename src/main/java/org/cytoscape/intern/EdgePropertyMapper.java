@@ -1,7 +1,9 @@
 package org.cytoscape.intern;
+
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
+import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
 import org.cytoscape.view.presentation.property.EdgeBendVisualProperty;
 
 import java.util.HashMap;
@@ -24,7 +26,7 @@ public class EdgePropertyMapper extends Mapper {
 	 * Maps Cytoscape VisualProperty types by their String ID to a HashMap that
 	 * contains the Cytoscape to *.dot mappings for that type
 	 */
-	private HashMap<String, HashMap<Object, Object> > discreteMappingTypes; // TODO fill in
+	private HashMap<String, HashMap<VisualPropertyValue, String> > discreteMappingTypes; // TODO fill in
 	/**
 	 * Maps Cytoscape arrowhead types to the equivalent dot attribute
 	 */

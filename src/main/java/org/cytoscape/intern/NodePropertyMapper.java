@@ -1,8 +1,10 @@
 package org.cytoscape.intern;
 
+import org.cytoscape.view.presentation.property.values.NodeShape;
+import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
+
 import java.util.HashMap;
 
-import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
 
 /**
  * Handles mapping of CyNode properties to .dot equivalent Strings
@@ -13,16 +15,20 @@ import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
  */
 public class NodePropertyMapper extends Mapper {
 	
-	// maps Cytoscape properties  by their ID Strings to their .dot equivalents if relationship is simple equivalency
+	/**
+	 * maps Cytoscape properties by their ID strings to their .dot equivalents if relationship is simple
+	 */
 	private HashMap<String, String> simpleVisPropsToDot; // TODO fill in
 	
 	/**
 	 * maps Cytoscape VisualProperty TYPES by their String ID to a HashMap that contains the 
 	 * cytoscape to *.dot mappings for that type
 	 */
-	private HashMap<String, HashMap<Object, Object> > discreteMappingTypes; // TODO
+	private HashMap<String, HashMap<VisualPropertyValue, String> > discreteMappingTypes; // TODO
 	
-	// maps Cytoscape line types to the equivalent string used in .dot
-	protected HashMap<LineTypeVisualProperty, String> nodeShapeMap; // TODO
+	/**
+	 *  maps Cytoscape node shape types to the equivalent string used in .dot
+	 */
+	protected HashMap<NodeShape, String> nodeShapeMap; // TODO
 
 }

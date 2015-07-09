@@ -1,13 +1,14 @@
 package org.cytoscape.intern;
 
-import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyNetwork;
-import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
 
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
+import java.util.ArrayList;
 
 /**
  * An instance of manager, which is constructed in 
@@ -20,10 +21,14 @@ import java.awt.GraphicsEnvironment;
  */
 public class DataManager {
   
-	//instance of NodePropertyMapper class
+	/**
+	 * instance of NodePropertyMapper class
+	 */
 	NodePropertyMapper nodeMapper;
 
-	//instance of EdgePropertyMapper class
+	/**
+	 * instance of EdgePropertyMapper class
+	 */
 	EdgePropertyMapper edgeMapper;
 
   
@@ -182,26 +187,4 @@ public class DataManager {
 		 */
 		return false;
 	}
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

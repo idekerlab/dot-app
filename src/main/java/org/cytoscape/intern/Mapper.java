@@ -1,11 +1,12 @@
 package org.cytoscape.intern;
 
-import java.util.HashMap;
+import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.presentation.property.values.LineType;
+import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
+
 import java.awt.Color;
 import java.awt.Font;
-
-import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
-import org.cytoscape.view.model.VisualProperty;
+import java.util.HashMap;
 
 /**
  * Handles mapping of Cytoscape properties to .dot attributes in the form of a String.
@@ -25,10 +26,10 @@ public abstract class Mapper {
 	 * maps Cytoscape VisualProperty TYPES by their String ID to a HashMap that contains the 
 	 * cytoscape to *.dot mappings for that type
 	 */
-	private HashMap<String, HashMap<Object, Object> >discreteMappingTypes;
+	private HashMap<String, HashMap<VisualPropertyValue, String> >discreteMappingTypes;
 	
 	// maps Cytoscape line types to the equivalent string used in .dot
-	protected HashMap<LineTypeVisualProperty, String> lineTypeMap; // TODO
+	protected HashMap<LineType, String> lineTypeMap; // TODO
 	
 	
 	/**
@@ -37,8 +38,17 @@ public abstract class Mapper {
 	 * @param property VisualProperty to be converted
 	 * @return String that is .dot equivalent of the visual property
 	 */
-	public String mapVisToDot(VisualProperty<Object> property) {
+	public <T> String  mapVisToDot(VisualProperty<T> property, T value) {
 		//TODO
+		/**
+		 * Pseudocode:
+		 * Attempt to retrieve .dot string from simpleVisPropsToDot by using ID string
+		 * If found: concatenate value to .dot stinrg
+		 * Else: Attempt to retrieve hashmap from discreteMappingTypes by using ID string
+		 * If found: attempt to retreive .dot string from retrieved hashmap using value
+		 * If found: return .dot string
+		 * Else: return default .dot string
+		 */
 		return null;
 	}
 	
@@ -52,6 +62,12 @@ public abstract class Mapper {
 	 */
 	protected String mapColorToDot(Color color, Integer alpha) {
 		// TODO
+		/**
+		 * Pseudocode:
+		 * Retrieve individual color bits using getRed() getGreen() getBlue()
+		 * Convert to a string using String.format("#%02X%02X%02X%02X", red, green, blue, alpha)
+		 * return string
+		 */
 		return null;
 	}
 	
