@@ -1,14 +1,11 @@
 package org.cytoscape.intern;
 
 import org.cytoscape.io.write.CyWriter;
-import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.view.model.CyNetworkView;
 
-
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.awt.Color;
 
 /**
  * Task object that writes the network view to a .dot file
@@ -43,10 +40,10 @@ public class DotWriterTask implements CyWriter {
 	/**
 	 * Constructs a DotWriterTask object with a given CyApplicationManager
 	 * 
-	 * @param cyAppMgr CyApplicationManager used to get network data
 	 * @param output OutputStream that is being written to
+	 * @param networkView CyNetworkView of network being converted
 	 */
-	public DotWriterTask(/*CyApplicationManager cyAppMgr,*/ OutputStream output, CyNetworkView networkView) {
+	public DotWriterTask(OutputStream output, CyNetworkView networkView) {
 		super();
 		
 		outputWriter = new OutputStreamWriter(output);
@@ -75,39 +72,44 @@ public class DotWriterTask implements CyWriter {
 	}
 	
 	/**
-	 * Writes the network properties
+	 * Writes the network properties to file
 	 */
 	public void writeProps() {
 		/**
 		 * pseudocode
 		 * 
-		 * outputWriter.write( dataMgr.getPropertiesString() );
-		 * 
+		 * outputWriter.write( dataMgr.getPropertiesString(networkView) );
 		 */
 	}
 	
 	/**
-	 * Writes the .dot declaration of each node
+	 * Writes the .dot declaration of each node to file
 	 */
 	public void writeNodes() {
-		// TODO
+		/**
+		 * pseudocode
+		 * 
+		 * ArrayList< View<CyNode> > nodeViewList = networkView.getNodeViews();
+		 * 
+		 * for(View<CyNode> nodeView: nodeViewList) {
+		 * 		outputWriter.write( dataMgr.getNodeString(nodeView) );
+		 * }
+		 */
 	}
 	
 	/**
 	 * Writes the .dot declaration of each edge
 	 */
 	public void writeEdges() {
-		// TODO
-	}
-	
-	/**
-	 * Determines if the network view should be treated as a directed graph or
-	 * an undirected graph
-	 * @return true if the graph should be treated as a directed graph, otherwise false
-	 */
-	public boolean determineDirected() {
-		// TODO
-		return false;
+		/**
+		 * pseudocode
+		 * 
+		 * ArrayList< View<CyEdge> > edgeViewList = networkView.getEdgeViews();
+		 * 
+		 * for(View<CyEdge> edgeView: edgeViewList) {
+		 * 		outputWriter.write( dataMgr.getEdgeString(edgeView) );
+		 * }
+		 */
 	}
 	
 }
