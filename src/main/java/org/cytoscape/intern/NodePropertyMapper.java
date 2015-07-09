@@ -20,7 +20,7 @@ public class NodePropertyMapper extends Mapper {
 	/**
 	 * maps Cytoscape properties by their ID strings to their .dot equivalents if relationship is simple
 	 */
-	private HashMap< VisualProperty<Object>, String> simpleVisPropsToDot;
+	private HashMap< VisualProperty, String> simpleVisPropsToDot;
 	
 	/**
 	 * maps Cytoscape VisualProperty TYPES by their String ID to a HashMap that contains the 
@@ -38,12 +38,12 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	public NodePropertyMapper() {
 		// initialize hash maps
-		simpleVisPropsToDot = new HashMap<VisualProperty<Object>, String>();
+		simpleVisPropsToDot = new HashMap< VisualProperty, String>();
 		discreteMappingTypes = new HashMap<String, HashMap<VisualPropertyValue, String> >();
 		nodeShapeMap = new HashMap<NodeShape, String>();
 		
 		// populate simpleVisPropsToDot
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = " + "a");
+		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = ");
 	}
 }
 
