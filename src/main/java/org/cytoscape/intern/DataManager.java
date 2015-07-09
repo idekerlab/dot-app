@@ -31,7 +31,14 @@ public class DataManager {
 	 */
 	EdgePropertyMapper edgeMapper;
 
-  
+	/**
+	 * Constructs a DataManager object
+	 */
+	public DataManager() {	
+		this.nodeMapper = new NodePropertyMapper();
+		this.edgeMapper = new EdgePropertyMapper();
+	}	
+	
 	/**
 	 * checks out which method,either getEdgeString or getNodeString, 
 	 * will be called based on the parameter 

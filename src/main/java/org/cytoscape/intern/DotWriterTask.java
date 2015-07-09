@@ -42,6 +42,7 @@ public class DotWriterTask implements CyWriter {
 		
 		outputWriter = new OutputStreamWriter(output);
 		this.networkView = networkView;
+		this.dataMgr = new DataManager();
 	}
 
 	/**

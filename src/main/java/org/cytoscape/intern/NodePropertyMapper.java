@@ -2,6 +2,7 @@ package org.cytoscape.intern;
 
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
+import org.cytoscape.view.model.VisualProperty;
 
 import java.util.HashMap;
 
@@ -18,7 +19,7 @@ public class NodePropertyMapper extends Mapper {
 	/**
 	 * maps Cytoscape properties by their ID strings to their .dot equivalents if relationship is simple
 	 */
-	private HashMap<String, String> simpleVisPropsToDot; // TODO fill in
+	private HashMap< VisualProperty<Object>, String> simpleVisPropsToDot = new HashMap<VisualProperty<Object>, String>();
 	
 	/**
 	 * maps Cytoscape VisualProperty TYPES by their String ID to a HashMap that contains the 
