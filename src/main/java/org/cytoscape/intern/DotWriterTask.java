@@ -79,19 +79,9 @@ public class DotWriterTask implements CyWriter {
 	 */
 	public void writeProps() {
 		/**
-		 * all properties we need to write
-		 * 
-		 * bgcolor-- NETWORK_BACKGROUND_POINT
-		 * dim -- 2
-		 * dimen -- 2?
-		 * fixedsize -- true
-		 * fontpath -- maybe something
-		 * scale -- NETWORK_SCALE_FACTOR -- try ignoring first
-		 * label -- NETWORK_TITLE -- maybe -- test
-		 * 
 		 * pseudocode
 		 * 
-		 * outputWriter.write();
+		 * outputWriter.write( dataMgr.getPropertiesString() );
 		 * 
 		 */
 	}
