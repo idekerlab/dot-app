@@ -5,7 +5,6 @@ import org.cytoscape.io.write.CyWriter;
 import org.cytoscape.io.CyFileFilter;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.model.CyNetwork;
-import org.cytoscape.application.CyApplicationManager;
 
 import java.io.OutputStream;
 
@@ -19,7 +18,7 @@ import java.io.OutputStream;
 public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	
 	// used to get Network/Node/Edge data from Cytoscape
-	CyApplicationManager cyAppMgr;
+	// CyApplicationManager cyAppMgr;
 	// TODO
 	CyFileFilter fileFilter;
 	
@@ -27,15 +26,11 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 * Constructs a DotWriterFactory object with a given CyApplicationManager
 	 * 
 	 * @param cyAppMgr CyApplicationManager used in this factory to get network data
+	 * @param fileFilter CyFileFilter associated with this factory
 	 */
-	public DotWriterFactory(CyApplicationManager cyAppMgr, CyFileFilter fileFilter) {
-		// TODO
-		/**
-		 * Pseudocode:
-		 * this.cyAppMgr = cyAppMgr;
-		 * this.fileFilter = fileFilter;
-		 */
+	public DotWriterFactory(/* CyApplicationManager cyAppMgr , */CyFileFilter fileFilter) {
 		super();
+		this.fileFilter = fileFilter;
 	}
 
 	/**
@@ -45,13 +40,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 */
 	@Override
 	public CyFileFilter getFileFilter() {
-		// TODO
-		/**
-		 * Pseudocode:
-		 * return this.fileFilter;
-		 */
-		// to prevent compiler error
-		return null;
+		return fileFilter;
 	}
 	
 	/**
@@ -82,13 +71,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 */
 	@Override
 	public CyWriter createWriter(OutputStream outStream, CyNetworkView view) {
-		// TODO
-		// to prevent compiler error
-		/**
-		 * Pseudocode:
-		 * return new DotWriterTask(cyAppMgr, outStream);
-		 */
-		return null;
+		return new DotWriterTask(outStream, view);
 	}
 	
 }

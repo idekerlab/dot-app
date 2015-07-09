@@ -1,9 +1,9 @@
 package org.cytoscape.intern;
 
-import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.io.write.CyWriter;
 import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.work.TaskMonitor;
+import org.cytoscape.view.model.CyNetworkView;
 
 
 import java.io.OutputStream;
@@ -22,7 +22,7 @@ public class DotWriterTask implements CyWriter {
 	 * Object used to retrieve the currently selected network view from
 	 * the program
 	 */
-	CyApplicationManager cyAppMgr;
+	// CyApplicationManager cyAppMgr;
 	
 	/**
 	 * Object used to handle the creation of the .dot node and edge declarations
@@ -30,24 +30,26 @@ public class DotWriterTask implements CyWriter {
 	DataManager dataMgr;
 	
 	/**
-	 * Object that contains all the VisualProperty objects associated with each
-	 * View object
-	 */
-	VisualLexicon visualLex;
-	
-	/**
 	 * Object used to write the .dot file
 	 */
 	OutputStreamWriter outputWriter;
 	
 	/**
+	 * NetworkView being converted to .dot
+	 */
+	CyNetworkView networkView;
+	
+	/**
 	 * Constructs a DotWriterTask object with a given CyApplicationManager
 	 * 
 	 * @param cyAppMgr CyApplicationManager used to get network data
+	 * @param output OutputStream that is being written to
 	 */
-	public DotWriterTask(CyApplicationManager cyAppMgr, OutputStream output) {
-		// TODO
+	public DotWriterTask(/*CyApplicationManager cyAppMgr,*/ OutputStream output, CyNetworkView networkView) {
 		super();
+		
+		outputWriter = new OutputStreamWriter(output);
+		this.networkView = networkView;
 	}
 
 	/**
@@ -58,7 +60,9 @@ public class DotWriterTask implements CyWriter {
 	 */
 	@Override
 	public void run(TaskMonitor taskMonitor) {
-		// TODO
+		writeProps();
+		writeNodes();
+		writeEdges();
 	}
 	
 	/**
@@ -73,7 +77,22 @@ public class DotWriterTask implements CyWriter {
 	 * Writes the network properties
 	 */
 	public void writeProps() {
-		// TODO
+		/**
+		 * all properties we need to write
+		 * 
+		 * bgcolor-- NETWORK_BACKGROUND_POINT
+		 * dim -- 2
+		 * dimen -- 2?
+		 * fixedsize -- true
+		 * fontpath -- maybe something
+		 * scale -- NETWORK_SCALE_FACTOR -- try ignoring first
+		 * label -- NETWORK_TITLE -- maybe -- test
+		 * 
+		 * pseudocode
+		 * 
+		 * outputWriter.write();
+		 * 
+		 */
 	}
 	
 	/**

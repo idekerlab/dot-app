@@ -2,6 +2,11 @@ package org.cytoscape.intern;
 
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.osgi.framework.BundleContext;
+import org.cytoscape.work.TaskFactory;
+import org.cytoscape.application.CyApplicationManager;
+//import org.cytoscape.model.CyNetworkManager;
+
+import java.util.Properties;
 
 /**
  * Runs the program
