@@ -6,6 +6,8 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.CyNetworkView;
 
+import java.awt.Color
+import java.awt.GraphicsEnvironment
 
 /**
  * An instance of manager, which is constructed in 
