@@ -2,6 +2,7 @@ package org.cytoscape.intern;
 
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.CyNetworkView;
 
@@ -110,5 +111,91 @@ public class DataManager {
 		 */
 		return null;
 	}
-
+	
+	/**
+	 * Returns a String that defines all relevant general properties-- general graph properties
+	 * that are not related to nodes or edges
+	 * 
+	 *  @param view View of network we are converting 
+	 *  @return String that defines graph properties in .dot format
+	 */
+	public String getPropertiesString(CyNetworkView view) {
+		
+		/**
+		 * all properties we need to write
+		 * 
+		 * directed
+		 * bgcolor-- NETWORK_BACKGROUND_POINT
+		 * dim -- 2
+		 * dimen -- 2?
+		 * fixedsize -- true
+		 * fontpath -- maybe something
+		 * scale -- NETWORK_SCALE_FACTOR -- try ignoring first
+		 * label -- NETWORK_TITLE -- maybe -- test
+		 * 
+		 * pseudocode
+		 * 
+		 * String output = "";
+		 * 
+		 * output += getDirectedString(view);
+		 */
+		return null;
+	}
+	
+	/**
+	 * Returns dot string that represents if graph is directed or not
+	 * 
+	 * @param view CyNetworkView of network being checked
+	 * @return String that is either "graph {" or "digraph {"
+	 */
+	private String getDirectedString(CyNetworkView view) {
+		String output = (isDirected(view)) ? "graph {":"digraph {";
+		return output;
+	}
+	
+	/**
+	 * Determines whether the graph is visibly directed or not
+	 * 
+	 * @param view View of network we are checking for direction
+	 * @return true if graph is directed, false otherwise
+	 */
+	private boolean isDirected(CyNetworkView view) {
+		/**
+		 * pseudocode
+		 * 
+		 * CyNetwork network = view.getModel();
+		 * ArrayList<CyEdge> edgeList = network.getEdgeList();
+		 * 
+		 * M-- note that indenting is off below
+		 * for(CyEdge edge: edgeList) {
+		 * 		if(edge.isDirected()) {
+		 * 			return true;
+		 * 		}
+		 * }
+		 * return false;
+		 */
+		return false;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
