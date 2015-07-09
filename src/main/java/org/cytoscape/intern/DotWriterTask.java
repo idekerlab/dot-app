@@ -8,7 +8,7 @@ import org.cytoscape.view.model.CyNetworkView;
 
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.awt.Color
+import java.awt.Color;
 
 /**
  * Task object that writes the network view to a .dot file
