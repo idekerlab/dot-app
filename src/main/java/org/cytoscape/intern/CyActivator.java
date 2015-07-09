@@ -4,6 +4,7 @@ import org.cytoscape.service.util.AbstractCyActivator;
 import org.osgi.framework.BundleContext;
 import org.cytoscape.work.TaskFactory;
 //import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.io.write.CyNetworkViewWriterFactory;
 
 import java.util.Properties;
 
