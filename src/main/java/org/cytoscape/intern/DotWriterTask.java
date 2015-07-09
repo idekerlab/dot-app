@@ -54,7 +54,6 @@ public class DotWriterTask implements CyWriter {
 	 */
 	@Override
 	public void run(TaskMonitor taskMonitor) {
-		dataMgr = new DataManager();
 		writeProps();
 		writeNodes();
 		writeEdges();
