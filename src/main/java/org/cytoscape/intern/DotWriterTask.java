@@ -47,8 +47,10 @@ public class DotWriterTask implements CyWriter {
 	 * @param output OutputStream that is being written to
 	 */
 	public DotWriterTask(/*CyApplicationManager cyAppMgr,*/ OutputStream output, CyNetwork network) {
-		// TODO
 		super();
+		
+		outputWriter = new OutputStreamWriter(output);
+		this.network = network;
 	}
 
 	/**
@@ -59,7 +61,9 @@ public class DotWriterTask implements CyWriter {
 	 */
 	@Override
 	public void run(TaskMonitor taskMonitor) {
-		// TODO
+		writeProps();
+		writeNodes();
+		writeEdges();
 	}
 	
 	/**
@@ -74,7 +78,22 @@ public class DotWriterTask implements CyWriter {
 	 * Writes the network properties
 	 */
 	public void writeProps() {
-		// TODO
+		/**
+		 * all properties we need to write
+		 * 
+		 * bgcolor-- NETWORK_BACKGROUND_POINT
+		 * dim -- 2
+		 * dimen -- 2?
+		 * fixedsize -- true
+		 * fontpath -- maybe something
+		 * scale -- NETWORK_SCALE_FACTOR -- try ignoring first
+		 * label -- NETWORK_TITLE -- maybe -- test
+		 * 
+		 * pseudocode
+		 * 
+		 * outputWriter.write();
+		 * 
+		 */
 	}
 	
 	/**
