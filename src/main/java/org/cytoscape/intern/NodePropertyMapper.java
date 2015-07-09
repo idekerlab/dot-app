@@ -37,6 +37,7 @@ public class NodePropertyMapper extends Mapper {
 	 * Initializes and populates instance variables with mappings
 	 */
 	public NodePropertyMapper() {
+		super();
 		// initialize hash maps
 		simpleVisPropsToDot = new HashMap< VisualProperty, String>();
 		discreteMappingTypes = new HashMap<String, HashMap<VisualPropertyValue, String> >();
