@@ -27,34 +27,34 @@ public class CyActivator extends AbstractCyActivator{
 	@Override
 	public void start(BundleContext context) {
 		
-		/* 
-		 * codes that have been tested 
-		 */ 
+	/* 
+	 * codes that have been tested 
+	 */ 
      
      //initialize two hashsets
-		 HashSet<String> extensions = new HashSet();
-		 HashSet<String> contentTypes = new HashSet();
+	 HashSet<String> extensions = new HashSet();
+	 HashSet<String> contentTypes = new HashSet();
 		 
      //captures the types of data the cytoscape.io package can read and write
      DataCategory category = DataCategory.NETWORK;
 
      //register the service of supporting InputStreams and URL connections 
      //over the network
-		 StreamUtil streamUtil = getService(context, StreamUtil.class);
+	 StreamUtil streamUtil = getService(context, StreamUtil.class);
 		 
      //add .dot and .gv,which have the same meaning, to the menu
      extensions.add(".dot");
-		 extensions.add(".gv");
-		 contentTypes.add("text/plain");
+	 extensions.add(".gv");
+	 contentTypes.add("text/plain");
 		 
      //initialize (Basic)CyFileFilter, which handles the file type
-		 BasicCyFileFilter fileFilter = new BasicCyFileFilter(extensions, contentTypes, "GraphViz files", category, streamUtil);
+	 BasicCyFileFilter fileFilter = new BasicCyFileFilter(extensions, contentTypes, "GraphViz files", category, streamUtil);
 		 
      //initialize the DotWriterFactory for later use
-     DotWriterFactory dotFac = new DotWriterFactory(cyFileFilter);
+     DotWriterFactory dotFac = new DotWriterFactory(fileFilter);
 		   
      //registerService from CyNetworkViewWriterFactory interface
-		 registerService(context, dotFac, CyNetworkViewWriterFactory.class, new Properties());
+	 registerService(context, dotFac, CyNetworkViewWriterFactory.class, new Properties());
 
 	}
 
