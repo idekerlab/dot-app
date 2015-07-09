@@ -30,6 +30,11 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 */
 	public DotWriterFactory(CyApplicationManager cyAppMgr, CyFileFilter fileFilter) {
 		// TODO
+		/**
+		 * Pseudocode:
+		 * this.cyAppMgr = cyAppMgr;
+		 * this.fileFilter = fileFilter;
+		 */
 		super();
 	}
 
@@ -41,6 +46,10 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	@Override
 	public CyFileFilter getFileFilter() {
 		// TODO
+		/**
+		 * Pseudocode:
+		 * return this.fileFilter;
+		 */
 		// to prevent compiler error
 		return null;
 	}
@@ -56,6 +65,9 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	@Override
 	public CyWriter createWriter(OutputStream outStream, CyNetwork network) {
 		// TODO
+		/**
+		 * Should return null because we are exporting the view data
+		 */
 		// to prevent compiler error
 		return null;
 	}
@@ -72,6 +84,10 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	public CyWriter createWriter(OutputStream outStream, CyNetworkView view) {
 		// TODO
 		// to prevent compiler error
+		/**
+		 * Pseudocode:
+		 * return new DotWriterTask(cyAppMgr, outStream);
+		 */
 		return null;
 	}
 	

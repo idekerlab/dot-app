@@ -33,6 +33,13 @@ public class DataManager {
 	 */
 	public String getElementString (View<Object> elementView) {
 		//TODO
+		/**
+		 * Pseudocode:
+		 * If elementView instanceof View<CyEdge> then
+		 * 		call getEdgeString(elementView)
+		 * Elseif elementView instanceof View<CyNode> then
+		 * 		call getNodeString(elementView)
+		 */
 		return null;
 	}
  
@@ -43,6 +50,34 @@ public class DataManager {
 	 */
 	public String getEdgeString(View<CyEdge> edgeView) {
 		//TODO
+		/**
+		 * Pseudocode:
+		 * elementString = ""
+		 * For each BasicVisualLexiconProperty prop do
+		 * 		propVal = edgeView.getVisualProperty(prop)
+		 * 		elementString += edgeMapper.mapVisToDot(prop, propVal)
+		 * end
+		 * 
+		 * Get stroke color and edge transparency values from view
+		 * elementString += edgeMapper.mapColor(strokeColorVal, edgeTransVal)
+		 * 
+		 * Get Source Arrowhead color (DOT ATTRIBUTE IS fillcolor, NO TRANSPARENCY)
+		 * elementString += edgeMapper.mapColor(sourceArrowColor, 255)
+		 * 
+		 * Get Target Arrowhead color (DOT ATTRIBUTE IS fillcolor, NO TRANSPARENCY)
+		 * elementString += edgeMapper.mapColor(targetArrowColor, 255)
+		 * 
+		 * Get Source Arrowhead Shape
+		 * elementString += edgeMapper.setSourceArrowShape()
+		 * 
+		 * Get Target Arrowhead Shape
+		 * elementString += edgeMapper.setTargetArrowShape()
+		 * 
+		 * Get Edge Label Font Face
+		 * elementString += edgeMapper.mapFont(edgeLabelFont)
+		 * 
+		 * return elementString
+		 */
 		return null;
 	}
 
@@ -53,6 +88,26 @@ public class DataManager {
 	 */
 	public String getNodeString(View<CyNode> nodeView) {
 		//TODO
+
+		/**
+		 * Pseudocode:
+		 * elementString = ""
+		 * For each BasicVisualLexiconProperty prop do
+		 * 		propVal = nodeView.getVisualProperty(prop)
+		 * 		elementString += nodeMapper.mapVisToDot(prop, propVal)
+		 * end
+		 * 
+		 * Get node border color and node border transparency values from view
+		 * elementString += nodeMapper.mapColor(strokeColorVal, edgeTransVal)
+		 * 
+		 * Get node fill color and node transparency (DOT ATTRIBUTE IS fillcolor)
+		 * elementString += nodeMapper.mapColor(sourceArrowColor, nodeTransparency)
+		 * 
+		 * Get node label font face
+		 * elementString += nodeMapper.mapFont(edgeLabelFont)
+		 * 
+		 * return elementString
+		 */
 		return null;
 	}
 
