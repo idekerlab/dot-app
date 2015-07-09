@@ -1,9 +1,8 @@
 package org.cytoscape.intern;
 
 import org.cytoscape.io.write.CyWriter;
-import org.cytoscape.view.model.VisualLexicon;
-import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.work.TaskMonitor;
 
 
 import java.io.OutputStream;
@@ -18,12 +17,6 @@ import java.awt.Color;
  * @author Ziran Zhang
  */
 public class DotWriterTask implements CyWriter {
-	
-	/**
-	 * Object used to retrieve the currently selected network view from
-	 * the program
-	 */
-	// CyApplicationManager cyAppMgr;
 	
 	/**
 	 * Object used to handle the creation of the .dot node and edge declarations
@@ -43,10 +36,10 @@ public class DotWriterTask implements CyWriter {
 	/**
 	 * Constructs a DotWriterTask object with a given CyApplicationManager
 	 * 
-	 * @param cyAppMgr CyApplicationManager used to get network data
 	 * @param output OutputStream that is being written to
+	 * @param networkView CyNetworkView that is being exported
 	 */
-	public DotWriterTask(/*CyApplicationManager cyAppMgr,*/ OutputStream output, CyNetworkView networkView) {
+	public DotWriterTask(OutputStream output, CyNetworkView networkView) {
 		super();
 		
 		outputWriter = new OutputStreamWriter(output);
@@ -61,6 +54,7 @@ public class DotWriterTask implements CyWriter {
 	 */
 	@Override
 	public void run(TaskMonitor taskMonitor) {
+		dataMgr = new DataManager();
 		writeProps();
 		writeNodes();
 		writeEdges();
@@ -99,15 +93,4 @@ public class DotWriterTask implements CyWriter {
 	public void writeEdges() {
 		// TODO
 	}
-	
-	/**
-	 * Determines if the network view should be treated as a directed graph or
-	 * an undirected graph
-	 * @return true if the graph should be treated as a directed graph, otherwise false
-	 */
-	public boolean determineDirected() {
-		// TODO
-		return false;
-	}
-	
 }
