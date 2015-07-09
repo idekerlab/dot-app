@@ -128,18 +128,22 @@ public class DataManager {
 		 * 
 		 * directed
 		 * bgcolor-- NETWORK_BACKGROUND_POINT
-		 * dim -- 2
-		 * dimen -- 2?
 		 * fixedsize -- true
 		 * fontpath -- maybe something
 		 * scale -- NETWORK_SCALE_FACTOR -- try ignoring first
 		 * label -- NETWORK_TITLE -- maybe -- test
 		 * 
-		 * pseudocode
+		 * pseudocode -- NOTE TABS ARE OFF
 		 * 
 		 * String output = "";
 		 * 
 		 * output += getDirectedString(view);
+		 * output += ", bgcolor = " + 
+		 * 		nodeMapper.mapColorToDot( view.getVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_COLOR), 255 );
+		 * output += ", fixedsize = true";
+		 * output += ", label = " + view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
+		 * 
+		 * return output;
 		 */
 		return null;
 	}
