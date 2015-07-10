@@ -30,7 +30,8 @@ public abstract class Mapper {
 	 * maps Cytoscape VisualProperty TYPES by their String ID to a HashMap that contains the 
 	 * cytoscape to *.dot mappings for that type
 	 */
-	private HashMap<String, HashMap<VisualPropertyValue, String> >discreteMappingTypes;
+	// TODO Must define here because lineMappings are in here-- I think m
+	protected HashMap<String, HashMap<VisualPropertyValue, String> > discreteMappingTypes; 
 	
 	// maps Cytoscape line types to the equivalent string used in .dot
 	protected HashMap<LineType, String> lineTypeMap; // TODO
@@ -127,12 +128,11 @@ public abstract class Mapper {
 		return null;
 	}
 	
+	
 	/**
-	 * Helper method to fill the hashmap instance variable with constants we need
+	 * Returns a String that contains all relevant attributes for this element 
 	 */
-	private void populateMaps() {
-		
-	}
+	public abstract String getElementString ();
 }
 
 
