@@ -3,6 +3,7 @@ package org.cytoscape.intern;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
+import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
 import org.cytoscape.view.presentation.property.EdgeBendVisualProperty;
 
@@ -63,5 +64,10 @@ public class EdgePropertyMapper extends Mapper {
 	public String mapEdgeBend(View<CyEdge> edgeView){
 		// TODO
 		return null;
+	}
+	
+	@Override
+	public String mapDotStyle(LineType lineType){
+		return super.mapDotStyle(lineType);
 	}
 }

@@ -32,8 +32,8 @@ public class CyActivator extends AbstractCyActivator{
 	 */ 
      
      //initialize two hashsets
-	 HashSet<String> extensions = new HashSet();
-	 HashSet<String> contentTypes = new HashSet();
+	 HashSet<String> extensions = new HashSet<String>();
+	 HashSet<String> contentTypes = new HashSet<String>();
 		 
      //captures the types of data the cytoscape.io package can read and write
      DataCategory category = DataCategory.NETWORK;

@@ -1,5 +1,6 @@
 package org.cytoscape.intern;
 
+import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
@@ -31,7 +32,19 @@ public class NodePropertyMapper extends Mapper {
 	/**
 	 *  maps Cytoscape node shape types to the equivalent string used in .dot
 	 */
-	protected HashMap<NodeShape, String> nodeShapeMap; // TODO
+	private HashMap<NodeShape, String> nodeShapeMap; // TODO
+	
+	public String mapDotStyle(LineType lineStyle, NodeShape nodeShape) {
+		// TODO
+		/**
+		 * Pseudocode
+		 * Call Mapper.mapDotStyle(lineStyle) to retrieve 'style="lineStyle"' string
+		 * Ignore final " (get first n-1 characters of string)
+		 * Join with "filled" and "rounded" separated by ","
+		 * return created String
+		 */
+		return null;
+	}
 
 	/**
 	 * Initializes and populates instance variables with mappings
