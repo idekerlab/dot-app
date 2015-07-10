@@ -26,15 +26,8 @@ public abstract class Mapper {
 	// maps Cytoscape properties  by their ID Strings to their .dot equivalents if relationship is simple equivalency
 	protected HashMap<String, String> simpleVisPropsToDot; 
 	
-	/**
-	 * maps Cytoscape VisualProperty TYPES by their String ID to a HashMap that contains the 
-	 * cytoscape to *.dot mappings for that type
-	 */
-	// TODO Must define here because lineMappings are in here-- I think --m
-	protected HashMap<String, HashMap<VisualPropertyValue, String> > discreteMappingTypes; 
-	
 	// maps Cytoscape line types to the equivalent string used in .dot
-	protected HashMap<LineType, String> lineTypeMap; // TODO
+	private HashMap<LineType, String> lineTypeMap; // TODO
 	
 	// view that this mapper object is mapping
 	protected View<?> view;

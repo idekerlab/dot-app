@@ -28,12 +28,6 @@ public class EdgePropertyMapper extends Mapper {
 	private HashMap<VisualProperty, String> simpleVisPropsToDot;
 	
 	/**
-	 * Maps Cytoscape VisualProperty types by their String ID to a HashMap that
-	 * contains the Cytoscape to *.dot mappings for that type
-	 */
-	private HashMap<String, HashMap<VisualPropertyValue, String> > discreteMappingTypes; // TODO fill in
-	
-	/**
 	 * Maps Cytoscape arrowhead types to the equivalent dot attribute
 	 */
 	private HashMap<ArrowShape, String> arrowShapeMap; // TODO fill in
@@ -43,31 +37,22 @@ public class EdgePropertyMapper extends Mapper {
 		super(view);
 		
 		simpleVisPropsToDot = new HashMap< VisualProperty, String>();
-		discreteMappingTypes = new HashMap<String, HashMap<VisualPropertyValue, String> >();
+		arrowShapeMap = new HashMap<ArrowShape, String>();
 		
 		populateMaps();
 		
 	}
 	
 	/**
-	 * Translates the Cytoscape Source Arrow Shape property of the View<CyEdge>
-	 * to the equivalent dot attribute string
-	 * @param edgeView The edge view whose property is to be translated
-	 * @return The dot attribute string which sets the source arrow shape
+	 * 
+	 * @return Strings that define arrow shape attributes
 	 */
-	public String setSourceArrowShape(View<CyEdge> edgeView){
-		// TODO
-		return null;
-	}
-	
-	/**
-	 * Translates the Cytoscape Target Arrow Shape property of the View<CyEdge>
-	 * to the equivalent dot attribute string
-	 * @param edgeView The edge view whose property is to be translated
-	 * @return The dot attribute string which sets the target arrow shape
-	 */
-	public String setTargetArrowShape(View<CyEdge> edgeView){
-		// TODO
+	private String setArrowShapes() {
+		/**
+		 * pseudocode
+		 * 
+		 * get Strings from hashMap and concatenate to eachother with "arrowshape="
+		 */
 		return null;
 	}
 	
@@ -113,13 +98,12 @@ public class EdgePropertyMapper extends Mapper {
 		 * elementString += edgeMapper.mapColor(targetArrowColor, 255)
 		 * 
 		 * Get Source Arrowhead Shape
-		 * elementString += edgeMapper.setSourceArrowShape()
-		 * 
-		 * Get Target Arrowhead Shape
-		 * elementString += edgeMapper.setTargetArrowShape()
+		 * elementString += edgeMapper.setSourceArrowShapes()
 		 * 
 		 * Get Edge Label Font Face
 		 * elementString += edgeMapper.mapFont(edgeLabelFont)
+		 * 
+		 * set line style
 		 * 
 		 * return elementString
 		 */
