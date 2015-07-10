@@ -16,6 +16,7 @@
 		<maven-compiler-plugin.version>2.0.2</maven-compiler-plugin.version>
 		<maven-bundle-plugin.version>2.3.4</maven-bundle-plugin.version>
 		<osgi.api.version>4.2.0</osgi.api.version>
+		<slf4jVersion>1.6.1</slf4jVersion>
 	</properties>
 
 	<!-- "packaging" tells Maven what sort of thing you want to build. If we 
@@ -172,6 +173,18 @@
 			<version>${cytoscape.api.version}</version>
 			<type>test-jar</type>
 		</dependency>
+		<dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>${slf4jVersion}</version>
+			<scope>test</scope>
+		</dependency>	
 	</dependencies>
   
 </project>

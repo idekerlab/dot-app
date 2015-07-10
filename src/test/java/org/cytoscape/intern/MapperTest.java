@@ -24,8 +24,8 @@ public class MapperTest {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
 		CyNode node = network.addNode();
-		String cyNodeName = network.getDefaultNodeTable().getRow(node).get(CyNetwork.NAME, String.class);
-		TestNodeView nodeView = new TestNodeView(node);
+		String cyNodeName = network.getRow(node).get(CyNetwork.NAME, String.class);
+		View<CyNode> nodeView = new TestNodeView(node);
 		Mapper mapper = new NodePropertyMapper(nodeView);
 		VisualProperty<String> labelProp = BasicVisualLexicon.NODE_LABEL;
 		String label = "Hello World!";
@@ -43,7 +43,7 @@ public class MapperTest {
 		final NetworkTestSupport nts = new NetworkTestSupport();
 		final CyNetwork network = nts.getNetwork();
 		final CyNode node = network.addNode();
-		String cyNodeName = network.getDefaultNodeTable().getRow(node).get(CyNetwork.NAME, String.class);
+		String cyNodeName = network.getRow(node).get(CyNetwork.NAME, String.class);
 		final TestNodeView nodeView = new TestNodeView(node);
 		final Mapper mapper = new NodePropertyMapper(nodeView);
 		final VisualProperty<NodeShape> shapeProp = BasicVisualLexicon.NODE_SHAPE;
