@@ -7,10 +7,16 @@ import org.cytoscape.intern.mapper.EdgePropertyMapper;
 import org.cytoscape.io.write.CyWriter;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
+import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyEdge;
 
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Task object that writes the network view to a .dot file
@@ -22,19 +28,20 @@ import java.util.ArrayList;
 public class DotWriterTask implements CyWriter {
 	
 	// handles mapping from CS to .dot of respective elements
-	NetworkPropertyMapper networkMapper;
-	NodePropertyMapper nodeMapper;
-	EdgePropertyMapper edgeMapper;
+	private NetworkPropertyMapper networkMapper;
+	private NodePropertyMapper nodeMapper;
+	private EdgePropertyMapper edgeMapper;
 	
-	/**
-	 * Object used to write the .dot file
-	 */
-	OutputStreamWriter outputWriter;
 	
-	/**
-	 * NetworkView being converted to .dot
-	 */
-	CyNetworkView networkView;
+	// Object used to write the .dot file
+	private OutputStreamWriter outputWriter;
+	
+	
+	// NetworkView being converted to .dot
+	private CyNetworkView networkView;
+	
+	// debug logger
+	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.DotWriterTask");
 	
 	/**
 	 * Constructs a DotWriterTask object
@@ -48,6 +55,7 @@ public class DotWriterTask implements CyWriter {
 		outputWriter = new OutputStreamWriter(output);
 		this.networkView = networkView;
 		this.networkMapper = new NetworkPropertyMapper(networkView);
+		LOGGER.log(Level.FINEST, "DotWriterTask constructed");
 	}
 
 	/**
@@ -75,43 +83,52 @@ public class DotWriterTask implements CyWriter {
 	 * Writes the network properties to file
 	 */
 	private void writeProps() {
-		/**
-		 * pseudocode
-		 * 
-		 * outputWriter.write( networkMapper.getElementString(networkView) );
-		 */
+		try {
+			outputWriter.write( networkMapper.getElementString() );
+		}
+		catch(IOException exception) {
+			LOGGER.log(Level.SEVERE, "Write failed @ writeProps()");
+		}
 	}
 	
 	/**
 	 * Writes the .dot declaration of each node to file
 	 */
 	private void writeNodes() {
-		/**
-		 * pseudocode
-		 * 
-		 * ArrayList< View<CyNode> > nodeViewList = networkView.getNodeViews();
-		 * 
-		 * for(View<CyNode> nodeView: nodeViewList) {
-		 * 		nodeMapper = new NodePropertyMapper(nodeView);
-		 * 		outputWriter.write( nodeMapper.getElementString() );
-		 * }
-		 */
+		// create list of all node views
+		ArrayList< View<CyNode> > nodeViewList = new ArrayList< View<CyNode> >( networkView.getNodeViews() );
+		
+		// for each node, write declaration string
+		for(View<CyNode> nodeView: nodeViewList) {
+	  		nodeMapper = new NodePropertyMapper(nodeView);
+	  		
+	  		try {
+	  			outputWriter.write( nodeMapper.getElementString());
+	  		}
+	  		catch(IOException exception) {
+	  			LOGGER.log(Level.SEVERE, "Write failed @ writeNodes()");
+	  		}
+		}
 	}
 	
 	/**
-	 * Writes the .dot declaration of each edge
+	 * Writes the .dot declaration of each edge to file
 	 */
 	private void writeEdges() {
-		/**
-		 * pseudocode
-		 * 
-		 * ArrayList< View<CyEdge> > edgeViewList = networkView.getEdgeViews();
-		 * 
-		 * for(View<CyEdge> edgeView: edgeViewList) {
-		 * 		edgeMapper = new EdgePropertyMApper(edgeView);
-		 * 		outputWriter.write( edgeMapper.getElementString(edgeView) );
-		 * }
-		 */
+		// create list of all edge views
+		ArrayList< View<CyEdge> > edgeViewList = new ArrayList< View<CyEdge> >( networkView.getEdgeViews() );
+		
+		// for each edge, write declaration string
+		for(View<CyEdge> edgeView: edgeViewList) {
+	  		edgeMapper = new EdgePropertyMapper(edgeView);
+	  		
+	  		try {
+	  			outputWriter.write( edgeMapper.getElementString());
+	  		}
+	  		catch(IOException exception) {
+	  			LOGGER.log(Level.SEVERE, "Write failed @ writeEdges()");
+	  		}
+		}
 	}
 	
 }
