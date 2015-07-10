@@ -5,6 +5,7 @@ import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
 
 import java.awt.Color;
+import java.awt.Paint;
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -43,7 +44,6 @@ public abstract class Mapper {
 	 * @return String that is .dot equivalent of the visual property
 	 */
 	public <T> String  mapVisToDot(VisualProperty<T> property, T value) {
-		//TODO
 		/**
 		 * Pseudocode:
 		 * Attempt to retrieve .dot string from simpleVisPropsToDot by using ID string
@@ -53,8 +53,11 @@ public abstract class Mapper {
 		 * If found: return .dot string
 		 * Else: return default .dot string
 		 */
+		String output = "";
+		
+		// if property is simple
 		if(simpleVisPropsToDot.get(property) != null) {
-			// append and return string
+			
 		}
 		else {
 			// check discrete
