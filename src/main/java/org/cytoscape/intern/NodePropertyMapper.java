@@ -5,6 +5,7 @@ import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
 import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.model.View;
 
 import java.util.HashMap;
 
@@ -49,8 +50,8 @@ public class NodePropertyMapper extends Mapper {
 	/**
 	 * Initializes and populates instance variables with mappings
 	 */
-	public NodePropertyMapper() {
-		super();
+	public NodePropertyMapper(View<?> view) {
+		super(view);
 		// initialize hash maps
 		simpleVisPropsToDot = new HashMap< VisualProperty, String>();
 		discreteMappingTypes = new HashMap<String, HashMap<VisualPropertyValue, String> >();
@@ -58,6 +59,13 @@ public class NodePropertyMapper extends Mapper {
 		
 		// populate simpleVisPropsToDot
 		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = ");
+	}
+	
+	/**
+	 * Helper method to fill the hashmap instance variable with constants we need
+	 */
+	private void populateMaps() {
+		
 	}
 }
 

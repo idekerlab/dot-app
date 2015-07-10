@@ -1,6 +1,7 @@
 package org.cytoscape.intern;
 
 import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
 
@@ -34,8 +35,20 @@ public abstract class Mapper {
 	// maps Cytoscape line types to the equivalent string used in .dot
 	protected HashMap<LineType, String> lineTypeMap; // TODO
 	
+	// view that this mapper object is mapping
+	protected View<?> view;
+	
 	// debug logger
 	protected static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.Mapper");
+	
+	/**
+	 * Initializes view field
+	 * 
+	 * @param view View that this mapper is being used to map to dot
+	 */
+	public Mapper(View<?> view) {
+		this.view = view;
+	}
 	
 	/**
 	 * Takes a VisualProperty and returns the String put in the .dot file to represent it
@@ -112,6 +125,13 @@ public abstract class Mapper {
 		 * Retrieve .dot string from lineType hashmap
 		 */
 		return null;
+	}
+	
+	/**
+	 * Helper method to fill the hashmap instance variable with constants we need
+	 */
+	private void populateMaps() {
+		
 	}
 }
 

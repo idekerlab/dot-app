@@ -2,9 +2,12 @@ package org.cytoscape.intern;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.LineType;
+import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.EdgeBendVisualProperty;
 
 import java.util.HashMap;
@@ -22,7 +25,7 @@ public class EdgePropertyMapper extends Mapper {
 	/**
 	 * Maps Cytoscape VisualProperty types by their String ID to their dot equivalent
 	 */
-	private HashMap<String, String> simpleVisPropsToDot; // TODO fill in
+	private HashMap<VisualProperty, String> simpleVisPropsToDot; // TODO fill in
 	/**
 	 * Maps Cytoscape VisualProperty types by their String ID to a HashMap that
 	 * contains the Cytoscape to *.dot mappings for that type
@@ -32,6 +35,17 @@ public class EdgePropertyMapper extends Mapper {
 	 * Maps Cytoscape arrowhead types to the equivalent dot attribute
 	 */
 	private HashMap<ArrowShape, String> arrowShapeMap; // TODO fill in
+	
+	
+	public EdgePropertyMapper(View<?> view) {
+		super(view);
+		// initialize hash maps
+		simpleVisPropsToDot = new HashMap< VisualProperty, String>();
+		discreteMappingTypes = new HashMap<String, HashMap<VisualPropertyValue, String> >();
+		// initialize other hashmaps
+		// populate hashMaps
+		
+	}
 	
 	/**
 	 * Translates the Cytoscape Source Arrow Shape property of the View<CyEdge>
@@ -69,5 +83,12 @@ public class EdgePropertyMapper extends Mapper {
 	@Override
 	public String mapDotStyle(LineType lineType){
 		return super.mapDotStyle(lineType);
+	}
+	
+	/**
+	 * Helper method to fill the hashmap instance variable with constants we need
+	 */
+	private void populateMaps() {
+		
 	}
 }
