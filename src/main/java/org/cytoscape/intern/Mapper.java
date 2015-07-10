@@ -82,6 +82,19 @@ public abstract class Mapper {
 		// TODO
 		return null;
 	}
+	
+	/**
+	 * Given a LineStyle, returns the .dot equivalent in String form
+	 * @param
+	 */
+	protected String mapDotStyle(LineType lineType) {
+		// TODO
+		/**
+		 * Pseudocode:
+		 * Retrieve .dot string from lineType hashmap
+		 */
+		return null;
+	}
 }
 
 
