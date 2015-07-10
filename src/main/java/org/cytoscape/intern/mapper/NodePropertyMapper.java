@@ -76,24 +76,30 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	@Override
 	public String getElementString() {
-		//TODO
 		LOGGER.info("Preparing to get .dot declaration for element.");
 		StringBuilder elementString = new StringBuilder("[");
+		
 		for (Map.Entry<VisualProperty<?>, String> keyAndVal : simpleVisPropsToDot.entrySet()) {
 			VisualProperty<?> visualProp = keyAndVal.getKey();
 			String dotString = keyAndVal.getValue();
 			Object val = view.getVisualProperty(visualProp);
 			String valString = "\"" + val.toString() + "\"";
+			
 			elementString.append(dotString + valString + ", ");
 		}
+		
 		//Color borderColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT);
 		//Integer borderTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY);
 		//elementString.append("color = " + mapColorToDot(borderColor, borderTransparency));
+		
 		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
+		
 		elementString.setLength(elementString.length() - 2);
 		LOGGER.info("Removed extraneous character. Resulting string: " + elementString);
+		
 		elementString.append("]");
 		LOGGER.info("Created .dot string. Result: " + elementString);
+		
 		return elementString.toString();
 		/**
 		 * Pseudocode:
