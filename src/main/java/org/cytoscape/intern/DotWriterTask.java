@@ -1,5 +1,9 @@
 package org.cytoscape.intern;
 
+import org.cytoscape.intern.mapper.NetworkPropertyMapper;
+import org.cytoscape.intern.mapper.NodePropertyMapper;
+import org.cytoscape.intern.mapper.EdgePropertyMapper;
+
 import org.cytoscape.io.write.CyWriter;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.view.model.CyNetworkView;
@@ -17,10 +21,10 @@ import java.util.ArrayList;
  */
 public class DotWriterTask implements CyWriter {
 	
-	/**
-	 * Object used to handle the creation of the .dot node and edge declarations
-	 */
-	DataManager dataMgr;
+	// handles mapping from CS to .dot of respective elements
+	NetworkPropertyMapper networkMapper;
+	NodePropertyMapper nodeMapper;
+	EdgePropertyMapper edgeMapper;
 	
 	/**
 	 * Object used to write the .dot file
@@ -33,7 +37,7 @@ public class DotWriterTask implements CyWriter {
 	CyNetworkView networkView;
 	
 	/**
-	 * Constructs a DotWriterTask object with a given CyApplicationManager
+	 * Constructs a DotWriterTask object
 	 * 
 	 * @param output OutputStream that is being written to
 	 * @param networkView CyNetworkView that is being exported
@@ -43,7 +47,7 @@ public class DotWriterTask implements CyWriter {
 		
 		outputWriter = new OutputStreamWriter(output);
 		this.networkView = networkView;
-		this.dataMgr = new DataManager();
+		this.networkMapper = new NetworkPropertyMapper(networkView);
 	}
 
 	/**
@@ -74,7 +78,7 @@ public class DotWriterTask implements CyWriter {
 		/**
 		 * pseudocode
 		 * 
-		 * outputWriter.write( dataMgr.getPropertiesString(networkView) );
+		 * outputWriter.write( networkMapper.getElementString(networkView) );
 		 */
 	}
 	
@@ -88,7 +92,8 @@ public class DotWriterTask implements CyWriter {
 		 * ArrayList< View<CyNode> > nodeViewList = networkView.getNodeViews();
 		 * 
 		 * for(View<CyNode> nodeView: nodeViewList) {
-		 * 		outputWriter.write( dataMgr.getNodeString(nodeView) );
+		 * 		nodeMapper = new NodePropertyMapper(nodeView);
+		 * 		outputWriter.write( nodeMapper.getElementString() );
 		 * }
 		 */
 	}
@@ -103,7 +108,8 @@ public class DotWriterTask implements CyWriter {
 		 * ArrayList< View<CyEdge> > edgeViewList = networkView.getEdgeViews();
 		 * 
 		 * for(View<CyEdge> edgeView: edgeViewList) {
-		 * 		outputWriter.write( dataMgr.getEdgeString(edgeView) );
+		 * 		edgeMapper = new EdgePropertyMApper(edgeView);
+		 * 		outputWriter.write( edgeMapper.getElementString(edgeView) );
 		 * }
 		 */
 	}
