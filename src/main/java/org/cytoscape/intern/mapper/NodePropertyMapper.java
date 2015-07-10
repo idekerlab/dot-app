@@ -26,26 +26,6 @@ public class NodePropertyMapper extends Mapper {
 	private HashMap<NodeShape, String> nodeShapeMap;
 	
 	/**
-	 * Creates string for .dot style attribute. Appends border lineStyle and shape style (rounded or not etc.) to 
-	 * "style = filled"
-	 * 
-	 * @param lineStyle lineStyle being converted
-	 * @param nodeShape being converted
-	 * @return String for style attribute
-	 */
-	private String mapDotStyle(LineType lineStyle, NodeShape nodeShape) {
-		// TODO
-		/**
-		 * Pseudocode
-		 * Call Mapper.mapDotStyle(lineStyle) to retrieve 'style="lineStyle"' string
-		 * Ignore final " (get first n-1 characters of string)
-		 * Join with "filled" and "rounded" separated by ","
-		 * return created String
-		 */
-		return null;
-	}
-
-	/**
 	 * Initializes and populates instance variables with mappings
 	 * 
 	 * @param view View of Node we are converting to .dot
@@ -57,6 +37,25 @@ public class NodePropertyMapper extends Mapper {
 		nodeShapeMap = new HashMap<NodeShape, String>();
 		
 		populateMaps();
+	}
+	
+	/**
+	 * Creates string for .dot style attribute. Appends border lineStyle and shape style (rounded or not etc.) to 
+	 * "style = filled"
+	 * 
+	 * @param nodeShape being converted
+	 * @return String for style attribute
+	 */
+	private String mapDotStyle(NodeShape nodeShape) {
+		// TODO
+		/**
+		 * Pseudocode
+		 * Call Mapper.mapDotStyle(lineStyle) to retrieve 'style="lineStyle"' string
+		 * Ignore final " (get first n-1 characters of string)
+		 * Join with "filled" and "rounded" separated by ","
+		 * return created String
+		 */
+		return null;
 	}
 	
 	/**

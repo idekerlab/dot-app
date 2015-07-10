@@ -74,7 +74,7 @@ public class DotWriterTask implements CyWriter {
 	/**
 	 * Writes the network properties to file
 	 */
-	public void writeProps() {
+	private void writeProps() {
 		/**
 		 * pseudocode
 		 * 
@@ -85,7 +85,7 @@ public class DotWriterTask implements CyWriter {
 	/**
 	 * Writes the .dot declaration of each node to file
 	 */
-	public void writeNodes() {
+	private void writeNodes() {
 		/**
 		 * pseudocode
 		 * 
@@ -101,7 +101,7 @@ public class DotWriterTask implements CyWriter {
 	/**
 	 * Writes the .dot declaration of each edge
 	 */
-	public void writeEdges() {
+	private void writeEdges() {
 		/**
 		 * pseudocode
 		 * 
