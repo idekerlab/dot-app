@@ -30,7 +30,11 @@ public class EdgePropertyMapper extends Mapper {
 	
 	private HashMap<ArrowShape, String> arrowShapeMap; // TODO fill in
 	
-	
+	/**
+	 * Constructs EdgePropertyMapper object
+	 * 
+	 * @param view of edge we are converting
+	 */
 	public EdgePropertyMapper(View<?> view) {
 		super(view);
 		
