@@ -34,7 +34,7 @@ public class EdgePropertyMapper extends Mapper {
 	 * 
 	 * @param view of edge we are converting
 	 */
-	public EdgePropertyMapper(View<?> view) {
+	public EdgePropertyMapper(View<CyEdge> view) {
 		super(view);
 		
 		simpleVisPropsToDot = new HashMap< VisualProperty<?>, String>();

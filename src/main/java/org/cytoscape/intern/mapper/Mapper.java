@@ -1,5 +1,6 @@
 package org.cytoscape.intern.mapper;
 
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.values.LineType;
@@ -30,7 +31,7 @@ public abstract class Mapper {
 	private HashMap<LineType, String> lineTypeMap; // TODO
 	
 	// view that this mapper object is mapping
-	protected View<?> view;
+	protected View<? extends CyIdentifiable> view;
 	
 	// debug logger
 	protected static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.mapper.Mapper");
@@ -40,7 +41,7 @@ public abstract class Mapper {
 	 * 
 	 * @param view View that this mapper is being used to map to dot
 	 */
-	public Mapper(View<?> view) {
+	public Mapper(View<? extends CyIdentifiable> view) {
 		this.view = view;
 	}
 	
@@ -54,13 +55,19 @@ public abstract class Mapper {
 	 */
 	protected String mapColorToDot(Color color, Integer alpha) {
 		// TODO
+		LOGGER.info("Creating .dot color attribute string");
+		Integer red = color.getRed();
+		Integer green = color.getGreen();
+		Integer blue = color.getBlue();
+		String result = String.format("#%02X%02X%02X%02X", red, green, blue, alpha);
+		LOGGER.info("Created .dot color attribute string. Result: " + result);
+		return result;
 		/**
 		 * Pseudocode:
 		 * Retrieve individual color bits using getRed() getGreen() getBlue()
 		 * Convert to a string using String.format("#%02X%02X%02X%02X", red, green, blue, alpha)
 		 * return string
 		 */
-		return null;
 	}
 	
 	/**

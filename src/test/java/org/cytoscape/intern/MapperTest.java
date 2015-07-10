@@ -17,6 +17,7 @@ import org.cytoscape.intern.mapper.NetworkPropertyMapper;
 import org.cytoscape.intern.mapper.NodePropertyMapper;
 import org.cytoscape.intern.mapper.EdgePropertyMapper;
 
+import java.awt.Color;
 public class MapperTest {
 
 	@Test
@@ -27,13 +28,18 @@ public class MapperTest {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
 		CyNode node = network.addNode();
+		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
 		String cyNodeName = network.getRow(node).get(CyNetwork.NAME, String.class);
 		View<CyNode> nodeView = new TestNodeView(node);
 		Mapper mapper = new NodePropertyMapper(nodeView);
 		
 		String label = "Hello World!";
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL, label);
-		String expectedDotString = String.format("%s [%s]", cyNodeName, "label = \"Hello World!\""); 
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, new Color(0xFF, 0x00, 0x00));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY, new Integer(0xFF));
+		String labelString = "label = \"" + label + "\"";
+		String colorString = "color = \"#FF0000FF";
+		String expectedDotString = String.format("%s [%s, %s]", cyNodeName, labelString, colorString); 
 		String actualDotString = mapper.getElementString();
 		assertEquals("Simple visual property translation failed.", expectedDotString, actualDotString);
 	}
