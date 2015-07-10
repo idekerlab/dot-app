@@ -25,12 +25,14 @@ public class EdgePropertyMapper extends Mapper {
 	/**
 	 * Maps Cytoscape VisualProperty types by their String ID to their dot equivalent
 	 */
-	private HashMap<VisualProperty, String> simpleVisPropsToDot; // TODO fill in
+	private HashMap<VisualProperty, String> simpleVisPropsToDot;
+	
 	/**
 	 * Maps Cytoscape VisualProperty types by their String ID to a HashMap that
 	 * contains the Cytoscape to *.dot mappings for that type
 	 */
 	private HashMap<String, HashMap<VisualPropertyValue, String> > discreteMappingTypes; // TODO fill in
+	
 	/**
 	 * Maps Cytoscape arrowhead types to the equivalent dot attribute
 	 */
@@ -39,11 +41,11 @@ public class EdgePropertyMapper extends Mapper {
 	
 	public EdgePropertyMapper(View<?> view) {
 		super(view);
-		// initialize hash maps
+		
 		simpleVisPropsToDot = new HashMap< VisualProperty, String>();
 		discreteMappingTypes = new HashMap<String, HashMap<VisualPropertyValue, String> >();
-		// initialize other hashmaps
-		// populate hashMaps
+		
+		populateMaps();
 		
 	}
 	
@@ -80,15 +82,47 @@ public class EdgePropertyMapper extends Mapper {
 		return null;
 	}
 	
-	@Override
-	public String mapDotStyle(LineType lineType){
-		return super.mapDotStyle(lineType);
-	}
-	
 	/**
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
 		
+	}
+	
+	/**
+	 * Returns a String that contains all relevant attributes for this element 
+	 */
+	@Override
+	public String getElementString() {
+		//TODO
+		/**
+		 * Pseudocode:
+		 * elementString = ""
+		 * For each BasicVisualLexiconProperty prop do
+		 * 		propVal = edgeView.getVisualProperty(prop)
+		 * 		elementString += edgeMapper.mapVisToDot(prop, propVal)
+		 * end
+		 * 
+		 * Get stroke color and edge transparency values from view
+		 * elementString += edgeMapper.mapColor(strokeColorVal, edgeTransVal)
+		 * 
+		 * Get Source Arrowhead color (DOT ATTRIBUTE IS fillcolor, NO TRANSPARENCY)
+		 * elementString += edgeMapper.mapColor(sourceArrowColor, 255)
+		 * 
+		 * Get Target Arrowhead color (DOT ATTRIBUTE IS fillcolor, NO TRANSPARENCY)
+		 * elementString += edgeMapper.mapColor(targetArrowColor, 255)
+		 * 
+		 * Get Source Arrowhead Shape
+		 * elementString += edgeMapper.setSourceArrowShape()
+		 * 
+		 * Get Target Arrowhead Shape
+		 * elementString += edgeMapper.setTargetArrowShape()
+		 * 
+		 * Get Edge Label Font Face
+		 * elementString += edgeMapper.mapFont(edgeLabelFont)
+		 * 
+		 * return elementString
+		 */
+		return null;
 	}
 }

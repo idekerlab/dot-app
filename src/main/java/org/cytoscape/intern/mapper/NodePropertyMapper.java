@@ -78,6 +78,7 @@ public class NodePropertyMapper extends Mapper {
 	/**
 	 * Returns a String that contains all relevant attributes for this element 
 	 */
+	@Override
 	public String getElementString() {
 		//TODO
 
