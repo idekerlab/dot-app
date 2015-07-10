@@ -10,6 +10,11 @@ import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.model.CyNode;
 
+import org.cytoscape.intern.mapper.Mapper;
+import org.cytoscape.intern.mapper.NetworkPropertyMapper;
+import org.cytoscape.intern.mapper.NodePropertyMapper;
+import org.cytoscape.intern.mapper.EdgePropertyMapper;
+
 public class MapperTest {
 
 	@Test
