@@ -38,8 +38,8 @@ public class DataManager {
 	 * Constructs a DataManager object
 	 */
 	public DataManager() {	
-		this.nodeMapper = new NodePropertyMapper();
-		this.edgeMapper = new EdgePropertyMapper();
+		//this.nodeMapper = new NodePropertyMapper();
+		//this.edgeMapper = new EdgePropertyMapper();
 	}	
 	
 	/**

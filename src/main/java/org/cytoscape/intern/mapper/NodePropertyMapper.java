@@ -51,6 +51,8 @@ public class NodePropertyMapper extends Mapper {
 
 	/**
 	 * Initializes and populates instance variables with mappings
+	 * 
+	 * @param view View of Node we are converting to .dot
 	 */
 	public NodePropertyMapper(View<?> view) {
 		super(view);
