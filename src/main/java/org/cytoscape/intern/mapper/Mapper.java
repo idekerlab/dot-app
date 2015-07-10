@@ -5,6 +5,10 @@ import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyIdentifiable;
 
 import java.awt.Color;
 import java.awt.Paint;
@@ -93,6 +97,30 @@ public abstract class Mapper {
 		 * Retrieve .dot string from lineType hashmap
 		 */
 		return null;
+	}
+	
+	/**
+	 * Returns String that is name of this element-- not label, name
+	 * 
+	 * @return String that is name of this element
+	 */
+	protected String getElementName() {
+		CyIdentifiable element = (CyIdentifiable)view.getModel();
+		CyNetwork network = null;		
+		
+		// get CyNetwork that element is in
+		if(element instanceof CyNetwork) {
+			network = (CyNetwork)view.getModel();
+		}
+		else if(element instanceof CyNode) {
+			network = ((CyNode)element).getNetworkPointer();
+		}
+		else if(element instanceof CyEdge) {
+			network = ((CyEdge) element).getSource().getNetworkPointer();
+		}
+		
+		// return string in "name" column of network table-- return name of element
+		return network.getRow(element).get("name", String.class);
 	}
 	
 	/**

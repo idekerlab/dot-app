@@ -78,7 +78,6 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	@Override
 	public String getElementString() {
-		//TODO
 		LOGGER.info("Preparing to get .dot declaration for element.");
 		CyNode node = (CyNode)view.getModel();
 		CyNetwork network = node.getNetworkPointer();
