@@ -7,6 +7,8 @@ import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Handles mapping of Cytoscape properties to .dot attributes in the form of a String.
@@ -31,6 +33,8 @@ public abstract class Mapper {
 	// maps Cytoscape line types to the equivalent string used in .dot
 	protected HashMap<LineType, String> lineTypeMap; // TODO
 	
+	// debug logger
+	protected static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.Mapper");
 	
 	/**
 	 * Takes a VisualProperty and returns the String put in the .dot file to represent it
@@ -43,12 +47,23 @@ public abstract class Mapper {
 		/**
 		 * Pseudocode:
 		 * Attempt to retrieve .dot string from simpleVisPropsToDot by using ID string
-		 * If found: concatenate value to .dot stinrg
+		 * If found: concatenate value to .dot string
 		 * Else: Attempt to retrieve hashmap from discreteMappingTypes by using ID string
 		 * If found: attempt to retreive .dot string from retrieved hashmap using value
 		 * If found: return .dot string
 		 * Else: return default .dot string
 		 */
+		if(simpleVisPropsToDot.get(property) != null) {
+			// append and return string
+		}
+		else {
+			// check discrete
+			// get value from map it points to
+			// return value
+		}
+		
+		// property not found
+		LOGGER.log(Level.SEVERE, "Property not found in maps");
 		return null;
 	}
 	
