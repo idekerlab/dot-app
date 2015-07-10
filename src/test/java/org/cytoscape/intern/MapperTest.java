@@ -12,7 +12,10 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.NetworkTestSupport;
 
-import org.cytoscape.intern.mapper.*;
+import org.cytoscape.intern.mapper.Mapper;
+import org.cytoscape.intern.mapper.NetworkPropertyMapper;
+import org.cytoscape.intern.mapper.NodePropertyMapper;
+import org.cytoscape.intern.mapper.EdgePropertyMapper;
 
 public class MapperTest {
 
@@ -27,12 +30,12 @@ public class MapperTest {
 		String cyNodeName = network.getRow(node).get(CyNetwork.NAME, String.class);
 		View<CyNode> nodeView = new TestNodeView(node);
 		Mapper mapper = new NodePropertyMapper(nodeView);
-		VisualProperty<String> labelProp = BasicVisualLexicon.NODE_LABEL;
+		
 		String label = "Hello World!";
-		nodeView.setVisualProperty(labelProp, label);
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL, label);
 		String expectedDotString = String.format("%s [%s]", cyNodeName, "label = \"Hello World!\""); 
 		String actualDotString = mapper.getElementString();
-		assertEquals("Cytoscape property translation failed.", expectedDotString, actualDotString);
+		assertEquals("Simple visual property translation failed.", expectedDotString, actualDotString);
 	}
 	
 	@Test
@@ -48,6 +51,7 @@ public class MapperTest {
 		final Mapper mapper = new NodePropertyMapper(nodeView);
 		final VisualProperty<NodeShape> shapeProp = BasicVisualLexicon.NODE_SHAPE;
 		final NodeShape shape = NodeShapeVisualProperty.TRIANGLE;
+		
 		nodeView.setVisualProperty(shapeProp, shape);
 		final String expectedDotString = String.format("%s [%s]", cyNodeName, "shape = \"ellipse\""); 
 		final String actualDotString = mapper.getElementString();
