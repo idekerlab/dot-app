@@ -22,6 +22,7 @@ import java.util.HashMap;
  * 
  */
 public class EdgePropertyMapper extends Mapper {
+	
 	/**
 	 * Maps Cytoscape VisualProperty types by their String ID to their dot equivalent
 	 */
@@ -32,7 +33,11 @@ public class EdgePropertyMapper extends Mapper {
 	 */
 	private HashMap<ArrowShape, String> arrowShapeMap; // TODO fill in
 	
-	
+	/**
+	 * Constructs EdgePropertyMapper object
+	 * 
+	 * @param view of edge we are converting
+	 */
 	public EdgePropertyMapper(View<?> view) {
 		super(view);
 		
