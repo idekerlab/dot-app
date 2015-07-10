@@ -25,15 +25,9 @@ public class NodePropertyMapper extends Mapper {
 	private HashMap< VisualProperty, String> simpleVisPropsToDot;
 	
 	/**
-	 * maps Cytoscape VisualProperty TYPES by their String ID to a HashMap that contains the 
-	 * cytoscape to *.dot mappings for that type
-	 */
-	private HashMap<String, HashMap<VisualPropertyValue, String> > discreteMappingTypes; // TODO
-	
-	/**
 	 *  maps Cytoscape node shape types to the equivalent string used in .dot
 	 */
-	private HashMap<NodeShape, String> nodeShapeMap; // TODO
+	private HashMap<NodeShape, String> nodeShapeMap;
 	
 	/**
 	 * Creates string for .dot style attribute. Appends border lineStyle and shape style (rounded or not etc.) to 
@@ -62,7 +56,6 @@ public class NodePropertyMapper extends Mapper {
 		super(view);
 		// initialize hash maps
 		simpleVisPropsToDot = new HashMap< VisualProperty, String>();
-		discreteMappingTypes = new HashMap<String, HashMap<VisualPropertyValue, String> >();
 		nodeShapeMap = new HashMap<NodeShape, String>();
 		
 		populateMaps();

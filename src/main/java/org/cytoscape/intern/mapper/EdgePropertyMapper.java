@@ -39,8 +39,7 @@ public class EdgePropertyMapper extends Mapper {
 		simpleVisPropsToDot = new HashMap< VisualProperty, String>();
 		arrowShapeMap = new HashMap<ArrowShape, String>();
 		
-		populateMaps();
-		
+		populateMaps();		
 	}
 	
 	/**
