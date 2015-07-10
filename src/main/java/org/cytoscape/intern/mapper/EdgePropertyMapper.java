@@ -27,7 +27,6 @@ public class EdgePropertyMapper extends Mapper {
 	/**
 	 * Maps Cytoscape arrowhead types to the equivalent dot attribute
 	 */
-	
 	private HashMap<ArrowShape, String> arrowShapeMap; // TODO fill in
 	
 	/**
@@ -61,10 +60,10 @@ public class EdgePropertyMapper extends Mapper {
 	/**
 	 * Translates the Cytoscape Bend property of the View<CyEdge> object to the
 	 * equivalent dot attribute string
-	 * @param edgeBend The edgeBend to be translated
-	 * @return
+	 * 
+	 * @return String that represents edge bend attribute
 	 */
-	public String mapEdgeBend(Bend edgeBend){
+	private String mapEdgeBend(){
 		// TODO
 		return null;
 	}

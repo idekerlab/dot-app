@@ -8,11 +8,6 @@ import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 
 public class NetworkPropertyMapper extends Mapper {
-
-	/**
-	 * Maps Cytoscape VisualProperty types by their String ID to their dot equivalent
-	 */
-	private HashMap<VisualProperty, String> simpleVisPropsToDot;
 	
 	/**
 	 * Contructs NetworkPropertyMapper object
@@ -22,7 +17,7 @@ public class NetworkPropertyMapper extends Mapper {
 	public NetworkPropertyMapper(CyNetworkView view) {
 		super(view);
 		
-		simpleVisPropsToDot = new HashMap< VisualProperty, String>();
+		simpleVisPropsToDot = new HashMap< VisualProperty<?>, String>();
 		
 		populateMaps();		
 	}
