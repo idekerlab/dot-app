@@ -45,39 +45,6 @@ public abstract class Mapper {
 	}
 	
 	/**
-	 * Takes a VisualProperty and returns the String put in the .dot file to represent it
-	 * 
-	 * @param property VisualProperty to be converted
-	 * @return String that is .dot equivalent of the visual property
-	 */
-	protected <T> String  mapVisToDot(VisualProperty<T> property, T value) {
-		/**
-		 * Pseudocode:
-		 * Attempt to retrieve .dot string from simpleVisPropsToDot by using ID string
-		 * If found: concatenate value to .dot string
-		 * Else: Attempt to retrieve hashmap from discreteMappingTypes by using ID string
-		 * If found: attempt to retreive .dot string from retrieved hashmap using value
-		 * If found: return .dot string
-		 * Else: return default .dot string
-		 */
-		String output = "";
-		
-		// if property is simple
-		if(simpleVisPropsToDot.get(property) != null) {
-			
-		}
-		else {
-			// check discrete
-			// get value from map it points to
-			// return value
-		}
-		
-		// property not found
-		LOGGER.log(Level.SEVERE, "Property not found in maps");
-		return null;
-	}
-	
-	/**
 	 * Given a color, returns the color in String format that .dot uses for color.
 	 * Format is "#%rr%gg%bb%aa" -- red, green, blue, alpha in hexadecimal
 	 * 

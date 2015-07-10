@@ -103,7 +103,7 @@ public class DotWriterTask implements CyWriter {
 	  		nodeMapper = new NodePropertyMapper(nodeView);
 	  		
 	  		try {
-	  			outputWriter.write( nodeMapper.getElementString());
+	  			outputWriter.write( nodeMapper.getElementString() + "\n");
 	  		}
 	  		catch(IOException exception) {
 	  			LOGGER.log(Level.SEVERE, "Write failed @ writeNodes()");
@@ -123,7 +123,7 @@ public class DotWriterTask implements CyWriter {
 	  		edgeMapper = new EdgePropertyMapper(edgeView);
 	  		
 	  		try {
-	  			outputWriter.write( edgeMapper.getElementString());
+	  			outputWriter.write( edgeMapper.getElementString() + "\n");
 	  		}
 	  		catch(IOException exception) {
 	  			LOGGER.log(Level.SEVERE, "Write failed @ writeEdges()");
