@@ -1,4 +1,4 @@
-package org.cytoscape.intern;
+package org.cytoscape.intern.mapper;
 
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
@@ -35,7 +35,15 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	private HashMap<NodeShape, String> nodeShapeMap; // TODO
 	
-	public String mapDotStyle(LineType lineStyle, NodeShape nodeShape) {
+	/**
+	 * Creates string for .dot style attribute. Appends border lineStyle and shape style (rounded or not etc.) to 
+	 * "style = filled"
+	 * 
+	 * @param lineStyle lineStyle being converted
+	 * @param nodeShape being converted
+	 * @return String for style attribute
+	 */
+	private String mapDotStyle(LineType lineStyle, NodeShape nodeShape) {
 		// TODO
 		/**
 		 * Pseudocode
@@ -57,15 +65,42 @@ public class NodePropertyMapper extends Mapper {
 		discreteMappingTypes = new HashMap<String, HashMap<VisualPropertyValue, String> >();
 		nodeShapeMap = new HashMap<NodeShape, String>();
 		
-		// populate simpleVisPropsToDot
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = ");
+		populateMaps();
 	}
 	
 	/**
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
-		
+		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = ");
+	}
+	
+	/**
+	 * Returns a String that contains all relevant attributes for this element 
+	 */
+	public String getElementString() {
+		//TODO
+
+		/**
+		 * Pseudocode:
+		 * elementString = ""
+		 * For each BasicVisualLexiconProperty prop do
+		 * 		propVal = view.getVisualProperty(prop)
+		 * 		elementString += mapVisToDot(prop, propVal)
+		 * end
+		 * 
+		 * Get node border color and node border transparency values from view
+		 * elementString += mapColor(strokeColorVal, edgeTransVal)
+		 * 
+		 * Get node fill color and node transparency (DOT ATTRIBUTE IS fillcolor)
+		 * elementString += mapColor(sourceArrowColor, nodeTransparency)
+		 * 
+		 * Get node label font face
+		 * elementString += mapFont(edgeLabelFont)
+		 * 
+		 * return elementString
+		 */
+		return null;
 	}
 }
 

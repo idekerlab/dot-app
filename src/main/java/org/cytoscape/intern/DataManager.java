@@ -1,5 +1,8 @@
 package org.cytoscape.intern;
 
+import org.cytoscape.intern.mapper.EdgePropertyMapper;
+import org.cytoscape.intern.mapper.NodePropertyMapper;
+
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyNetwork;

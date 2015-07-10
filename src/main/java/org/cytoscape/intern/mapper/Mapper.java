@@ -1,4 +1,4 @@
-package org.cytoscape.intern;
+package org.cytoscape.intern.mapper;
 
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.View;
@@ -24,13 +24,13 @@ import java.util.logging.Logger;
 public abstract class Mapper {
 
 	// maps Cytoscape properties  by their ID Strings to their .dot equivalents if relationship is simple equivalency
-	private HashMap<String, String> simpleVisPropsToDot; 
+	protected HashMap<String, String> simpleVisPropsToDot; 
 	
 	/**
 	 * maps Cytoscape VisualProperty TYPES by their String ID to a HashMap that contains the 
 	 * cytoscape to *.dot mappings for that type
 	 */
-	// TODO Must define here because lineMappings are in here-- I think m
+	// TODO Must define here because lineMappings are in here-- I think --m
 	protected HashMap<String, HashMap<VisualPropertyValue, String> > discreteMappingTypes; 
 	
 	// maps Cytoscape line types to the equivalent string used in .dot
@@ -57,7 +57,7 @@ public abstract class Mapper {
 	 * @param property VisualProperty to be converted
 	 * @return String that is .dot equivalent of the visual property
 	 */
-	public <T> String  mapVisToDot(VisualProperty<T> property, T value) {
+	protected <T> String  mapVisToDot(VisualProperty<T> property, T value) {
 		/**
 		 * Pseudocode:
 		 * Attempt to retrieve .dot string from simpleVisPropsToDot by using ID string

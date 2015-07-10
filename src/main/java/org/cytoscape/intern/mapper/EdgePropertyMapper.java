@@ -1,4 +1,4 @@
-package org.cytoscape.intern;
+package org.cytoscape.intern.mapper;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.View;
