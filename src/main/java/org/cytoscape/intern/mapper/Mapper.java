@@ -33,7 +33,7 @@ public abstract class Mapper {
 	protected View<?> view;
 	
 	// debug logger
-	protected static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.Mapper");
+	protected static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.mapper.Mapper");
 	
 	/**
 	 * Initializes view field
