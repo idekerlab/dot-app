@@ -19,10 +19,6 @@ import java.util.HashMap;
  */
 public class NodePropertyMapper extends Mapper {
 	
-	/**
-	 * maps Cytoscape properties by their ID strings to their .dot equivalents if relationship is simple
-	 */
-	private HashMap< VisualProperty, String> simpleVisPropsToDot;
 	
 	/**
 	 *  maps Cytoscape node shape types to the equivalent string used in .dot
@@ -57,7 +53,7 @@ public class NodePropertyMapper extends Mapper {
 	public NodePropertyMapper(View<?> view) {
 		super(view);
 		// initialize hash maps
-		simpleVisPropsToDot = new HashMap< VisualProperty, String>();
+		simpleVisPropsToDot = new HashMap< VisualProperty<?>, String>();
 		nodeShapeMap = new HashMap<NodeShape, String>();
 		
 		populateMaps();
@@ -80,19 +76,19 @@ public class NodePropertyMapper extends Mapper {
 		/**
 		 * Pseudocode:
 		 * elementString = ""
-		 * For each BasicVisualLexiconProperty prop do
+		 * For each prop in simpleVisPropsToDot do
 		 * 		propVal = view.getVisualProperty(prop)
 		 * 		elementString += mapVisToDot(prop, propVal)
 		 * end
 		 * 
 		 * Get node border color and node border transparency values from view
-		 * elementString += mapColor(strokeColorVal, edgeTransVal)
+		 * elementString += mapColor(nodeBorderColorVal, nodeBorderTransVal)
 		 * 
 		 * Get node fill color and node transparency (DOT ATTRIBUTE IS fillcolor)
-		 * elementString += mapColor(sourceArrowColor, nodeTransparency)
+		 * elementString += mapColor(nodeFillColor, nodeTransparency)
 		 * 
 		 * Get node label font face
-		 * elementString += mapFont(edgeLabelFont)
+		 * elementString += mapFont(nodeLabelFont)
 		 * 
 		 * return elementString
 		 */

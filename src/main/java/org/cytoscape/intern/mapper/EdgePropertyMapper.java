@@ -4,6 +4,7 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
+import org.cytoscape.view.presentation.property.values.Bend;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
@@ -24,13 +25,9 @@ import java.util.HashMap;
 public class EdgePropertyMapper extends Mapper {
 	
 	/**
-	 * Maps Cytoscape VisualProperty types by their String ID to their dot equivalent
-	 */
-	private HashMap<VisualProperty, String> simpleVisPropsToDot;
-	
-	/**
 	 * Maps Cytoscape arrowhead types to the equivalent dot attribute
 	 */
+	
 	private HashMap<ArrowShape, String> arrowShapeMap; // TODO fill in
 	
 	/**
@@ -41,7 +38,7 @@ public class EdgePropertyMapper extends Mapper {
 	public EdgePropertyMapper(View<?> view) {
 		super(view);
 		
-		simpleVisPropsToDot = new HashMap< VisualProperty, String>();
+		simpleVisPropsToDot = new HashMap< VisualProperty<?>, String>();
 		arrowShapeMap = new HashMap<ArrowShape, String>();
 		
 		populateMaps();		
@@ -55,7 +52,8 @@ public class EdgePropertyMapper extends Mapper {
 		/**
 		 * pseudocode
 		 * 
-		 * get Strings from hashMap and concatenate to eachother with "arrowshape="
+		 * get Strings from hashMap and concatenate to eachother with "arrowhead="
+		 * for EDGE_TARGET_ARROW_SHAPE and "arrowtail=" for EDGE_SOURCE_ARROW_SHAPE
 		 */
 		return null;
 	}
@@ -63,10 +61,10 @@ public class EdgePropertyMapper extends Mapper {
 	/**
 	 * Translates the Cytoscape Bend property of the View<CyEdge> object to the
 	 * equivalent dot attribute string
-	 * @param edgeView The edge view whose property is to be translated
+	 * @param edgeBend The edgeBend to be translated
 	 * @return
 	 */
-	public String mapEdgeBend(View<CyEdge> edgeView){
+	public String mapEdgeBend(Bend edgeBend){
 		// TODO
 		return null;
 	}

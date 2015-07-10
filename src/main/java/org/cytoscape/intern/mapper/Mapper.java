@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public abstract class Mapper {
 
 	// maps Cytoscape properties  by their ID Strings to their .dot equivalents if relationship is simple equivalency
-	protected HashMap<VisualProperty, String> simpleVisPropsToDot; 
+	protected HashMap<VisualProperty<?>, String> simpleVisPropsToDot; 
 	
 	// maps Cytoscape line types to the equivalent string used in .dot
 	private HashMap<LineType, String> lineTypeMap; // TODO
@@ -120,7 +120,6 @@ public abstract class Mapper {
 		 */
 		return null;
 	}
-	
 	
 	/**
 	 * Returns a String that contains all relevant attributes for this element 
