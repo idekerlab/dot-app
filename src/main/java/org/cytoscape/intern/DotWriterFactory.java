@@ -17,7 +17,7 @@ import java.io.OutputStream;
  */
 public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	
-	CyFileFilter fileFilter;
+	private CyFileFilter fileFilter;
 	
 	/**
 	 * Constructs a DotWriterFactory object with a given CyApplicationManager
