@@ -63,6 +63,10 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	private void populateMaps() {
 		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = ");
+		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_BORDER_WIDTH, "penwidth = ");
+		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_HEIGHT, "height = ");
+		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_WIDTH, "width = ");
+		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_TOOLTIP, "tooltip = ");
 	}
 	
 	/**

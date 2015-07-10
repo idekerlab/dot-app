@@ -151,6 +151,27 @@
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>model-impl</artifactId>
+			<scope>test</scope>
+			<type>test-jar</type>
+			<version>${cytoscape.api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>model-impl</artifactId>
+			<scope>test</scope>
+			<version>${cytoscape.api.version}</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>event-api</artifactId>
+			<scope>test</scope>
+			<version>${cytoscape.api.version}</version>
+			<type>test-jar</type>
+		</dependency>
 	</dependencies>
   
 </project>
