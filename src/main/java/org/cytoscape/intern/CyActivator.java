@@ -10,6 +10,7 @@ import org.osgi.framework.BundleContext;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.io.IOException;
@@ -31,14 +32,18 @@ public class CyActivator extends AbstractCyActivator {
 	@Override
 	public void start(BundleContext context) {
 		
-		FileHandler handler = null;;
+		FileHandler handler = null;
+		
 		try {
-			handler = new FileHandler("high_log_%u.txt");
+			handler = new FileHandler("high_log.txt");
 			handler.setLevel(Level.ALL);
+			
+			handler.setFormatter(new SimpleFormatter());
 		}
 		catch(IOException e) {
 			// to prevent compiler error
 		}
+		
 		final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.CyActivator");
 		LOGGER.addHandler(handler);
      
