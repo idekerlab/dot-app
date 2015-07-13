@@ -3,6 +3,7 @@ package org.cytoscape.intern.mapper;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
 import org.cytoscape.view.presentation.property.values.LineType;
 
 import java.awt.Color;
@@ -60,8 +61,18 @@ public abstract class Mapper {
 	 */
 	public Mapper(View<? extends CyIdentifiable> view) {
 		this.view = view;
+		populateMaps();
 	}
 	
+	/**
+	 * Helper method to fill the hashmap instance variable with constants we need
+	 */
+	private void populateMaps() {
+		lineTypeMap.put(LineTypeVisualProperty.LONG_DASH, "dashed");
+		lineTypeMap.put(LineTypeVisualProperty.EQUAL_DASH, "dashed");
+		lineTypeMap.put(LineTypeVisualProperty.SOLID, "solid");
+		lineTypeMap.put(LineTypeVisualProperty.DOT, "dotted");
+	}
 	/**
 	 * Given a color, returns the color in String format that .dot uses for color.
 	 * Format is "#%rr%gg%bb%aa" -- red, green, blue, alpha in hexadecimal
