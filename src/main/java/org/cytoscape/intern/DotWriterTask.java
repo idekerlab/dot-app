@@ -67,9 +67,11 @@ public class DotWriterTask implements CyWriter {
 	 */
 	@Override
 	public void run(TaskMonitor taskMonitor) {
+		LOGGER.info("Writing .dot file...");
 		writeProps();
 		writeNodes();
 		writeEdges();
+		LOGGER.info("Finished writing file");
 	}
 	
 	/**
@@ -85,7 +87,9 @@ public class DotWriterTask implements CyWriter {
 	 */
 	private void writeProps() {
 		try {
+			LOGGER.info("Writing network properties...");
 			outputWriter.write( networkMapper.getElementString() );
+			LOGGER.info("Finished writing network properties");
 		}
 		catch(IOException exception) {
 			LOGGER.log(Level.SEVERE, "Write failed @ writeProps()");
@@ -96,6 +100,7 @@ public class DotWriterTask implements CyWriter {
 	 * Writes the .dot declaration of each node to file
 	 */
 	private void writeNodes() {
+		LOGGER.info("Writing node declarations...");
 		// create list of all node views
 		ArrayList< View<CyNode> > nodeViewList = new ArrayList< View<CyNode> >( networkView.getNodeViews() );
 		
@@ -116,12 +121,14 @@ public class DotWriterTask implements CyWriter {
 	  			LOGGER.log(Level.SEVERE, "Write failed @ writeNodes()");
 	  		}
 		}
+		LOGGER.info("Finished writing node declarations");
 	}
 	
 	/**
 	 * Writes the .dot declaration of each edge to file
 	 */
 	private void writeEdges() {
+		LOGGER.info("Writing edge declarations...");
 		// create list of all edge views
 		ArrayList< View<CyEdge> > edgeViewList = new ArrayList< View<CyEdge> >( networkView.getEdgeViews() );
 		
@@ -148,6 +155,7 @@ public class DotWriterTask implements CyWriter {
 	  			LOGGER.log(Level.SEVERE, "Write failed @ writeEdges()");
 	  		}
 		}
+		LOGGER.info("Finished writing edge declarations...");
 	}
 	
 }

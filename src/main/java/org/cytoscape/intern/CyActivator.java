@@ -43,8 +43,8 @@ public class CyActivator extends AbstractCyActivator{
 	 StreamUtil streamUtil = getService(context, StreamUtil.class);
 		 
      //add .dot and .gv,which have the same meaning, to the menu
-     extensions.add(".dot");
-	 extensions.add(".gv");
+     extensions.add("dot");
+	 extensions.add("gv");
 	 contentTypes.add("text/plain");
 		 
      //initialize (Basic)CyFileFilter, which handles the file type

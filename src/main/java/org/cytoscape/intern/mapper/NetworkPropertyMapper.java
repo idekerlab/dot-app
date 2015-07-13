@@ -2,10 +2,8 @@ package org.cytoscape.intern.mapper;
 
 import java.util.HashMap;
 
-import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.VisualProperty;
-import org.cytoscape.view.presentation.property.values.ArrowShape;
 
 public class NetworkPropertyMapper extends Mapper {
 	
@@ -62,7 +60,6 @@ public class NetworkPropertyMapper extends Mapper {
 	/**
 	 * Returns dot string that represents if graph is directed or not
 	 * 
-	 * @param view CyNetworkView of network being checked
 	 * @return String that is either "graph {" or "digraph {"
 	 */
 	private String getDirectedString() {
@@ -73,7 +70,6 @@ public class NetworkPropertyMapper extends Mapper {
 	/**
 	 * Determines whether the graph is visibly directed or not
 	 * 
-	 * @param view View of network we are checking for direction
 	 * @return true if graph is directed, false otherwise
 	 */
 	private boolean isDirected() {
