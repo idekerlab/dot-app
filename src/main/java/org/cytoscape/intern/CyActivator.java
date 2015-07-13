@@ -9,6 +9,10 @@ import org.osgi.framework.BundleContext;
 
 import java.util.HashSet;
 import java.util.Properties;
+import java.util.logging.Logger;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.io.IOException;
 
 /**
  * Runs the program
@@ -17,7 +21,7 @@ import java.util.Properties;
  * @author Braxton Fitts
  * @author Ziran Zhang
  */
-public class CyActivator extends AbstractCyActivator{
+public class CyActivator extends AbstractCyActivator {
 	
 	/**
 	 * Method that runs when class is activated-- will start dot app
@@ -27,34 +31,42 @@ public class CyActivator extends AbstractCyActivator{
 	@Override
 	public void start(BundleContext context) {
 		
-	/* 
-	 * codes that have been tested 
-	 */ 
+		FileHandler handler = null;;
+		try {
+			handler = new FileHandler("high_log_%u.txt");
+			handler.setLevel(Level.ALL);
+		}
+		catch(IOException e) {
+			// to prevent compiler error
+		}
+		final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.CyActivator");
+		LOGGER.addHandler(handler);
      
-     //initialize two hashsets
-	 HashSet<String> extensions = new HashSet<String>();
-	 HashSet<String> contentTypes = new HashSet<String>();
+		//initialize two hashsets
+		HashSet<String> extensions = new HashSet<String>();
+		HashSet<String> contentTypes = new HashSet<String>();
 		 
-     //captures the types of data the cytoscape.io package can read and write
-     DataCategory category = DataCategory.NETWORK;
-
-     //register the service of supporting InputStreams and URL connections 
-     //over the network
-	 StreamUtil streamUtil = getService(context, StreamUtil.class);
+		//captures the types of data the cytoscape.io package can read and write
+		DataCategory category = DataCategory.NETWORK;
+			
+		//register the service of supporting InputStreams and URL connections 
+		//over the network
+		StreamUtil streamUtil = getService(context, StreamUtil.class);
 		 
-     //add .dot and .gv,which have the same meaning, to the menu
-     extensions.add(".dot");
-	 extensions.add(".gv");
-	 contentTypes.add("text/plain");
-		 
-     //initialize (Basic)CyFileFilter, which handles the file type
-	 BasicCyFileFilter fileFilter = new BasicCyFileFilter(extensions, contentTypes, "GraphViz files", category, streamUtil);
-		 
-     //initialize the DotWriterFactory for later use
-     DotWriterFactory dotFac = new DotWriterFactory(fileFilter);
-		   
-     //registerService from CyNetworkViewWriterFactory interface
-	 registerService(context, dotFac, CyNetworkViewWriterFactory.class, new Properties());
+		//add .dot and .gv,which have the same meaning, to the menu
+		extensions.add("dot");
+		extensions.add("gv");
+		contentTypes.add("text/plain");
+				 
+		//initialize (Basic)CyFileFilter, which handles the file type
+		BasicCyFileFilter fileFilter = new BasicCyFileFilter(extensions, contentTypes, "GraphViz files", category, streamUtil);
+				 
+		//initialize the DotWriterFactory for later use
+		DotWriterFactory dotFac = new DotWriterFactory(fileFilter);
+		LOGGER.info("factory constructed");
+		
+		//registerService from CyNetworkViewWriterFactory interface
+		registerService(context, dotFac, CyNetworkViewWriterFactory.class, new Properties());
 
 	}
 
