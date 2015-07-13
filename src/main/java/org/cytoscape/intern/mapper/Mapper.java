@@ -87,40 +87,17 @@ public abstract class Mapper {
 	}
 	
 	/**
-	 * Given a LineStyle, returns the .dot equivalent in String form
-	 * @param
+	 * Returns the .dot equivalent in String form for style attribute. Only handles linestyle
 	 */
-	protected String mapDotStyle(LineType lineType) {
+	protected String mapDotStyle() {
 		// TODO
 		/**
 		 * Pseudocode:
+		 * if instanceof edge check BVL.EDGE_LINE_TYPE
+		 * else if instanceof node check BVL.NODE_BORDER_LINE_TYPE
 		 * Retrieve .dot string from lineType hashmap
 		 */
 		return null;
-	}
-	
-	/**
-	 * Returns String that is name of this element-- not label, name
-	 * 
-	 * @return String that is name of this element
-	 */
-	protected String getElementName() {
-		CyIdentifiable element = (CyIdentifiable)view.getModel();
-		CyNetwork network = null;		
-		
-		// get CyNetwork that element is in
-		if(element instanceof CyNetwork) {
-			network = (CyNetwork)view.getModel();
-		}
-		else if(element instanceof CyNode) {
-			network = ((CyNode)element).getNetworkPointer();
-		}
-		else if(element instanceof CyEdge) {
-			network = ((CyEdge) element).getSource().getNetworkPointer();
-		}
-		
-		// return string in "name" column of network table-- return name of element
-		return network.getRow(element).get("name", String.class);
 	}
 	
 	/**

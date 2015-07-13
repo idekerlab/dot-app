@@ -47,16 +47,17 @@ public class NodePropertyMapper extends Mapper {
 	 * Creates string for .dot style attribute. Appends border lineStyle and shape style (rounded or not etc.) to 
 	 * "style = filled"
 	 * 
-	 * @param nodeShape being converted
 	 * @return String for style attribute
 	 */
-	private String mapDotStyle(NodeShape nodeShape) {
+	protected String mapDotStyle() {
 		// TODO
 		/**
 		 * Pseudocode
-		 * Call Mapper.mapDotStyle(lineStyle) to retrieve 'style="lineStyle"' string
+		 * Call super.mapDotStyle(lineStyle) to retrieve 'style="lineStyle"' string
 		 * Ignore final " (get first n-1 characters of string)
-		 * Join with "filled" and "rounded" separated by ","
+		 * Join with "filled" separated by ","
+		 * determine if we need to add "rounded" by checking BVL.NODE_SHAPE
+		 * concatenate if needed
 		 * return created String
 		 */
 		return null;
@@ -80,11 +81,13 @@ public class NodePropertyMapper extends Mapper {
 	public String getElementString() {
 		LOGGER.info("Preparing to get .dot declaration for element.");
 		CyNode node = (CyNode)view.getModel();
-		CyNetwork network = node.getNetworkPointer();
+		CyNetwork network = node.getNetworkPointer(); //WONT WORK right? --m
+		
 		try {
 			LOGGER.info("Retrieved required Network model objects. Results: " + node.toString() + ", " + network.toString());
-			String nodeName = network.getRow(node).get(CyNetwork.NAME, String.class);
+			String nodeName = network.getRow(node).get(CyNetwork.NAME, String.class); //WONT WORK right? --m
 			StringBuilder elementString = new StringBuilder(nodeName + " [");
+			
 			for (Map.Entry<VisualProperty<?>, String> keyAndVal : simpleVisPropsToDot.entrySet()) {
 			        VisualProperty<?> visualProp = keyAndVal.getKey();
 			        String dotString = keyAndVal.getValue();
@@ -92,14 +95,19 @@ public class NodePropertyMapper extends Mapper {
 			        String valString = "\"" + val.toString() + "\"";
 			        elementString.append(dotString + valString + ", ");
 			}
+			
 			LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
+			
 			Color borderColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT);
 			Integer borderTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY);
 			elementString.append("color = " + mapColorToDot(borderColor, borderTransparency));
 			elementString.append("]");
+			
 			LOGGER.info("Created .dot string. Result: " + elementString);
 			return elementString.toString();
-		} catch (NullPointerException e) {
+		} 
+		catch (NullPointerException e) {
+			
 			LOGGER.severe("ERROR: Could not retrieve CyNode or CyNetwork");
 			throw e;
 		}
