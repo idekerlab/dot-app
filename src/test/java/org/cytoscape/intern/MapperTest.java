@@ -37,7 +37,7 @@ public class MapperTest {
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY, new Integer(0xFF));
 		String labelString = String.format("label = \"%s\"", label);
 		String colorString = "color = \"#FF0000FF\"";
-		String expectedDotString = String.format("[%s,%s,shape = \"null\"]", labelString, colorString); 
+		String expectedDotString = String.format("[%s,%s,shape = \"null\",fixedsize = true]", labelString, colorString); 
 
 		final Mapper mapper = new NodePropertyMapper(nodeView);
 		String actualDotString = mapper.getElementString();
@@ -66,7 +66,7 @@ public class MapperTest {
 		String labelString = String.format("label = \"%s\"", label);
 		String colorString = "color = \"#FF0000FF\"";
 		String shapeString = "shape = \"triangle\"";
-		final String expectedDotString = String.format("[%s,%s,%s]", labelString, colorString, shapeString);
+		final String expectedDotString = String.format("[%s,%s,%s,fixedsize = true]", labelString, colorString, shapeString);
 
 		final Mapper mapper = new NodePropertyMapper(nodeView);
 		final String actualDotString = mapper.getElementString();
