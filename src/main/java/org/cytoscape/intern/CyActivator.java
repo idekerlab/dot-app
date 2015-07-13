@@ -75,5 +75,4 @@ public class CyActivator extends AbstractCyActivator {
 		registerService(context, dotFac, CyNetworkViewWriterFactory.class, new Properties());
 
 	}
-
 }

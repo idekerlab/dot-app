@@ -184,5 +184,4 @@ public class DotWriterTask implements CyWriter {
 		}
 		LOGGER.info("Finished writing edge declarations...");
 	}
-	
 }
