@@ -30,13 +30,14 @@ public abstract class Mapper {
 	protected HashMap<VisualProperty<?>, String> simpleVisPropsToDot; 
 	
 	// maps Cytoscape line types to the equivalent string used in .dot
-	private HashMap<LineType, String> lineTypeMap; // TODO
+	private HashMap<LineType, String> lineTypeMap;
 	
 	// view that this mapper object is mapping
 	protected View<? extends CyIdentifiable> view;
 	
 	// debug logger
 	protected static final Logger LOGGER;
+	//Initialilze logger with file handler
 	static {
 		LOGGER = Logger.getLogger("org.cytoscape.intern.mapper.Mapper");
 		FileHandler handler = null;
