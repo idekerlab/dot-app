@@ -64,6 +64,7 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	private void populateMaps() {
 		LOGGER.info("Populating HashMaps with values");
+
 		//Put Simple Props Key/Values
 		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = \"" + 
 			view.getVisualProperty(BasicVisualLexicon.NODE_LABEL) + "\"" );
@@ -125,22 +126,20 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
 		
 		LOGGER.info("Preparing to get color properties");
-		//Get the color and fillcolor .dot strings. Append to attribute string
+		
+		//Get the color string (border color). Append to attribute string
 		Color borderColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT);
 		Integer borderTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY);
-		String dotColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
-		elementString.append(dotColor);
+		String dotBorderColor = String.format("color = \"%s\",", mapColorToDot(borderColor, borderTransparency));
+		elementString.append(dotBorderColor);
 		
-		elementString.append(",");
-		
+		// Write node fill color
 		Color fillColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR);
 		Integer nodeTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_TRANSPARENCY);
-		String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, nodeTransparency));
+		String dotFillColor = String.format("fillcolor = \"%s\",", mapColorToDot(fillColor, nodeTransparency));
 		elementString.append(dotFillColor);
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
-		
-		elementString.append(",");
-		
+	
 		LOGGER.info("Preparing to get shape property");
 		//Get the .dot string for the node shape. Append to attribute string
 		NodeShape shape = view.getVisualProperty(BasicVisualLexicon.NODE_SHAPE);

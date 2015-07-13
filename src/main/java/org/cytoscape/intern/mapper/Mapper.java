@@ -83,7 +83,6 @@ public abstract class Mapper {
 	 * @return String representation of color in .dot format of rgba
 	 */
 	protected String mapColorToDot(Color color, Integer alpha) {
-		// TODO
 		LOGGER.info("Creating .dot color attribute string");
 		Integer red = color.getRed();
 		Integer green = color.getGreen();
@@ -91,12 +90,6 @@ public abstract class Mapper {
 		String result = String.format("#%02X%02X%02X%02X", red, green, blue, alpha);
 		LOGGER.info("Created .dot color attribute string. Result: " + result);
 		return result;
-		/**
-		 * Pseudocode:
-		 * Retrieve individual color bits using getRed() getGreen() getBlue()
-		 * Convert to a string using String.format("#%02X%02X%02X%02X", red, green, blue, alpha)
-		 * return string
-		 */
 	}
 	
 	/**
