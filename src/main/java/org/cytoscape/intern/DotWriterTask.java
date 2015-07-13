@@ -3,7 +3,6 @@ package org.cytoscape.intern;
 import org.cytoscape.intern.mapper.NetworkPropertyMapper;
 import org.cytoscape.intern.mapper.NodePropertyMapper;
 import org.cytoscape.intern.mapper.EdgePropertyMapper;
-
 import org.cytoscape.io.write.CyWriter;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
@@ -16,8 +15,10 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Task object that writes the network view to a .dot file
@@ -56,6 +57,21 @@ public class DotWriterTask implements CyWriter {
 		outputWriter = new OutputStreamWriter(output);
 		this.networkView = networkView;
 		this.networkMapper = new NetworkPropertyMapper(networkView);
+		
+		FileHandler handler = null;
+		
+		try {
+			handler = new FileHandler("log_DotWriterTask.txt");
+			handler.setLevel(Level.ALL);
+			
+			handler.setFormatter(new SimpleFormatter());
+		}
+		catch(IOException e) {
+			// to prevent compiler error
+		}
+		
+		LOGGER.addHandler(handler);
+		
 		LOGGER.log(Level.FINEST, "DotWriterTask constructed");
 	}
 

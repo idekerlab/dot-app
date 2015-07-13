@@ -90,7 +90,7 @@ public class MapperTest {
 
 	}
 	
-	@Test
+	//@Test --I commented so I can debug how nothing is being written to file
 	public void testEdgeGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
