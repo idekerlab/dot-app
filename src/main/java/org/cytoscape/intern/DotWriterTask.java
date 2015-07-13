@@ -72,7 +72,8 @@ public class DotWriterTask implements CyWriter {
 		
 		LOGGER.addHandler(handler);
 		
-		LOGGER.log(Level.FINEST, "DotWriterTask constructed");
+		LOGGER.info("DotWriterTask constructed with OutputStream" + 
+			output.toString());
 	}
 
 	/**
