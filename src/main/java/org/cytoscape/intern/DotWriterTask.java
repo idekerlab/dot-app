@@ -43,6 +43,8 @@ public class DotWriterTask implements CyWriter {
 	// debug logger
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.DotWriterTask");
 	
+	//check whether the task needs to respond to cancellation
+	boolean cancelled = false;
 	/**
 	 * Constructs a DotWriterTask object
 	 * 
@@ -102,6 +104,9 @@ public class DotWriterTask implements CyWriter {
 	@Override
 	public void cancel() {
 		// TODO
+		
+		//set the cancelled to true for further action
+		cancelled  = true;
 	}
 	
 	/**
