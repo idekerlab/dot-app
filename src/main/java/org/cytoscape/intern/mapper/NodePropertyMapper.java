@@ -64,22 +64,28 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	private void populateMaps() {
 		LOGGER.info("Populating HashMaps with values");
-		
+
+		//Put Simple Props Key/Values
 		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = \"" + 
 			view.getVisualProperty(BasicVisualLexicon.NODE_LABEL) + "\"" );
-		// points
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_BORDER_WIDTH, "penwidth = " +
-			view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH));
-		// inches
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_HEIGHT, "height = " + 
-			view.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT));
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_WIDTH, "width = " +
-			view.getVisualProperty(BasicVisualLexicon.NODE_WIDTH));
-		
+		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_BORDER_WIDTH, "penwidth = \"" +
+			view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH) + "\"");
+		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_HEIGHT, "height = \"" +
+			view.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT) + "\"");
+		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_WIDTH, "width = \"" +
+			view.getVisualProperty(BasicVisualLexicon.NODE_WIDTH) + "\"");
 		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_TOOLTIP, "tooltip = \"" +
 			view.getVisualProperty(BasicVisualLexicon.NODE_TOOLTIP) + "\"");
 		
+		//Put Node Shape Key/Values
 		nodeShapeMap.put(NodeShapeVisualProperty.TRIANGLE, "triangle");
+		nodeShapeMap.put(NodeShapeVisualProperty.DIAMOND, "diamond");
+		nodeShapeMap.put(NodeShapeVisualProperty.ELLIPSE, "ellipse");
+		nodeShapeMap.put(NodeShapeVisualProperty.HEXAGON, "hexagon");
+		nodeShapeMap.put(NodeShapeVisualProperty.OCTAGON, "octagon");
+		nodeShapeMap.put(NodeShapeVisualProperty.PARALLELOGRAM, "parallelogram");
+		nodeShapeMap.put(NodeShapeVisualProperty.ROUND_RECTANGLE, "rectangle");
+		nodeShapeMap.put(NodeShapeVisualProperty.RECTANGLE, "rectangle");
 		LOGGER.info("HashMaps populated");
 	}
 	
@@ -120,22 +126,20 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
 		
 		LOGGER.info("Preparing to get color properties");
+		
 		//Get the color string (border color). Append to attribute string
 		Color borderColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT);
 		Integer borderTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY);
-		String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
+		String dotBorderColor = String.format("color = \"%s\",", mapColorToDot(borderColor, borderTransparency));
 		elementString.append(dotBorderColor);
-		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 		
-		// Get the fillcolor String and append
+		// Write node fill color
 		Color fillColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR);
-		Integer fillTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_TRANSPARENCY);
-		String dotFillColor = String.format("fillcolor = \"%s\",", mapColorToDot(fillColor, fillTransparency));
+		Integer nodeTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_TRANSPARENCY);
+		String dotFillColor = String.format("fillcolor = \"%s\",", mapColorToDot(fillColor, nodeTransparency));
 		elementString.append(dotFillColor);
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
-		
-		//elementString.append(",");
-		
+	
 		LOGGER.info("Preparing to get shape property");
 		//Get the .dot string for the node shape. Append to attribute string
 		NodeShape shape = view.getVisualProperty(BasicVisualLexicon.NODE_SHAPE);
