@@ -34,11 +34,9 @@ public class DotWriterTask implements CyWriter {
 	private NodePropertyMapper nodeMapper;
 	private EdgePropertyMapper edgeMapper;
 	
-	
 	// Object used to write the .dot file
 	private OutputStreamWriter outputWriter;
-	
-	
+		
 	// NetworkView being converted to .dot
 	private CyNetworkView networkView;
 	
@@ -58,8 +56,8 @@ public class DotWriterTask implements CyWriter {
 		this.networkView = networkView;
 		this.networkMapper = new NetworkPropertyMapper(networkView);
 		
+		// Make logger write to file
 		FileHandler handler = null;
-		
 		try {
 			handler = new FileHandler("log_DotWriterTask.txt");
 			handler.setLevel(Level.ALL);
@@ -69,11 +67,9 @@ public class DotWriterTask implements CyWriter {
 		catch(IOException e) {
 			// to prevent compiler error
 		}
-		
 		LOGGER.addHandler(handler);
 		
-		LOGGER.info("DotWriterTask constructed with OutputStream" + 
-			output.toString());
+		LOGGER.info("DotWriterTask constructed");
 	}
 
 	/**
@@ -88,13 +84,16 @@ public class DotWriterTask implements CyWriter {
 		writeProps();
 		writeNodes();
 		writeEdges();
+		
 		try {
 			outputWriter.write("}");
 			outputWriter.close();
 			LOGGER.info("Finished writing file");
-		} catch(IOException e) {
-			LOGGER.severe("Failed to close file");
+		} 
+		catch(IOException e) {
+			LOGGER.severe("Failed to close file, IOException in DotWriterTask");
 		}
+		
 	}
 	
 	/**
@@ -124,6 +123,7 @@ public class DotWriterTask implements CyWriter {
 	 */
 	private void writeNodes() {
 		LOGGER.info("Writing node declarations...");
+		
 		// create list of all node views
 		ArrayList< View<CyNode> > nodeViewList = new ArrayList< View<CyNode> >( networkView.getNodeViews() );
 		
@@ -132,11 +132,13 @@ public class DotWriterTask implements CyWriter {
 	  		nodeMapper = new NodePropertyMapper(nodeView);
 	  		
 	  		try {
+	  			// Retrive node name
 	  			CyNode nodeModel = nodeView.getModel();
 	  			CyNetwork networkModel = networkView.getModel();
-
 	  			String nodeName = networkModel.getRow(nodeModel).get(CyNetwork.NAME, String.class);
+	  			// Remove spaces
 	  			nodeName = nodeName.replace(" ", "");
+	  			
 	  			String declaration = String.format("%s %s\n", nodeName, nodeMapper.getElementString());
 
 	  			outputWriter.write(declaration);
@@ -153,6 +155,7 @@ public class DotWriterTask implements CyWriter {
 	 */
 	private void writeEdges() {
 		LOGGER.info("Writing edge declarations...");
+		
 		// create list of all edge views
 		ArrayList< View<CyEdge> > edgeViewList = new ArrayList< View<CyEdge> >( networkView.getEdgeViews() );
 		
@@ -161,16 +164,19 @@ public class DotWriterTask implements CyWriter {
 	  		edgeMapper = new EdgePropertyMapper(edgeView);
 	  		
 	  		try {
+	  			// Retrieve source+target node names
 	  			CyEdge edgeModel = edgeView.getModel();
 	  			CyNetwork networkModel = networkView.getModel();
-	  			
+
 	  			CyNode sourceNode = edgeModel.getSource();
 	  			CyNode targetNode = edgeModel.getTarget();
 	  			
 	  			String sourceName = networkModel.getRow(sourceNode).get(CyNetwork.NAME, String.class);
+	  			// Remove spaces
 	  			sourceName = sourceName.replace(" ", "");
 	  			
 	  			String targetName = networkModel.getRow(targetNode).get(CyNetwork.NAME, String.class);
+	  			// Remove spaces
 	  			targetName = targetName.replace(" ", "");
 
 	  			String edgeName = String.format("%s -- %s", sourceName, targetName);

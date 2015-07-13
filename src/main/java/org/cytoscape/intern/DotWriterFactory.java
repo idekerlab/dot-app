@@ -35,7 +35,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 		super();
 		this.fileFilter = fileFilter;
 		
-		// make logger save to file
+		// make logger write to file
 		FileHandler handler = null;
 		try {
 			handler = new FileHandler("log_DotWriterFactory.txt");
@@ -46,7 +46,6 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 		catch(IOException e) {
 			// to prevent compiler error
 		}
-		
 		LOGGER.addHandler(handler);
 	}
 
@@ -59,7 +58,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	public CyFileFilter getFileFilter() {
 		return fileFilter;
 	}
-	
+	 
 	/**
 	 * Creates a task that writes a specified network to a specified stream
 	 * 

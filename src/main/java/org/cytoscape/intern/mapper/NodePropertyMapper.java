@@ -20,7 +20,6 @@ import java.util.HashMap;
  */
 public class NodePropertyMapper extends Mapper {
 	
-	
 	/**
 	 *  maps Cytoscape node shape types to the equivalent string used in .dot
 	 */
