@@ -21,7 +21,7 @@ import java.awt.Color;
 public class MapperTest {
 
 	@Test
-	public void testGetElementStringSimpleProps() {
+	public void testNodeGetElementStringSimpleProps() {
 		/**
 		 * Case 1: Translating a simple Cytoscape property to .dot string
 		 */
@@ -29,7 +29,6 @@ public class MapperTest {
 		CyNetwork network = nts.getNetwork();
 		CyNode node = network.addNode();
 		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
-		String cyNodeName = network.getRow(node).get(CyNetwork.NAME, String.class);
 		View<CyNode> nodeView = new TestNodeView(node);
 		Mapper mapper = new NodePropertyMapper(nodeView);
 		
@@ -39,13 +38,13 @@ public class MapperTest {
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY, new Integer(0xFF));
 		String labelString = "label = \"" + label + "\"";
 		String colorString = "color = \"#FF0000FF";
-		String expectedDotString = String.format("%s [%s, %s]", cyNodeName, labelString, colorString); 
+		String expectedDotString = String.format("[%s, %s]", labelString, colorString); 
 		String actualDotString = mapper.getElementString();
 		assertEquals("Simple visual property translation failed.", expectedDotString, actualDotString);
 	}
 	
 	@Test
-	public void testGetElementStringDiscreteProps() {
+	public void testNodeGetElementStringDiscreteProps() {
 		/**
 		 * Case 2: Translating a discrete Cytoscape property to .dot string
 		 */
@@ -59,7 +58,7 @@ public class MapperTest {
 		final NodeShape shape = NodeShapeVisualProperty.TRIANGLE;
 		
 		nodeView.setVisualProperty(shapeProp, shape);
-		final String expectedDotString = String.format("%s [%s]", cyNodeName, "shape = \"ellipse\""); 
+		final String expectedDotString = String.format("[%s]", cyNodeName, "shape = \"ellipse\""); 
 		final String actualDotString = mapper.getElementString();
 		assertEquals("Cytoscape property translation failed.", expectedDotString, actualDotString);
 	}

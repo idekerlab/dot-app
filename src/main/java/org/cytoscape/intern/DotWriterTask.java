@@ -5,11 +5,12 @@ import org.cytoscape.intern.mapper.NodePropertyMapper;
 import org.cytoscape.intern.mapper.EdgePropertyMapper;
 
 import org.cytoscape.io.write.CyWriter;
-import org.cytoscape.work.TaskMonitor;
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-import org.cytoscape.model.CyNode;
-import org.cytoscape.model.CyEdge;
+import org.cytoscape.work.TaskMonitor;
 
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -103,7 +104,13 @@ public class DotWriterTask implements CyWriter {
 	  		nodeMapper = new NodePropertyMapper(nodeView);
 	  		
 	  		try {
-	  			outputWriter.write( nodeMapper.getElementString() + "\n");
+	  			CyNode nodeModel = nodeView.getModel();
+	  			CyNetwork networkModel = networkView.getModel();
+	  			
+	  			String nodeName = networkModel.getRow(nodeModel).get(CyNetwork.NAME, String.class);
+	  			String declaration = String.format("%s %s\n", nodeName, nodeMapper.getElementString());
+	  			
+	  			outputWriter.write(declaration);
 	  		}
 	  		catch(IOException exception) {
 	  			LOGGER.log(Level.SEVERE, "Write failed @ writeNodes()");
@@ -123,7 +130,19 @@ public class DotWriterTask implements CyWriter {
 	  		edgeMapper = new EdgePropertyMapper(edgeView);
 	  		
 	  		try {
-	  			outputWriter.write( edgeMapper.getElementString() + "\n");
+	  			CyEdge edgeModel = edgeView.getModel();
+	  			CyNetwork networkModel = networkView.getModel();
+	  			
+	  			CyNode sourceNode = edgeModel.getSource();
+	  			CyNode targetNode = edgeModel.getTarget();
+	  			
+	  			String sourceName = networkModel.getRow(sourceNode).get(CyNetwork.NAME, String.class);
+	  			String targetName = networkModel.getRow(targetNode).get(CyNetwork.NAME, String.class);
+	  			
+	  			String edgeName = String.format("%s -- %s", sourceName, targetName);
+	  			String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());
+	  			
+	  			outputWriter.write(declaration);
 	  		}
 	  		catch(IOException exception) {
 	  			LOGGER.log(Level.SEVERE, "Write failed @ writeEdges()");
