@@ -62,6 +62,7 @@ public abstract class Mapper {
 	 */
 	public Mapper(View<? extends CyIdentifiable> view) {
 		this.view = view;
+		lineTypeMap = new HashMap<LineType, String>();
 		populateMaps();
 	}
 	
