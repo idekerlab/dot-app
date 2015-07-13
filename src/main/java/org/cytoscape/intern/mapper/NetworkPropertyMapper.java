@@ -58,4 +58,39 @@ public class NetworkPropertyMapper extends Mapper {
 	private void populateMaps() {
 		
 	}
+
+	/**
+	 * Returns dot string that represents if graph is directed or not
+	 * 
+	 * @param view CyNetworkView of network being checked
+	 * @return String that is either "graph {" or "digraph {"
+	 */
+	private String getDirectedString() {
+		String output = (isDirected()) ? "graph {":"digraph {";
+		return output;
+	}
+	
+	/**
+	 * Determines whether the graph is visibly directed or not
+	 * 
+	 * @param view View of network we are checking for direction
+	 * @return true if graph is directed, false otherwise
+	 */
+	private boolean isDirected() {
+		/**
+		 * pseudocode
+		 * 
+		 * CyNetwork network = view.getModel();
+		 * ArrayList<CyEdge> edgeList = network.getEdgeList();
+		 * 
+		 * M-- note that indenting is off below
+		 * for(CyEdge edge: edgeList) {
+		 * 		if(edge.isDirected()) {
+		 * 			return true;
+		 * 		}
+		 * }
+		 * return false;
+		 */
+		return false;
+	}
 }
