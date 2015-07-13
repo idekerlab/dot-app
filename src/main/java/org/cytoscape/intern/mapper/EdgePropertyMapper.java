@@ -70,12 +70,12 @@ public class EdgePropertyMapper extends Mapper {
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_LABEL, "label = " +
-				view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL));
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_WIDTH, "penwidth = " +
-				view.getVisualProperty(BasicVisualLexicon.EDGE_WIDTH));
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_TOOLTIP, "tooltip = " +
-				view.getVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP));
+		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_LABEL, "label = \"" +
+				view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL) + "\"");
+		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_WIDTH, "penwidth = \"" +
+				view.getVisualProperty(BasicVisualLexicon.EDGE_WIDTH) + "\"");
+		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_TOOLTIP, "tooltip = \"" +
+				view.getVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP) + "\"");
 	}
 	
 	/**
