@@ -66,7 +66,7 @@ public class NetworkPropertyMapper extends Mapper {
 	 * @return String that is either "graph {" or "digraph {"
 	 */
 	private String getDirectedString() {
-		String output = (isDirected()) ? "graph {":"digraph {";
+		String output = (isDirected()) ? "digraph {":"graph {";
 		return output;
 	}
 	
