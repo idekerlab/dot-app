@@ -106,8 +106,10 @@ public class DotWriterTask implements CyWriter {
 	  		try {
 	  			CyNode nodeModel = nodeView.getModel();
 	  			CyNetwork networkModel = networkView.getModel();
+	  			
 	  			String nodeName = networkModel.getRow(nodeModel).get(CyNetwork.NAME, String.class);
 	  			String declaration = String.format("%s %s\n", nodeName, nodeMapper.getElementString());
+	  			
 	  			outputWriter.write(declaration);
 	  		}
 	  		catch(IOException exception) {
@@ -130,12 +132,16 @@ public class DotWriterTask implements CyWriter {
 	  		try {
 	  			CyEdge edgeModel = edgeView.getModel();
 	  			CyNetwork networkModel = networkView.getModel();
+	  			
 	  			CyNode sourceNode = edgeModel.getSource();
 	  			CyNode targetNode = edgeModel.getTarget();
+	  			
 	  			String sourceName = networkModel.getRow(sourceNode).get(CyNetwork.NAME, String.class);
 	  			String targetName = networkModel.getRow(targetNode).get(CyNetwork.NAME, String.class);
+	  			
 	  			String edgeName = String.format("%s -- %s", sourceName, targetName);
 	  			String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());
+	  			
 	  			outputWriter.write(declaration);
 	  		}
 	  		catch(IOException exception) {
