@@ -5,12 +5,10 @@ import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.Bend;
-import org.cytoscape.view.presentation.property.values.LineType;
-import org.cytoscape.view.presentation.property.values.NodeShape;
-import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.EdgeBendVisualProperty;
 
+import java.awt.Color;
 import java.util.HashMap;
 
 /**
@@ -72,9 +70,12 @@ public class EdgePropertyMapper extends Mapper {
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_LABEL, "label = ");
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_WIDTH, "penwidth = ");
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_TOOLTIP, "tooltip = ");
+		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_LABEL, "label = " +
+				view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL));
+		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_WIDTH, "penwidth = " +
+				view.getVisualProperty(BasicVisualLexicon.EDGE_WIDTH));
+		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_TOOLTIP, "tooltip = " +
+				view.getVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP));
 	}
 	
 	/**
@@ -110,6 +111,37 @@ public class EdgePropertyMapper extends Mapper {
 		 * 
 		 * return elementString
 		 */
-		return null;
+		LOGGER.info("Preparing to get .dot declaration for element.");
+
+		//Build attribute string
+		StringBuilder elementString = new StringBuilder("[");
+
+		//Get .dot strings for simple dot attributes. Append to attribute string
+		for (String dotAttribute : simpleVisPropsToDot.values()) {
+		        elementString.append(dotAttribute);
+		        elementString.append(",");
+		}
+		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
+		
+		LOGGER.info("Preparing to get color properties");
+		//Get the color and fillcolor .dot strings. Append to attribute string
+		Color strokeColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT);
+		Integer strokeTransparency = view.getVisualProperty(BasicVisualLexicon.EDGE_TRANSPARENCY);
+		String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
+		elementString.append(dotColor);
+		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
+		
+		elementString.append(",");
+		
+		LOGGER.info("Preparing to get arrow shapes properties");
+		//Get the .dot string for the arrow shapes. Append to attribute string
+		String dotShape = setArrowShapes();
+		elementString.append(dotShape);
+		LOGGER.info("Appended shape attributes to .dot string. Result: " + elementString);
+		
+		//Finish attribute string
+		elementString.append("]");
+		LOGGER.info("Created .dot string. Result: " + elementString);
+		return elementString.toString();
 	}
 }

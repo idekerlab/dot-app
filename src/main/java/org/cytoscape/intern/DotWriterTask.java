@@ -71,7 +71,13 @@ public class DotWriterTask implements CyWriter {
 		writeProps();
 		writeNodes();
 		writeEdges();
-		LOGGER.info("Finished writing file");
+		try {
+			outputWriter.write("}");
+			outputWriter.close();
+			LOGGER.info("Finished writing file");
+		} catch(IOException e) {
+			LOGGER.severe("Failed to close file");
+		}
 	}
 	
 	/**
@@ -113,6 +119,7 @@ public class DotWriterTask implements CyWriter {
 	  			CyNetwork networkModel = networkView.getModel();
 
 	  			String nodeName = networkModel.getRow(nodeModel).get(CyNetwork.NAME, String.class);
+	  			nodeName = nodeName.replace(" ", "");
 	  			String declaration = String.format("%s %s\n", nodeName, nodeMapper.getElementString());
 
 	  			outputWriter.write(declaration);
@@ -144,7 +151,10 @@ public class DotWriterTask implements CyWriter {
 	  			CyNode targetNode = edgeModel.getTarget();
 	  			
 	  			String sourceName = networkModel.getRow(sourceNode).get(CyNetwork.NAME, String.class);
+	  			sourceName = sourceName.replace(" ", "");
+	  			
 	  			String targetName = networkModel.getRow(targetNode).get(CyNetwork.NAME, String.class);
+	  			targetName = targetName.replace(" ", "");
 
 	  			String edgeName = String.format("%s -- %s", sourceName, targetName);
 	  			String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());

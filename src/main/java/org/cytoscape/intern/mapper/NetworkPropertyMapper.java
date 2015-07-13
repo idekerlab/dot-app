@@ -49,19 +49,26 @@ public class NetworkPropertyMapper extends Mapper {
 		 * 
 		 * return output;
 		 */
+		//Get network name from model. Remove spaces from name
 		CyNetwork network = (CyNetwork)view.getModel();
 		String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
+		networkName = networkName.replace(" ", "");
+
+		//Build the network properties string
 		StringBuilder elementString = new StringBuilder();
 		
+		//Header of the dot file of the form (di)graph [NetworkName] {
 		String graphDeclaration = String.format("%s %s {\n", getDirectedString(), networkName);
 		elementString.append(graphDeclaration);
 		
+		//bgcolor attribute of graph
 		Color netBgColor = (Color)view.getVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_PAINT);
 		String dotBgColor = String.format("bgcolor = \"%s\"\n", mapColorToDot(netBgColor, netBgColor.getAlpha()));
 		elementString.append(dotBgColor);
 		
+		//label attribute of graph
 		String label = view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
-		String dotLabel = String.format("label = \"%s\"\n");
+		String dotLabel = String.format("label = \"%s\"\n", label);
 		elementString.append(dotLabel);
 		
 		return elementString.toString();

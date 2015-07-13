@@ -67,12 +67,12 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("Populating HashMaps with values");
 		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = \"" + 
 			view.getVisualProperty(BasicVisualLexicon.NODE_LABEL) + "\"" );
-		LOGGER.info("Placed value into simpleVisPropsToDot. Result: " + simpleVisPropsToDot.get(BasicVisualLexicon.NODE_LABEL));
 		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_BORDER_WIDTH, "penwidth = ");
 		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_HEIGHT, "height = ");
 		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_WIDTH, "width = ");
 		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_TOOLTIP, "tooltip = ");
 		nodeShapeMap.put(NodeShapeVisualProperty.TRIANGLE, "triangle");
+		LOGGER.info("HashMaps populated");
 	}
 	
 	/**
@@ -101,9 +101,10 @@ public class NodePropertyMapper extends Mapper {
 		 */
 		LOGGER.info("Preparing to get .dot declaration for element.");
 
-		CyNode node = (CyNode)view.getModel();
+		//Build attribute string
 		StringBuilder elementString = new StringBuilder("[");
 
+		//Get .dot strings for simple dot attributes. Append to attribute string
 		for (String dotAttribute : simpleVisPropsToDot.values()) {
 		        elementString.append(dotAttribute);
 		        elementString.append(",");
@@ -111,6 +112,7 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
 		
 		LOGGER.info("Preparing to get color properties");
+		//Get the color and fillcolor .dot strings. Append to attribute string
 		Color borderColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT);
 		Integer borderTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY);
 		String dotColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
@@ -120,6 +122,7 @@ public class NodePropertyMapper extends Mapper {
 		elementString.append(",");
 		
 		LOGGER.info("Preparing to get shape property");
+		//Get the .dot string for the node shape. Append to attribute string
 		NodeShape shape = view.getVisualProperty(BasicVisualLexicon.NODE_SHAPE);
 		String dotShape = String.format("shape = \"%s\"", nodeShapeMap.get(shape));
 		elementString.append(dotShape);
@@ -127,6 +130,7 @@ public class NodePropertyMapper extends Mapper {
 		
 		elementString.append(",");
 
+		//Finish attribute string with mandatory fixedsize = true attribute
 		elementString.append("fixedsize = true]");
 		LOGGER.info("Created .dot string. Result: " + elementString);
 		return elementString.toString();
