@@ -132,9 +132,10 @@ public class DotWriterTask implements CyWriter {
 	  		try {
 	  			CyEdge edgeModel = edgeView.getModel();
 	  			CyNetwork networkModel = networkView.getModel();
+	  			
 	  			CyNode sourceNode = edgeModel.getSource();
 	  			CyNode targetNode = edgeModel.getTarget();
-
+	  			
 	  			String sourceName = networkModel.getRow(sourceNode).get(CyNetwork.NAME, String.class);
 	  			String targetName = networkModel.getRow(targetNode).get(CyNetwork.NAME, String.class);
 

@@ -1,17 +1,13 @@
 package org.cytoscape.intern.mapper;
 
-import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
-import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
-import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.View;
 
 import java.awt.Color;
-import java.util.Map;
 import java.util.HashMap;
 
 
@@ -68,12 +64,14 @@ public class NodePropertyMapper extends Mapper {
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label =");
-		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_BORDER_WIDTH, "penwidth =");
-		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_HEIGHT, "height =");
-		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_WIDTH, "width =");
-		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_TOOLTIP, "tooltip =");
-		nodeShapeMap.put(NodeShapeVisualProperty.DIAMOND, "diamond");
+		LOGGER.info("Populating HashMaps with values");
+		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = \"" + 
+			view.getVisualProperty(BasicVisualLexicon.NODE_LABEL) + "\"" );
+		LOGGER.info("Placed value into simpleVisPropsToDot. Result: " + simpleVisPropsToDot.get(BasicVisualLexicon.NODE_LABEL));
+		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_BORDER_WIDTH, "penwidth = ");
+		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_HEIGHT, "height = ");
+		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_WIDTH, "width = ");
+		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_TOOLTIP, "tooltip = ");
 		nodeShapeMap.put(NodeShapeVisualProperty.TRIANGLE, "triangle");
 	}
 	
@@ -106,13 +104,7 @@ public class NodePropertyMapper extends Mapper {
 		CyNode node = (CyNode)view.getModel();
 		StringBuilder elementString = new StringBuilder("[");
 
-		for (Map.Entry<VisualProperty<?>, String> keyAndVal : simpleVisPropsToDot.entrySet()) {
-		        VisualProperty<?> visualProp = keyAndVal.getKey();
-		        String dotString = keyAndVal.getValue();
-		        Object val = view.getVisualProperty(visualProp);
-		        
-		        String dotAttribute = String.format("%s \"%s\"", dotString, val.toString());
-		        
+		for (String dotAttribute : simpleVisPropsToDot.values()) {
 		        elementString.append(dotAttribute);
 		        elementString.append(",");
 		}

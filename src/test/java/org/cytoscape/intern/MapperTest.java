@@ -30,7 +30,6 @@ public class MapperTest {
 		CyNode node = network.addNode();
 		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
 		View<CyNode> nodeView = new TestNodeView(node);
-		Mapper mapper = new NodePropertyMapper(nodeView);
 		
 		String label = "Hello World!";
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL, label);
@@ -39,7 +38,10 @@ public class MapperTest {
 		String labelString = String.format("label = \"%s\"", label);
 		String colorString = "color = \"#FF0000FF\"";
 		String expectedDotString = String.format("[%s,%s,shape = \"null\"]", labelString, colorString); 
+
+		final Mapper mapper = new NodePropertyMapper(nodeView);
 		String actualDotString = mapper.getElementString();
+
 		assertEquals("Simple visual property translation failed.", expectedDotString, actualDotString);
 	}
 	
@@ -54,7 +56,6 @@ public class MapperTest {
 
 		String cyNodeName = network.getRow(node).get(CyNetwork.NAME, String.class);
 		final TestNodeView nodeView = new TestNodeView(node);
-		final Mapper mapper = new NodePropertyMapper(nodeView);
 
 		String label = "Hello World!";
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL, label);
@@ -62,11 +63,12 @@ public class MapperTest {
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY, new Integer(0xFF));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_SHAPE, NodeShapeVisualProperty.TRIANGLE);
 
-		assertEquals(nodeView.getVisualProperty(BasicVisualLexicon.NODE_SHAPE), NodeShapeVisualProperty.TRIANGLE);
 		String labelString = String.format("label = \"%s\"", label);
 		String colorString = "color = \"#FF0000FF\"";
 		String shapeString = "shape = \"triangle\"";
 		final String expectedDotString = String.format("[%s,%s,%s]", labelString, colorString, shapeString);
+
+		final Mapper mapper = new NodePropertyMapper(nodeView);
 		final String actualDotString = mapper.getElementString();
 		assertEquals("Cytoscape property translation failed.", expectedDotString, actualDotString);
 	}
