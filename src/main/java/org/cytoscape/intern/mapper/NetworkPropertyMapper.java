@@ -1,9 +1,12 @@
 package org.cytoscape.intern.mapper;
 
+import java.awt.Color;
 import java.util.HashMap;
 
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 
 public class NetworkPropertyMapper extends Mapper {
 	
@@ -42,12 +45,26 @@ public class NetworkPropertyMapper extends Mapper {
 		 * output += getDirectedString(view);
 		 * output += ", bgcolor = " + 
 		 * 		nodeMapper.mapColorToDot( view.getVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_COLOR), 255 );
-		 * output += ", fixedsize = true";
 		 * output += ", label = " + view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
 		 * 
 		 * return output;
 		 */
-		return null;
+		CyNetwork network = (CyNetwork)view.getModel();
+		String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
+		StringBuilder elementString = new StringBuilder();
+		
+		String graphDeclaration = String.format("%s %s {\n", getDirectedString(), networkName);
+		elementString.append(graphDeclaration);
+		
+		Color netBgColor = (Color)view.getVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_PAINT);
+		String dotBgColor = String.format("bgcolor = \"%s\"\n", mapColorToDot(netBgColor, netBgColor.getAlpha()));
+		elementString.append(dotBgColor);
+		
+		String label = view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
+		String dotLabel = String.format("label = \"%s\"\n");
+		elementString.append(dotLabel);
+		
+		return elementString.toString();
 	}
 	
 	/**
@@ -60,10 +77,10 @@ public class NetworkPropertyMapper extends Mapper {
 	/**
 	 * Returns dot string that represents if graph is directed or not
 	 * 
-	 * @return String that is either "graph {" or "digraph {"
+	 * @return String that is either "graph" or "digraph"
 	 */
 	private String getDirectedString() {
-		String output = (isDirected()) ? "digraph {":"graph {";
+		String output = (isDirected()) ? "digraph":"graph";
 		return output;
 	}
 	

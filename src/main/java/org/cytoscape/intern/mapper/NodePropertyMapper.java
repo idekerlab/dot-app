@@ -124,8 +124,10 @@ public class NodePropertyMapper extends Mapper {
 		String dotShape = String.format("shape = \"%s\"", nodeShapeMap.get(shape));
 		elementString.append(dotShape);
 		LOGGER.info("Appended shape attribute to .dot string. Result: " + elementString);
+		
+		elementString.append(",");
 
-		elementString.append("]");
+		elementString.append("fixedsize = true]");
 		LOGGER.info("Created .dot string. Result: " + elementString);
 		return elementString.toString();
 		} 
