@@ -36,9 +36,9 @@ public class MapperTest {
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL, label);
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, new Color(0xFF, 0x00, 0x00));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY, new Integer(0xFF));
-		String labelString = "label = \"" + label + "\"";
-		String colorString = "color = \"#FF0000FF";
-		String expectedDotString = String.format("[%s, %s]", labelString, colorString); 
+		String labelString = String.format("label = \"%s\"", label);
+		String colorString = "color = \"#FF0000FF\"";
+		String expectedDotString = String.format("[%s,%s,shape = \"null\"]", labelString, colorString); 
 		String actualDotString = mapper.getElementString();
 		assertEquals("Simple visual property translation failed.", expectedDotString, actualDotString);
 	}
@@ -51,14 +51,22 @@ public class MapperTest {
 		final NetworkTestSupport nts = new NetworkTestSupport();
 		final CyNetwork network = nts.getNetwork();
 		final CyNode node = network.addNode();
+
 		String cyNodeName = network.getRow(node).get(CyNetwork.NAME, String.class);
 		final TestNodeView nodeView = new TestNodeView(node);
 		final Mapper mapper = new NodePropertyMapper(nodeView);
-		final VisualProperty<NodeShape> shapeProp = BasicVisualLexicon.NODE_SHAPE;
-		final NodeShape shape = NodeShapeVisualProperty.TRIANGLE;
-		
-		nodeView.setVisualProperty(shapeProp, shape);
-		final String expectedDotString = String.format("[%s]", cyNodeName, "shape = \"ellipse\""); 
+
+		String label = "Hello World!";
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL, label);
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, new Color(0xFF, 0x00, 0x00));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY, new Integer(0xFF));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_SHAPE, NodeShapeVisualProperty.TRIANGLE);
+
+		assertEquals(nodeView.getVisualProperty(BasicVisualLexicon.NODE_SHAPE), NodeShapeVisualProperty.TRIANGLE);
+		String labelString = String.format("label = \"%s\"", label);
+		String colorString = "color = \"#FF0000FF\"";
+		String shapeString = "shape = \"triangle\"";
+		final String expectedDotString = String.format("[%s,%s,%s]", labelString, colorString, shapeString);
 		final String actualDotString = mapper.getElementString();
 		assertEquals("Cytoscape property translation failed.", expectedDotString, actualDotString);
 	}

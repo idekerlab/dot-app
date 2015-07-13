@@ -5,6 +5,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
+import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.View;
@@ -67,11 +68,13 @@ public class NodePropertyMapper extends Mapper {
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = ");
-		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_BORDER_WIDTH, "penwidth = ");
-		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_HEIGHT, "height = ");
-		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_WIDTH, "width = ");
-		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_TOOLTIP, "tooltip = ");
+		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label =");
+		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_BORDER_WIDTH, "penwidth =");
+		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_HEIGHT, "height =");
+		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_WIDTH, "width =");
+		//simpleVisPropsToDot.put(BasicVisualLexicon.NODE_TOOLTIP, "tooltip =");
+		nodeShapeMap.put(NodeShapeVisualProperty.DIAMOND, "diamond");
+		nodeShapeMap.put(NodeShapeVisualProperty.TRIANGLE, "triangle");
 	}
 	
 	/**
@@ -79,38 +82,6 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	@Override
 	public String getElementString() {
-		LOGGER.info("Preparing to get .dot declaration for element.");
-		CyNode node = (CyNode)view.getModel();
-		CyNetwork network = node.getNetworkPointer(); //WONT WORK right? --m
-		
-		try {
-			LOGGER.info("Retrieved required Network model objects. Results: " + node.toString() + ", " + network.toString());
-			String nodeName = network.getRow(node).get(CyNetwork.NAME, String.class); //WONT WORK right? --m
-			StringBuilder elementString = new StringBuilder(nodeName + " [");
-			
-			for (Map.Entry<VisualProperty<?>, String> keyAndVal : simpleVisPropsToDot.entrySet()) {
-			        VisualProperty<?> visualProp = keyAndVal.getKey();
-			        String dotString = keyAndVal.getValue();
-			        Object val = view.getVisualProperty(visualProp);
-			        String valString = "\"" + val.toString() + "\"";
-			        elementString.append(dotString + valString + ", ");
-			}
-			
-			LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
-			
-			Color borderColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT);
-			Integer borderTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY);
-			elementString.append("color = " + mapColorToDot(borderColor, borderTransparency));
-			elementString.append("]");
-			
-			LOGGER.info("Created .dot string. Result: " + elementString);
-			return elementString.toString();
-		} 
-		catch (NullPointerException e) {
-			
-			LOGGER.severe("ERROR: Could not retrieve CyNode or CyNetwork");
-			throw e;
-		}
 		/**
 		 * Pseudocode:
 		 * elementString = ""
@@ -130,15 +101,40 @@ public class NodePropertyMapper extends Mapper {
 		 * 
 		 * return elementString
 		 */
-	}
+		LOGGER.info("Preparing to get .dot declaration for element.");
+
+		CyNode node = (CyNode)view.getModel();
+		StringBuilder elementString = new StringBuilder("[");
+
+		for (Map.Entry<VisualProperty<?>, String> keyAndVal : simpleVisPropsToDot.entrySet()) {
+		        VisualProperty<?> visualProp = keyAndVal.getKey();
+		        String dotString = keyAndVal.getValue();
+		        Object val = view.getVisualProperty(visualProp);
+		        
+		        String dotAttribute = String.format("%s \"%s\"", dotString, val.toString());
+		        
+		        elementString.append(dotAttribute);
+		        elementString.append(",");
+		}
+		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
+		
+		LOGGER.info("Preparing to get color properties");
+		Color borderColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT);
+		Integer borderTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY);
+		String dotColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
+		elementString.append(dotColor);
+		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
+		
+		elementString.append(",");
+		
+		LOGGER.info("Preparing to get shape property");
+		NodeShape shape = view.getVisualProperty(BasicVisualLexicon.NODE_SHAPE);
+		String dotShape = String.format("shape = \"%s\"", nodeShapeMap.get(shape));
+		elementString.append(dotShape);
+		LOGGER.info("Appended shape attribute to .dot string. Result: " + elementString);
+
+		elementString.append("]");
+		LOGGER.info("Created .dot string. Result: " + elementString);
+		return elementString.toString();
+		} 
 }
-
-
-
-
-
-
-
-
-
-
