@@ -4,18 +4,15 @@ import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.values.LineType;
-import org.cytoscape.view.presentation.property.values.VisualPropertyValue;
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNode;
-import org.cytoscape.model.CyEdge;
-import org.cytoscape.model.CyIdentifiable;
 
 import java.awt.Color;
-import java.awt.Paint;
 import java.awt.Font;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Handles mapping of Cytoscape properties to .dot attributes in the form of a String.
@@ -47,6 +44,19 @@ public abstract class Mapper {
 	 */
 	public Mapper(View<? extends CyIdentifiable> view) {
 		this.view = view;
+		FileHandler handler = null;
+		
+		try {
+			handler = new FileHandler("log_DotWriterTask.txt");
+			handler.setLevel(Level.ALL);
+			
+			handler.setFormatter(new SimpleFormatter());
+		}
+		catch(IOException e) {
+			// to prevent compiler error
+		}
+		
+		LOGGER.addHandler(handler);
 	}
 	
 	/**
@@ -105,12 +115,3 @@ public abstract class Mapper {
 	 */
 	public abstract String getElementString ();
 }
-
-
-
-
-
-
-
-
-

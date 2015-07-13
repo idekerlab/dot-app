@@ -74,7 +74,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 		 * Should return null because we are exporting the view data
 		 * Maybe not, maybe we have to make both of these do the same thing
 		 */
-		LOGGER.info("getFileFilter with CyNetwork param called");
+		LOGGER.info("createWriter with CyNetwork param called");
 		return null;
 	}
 	
@@ -88,8 +88,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 */
 	@Override
 	public CyWriter createWriter(OutputStream outStream, CyNetworkView view) {
-		LOGGER.info("getFileFilter with CyNetworkView param called");
+		LOGGER.info("createWriter with CyNetworkView param called");
 		return new DotWriterTask(outStream, view);
 	}
-	
 }
