@@ -35,19 +35,13 @@ public abstract class Mapper {
 	protected View<? extends CyIdentifiable> view;
 	
 	// debug logger
-	protected static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.mapper.Mapper");
-	
-	/**
-	 * Initializes view field
-	 * 
-	 * @param view View that this mapper is being used to map to dot
-	 */
-	public Mapper(View<? extends CyIdentifiable> view) {
-		this.view = view;
+	protected static final Logger LOGGER;
+	static {
+		LOGGER = Logger.getLogger("org.cytoscape.intern.mapper.Mapper");
 		FileHandler handler = null;
 		
 		try {
-			handler = new FileHandler("log_DotWriterTask.txt");
+			handler = new FileHandler("log_Mapper.txt");
 			handler.setLevel(Level.ALL);
 			
 			handler.setFormatter(new SimpleFormatter());
@@ -57,6 +51,15 @@ public abstract class Mapper {
 		}
 		
 		LOGGER.addHandler(handler);
+	}
+	
+	/**
+	 * Initializes view field
+	 * 
+	 * @param view View that this mapper is being used to map to dot
+	 */
+	public Mapper(View<? extends CyIdentifiable> view) {
+		this.view = view;
 	}
 	
 	/**
