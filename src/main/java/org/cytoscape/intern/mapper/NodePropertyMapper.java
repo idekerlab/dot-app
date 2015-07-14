@@ -56,7 +56,13 @@ public class NodePropertyMapper extends Mapper {
 		 * concatenate if needed
 		 * return created String
 		 */
-		return null;
+		StringBuilder dotStyle = new StringBuilder(super.mapDotStyle());
+		NodeShape shape = view.getVisualProperty(BasicVisualLexicon.NODE_SHAPE);
+		if (shape.equals(NodeShapeVisualProperty.ROUND_RECTANGLE)) {
+			dotStyle.append("rounded,");
+		}
+		dotStyle.append("filled\"");
+		return dotStyle.toString();
 	}
 	
 	/**
@@ -143,12 +149,22 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("Preparing to get shape property");
 		//Get the .dot string for the node shape. Append to attribute string
 		NodeShape shape = view.getVisualProperty(BasicVisualLexicon.NODE_SHAPE);
-		String dotShape = String.format("shape = \"%s\"", nodeShapeMap.get(shape));
+		String shapeStr = nodeShapeMap.get(shape);
+		if (shapeStr == null) {
+			shapeStr = "rectangle"; 
+			LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+		}
+		String dotShape = String.format("shape = \"%s\"", shapeStr);
 		elementString.append(dotShape);
 		LOGGER.info("Appended shape attribute to .dot string. Result: " + elementString);
 		
 		elementString.append(",");
-
+		
+		//Get the .dot string for the node style. Append to attribute string
+		elementString.append(mapDotStyle());
+		
+		elementString.append(",");
+		
 		//Finish attribute string with mandatory fixedsize = true attribute
 		elementString.append("fixedsize = true]");
 		LOGGER.info("Created .dot string. Result: " + elementString);

@@ -1,8 +1,11 @@
 package org.cytoscape.intern.mapper;
 
 import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
 import org.cytoscape.view.presentation.property.values.LineType;
 
@@ -62,6 +65,7 @@ public abstract class Mapper {
 	 */
 	public Mapper(View<? extends CyIdentifiable> view) {
 		this.view = view;
+		lineTypeMap = new HashMap<LineType, String>();
 		populateMaps();
 	}
 	
@@ -116,7 +120,27 @@ public abstract class Mapper {
 		 * else if instanceof node check BVL.NODE_BORDER_LINE_TYPE
 		 * Retrieve .dot string from lineType hashmap
 		 */
-		return null;
+		StringBuilder dotStyle = new StringBuilder();
+		if (view.getModel() instanceof CyNode) {
+			LineType lineType = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_LINE_TYPE);
+			String lineStr = lineTypeMap.get(lineType);
+			if (lineStr == null) {
+				lineStr = "solid";
+				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+			}
+			String style = String.format("style = \"%s,", lineStr);
+			dotStyle.append(style);
+		} else if (view.getModel() instanceof CyEdge) {
+			LineType lineType = view.getVisualProperty(BasicVisualLexicon.EDGE_LINE_TYPE);
+			String lineStr = lineTypeMap.get(lineType);
+			if (lineStr == null) {
+				lineStr = "solid";
+				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+			}
+			String style = String.format("style = \"%s,", lineStr);
+			dotStyle.append(style);
+		}
+		return dotStyle.toString();
 	}
 	
 	/**
