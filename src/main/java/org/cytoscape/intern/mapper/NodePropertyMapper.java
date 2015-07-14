@@ -80,10 +80,10 @@ public class NodePropertyMapper extends Mapper {
 		simpleVisPropsToDot.add(String.format("penwidth = \"%f\"", borderWidth));
 		
 		Double height = view.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT);
-		simpleVisPropsToDot.add(String.format("height = \"%f\"", height));
+		simpleVisPropsToDot.add(String.format("height = \"%f\"", height/PPI));
 
 		Double width = view.getVisualProperty(BasicVisualLexicon.NODE_WIDTH);
-		simpleVisPropsToDot.add(String.format("width = \"%f\"", width));
+		simpleVisPropsToDot.add(String.format("width = \"%f\"", width/PPI));
 
 		String tooltip = view.getVisualProperty(BasicVisualLexicon.NODE_TOOLTIP);
 		simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
@@ -182,10 +182,3 @@ public class NodePropertyMapper extends Mapper {
 		return elementString.toString();
 	}
 }
-
-
-
-
-
-
-
