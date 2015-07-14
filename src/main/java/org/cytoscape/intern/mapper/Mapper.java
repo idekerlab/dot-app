@@ -44,6 +44,7 @@ public abstract class Mapper {
 	// view that this mapper object is mapping
 	protected View<? extends CyIdentifiable> view;
 	
+	protected static final double PPI = 96;
 	// debug logger
 	protected static final Logger LOGGER;
 	//Initialilze logger with file handler
@@ -162,7 +163,7 @@ public abstract class Mapper {
 	 * @return String in form %x,%y?
 	 */
 	protected String mapPosition(Double x, Double y) {
-		return String.format("%f,%f?", x, y);
+		return String.format("%f,%f", x/PPI, y/PPI);
 	}
 	
 	/**
