@@ -62,18 +62,13 @@ public class NetworkPropertyMapper extends Mapper {
 		StringBuilder elementString = new StringBuilder();
 		
 		//Header of the dot file of the form (di)graph [NetworkName] {
-		String graphDeclaration = String.format("%s %s {\n", getDirectedString(), networkName);
-		elementString.append(graphDeclaration);
+		String graphDeclaration = String.format("%s %s {", getDirectedString(), networkName);
+		elementString.append(graphDeclaration + "\n");
 		
-		//bgcolor attribute of graph
-		Color netBgColor = (Color)view.getVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_PAINT);
-		String dotBgColor = String.format("bgcolor = \"%s\"\n", mapColorToDot(netBgColor, netBgColor.getAlpha()));
-		elementString.append(dotBgColor);
-		
-		//label attribute of graph
-		String label = view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
-		String dotLabel = String.format("label = \"%s\"\n", label);
-		elementString.append(dotLabel);
+		//Get .dot strings for simple dot attributes. Append to attribute string
+		for (String dotAttribute : simpleVisPropsToDot) {
+		        elementString.append(dotAttribute + "\n");
+		}
 		
 		return elementString.toString();
 	}
@@ -83,6 +78,15 @@ public class NetworkPropertyMapper extends Mapper {
 	 */
 	private void populateMaps() {
 		
+		//Background color of graph
+		Color netBgColor = (Color)view.getVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_PAINT);
+		String dotBgColor = String.format("bgcolor = \"%s\"", mapColorToDot(netBgColor, netBgColor.getAlpha()));
+		simpleVisPropsToDot.add(dotBgColor);
+		
+		//label attribute of graph
+		String label = view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
+		String dotLabel = String.format("label = \"%s\"", label);
+		simpleVisPropsToDot.add(dotLabel);
 	}
 
 	/**
@@ -116,12 +120,12 @@ public class NetworkPropertyMapper extends Mapper {
         	ArrowShape sourceArrow = edge.getVisualProperty(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE);
         	ArrowShape targetArrow = edge.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE);
         	if(!targetArrow.equals(noArrow) || !sourceArrow.equals(noArrow)) {
-        		//return true if there is at least one not null arrowshape
+        		//return true if there is at least one not NONE arrow shape
         		return true;
         	}
         }
         
-        //return false if the graph is undirectly (has none arrow)
+        //return false if the graph is undirected (has only NONE arrow shapes)
         return false;
 		
 	}

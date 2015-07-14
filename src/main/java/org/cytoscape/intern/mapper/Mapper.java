@@ -3,7 +3,6 @@ package org.cytoscape.intern.mapper;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyEdge;
-import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
@@ -34,7 +33,13 @@ public abstract class Mapper {
 	protected ArrayList<String> simpleVisPropsToDot; 
 	
 	// maps Cytoscape line types to the equivalent string used in .dot
-	private HashMap<LineType, String> lineTypeMap;
+	private static final HashMap<LineType, String> LINE_TYPE_MAP = new HashMap<LineType, String>();
+	static {
+		LINE_TYPE_MAP.put(LineTypeVisualProperty.LONG_DASH, "dashed");
+		LINE_TYPE_MAP.put(LineTypeVisualProperty.EQUAL_DASH, "dashed");
+		LINE_TYPE_MAP.put(LineTypeVisualProperty.SOLID, "solid");
+		LINE_TYPE_MAP.put(LineTypeVisualProperty.DOT, "dotted");
+	}
 	
 	// view that this mapper object is mapping
 	protected View<? extends CyIdentifiable> view;
@@ -66,19 +71,8 @@ public abstract class Mapper {
 	 */
 	public Mapper(View<? extends CyIdentifiable> view) {
 		this.view = view;
-		lineTypeMap = new HashMap<LineType, String>();
-		populateMaps();
 	}
 	
-	/**
-	 * Helper method to fill the hashmap instance variable with constants we need
-	 */
-	private void populateMaps() {
-		lineTypeMap.put(LineTypeVisualProperty.LONG_DASH, "dashed");
-		lineTypeMap.put(LineTypeVisualProperty.EQUAL_DASH, "dashed");
-		lineTypeMap.put(LineTypeVisualProperty.SOLID, "solid");
-		lineTypeMap.put(LineTypeVisualProperty.DOT, "dotted");
-	}
 	
 	/**
 	 * Given a color, returns the color in String format that .dot uses for color.
@@ -125,7 +119,7 @@ public abstract class Mapper {
 		StringBuilder dotStyle = new StringBuilder();
 		if (view.getModel() instanceof CyNode) {
 			LineType lineType = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_LINE_TYPE);
-			String lineStr = lineTypeMap.get(lineType);
+			String lineStr = LINE_TYPE_MAP.get(lineType);
 			if (lineStr == null) {
 				lineStr = "solid";
 				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
@@ -134,7 +128,7 @@ public abstract class Mapper {
 			dotStyle.append(style);
 		} else if (view.getModel() instanceof CyEdge) {
 			LineType lineType = view.getVisualProperty(BasicVisualLexicon.EDGE_LINE_TYPE);
-			String lineStr = lineTypeMap.get(lineType);
+			String lineStr = LINE_TYPE_MAP.get(lineType);
 			if (lineStr == null) {
 				lineStr = "solid";
 				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
@@ -153,11 +147,11 @@ public abstract class Mapper {
 	 * @return String in form %x,%y?
 	 */
 	protected String mapPosition(Double x, Double y) {
-		return "%" + x + ",%" + y + "?";
+		return String.format("%f,%f", x, y);
 	}
 	
 	/**
 	 * Returns a String that contains all relevant attributes for this element 
 	 */
-	public abstract String getElementString ();
+	public abstract String getElementString();
 }

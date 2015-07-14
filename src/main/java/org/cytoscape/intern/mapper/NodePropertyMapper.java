@@ -131,7 +131,8 @@ public class NodePropertyMapper extends Mapper {
 		// Get node location and append in proper format
 		Double xLoc = view.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
 		Double yLoc = view.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION);
-		elementString.append("pos = " + mapPosition(xLoc, yLoc) + ",");
+		String dotPosition = String.format("pos = \"%s\"", mapPosition(xLoc, yLoc));
+		elementString.append(dotPosition + ",");
 		
 		//Finish attribute string with mandatory fixedsize = true attribute
 		elementString.append("fixedsize = true]");
