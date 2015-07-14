@@ -7,6 +7,7 @@ import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.Bend;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.EdgeBendVisualProperty;
+import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -26,7 +27,17 @@ public class EdgePropertyMapper extends Mapper {
 	/**
 	 * Maps Cytoscape arrowhead types to the equivalent dot attribute
 	 */
-	private HashMap<ArrowShape, String> arrowShapeMap; // TODO fill in
+	private static final HashMap<ArrowShape, String> ARROW_SHAPE_MAP = new HashMap<ArrowShape, String>(); // TODO fill in
+	static {
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.ARROW, "vee");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.CIRCLE, "dot");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.DELTA, "normal");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.DIAMOND, "diamond");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.HALF_BOTTOM, "ornormal");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.HALF_TOP, "olnormal");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.NONE, "none");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.T, "tee");
+	}
 	
 	/**
 	 * Constructs EdgePropertyMapper object
@@ -35,10 +46,7 @@ public class EdgePropertyMapper extends Mapper {
 	 */
 	public EdgePropertyMapper(View<CyEdge> view) {
 		super(view);
-		
 		simpleVisPropsToDot = new ArrayList<String>();
-		arrowShapeMap = new HashMap<ArrowShape, String>();
-		
 		populateMaps();		
 	}
 	
@@ -80,6 +88,14 @@ public class EdgePropertyMapper extends Mapper {
 
 		String tooltip = view.getVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP);
 		simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
+		
+		ArrowShape targetArrow = view.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE);
+		String dotTargetArrow = ARROW_SHAPE_MAP.get(targetArrow);
+		simpleVisPropsToDot.add(String.format("arrowhead = \"%s\"", dotTargetArrow));
+
+		ArrowShape sourceArrow = view.getVisualProperty(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE);
+		String dotSourceArrow = ARROW_SHAPE_MAP.get(sourceArrow);
+		simpleVisPropsToDot.add(String.format("arrowtail = \"%s\"", dotSourceArrow));
 	}
 	
 	/**

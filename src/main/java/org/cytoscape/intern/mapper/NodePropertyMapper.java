@@ -24,7 +24,17 @@ public class NodePropertyMapper extends Mapper {
 	/**
 	 *  maps Cytoscape node shape types to the equivalent string used in .dot
 	 */
-	private HashMap<NodeShape, String> nodeShapeMap;
+	private static final HashMap<NodeShape, String> NODE_SHAPE_MAP = new HashMap<NodeShape, String>();
+	static {
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.TRIANGLE, "triangle");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.DIAMOND, "diamond");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.ELLIPSE, "ellipse");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.HEXAGON, "hexagon");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.OCTAGON, "octagon");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.PARALLELOGRAM, "parallelogram");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.ROUND_RECTANGLE, "rectangle");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.RECTANGLE, "rectangle");
+	}
 	
 	/**
 	 * Initializes and populates instance variables with mappings
@@ -35,7 +45,6 @@ public class NodePropertyMapper extends Mapper {
 		super(view);
 		// initialize hash maps
 		simpleVisPropsToDot = new ArrayList<String>();
-		nodeShapeMap = new HashMap<NodeShape, String>();
 		
 		populateMaps();
 	}
@@ -89,14 +98,6 @@ public class NodePropertyMapper extends Mapper {
 		simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
 		
 		//Put Node Shape Key/Values
-		nodeShapeMap.put(NodeShapeVisualProperty.TRIANGLE, "triangle");
-		nodeShapeMap.put(NodeShapeVisualProperty.DIAMOND, "diamond");
-		nodeShapeMap.put(NodeShapeVisualProperty.ELLIPSE, "ellipse");
-		nodeShapeMap.put(NodeShapeVisualProperty.HEXAGON, "hexagon");
-		nodeShapeMap.put(NodeShapeVisualProperty.OCTAGON, "octagon");
-		nodeShapeMap.put(NodeShapeVisualProperty.PARALLELOGRAM, "parallelogram");
-		nodeShapeMap.put(NodeShapeVisualProperty.ROUND_RECTANGLE, "rectangle");
-		nodeShapeMap.put(NodeShapeVisualProperty.RECTANGLE, "rectangle");
 		LOGGER.info("HashMaps populated");
 	}
 	
@@ -154,7 +155,7 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("Preparing to get shape property");
 		//Get the .dot string for the node shape. Append to attribute string
 		NodeShape shape = view.getVisualProperty(BasicVisualLexicon.NODE_SHAPE);
-		String shapeStr = nodeShapeMap.get(shape);
+		String shapeStr = NODE_SHAPE_MAP.get(shape);
 		if (shapeStr == null) {
 			shapeStr = "rectangle"; 
 			LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");

@@ -1,15 +1,18 @@
 package org.cytoscape.intern.mapper;
 
 import java.awt.Color;
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
+import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 
 public class NetworkPropertyMapper extends Mapper {
-	
+
 	/**
 	 * Contructs NetworkPropertyMapper object
 	 * 
@@ -97,20 +100,26 @@ public class NetworkPropertyMapper extends Mapper {
 	 * @return true if graph is directed, false otherwise
 	 */
 	private boolean isDirected() {
+		//get the current network view
+		CyNetworkView networkView = (CyNetworkView)view.getModel();
+        
+		//get all the edge views from the current networkview
+		Collection<View<CyEdge>> edgeViews = networkView.getEdgeViews();
+		
 		/**
-		 * pseudocode
-		 * 
-		 * CyNetwork network = view.getModel();
-		 * ArrayList<CyEdge> edgeList = network.getEdgeList();
-		 * 
-		 * M-- note that indenting is off below
-		 * for(CyEdge edge: edgeList) {
-		 * 		if(edge.isDirected()) {
-		 * 			return true;
-		 * 		}
-		 * }
-		 * return false;
+		 * iterate each edgeview to check whether there is a target arrow shape
+		 * or a source arrow shape for that edge
 		 */
-		return false;
+        for (View<CyEdge> edge: edgeViews){
+        	if(edge.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE)!= null || 
+        			edge.getVisualProperty(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE)!= null)
+        		
+        		//return true if there is at least one not null arrowshape
+        		return true;
+        }
+        
+        //return false if the graph is undirectly (has none arrow)
+        return false;
+		
 	}
 }
