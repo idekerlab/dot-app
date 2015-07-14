@@ -2,7 +2,6 @@ package org.cytoscape.intern.mapper;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.View;
-import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.Bend;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
@@ -10,6 +9,7 @@ import org.cytoscape.view.presentation.property.EdgeBendVisualProperty;
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -45,23 +45,9 @@ public class EdgePropertyMapper extends Mapper {
 	 */
 	public EdgePropertyMapper(View<CyEdge> view) {
 		super(view);
-		
-		simpleVisPropsToDot = new HashMap< VisualProperty<?>, String>();
+		//initialize data structure
+		simpleVisPropsToDot = new ArrayList<String>();
 		populateMaps();		
-	}
-	
-	/**
-	 * 
-	 * @return Strings that define arrow shape attributes
-	 */
-	private String setArrowShapes() {
-		/**
-		 * pseudocode
-		 * 
-		 * get Strings from hashMap and concatenate to eachother with "arrowhead="
-		 * for EDGE_TARGET_ARROW_SHAPE and "arrowtail=" for EDGE_SOURCE_ARROW_SHAPE
-		 */
-		return null;
 	}
 	
 	/**
@@ -79,20 +65,23 @@ public class EdgePropertyMapper extends Mapper {
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
-		// populate simpleVisPropsToDot
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_LABEL, "label = \"" +
-			view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL) + "\"");
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_WIDTH, "penwidth = \"" +
-			view.getVisualProperty(BasicVisualLexicon.EDGE_WIDTH) + "\"");
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_TOOLTIP, "tooltip = \"" +
-			view.getVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP) + "\"");
-		// commented until mapDotStyle() is written
-		// simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_LINE_TYPE, "style = \"" +
-		//		super.mapDotStyle() + "\"");
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE, "arrowhead = " +
-			ARROW_SHAPE_MAP.get( view.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE) ));
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE, "arrowtail = " +
-			ARROW_SHAPE_MAP.get( view.getVisualProperty(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE) ));
+		//Put Simple Props Key/Values
+		String edgeLabel = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL);
+		simpleVisPropsToDot.add(String.format("label = \"%s\"", edgeLabel));
+
+		Double width = view.getVisualProperty(BasicVisualLexicon.EDGE_WIDTH);
+		simpleVisPropsToDot.add(String.format("penwidth = \"%s\"", width));
+
+		String tooltip = view.getVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP);
+		simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
+		
+		ArrowShape targetArrow = view.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE);
+		String dotTargetArrow = ARROW_SHAPE_MAP.get(targetArrow);
+		simpleVisPropsToDot.add(String.format("arrowhead = \"%s\"", dotTargetArrow));
+
+		ArrowShape sourceArrow = view.getVisualProperty(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE);
+		String dotSourceArrow = ARROW_SHAPE_MAP.get(sourceArrow);
+		simpleVisPropsToDot.add(String.format("arrowtail = \"%s\"", dotSourceArrow));
 	}
 	
 	/**
@@ -134,7 +123,7 @@ public class EdgePropertyMapper extends Mapper {
 		StringBuilder elementString = new StringBuilder("[");
 
 		//Get .dot strings for simple dot attributes. Append to attribute string
-		for (String dotAttribute : simpleVisPropsToDot.values()) {
+		for (String dotAttribute : simpleVisPropsToDot) {
 		        elementString.append(dotAttribute);
 		        elementString.append(",");
 		}
@@ -150,11 +139,6 @@ public class EdgePropertyMapper extends Mapper {
 		
 		elementString.append(",");
 		
-		LOGGER.info("Preparing to get arrow shapes properties");
-		//Get the .dot string for the arrow shapes. Append to attribute string
-		String dotShape = setArrowShapes();
-		elementString.append(dotShape);
-		LOGGER.info("Appended shape attributes to .dot string. Result: " + elementString);
 		
 		//Finish attribute string
 		elementString.append("]");

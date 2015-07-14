@@ -4,10 +4,10 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
-import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.View;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -23,7 +23,17 @@ public class NodePropertyMapper extends Mapper {
 	/**
 	 *  maps Cytoscape node shape types to the equivalent string used in .dot
 	 */
-	private HashMap<NodeShape, String> nodeShapeMap;
+	private static final HashMap<NodeShape, String> NODE_SHAPE_MAP = new HashMap<NodeShape, String>();
+	static {
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.TRIANGLE, "triangle");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.DIAMOND, "diamond");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.ELLIPSE, "ellipse");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.HEXAGON, "hexagon");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.OCTAGON, "octagon");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.PARALLELOGRAM, "parallelogram");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.ROUND_RECTANGLE, "rectangle");
+		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.RECTANGLE, "rectangle");
+	}
 	
 	/**
 	 * Initializes and populates instance variables with mappings
@@ -32,9 +42,8 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	public NodePropertyMapper(View<CyNode> view) {
 		super(view);
-		// initialize hash maps
-		simpleVisPropsToDot = new HashMap< VisualProperty<?>, String>();
-		nodeShapeMap = new HashMap<NodeShape, String>();
+		// initialize data structure
+		simpleVisPropsToDot = new ArrayList<String>();
 		
 		populateMaps();
 	}
@@ -72,26 +81,22 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("Populating HashMaps with values");
 
 		//Put Simple Props Key/Values
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = \"" + 
-			view.getVisualProperty(BasicVisualLexicon.NODE_LABEL) + "\"" );
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_BORDER_WIDTH, "penwidth = \"" +
-			view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH) + "\"");
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_HEIGHT, "height = \"" +
-			view.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT) + "\"");
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_WIDTH, "width = \"" +
-			view.getVisualProperty(BasicVisualLexicon.NODE_WIDTH) + "\"");
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_TOOLTIP, "tooltip = \"" +
-			view.getVisualProperty(BasicVisualLexicon.NODE_TOOLTIP) + "\"");
+		String nodeLabel = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL);
+		simpleVisPropsToDot.add(String.format("label = \"%s\"", nodeLabel));
+		
+		Double borderWidth = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH);
+		simpleVisPropsToDot.add(String.format("penwidth = \"%s\"", borderWidth));
+		
+		Double height = view.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT);
+		simpleVisPropsToDot.add(String.format("height = \"%s\"", height));
+
+		Double width = view.getVisualProperty(BasicVisualLexicon.NODE_WIDTH);
+		simpleVisPropsToDot.add(String.format("width = \"%s\"", width));
+
+		String tooltip = view.getVisualProperty(BasicVisualLexicon.NODE_TOOLTIP);
+		simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
 		
 		//Put Node Shape Key/Values
-		nodeShapeMap.put(NodeShapeVisualProperty.TRIANGLE, "triangle");
-		nodeShapeMap.put(NodeShapeVisualProperty.DIAMOND, "diamond");
-		nodeShapeMap.put(NodeShapeVisualProperty.ELLIPSE, "ellipse");
-		nodeShapeMap.put(NodeShapeVisualProperty.HEXAGON, "hexagon");
-		nodeShapeMap.put(NodeShapeVisualProperty.OCTAGON, "octagon");
-		nodeShapeMap.put(NodeShapeVisualProperty.PARALLELOGRAM, "parallelogram");
-		nodeShapeMap.put(NodeShapeVisualProperty.ROUND_RECTANGLE, "rectangle");
-		nodeShapeMap.put(NodeShapeVisualProperty.RECTANGLE, "rectangle");
 		LOGGER.info("HashMaps populated");
 	}
 	
@@ -106,8 +111,9 @@ public class NodePropertyMapper extends Mapper {
 		StringBuilder elementString = new StringBuilder("[");
 
 		//Get .dot strings for simple dot attributes. Append to attribute string
-		for (String dotAttribute : simpleVisPropsToDot.values()) {
-		        elementString.append(dotAttribute + ",");
+		for (String dotAttribute : simpleVisPropsToDot) {
+		        elementString.append(dotAttribute);
+		        elementString.append(",");
 		}
 		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
 		
@@ -163,12 +169,12 @@ public class NodePropertyMapper extends Mapper {
 	 * @return String in form in form "shape = <shape>"
 	 */
 	private String mapShape() {
+		LOGGER.info("Preparing to get shape property");
 		StringBuilder elementString = new StringBuilder();
 		
-		LOGGER.info("Preparing to get shape property");
 		//Get the .dot string for the node shape. Append to attribute string
 		NodeShape shape = view.getVisualProperty(BasicVisualLexicon.NODE_SHAPE);
-		String shapeStr = nodeShapeMap.get(shape);
+		String shapeStr = NODE_SHAPE_MAP.get(shape);
 		
 		// default if there is no match
 		if (shapeStr == null) {

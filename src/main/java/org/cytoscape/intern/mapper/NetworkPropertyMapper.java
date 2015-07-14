@@ -2,14 +2,15 @@ package org.cytoscape.intern.mapper;
 
 import java.awt.Color;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.ArrayList;
 
+import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-import org.cytoscape.model.CyEdge;
-import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
+import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
+import org.cytoscape.view.presentation.property.values.ArrowShape;
 
 public class NetworkPropertyMapper extends Mapper {
 
@@ -24,7 +25,7 @@ public class NetworkPropertyMapper extends Mapper {
 		//this.view = (CyNetworkView)this.view;
 		//this.view = netView;
 		
-		simpleVisPropsToDot = new HashMap< VisualProperty<?>, String>();
+		simpleVisPropsToDot = new ArrayList<String>();
 		
 		populateMaps();		
 	}
@@ -113,12 +114,14 @@ public class NetworkPropertyMapper extends Mapper {
 		 * iterate each edgeview to check whether there is a target arrow shape
 		 * or a source arrow shape for that edge
 		 */
+		ArrowShape noArrow = ArrowShapeVisualProperty.NONE;
         for (View<CyEdge> edge: edgeViews){
-        	if(edge.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE)!= null || 
-        			edge.getVisualProperty(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE)!= null)
-        		
+        	ArrowShape sourceArrow = edge.getVisualProperty(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE);
+        	ArrowShape targetArrow = edge.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE);
+        	if(!targetArrow.equals(noArrow) || !sourceArrow.equals(noArrow)) {
         		//return true if there is at least one not null arrowshape
         		return true;
+        	}
         }
         
         //return false if the graph is undirectly (has none arrow)

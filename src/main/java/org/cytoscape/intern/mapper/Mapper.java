@@ -12,6 +12,7 @@ import org.cytoscape.view.presentation.property.values.LineType;
 import java.awt.Color;
 import java.awt.Font;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -30,7 +31,7 @@ import java.util.logging.SimpleFormatter;
 public abstract class Mapper {
 
 	// maps Cytoscape properties  by their ID Strings to their .dot equivalents if relationship is simple equivalency
-	protected HashMap<VisualProperty<?>, String> simpleVisPropsToDot; 
+	protected ArrayList<String> simpleVisPropsToDot; 
 	
 	// maps Cytoscape line types to the equivalent string used in .dot
 	private HashMap<LineType, String> lineTypeMap;
