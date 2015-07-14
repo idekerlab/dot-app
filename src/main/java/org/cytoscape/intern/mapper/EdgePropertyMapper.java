@@ -2,7 +2,6 @@ package org.cytoscape.intern.mapper;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.View;
-import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.Bend;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
@@ -46,22 +45,9 @@ public class EdgePropertyMapper extends Mapper {
 	 */
 	public EdgePropertyMapper(View<CyEdge> view) {
 		super(view);
+		//initialize data structure
 		simpleVisPropsToDot = new ArrayList<String>();
 		populateMaps();		
-	}
-	
-	/**
-	 * 
-	 * @return Strings that define arrow shape attributes
-	 */
-	private String setArrowShapes() {
-		/**
-		 * pseudocode
-		 * 
-		 * get Strings from hashMap and concatenate to eachother with "arrowhead="
-		 * for EDGE_TARGET_ARROW_SHAPE and "arrowtail=" for EDGE_SOURCE_ARROW_SHAPE
-		 */
-		return null;
 	}
 	
 	/**
@@ -153,11 +139,6 @@ public class EdgePropertyMapper extends Mapper {
 		
 		elementString.append(",");
 		
-		LOGGER.info("Preparing to get arrow shapes properties");
-		//Get the .dot string for the arrow shapes. Append to attribute string
-		String dotShape = setArrowShapes();
-		elementString.append(dotShape);
-		LOGGER.info("Appended shape attributes to .dot string. Result: " + elementString);
 		
 		//Finish attribute string
 		elementString.append("]");
