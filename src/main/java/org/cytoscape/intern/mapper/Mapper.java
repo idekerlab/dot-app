@@ -99,19 +99,37 @@ public abstract class Mapper {
 	 * @param size size of font to be converted
 	 * @return String that is .dot representation of the provided font
 	 */
-	protected String mapFont(Font font, Integer size) {
+	protected String mapFont(Font font, Integer size, Color color, Integer transparency) {
 		// TODO
+		
 		//in Cytoscape default size is 12, default fontname is HelveticaNeue-Ultralight
 		//in .Dot default size is 14, default fontname is Times-Roman
 		
 		//Question: not sure if font size in .dot is all integer or it also can be float
-		//label's color needs to be handled somewhere (label color in cytoscape, fontcolor in .dot)
+	    //color in .dot has three expressions: I. ColorName(e.g. grey)  II. three floats (0.8396, 0.4862, 0.8549)
+		//III. hexadecimal number (between #000000 and #FFFFFF). So should we add two other overloaded methods 
+		//that can take in the other two color expressions as parameters. Or we can assume we will only pass 
+		//in only one expression if that's possible (Although I don't think the colorName can cover all the possible colors,
+		//but I'm pretty sure both II(3 floats) and III(hexadecimal number) can cover all the possible colors in cyto)
 		
-		//needs double check with the codes below
+		//needs double check with the codes below, can't think of any corner case/error checking for now
 		/**
+		 * LOGGER.info("Label font and size translation");
+		 * 
 		 * String returnValue = "";
+		 * 
 		 * returnValue += "fontname= " + font.getFontName() + ",";
+		 * 
 		 * returnValue += " fontsize= " + size.toString() + ",";
+		 * 
+		 * returnValue += " fontcolor= " + color.toString() + ",";
+		 * 
+		 * //might need error checking for transparency, since transparency has to be within 0 to 255
+		 * 
+		 * returnValue += " transparency= " + transparency.toString() + ",";
+		 * 
+		 * LOGGER.info("Dot attribute associate with font is: " + returnValue);
+		 * 
 		 * return returnValue;
 		 */
 		return null;
