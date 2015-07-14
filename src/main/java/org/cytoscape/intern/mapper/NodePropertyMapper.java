@@ -125,8 +125,13 @@ public class NodePropertyMapper extends Mapper {
 		elementString.append(mapShape() + ",");
 		LOGGER.info("Appended shape attribute to .dot string. Result: " + elementString);
 		
-		//Get the .dot string for the node style. Append to attribute string
+		// Get the .dot string for the node style. Append to attribute string
 		elementString.append(mapDotStyle() + ",");
+		
+		// Get node location and append in proper format
+		Double xLoc = view.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
+		Double yLoc = view.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION);
+		elementString.append("pos = " + mapPosition(xLoc, yLoc) + ",");
 		
 		//Finish attribute string with mandatory fixedsize = true attribute
 		elementString.append("fixedsize = true]");
