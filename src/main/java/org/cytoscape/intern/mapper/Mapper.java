@@ -107,7 +107,21 @@ public abstract class Mapper {
 	 */
 	protected String mapFont(Font font, Integer size) {
 		// TODO
-		return null;
+		//in Cytoscape default size is 12, default fontname is HelveticaNeue-Ultralight
+		//in .Dot default size is 14, default fontname is Times-Roman
+		
+		//Question: not sure if font size in .dot is all integer or it also can be float
+		
+		//needs double check with the codes below
+		/**
+		 * String returnValue = "";
+		 * returnValue += "fontname= " + font.getFontName();
+		 * returnValue += " fontsize= " + size.toString();
+		 * return returnValue;
+		 */
+		
+		
+		
 	}
 	
 	/**
