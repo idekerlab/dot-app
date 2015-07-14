@@ -15,18 +15,13 @@ import org.cytoscape.view.presentation.property.values.ArrowShape;
 public class NetworkPropertyMapper extends Mapper {
 
 	/**
-	 * Contructs NetworkPropertyMapper object
+	 * Constructs NetworkPropertyMapper object
 	 * 
 	 * @param view of network we are converting
 	 */
 	public NetworkPropertyMapper(CyNetworkView netView) {
 		super(netView);
-		// Cast and re-initialize so information is not lost -- might be superfluous will check
-		//this.view = (CyNetworkView)this.view;
-		//this.view = netView;
-		
 		simpleVisPropsToDot = new ArrayList<String>();
-		
 		populateMaps();		
 	}
 	

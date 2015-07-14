@@ -55,21 +55,13 @@ public class NodePropertyMapper extends Mapper {
 	 * @return String for style attribute
 	 */
 	protected String mapDotStyle() {
-		// TODO
-		/**
-		 * Pseudocode
-		 * Call super.mapDotStyle(lineStyle) to retrieve 'style="lineStyle"' string
-		 * Ignore final " (get first n-1 characters of string)
-		 * Join with "filled" separated by ","
-		 * determine if we need to add "rounded" by checking BVL.NODE_SHAPE
-		 * concatenate if needed
-		 * return created String
-		 */
 		StringBuilder dotStyle = new StringBuilder(super.mapDotStyle());
 		NodeShape shape = view.getVisualProperty(BasicVisualLexicon.NODE_SHAPE);
+		
 		if (shape.equals(NodeShapeVisualProperty.ROUND_RECTANGLE)) {
 			dotStyle.append("rounded,");
 		}
+		
 		dotStyle.append("filled\"");
 		return dotStyle.toString();
 	}
@@ -135,7 +127,7 @@ public class NodePropertyMapper extends Mapper {
 		elementString.append(dotPosition + ",");
 		
 		//Finish attribute string with mandatory fixedsize = true attribute
-		elementString.append("fixedsize = true]");
+		elementString.append("fixedsize = true];");
 		LOGGER.info("Created .dot string. Result: " + elementString);
 		return elementString.toString();
 	}
@@ -158,7 +150,7 @@ public class NodePropertyMapper extends Mapper {
 		// Write node fill color
 		Color fillColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR);
 		Integer nodeTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_TRANSPARENCY);
-		String dotFillColor = String.format("fillcolor = \"%s\",", mapColorToDot(fillColor, nodeTransparency));
+		String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, nodeTransparency));
 		elementString.append(dotFillColor);
 		
 		return elementString.toString();
