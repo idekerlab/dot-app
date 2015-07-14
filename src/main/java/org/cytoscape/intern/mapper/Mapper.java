@@ -115,8 +115,8 @@ public abstract class Mapper {
 		//needs double check with the codes below
 		/**
 		 * String returnValue = "";
-		 * returnValue += "fontname= " + font.getFontName();
-		 * returnValue += " fontsize= " + size.toString();
+		 * returnValue += "fontname= " + font.getFontName() + ";";
+		 * returnValue += " fontsize= " + size.toString() + ";";
 		 * return returnValue;
 		 */
 		
