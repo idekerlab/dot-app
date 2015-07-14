@@ -19,8 +19,11 @@ public class NetworkPropertyMapper extends Mapper {
 	 * 
 	 * @param view of network we are converting
 	 */
-	public NetworkPropertyMapper(CyNetworkView view) {
-		super(view);
+	public NetworkPropertyMapper(CyNetworkView netView) {
+		super(netView);
+		// Cast and re-initialize so information is not lost -- might be superfluous will check
+		//this.view = (CyNetworkView)this.view;
+		//this.view = netView;
 		
 		simpleVisPropsToDot = new ArrayList<String>();
 		
@@ -106,10 +109,10 @@ public class NetworkPropertyMapper extends Mapper {
 	 */
 	private boolean isDirected() {
 		//get the current network view
-		CyNetworkView networkView = (CyNetworkView)view.getModel();
+		//CyNetworkView networkView = (CyNetworkView)view.getModel();
         
 		//get all the edge views from the current networkview
-		Collection<View<CyEdge>> edgeViews = networkView.getEdgeViews();
+		Collection<View<CyEdge>> edgeViews = ((CyNetworkView)view).getEdgeViews();
 		
 		/**
 		 * iterate each edgeview to check whether there is a target arrow shape
