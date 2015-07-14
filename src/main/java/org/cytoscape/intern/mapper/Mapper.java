@@ -78,6 +78,7 @@ public abstract class Mapper {
 		lineTypeMap.put(LineTypeVisualProperty.SOLID, "solid");
 		lineTypeMap.put(LineTypeVisualProperty.DOT, "dotted");
 	}
+	
 	/**
 	 * Given a color, returns the color in String format that .dot uses for color.
 	 * Format is "#%rr%gg%bb%aa" -- red, green, blue, alpha in hexadecimal
@@ -141,6 +142,17 @@ public abstract class Mapper {
 			dotStyle.append(style);
 		}
 		return dotStyle.toString();
+	}
+	
+	/**
+	 * Returns the String that denotes a position in .dot format
+	 * 
+	 * @param x x coordinate of position
+	 * @param y y coordinate of position
+	 * @return String in form %x,%y?
+	 */
+	protected String mapPosition(Double x, Double y) {
+		return "%" + x + ",%" + y + "?";
 	}
 	
 	/**

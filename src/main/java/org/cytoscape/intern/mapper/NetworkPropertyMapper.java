@@ -12,9 +12,6 @@ import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 
 public class NetworkPropertyMapper extends Mapper {
-	
-	private static final VisualProperty EDGE_TARGET_ARROW_SHAPE = null;
-	private static final VisualProperty EDGE_SOURCE_ARROW_SHAPE = null;
 
 	/**
 	 * Contructs NetworkPropertyMapper object
@@ -109,11 +106,13 @@ public class NetworkPropertyMapper extends Mapper {
 		//get all the edge views from the current networkview
 		Collection<View<CyEdge>> edgeViews = networkView.getEdgeViews();
 		
-		//iterate each edgeview to check whether there is a target arrow shape
-        //or a source arrow shape for that edge
+		/**
+		 * iterate each edgeview to check whether there is a target arrow shape
+		 * or a source arrow shape for that edge
+		 */
         for (View<CyEdge> edge: edgeViews){
-        	if(edge.getVisualProperty(EDGE_TARGET_ARROW_SHAPE)!=null || 
-        			edge.getVisualProperty(EDGE_SOURCE_ARROW_SHAPE)!= null)
+        	if(edge.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE)!= null || 
+        			edge.getVisualProperty(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE)!= null)
         		
         		//return true if there is at least one not null arrowshape
         		return true;
