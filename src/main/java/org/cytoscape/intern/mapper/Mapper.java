@@ -113,7 +113,7 @@ public abstract class Mapper {
 		 * returnValue += " fontsize= " + size.toString() + ";";
 		 * return returnValue;
 		 */
-		
+		return null;
 		
 		
 	}

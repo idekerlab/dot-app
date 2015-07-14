@@ -20,20 +20,28 @@ import org.cytoscape.intern.mapper.EdgePropertyMapper;
 import java.awt.Color;
 public class MapperTest {
 
-	//@Test
+	@Test
 	public void testNodeGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
 		CyNode node = network.addNode();
 		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
 		View<CyNode> nodeView = new TestNodeView(node);
-		System.out.println(nodeView.getVisualProperty(BasicVisualLexicon.NODE_SHAPE).toString());
 		String label = "Hello World!";
+		String tooltip = "Hello!";
+		Double height = nodeView.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT);
+		Double width = nodeView.getVisualProperty(BasicVisualLexicon.NODE_WIDTH);
+		Double bwidth = nodeView.getVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH);
 
 		String labelString = null;
+		String tooltipString = null;
 		String colorString = null;
+		String fillColorString = null;
 		String expectedDotString = null;
 		String actualDotString = null;
+		String heightString = String.format("height = \"%f\"", height);
+		String widthString = String.format("width = \"%f\"", width);
+		String bwidthString = String.format("penwidth = \"%f\"", bwidth);
 
 		/**
 		 * Case 1: Translating a simple Cytoscape property to .dot string
@@ -42,9 +50,20 @@ public class MapperTest {
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL, label);
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, new Color(0xFF, 0x00, 0x00));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY, new Integer(0xFF));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_TOOLTIP, tooltip);
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_X_LOCATION, new Double(0));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION, new Double(0));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR, new Color(0x00, 0xDD, 0x99));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_TRANSPARENCY, new Integer(0xFF));
+		
 		labelString = String.format("label = \"%s\"", label);
+		tooltipString = String.format("tooltip = \"%s\"", tooltip);
 		colorString = "color = \"#FF0000FF\"";
-		expectedDotString = String.format("[%s,%s,shape = \"null\",fixedsize = true]", labelString, colorString); 
+		fillColorString = "fillcolor = \"#00DD99FF\"";
+		expectedDotString = String.format("[%s,%s,%s,%s,%s,%s,%s,shape = \"ellipse\","
+				+ "style = \"solid,filled\",pos = \"%f,%f\",fixedsize = true]",
+				labelString, bwidthString, heightString, widthString, tooltipString, colorString, fillColorString,
+				new Double(0), new Double(0)); 
 
 		Mapper mapper = new NodePropertyMapper(nodeView);
 		actualDotString = mapper.getElementString();
@@ -58,7 +77,10 @@ public class MapperTest {
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_SHAPE, NodeShapeVisualProperty.TRIANGLE);
 
 		String shapeString = "shape = \"triangle\"";
-		expectedDotString = String.format("[%s,%s,%s,fixedsize = true]", labelString, colorString, shapeString);
+		expectedDotString = String.format("[%s,%s,%s,%s,%s,%s,%s,%s,"
+				+ "style = \"solid,filled\",pos = \"%f,%f\",fixedsize = true]",
+				labelString, bwidthString, heightString, widthString, tooltipString, colorString, fillColorString,
+				shapeString, new Double(0), new Double(0)); 
 
 		mapper = new NodePropertyMapper(nodeView);
 		actualDotString = mapper.getElementString();
