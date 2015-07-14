@@ -5,6 +5,7 @@ import org.cytoscape.io.write.CyNetworkViewWriterFactory;
 import org.cytoscape.io.write.CyWriter;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.CyNetworkViewFactory;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -23,6 +24,7 @@ import java.util.logging.SimpleFormatter;
 public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	
 	private CyFileFilter fileFilter;
+	private CyNetworkViewFactory netViewFactory;
 	
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.DotWriterFactory");
 	
@@ -31,9 +33,10 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 * 
 	 * @param fileFilter CyFileFilter associated with this factory
 	 */
-	public DotWriterFactory(CyFileFilter fileFilter) {
+	public DotWriterFactory(CyFileFilter fileFilter, CyNetworkViewFactory netViewFactory) {
 		super();
 		this.fileFilter = fileFilter;
+		this.netViewFactory = netViewFactory;
 		
 		// make logger write to file
 		FileHandler handler = null;
@@ -69,12 +72,8 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 */
 	@Override
 	public CyWriter createWriter(OutputStream outStream, CyNetwork network) {
-		/**
-		 * Should return null because we are exporting the view data
-		 * Maybe not, maybe we have to make both of these do the same thing
-		 */
 		LOGGER.info("createWriter with CyNetwork param called");
-		return null;
+		return new DotWriterTask(outStream, netViewFactory.createNetworkView(network));
 	}
 	
 	/**

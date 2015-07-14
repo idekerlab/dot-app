@@ -44,7 +44,8 @@ public class DotWriterTask implements CyWriter {
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.DotWriterTask");
 	
 	//check whether the task needs to respond to cancellation
-	boolean cancelled = false;
+	private boolean cancelled = false;
+	
 	/**
 	 * Constructs a DotWriterTask object
 	 * 

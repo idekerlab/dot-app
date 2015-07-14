@@ -5,6 +5,8 @@ import org.cytoscape.io.DataCategory;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.io.write.CyNetworkViewWriterFactory;
 import org.cytoscape.service.util.AbstractCyActivator;
+import org.cytoscape.view.model.CyNetworkViewFactory;
+
 import org.osgi.framework.BundleContext;
 
 import java.util.HashSet;
@@ -66,9 +68,12 @@ public class CyActivator extends AbstractCyActivator {
 				 
 		//initialize (Basic)CyFileFilter, which handles the file type
 		BasicCyFileFilter fileFilter = new BasicCyFileFilter(extensions, contentTypes, "GraphViz files", category, streamUtil);
-				 
+		
+		//CyNetworkView factory that is needed in DotWriterFactory
+		CyNetworkViewFactory netViewFactory = getService(context, CyNetworkViewFactory.class);
+		
 		//initialize the DotWriterFactory for later use
-		DotWriterFactory dotFac = new DotWriterFactory(fileFilter);
+		DotWriterFactory dotFac = new DotWriterFactory(fileFilter, netViewFactory);
 		LOGGER.info("Writer factory constructed");
 		
 		//registerService from CyNetworkViewWriterFactory interface
