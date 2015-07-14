@@ -137,9 +137,6 @@ public class EdgePropertyMapper extends Mapper {
 		elementString.append(dotColor);
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 		
-		elementString.append(",");
-		
-		
 		//Finish attribute string
 		elementString.append("]");
 		LOGGER.info("Created .dot string. Result: " + elementString);
