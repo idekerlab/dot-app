@@ -77,13 +77,13 @@ public class NodePropertyMapper extends Mapper {
 		simpleVisPropsToDot.add(String.format("label = \"%s\"", nodeLabel));
 		
 		Double borderWidth = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH);
-		simpleVisPropsToDot.add(String.format("penwidth = \"%s\"", borderWidth));
+		simpleVisPropsToDot.add(String.format("penwidth = \"%f\"", borderWidth));
 		
 		Double height = view.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT);
-		simpleVisPropsToDot.add(String.format("height = \"%s\"", height));
+		simpleVisPropsToDot.add(String.format("height = \"%f\"", height));
 
 		Double width = view.getVisualProperty(BasicVisualLexicon.NODE_WIDTH);
-		simpleVisPropsToDot.add(String.format("width = \"%s\"", width));
+		simpleVisPropsToDot.add(String.format("width = \"%f\"", width));
 
 		String tooltip = view.getVisualProperty(BasicVisualLexicon.NODE_TOOLTIP);
 		simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
@@ -144,8 +144,8 @@ public class NodePropertyMapper extends Mapper {
 		//Get the color string (border color). Append to attribute string
 		Color borderColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT);
 		Integer borderTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY);
-		String dotBorderColor = String.format("color = \"%s\",", mapColorToDot(borderColor, borderTransparency));
-		elementString.append(dotBorderColor);
+		String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
+		elementString.append(dotBorderColor + ",");
 		
 		// Write node fill color
 		Color fillColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR);
