@@ -7,6 +7,7 @@ import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.Bend;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.EdgeBendVisualProperty;
+import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -25,7 +26,17 @@ public class EdgePropertyMapper extends Mapper {
 	/**
 	 * Maps Cytoscape arrowhead types to the equivalent dot attribute
 	 */
-	private HashMap<ArrowShape, String> arrowShapeMap; // TODO fill in
+	private static final HashMap<ArrowShape, String> ARROW_SHAPE_MAP = new HashMap<ArrowShape, String>(); // TODO fill in
+	static {
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.ARROW, "vee");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.CIRCLE, "dot");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.DELTA, "normal");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.DIAMOND, "diamond");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.HALF_BOTTOM, "ornormal");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.HALF_TOP, "olnormal");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.NONE, "none");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.T, "tee");
+	}
 	
 	/**
 	 * Constructs EdgePropertyMapper object
@@ -36,8 +47,6 @@ public class EdgePropertyMapper extends Mapper {
 		super(view);
 		
 		simpleVisPropsToDot = new HashMap< VisualProperty<?>, String>();
-		arrowShapeMap = new HashMap<ArrowShape, String>();
-		
 		populateMaps();		
 	}
 	
@@ -70,12 +79,20 @@ public class EdgePropertyMapper extends Mapper {
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
+		// populate simpleVisPropsToDot
 		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_LABEL, "label = \"" +
-				view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL) + "\"");
+			view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL) + "\"");
 		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_WIDTH, "penwidth = \"" +
-				view.getVisualProperty(BasicVisualLexicon.EDGE_WIDTH) + "\"");
+			view.getVisualProperty(BasicVisualLexicon.EDGE_WIDTH) + "\"");
 		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_TOOLTIP, "tooltip = \"" +
-				view.getVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP) + "\"");
+			view.getVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP) + "\"");
+		// commented until mapDotStyle() is written
+		// simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_LINE_TYPE, "style = \"" +
+		//		super.mapDotStyle() + "\"");
+		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE, "arrowhead = " +
+			ARROW_SHAPE_MAP.get( view.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE) ));
+		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE, "arrowtail = " +
+			ARROW_SHAPE_MAP.get( view.getVisualProperty(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE) ));
 	}
 	
 	/**

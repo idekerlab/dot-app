@@ -106,6 +106,7 @@ public abstract class Mapper {
 	
 	/**
 	 * Returns the .dot equivalent in String form for style attribute. Only handles linestyle
+	 * Does not include "style=" bit
 	 */
 	protected String mapDotStyle() {
 		// TODO
