@@ -100,25 +100,6 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	@Override
 	public String getElementString() {
-		/**
-		 * Pseudocode:
-		 * elementString = ""
-		 * For each prop in simpleVisPropsToDot do
-		 * 		propVal = view.getVisualProperty(prop)
-		 * 		elementString += mapVisToDot(prop, propVal)
-		 * end
-		 * 
-		 * Get node border color and node border transparency values from view
-		 * elementString += mapColor(nodeBorderColorVal, nodeBorderTransVal)
-		 * 
-		 * Get node fill color and node transparency (DOT ATTRIBUTE IS fillcolor)
-		 * elementString += mapColor(nodeFillColor, nodeTransparency)
-		 * 
-		 * Get node label font face
-		 * elementString += mapFont(nodeLabelFont)
-		 * 
-		 * return elementString
-		 */
 		LOGGER.info("Preparing to get .dot declaration for element.");
 
 		//Build attribute string
@@ -126,13 +107,36 @@ public class NodePropertyMapper extends Mapper {
 
 		//Get .dot strings for simple dot attributes. Append to attribute string
 		for (String dotAttribute : simpleVisPropsToDot.values()) {
-		        elementString.append(dotAttribute);
-		        elementString.append(",");
+		        elementString.append(dotAttribute + ",");
 		}
 		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
 		
-		LOGGER.info("Preparing to get color properties");
+		// Write fillcolor and color attribute
+		elementString.append(mapColors() + ",");
+		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
+
+		// Write nodeShape
+		elementString.append(mapShape() + ",");
+		LOGGER.info("Appended shape attribute to .dot string. Result: " + elementString);
 		
+		//Get the .dot string for the node style. Append to attribute string
+		elementString.append(mapDotStyle() + ",");
+		
+		//Finish attribute string with mandatory fixedsize = true attribute
+		elementString.append("fixedsize = true]");
+		LOGGER.info("Created .dot string. Result: " + elementString);
+		return elementString.toString();
+	}
+	
+	/**
+	 * Helper method that returns String that defines color attribute including "fillcolor=" part
+	 * 
+	 * @return String in form "color = <color>,fillcolor = <color>"
+	 */
+	private String mapColors() {
+		StringBuilder elementString = new StringBuilder();
+		
+		LOGGER.info("Preparing to get color properties");
 		//Get the color string (border color). Append to attribute string
 		Color borderColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT);
 		Integer borderTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY);
@@ -144,30 +148,40 @@ public class NodePropertyMapper extends Mapper {
 		Integer nodeTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_TRANSPARENCY);
 		String dotFillColor = String.format("fillcolor = \"%s\",", mapColorToDot(fillColor, nodeTransparency));
 		elementString.append(dotFillColor);
-		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
+		
+		return elementString.toString();
+	}
 	
+	/**
+	 * Helper method that returns String that represents nodeShape 
+	 * 
+	 * @return String in form in form "shape = <shape>"
+	 */
+	private String mapShape() {
+		StringBuilder elementString = new StringBuilder();
+		
 		LOGGER.info("Preparing to get shape property");
 		//Get the .dot string for the node shape. Append to attribute string
 		NodeShape shape = view.getVisualProperty(BasicVisualLexicon.NODE_SHAPE);
 		String shapeStr = nodeShapeMap.get(shape);
+		
+		// default if there is no match
 		if (shapeStr == null) {
 			shapeStr = "rectangle"; 
 			LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
 		}
+		
 		String dotShape = String.format("shape = \"%s\"", shapeStr);
 		elementString.append(dotShape);
 		LOGGER.info("Appended shape attribute to .dot string. Result: " + elementString);
 		
-		elementString.append(",");
-		
-		//Get the .dot string for the node style. Append to attribute string
-		elementString.append(mapDotStyle());
-		
-		elementString.append(",");
-		
-		//Finish attribute string with mandatory fixedsize = true attribute
-		elementString.append("fixedsize = true]");
-		LOGGER.info("Created .dot string. Result: " + elementString);
 		return elementString.toString();
-	} 
+	}
 }
+
+
+
+
+
+
+
