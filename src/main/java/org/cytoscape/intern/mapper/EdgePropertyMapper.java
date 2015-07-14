@@ -9,6 +9,7 @@ import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.EdgeBendVisualProperty;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -35,7 +36,7 @@ public class EdgePropertyMapper extends Mapper {
 	public EdgePropertyMapper(View<CyEdge> view) {
 		super(view);
 		
-		simpleVisPropsToDot = new HashMap< VisualProperty<?>, String>();
+		simpleVisPropsToDot = new ArrayList<String>();
 		arrowShapeMap = new HashMap<ArrowShape, String>();
 		
 		populateMaps();		
@@ -70,12 +71,15 @@ public class EdgePropertyMapper extends Mapper {
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_LABEL, "label = \"" +
-				view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL) + "\"");
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_WIDTH, "penwidth = \"" +
-				view.getVisualProperty(BasicVisualLexicon.EDGE_WIDTH) + "\"");
-		simpleVisPropsToDot.put(BasicVisualLexicon.EDGE_TOOLTIP, "tooltip = \"" +
-				view.getVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP) + "\"");
+		//Put Simple Props Key/Values
+		String edgeLabel = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL);
+		simpleVisPropsToDot.add(String.format("label = \"%s\"", edgeLabel));
+
+		Double width = view.getVisualProperty(BasicVisualLexicon.EDGE_WIDTH);
+		simpleVisPropsToDot.add(String.format("penwidth = \"%s\"", width));
+
+		String tooltip = view.getVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP);
+		simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
 	}
 	
 	/**
@@ -117,7 +121,7 @@ public class EdgePropertyMapper extends Mapper {
 		StringBuilder elementString = new StringBuilder("[");
 
 		//Get .dot strings for simple dot attributes. Append to attribute string
-		for (String dotAttribute : simpleVisPropsToDot.values()) {
+		for (String dotAttribute : simpleVisPropsToDot) {
 		        elementString.append(dotAttribute);
 		        elementString.append(",");
 		}

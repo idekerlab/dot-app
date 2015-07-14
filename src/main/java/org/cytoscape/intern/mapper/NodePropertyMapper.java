@@ -8,6 +8,7 @@ import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.View;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -33,7 +34,7 @@ public class NodePropertyMapper extends Mapper {
 	public NodePropertyMapper(View<CyNode> view) {
 		super(view);
 		// initialize hash maps
-		simpleVisPropsToDot = new HashMap< VisualProperty<?>, String>();
+		simpleVisPropsToDot = new ArrayList<String>();
 		nodeShapeMap = new HashMap<NodeShape, String>();
 		
 		populateMaps();
@@ -72,16 +73,20 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("Populating HashMaps with values");
 
 		//Put Simple Props Key/Values
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_LABEL, "label = \"" + 
-			view.getVisualProperty(BasicVisualLexicon.NODE_LABEL) + "\"" );
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_BORDER_WIDTH, "penwidth = \"" +
-			view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH) + "\"");
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_HEIGHT, "height = \"" +
-			view.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT) + "\"");
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_WIDTH, "width = \"" +
-			view.getVisualProperty(BasicVisualLexicon.NODE_WIDTH) + "\"");
-		simpleVisPropsToDot.put(BasicVisualLexicon.NODE_TOOLTIP, "tooltip = \"" +
-			view.getVisualProperty(BasicVisualLexicon.NODE_TOOLTIP) + "\"");
+		String nodeLabel = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL);
+		simpleVisPropsToDot.add(String.format("label = \"%s\"", nodeLabel));
+		
+		Double borderWidth = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH);
+		simpleVisPropsToDot.add(String.format("penwidth = \"%s\"", borderWidth));
+		
+		Double height = view.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT);
+		simpleVisPropsToDot.add(String.format("height = \"%s\"", height));
+
+		Double width = view.getVisualProperty(BasicVisualLexicon.NODE_WIDTH);
+		simpleVisPropsToDot.add(String.format("width = \"%s\"", width));
+
+		String tooltip = view.getVisualProperty(BasicVisualLexicon.NODE_TOOLTIP);
+		simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
 		
 		//Put Node Shape Key/Values
 		nodeShapeMap.put(NodeShapeVisualProperty.TRIANGLE, "triangle");
@@ -125,7 +130,7 @@ public class NodePropertyMapper extends Mapper {
 		StringBuilder elementString = new StringBuilder("[");
 
 		//Get .dot strings for simple dot attributes. Append to attribute string
-		for (String dotAttribute : simpleVisPropsToDot.values()) {
+		for (String dotAttribute : simpleVisPropsToDot) {
 		        elementString.append(dotAttribute);
 		        elementString.append(",");
 		}
