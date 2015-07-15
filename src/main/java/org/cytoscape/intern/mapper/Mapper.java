@@ -117,7 +117,7 @@ public abstract class Mapper {
 		
 		//needs double check with the codes below, can't think of any corner case/error checking for now
 		/**
-		 * LOGGER.info("Label font and size translation");
+		 * LOGGER.info("Label font, size, color, and transparency translation");
 		 * 
 		 * String returnValue = "";
 		 * 
@@ -131,7 +131,7 @@ public abstract class Mapper {
 		 * 
 		 * returnValue += " transparency= " + transparency.toString() + ",";
 		 * 
-		 * LOGGER.info("Dot attribute associate with font is: " + returnValue);
+		 * LOGGER.info("Dot attributes associate with font is: " + returnValue);
 		 * 
 		 * return returnValue;
 		 */
