@@ -100,34 +100,6 @@ public class EdgePropertyMapper extends Mapper {
 	 */
 	@Override
 	public String getElementString() {
-		//TODO
-		/**
-		 * Pseudocode:
-		 * elementString = ""
-		 * For each BasicVisualLexiconProperty prop do
-		 * 		propVal = edgeView.getVisualProperty(prop)
-		 * 		elementString += edgeMapper.mapVisToDot(prop, propVal)
-		 * end
-		 * 
-		 * Get stroke color and edge transparency values from view
-		 * elementString += edgeMapper.mapColor(strokeColorVal, edgeTransVal)
-		 * 
-		 * Get Source Arrowhead color (DOT ATTRIBUTE IS fillcolor, NO TRANSPARENCY)
-		 * elementString += edgeMapper.mapColor(sourceArrowColor, 255)
-		 * 
-		 * Get Target Arrowhead color (DOT ATTRIBUTE IS fillcolor, NO TRANSPARENCY)
-		 * elementString += edgeMapper.mapColor(targetArrowColor, 255)
-		 * 
-		 * Get Source Arrowhead Shape
-		 * elementString += edgeMapper.setSourceArrowShapes()
-		 * 
-		 * Get Edge Label Font Face
-		 * elementString += edgeMapper.mapFont(edgeLabelFont)
-		 * 
-		 * set line style
-		 * 
-		 * return elementString
-		 */
 		LOGGER.info("Preparing to get .dot declaration for element.");
 
 		//Build attribute string
@@ -151,6 +123,7 @@ public class EdgePropertyMapper extends Mapper {
 		LOGGER.info("Preparing to map edge bends");
 		elementString.append(mapEdgeBend());
 		LOGGER.info("Appended edge bend attributes to .dot string. Result: " + elementString);
+		
 		//Finish attribute string
 		elementString.append("]");
 		LOGGER.info("Created .dot string. Result: " + elementString);
