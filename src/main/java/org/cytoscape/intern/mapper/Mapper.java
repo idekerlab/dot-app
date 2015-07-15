@@ -49,7 +49,7 @@ public abstract class Mapper {
 	
 	// debug logger
 	protected static final Logger LOGGER;
-	//Initialilze logger with file handler
+	// Initialize logger with file handler
 	static {
 		LOGGER = Logger.getLogger("org.cytoscape.intern.mapper.Mapper");
 		FileHandler handler = null;
