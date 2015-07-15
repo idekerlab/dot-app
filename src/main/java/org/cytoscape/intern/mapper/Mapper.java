@@ -180,7 +180,7 @@ public abstract class Mapper {
 				lineStr = "solid";
 				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
 			}
-			String style = String.format("style = \"%s,", lineStr);
+			String style = String.format("style = \"%s\"", lineStr);
 			dotStyle.append(style);
 		}
 		return dotStyle.toString();
