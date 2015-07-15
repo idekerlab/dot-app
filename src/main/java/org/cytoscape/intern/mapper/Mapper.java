@@ -44,7 +44,9 @@ public abstract class Mapper {
 	// view that this mapper object is mapping
 	protected View<? extends CyIdentifiable> view;
 	
+	// Pixel per inch scaling factor
 	protected static final double PPI = 96;
+	
 	// debug logger
 	protected static final Logger LOGGER;
 	//Initialilze logger with file handler
@@ -72,8 +74,7 @@ public abstract class Mapper {
 	 */
 	public Mapper(View<? extends CyIdentifiable> view) {
 		this.view = view;
-	}
-	
+	}	
 	
 	/**
 	 * Given a color, returns the color in String format that .dot uses for color.
@@ -94,7 +95,8 @@ public abstract class Mapper {
 	}
 	
 	/**
-	 * Given a font, returns the .dot equivalent in String form
+	 * Given a font, returns the .dot equivalent in String form including the
+	 * font name, size and color
 	 * 
 	 * @param font font to be converted
 	 * @param size size of font to be converted
@@ -143,7 +145,6 @@ public abstract class Mapper {
 	 * Does not include "style=" bit
 	 */
 	protected String mapDotStyle() {
-		// TODO
 		/**
 		 * Pseudocode:
 		 * if instanceof edge check BVL.EDGE_LINE_TYPE
@@ -160,7 +161,8 @@ public abstract class Mapper {
 			}
 			String style = String.format("style = \"%s,", lineStr);
 			dotStyle.append(style);
-		} else if (view.getModel() instanceof CyEdge) {
+		} 
+		else if (view.getModel() instanceof CyEdge) {
 			LineType lineType = view.getVisualProperty(BasicVisualLexicon.EDGE_LINE_TYPE);
 			String lineStr = LINE_TYPE_MAP.get(lineType);
 			if (lineStr == null) {
