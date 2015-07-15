@@ -116,6 +116,9 @@ public abstract class Mapper {
 		//I'm pretty sure both II(three floats) and III(hexadecimal number) can cover all the possible colors in cytoscape)
 		//Or the color expressions will be handled before we call this function 
 		
+		//I have trouble translating NODE_LABEL_TRANSPARENCY in cytoscape to label's transparency in .dot
+		//because I don't think graphviz has transparency for label (text).
+		
 		//needs double check with the codes below, can't think of any corner case/error checking for now
 		/**
 		 * LOGGER.info("Label font, size, color, and transparency translation");
@@ -131,7 +134,12 @@ public abstract class Mapper {
 		 * //might need error checking for transparency, since transparency has to be within 0 to 255
 		 * //transparency can also be shown in hex value.
 		 * 
-		 * returnValue += " transparency= " + transparency.toString() + ",";
+		 * //The code below is wrong, there is no transparency key word in graphviz, I don't know how to handle 
+		 * //the transparency of label in graphviz, and I doubt that user can change transparency in graphviz.
+		 * //All I know is that in graphviz we can change the transparency of node and graph's bgcolor.
+		 * 
+		 * //returnValue += " transparency= " + transparency.toString() + ",";  //Discarded code
+		 * 
 		 * 
 		 * LOGGER.info("Dot attributes associate with font is: " + returnValue);
 		 * 
