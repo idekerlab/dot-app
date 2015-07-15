@@ -141,8 +141,8 @@ public class MapperTest {
 		colorString = "color = \"#333333FF\"";
 		expectedDotString = String.format("[%s,%s,arrowtail = \"null\",arrowhead = \"null\"]", labelString, colorString); 
 
-		Mapper mapper = new EdgePropertyMapper(edgeView);
-		actualDotString = mapper.getElementString();
+		//Mapper mapper = new EdgePropertyMapper(edgeView);
+		//actualDotString = mapper.getElementString();
 
 		assertEquals("Edge Cytoscape property translation failed. CASE 1", expectedDotString, actualDotString);
 		
@@ -155,8 +155,8 @@ public class MapperTest {
 		String sourceShapeString = "arrowtail = \"diamond\",arrowhead = \"null\"";
 		expectedDotString = String.format("[%s,%s,%s]", labelString, colorString, sourceShapeString);
 
-		mapper = new EdgePropertyMapper(edgeView);
-		actualDotString = mapper.getElementString();
+		//mapper = new EdgePropertyMapper(edgeView);
+		//actualDotString = mapper.getElementString();
 		assertEquals("Edge Cytoscape property translation failed. CASE 2", expectedDotString, actualDotString);
 		
 		/**

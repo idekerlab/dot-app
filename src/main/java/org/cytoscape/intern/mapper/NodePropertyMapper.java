@@ -7,6 +7,7 @@ import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 import org.cytoscape.view.model.View;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -109,22 +110,29 @@ public class NodePropertyMapper extends Mapper {
 		}
 		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
 		
-		// Write fillcolor and color attribute
+		//Write fillcolor and color attribute
 		elementString.append(mapColors() + ",");
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 
-		// Write nodeShape
+		//Write nodeShape
 		elementString.append(mapShape() + ",");
 		LOGGER.info("Appended shape attribute to .dot string. Result: " + elementString);
 		
-		// Get the .dot string for the node style. Append to attribute string
+		//Get the .dot string for the node style. Append to attribute string
 		elementString.append(mapDotStyle() + ",");
 		
-		// Get node location and append in proper format
+		//Get node location and append in proper format
 		Double xLoc = view.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
 		Double yLoc = view.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION);
 		String dotPosition = String.format("pos = \"%s\"", mapPosition(xLoc, yLoc));
 		elementString.append(dotPosition + ",");
+		
+		//Get label font information and append in proper format
+		Color labelColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_COLOR);
+		Integer labelTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_TRANSPARENCY);
+		Font labelFont = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_FACE);
+		Integer labelSize = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_SIZE);
+		elementString.append(mapFont(labelFont, labelSize, labelColor, labelTransparency) + ",");
 		
 		//Finish attribute string with mandatory fixedsize = true attribute
 		elementString.append("fixedsize = true]");
@@ -147,7 +155,7 @@ public class NodePropertyMapper extends Mapper {
 		String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
 		elementString.append(dotBorderColor + ",");
 		
-		// Write node fill color
+		//Write node fill color
 		Color fillColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR);
 		Integer nodeTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_TRANSPARENCY);
 		String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, nodeTransparency));

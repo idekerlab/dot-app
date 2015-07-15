@@ -1,6 +1,7 @@
 package org.cytoscape.intern.mapper;
 
 import org.cytoscape.model.CyEdge;
+import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.Bend;
@@ -9,6 +10,7 @@ import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.geom.Point2D;
 import java.util.List;
 import java.util.ArrayList;
@@ -40,15 +42,18 @@ public class EdgePropertyMapper extends Mapper {
 		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.T, "tee");
 	}
 	
+	private CyNetworkView networkView;
+	
 	/**
 	 * Constructs EdgePropertyMapper object
 	 * 
 	 * @param view of edge we are converting
 	 */
-	public EdgePropertyMapper(View<CyEdge> view) {
+	public EdgePropertyMapper(View<CyEdge> view, CyNetworkView networkView) {
 		super(view);
 		//initialize data structure
 		simpleVisPropsToDot = new ArrayList<String>();
+		this.networkView = networkView;
 		populateMaps();		
 	}
 	
@@ -58,18 +63,23 @@ public class EdgePropertyMapper extends Mapper {
 	 * 
 	 * @return String that represents edge bend attribute
 	 */
+	@SuppressWarnings("unchecked")
 	private String mapEdgeBend(){
 		// TODO
-		StringBuilder posString = new StringBuilder("pos = \"");
+		StringBuilder coordinatesString = new StringBuilder();
 		Bend edgeBend = view.getVisualProperty(BasicVisualLexicon.EDGE_BEND);
 		List<Handle> handles = edgeBend.getAllHandles();
 		for (Handle handle : handles) {
-			Point2D coords = handle.calculateHandleLocation(arg0, view);
-			String coordString = mapPosition(coords.getX(), -coords.getY());
-			posString.append(coordString + " ");
+			Point2D coords = handle.calculateHandleLocation(networkView, (View<CyEdge>)view);
+			String singlePointString = mapPosition(coords.getX(), -coords.getY());
+			coordinatesString.append(singlePointString + " ");
 		}
-		posString.replace(posString.length() - 1, posString.length() - 1, "\"");
-		return posString.toString();
+		if (coordinatesString.length() == 0) {
+			return "";
+		}
+		coordinatesString.deleteCharAt(coordinatesString.length() - 1);
+		String dotPos = String.format("pos = \"%s\"", coordinatesString.toString());
+		return dotPos;
 	}
 	
 	/**
@@ -149,8 +159,18 @@ public class EdgePropertyMapper extends Mapper {
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 		
 		LOGGER.info("Preparing to map edge bends");
-		elementString.append(mapEdgeBend());
+		String dotPos = mapEdgeBend();
+		if (!(dotPos.equals(""))) {
+			elementString.append(dotPos + ",");
+		}
 		LOGGER.info("Appended edge bend attributes to .dot string. Result: " + elementString);
+		
+		//Get label font information and append in proper format
+		Color labelColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_COLOR);
+		Integer labelTransparency = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY);
+		Font labelFont = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_FACE);
+		Integer labelSize = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_SIZE);
+		elementString.append(mapFont(labelFont, labelSize, labelColor, labelTransparency));
 		//Finish attribute string
 		elementString.append("]");
 		LOGGER.info("Created .dot string. Result: " + elementString);
