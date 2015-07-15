@@ -118,6 +118,7 @@ public abstract class Mapper {
 		
 		//I have trouble translating NODE_LABEL_TRANSPARENCY in cytoscape to label's transparency in .dot
 		//because I don't think graphviz has transparency for label (text).
+		//If this is the case, we need to get rid of the transparency in parameter
 		
 		//needs double check with the codes below, can't think of any corner case/error checking for now
 		/**
