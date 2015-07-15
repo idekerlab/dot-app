@@ -113,9 +113,9 @@ public abstract class Mapper {
 		 
 		String returnValue = "";
 		
-		returnValue += "fontname= " + font.getFontName() + ",";  
-		returnValue += "fontsize= " + size.toString() + ","; 
-		returnValue += "fontcolor= " + mapColorToDot(color, transparency);
+		returnValue += "fontname = \"" + font.getFontName() + "\",";  
+		returnValue += "fontsize = \"" + size.toString() + "\","; 
+		returnValue += "fontcolor = \"" + mapColorToDot(color, transparency) + "\"";
 
 		LOGGER.info("Dot attributes associate with font is: " + returnValue);
 		
