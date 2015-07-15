@@ -158,13 +158,15 @@ public abstract class Mapper {
 	
 	/**
 	 * Returns the String that denotes a position in .dot format
+	 * Note: Positive in graphviz is up and right, positive in cytoscape
+	 * is down and right. Therefore, we negate the y-values
 	 * 
 	 * @param x x coordinate of position
 	 * @param y y coordinate of position
-	 * @return String in form %x,%y?
+	 * @return String in form %x,%y!
 	 */
 	protected String mapPosition(Double x, Double y) {
-		return String.format("%f,%f", x/PPI, y/PPI);
+		return String.format("%f,%f!", x/PPI, -1*y/PPI);
 	}
 	
 	/**
