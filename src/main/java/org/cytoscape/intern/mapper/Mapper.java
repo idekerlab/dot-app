@@ -113,7 +113,7 @@ public abstract class Mapper {
 		//III. hexadecimal number (between #000000 and #FFFFFF). So should we add two other overloaded methods 
 		//that can take in the other two color expressions as parameters. Or we can assume we will only pass 
 		//in only one expression if that's possible (Although I don't think the colorName can cover all the possible colors,
-		//but I'm pretty sure both II(3 floats) and III(hexadecimal number) can cover all the possible colors in cyto)
+		//I'm pretty sure both II(three floats) and III(hexadecimal number) can cover all the possible colors in cytoscape)
 		
 		//needs double check with the codes below, can't think of any corner case/error checking for now
 		/**
