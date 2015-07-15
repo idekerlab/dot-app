@@ -129,6 +129,7 @@ public abstract class Mapper {
 		 * returnValue += " fontcolor= " + color.toString() + ",";
 		 * 
 		 * //might need error checking for transparency, since transparency has to be within 0 to 255
+		 * //transparency can also be shown in hex value.
 		 * 
 		 * returnValue += " transparency= " + transparency.toString() + ",";
 		 * 
