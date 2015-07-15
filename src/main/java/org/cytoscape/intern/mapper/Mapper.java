@@ -103,51 +103,21 @@ public abstract class Mapper {
 	 * @return String that is .dot representation of the provided font
 	 */
 	protected String mapFont(Font font, Integer size, Color color, Integer transparency) {
-		// TODO
 		
-		//in Cytoscape default size is 12, default fontname is HelveticaNeue-Ultralight
-		//in .Dot default size is 14, default fontname is Times-Roman
-		
-		//Question: not sure if font size in .dot is all integer or it also can be float
-	    //color in .dot has three expressions: I. ColorName(e.g. grey)  II. three floats (0.8396, 0.4862, 0.8549)
-		//III. hexadecimal number (between #000000 and #FFFFFF). So should we add two other overloaded methods 
-		//that can take in the other two color expressions as parameters. Or we can assume we will only pass 
-		//in only one expression if that's possible (Although I don't think the colorName can cover all the possible colors,
-		//I'm pretty sure both II(three floats) and III(hexadecimal number) can cover all the possible colors in cytoscape)
-		//Or the color expressions will be handled before we call this function 
-		
-		//I have trouble translating NODE_LABEL_TRANSPARENCY in cytoscape to label's transparency in .dot
-		//because I don't think graphviz has transparency for label (text).
-		//If this is the case, we need to get rid of the transparency in parameter
-		
+		//not sure if font size in .dot is all integer or it also can be float
 		//needs double check with the codes below, can't think of any corner case/error checking for now
-		/**
-		 * LOGGER.info("Label font, size, color, and transparency translation");
-		 * 
-		 * String returnValue = "";
-		 * 
-		 * returnValue += "fontname= " + font.getFontName() + ",";
-		 * 
-		 * returnValue += " fontsize= " + size.toString() + ",";
-		 * 
-		 * returnValue += " fontcolor= " + color.toString() + ",";
-		 * 
-		 * //might need error checking for transparency, since transparency has to be within 0 to 255
-		 * //transparency can also be shown in hex value.
-		 * 
-		 * //The code below is wrong, there is no transparency key word in graphviz, I don't know how to handle 
-		 * //the transparency of label in graphviz, and I doubt that user can change transparency in graphviz.
-		 * //All I know is that in graphviz we can change the transparency of node and graph's bgcolor.
-		 * 
-		 * //returnValue += " transparency= " + transparency.toString() + ",";  //Discarded code
-		 * 
-		 * 
-		 * LOGGER.info("Dot attributes associate with font is: " + returnValue);
-		 * 
-		 * return returnValue;
-		 */
-		return null;
 		
+		LOGGER.info("Label font, size, color, and transparency translation");
+		 
+		String returnValue = "";
+		 
+		returnValue += "fontname= " + font.getFontName() + ",";  
+		returnValue += " fontsize= " + size.toString() + ","; 
+		returnValue += " fontcolor= " + mapColorToDot(color, transparency);
+
+		LOGGER.info("Dot attributes associate with font is: " + returnValue);
+		
+		return returnValue;		
 		
 	}
 	
@@ -180,7 +150,7 @@ public abstract class Mapper {
 				lineStr = "solid";
 				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
 			}
-			String style = String.format("style = \"%s,", lineStr);
+			String style = String.format("style = \"%s\"", lineStr);
 			dotStyle.append(style);
 		}
 		return dotStyle.toString();

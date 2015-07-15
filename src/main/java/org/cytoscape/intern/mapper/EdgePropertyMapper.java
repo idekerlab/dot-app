@@ -4,11 +4,13 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.Bend;
+import org.cytoscape.view.presentation.property.values.Handle;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
-import org.cytoscape.view.presentation.property.EdgeBendVisualProperty;
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 
 import java.awt.Color;
+import java.awt.geom.Point2D;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -58,7 +60,16 @@ public class EdgePropertyMapper extends Mapper {
 	 */
 	private String mapEdgeBend(){
 		// TODO
-		return null;
+		StringBuilder posString = new StringBuilder("pos = \"");
+		Bend edgeBend = view.getVisualProperty(BasicVisualLexicon.EDGE_BEND);
+		List<Handle> handles = edgeBend.getAllHandles();
+		for (Handle handle : handles) {
+			Point2D coords = handle.calculateHandleLocation(arg0, view);
+			String coordString = mapPosition(coords.getX(), -coords.getY());
+			posString.append(coordString + " ");
+		}
+		posString.replace(posString.length() - 1, posString.length() - 1, "\"");
+		return posString.toString();
 	}
 	
 	/**
@@ -134,9 +145,12 @@ public class EdgePropertyMapper extends Mapper {
 		Color strokeColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT);
 		Integer strokeTransparency = view.getVisualProperty(BasicVisualLexicon.EDGE_TRANSPARENCY);
 		String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
-		elementString.append(dotColor);
+		elementString.append(dotColor + ",");
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 		
+		LOGGER.info("Preparing to map edge bends");
+		elementString.append(mapEdgeBend());
+		LOGGER.info("Appended edge bend attributes to .dot string. Result: " + elementString);
 		//Finish attribute string
 		elementString.append("]");
 		LOGGER.info("Created .dot string. Result: " + elementString);
