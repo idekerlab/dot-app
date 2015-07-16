@@ -14,14 +14,16 @@ import org.cytoscape.view.presentation.property.values.ArrowShape;
 
 public class NetworkPropertyMapper extends Mapper {
 
+	private boolean directed = false;
 	/**
 	 * Constructs NetworkPropertyMapper object
 	 * 
 	 * @param view of network we are converting
 	 */
-	public NetworkPropertyMapper(CyNetworkView netView) {
+	public NetworkPropertyMapper(CyNetworkView netView, boolean directed) {
 		super(netView);
 		simpleVisPropsToDot = new ArrayList<String>();
+		this.directed = directed;
 		populateMaps();		
 	}
 	
@@ -93,21 +95,22 @@ public class NetworkPropertyMapper extends Mapper {
 	 * @return String that is either "graph" or "digraph"
 	 */
 	private String getDirectedString() {
-		String output = (isDirected()) ? "digraph":"graph";
+		String output = (directed) ? "digraph":"graph";
 		return output;
 	}
 	
 	/**
 	 * Determines whether the graph is visibly directed or not
 	 * 
+	 * @param networkView The network being tested for directedness
 	 * @return true if graph is directed, false otherwise
 	 */
-	private boolean isDirected() {
+	public static boolean isDirected(CyNetworkView networkView) {
 		//get the current network view
 		//CyNetworkView networkView = (CyNetworkView)view.getModel();
         
 		//get all the edge views from the current networkview
-		Collection<View<CyEdge>> edgeViews = ((CyNetworkView)view).getEdgeViews();
+		Collection<View<CyEdge>> edgeViews = networkView.getEdgeViews();
 		
 		/**
 		 * iterate each edgeview to check whether there is a target arrow shape

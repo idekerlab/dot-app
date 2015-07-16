@@ -110,27 +110,31 @@ public class NodePropertyMapper extends Mapper {
 		}
 		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
 		
-		// Write fillcolor and color attribute
+		//Write fillcolor and color attribute
 		elementString.append(mapColors() + ",");
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 
-		// Write nodeShape
+		//Write nodeShape
 		elementString.append(mapShape() + ",");
 		LOGGER.info("Appended shape attribute to .dot string. Result: " + elementString);
 		
+
 		// Get the .dot string for the node style. Append to attribute string
-		LOGGER.info("Appending font data");
 		elementString.append(mapDotStyle() + ",");
 		LOGGER.info("Font data appended. Resulting String: " + elementString);
 		
-		// Get node location and append in proper format
+		//Get node location and append in proper format
 		Double xLoc = view.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
 		Double yLoc = view.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION);
 		String dotPosition = String.format("pos = \"%s\"", mapPosition(xLoc, yLoc));
 		elementString.append(dotPosition + ",");
 		
+
+
 		// Append font name+size+color attributes
+		LOGGER.info("Appending font data");
 		elementString.append(mapFontHelper() + ",");
+
 		
 		//Finish attribute string with mandatory fixedsize = true attribute
 		elementString.append("fixedsize = true]");
@@ -153,7 +157,7 @@ public class NodePropertyMapper extends Mapper {
 		String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
 		elementString.append(dotBorderColor + ",");
 		
-		// Write node fill color
+		//Write node fill color
 		Color fillColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR);
 		Integer nodeTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_TRANSPARENCY);
 		String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, nodeTransparency));

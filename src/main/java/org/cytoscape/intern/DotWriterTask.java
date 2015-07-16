@@ -46,6 +46,9 @@ public class DotWriterTask implements CyWriter {
 	//check whether the task needs to respond to cancellation
 	private boolean cancelled = false;
 	
+	//whether or not the network view is directed
+	private boolean directed = false;
+	
 	/**
 	 * Constructs a DotWriterTask object
 	 * 
@@ -57,7 +60,8 @@ public class DotWriterTask implements CyWriter {
 		
 		outputWriter = new OutputStreamWriter(output);
 		this.networkView = networkView;
-		this.networkMapper = new NetworkPropertyMapper(networkView);
+		directed = NetworkPropertyMapper.isDirected(networkView);
+		this.networkMapper = new NetworkPropertyMapper(networkView, directed);
 		
 		// Make logger write to file
 		FileHandler handler = null;
@@ -165,9 +169,11 @@ public class DotWriterTask implements CyWriter {
 		// create list of all edge views
 		ArrayList< View<CyEdge> > edgeViewList = new ArrayList< View<CyEdge> >( networkView.getEdgeViews() );
 		
+		String edgeType = (directed) ? "->" : "--";
+		
 		// for each edge, write declaration string
 		for(View<CyEdge> edgeView: edgeViewList) {
-	  		edgeMapper = new EdgePropertyMapper(edgeView);
+	  		edgeMapper = new EdgePropertyMapper(edgeView, networkView);
 	  		
 	  		try {
 	  			// Retrieve source+target node names
@@ -185,7 +191,7 @@ public class DotWriterTask implements CyWriter {
 	  			// Remove spaces
 	  			targetName = targetName.replace(" ", "");
 
-	  			String edgeName = String.format("%s -- %s", sourceName, targetName);
+	  			String edgeName = String.format("%s %s %s", sourceName, edgeType, targetName);
 	  			String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());
 
 	  			outputWriter.write(declaration);
