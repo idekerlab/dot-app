@@ -76,6 +76,8 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	@Override
 	public CyWriter createWriter(OutputStream outStream, CyNetwork network) {
 		LOGGER.info("createWriter with CyNetwork param called");
+			
+		// Notify use they will lose info
 		
 		// maybe we should just return null 
 		return new DotWriterTask(outStream, netViewFactory.createNetworkView(network));

@@ -56,7 +56,9 @@ public class NetworkPropertyMapper extends Mapper {
 		//Get network name from model. Remove spaces from name
 		CyNetwork network = (CyNetwork)view.getModel();
 		String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
+		// remove dis-allowed characters to avoid errors
 		networkName = networkName.replace(" ", "");
+		networkName = networkName.replace(".", "");
 
 		//Build the network properties string
 		StringBuilder elementString = new StringBuilder();

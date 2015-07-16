@@ -97,11 +97,15 @@ public class EdgePropertyMapper extends Mapper {
 		simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
 		
 		ArrowShape targetArrow = view.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE);
+		LOGGER.info("Retrieving target/head arrow. CS version is: " + targetArrow);
 		String dotTargetArrow = ARROW_SHAPE_MAP.get(targetArrow);
+		LOGGER.info("Target/head arrow retrieved. .dot verison is: " + dotTargetArrow);
 		simpleVisPropsToDot.add(String.format("arrowhead = \"%s\"", dotTargetArrow));
 
 		ArrowShape sourceArrow = view.getVisualProperty(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE);
+		LOGGER.info("Retrieving source/tail arrow. CS version is: " + sourceArrow);
 		String dotSourceArrow = ARROW_SHAPE_MAP.get(sourceArrow);
+		LOGGER.info("Source/tail arrow retrieved. .dot verison is: " + dotSourceArrow);
 		simpleVisPropsToDot.add(String.format("arrowtail = \"%s\"", dotSourceArrow));
 	}
 	

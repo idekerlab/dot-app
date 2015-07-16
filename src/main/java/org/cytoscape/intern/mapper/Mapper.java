@@ -172,6 +172,35 @@ public abstract class Mapper {
 	}
 	
 	/**
+	 * Changes a string to comply with dot ID requirements and returns the result
+	 * Dot names must be a string of alphanumeric characters and underscores,
+	 * not beginning with a digit
+	 * 
+	 * @param input is String we are modifying
+	 * @return is .dot-compliant ID String where all leading numbers are removed
+	 * and put at the end of the string and all dis-allowed characters are replaced
+	 * with underscores
+	 */
+	protected String filterString(String input) {
+		StringBuilder output = new StringBuilder(input);
+		String numbers = "";
+		
+		// remove all leading numbers and append to end
+		for(int i = 0; i < output.length() ; i++) {
+			if ('0' <= output.charAt(i) && output.charAt(0) <= '9') {
+				numbers += output.charAt(i);
+			}
+			else {
+				
+			}
+		}
+		
+		String outputString = output.toString();
+		return null;
+		// replace all disallowed characters with underscores
+	}
+	
+	/**
 	 * Returns a String that contains all relevant attributes for this element 
 	 */
 	public abstract String getElementString();
