@@ -32,6 +32,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 * Constructs a DotWriterFactory object with a given CyApplicationManager
 	 * 
 	 * @param fileFilter CyFileFilter associated with this factory
+	 * @param netViewFactory network view factory to create network view needed elsewhere
 	 */
 	public DotWriterFactory(CyFileFilter fileFilter, CyNetworkViewFactory netViewFactory) {
 		super();
@@ -63,7 +64,9 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	}
 	 
 	/**
-	 * Creates a task that writes a specified network to a specified stream
+	 * Creates a task that writes a specified network to a specified stream.
+	 * Notifies user that using this option results in large loss of data and recommends
+	 * to export with view
 	 * 
 	 * @param outStream stream that this writer writes to
 	 * @param network CyNetwork that is being written
@@ -73,6 +76,8 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	@Override
 	public CyWriter createWriter(OutputStream outStream, CyNetwork network) {
 		LOGGER.info("createWriter with CyNetwork param called");
+		
+		// maybe we should just return null 
 		return new DotWriterTask(outStream, netViewFactory.createNetworkView(network));
 	}
 	
