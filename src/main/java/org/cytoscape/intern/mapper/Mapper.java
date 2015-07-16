@@ -45,7 +45,7 @@ public abstract class Mapper {
 	protected View<? extends CyIdentifiable> view;
 	
 	// Pixel per inch scaling factor
-	protected static final double PPI = 96;
+	protected static final double PPI = 72;
 	
 	// debug logger
 	protected static final Logger LOGGER;
