@@ -11,10 +11,12 @@ import java.util.HashMap;
 public class TestNodeView implements View<CyNode> {
 	private HashMap<VisualProperty<Object>, Object> visualProperties;
 	private CyNode model;
+	private Long SUID;
 	
 	@SuppressWarnings("unchecked")
 	public TestNodeView(CyNode node) {
 		model = node;
+		SUID = model.getSUID();
 		visualProperties = new HashMap<VisualProperty<Object>, Object>();
 		BasicVisualLexicon bvl = new BasicVisualLexicon(new NullVisualProperty("ROOT", "Root"));
 		for (VisualProperty<?> prop: bvl.getAllDescendants(BasicVisualLexicon.NODE)) {
@@ -23,7 +25,7 @@ public class TestNodeView implements View<CyNode> {
 	}
 	@Override
 	public Long getSUID() {
-		return null;
+		return SUID;
 	}
 
 	@Override

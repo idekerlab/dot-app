@@ -37,9 +37,6 @@ public class NetworkPropertyMapper extends Mapper {
 		 * 
 		 * directed
 		 * bgcolor-- NETWORK_BACKGROUND_POINT
-		 * fixedsize -- true
-		 * fontpath -- maybe something
-		 * scale -- NETWORK_SCALE_FACTOR -- try ignoring first
 		 * label -- NETWORK_TITLE -- maybe -- test
 		 * 
 		 * pseudocode -- NOTE TABS ARE OFF
@@ -77,16 +74,16 @@ public class NetworkPropertyMapper extends Mapper {
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
-		
+		//label attribute of graph
+		String label = view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
+		String dotLabel = String.format("label = \"%s\"", label);
+		simpleVisPropsToDot.add(dotLabel);
+
 		//Background color of graph
 		Color netBgColor = (Color)view.getVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_PAINT);
 		String dotBgColor = String.format("bgcolor = \"%s\"", mapColorToDot(netBgColor, netBgColor.getAlpha()));
 		simpleVisPropsToDot.add(dotBgColor);
 		
-		//label attribute of graph
-		String label = view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
-		String dotLabel = String.format("label = \"%s\"", label);
-		simpleVisPropsToDot.add(dotLabel);
 	}
 
 	/**
