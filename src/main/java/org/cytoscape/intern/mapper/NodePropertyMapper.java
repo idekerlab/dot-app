@@ -118,8 +118,10 @@ public class NodePropertyMapper extends Mapper {
 		elementString.append(mapShape() + ",");
 		LOGGER.info("Appended shape attribute to .dot string. Result: " + elementString);
 		
-		//Get the .dot string for the node style. Append to attribute string
+
+		// Get the .dot string for the node style. Append to attribute string
 		elementString.append(mapDotStyle() + ",");
+		LOGGER.info("Font data appended. Resulting String: " + elementString);
 		
 		//Get node location and append in proper format
 		Double xLoc = view.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
@@ -127,12 +129,12 @@ public class NodePropertyMapper extends Mapper {
 		String dotPosition = String.format("pos = \"%s\"", mapPosition(xLoc, yLoc));
 		elementString.append(dotPosition + ",");
 		
-		//Get label font information and append in proper format
-		Color labelColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_COLOR);
-		Integer labelTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_TRANSPARENCY);
-		Font labelFont = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_FACE);
-		Integer labelSize = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_SIZE);
-		elementString.append(mapFont(labelFont, labelSize, labelColor, labelTransparency) + ",");
+
+
+		// Append font name+size+color attributes
+		LOGGER.info("Appending font data");
+		elementString.append(mapFontHelper() + ",");
+
 		
 		//Finish attribute string with mandatory fixedsize = true attribute
 		elementString.append("fixedsize = true]");
@@ -188,5 +190,19 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("Appended shape attribute to .dot string. Result: " + elementString);
 		
 		return elementString.toString();
+	}
+	
+	/**
+	 * Helper method that returns String that contains font face, size, color and transparency
+	 * 
+	 * @return String that defines fontname, fontcolor and fontsize attributes
+	 */
+	private String mapFontHelper() {
+		Font fontName = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_FACE);
+		Integer fontSize = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_SIZE);
+		Color fontColor = (Color)(view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_COLOR));
+		Integer fontTransparency = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_TRANSPARENCY);
+		
+		return mapFont(fontName, fontSize, fontColor, fontTransparency);
 	}
 }

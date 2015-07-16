@@ -49,7 +49,7 @@ public abstract class Mapper {
 	
 	// debug logger
 	protected static final Logger LOGGER;
-	//Initialilze logger with file handler
+	// Initialize logger with file handler
 	static {
 		LOGGER = Logger.getLogger("org.cytoscape.intern.mapper.Mapper");
 		FileHandler handler = null;
@@ -100,6 +100,8 @@ public abstract class Mapper {
 	 * 
 	 * @param font font to be converted
 	 * @param size size of font to be converted
+	 * @param color color of font
+	 * @param transparency transparency of font from 0-255
 	 * @return String that is .dot representation of the provided font
 	 */
 	protected String mapFont(Font font, Integer size, Color color, Integer transparency) {
@@ -110,10 +112,11 @@ public abstract class Mapper {
 		LOGGER.info("Label font, size, color, and transparency translation");
 		 
 		String returnValue = "";
-		 
+
 		returnValue += "fontname = \"" + font.getFontName() + "\",";  
 		returnValue += " fontsize = \"" + size.toString() + "\","; 
 		returnValue += " fontcolor = \"" + mapColorToDot(color, transparency) + "\"";
+
 
 		LOGGER.info("Dot attributes associate with font is: " + returnValue);
 		
