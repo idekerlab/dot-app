@@ -11,10 +11,12 @@ import java.util.HashMap;
 public class TestEdgeView implements View<CyEdge> {
 	private HashMap<VisualProperty<Object>, Object> visualProperties;
 	private CyEdge model;
+	private Long SUID;
 	
 	@SuppressWarnings("unchecked")
 	public TestEdgeView(CyEdge edge) {
 		model = edge;
+		SUID = model.getSUID();
 		visualProperties = new HashMap<VisualProperty<Object>, Object>();
 		BasicVisualLexicon bvl = new BasicVisualLexicon(new NullVisualProperty("ROOT", "Root"));
 		for (VisualProperty<?> prop: bvl.getAllDescendants(BasicVisualLexicon.EDGE)) {
@@ -23,7 +25,7 @@ public class TestEdgeView implements View<CyEdge> {
 	}
 	@Override
 	public Long getSUID() {
-		return null;
+		return SUID;
 	}
 
 	@Override

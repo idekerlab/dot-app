@@ -91,7 +91,7 @@ public class EdgePropertyMapper extends Mapper {
 		simpleVisPropsToDot.add(String.format("label = \"%s\"", edgeLabel));
 
 		Double width = view.getVisualProperty(BasicVisualLexicon.EDGE_WIDTH);
-		simpleVisPropsToDot.add(String.format("penwidth = \"%s\"", width));
+		simpleVisPropsToDot.add(String.format("penwidth = \"%f\"", width));
 
 		String tooltip = view.getVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP);
 		simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
