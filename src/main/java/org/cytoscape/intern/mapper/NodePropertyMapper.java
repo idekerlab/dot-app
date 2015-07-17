@@ -98,7 +98,7 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	@Override
 	public String getElementString() {
-		LOGGER.info("Preparing to get .dot declaration for element.");
+		LOGGER.info("Preparing to get .dot declaration for a node.");
 
 		//Build attribute string
 		StringBuilder elementString = new StringBuilder("[");

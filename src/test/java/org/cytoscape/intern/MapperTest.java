@@ -148,4 +148,16 @@ public class MapperTest {
 
 		assertEquals("Edge Cytoscape property translation failed", expectedDotString, actualDotString);
 	}
+	
+	@Test
+	public void testFilterString() {
+		assertEquals("FilterString is wrong", "TestNode1", "TestNode1");
+		assertEquals("FilterString is wrong", ".59", Mapper.filterString(".59"));
+		assertNull("FilterString is wrong", Mapper.filterString("9.-"));
+		assertEquals("FilterString is wrong", "8.8", Mapper.filterString("8.8"));
+		assertEquals("FilterString is wrong", "\"Hello\"", Mapper.filterString("\"Hello\""));
+		assertEquals("FilterString is wrong", "<Hello>", Mapper.filterString("<Hello>"));
+		assertEquals("FilterString is wrong", "baba123", Mapper.filterString("123baba"));
+		
+	}
 }

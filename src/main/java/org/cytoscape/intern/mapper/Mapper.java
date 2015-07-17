@@ -17,6 +17,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Handles mapping of Cytoscape properties to .dot attributes in the form of a String.
@@ -181,21 +183,48 @@ public abstract class Mapper {
 	 * and put at the end of the string and all dis-allowed characters are replaced
 	 * with underscores
 	 */
-	protected String filterString(String input) {
-		StringBuilder output = new StringBuilder(input);
-		String numbers = "";
+	/*
+	 *  An ID is one of the following:
+	 *	Any string of alphabetic ([a-zA-Z\200-\377]) characters, underscores ('_') or digits ([0-9]), not beginning with a digit;
+	 *	a numeral [-]?(.[0-9]+ | [0-9]+(.[0-9]*)? );
+	 *	any double-quoted string ("...") possibly containing escaped quotes (\")1;
+	 *	an HTML string (<...>). 
+	 */
+	public static String filterString(String input) {
+		LOGGER.info("Preparing to transform string");
+		String alphaNumRegEx = "[a-zA-Z\200-\377_]+[0-9]*";
+		String numericRegEx = "[-]?[.][0-9]+|[0-9]+([.][0-9]*)?";
+		String quotedRegEx = "\".*\"";
+		String htmlRegEx = "<.*>";
+		if (input.matches(alphaNumRegEx)) {
+			LOGGER.info("Alphanumeric ID");
+			return input;
+		}
+		if (input.matches(numericRegEx)) {
+			LOGGER.info("Numeric ID");
+			return input;
+		}
+		if (input.matches(quotedRegEx)) {
+			LOGGER.info("Quoted ID");
+			return input;
+		}
+		if (input.matches(htmlRegEx)) {
+			LOGGER.info("HTML ID");
+			return input;
+		}
+		StringBuilder output = new StringBuilder(input.length());
 		
 		// remove all leading numbers and append to end
-		for(int i = 0; i < output.length() ; i++) {
-			if ('0' <= output.charAt(i) && output.charAt(0) <= '9') {
-				numbers += output.charAt(i);
-			}
-			else {
-				
-			}
+		Pattern leadingNum = Pattern.compile(String.format("([0-9]+)(%s)", alphaNumRegEx));
+		Matcher matcher = leadingNum.matcher(input);
+		if (matcher.matches()) {
+			String numbers = matcher.group(1);
+			String characters = matcher.group(2);
+			output.append(characters);
+			output.append(numbers);
+			return output.toString();
 		}
 		
-		String outputString = output.toString();
 		return null;
 		// replace all disallowed characters with underscores
 	}

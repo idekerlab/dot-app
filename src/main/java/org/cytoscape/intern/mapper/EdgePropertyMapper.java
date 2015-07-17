@@ -114,7 +114,7 @@ public class EdgePropertyMapper extends Mapper {
 	 */
 	@Override
 	public String getElementString() {
-		LOGGER.info("Preparing to get .dot declaration for element.");
+		LOGGER.info("Preparing to get .dot declaration for an edge.");
 
 		//Build attribute string
 		StringBuilder elementString = new StringBuilder("[");
