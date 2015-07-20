@@ -11,6 +11,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.TaskMonitor;
+import org.cytoscape.io.read.CyNetworkReader;
 
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -78,6 +79,44 @@ public class DotWriterTask implements CyWriter {
 		LOGGER.addHandler(handler);
 		
 		LOGGER.info("DotWriterTask constructed");
+	}
+	
+	/**
+	 * Constructs a DotWriterTask object (Overloaded method)
+	 * 
+	 * @param output OutputStream that is being written to
+	 * @param network, makes a networkview based on this network, and then gets exported
+	 */
+	public DotWriterTask(OutputStream output, CyNetwork network){
+		super();
+		
+		outputWriter = new OutputStreamWriter(output);
+		// create a NetworkView based on the passed in network
+		this.networkView = buildCyNetworkView(network);
+		directed = NetworkPropertyMapper.isDirected(networkView);
+		this.networkMapper = new NetworkPropertyMapper(networkView, directed);
+		
+		
+		// Make logger write to file
+		FileHandler handler = null;
+		try {
+			handler = new FileHandler("log_DotWriterTask.txt");
+			handler.setLevel(Level.ALL);
+			
+			handler.setFormatter(new SimpleFormatter());
+		}
+		catch(IOException e) {
+			// to prevent compiler error
+		}
+		LOGGER.addHandler(handler);
+		
+		LOGGER.info("DotWriterTask constructed");
+		
+	}
+	
+	private CyNetworkView buildCyNetworkView(CyNetwork network) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
