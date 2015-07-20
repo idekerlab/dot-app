@@ -1,5 +1,6 @@
 package org.cytoscape.intern;
 
+import org.cytoscape.intern.mapper.Mapper;
 import org.cytoscape.intern.mapper.NetworkPropertyMapper;
 import org.cytoscape.intern.mapper.NodePropertyMapper;
 import org.cytoscape.intern.mapper.EdgePropertyMapper;
@@ -146,9 +147,8 @@ public class DotWriterTask implements CyWriter {
 	  			CyNode nodeModel = nodeView.getModel();
 	  			CyNetwork networkModel = networkView.getModel();
 	  			String nodeName = networkModel.getRow(nodeModel).get(CyNetwork.NAME, String.class);
-	  			// Remove spaces
-	  			nodeName = nodeName.replace(" ", "");
-	  			
+	  
+	  			nodeName = Mapper.filterString(nodeName);
 	  			String declaration = String.format("%s %s\n", nodeName, nodeMapper.getElementString());
 
 	  			outputWriter.write(declaration);
@@ -184,12 +184,12 @@ public class DotWriterTask implements CyWriter {
 	  			CyNode targetNode = edgeModel.getTarget();
 	  			
 	  			String sourceName = networkModel.getRow(sourceNode).get(CyNetwork.NAME, String.class);
-	  			// Remove spaces
-	  			sourceName = sourceName.replace(" ", "");
+	  			// filter out disallowed chars
+	  			sourceName = Mapper.filterString(sourceName);
 	  			
 	  			String targetName = networkModel.getRow(targetNode).get(CyNetwork.NAME, String.class);
-	  			// Remove spaces
-	  			targetName = targetName.replace(" ", "");
+	  			// filter out disallowed chars
+	  			targetName = Mapper.filterString(targetName);
 
 	  			String edgeName = String.format("%s %s %s", sourceName, edgeType, targetName);
 	  			String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());

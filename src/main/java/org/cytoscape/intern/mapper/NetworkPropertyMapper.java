@@ -32,30 +32,12 @@ public class NetworkPropertyMapper extends Mapper {
 	 */
 	@Override
 	public String getElementString() {
-		/**
-		 * all properties we need to write
-		 * 
-		 * directed
-		 * bgcolor-- NETWORK_BACKGROUND_POINT
-		 * label -- NETWORK_TITLE -- maybe -- test
-		 * 
-		 * pseudocode -- NOTE TABS ARE OFF
-		 * 
-		 * String output = "";
-		 * 
-		 * output += getDirectedString(view);
-		 * output += ", bgcolor = " + 
-		 * 		nodeMapper.mapColorToDot( view.getVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_COLOR), 255 );
-		 * output += ", label = " + view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
-		 * 
-		 * return output;
-		 */
 		//Get network name from model. Remove spaces from name
 		CyNetwork network = (CyNetwork)view.getModel();
 		String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
 		// remove dis-allowed characters to avoid errors
-		networkName = networkName.replace(" ", "");
-		networkName = networkName.replace(".", "");
+		// filter out disallowed chars
+		networkName = Mapper.filterString(networkName);
 
 		//Build the network properties string
 		StringBuilder elementString = new StringBuilder();
