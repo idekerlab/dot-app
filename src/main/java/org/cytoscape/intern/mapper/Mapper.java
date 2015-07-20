@@ -212,21 +212,12 @@ public abstract class Mapper {
 			LOGGER.info("HTML ID");
 			return input;
 		}
-		StringBuilder output = new StringBuilder(input.length());
-		
-		// remove all leading numbers and append to end
-		Pattern leadingNum = Pattern.compile(String.format("([0-9]+)(%s)", alphaNumRegEx));
-		Matcher matcher = leadingNum.matcher(input);
-		if (matcher.matches()) {
-			String numbers = matcher.group(1);
-			String characters = matcher.group(2);
-			output.append(characters);
-			output.append(numbers);
-			return output.toString();
-		}
-		
-		return null;
-		// replace all disallowed characters with underscores
+		LOGGER.info("None of the above. Transforming to Quoted ID");
+		StringBuilder output = new StringBuilder(input.length() + 2);
+		output.append('\"');
+		output.append(input);
+		output.append('\"');
+		return output.toString();
 	}
 	
 	/**
