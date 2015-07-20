@@ -92,7 +92,8 @@ public class DotWriterTask implements CyWriter {
 	 */
 	public DotWriterTask(OutputStream output, CyNetwork network){
 		
-		//The codes below are probably wrong
+		//The codes below are probably wrong because the buildCyNetworkView only 
+		//takes a network just read by the task and part of the getCyNetworks() array.
 		/*
 		super();
 		
