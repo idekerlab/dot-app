@@ -120,9 +120,10 @@ public class DotWriterTask implements CyWriter {
 		LOGGER.info("DotWriterTask constructed");
 		
 	}
-	
+	/*
+	 * CyNetworkView method declaration, used in the constructor which takes a CyNetwork
+	 */
 	private CyNetworkView buildCyNetworkView(CyNetwork network) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
