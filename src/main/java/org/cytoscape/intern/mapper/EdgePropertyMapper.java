@@ -146,10 +146,10 @@ public class EdgePropertyMapper extends Mapper {
 		Integer labelTransparency = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY);
 		Font labelFont = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_FACE);
 		Integer labelSize = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_SIZE);
-		elementString.append(mapFont(labelFont, labelSize, labelColor, labelTransparency));
+		elementString.append(mapFont(labelFont, labelSize, labelColor, labelTransparency) + ",");
 		
-		//Finish attribute string
-		elementString.append("]");
+		// append dir=both so both arrowShapes show up and close off attr string
+		elementString.append("dir = \"both\"]");
 		LOGGER.info("Created .dot string. Result: " + elementString);
 		return elementString.toString();
 	}
