@@ -80,6 +80,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 		// Notify use they will lose info
 		
 		// maybe we should just return null 
+		Notifier.showWarning("No visual information will be written to the GraphViz file.");
 		return new DotWriterTask(outStream, netViewFactory.createNetworkView(network));
 	}
 	

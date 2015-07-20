@@ -50,6 +50,9 @@ public class DotWriterTask implements CyWriter {
 	//whether or not the network view is directed
 	private boolean directed = false;
 	
+	//whether or not a name had to be modified
+	private boolean nameModified = false;
+	
 	/**
 	 * Constructs a DotWriterTask object
 	 * 
@@ -97,6 +100,9 @@ public class DotWriterTask implements CyWriter {
 			outputWriter.write("}");
 			outputWriter.close();
 			LOGGER.info("Finished writing file");
+			if (nameModified) {
+				Notifier.showWarning("Some names have been modified in order to comply to DOT syntax");
+			}
 		} 
 		catch(IOException e) {
 			LOGGER.severe("Failed to close file, IOException in DotWriterTask");
@@ -121,7 +127,13 @@ public class DotWriterTask implements CyWriter {
 	private void writeProps() {
 		try {
 			LOGGER.info("Writing network properties...");
-			outputWriter.write( networkMapper.getElementString() );
+			CyNetwork network = (CyNetwork)networkView.getModel();
+			String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
+			String networkProps = networkMapper.getElementString();
+			if (!networkProps.contains(networkName)) {
+				nameModified = true;
+			}
+			outputWriter.write( networkProps );
 			LOGGER.info("Finished writing network properties");
 		}
 		catch(IOException exception) {
@@ -148,8 +160,12 @@ public class DotWriterTask implements CyWriter {
 	  			CyNetwork networkModel = networkView.getModel();
 	  			String nodeName = networkModel.getRow(nodeModel).get(CyNetwork.NAME, String.class);
 	  
-	  			nodeName = Mapper.filterString(nodeName);
-	  			String declaration = String.format("%s %s\n", nodeName, nodeMapper.getElementString());
+	  			String newNodeName = Mapper.filterString(nodeName);
+	  			if (!newNodeName.equals(nodeName)) {
+	  				nameModified = true;
+	  			}
+
+	  			String declaration = String.format("%s %s\n", newNodeName, nodeMapper.getElementString());
 
 	  			outputWriter.write(declaration);
 	  		}

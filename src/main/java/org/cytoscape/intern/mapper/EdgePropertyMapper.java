@@ -71,7 +71,7 @@ public class EdgePropertyMapper extends Mapper {
 		List<Handle> handles = edgeBend.getAllHandles();
 		for (Handle handle : handles) {
 			Point2D coords = handle.calculateHandleLocation(networkView, (View<CyEdge>)view);
-			String singlePointString = mapPosition(coords.getX(), -coords.getY());
+			String singlePointString = mapPosition(coords.getX(), coords.getY());
 			coordinatesString.append(singlePointString + " ");
 		}
 		if (coordinatesString.length() == 0) {
