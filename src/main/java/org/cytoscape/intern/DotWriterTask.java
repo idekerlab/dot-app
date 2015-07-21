@@ -179,7 +179,7 @@ public class DotWriterTask implements CyWriter {
 			outputWriter.close();
 			LOGGER.info("Finished writing file");
 			if (nameModified) {
-				Notifier.showWarning("Some names have been modified in order to comply to DOT syntax");
+				Notifier.showMessage("Some names have been modified in order to comply to DOT syntax", Notifier.MessageType.WARNING);
 			}
 		} 
 		catch(IOException e) {
