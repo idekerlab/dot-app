@@ -82,7 +82,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 		// maybe we should just return null 
 		Notifier.showMessage("No visual information will be written to the GraphViz file.\n"
 				+ "Use File -> Export -> Network and View... instead", Notifier.MessageType.INFO);
-		return new DotWriterTask(outStream, netViewFactory.createNetworkView(network));
+		return new DotWriterTask(outStream, network);
 	}
 	
 	/**
