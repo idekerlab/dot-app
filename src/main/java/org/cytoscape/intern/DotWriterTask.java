@@ -53,8 +53,6 @@ public class DotWriterTask implements CyWriter {
 	//whether or not the network view is directed
 	private boolean directed = false;
 	
-	private String splinesVal = "";
-	
 	/*
 	 * Tunable to prompt user for edge style
 	 * curved, normal (segments) or splines
@@ -76,28 +74,6 @@ public class DotWriterTask implements CyWriter {
 	public DotWriterTask(OutputStream output, CyNetworkView networkView) {
 		super();
 		
-		outputWriter = new OutputStreamWriter(output);
-		this.networkView = networkView;
-		directed = NetworkPropertyMapper.isDirected(networkView);
-
-		// set splines val
-		splinesVal = typer.getSelectedValue();
-		LOGGER.info("Raw splinesVal: " + splinesVal);
-		switch(splinesVal) {
-			case "Straight segments":
-				splinesVal = "false";
-				break;
-			case "Curved segments":
-				splinesVal = "curved";
-				break;	
-			case "Curved segments routed around nodes":
-				splinesVal = "true";
-				break;
-		}
-		LOGGER.info("Converted splinesVal: " + splinesVal);
-
-		this.networkMapper = new NetworkPropertyMapper(networkView, directed, splinesVal);
-		
 		// Make logger write to file
 		FileHandler handler = null;
 		try {
@@ -110,6 +86,11 @@ public class DotWriterTask implements CyWriter {
 			// to prevent compiler error
 		}
 		LOGGER.addHandler(handler);
+		
+		outputWriter = new OutputStreamWriter(output);
+		this.networkView = networkView;
+		directed = NetworkPropertyMapper.isDirected(networkView);
+		
 		LOGGER.info("DotWriterTask constructed");
 	}
 	
@@ -153,20 +134,26 @@ public class DotWriterTask implements CyWriter {
 	 * Task to modify its user interface.
 	 */
 	@Override
-	public void run(TaskMonitor taskMonitor) {
-		/*splinesVal = typer.getSelectedValue();
+	public void run(TaskMonitor taskMonitor) {	
+		// set splines val
+		String splinesVal = typer.getSelectedValue();
+		LOGGER.info("Raw splinesVal: " + splinesVal);
 		switch(splinesVal) {
-		case "Straight segments":
-			splinesVal = "false";
-			break;
-		case "Curved segments":
-			splinesVal = "curved";
-			break;
-			
-		case "Curved segments routed around nodes":
-			splinesVal = "true";
-			break;
-		}*/
+			case "Straight segments":
+				splinesVal = "false";
+				break;
+			case "Curved segments":
+				splinesVal = "curved";
+				break;	
+			case "Curved segments routed around nodes":
+				splinesVal = "true";
+				break;
+		}
+		LOGGER.info("Converted splinesVal: " + splinesVal);
+
+		// constructed here because needed in writeProps() and splinesVal needed here
+		this.networkMapper = new NetworkPropertyMapper(networkView, directed, splinesVal);
+		
 		LOGGER.info("Writing .dot file...");
 		writeProps();
 		writeNodes();
@@ -177,7 +164,7 @@ public class DotWriterTask implements CyWriter {
 			outputWriter.close();
 			LOGGER.info("Finished writing file");
 			if (nameModified) {
-				Notifier.showWarning("Some names have been modified in order to comply to DOT syntax");
+				Notifier.showMessage("Some names have been modified in order to comply to DOT syntax", Notifier.MessageType.WARNING);
 			}
 		} 
 		catch(IOException e) {
