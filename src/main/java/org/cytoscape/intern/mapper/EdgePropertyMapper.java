@@ -96,19 +96,13 @@ public class EdgePropertyMapper extends Mapper {
 		String tooltip = view.getVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP);
 		simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
 		
-		/*ArrowShape targetArrow = view.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE);
+		// block is non-functioning. only works for bypasses due to what we think is source error
+		ArrowShape targetArrow = view.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE);
 		LOGGER.info("Retrieving target/head arrow. CS version is: " + targetArrow);
 		String dotTargetArrow = ARROW_SHAPE_MAP.get(targetArrow);
 		LOGGER.info("Target/head arrow retrieved. .dot verison is: " + dotTargetArrow);
-		simpleVisPropsToDot.add(String.format("arrowhead = \"%s\"", dotTargetArrow));*/
-
-		// testing different method to get around target arrow bug-- block above is original
-		//LOGGER.info("Retrieving target/head arrow. CS version is: " + targetArrow);
-		String dotTargetArrow = ARROW_SHAPE_MAP.get(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE.getDefault());
-		LOGGER.info("Target/head arrow retrieved. .dot verison is: " + dotTargetArrow);
 		simpleVisPropsToDot.add(String.format("arrowhead = \"%s\"", dotTargetArrow));
-		
-		
+				
 		ArrowShape sourceArrow = view.getVisualProperty(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE);
 		LOGGER.info("Retrieving source/tail arrow. CS version is: " + sourceArrow);
 		String dotSourceArrow = ARROW_SHAPE_MAP.get(sourceArrow);
