@@ -75,6 +75,8 @@ public class NodePropertyMapper extends Mapper {
 
 		//Put Simple Props Key/Values
 		String nodeLabel = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL);
+		// remove quotes
+		nodeLabel.replace("\"", "");
 		simpleVisPropsToDot.add(String.format("label = \"%s\"", nodeLabel));
 		
 		Double borderWidth = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH);

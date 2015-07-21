@@ -65,6 +65,9 @@ public class DotWriterTask implements CyWriter {
 	//whether or not a name had to be modified
 	private boolean nameModified = false;
 	
+	//value of splines attribute
+	private String splinesVal = "";
+	
 	/**
 	 * Constructs a DotWriterTask object
 	 * 
@@ -94,11 +97,9 @@ public class DotWriterTask implements CyWriter {
 		LOGGER.info("DotWriterTask constructed");
 	}
 	
-	
-	
-	/*
+	/**
 	 * 
-	 * Constructs a DotWriterTask object (Overloaded method)
+	 * Constructs a DotWriterTask object (Overloaded ctor)
 	 * 
 	 * @param output OutputStream that is being written to
 	 * @param network that is being exported
@@ -136,28 +137,27 @@ public class DotWriterTask implements CyWriter {
 	@Override
 	public void run(TaskMonitor taskMonitor) {	
 		
-		//do the following in the if statement if passed in networkView
-		//don't do the following in the if statement if passed in network
-		if(networkView != null){
-			// set splines val
-			String splinesVal = typer.getSelectedValue();
-			LOGGER.info("Raw splinesVal: " + splinesVal);
-			switch(splinesVal) {
-				case "Straight segments":
-					splinesVal = "false";
-					break;
-				case "Curved segments":
-					splinesVal = "curved";
-					break;	
-				case "Curved segments routed around nodes":
-					splinesVal = "true";
-					break;
-			}
-			LOGGER.info("Converted splinesVal: " + splinesVal);
+		// set splines val
+		splinesVal = typer.getSelectedValue();
+		LOGGER.info("Raw splinesVal: " + splinesVal);
+		switch(splinesVal) {
+			case "Straight segments":
+				splinesVal = "false";
+				break;
+			case "Curved segments":
+				splinesVal = "curved";
+				break;	
+			case "Curved segments routed around nodes":
+				splinesVal = "true";
+				break;
+		}
+		LOGGER.info("Converted splinesVal: " + splinesVal);
 
+		if(networkView != null) {	
 			// constructed here because needed in writeProps() and splinesVal needed here
 			this.networkMapper = new NetworkPropertyMapper(networkView, directed, splinesVal);
 		}
+		
 		LOGGER.info("Writing .dot file...");
 		writeProps();
 		writeNodes();
@@ -199,8 +199,9 @@ public class DotWriterTask implements CyWriter {
 			
 			if(networkView != null){
 				networkProps = networkMapper.getElementString();
-			}else{
-				networkProps = "graph "+ Mapper.filterString(networkName)+ " {\n";  
+			}
+			else {
+				networkProps = "graph "+ Mapper.filterString(networkName) + "\nsplines = " + splinesVal + "{\n";  
 			}
 
 			if (!networkProps.contains(networkName)) {
@@ -251,7 +252,8 @@ public class DotWriterTask implements CyWriter {
 			}
 			
 		//do the following if the user passed in network	
-		}else{
+		}
+		else {
 			List<CyNode> nodeList = network.getNodeList();
 			
 			for(CyNode node: nodeList){
@@ -268,7 +270,8 @@ public class DotWriterTask implements CyWriter {
 
 					outputWriter.write(declaration);
 			
-				}catch(IOException exception){
+				}
+				catch(IOException exception){
 					LOGGER.log(Level.SEVERE, "Write failed @ writeNodes() passed in network instead of networkView");
 				}
 			}
@@ -320,7 +323,8 @@ public class DotWriterTask implements CyWriter {
 			}
 			
 		//do the following if user passed in the network
-		}else{
+		}
+		else {
 			
 			List<CyEdge> edgeList = network.getEdgeList();
 			
@@ -342,7 +346,8 @@ public class DotWriterTask implements CyWriter {
 					String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());
 
 					outputWriter.write(declaration);
-				}catch(IOException exception){
+				}
+				catch(IOException exception){
 					LOGGER.log(Level.SEVERE, "Write failed @ writeEdges() (passed in network instead of networkView)");
 				}
 			}
