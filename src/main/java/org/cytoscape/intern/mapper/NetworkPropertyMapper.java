@@ -18,14 +18,6 @@ public class NetworkPropertyMapper extends Mapper {
 
 	private boolean directed = false;
 	
-	/*
-	 * Tunable to prompt user for edge style
-	 * curved, normal (segments) or splines
-	 * (route around nodes)
-	 */
-	@Tunable(description="Pick edge style")
-	private ListSingleSelection<String>  typer = new ListSingleSelection<String>(
-			"Straight segments", "Curved segments", "Curved segments routed around nodes");
 	// Value of splines attribute
 	private String splinesVal;
 	
@@ -34,7 +26,7 @@ public class NetworkPropertyMapper extends Mapper {
 	 * 
 	 * @param view of network we are converting
 	 */
-	public NetworkPropertyMapper(CyNetworkView netView, boolean directed ,String splinesVal) {
+	public NetworkPropertyMapper(CyNetworkView netView, boolean directed, String splinesVal) {
 		super(netView);
 		simpleVisPropsToDot = new ArrayList<String>();
 		this.directed = directed;
@@ -105,9 +97,6 @@ public class NetworkPropertyMapper extends Mapper {
 	 * @return true if graph is directed, false otherwise
 	 */
 	public static boolean isDirected(CyNetworkView networkView) {
-		//get the current network view
-		//CyNetworkView networkView = (CyNetworkView)view.getModel();
-        
 		//get all the edge views from the current networkview
 		Collection<View<CyEdge>> edgeViews = networkView.getEdgeViews();
 		
