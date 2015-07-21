@@ -11,19 +11,35 @@ import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
+import org.cytoscape.work.Tunable;
+import org.cytoscape.work.util.ListSingleSelection;
 
 public class NetworkPropertyMapper extends Mapper {
 
 	private boolean directed = false;
+	
+	/*
+	 * Tunable to prompt user for edge style
+	 * curved, normal (segments) or splines
+	 * (route around nodes)
+	 */
+	@Tunable(description="Pick edge style")
+	private ListSingleSelection<String>  typer = new ListSingleSelection<String>(
+			"Straight segments", "Curved segments", "Curved segments routed around nodes");
+	// Value of splines attribute
+	private String splinesVal;
+	
 	/**
 	 * Constructs NetworkPropertyMapper object
 	 * 
 	 * @param view of network we are converting
 	 */
-	public NetworkPropertyMapper(CyNetworkView netView, boolean directed) {
+	public NetworkPropertyMapper(CyNetworkView netView, boolean directed ,String splinesVal) {
 		super(netView);
 		simpleVisPropsToDot = new ArrayList<String>();
 		this.directed = directed;
+		this.splinesVal = splinesVal;
+		
 		populateMaps();		
 	}
 	
@@ -68,6 +84,8 @@ public class NetworkPropertyMapper extends Mapper {
 		String dotBgColor = String.format("bgcolor = \"%s\"", mapColorToDot(netBgColor, netBgColor.getAlpha()));
 		simpleVisPropsToDot.add(dotBgColor);
 		
+		// splines value
+		simpleVisPropsToDot.add("splines = " + splinesVal);
 	}
 
 	/**

@@ -11,6 +11,8 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.TaskMonitor;
+import org.cytoscape.work.util.ListSingleSelection;
+import org.cytoscape.work.Tunable;
 
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -44,11 +46,19 @@ public class DotWriterTask implements CyWriter {
 	// debug logger
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.DotWriterTask");
 	
-	//check whether the task needs to respond to cancellation
-	private boolean cancelled = false;
-	
 	//whether or not the network view is directed
 	private boolean directed = false;
+	
+	private String splinesVal = "";
+	
+	/*
+	 * Tunable to prompt user for edge style
+	 * curved, normal (segments) or splines
+	 * (route around nodes)
+	 */
+	@Tunable(description="Pick edge style")
+	public ListSingleSelection<String>  typer = new ListSingleSelection<String>(
+			"Straight segments", "Curved segments", "Curved segments routed around nodes");
 	
 	/**
 	 * Constructs a DotWriterTask object
@@ -62,7 +72,24 @@ public class DotWriterTask implements CyWriter {
 		outputWriter = new OutputStreamWriter(output);
 		this.networkView = networkView;
 		directed = NetworkPropertyMapper.isDirected(networkView);
-		this.networkMapper = new NetworkPropertyMapper(networkView, directed);
+
+		// set splines val
+		splinesVal = typer.getSelectedValue();
+		LOGGER.info("Raw splinesVal: " + splinesVal);
+		switch(splinesVal) {
+			case "Straight segments":
+				splinesVal = "false";
+				break;
+			case "Curved segments":
+				splinesVal = "curved";
+				break;	
+			case "Curved segments routed around nodes":
+				splinesVal = "true";
+				break;
+		}
+		LOGGER.info("Converted splinesVal: " + splinesVal);
+
+		this.networkMapper = new NetworkPropertyMapper(networkView, directed, splinesVal);
 		
 		// Make logger write to file
 		FileHandler handler = null;
@@ -76,7 +103,6 @@ public class DotWriterTask implements CyWriter {
 			// to prevent compiler error
 		}
 		LOGGER.addHandler(handler);
-		
 		LOGGER.info("DotWriterTask constructed");
 	}
 
@@ -88,6 +114,19 @@ public class DotWriterTask implements CyWriter {
 	 */
 	@Override
 	public void run(TaskMonitor taskMonitor) {
+		/*splinesVal = typer.getSelectedValue();
+		switch(splinesVal) {
+		case "Straight segments":
+			splinesVal = "false";
+			break;
+		case "Curved segments":
+			splinesVal = "curved";
+			break;
+			
+		case "Curved segments routed around nodes":
+			splinesVal = "true";
+			break;
+		}*/
 		LOGGER.info("Writing .dot file...");
 		writeProps();
 		writeNodes();
@@ -110,9 +149,6 @@ public class DotWriterTask implements CyWriter {
 	@Override
 	public void cancel() {
 		// TODO
-		
-		//set the cancelled to true for further action
-		cancelled  = true;
 	}
 	
 	/**
