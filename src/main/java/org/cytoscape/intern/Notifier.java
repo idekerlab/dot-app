@@ -1,6 +1,9 @@
 package org.cytoscape.intern;
 
+import java.awt.Dialog;
+
 import javax.swing.JOptionPane;
+import javax.swing.JDialog;
 import javax.swing.SwingUtilities;
 
 public class Notifier {
@@ -9,7 +12,15 @@ public class Notifier {
 			new Runnable() {
 				@Override
 				public void run() {
-					JOptionPane.showMessageDialog(null, message, "Warning", JOptionPane.WARNING_MESSAGE);
+					JOptionPane prompt = new JOptionPane(message, JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION);
+					JDialog dialogWindow = prompt.createDialog("Warning");
+					dialogWindow.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+					dialogWindow.setLocationRelativeTo(null);
+					
+					dialogWindow.add(prompt);
+					dialogWindow.pack();
+					dialogWindow.setAlwaysOnTop(true);
+					dialogWindow.setVisible(true);
 				}
 		});
 	}
