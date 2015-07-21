@@ -343,7 +343,7 @@ public class DotWriterTask implements CyWriter {
 					targetName = Mapper.filterString(targetName);
 				
 					String edgeName = String.format("%s %s %s", sourceName, "--", targetName);
-					String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());
+					String declaration = String.format("%s\n", edgeName);
 
 					outputWriter.write(declaration);
 				}
