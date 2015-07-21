@@ -18,6 +18,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -199,12 +200,21 @@ public class DotWriterTask implements CyWriter {
 	private void writeProps() {
 		try {
 			LOGGER.info("Writing network properties...");
-			CyNetwork network = (CyNetwork)networkView.getModel();
+			if(network == null)
+				network = (CyNetwork)networkView.getModel();
+						
 			String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
-			String networkProps = networkMapper.getElementString();
+			String networkProps;
+			if(networkView != null){
+				networkProps = networkMapper.getElementString();
+			}else{
+				networkProps = "graph "+ Mapper.filterString(networkName)+ " {\n";  
+			}
+
 			if (!networkProps.contains(networkName)) {
 				nameModified = true;
 			}
+			
 			outputWriter.write( networkProps );
 			LOGGER.info("Finished writing network properties");
 		}
@@ -218,32 +228,53 @@ public class DotWriterTask implements CyWriter {
 	 */
 	private void writeNodes() {
 		LOGGER.info("Writing node declarations...");
+		if(networkView != null){
+			// create list of all node views
+			ArrayList< View<CyNode> > nodeViewList = new ArrayList< View<CyNode> >( networkView.getNodeViews() );
 		
-		// create list of all node views
-		ArrayList< View<CyNode> > nodeViewList = new ArrayList< View<CyNode> >( networkView.getNodeViews() );
-		
-		// for each node, write declaration string
-		for(View<CyNode> nodeView: nodeViewList) {
-	  		nodeMapper = new NodePropertyMapper(nodeView);
+			// for each node, write declaration string
+			for(View<CyNode> nodeView: nodeViewList) {
+				nodeMapper = new NodePropertyMapper(nodeView);
 	  		
-	  		try {
-	  			// Retrive node name
-	  			CyNode nodeModel = nodeView.getModel();
-	  			CyNetwork networkModel = networkView.getModel();
-	  			String nodeName = networkModel.getRow(nodeModel).get(CyNetwork.NAME, String.class);
+				try {
+					// Retrive node name
+					CyNode nodeModel = nodeView.getModel();
+					CyNetwork networkModel = networkView.getModel();
+					String nodeName = networkModel.getRow(nodeModel).get(CyNetwork.NAME, String.class);
 	  
-	  			String newNodeName = Mapper.filterString(nodeName);
-	  			if (!newNodeName.equals(nodeName)) {
-	  				nameModified = true;
-	  			}
+					String newNodeName = Mapper.filterString(nodeName);
+					if (!newNodeName.equals(nodeName)) {
+						nameModified = true;
+					}
 
-	  			String declaration = String.format("%s %s\n", newNodeName, nodeMapper.getElementString());
+					String declaration = String.format("%s %s\n", newNodeName, nodeMapper.getElementString());
 
-	  			outputWriter.write(declaration);
-	  		}
-	  		catch(IOException exception) {
-	  			LOGGER.log(Level.SEVERE, "Write failed @ writeNodes()");
-	  		}
+					outputWriter.write(declaration);
+				}
+				catch(IOException exception) {
+					LOGGER.log(Level.SEVERE, "Write failed @ writeNodes()");
+				}
+			}	
+		}else{
+			List<CyNode> nodeList = network.getNodeList();
+			
+			for(CyNode node: nodeList){
+				try{
+					String nodeName = network.getRow(node).get(CyNetwork.NAME,String.class);
+			
+					String newNodeName = Mapper.filterString(nodeName);
+				
+					if(!newNodeName.equals(nodeName)){
+						nameModified = true;
+					}
+					String declaration = String.format("%s\n", newNodeName);
+
+					outputWriter.write(declaration);
+			
+				}catch(IOException exception){
+					LOGGER.log(Level.SEVERE, "Write failed @ writeNodes() passed in network instead of networkView");
+				}
+			}
 		}
 		LOGGER.info("Finished writing node declarations");
 	}
@@ -253,40 +284,65 @@ public class DotWriterTask implements CyWriter {
 	 */
 	private void writeEdges() {
 		LOGGER.info("Writing edge declarations...");
+		if(networkView != null){
+			// create list of all edge views
+			ArrayList< View<CyEdge> > edgeViewList = new ArrayList< View<CyEdge> >( networkView.getEdgeViews() );
 		
-		// create list of all edge views
-		ArrayList< View<CyEdge> > edgeViewList = new ArrayList< View<CyEdge> >( networkView.getEdgeViews() );
+			String edgeType = (directed) ? "->" : "--";
 		
-		String edgeType = (directed) ? "->" : "--";
-		
-		// for each edge, write declaration string
-		for(View<CyEdge> edgeView: edgeViewList) {
-	  		edgeMapper = new EdgePropertyMapper(edgeView, networkView);
+			// for each edge, write declaration string
+			for(View<CyEdge> edgeView: edgeViewList) {
+				edgeMapper = new EdgePropertyMapper(edgeView, networkView);
 	  		
-	  		try {
-	  			// Retrieve source+target node names
-	  			CyEdge edgeModel = edgeView.getModel();
-	  			CyNetwork networkModel = networkView.getModel();
+				try {
+					// Retrieve source+target node names
+					CyEdge edgeModel = edgeView.getModel();
+					CyNetwork networkModel = networkView.getModel();
 
-	  			CyNode sourceNode = edgeModel.getSource();
-	  			CyNode targetNode = edgeModel.getTarget();
+					CyNode sourceNode = edgeModel.getSource();
+					CyNode targetNode = edgeModel.getTarget();
 	  			
-	  			String sourceName = networkModel.getRow(sourceNode).get(CyNetwork.NAME, String.class);
-	  			// filter out disallowed chars
-	  			sourceName = Mapper.filterString(sourceName);
+					String sourceName = networkModel.getRow(sourceNode).get(CyNetwork.NAME, String.class);
+					// filter out disallowed chars
+					sourceName = Mapper.filterString(sourceName);
 	  			
-	  			String targetName = networkModel.getRow(targetNode).get(CyNetwork.NAME, String.class);
-	  			// filter out disallowed chars
-	  			targetName = Mapper.filterString(targetName);
+					String targetName = networkModel.getRow(targetNode).get(CyNetwork.NAME, String.class);
+					// filter out disallowed chars
+					targetName = Mapper.filterString(targetName);
 
-	  			String edgeName = String.format("%s %s %s", sourceName, edgeType, targetName);
-	  			String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());
+					String edgeName = String.format("%s %s %s", sourceName, edgeType, targetName);
+					String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());
 
-	  			outputWriter.write(declaration);
-	  		}
-	  		catch(IOException exception) {
-	  			LOGGER.log(Level.SEVERE, "Write failed @ writeEdges()");
-	  		}
+					outputWriter.write(declaration);
+				}
+				catch(IOException exception) {
+					LOGGER.log(Level.SEVERE, "Write failed @ writeEdges()");
+				}	
+			}
+			
+		}else{
+			List<CyEdge> edgeList = network.getEdgeList();
+			for(CyEdge edge : edgeList){
+				try{
+					CyNode sourceNode = edge.getSource();
+				
+					CyNode targetNode = edge.getTarget();
+					String sourceName = network.getRow(sourceNode).get(CyNetwork.NAME, String.class);
+				
+					sourceName = Mapper.filterString(sourceName);
+				
+					String targetName = network.getRow(targetNode).get(CyNetwork.NAME, String.class);
+				
+					targetName = Mapper.filterString(targetName);
+				
+					String edgeName = String.format("%s %s %s", sourceName, "--", targetName);
+					String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());
+
+					outputWriter.write(declaration);
+				}catch(IOException exception){
+					LOGGER.log(Level.SEVERE, "Write failed @ writeEdges() (passed in network instead of networkView)");
+				}
+			}
 		}
 		LOGGER.info("Finished writing edge declarations...");
 	}
