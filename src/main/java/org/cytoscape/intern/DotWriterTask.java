@@ -84,12 +84,16 @@ public class DotWriterTask implements CyWriter {
 		LOGGER.info("DotWriterTask constructed");
 	}
 	
-	/**
+	
+	
+	//The codes commented out below is not correct, I'll fix it soon
+	
+	/*
+	 * 
 	 * Constructs a DotWriterTask object (Overloaded method)
 	 * 
 	 * @param output OutputStream that is being written to
 	 * @param network, makes a networkview based on this network, and then gets exported
-	 */
 	public DotWriterTask(OutputStream output, CyNetwork network){
 		
 		//The codes below are probably wrong because the buildCyNetworkView only 
@@ -103,7 +107,7 @@ public class DotWriterTask implements CyWriter {
 		directed = NetworkPropertyMapper.isDirected(networkView);
 		this.networkMapper = new NetworkPropertyMapper(networkView, directed);
 		
-		*/
+		
 		// Make logger write to file
 		FileHandler handler = null;
 		try {
@@ -120,13 +124,20 @@ public class DotWriterTask implements CyWriter {
 		LOGGER.info("DotWriterTask constructed");
 		
 	}
+	
+	*/
 	/*
-	 * CyNetworkView method declaration, used in the constructor which takes a CyNetwork
-	 */
+	 *
+	//CyNetworkView method declaration, used in the constructor which takes a CyNetwork
+	 
 	private CyNetworkView buildCyNetworkView(CyNetwork network) {
 		return null;
 	}
-
+    */
+	
+	
+	
+	
 	/**
 	 * Causes the task to begin execution.
 	 * 
