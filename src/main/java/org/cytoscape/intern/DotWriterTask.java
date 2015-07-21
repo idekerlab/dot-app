@@ -201,7 +201,7 @@ public class DotWriterTask implements CyWriter {
 				networkProps = networkMapper.getElementString();
 			}
 			else {
-				networkProps = "graph "+ Mapper.filterString(networkName) + "\nsplines = " + splinesVal + "{\n";  
+				networkProps = "graph "+ Mapper.filterString(networkName) + " {\nsplines = " + splinesVal +  "\n";  
 			}
 
 			if (!networkProps.contains(networkName)) {
