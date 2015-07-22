@@ -6,7 +6,7 @@
  	<modelVersion>4.0.0</modelVersion>
  	<groupId>org.cytoscape.intern</groupId>
  	<artifactId>dot-app</artifactId> 
- 	<version>0.0.1-SNAPSHOT</version>
+ 	<version>1.0.0</version>
 
 	<!-- Properties are variables that can be referenced throughout the pom.xml
 		file. When the pom.xml file has repeated elements, it's best to use them 

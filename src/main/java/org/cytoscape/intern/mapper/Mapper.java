@@ -17,8 +17,6 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Handles mapping of Cytoscape properties to .dot attributes in the form of a String.
@@ -80,7 +78,7 @@ public abstract class Mapper {
 	
 	/**
 	 * Given a color, returns the color in String format that .dot uses for color.
-	 * Format is "#%rr%gg%bb%aa" -- red, green, blue, alpha in hexadecimal
+	 * Format is "#rrggbbaa" -- red, green, blue, alpha in hexadecimal
 	 * 
 	 * @param color color being converted
 	 * @param alpha alpha level of that color-- cytoscape does not use alpha in Paint class
@@ -108,9 +106,6 @@ public abstract class Mapper {
 	 */
 	protected String mapFont(Font font, Integer size, Color color, Integer transparency) {
 		
-		//not sure if font size in .dot is all integer or it also can be float
-		//needs double check with the codes below, can't think of any corner case/error checking for now
-		
 		LOGGER.info("Label font, size, color, and transparency translation");
 		 
 		String returnValue = "";
@@ -130,15 +125,10 @@ public abstract class Mapper {
 	 * Does not include "style=" bit
 	 */
 	protected String mapDotStyle() {
-		/**
-		 * Pseudocode:
-		 * if instanceof edge check BVL.EDGE_LINE_TYPE
-		 * else if instanceof node check BVL.NODE_BORDER_LINE_TYPE
-		 * Retrieve .dot string from lineType hashmap
-		 */
 		StringBuilder dotStyle = new StringBuilder();
 		if (view.getModel() instanceof CyNode) {
 			LineType lineType = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_LINE_TYPE);
+			// get .dot equivalent of line style
 			String lineStr = LINE_TYPE_MAP.get(lineType);
 			if (lineStr == null) {
 				lineStr = "solid";

@@ -5,7 +5,6 @@ import org.cytoscape.io.write.CyNetworkViewWriterFactory;
 import org.cytoscape.io.write.CyWriter;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.view.model.CyNetworkViewFactory;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -24,20 +23,18 @@ import java.util.logging.SimpleFormatter;
 public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	
 	private CyFileFilter fileFilter;
-	private CyNetworkViewFactory netViewFactory;
 	
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.DotWriterFactory");
 	
 	/**
-	 * Constructs a DotWriterFactory object with a given CyApplicationManager
+	 * Constructs a DotWriterFactory object with a given CyFileFilter
+	 * so it knows where to write to file
 	 * 
 	 * @param fileFilter CyFileFilter associated with this factory
-	 * @param netViewFactory network view factory to create network view needed elsewhere
 	 */
-	public DotWriterFactory(CyFileFilter fileFilter, CyNetworkViewFactory netViewFactory) {
+	public DotWriterFactory(CyFileFilter fileFilter) {
 		super();
 		this.fileFilter = fileFilter;
-		this.netViewFactory = netViewFactory;
 		
 		// make logger write to file
 		FileHandler handler = null;
@@ -54,7 +51,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	}
 
 	/**
-	 * Returns CyFileFilter associated with this factory-- must be overridden
+	 * Returns CyFileFilter associated with this factory
 	 * 
 	 * @return CyFileFilter for this factory
 	 */
@@ -64,9 +61,9 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	}
 	 
 	/**
-	 * Creates a task that writes a specified network to a specified stream.
+	 * Returns a task that writes a specified network to a specified stream.
 	 * Notifies user that using this option results in large loss of data and recommends
-	 * to export with view
+	 * to export with view. Export will only include node and edge declarations
 	 * 
 	 * @param outStream stream that this writer writes to
 	 * @param network CyNetwork that is being written
@@ -78,15 +75,13 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 		LOGGER.info("createWriter with CyNetwork param called");
 			
 		// Notify use they will lose info
-		
-		// maybe we should just return null 
 		Notifier.showMessage("No visual information will be written to the GraphViz file, only node and edge declarations\n"
 				+ "Use File -> Export -> Network and View... instead to maintain visual information", Notifier.MessageType.INFO);
 		return new DotWriterTask(outStream, network);
 	}
 	
 	/**
-	 * Creates a task that writes a specified network to a specified stream
+	 * Creates a task that writes a specified network and its view to a specified stream
 	 * 
 	 * @param outStream stream that this writer writes to
 	 * @param view CyNetworkView that is being written

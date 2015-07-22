@@ -6,6 +6,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JDialog;
 import javax.swing.SwingUtilities;
 
+/**
+ * Utility class for notifying user with pop-up box
+ * 
+ * @author Massoud Maher
+ * @author Braxton Fitts
+ * @author Ziran Zhang
+ */
 public class Notifier {
 	public enum MessageType {
 		WARNING, ERROR, INFO;

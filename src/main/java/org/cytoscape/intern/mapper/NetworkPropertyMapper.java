@@ -11,8 +11,6 @@ import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
-import org.cytoscape.work.Tunable;
-import org.cytoscape.work.util.ListSingleSelection;
 
 public class NetworkPropertyMapper extends Mapper {
 
@@ -40,21 +38,21 @@ public class NetworkPropertyMapper extends Mapper {
 	 */
 	@Override
 	public String getElementString() {
-		//Get network name from model. Remove spaces from name
+		// Get network name from model. Remove spaces from name
 		CyNetwork network = (CyNetwork)view.getModel();
 		String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
 		// remove dis-allowed characters to avoid errors
 		// filter out disallowed chars
 		networkName = Mapper.filterString(networkName);
 
-		//Build the network properties string
+		// Build the network properties string
 		StringBuilder elementString = new StringBuilder();
 		
-		//Header of the dot file of the form (di)graph [NetworkName] {
+		// Header of the dot file of the form (di)graph [NetworkName] {
 		String graphDeclaration = String.format("%s %s {", getDirectedString(), networkName);
 		elementString.append(graphDeclaration + "\n");
 		
-		//Get .dot strings for simple dot attributes. Append to attribute string
+		// Get .dot strings for simple dot attributes. Append to attribute string
 		for (String dotAttribute : simpleVisPropsToDot) {
 		        elementString.append(dotAttribute + "\n");
 		}
@@ -66,12 +64,12 @@ public class NetworkPropertyMapper extends Mapper {
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
-		//label attribute of graph
+		// label attribute of graph
 		String label = view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
 		String dotLabel = String.format("label = \"%s\"", label);
 		simpleVisPropsToDot.add(dotLabel);
 
-		//Background color of graph
+		// Background color of graph
 		Color netBgColor = (Color)view.getVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_PAINT);
 		String dotBgColor = String.format("bgcolor = \"%s\"", mapColorToDot(netBgColor, netBgColor.getAlpha()));
 		simpleVisPropsToDot.add(dotBgColor);
@@ -97,7 +95,7 @@ public class NetworkPropertyMapper extends Mapper {
 	 * @return true if graph is directed, false otherwise
 	 */
 	public static boolean isDirected(CyNetworkView networkView) {
-		//get all the edge views from the current networkview
+		// get all the edge views from the current networkview
 		Collection<View<CyEdge>> edgeViews = networkView.getEdgeViews();
 		
 		/**
@@ -114,7 +112,7 @@ public class NetworkPropertyMapper extends Mapper {
         	}
         }
         
-        //return false if the graph is undirected (has only NONE arrow shapes)
+        // return false if the graph is undirected (has only NONE arrow shapes)
         return false;
 		
 	}
