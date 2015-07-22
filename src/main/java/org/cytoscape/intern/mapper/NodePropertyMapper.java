@@ -35,6 +35,7 @@ public class NodePropertyMapper extends Mapper {
 		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.RECTANGLE, "rectangle");
 	}
 	
+	private static final int TRANSPARENT = 0x00;
 	/**
 	 * Initializes and populates instance variables with mappings
 	 * 
@@ -150,17 +151,20 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	private String mapColors() {
 		StringBuilder elementString = new StringBuilder();
+		boolean visible = view.getVisualProperty(BasicVisualLexicon.NODE_VISIBLE);
 		
 		LOGGER.info("Preparing to get color properties");
 		// Get the color string (border color). Append to attribute string
 		Color borderColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT);
-		Integer borderTransparency = ((Number)view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY)).intValue();
+		Integer borderTransparency = (visible) ? ((Number)view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY)).intValue()
+												: TRANSPARENT;
 		String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
 		elementString.append(dotBorderColor + ",");
 		
 		// Write node fill color
 		Color fillColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR);
-		Integer nodeTransparency = ((Number)view.getVisualProperty(BasicVisualLexicon.NODE_TRANSPARENCY)).intValue();
+		Integer nodeTransparency = (visible) ? ((Number)view.getVisualProperty(BasicVisualLexicon.NODE_TRANSPARENCY)).intValue()
+											 : TRANSPARENT;
 		String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, nodeTransparency));
 		elementString.append(dotFillColor);
 		
@@ -199,11 +203,13 @@ public class NodePropertyMapper extends Mapper {
 	 * @return String that defines fontname, fontcolor and fontsize attributes
 	 */
 	private String mapFontHelper() {
+		final boolean visible = view.getVisualProperty(BasicVisualLexicon.NODE_VISIBLE);
 		Font fontName = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_FACE);
 		LOGGER.info("Retrieving font size...");
 		Integer fontSize = ((Number)view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_SIZE)).intValue();
 		Color fontColor = (Color)(view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_COLOR));
-		Integer fontTransparency = ((Number)view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_TRANSPARENCY)).intValue();
+		Integer fontTransparency = (visible) ? ((Number)view.getVisualProperty(BasicVisualLexicon.NODE_LABEL_TRANSPARENCY)).intValue()
+											 : TRANSPARENT;
 		
 		return mapFont(fontName, fontSize, fontColor, fontTransparency);
 	}
