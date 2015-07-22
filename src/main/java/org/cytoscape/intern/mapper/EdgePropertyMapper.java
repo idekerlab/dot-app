@@ -51,7 +51,7 @@ public class EdgePropertyMapper extends Mapper {
 	 */
 	public EdgePropertyMapper(View<CyEdge> view, CyNetworkView networkView) {
 		super(view);
-		//initialize data structure
+		// initialize data structure
 		simpleVisPropsToDot = new ArrayList<String>();
 		this.networkView = networkView;
 		populateMaps();		
@@ -86,7 +86,7 @@ public class EdgePropertyMapper extends Mapper {
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
-		//Put Simple Props Key/Values
+		// Put Simple Props Key/Values
 		String edgeLabel = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL);
 		simpleVisPropsToDot.add(String.format("label = \"%s\"", edgeLabel));
 
@@ -117,10 +117,10 @@ public class EdgePropertyMapper extends Mapper {
 	public String getElementString() {
 		LOGGER.info("Preparing to get .dot declaration for an edge.");
 
-		//Build attribute string
+		// Build attribute string
 		StringBuilder elementString = new StringBuilder("[");
 
-		//Get .dot strings for simple dot attributes. Append to attribute string
+		// Get .dot strings for simple dot attributes. Append to attribute string
 		for (String dotAttribute : simpleVisPropsToDot) {
 		        elementString.append(dotAttribute);
 		        elementString.append(",");
@@ -128,7 +128,7 @@ public class EdgePropertyMapper extends Mapper {
 		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
 		
 		LOGGER.info("Preparing to get color properties");
-		//Get the color and fillcolor .dot strings. Append to attribute string
+		// Get the color and fillcolor .dot strings. Append to attribute string
 		Color strokeColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT);
 		Integer strokeTransparency = view.getVisualProperty(BasicVisualLexicon.EDGE_TRANSPARENCY);
 		String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
@@ -142,7 +142,7 @@ public class EdgePropertyMapper extends Mapper {
 		}
 		LOGGER.info("Appended edge bend attributes to .dot string. Result: " + elementString);
 		
-		//Get label font information and append in proper format
+		// Get label font information and append in proper format
 		Color labelColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_COLOR);
 		Integer labelTransparency = ((Number)view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY)).intValue();
 		Font labelFont = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_FACE);

@@ -11,7 +11,6 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 /**
  * Handles mapping of CyNode properties to .dot equivalent Strings
  * 
@@ -73,7 +72,7 @@ public class NodePropertyMapper extends Mapper {
 	private void populateMaps() {
 		LOGGER.info("Populating HashMaps with values");
 
-		//Put Simple Props Key/Values
+		// Put Simple Props Key/Values
 		String nodeLabel = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL);
 		// remove quotes
 		nodeLabel.replace("\"", "");
@@ -91,7 +90,7 @@ public class NodePropertyMapper extends Mapper {
 		String tooltip = view.getVisualProperty(BasicVisualLexicon.NODE_TOOLTIP);
 		simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
 		
-		//Put Node Shape Key/Values
+		// Put Node Shape Key/Values
 		LOGGER.info("HashMaps populated");
 	}
 	
@@ -102,21 +101,21 @@ public class NodePropertyMapper extends Mapper {
 	public String getElementString() {
 		LOGGER.info("Preparing to get .dot declaration for a node.");
 
-		//Build attribute string
+		// Build attribute string
 		StringBuilder elementString = new StringBuilder("[");
 
-		//Get .dot strings for simple dot attributes. Append to attribute string
+		// Get .dot strings for simple dot attributes. Append to attribute string
 		for (String dotAttribute : simpleVisPropsToDot) {
 		        elementString.append(dotAttribute);
 		        elementString.append(",");
 		}
 		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
 		
-		//Write fillcolor and color attribute
+		// Write fillcolor and color attribute
 		elementString.append(mapColors() + ",");
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 
-		//Write nodeShape
+		// Write nodeShape
 		elementString.append(mapShape() + ",");
 		LOGGER.info("Appended shape attribute to .dot string. Result: " + elementString);
 		
@@ -125,7 +124,7 @@ public class NodePropertyMapper extends Mapper {
 		elementString.append(mapDotStyle() + ",");
 		LOGGER.info("Font data appended. Resulting String: " + elementString);
 		
-		//Get node location and append in proper format
+		// Get node location and append in proper format
 		Double xLoc = view.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
 		Double yLoc = view.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION);
 		String dotPosition = String.format("pos = \"%s\"", mapPosition(xLoc, yLoc));
@@ -138,7 +137,7 @@ public class NodePropertyMapper extends Mapper {
 		elementString.append(mapFontHelper() + ",");
 
 		
-		//Finish attribute string with mandatory fixedsize = true attribute
+		// Finish attribute string with mandatory fixedsize = true attribute
 		elementString.append("fixedsize = true]");
 		LOGGER.info("Created .dot string. Result: " + elementString);
 		return elementString.toString();
@@ -153,13 +152,13 @@ public class NodePropertyMapper extends Mapper {
 		StringBuilder elementString = new StringBuilder();
 		
 		LOGGER.info("Preparing to get color properties");
-		//Get the color string (border color). Append to attribute string
+		// Get the color string (border color). Append to attribute string
 		Color borderColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT);
 		Integer borderTransparency = ((Number)view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY)).intValue();
 		String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
 		elementString.append(dotBorderColor + ",");
 		
-		//Write node fill color
+		// Write node fill color
 		Color fillColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR);
 		Integer nodeTransparency = ((Number)view.getVisualProperty(BasicVisualLexicon.NODE_TRANSPARENCY)).intValue();
 		String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, nodeTransparency));
@@ -177,7 +176,7 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("Preparing to get shape property");
 		StringBuilder elementString = new StringBuilder();
 		
-		//Get the .dot string for the node shape. Append to attribute string
+		// Get the .dot string for the node shape. Append to attribute string
 		NodeShape shape = view.getVisualProperty(BasicVisualLexicon.NODE_SHAPE);
 		String shapeStr = NODE_SHAPE_MAP.get(shape);
 		

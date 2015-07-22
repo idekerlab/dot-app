@@ -18,7 +18,7 @@ import java.util.logging.Level;
 import java.io.IOException;
 
 /**
- * Runs the program
+ * Runs the program-- fetches all needed services
  * 
  * @author Massoud Maher
  * @author Braxton Fitts
@@ -36,8 +36,8 @@ public class CyActivator extends AbstractCyActivator {
 	@Override
 	public void start(BundleContext context) {
 		
+		// Make logger write to file
 		FileHandler handler = null;
-		
 		try {
 			handler = new FileHandler("log_CyActivator.txt");
 			handler.setLevel(Level.ALL);
@@ -47,33 +47,28 @@ public class CyActivator extends AbstractCyActivator {
 		catch(IOException e) {
 			// to prevent compiler error
 		}
-		
 		LOGGER.addHandler(handler);
      
-		//initialize two hashsets
+		// initialize two hashsets
 		HashSet<String> extensions = new HashSet<String>();
 		HashSet<String> contentTypes = new HashSet<String>();
 		
-		//captures the types of data the cytoscape.io package can read and write
+		// captures the types of data the cytoscape.io package can read and write
 		DataCategory category = DataCategory.NETWORK;
 			
-		//register the service of supporting InputStreams and URL connections 
-		//over the network
+		// register the service of supporting InputStreams and URL connections over the network
 		StreamUtil streamUtil = getService(context, StreamUtil.class);
 		 
-		//add .dot and .gv,which have the same meaning, to the menu
+		// add .dot and .gv, which have the same meaning, to the export menu
 		extensions.add("dot");
 		extensions.add("gv");
 		contentTypes.add("text/plain");
 				 
-		//initialize (Basic)CyFileFilter, which handles the file type
+		// initialize (Basic)CyFileFilter, which handles the file type
 		BasicCyFileFilter fileFilter = new BasicCyFileFilter(extensions, contentTypes, "GraphViz files", category, streamUtil);
 		
-		//CyNetworkView factory that is needed in DotWriterFactory
-		CyNetworkViewFactory netViewFactory = getService(context, CyNetworkViewFactory.class);
-		
-		//initialize the DotWriterFactory for later use
-		DotWriterFactory dotFac = new DotWriterFactory(fileFilter, netViewFactory);
+		// initialize the DotWriterFactory for later use
+		DotWriterFactory dotFac = new DotWriterFactory(fileFilter);
 		LOGGER.info("Writer factory constructed");
 		
 		//registerService from CyNetworkViewWriterFactory interface
