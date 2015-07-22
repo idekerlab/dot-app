@@ -144,9 +144,9 @@ public class EdgePropertyMapper extends Mapper {
 		
 		//Get label font information and append in proper format
 		Color labelColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_COLOR);
-		Integer labelTransparency = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY);
+		Integer labelTransparency = ((Number)view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY)).intValue();
 		Font labelFont = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_FACE);
-		Integer labelSize = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_SIZE);
+		Integer labelSize = ((Number)view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_SIZE)).intValue();
 		elementString.append(mapFont(labelFont, labelSize, labelColor, labelTransparency) + ",");
 		
 		// append dir=both so both arrowShapes show up and close off attr string
