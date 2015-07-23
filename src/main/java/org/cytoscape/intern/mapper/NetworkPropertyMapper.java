@@ -54,7 +54,6 @@ public class NetworkPropertyMapper extends Mapper {
 		
 		//added outputorder = edgesfirst at the beginning of the file to make sure all the nodes 
 		//are on the top of the edges.
-		elementString.append("graph [outputorder = edgesfirst] \n");
 		
 		// Get .dot strings for simple dot attributes. Append to attribute string
 		for (String dotAttribute : simpleVisPropsToDot) {
@@ -79,7 +78,10 @@ public class NetworkPropertyMapper extends Mapper {
 		simpleVisPropsToDot.add(dotBgColor);
 		
 		// splines value
-		simpleVisPropsToDot.add("splines = " + splinesVal);
+		simpleVisPropsToDot.add(String.format("splines = \"%s\"", splinesVal));
+		
+		// output order
+		simpleVisPropsToDot.add("outputorder = \"edgesfirst\"");
 	}
 
 	/**

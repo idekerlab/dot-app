@@ -208,7 +208,7 @@ public class DotWriterTask implements CyWriter {
 			}
 			// if we are only exporting network
 			else {
-				networkProps = "graph "+ Mapper.filterString(networkName) + " {\nsplines = " + splinesVal +  "\n";  
+				networkProps = String.format("graph %s {\nsplines = \"%s\"\n", networkName, splinesVal);
 			}
 			// if network name was modified
 			if (!networkProps.contains(networkName)) {
