@@ -5,7 +5,6 @@ import org.cytoscape.io.DataCategory;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.io.write.CyNetworkViewWriterFactory;
 import org.cytoscape.service.util.AbstractCyActivator;
-import org.cytoscape.view.model.CyNetworkViewFactory;
 
 import org.osgi.framework.BundleContext;
 
