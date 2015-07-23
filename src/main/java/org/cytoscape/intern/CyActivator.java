@@ -26,6 +26,7 @@ import java.io.IOException;
 public class CyActivator extends AbstractCyActivator {
 	
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.CyActivator");
+	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
 	
 	/**
 	 * Method that runs when class is activated-- will start dot app
@@ -47,6 +48,7 @@ public class CyActivator extends AbstractCyActivator {
 			// to prevent compiler error
 		}
 		LOGGER.addHandler(handler);
+		FILE_HANDLER_MGR.registerFileHandler(handler);
      
 		// initialize two hashsets
 		HashSet<String> extensions = new HashSet<String>();
@@ -73,5 +75,12 @@ public class CyActivator extends AbstractCyActivator {
 		//registerService from CyNetworkViewWriterFactory interface
 		registerService(context, dotFac, CyNetworkViewWriterFactory.class, new Properties());
 
+	}
+	
+	@Override
+	public void shutDown() {
+		FILE_HANDLER_MGR.closeAllFileHandlers();
+		super.shutDown();
+		
 	}
 }

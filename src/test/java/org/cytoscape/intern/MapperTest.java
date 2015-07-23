@@ -20,7 +20,7 @@ import java.awt.Color;
 import java.awt.Font;
 public class MapperTest {
 
-	@Test
+	//@Test
 	public void testNodeGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
@@ -77,7 +77,7 @@ public class MapperTest {
 		
 	}
 	
-	@Test 
+	//@Test 
 	public void testEdgeGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();

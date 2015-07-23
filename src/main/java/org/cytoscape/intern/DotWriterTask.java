@@ -49,6 +49,9 @@ public class DotWriterTask implements CyWriter {
 	
 	// debug logger
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.DotWriterTask");
+	private FileHandler handler;
+	
+	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
 	
 	// whether or not the network view is directed
 	private boolean directed = false;
@@ -78,7 +81,7 @@ public class DotWriterTask implements CyWriter {
 		super();
 		
 		// Make logger write to file
-		FileHandler handler = null;
+		handler = null;
 		try {
 			handler = new FileHandler("log_DotWriterTask.txt");
 			handler.setLevel(Level.ALL);
@@ -89,6 +92,7 @@ public class DotWriterTask implements CyWriter {
 			// to prevent compiler error
 		}
 		LOGGER.addHandler(handler);
+		FILE_HANDLER_MGR.registerFileHandler(handler);
 		
 		outputWriter = new OutputStreamWriter(output);
 		this.networkView = networkView;
@@ -110,7 +114,7 @@ public class DotWriterTask implements CyWriter {
 		this.network = network;
 		
 		// Make logger write to file
-		FileHandler handler = null;
+		handler = null;
 		try {
 			handler = new FileHandler("log_DotWriterTask.txt");
 			handler.setLevel(Level.ALL);
@@ -121,6 +125,7 @@ public class DotWriterTask implements CyWriter {
 			// to prevent compiler error
 		}
 		LOGGER.addHandler(handler);
+		FILE_HANDLER_MGR.registerFileHandler(handler);
 		
 		LOGGER.info("DotWriterTask constructed");	
 	}
@@ -168,6 +173,7 @@ public class DotWriterTask implements CyWriter {
 			outputWriter.write("}");
 			outputWriter.close();
 			LOGGER.info("Finished writing file");
+			FILE_HANDLER_MGR.closeFileHandler(handler);
 			if (nameModified) {
 				Notifier.showMessage("Some node names have been modified in order to comply to DOT syntax", Notifier.MessageType.WARNING);
 			}

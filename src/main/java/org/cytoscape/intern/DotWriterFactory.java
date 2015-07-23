@@ -26,6 +26,8 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.DotWriterFactory");
 	
+	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
+	
 	/**
 	 * Constructs a DotWriterFactory object with a given CyFileFilter
 	 * so it knows where to write to file
@@ -48,6 +50,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 			// to prevent compiler error
 		}
 		LOGGER.addHandler(handler);
+		FILE_HANDLER_MGR.registerFileHandler(handler);
 	}
 
 	/**
