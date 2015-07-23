@@ -52,6 +52,10 @@ public class NetworkPropertyMapper extends Mapper {
 		String graphDeclaration = String.format("%s %s {", getDirectedString(), networkName);
 		elementString.append(graphDeclaration + "\n");
 		
+		//added outputorder = edgesfirst at the beginning of the file to make sure all the nodes 
+		//are on the top of the edges.
+		elementString.append("graph [outputorder = edgesfirst] \n");
+		
 		// Get .dot strings for simple dot attributes. Append to attribute string
 		for (String dotAttribute : simpleVisPropsToDot) {
 		        elementString.append(dotAttribute + "\n");
