@@ -1,6 +1,7 @@
 package org.cytoscape.intern.mapper;
 
 import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
@@ -110,15 +111,43 @@ public class EdgePropertyMapper extends Mapper {
 		simpleVisPropsToDot.add(String.format("arrowtail = \"%s\"", dotSourceArrow));
 	}
 	
+	@SuppressWarnings("unchecked")
+	private boolean isVisible() {
+		LOGGER.info("Checking if edge should be visible");
+		boolean visibleByProp = view.getVisualProperty(BasicVisualLexicon.EDGE_VISIBLE);
+		if (!visibleByProp) {
+			LOGGER.finest("Edge not visible due to its own property.");
+			return false;
+		}
+		CyEdge model = ((View<CyEdge>)view).getModel();
+		CyNode source = model.getSource();
+		CyNode target = model.getTarget();
+		View<CyNode> sourceView = networkView.getNodeView(source);
+		View<CyNode> targetView = networkView.getNodeView(target);
+		boolean visibleBySource = sourceView.getVisualProperty(BasicVisualLexicon.NODE_VISIBLE);
+		boolean visibleByTarget = targetView.getVisualProperty(BasicVisualLexicon.NODE_VISIBLE);
+		if (!visibleBySource || !visibleByTarget) {
+			LOGGER.finest("Edge not visible due to source or target's property.");
+			return false;
+		}
+		LOGGER.finest("Edge is visible");
+		return true;
+	}
+	
 	/**
 	 * Returns a String that contains all relevant attributes for this element 
 	 */
 	@Override
 	public String getElementString() {
+		final int TRANSPARENT = 0x00;
+		
 		LOGGER.info("Preparing to get .dot declaration for an edge.");
 
 		// Build attribute string
 		StringBuilder elementString = new StringBuilder("[");
+		
+		// Control for writing color attributes
+		boolean visible = isVisible();
 
 		// Get .dot strings for simple dot attributes. Append to attribute string
 		for (String dotAttribute : simpleVisPropsToDot) {
@@ -130,7 +159,8 @@ public class EdgePropertyMapper extends Mapper {
 		LOGGER.info("Preparing to get color properties");
 		// Get the color and fillcolor .dot strings. Append to attribute string
 		Color strokeColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT);
-		Integer strokeTransparency = view.getVisualProperty(BasicVisualLexicon.EDGE_TRANSPARENCY);
+		Integer strokeTransparency = (visible) ? view.getVisualProperty(BasicVisualLexicon.EDGE_TRANSPARENCY)
+											   : TRANSPARENT;
 		String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
 		elementString.append(dotColor + ",");
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
@@ -144,13 +174,15 @@ public class EdgePropertyMapper extends Mapper {
 		
 		// Get label font information and append in proper format
 		Color labelColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_COLOR);
-		Integer labelTransparency = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY);
+		Integer labelTransparency = (visible) ? ((Number)view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY)).intValue()
+											  : TRANSPARENT;
 		Font labelFont = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_FACE);
-		Integer labelSize = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_SIZE);
+		Integer labelSize = ((Number)view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_SIZE)).intValue();
 		elementString.append(mapFont(labelFont, labelSize, labelColor, labelTransparency) + ",");
 		
 		// append dir=both so both arrowShapes show up and close off attr string
-		elementString.append("dir = \"both\"]");
+		String dir = (visible) ? "dir = \"both\"]" : "dir = \"none\"]";
+		elementString.append(dir);
 		LOGGER.info("Created .dot string. Result: " + elementString);
 		return elementString.toString();
 	}
