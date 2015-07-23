@@ -162,6 +162,7 @@ public class DotWriterTask implements CyWriter {
 		
 		// Close off file and notify if needed
 		try {
+			outputWriter.write("graph [outputorder = edgesfirst] \n");
 			outputWriter.write("}");
 			outputWriter.close();
 			LOGGER.info("Finished writing file");
