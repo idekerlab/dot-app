@@ -20,7 +20,7 @@ import java.awt.Color;
 import java.awt.Font;
 public class MapperTest {
 
-	//@Test
+	@Test
 	public void testNodeGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
@@ -66,7 +66,7 @@ public class MapperTest {
 		
 		
 		expectedDotString = String.format("[%s,%s,%s,%s,%s,%s,%s,shape = \"ellipse\","
-				+ "style = \"solid,filled\",pos = \"%f,%f!\",%s,%s,%s,fixedsize = true]",
+				+ "style = \"solid,filled\",pos = \"%f,%f!\",%s,%s,%s,fixedsize = \"true\"]",
 				labelString, bwidthString, heightString, widthString, tooltipString, colorString, fillColorString,
 				new Double(0), new Double(0) * -1.0,fontString, fontSizeString, fontColor); 
 
@@ -77,7 +77,7 @@ public class MapperTest {
 		
 	}
 	
-	//@Test 
+	@Test 
 	public void testEdgeGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
@@ -122,7 +122,7 @@ public class MapperTest {
 		
 	}
 	
-	//@Test
+	@Test
 	public void testNetworkGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
@@ -141,10 +141,11 @@ public class MapperTest {
 		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE, ArrowShapeVisualProperty.ARROW);
 		String labelString = String.format("label = \"%s\"", label);
 		String colorString = "bgcolor = \"#AA9500FF\"";
-		String splinesString = "splines = line";
-		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n", labelString, colorString, splinesString); 
+		String splinesString = "splines = \"false\"";
+		String outputString = "outputorder = \"edgesfirst\"";
+		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n", labelString, colorString, splinesString, outputString); 
 
-		Mapper mapper = new NetworkPropertyMapper(networkView, NetworkPropertyMapper.isDirected(networkView), null);
+		Mapper mapper = new NetworkPropertyMapper(networkView, NetworkPropertyMapper.isDirected(networkView), "false");
 		String actualDotString = mapper.getElementString();
 
 		assertEquals("Edge Cytoscape property translation failed", expectedDotString, actualDotString);

@@ -139,7 +139,7 @@ public class NodePropertyMapper extends Mapper {
 
 		
 		// Finish attribute string with mandatory fixedsize = true attribute
-		elementString.append("fixedsize = true]");
+		elementString.append("fixedsize = \"true\"]");
 		LOGGER.info("Created .dot string. Result: " + elementString);
 		return elementString.toString();
 	}
