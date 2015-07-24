@@ -1,5 +1,6 @@
 package org.cytoscape.intern.mapper;
 
+import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyEdge;
@@ -49,6 +50,8 @@ public abstract class Mapper {
 	
 	// debug logger
 	protected static final Logger LOGGER;
+	
+	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
 	// Initialize logger with file handler
 	static {
 		LOGGER = Logger.getLogger("org.cytoscape.intern.mapper.Mapper");
@@ -65,6 +68,7 @@ public abstract class Mapper {
 		}
 		
 		LOGGER.addHandler(handler);
+		FILE_HANDLER_MGR.registerFileHandler(handler);
 	}
 	
 	/**
