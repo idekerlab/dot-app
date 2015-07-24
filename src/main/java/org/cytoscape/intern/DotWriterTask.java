@@ -162,8 +162,7 @@ public class DotWriterTask implements CyWriter {
 		
 		// Close off file and notify if needed
 		try {
-			//added outputorder = edgesfirst at the very end of the file to make sure all the nodes 
-			//are on the top of the edges.
+			// so edges are drawn first and don't cover nodes
 			outputWriter.write("graph [outputorder = edgesfirst] \n");
 			outputWriter.write("}");
 			outputWriter.close();

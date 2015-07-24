@@ -156,6 +156,7 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("Preparing to get color properties");
 		// Get the color string (border color). Append to attribute string
 		Color borderColor = (Color) view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT);
+		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
 		Integer borderTransparency = (visible) ? ((Number)view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY)).intValue()
 												: TRANSPARENT;
 		String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));

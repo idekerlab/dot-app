@@ -66,7 +66,7 @@ public class MapperTest {
 		
 		
 		expectedDotString = String.format("[%s,%s,%s,%s,%s,%s,%s,shape = \"ellipse\","
-				+ "style = \"solid,filled\",pos = \"%f,%f!\",%s,%s,%s,fixedsize = true]",
+				+ "style = \"solid,filled\",pos = \"%f,%f\",%s,%s,%s,fixedsize = true]",
 				labelString, bwidthString, heightString, widthString, tooltipString, colorString, fillColorString,
 				new Double(0), new Double(0) * -1.0,fontString, fontSizeString, fontColor); 
 

@@ -174,6 +174,7 @@ public class EdgePropertyMapper extends Mapper {
 		
 		// Get label font information and append in proper format
 		Color labelColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_COLOR);
+		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
 		Integer labelTransparency = (visible) ? ((Number)view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY)).intValue()
 											  : TRANSPARENT;
 		Font labelFont = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_FACE);
