@@ -84,7 +84,9 @@ public class NetworkPropertyMapper extends Mapper {
 		simpleVisPropsToDot.add("outputorder = \"edgesfirst\"");
 		
 		// esep=0 so splines can always be routed around nodes
-		simpleVisPropsToDot.add("esep = 0");
+		simpleVisPropsToDot.add("esep = \"0\"");
+		
+		simpleVisPropsToDot.add("pad = \"1\"");
 	}
 
 	/**

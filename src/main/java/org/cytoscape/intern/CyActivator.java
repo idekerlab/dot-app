@@ -1,11 +1,11 @@
 package org.cytoscape.intern;
 
+import org.cytoscape.intern.write.DotWriterFactory;
 import org.cytoscape.io.BasicCyFileFilter;
 import org.cytoscape.io.DataCategory;
 import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.io.write.CyNetworkViewWriterFactory;
 import org.cytoscape.service.util.AbstractCyActivator;
-
 import org.osgi.framework.BundleContext;
 
 import java.util.HashSet;

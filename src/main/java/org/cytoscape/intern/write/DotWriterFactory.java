@@ -1,5 +1,8 @@
-package org.cytoscape.intern;
+package org.cytoscape.intern.write;
 
+import org.cytoscape.intern.FileHandlerManager;
+import org.cytoscape.intern.Notifier;
+import org.cytoscape.intern.Notifier.MessageType;
 import org.cytoscape.io.CyFileFilter;
 import org.cytoscape.io.write.CyNetworkViewWriterFactory;
 import org.cytoscape.io.write.CyWriter;
