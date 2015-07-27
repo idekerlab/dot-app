@@ -64,12 +64,23 @@ public class DotWriterTask implements CyWriter {
 	@Tunable(description="Pick edge style")
 	public ListSingleSelection<String>  typer = new ListSingleSelection<String>(
 			"Straight segments", "Curved segments", "Curved segments routed around nodes");
+	
+	/*
+	 * Tunable to prompt user for where to put node labels
+	 * top, bottom, center or external
+	 */
+	@Tunable(description="Pick node label location")
+	public ListSingleSelection<String>  labelLocations = new ListSingleSelection<String>(
+			"Center", "Top", "Bottom", "External");
 
 	// whether or not a name had to be modified
 	private boolean nameModified = false;
 	
 	// value of splines attribute
 	private String splinesVal;
+	
+	// location of node label
+	private String labelLoc;
 	
 	/**
 	 * Constructs a DotWriterTask object for exporting network view
@@ -139,7 +150,7 @@ public class DotWriterTask implements CyWriter {
 	 */
 	@Override
 	public void run(TaskMonitor taskMonitor) {	
-		// set splines val
+		// set splines value
 		splinesVal = typer.getSelectedValue();
 		LOGGER.info("Raw splinesVal: " + splinesVal);
 		switch(splinesVal) {
@@ -154,6 +165,25 @@ public class DotWriterTask implements CyWriter {
 				break;
 		}
 		LOGGER.info("Converted splinesVal: " + splinesVal);
+		
+		// set labelLocation
+		labelLoc = labelLocations.getSelectedValue();
+		LOGGER.info("Raw labelLoc: " + labelLoc);
+		switch(labelLoc) {
+			case "Center":
+				labelLoc = "c";
+				break;
+			case "Top":
+				labelLoc = "t";
+				break;	
+			case "Bottom":
+				labelLoc = "b";
+				break;
+			case "External":
+				labelLoc = "ex";
+				break;
+		}
+		LOGGER.info("Converted labelLoc: " + labelLoc);
 
 		if(networkView != null) {
 			// constructed here because splinesVal is needed, splinesVal can't be determined until run()
@@ -235,7 +265,7 @@ public class DotWriterTask implements CyWriter {
 		
 			// for each node, write declaration string
 			for(View<CyNode> nodeView: nodeViewList) {
-				nodeMapper = new NodePropertyMapper(nodeView);
+				nodeMapper = new NodePropertyMapper(nodeView, labelLoc);
 	  		
 				try {
 					// Retrieve node name

@@ -66,11 +66,12 @@ public class MapperTest {
 		
 		
 		expectedDotString = String.format("[%s,%s,%s,%s,%s,%s,%s,shape = \"ellipse\","
-				+ "style = \"solid,filled\",pos = \"%f,%f\",%s,%s,%s,fixedsize = \"true\"]",
+				+ "style = \"solid,filled\",pos = \"%f,%f\",%s,%s,%s,fixedsize = \"true\",labelloc = t]",
 				labelString, bwidthString, heightString, widthString, tooltipString, colorString, fillColorString,
 				new Double(0), new Double(0) * -1.0,fontString, fontSizeString, fontColor); 
 
-		Mapper mapper = new NodePropertyMapper(nodeView);
+		// todo
+		Mapper mapper = new NodePropertyMapper(nodeView, "t");
 		actualDotString = mapper.getElementString();
 
 		assertEquals("Node Cytoscape property translation failed.", expectedDotString, actualDotString);
