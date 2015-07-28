@@ -2,7 +2,6 @@ package org.cytoscape.intern.write;
 
 import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.intern.Notifier;
-import org.cytoscape.intern.Notifier.MessageType;
 import org.cytoscape.intern.mapper.Mapper;
 import org.cytoscape.intern.mapper.NetworkPropertyMapper;
 import org.cytoscape.intern.mapper.NodePropertyMapper;
