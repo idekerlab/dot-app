@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashMap;
-// test
+
 /**
  * Handles mapping of CyNode properties to .dot equivalent Strings
  * 
@@ -79,6 +79,7 @@ public class NodePropertyMapper extends Mapper {
 
 		// Put Simple Props Key/Values
 		
+		// determine if using exlabel attribute or not
 		String nodeLabel = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL);
 		// if internal label
 		if(!labelLoc.equals("ex")) {
