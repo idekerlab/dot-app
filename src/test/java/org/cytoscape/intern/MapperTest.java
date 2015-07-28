@@ -144,9 +144,10 @@ public class MapperTest {
 		String colorString = "bgcolor = \"#AA9500FF\"";
 		String splinesString = "splines = \"false\"";
 		String outputString = "outputorder = \"edgesfirst\"";
-		String esepString = "esep = 0";
-		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n%s\n", 
-				labelString, colorString, splinesString, outputString, esepString); 
+		String esepString = "esep = \"0\"";
+		String marginString = "pad = \"1\"";
+		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n%s\n%s\n", 
+				labelString, colorString, splinesString, outputString, esepString, marginString); 
 
 		Mapper mapper = new NetworkPropertyMapper(networkView, NetworkPropertyMapper.isDirected(networkView), "false");
 		String actualDotString = mapper.getElementString();
