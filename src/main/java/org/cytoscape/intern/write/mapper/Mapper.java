@@ -1,4 +1,4 @@
-package org.cytoscape.intern.mapper;
+package org.cytoscape.intern.write.mapper;
 
 import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.model.CyIdentifiable;

@@ -1,4 +1,4 @@
-package org.cytoscape.intern.mapper;
+package org.cytoscape.intern.write.mapper;
 
 import java.awt.Color;
 import java.util.Collection;

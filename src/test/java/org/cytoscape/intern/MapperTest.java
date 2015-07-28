@@ -11,10 +11,10 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
-import org.cytoscape.intern.mapper.Mapper;
-import org.cytoscape.intern.mapper.NetworkPropertyMapper;
-import org.cytoscape.intern.mapper.NodePropertyMapper;
-import org.cytoscape.intern.mapper.EdgePropertyMapper;
+import org.cytoscape.intern.write.mapper.EdgePropertyMapper;
+import org.cytoscape.intern.write.mapper.Mapper;
+import org.cytoscape.intern.write.mapper.NetworkPropertyMapper;
+import org.cytoscape.intern.write.mapper.NodePropertyMapper;
 
 import java.awt.Color;
 import java.awt.Font;

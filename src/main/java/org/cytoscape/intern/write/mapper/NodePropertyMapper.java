@@ -1,4 +1,4 @@
-package org.cytoscape.intern.mapper;
+package org.cytoscape.intern.write.mapper;
 
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.presentation.property.values.NodeShape;

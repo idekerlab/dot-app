@@ -2,10 +2,10 @@ package org.cytoscape.intern.write;
 
 import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.intern.Notifier;
-import org.cytoscape.intern.mapper.Mapper;
-import org.cytoscape.intern.mapper.NetworkPropertyMapper;
-import org.cytoscape.intern.mapper.NodePropertyMapper;
-import org.cytoscape.intern.mapper.EdgePropertyMapper;
+import org.cytoscape.intern.write.mapper.EdgePropertyMapper;
+import org.cytoscape.intern.write.mapper.Mapper;
+import org.cytoscape.intern.write.mapper.NetworkPropertyMapper;
+import org.cytoscape.intern.write.mapper.NodePropertyMapper;
 import org.cytoscape.io.write.CyWriter;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
