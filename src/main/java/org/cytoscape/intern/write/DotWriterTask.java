@@ -2,7 +2,6 @@ package org.cytoscape.intern.write;
 
 import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.intern.Notifier;
-import org.cytoscape.intern.Notifier.MessageType;
 import org.cytoscape.intern.mapper.Mapper;
 import org.cytoscape.intern.mapper.NetworkPropertyMapper;
 import org.cytoscape.intern.mapper.NodePropertyMapper;
@@ -173,14 +172,18 @@ public class DotWriterTask implements CyWriter {
 			outputWriter.write("}");
 			outputWriter.close();
 			LOGGER.info("Finished writing file");
-			FILE_HANDLER_MGR.closeFileHandler(handler);
 			if (nameModified) {
 				Notifier.showMessage("Some node names have been modified in order to comply to DOT syntax", Notifier.MessageType.WARNING);
 			}
-		} 
-		catch(IOException e) {
+		} catch(IOException e) {
 			LOGGER.severe("Failed to close file, IOException in DotWriterTask");
-		}	
+		} catch(Exception e) {
+			LOGGER.severe("Not an IOException");
+			FILE_HANDLER_MGR.closeFileHandler(handler);
+			throw new RuntimeException(e);
+		} finally {
+			FILE_HANDLER_MGR.closeFileHandler(handler);
+		}
 	}
 	
 	/**

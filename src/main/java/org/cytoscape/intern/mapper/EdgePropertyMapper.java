@@ -159,7 +159,7 @@ public class EdgePropertyMapper extends Mapper {
 		LOGGER.info("Preparing to get color properties");
 		// Get the color and fillcolor .dot strings. Append to attribute string
 		Color strokeColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT);
-		Integer strokeTransparency = (visible) ? view.getVisualProperty(BasicVisualLexicon.EDGE_TRANSPARENCY)
+		Integer strokeTransparency = (visible) ? ((Number)view.getVisualProperty(BasicVisualLexicon.EDGE_TRANSPARENCY)).intValue()
 											   : TRANSPARENT;
 		String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
 		elementString.append(dotColor + ",");
