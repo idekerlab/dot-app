@@ -20,6 +20,9 @@ import java.util.HashMap;
  */
 public class NodePropertyMapper extends Mapper {
 	
+	// location of node label
+	private String labelLoc;
+	
 	/**
 	 *  maps Cytoscape node shape types to the equivalent string used in .dot
 	 */
@@ -41,10 +44,11 @@ public class NodePropertyMapper extends Mapper {
 	 * 
 	 * @param view View of Node we are converting to .dot
 	 */
-	public NodePropertyMapper(View<CyNode> view) {
+	public NodePropertyMapper(View<CyNode> view, String labelLoc) {
 		super(view);
 		// initialize data structure
 		simpleVisPropsToDot = new ArrayList<String>();
+		this.labelLoc = labelLoc;
 		
 		populateMaps();
 	}
@@ -74,10 +78,20 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("Populating HashMaps with values");
 
 		// Put Simple Props Key/Values
+		
+		// determine if using exlabel attribute or not
 		String nodeLabel = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL);
-		// remove quotes
-		nodeLabel.replace("\"", "");
-		simpleVisPropsToDot.add(String.format("label = \"%s\"", nodeLabel));
+		// if internal label
+		if(!labelLoc.equals("ex")) {
+			// remove quotes
+			nodeLabel.replace("\"", "");
+			simpleVisPropsToDot.add(String.format("label = \"%s\"", nodeLabel));
+		}
+		// if external label
+		else {
+			simpleVisPropsToDot.add("label = \"\"");
+			simpleVisPropsToDot.add(String.format("xlabel = \"%s\"", nodeLabel));
+		}
 		
 		Double borderWidth = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH);
 		simpleVisPropsToDot.add(String.format("penwidth = \"%f\"", borderWidth));
@@ -139,7 +153,7 @@ public class NodePropertyMapper extends Mapper {
 
 		
 		// Finish attribute string with mandatory fixedsize = true attribute
-		elementString.append("fixedsize = \"true\"]");
+		elementString.append("fixedsize = \"true\",labelloc = "+ labelLoc + "]");
 		LOGGER.info("Created .dot string. Result: " + elementString);
 		return elementString.toString();
 	}
