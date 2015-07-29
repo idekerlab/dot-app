@@ -18,13 +18,13 @@ public class DotReaderTask implements CyNetworkReader {
 	}
 
 	@Override
-	public void run(TaskMonitor arg0) throws Exception {
+	public void run(TaskMonitor monitor) throws Exception {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public CyNetworkView buildCyNetworkView(CyNetwork arg0) {
+	public CyNetworkView buildCyNetworkView(CyNetwork network) {
 		// TODO Auto-generated method stub
 		return null;
 	}

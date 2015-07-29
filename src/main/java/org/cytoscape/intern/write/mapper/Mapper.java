@@ -210,7 +210,7 @@ public abstract class Mapper {
 		StringBuilder output = new StringBuilder(input.length() + 2);
 		output.append('\"');
 		// replace any quotations from name string with underscore
-		input.replace('\"', '_');
+		input = input.replace('\"', '_');
 		output.append(input);
 		output.append('\"');
 		return output.toString();

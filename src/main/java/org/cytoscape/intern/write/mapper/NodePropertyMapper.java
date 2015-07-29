@@ -81,10 +81,10 @@ public class NodePropertyMapper extends Mapper {
 		
 		// determine if using exlabel attribute or not
 		String nodeLabel = view.getVisualProperty(BasicVisualLexicon.NODE_LABEL);
+		// remove quotes if any
+		nodeLabel = nodeLabel.replace("\"", "");
 		// if internal label
 		if(!labelLoc.equals("ex")) {
-			// remove quotes
-			nodeLabel.replace("\"", "");
 			simpleVisPropsToDot.add(String.format("label = \"%s\"", nodeLabel));
 		}
 		// if external label

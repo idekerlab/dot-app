@@ -15,13 +15,13 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 	}
 
 	@Override
-	public TaskIterator createTaskIterator(InputStream arg0, String arg1) {
+	public TaskIterator createTaskIterator(InputStream inStream, String inputName) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean isReady(InputStream arg0, String arg1) {
+	public boolean isReady(InputStream inStream, String inputName) {
 		// TODO Auto-generated method stub
 		return false;
 	}
