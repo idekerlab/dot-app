@@ -26,16 +26,17 @@ public class MapperTest {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
 		CyNode node = network.addNode();
-		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
+		network.getRow(node).set(CyNetwork.NAME, "\"Test\"Node1\"\"");
 		CyNetworkView networkView = new TestNetworkView(network);
 		View<CyNode> nodeView = networkView.getNodeView(node);
-		String label = "Hello World!";
+		String label = "\"Hello World!\"";
 		String tooltip = "Hello!";
 		Double height = nodeView.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT);
 		Double width = nodeView.getVisualProperty(BasicVisualLexicon.NODE_WIDTH);
 		Double bwidth = nodeView.getVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH);
 
-		String labelString = String.format("label = \"%s\"", label);
+		String escLabel = label.replace("\"", "\\\"");
+		String labelString = String.format("label = \"%s\"", escLabel);
 		String tooltipString = String.format("tooltip = \"%s\"", tooltip);
 		String colorString = "color = \"#FF0000FF\"";
 		String fillColorString = "fillcolor = \"#00DD99FF\"";
@@ -158,14 +159,15 @@ public class MapperTest {
 	}
 	
 	@Test
-	public void testFilterString() {
-		assertEquals("FilterString is wrong", "TestNode1", "TestNode1");
-		assertEquals("FilterString is wrong", ".59", Mapper.filterString(".59"));
-		assertEquals("FilterString is wrong", "\"9.-\"", Mapper.filterString("9.-"));
-		assertEquals("FilterString is wrong", "8.8", Mapper.filterString("8.8"));
-		assertEquals("FilterString is wrong", "\"Hello\"", Mapper.filterString("\"Hello\""));
-		assertEquals("FilterString is wrong", "<Hello>", Mapper.filterString("<Hello>"));
-		assertEquals("FilterString is wrong", "\"123baba\"", Mapper.filterString("123baba"));
+	public void testModifyElementID() {
+		assertEquals("ModifyElementId is wrong", "TestNode1", Mapper.modifyElementId("TestNode1"));
+		assertEquals("ModifyElementId is wrong", ".59", Mapper.modifyElementId(".59"));
+		assertEquals("ModifyElementId is wrong", "\"9.-\"", Mapper.modifyElementId("9.-"));
+		assertEquals("ModifyElementId is wrong", "8.8", Mapper.modifyElementId("8.8"));
+		assertEquals("ModifyElementId is wrong", "\"Hello\"", Mapper.modifyElementId("\"Hello\""));
+		assertEquals("ModifyElementId is wrong", "<Hello>", Mapper.modifyElementId("<Hello>"));
+		assertEquals("ModifyElementId is wrong", "\"123baba\"", Mapper.modifyElementId("123baba"));
+		assertEquals("ModifyElementId is wrong", "\"\\\"Hi\\\"Harry\\\"\\\"\"", Mapper.modifyElementId("\"Hi\"Harry\"\""));
 		
 	}
 }

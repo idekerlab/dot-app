@@ -43,7 +43,7 @@ public class NetworkPropertyMapper extends Mapper {
 		String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
 		// remove dis-allowed characters to avoid errors
 		// filter out disallowed chars
-		networkName = Mapper.filterString(networkName);
+		networkName = Mapper.modifyElementId(networkName);
 
 		// Build the network properties string
 		StringBuilder elementString = new StringBuilder();

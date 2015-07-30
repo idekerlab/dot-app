@@ -168,11 +168,11 @@ public abstract class Mapper {
 	}
 	
 	/**
-	 * Changes a string to comply with dot ID requirements and returns the result
+	 * Used to change an id string of a graph element to comply with dot ID requirements
 	 * Dot names must be a string of alphanumeric characters and underscores,
 	 * not beginning with a digit
 	 * 
-	 * @param input is String we are modifying
+	 * @param id is String we are modifying
 	 * @return is .dot-compliant ID String where all leading numbers are removed
 	 * and put at the end of the string and all dis-allowed characters are replaced
 	 * with underscores
@@ -181,37 +181,37 @@ public abstract class Mapper {
 	 *  An ID is one of the following:
 	 *	Any string of alphabetic ([a-zA-Z\200-\377]) characters, underscores ('_') or digits ([0-9]), not beginning with a digit;
 	 *	a numeral [-]?(.[0-9]+ | [0-9]+(.[0-9]*)? );
-	 *	any double-quoted string ("...") possibly containing escaped quotes (\")1;
+	 *	any double-quoted string ("...") possibly containing escaped quotes (\");
 	 *	an HTML string (<...>). 
 	 */
-	public static String filterString(String input) {
-		LOGGER.info("Preparing to transform string");
-		String alphaNumRegEx = "[a-zA-Z\200-\377_]+[0-9]*";
-		String numericRegEx = "[-]?[.][0-9]+|[0-9]+([.][0-9]*)?";
-		String quotedRegEx = "\".*\"";
+	public static String modifyElementId(String id) {
+		LOGGER.info("Preparing to transform ID");
+		String alphaNumRegEx = "[a-zA-Z\200-\377_]+[a-zA-Z\200-\377_0-9]*";
+		String numericRegEx = "[-]?([.][0-9]+|[0-9]+([.][0-9]*)?)";
+		String quotedRegEx = "\"[^\"]*(\\\")*[^\"]*\"";
 		String htmlRegEx = "<.*>";
-		if (input.matches(alphaNumRegEx)) {
+		if (id.matches(alphaNumRegEx)) {
 			LOGGER.info("Alphanumeric ID");
-			return input;
+			return id;
 		}
-		if (input.matches(numericRegEx)) {
+		if (id.matches(numericRegEx)) {
 			LOGGER.info("Numeric ID");
-			return input;
+			return id;
 		}
-		if (input.matches(quotedRegEx)) {
+		if (id.matches(quotedRegEx)) {
 			LOGGER.info("Quoted ID");
-			return input;
+			return id;
 		}
-		if (input.matches(htmlRegEx)) {
+		if (id.matches(htmlRegEx)) {
 			LOGGER.info("HTML ID");
-			return input;
+			return id;
 		}
 		LOGGER.info("None of the above. Transforming to Quoted ID");
-		StringBuilder output = new StringBuilder(input.length() + 2);
+		StringBuilder output = new StringBuilder(id.length() + 2);
 		output.append('\"');
-		// replace any quotations from name string with underscore
-		input = input.replace('\"', '_');
-		output.append(input);
+		// replace any quotations from name string with escaped quotes
+		id = id.replace("\"", "\\\"");
+		output.append(id);
 		output.append('\"');
 		return output.toString();
 	}
