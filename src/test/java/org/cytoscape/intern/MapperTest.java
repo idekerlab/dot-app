@@ -11,6 +11,7 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
+import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
 import org.cytoscape.intern.write.mapper.EdgePropertyMapper;
 import org.cytoscape.intern.write.mapper.Mapper;
 import org.cytoscape.intern.write.mapper.NetworkPropertyMapper;
@@ -111,9 +112,10 @@ public class MapperTest {
 		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_TRANSPARENCY, new Integer(0xFF));
 		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_FACE, new Font(Font.DIALOG, Font.PLAIN, 12));
 		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_SIZE, new Integer(12));
+		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LINE_TYPE, LineTypeVisualProperty.EQUAL_DASH);
 		labelString = String.format("label = \"%s\"", label);
 		colorString = "color = \"#333333FF\"";
-		expectedDotString = String.format("[%s,%s,%s,arrowhead = \"none\",arrowtail = \"none\",%s,%s,%s,%s,dir = \"both\"]", labelString, widthString,
+		expectedDotString = String.format("[%s,%s,%s,arrowhead = \"none\",arrowtail = \"none\",%s,%s,%s,%s,style = \"dashed\",dir = \"both\"]", labelString, widthString,
 				tooltipString, colorString, fontString, fontSizeString, fontColor);
 
 		Mapper mapper = new EdgePropertyMapper(edgeView, networkView);
