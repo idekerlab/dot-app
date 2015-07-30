@@ -173,6 +173,7 @@ public class EdgePropertyMapper extends Mapper {
 		}
 		LOGGER.info("Appended edge bend attributes to .dot string. Result: " + elementString);
 		
+		LOGGER.info("Preparing to map edge label attributes");
 		// Get label font information and append in proper format
 		Color labelColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_COLOR);
 		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
@@ -181,6 +182,11 @@ public class EdgePropertyMapper extends Mapper {
 		Font labelFont = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_FACE);
 		Integer labelSize = ((Number)view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_SIZE)).intValue();
 		elementString.append(mapFont(labelFont, labelSize, labelColor, labelTransparency) + ",");
+		LOGGER.info("Appened label attributes to .dot string. Result: " + elementString);
+		
+		LOGGER.info("Appending style attribute to .dot string");
+		elementString.append(mapDotStyle() + ",");
+		LOGGER.info("Appended style attribute. Result: " + elementString);
 		
 		// append dir=both so both arrowShapes show up and close off attr string
 		String dir = (visible) ? "dir = \"both\"]" : "dir = \"none\"]";
