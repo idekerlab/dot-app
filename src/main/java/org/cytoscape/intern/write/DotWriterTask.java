@@ -74,6 +74,14 @@ public class DotWriterTask implements CyWriter {
 	@Tunable(description="Pick node label location")
 	public ListSingleSelection<String>  labelLocations = new ListSingleSelection<String>(
 			"Center", "Top", "Bottom", "External");
+	
+	/*
+	 * Tunable to prompt user for where to put network labels
+	 * top, bottom, or none at all
+	 */
+	@Tunable(description="Pick network label location")
+	public ListSingleSelection<String>  networkLabelLocations = new ListSingleSelection<String>(
+			"No network label", "Top", "Bottom");
 
 	// whether or not a name had to be modified
 	private boolean nameModified = false;
@@ -82,7 +90,10 @@ public class DotWriterTask implements CyWriter {
 	private String splinesVal;
 	
 	// location of node label
-	private String labelLoc;
+	private String nodeLabelLoc;
+	
+	// location of network label
+	private String networkLabelLoc;
 	
 	/**
 	 * Constructs a DotWriterTask object for exporting network view
@@ -151,52 +162,24 @@ public class DotWriterTask implements CyWriter {
 	 * Task to modify its user interface.
 	 */
 	@Override
-	public void run(TaskMonitor taskMonitor) {	
-		// set splines value
-		splinesVal = typer.getSelectedValue();
-		LOGGER.info("Raw splinesVal: " + splinesVal);
-		switch(splinesVal) {
-			case "Straight segments":
-				splinesVal = "false";
-				break;
-			case "Curved segments":
-				splinesVal = "curved";
-				break;	
-			case "Curved segments routed around nodes":
-				splinesVal = "true";
-				break;
-		}
-		LOGGER.info("Converted splinesVal: " + splinesVal);
+	public void run(TaskMonitor taskMonitor) {
 		
-		// set labelLocation
-		labelLoc = labelLocations.getSelectedValue();
-		LOGGER.info("Raw labelLoc: " + labelLoc);
-		switch(labelLoc) {
-			case "Center":
-				labelLoc = "c";
-				break;
-			case "Top":
-				labelLoc = "t";
-				break;	
-			case "Bottom":
-				labelLoc = "b";
-				break;
-			case "External":
-				labelLoc = "ex";
-				break;
-		}
-		LOGGER.info("Converted labelLoc: " + labelLoc);
-
+		processUserInput();
+		
 		if(networkView != null) {
 			// constructed here because splinesVal is needed, splinesVal can't be determined until run()
-			this.networkMapper = new NetworkPropertyMapper(networkView, directed, splinesVal);
+			this.networkMapper = new NetworkPropertyMapper(networkView, directed, splinesVal, networkLabelLoc);
 		}
 		
 		LOGGER.info("Writing .dot file...");
+		taskMonitor.setStatusMessage("Writing network attributes...");
 		writeProps();
+		taskMonitor.setStatusMessage("Writing node declarations...");
 		writeNodes();
+		taskMonitor.setStatusMessage("Writing edge declarations...");
 		writeEdges();
 		
+		taskMonitor.setStatusMessage("Closing off file");
 		// Close off file and notify if needed
 		try {
 			outputWriter.write("}");
@@ -271,7 +254,7 @@ public class DotWriterTask implements CyWriter {
 		
 			// for each node, write declaration string
 			for(View<CyNode> nodeView: nodeViewList) {
-				nodeMapper = new NodePropertyMapper(nodeView, labelLoc);
+				nodeMapper = new NodePropertyMapper(nodeView, nodeLabelLoc);
 	  		
 				try {
 					// Retrieve node name
@@ -386,5 +369,65 @@ public class DotWriterTask implements CyWriter {
 			}
 		}
 		LOGGER.info("Finished writing edge declarations...");
+	}
+	
+	/**
+	 * Takes user input for label locations and saves the .dot String value to instance variables
+	 * eg. takes Center for nodeLabelLoc and saves it as "c" for .dot file
+	 * 
+	 * Precondition: splinesVal, nodeLabelLoc and networkLabelLoc have drop-down string that user selected
+	 * Postcondition: splinesVal, nodeLabelLoc and networkLabelLoc all have their .dot attribute value
+	 */
+	private void processUserInput() {
+		// set splines value
+		splinesVal = typer.getSelectedValue();
+		LOGGER.info("Raw splinesVal: " + splinesVal);
+		switch(splinesVal) {
+			case "Straight segments":
+				splinesVal = "false";
+				break;
+			case "Curved segments":
+				splinesVal = "curved";
+				break;	
+			case "Curved segments routed around nodes":
+				splinesVal = "true";
+				break;
+		}
+		LOGGER.info("Converted splinesVal: " + splinesVal);
+		
+		// set nodeLabelLocation
+		nodeLabelLoc = labelLocations.getSelectedValue();
+		LOGGER.info("Raw labelLoc: " + nodeLabelLoc);
+		switch(nodeLabelLoc) {
+			case "Center":
+				nodeLabelLoc = "c";
+				break;
+			case "Top":
+				nodeLabelLoc = "t";
+				break;	
+			case "Bottom":
+				nodeLabelLoc = "b";
+				break;
+			case "External":
+				nodeLabelLoc = "ex";
+				break;
+		}
+		LOGGER.info("Converted labelLoc: " + nodeLabelLoc);
+		
+		// set networkLabelLocation
+		networkLabelLoc = networkLabelLocations.getSelectedValue();
+		LOGGER.info("Raw networkLabelLoc: " + networkLabelLoc);
+		switch(networkLabelLoc) {
+			case "No network label":
+				networkLabelLoc = null;
+				break;
+			case "Top":
+				networkLabelLoc = "t";
+				break;	
+			case "Bottom":
+				networkLabelLoc = "b";
+				break;
+		}
+		LOGGER.info("Converted networkLabelLoc: " + networkLabelLoc);
 	}
 }

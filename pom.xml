@@ -95,6 +95,14 @@
 			<url>http://code.cytoscape.org/nexus/content/repositories/releases/</url>
 		</repository>
 
+		<!-- In project repo to reference java graphviz api jar-->
+		<repository>
+			<id>in-project</id>
+			<name>In Project Repo</name>
+			<url>file://${project.basedir}/jars</url>
+		</repository>
+
+	
 	</repositories>
 
 	<!-- Our app depends on other OSGi bundle JARs. We list all the JARs we 
@@ -104,6 +112,14 @@
 		must be inlined or embedded into this bundle. -->
 	<dependencies>
 
+		<!--
+		<dependency>
+			<groupId>com.alexmerz</groupId>
+			<artifactId>java-graphviz-api</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		-->
+		
 		<dependency>
 			<groupId>org.cytoscape</groupId>
 			<artifactId>service-api</artifactId>

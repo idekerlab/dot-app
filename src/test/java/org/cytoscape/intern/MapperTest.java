@@ -141,15 +141,16 @@ public class MapperTest {
 		networkView.setVisualProperty(BasicVisualLexicon.NETWORK_TITLE, label);
 		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE, ArrowShapeVisualProperty.ARROW);
 		String labelString = String.format("label = \"%s\"", label);
+		String labelLocString = String.format("labelloc = %s", "b");
 		String colorString = "bgcolor = \"#AA9500FF\"";
 		String splinesString = "splines = \"false\"";
 		String outputString = "outputorder = \"edgesfirst\"";
 		String esepString = "esep = \"0\"";
-		String marginString = "pad = \"1\"";
-		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n%s\n%s\n", 
-				labelString, colorString, splinesString, outputString, esepString, marginString); 
+		String marginString = "pad = \"3\"";
+		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
+				labelString, labelLocString, colorString, splinesString, outputString, esepString, marginString); 
 
-		Mapper mapper = new NetworkPropertyMapper(networkView, NetworkPropertyMapper.isDirected(networkView), "false");
+		Mapper mapper = new NetworkPropertyMapper(networkView, NetworkPropertyMapper.isDirected(networkView), "false", "b");
 		String actualDotString = mapper.getElementString();
 
 		assertEquals("Edge Cytoscape property translation failed", expectedDotString, actualDotString);

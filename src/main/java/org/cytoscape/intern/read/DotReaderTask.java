@@ -5,9 +5,9 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.TaskMonitor;
 
-import com.alexmerz.graphviz.Parser;
+/*import com.alexmerz.graphviz.Parser;
 import com.alexmerz.graphviz.ParseException;
-import com.alexmerz.graphviz.objects.*;
+import com.alexmerz.graphviz.objects.*;*/
 
 public class DotReaderTask implements CyNetworkReader {
 

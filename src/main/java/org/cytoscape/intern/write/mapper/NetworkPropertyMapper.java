@@ -19,16 +19,20 @@ public class NetworkPropertyMapper extends Mapper {
 	// Value of splines attribute
 	private String splinesVal;
 	
+	// Location of graph label, null if no graph label is desired
+	private String labelLoc;
+	
 	/**
 	 * Constructs NetworkPropertyMapper object
 	 * 
 	 * @param view of network we are converting
 	 */
-	public NetworkPropertyMapper(CyNetworkView netView, boolean directed, String splinesVal) {
+	public NetworkPropertyMapper(CyNetworkView netView, boolean directed, String splinesVal, String labelLoc) {
 		super(netView);
 		simpleVisPropsToDot = new ArrayList<String>();
 		this.directed = directed;
 		this.splinesVal = splinesVal;
+		this.labelLoc = labelLoc;
 		
 		populateMaps();		
 	}
@@ -67,10 +71,16 @@ public class NetworkPropertyMapper extends Mapper {
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
-		// label attribute of graph
-		String label = view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
-		String dotLabel = String.format("label = \"%s\"", label);
-		simpleVisPropsToDot.add(dotLabel);
+		// if graph label is desired
+		if(labelLoc != null) {
+			// label attribute of graph
+			String label = view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
+			String dotLabel = String.format("label = \"%s\"", label);
+			simpleVisPropsToDot.add(dotLabel);
+			
+			// desired label location
+			simpleVisPropsToDot.add("labelloc = " + labelLoc);
+		}
 
 		// Background color of graph
 		Color netBgColor = (Color)view.getVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_PAINT);
@@ -86,7 +96,8 @@ public class NetworkPropertyMapper extends Mapper {
 		// esep=0 so splines can always be routed around nodes
 		simpleVisPropsToDot.add("esep = \"0\"");
 		
-		simpleVisPropsToDot.add("pad = \"1\"");
+		// pad so (ideally) no labels are cut off
+		simpleVisPropsToDot.add("pad = \"3\"");
 	}
 
 	/**
