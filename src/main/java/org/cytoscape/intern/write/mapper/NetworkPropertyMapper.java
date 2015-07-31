@@ -47,7 +47,7 @@ public class NetworkPropertyMapper extends Mapper {
 		String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
 		// remove dis-allowed characters to avoid errors
 		// filter out disallowed chars
-		networkName = Mapper.filterString(networkName);
+		networkName = Mapper.modifyElementId(networkName);
 
 		// Build the network properties string
 		StringBuilder elementString = new StringBuilder();
@@ -75,6 +75,7 @@ public class NetworkPropertyMapper extends Mapper {
 		if(labelLoc != null) {
 			// label attribute of graph
 			String label = view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
+			label = label.replace("\"", "\\\"");
 			String dotLabel = String.format("label = \"%s\"", label);
 			simpleVisPropsToDot.add(dotLabel);
 			
@@ -97,7 +98,7 @@ public class NetworkPropertyMapper extends Mapper {
 		simpleVisPropsToDot.add("esep = \"0\"");
 		
 		// pad so (ideally) no labels are cut off
-		simpleVisPropsToDot.add("pad = \"3\"");
+		simpleVisPropsToDot.add("pad = \"2\"");
 	}
 
 	/**

@@ -64,7 +64,7 @@ public class EdgePropertyMapper extends Mapper {
 	 * 
 	 * @return String that represents edge bend attribute
 	 */
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	private String mapEdgeBend(){
 		// TODO
 		StringBuilder coordinatesString = new StringBuilder();
@@ -81,7 +81,7 @@ public class EdgePropertyMapper extends Mapper {
 		coordinatesString.deleteCharAt(coordinatesString.length() - 1);
 		String dotPos = String.format("pos = \"%s\"", coordinatesString.toString());
 		return dotPos;
-	}
+	}*/
 	
 	/**
 	 * Helper method to fill the hashmap instance variable with constants we need
@@ -89,7 +89,7 @@ public class EdgePropertyMapper extends Mapper {
 	private void populateMaps() {
 		// Put Simple Props Key/Values
 		String edgeLabel = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL);
-		edgeLabel = edgeLabel.replace("\"", "");
+		edgeLabel = edgeLabel.replace("\"", "\\\"");
 		simpleVisPropsToDot.add(String.format("label = \"%s\"", edgeLabel));
 
 		Double width = view.getVisualProperty(BasicVisualLexicon.EDGE_WIDTH);
@@ -166,13 +166,14 @@ public class EdgePropertyMapper extends Mapper {
 		elementString.append(dotColor + ",");
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 		
-		LOGGER.info("Preparing to map edge bends");
+		/*LOGGER.info("Preparing to map edge bends");
 		String dotPos = mapEdgeBend();
 		if (!(dotPos.equals(""))) {
 			elementString.append(dotPos + ",");
 		}
 		LOGGER.info("Appended edge bend attributes to .dot string. Result: " + elementString);
-		
+		*/
+		LOGGER.info("Preparing to map edge label attributes");
 		// Get label font information and append in proper format
 		Color labelColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_COLOR);
 		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
@@ -181,6 +182,11 @@ public class EdgePropertyMapper extends Mapper {
 		Font labelFont = view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_FACE);
 		Integer labelSize = ((Number)view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_SIZE)).intValue();
 		elementString.append(mapFont(labelFont, labelSize, labelColor, labelTransparency) + ",");
+		LOGGER.info("Appened label attributes to .dot string. Result: " + elementString);
+		
+		LOGGER.info("Appending style attribute to .dot string");
+		elementString.append(mapDotStyle() + ",");
+		LOGGER.info("Appended style attribute. Result: " + elementString);
 		
 		// append dir=both so both arrowShapes show up and close off attr string
 		String dir = (visible) ? "dir = \"both\"]" : "dir = \"none\"]";

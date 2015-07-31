@@ -29,8 +29,8 @@ public class FileHandlerManager {
 		}
 	}
 	public void closeAllFileHandlers() {
-		for (FileHandler handler: fileHandlers) {
-			handler.close();
+		for (int i = 0; i < fileHandlers.size(); ++i) {
+			FileHandler handler = fileHandlers.get(i);
 			fileHandlers.remove(handler);
 		}
 	}

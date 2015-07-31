@@ -262,7 +262,7 @@ public class DotWriterTask implements CyWriter {
 					CyNetwork networkModel = networkView.getModel();
 					String nodeName = networkModel.getRow(nodeModel).get(CyNetwork.NAME, String.class);
 	  
-					String newNodeName = Mapper.filterString(nodeName);
+					String newNodeName = Mapper.modifyElementId(nodeName);
 					if (!newNodeName.equals(nodeName)) {
 						nameModified = true;
 					}
@@ -284,7 +284,7 @@ public class DotWriterTask implements CyWriter {
 			for(CyNode node: nodeList){
 				try{
 					String nodeName = network.getRow(node).get(CyNetwork.NAME,String.class);
-					String newNodeName = Mapper.filterString(nodeName);
+					String newNodeName = Mapper.modifyElementId(nodeName);
 				
 					if(!newNodeName.equals(nodeName)) {
 						nameModified = true;
@@ -327,11 +327,11 @@ public class DotWriterTask implements CyWriter {
 	  			
 					String sourceName = networkModel.getRow(sourceNode).get(CyNetwork.NAME, String.class);
 					// filter out disallowed chars
-					sourceName = Mapper.filterString(sourceName);
+					sourceName = Mapper.modifyElementId(sourceName);
 	  			
 					String targetName = networkModel.getRow(targetNode).get(CyNetwork.NAME, String.class);
 					// filter out disallowed chars
-					targetName = Mapper.filterString(targetName);
+					targetName = Mapper.modifyElementId(targetName);
 
 					String edgeName = String.format("%s %s %s", sourceName, edgeType, targetName);
 					String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());
@@ -353,10 +353,10 @@ public class DotWriterTask implements CyWriter {
 					CyNode targetNode = edge.getTarget();
 					
 					String sourceName = network.getRow(sourceNode).get(CyNetwork.NAME, String.class);
-					sourceName = Mapper.filterString(sourceName);
+					sourceName = Mapper.modifyElementId(sourceName);
 				
 					String targetName = network.getRow(targetNode).get(CyNetwork.NAME, String.class);
-					targetName = Mapper.filterString(targetName);
+					targetName = Mapper.modifyElementId(targetName);
 				
 					String edgeName = String.format("%s %s %s", sourceName, "--", targetName);
 					String declaration = String.format("%s\n", edgeName);
