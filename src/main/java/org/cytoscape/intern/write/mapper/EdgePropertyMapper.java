@@ -64,7 +64,7 @@ public class EdgePropertyMapper extends Mapper {
 	 * 
 	 * @return String that represents edge bend attribute
 	 */
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	private String mapEdgeBend(){
 		// TODO
 		StringBuilder coordinatesString = new StringBuilder();
@@ -81,7 +81,7 @@ public class EdgePropertyMapper extends Mapper {
 		coordinatesString.deleteCharAt(coordinatesString.length() - 1);
 		String dotPos = String.format("pos = \"%s\"", coordinatesString.toString());
 		return dotPos;
-	}
+	}*/
 	
 	/**
 	 * Helper method to fill the hashmap instance variable with constants we need
@@ -166,13 +166,13 @@ public class EdgePropertyMapper extends Mapper {
 		elementString.append(dotColor + ",");
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 		
-		LOGGER.info("Preparing to map edge bends");
+		/*LOGGER.info("Preparing to map edge bends");
 		String dotPos = mapEdgeBend();
 		if (!(dotPos.equals(""))) {
 			elementString.append(dotPos + ",");
 		}
 		LOGGER.info("Appended edge bend attributes to .dot string. Result: " + elementString);
-		
+		*/
 		LOGGER.info("Preparing to map edge label attributes");
 		// Get label font information and append in proper format
 		Color labelColor = (Color) view.getVisualProperty(BasicVisualLexicon.EDGE_LABEL_COLOR);

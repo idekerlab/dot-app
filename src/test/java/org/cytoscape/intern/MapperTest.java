@@ -148,7 +148,7 @@ public class MapperTest {
 		String splinesString = "splines = \"false\"";
 		String outputString = "outputorder = \"edgesfirst\"";
 		String esepString = "esep = \"0\"";
-		String marginString = "pad = \"1\"";
+		String marginString = "pad = \"2\"";
 		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n%s\n%s\n", 
 				labelString, colorString, splinesString, outputString, esepString, marginString); 
 

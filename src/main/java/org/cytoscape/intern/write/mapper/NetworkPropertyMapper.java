@@ -69,6 +69,7 @@ public class NetworkPropertyMapper extends Mapper {
 	private void populateMaps() {
 		// label attribute of graph
 		String label = view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
+		label = label.replace("\"", "\\\"");
 		String dotLabel = String.format("label = \"%s\"", label);
 		simpleVisPropsToDot.add(dotLabel);
 
@@ -86,7 +87,7 @@ public class NetworkPropertyMapper extends Mapper {
 		// esep=0 so splines can always be routed around nodes
 		simpleVisPropsToDot.add("esep = \"0\"");
 		
-		simpleVisPropsToDot.add("pad = \"1\"");
+		simpleVisPropsToDot.add("pad = \"2\"");
 	}
 
 	/**
