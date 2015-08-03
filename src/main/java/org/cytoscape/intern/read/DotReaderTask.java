@@ -1,9 +1,14 @@
 package org.cytoscape.intern.read;
 
-import org.cytoscape.io.read.CyNetworkReader;
+import org.cytoscape.io.read.AbstractCyNetworkReader;
 import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNetworkFactory;
+import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.subnetwork.CyRootNetworkManager;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.work.TaskMonitor;
+
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,19 +18,15 @@ import java.util.ArrayList;
 import com.alexmerz.graphviz.ParseException;
 import com.alexmerz.graphviz.objects.*;*/
 
-public class DotReaderTask implements CyNetworkReader {
+public class DotReaderTask extends AbstractCyNetworkReader {
 	
-	ArrayList<CyNetwork> networks;
-	InputStreamReader inputReader;
-
-	public DotReaderTask(InputStream inputStream, String inputName) {
-		inputReader = new InputStreamReader(inputStream);
-		networks = new ArrayList<CyNetwork>();
-	}
-	@Override
-	public void cancel() {
-		// TODO Auto-generated method stub
-
+	private InputStreamReader inStreamReader;
+	
+	public DotReaderTask(InputStream inStream, CyNetworkViewFactory cyNetViewFctry,
+			CyNetworkFactory cyNetFctry, CyNetworkManager cyNetMgr,
+			CyRootNetworkManager cyRootNetMgr) {
+		super(inStream, cyNetViewFctry, cyNetFctry, cyNetMgr, cyRootNetMgr);
+		inStreamReader = new InputStreamReader(inStream);
 	}
 
 	@Override
@@ -51,16 +52,9 @@ public class DotReaderTask implements CyNetworkReader {
 	}
 
 	@Override
-	public CyNetworkView buildCyNetworkView(CyNetwork network) {
+	public CyNetworkView buildCyNetworkView(CyNetwork arg0) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public CyNetwork[] getNetworks() {
-		// TODO Auto-generated method stub
-		CyNetwork[] networksArray = new CyNetwork[networks.size()];
-		return networks.toArray(networksArray);
 	}
 
 }
