@@ -8,21 +8,33 @@ import org.cytoscape.work.TaskIterator;
 
 public class DotReaderFactory implements InputStreamTaskFactory {
 
+	private CyFileFilter fileFilter;
+	
+	public DotReaderFactory(CyFileFilter fileFilter) {
+		this.fileFilter = fileFilter;
+	}
+	
 	@Override
 	public CyFileFilter getFileFilter() {
-		// TODO Auto-generated method stub
-		return null;
+		return fileFilter;
 	}
 
 	@Override
 	public TaskIterator createTaskIterator(InputStream inStream, String inputName) {
 		// TODO Auto-generated method stub
+		// Will create a single DotReaderTask object, passing in the input stream and input name
 		return null;
 	}
 
 	@Override
 	public boolean isReady(InputStream inStream, String inputName) {
-		// TODO Auto-generated method stub
+		if (inStream != null && inputName != null) {
+			String[] parts = inputName.split(".");
+			String extension = parts[parts.length-1];
+			if (extension.matches(("gv|dot"))) {
+				return true;
+			}
+		}
 		return false;
 	}
 
