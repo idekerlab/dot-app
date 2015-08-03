@@ -18,10 +18,27 @@ import java.util.ArrayList;
 import com.alexmerz.graphviz.ParseException;
 import com.alexmerz.graphviz.objects.*;*/
 
+/**
+ * Task object that reads a dot file into a network/ network view
+ * 
+ * @author Massoud Maher
+ * @author Braxton Fitts
+ * @author Ziran Zhang
+ */
+
 public class DotReaderTask extends AbstractCyNetworkReader {
 	
 	private InputStreamReader inStreamReader;
 	
+	/**
+	 * Constructs a DotReaderTask object for importing a dot file
+	 * 
+	 * @param InputStream inStream the stream to be read from
+	 * @param instance of CyNetworkViewFactory
+	 * @param instance of CyNetworkFactory
+	 * @param instance of CyNetworkManager
+	 * @param instance of CyRootNetworkManager
+	 */
 	public DotReaderTask(InputStream inStream, CyNetworkViewFactory cyNetViewFctry,
 			CyNetworkFactory cyNetFctry, CyNetworkManager cyNetMgr,
 			CyRootNetworkManager cyRootNetMgr) {
@@ -29,6 +46,13 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		inStreamReader = new InputStreamReader(inStream);
 	}
 
+	
+	/**
+	 * Causes the task to begin execution.
+	 * 
+	 * @param taskMonitor The TaskMonitor provided by TaskManager to allow the
+	 * Task to modify its user interface.
+	 */
 	@Override
 	public void run(TaskMonitor monitor) throws Exception {
 		// TODO Auto-generated method stub
@@ -50,9 +74,15 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 */
 
 	}
-
+	
+	
+	/**
+	 * build an instance of CyNetworkView based on the passed in CyNetwork instance
+	 * 
+	 * @param CyNetwork network from which we want to build the CyNetworkView
+	 */
 	@Override
-	public CyNetworkView buildCyNetworkView(CyNetwork arg0) {
+	public CyNetworkView buildCyNetworkView(CyNetwork network) {
 		// TODO Auto-generated method stub
 		return null;
 	}
