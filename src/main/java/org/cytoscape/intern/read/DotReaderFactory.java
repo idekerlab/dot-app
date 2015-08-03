@@ -20,11 +20,14 @@ import java.io.InputStream;
 
 public class DotReaderFactory implements InputStreamTaskFactory {
 
+	
+	//Variable initializations 
 	private CyFileFilter fileFilter;
 	private CyNetworkViewFactory cyNetViewFctry;
 	private CyNetworkFactory cyNetFctry;
 	private CyNetworkManager cyNetMgr;
 	private CyRootNetworkManager cyRootNetMgr;
+	
 	
 	/**
 	 * Sets the DotReaderFactory with associate fileFilter
@@ -34,6 +37,7 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 	public DotReaderFactory(CyFileFilter fileFilter) {
 		this.fileFilter = fileFilter;
 	}
+	
 	
 	/**
 	 * Returns CyFileFilter associated with this factory
@@ -45,6 +49,7 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 		return fileFilter;
 	}
 
+	
 	/**
 	 * Sets the input stream that will be read by the Reader created from this factory
 	 * 
@@ -59,6 +64,7 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 				cyNetFctry, cyNetMgr, cyRootNetMgr));
 	}
 
+	
 	/**
 	 * Returns true if the factory is ready to be produce a TaskIterator and false otherwise.
 	 * 

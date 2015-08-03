@@ -28,7 +28,10 @@ import com.alexmerz.graphviz.objects.*;*/
 
 public class DotReaderTask extends AbstractCyNetworkReader {
 	
+	
+	//variable initializations
 	private InputStreamReader inStreamReader;
+	
 	
 	/**
 	 * Constructs a DotReaderTask object for importing a dot file
