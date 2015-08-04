@@ -1,15 +1,19 @@
 package org.cytoscape.intern.write.mapper;
 
 import java.awt.Color;
-import java.util.Collection;
+
 import java.util.ArrayList;
+import java.util.Collection;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
+
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
+
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 
 public class NetworkPropertyMapper extends Mapper {

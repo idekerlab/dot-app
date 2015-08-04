@@ -2,8 +2,8 @@ package org.cytoscape.intern;
 
 import java.awt.Dialog;
 
-import javax.swing.JOptionPane;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**

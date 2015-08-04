@@ -2,14 +2,19 @@ package org.cytoscape.intern.write;
 
 import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.intern.Notifier;
+
 import org.cytoscape.io.CyFileFilter;
+
 import org.cytoscape.io.write.CyNetworkViewWriterFactory;
 import org.cytoscape.io.write.CyWriter;
+
 import org.cytoscape.model.CyNetwork;
+
 import org.cytoscape.view.model.CyNetworkView;
 
 import java.io.IOException;
 import java.io.OutputStream;
+
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +31,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	
 	private CyFileFilter fileFilter;
 	
-	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.DotWriterFactory");
+	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.write.DotWriterFactory");
 	
 	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
 	
@@ -37,9 +42,6 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 * @param fileFilter CyFileFilter associated with this factory
 	 */
 	public DotWriterFactory(CyFileFilter fileFilter) {
-		super();
-		this.fileFilter = fileFilter;
-		
 		// make logger write to file
 		FileHandler handler = null;
 		try {
@@ -53,6 +55,8 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 		}
 		LOGGER.addHandler(handler);
 		FILE_HANDLER_MGR.registerFileHandler(handler);
+
+		this.fileFilter = fileFilter;
 	}
 
 	/**

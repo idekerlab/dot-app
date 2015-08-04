@@ -3,15 +3,19 @@ package org.cytoscape.intern;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.NetworkTestSupport;
+
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
+
 import org.cytoscape.intern.write.mapper.EdgePropertyMapper;
 import org.cytoscape.intern.write.mapper.Mapper;
 import org.cytoscape.intern.write.mapper.NetworkPropertyMapper;

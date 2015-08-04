@@ -1,8 +1,10 @@
 package org.cytoscape.intern;
 
 import org.cytoscape.model.CyEdge;
+
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
+
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.NullVisualProperty;
 
