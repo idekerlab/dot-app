@@ -35,10 +35,13 @@ import java.util.logging.SimpleFormatter;
  */
 
 public class DotReaderFactory implements InputStreamTaskFactory {
-
+    
+	
+	//debug logger declaration 
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.read.DotReaderFactory");
 	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
 
+	
 	//Variable Declarations
 	private CyFileFilter fileFilter;
 	private CyNetworkViewFactory netViewFact;
@@ -47,6 +50,7 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 	private CyRootNetworkManager rootNetMgr;
 	private VisualMappingManager vizMapMgr;
 	private VisualStyleFactory vizStyleFact;
+	
 	
 	/**
 	 * Sets the DotReaderFactory with associate fileFilter
