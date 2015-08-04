@@ -2,4 +2,4 @@
 /.settings/
 log*
 /.classpath
-/src/test/resources/expected_dot_files
+/src/test/resources/expected_dot_files/*
