@@ -22,6 +22,7 @@ public class DotReaderTask implements CyNetworkReader {
 		inputReader = new InputStreamReader(inputStream);
 		networks = new ArrayList<CyNetwork>();
 	}
+	
 	@Override
 	public void cancel() {
 		// TODO Auto-generated method stub
@@ -46,6 +47,23 @@ public class DotReaderTask implements CyNetworkReader {
 		 *			- Create a CyEdge
 		 *			- If digraph, set interaction to "interaction", else set to undirected
 		 *			- set the name and shared_name of CyEdge to Sourcename (interaction) Targetname
+		 */
+		/**
+		 * Everything we need to do (to help design-- not necessarily in this order):
+		 * 1. Use parser to generate Graph objects representing
+		 * the graphs from the InputStreamReader
+		 * 2. For each graph object do the following:
+		 * 		a. Create a CyNetwork
+		 * 		b. Set the name of the CyNetwork to the Graph's Id
+		 * 		-  Set all network properties
+		 * 		[-  Add all CyNodes to network
+		 * 		-  set default VPs if exists defaults in .dot file. using getGenericAttriubte()
+		 * 		-  If not, use cytoscape defaults (do nothing)
+		 * 		-  Set default Visual Properties for nodes
+		 * 		-]  Set any bypass VPs
+		 * 		-  Do bracketed points for CyEdges. And also:
+		 * 			-  If digraph, set interaction to "interaction", else set to undirected
+		 * 			-  set the name and shared_name of CyEdge to Sourcename (interaction) Targetname
 		 */
 
 	}

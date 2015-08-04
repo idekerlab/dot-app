@@ -75,6 +75,18 @@ public class CyActivator extends AbstractCyActivator {
 		//registerService from CyNetworkViewWriterFactory interface
 		registerService(context, dotFac, CyNetworkViewWriterFactory.class, new Properties());
 
+		/**
+		 * getService for:
+		 * CyNetworkFactory
+		 * CyNetworkViewFactory
+		 * VisualStyleFactory
+		 * 
+		 * create a VisualStyle and pass into DotReaderFactory
+		 * Pass CyNetworkFactory and CyNetworkViewFactory in
+		 * because we do not want to create a network until we know user is reading.
+		 * And we need a network to create a networkView
+		 */
+		
 	}
 	
 	@Override

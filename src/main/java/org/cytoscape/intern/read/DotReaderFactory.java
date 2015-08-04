@@ -28,6 +28,8 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 
 	@Override
 	public boolean isReady(InputStream inStream, String inputName) {
+		
+		// 
 		if (inStream != null && inputName != null) {
 			String[] parts = inputName.split(".");
 			String extension = parts[parts.length-1];
@@ -35,6 +37,7 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 				return true;
 			}
 		}
+		
 		return false;
 	}
 
