@@ -1,13 +1,17 @@
 package org.cytoscape.intern.write.mapper;
 
 import org.cytoscape.model.CyNode;
-import org.cytoscape.view.presentation.property.values.NodeShape;
+
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
+
+import org.cytoscape.view.presentation.property.values.NodeShape;
+
 import org.cytoscape.view.model.View;
 
 import java.awt.Color;
 import java.awt.Font;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

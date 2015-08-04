@@ -2,14 +2,18 @@ package org.cytoscape.intern.write.mapper;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNode;
+
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-import org.cytoscape.view.presentation.property.values.ArrowShape;
+
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 
+import org.cytoscape.view.presentation.property.values.ArrowShape;
+
 import java.awt.Color;
 import java.awt.Font;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

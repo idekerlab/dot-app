@@ -2,25 +2,33 @@ package org.cytoscape.intern.write;
 
 import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.intern.Notifier;
+
 import org.cytoscape.intern.write.mapper.EdgePropertyMapper;
 import org.cytoscape.intern.write.mapper.Mapper;
 import org.cytoscape.intern.write.mapper.NetworkPropertyMapper;
 import org.cytoscape.intern.write.mapper.NodePropertyMapper;
+
 import org.cytoscape.io.write.CyWriter;
+
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
+
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+
 import org.cytoscape.work.TaskMonitor;
-import org.cytoscape.work.util.ListSingleSelection;
 import org.cytoscape.work.Tunable;
 
+import org.cytoscape.work.util.ListSingleSelection;
+
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -102,8 +110,6 @@ public class DotWriterTask implements CyWriter {
 	 * @param networkView CyNetworkView that is being exported
 	 */
 	public DotWriterTask(OutputStream output, CyNetworkView networkView) {
-		super();
-		
 		// Make logger write to file
 		handler = null;
 		try {
