@@ -34,6 +34,14 @@ import java.util.logging.SimpleFormatter;
 import com.alexmerz.graphviz.ParseException;*/
 import com.alexmerz.graphviz.objects.*;
 
+/**
+ * Task object that reads a dot file into a network/ network view
+ * 
+ * @author Massoud Maher
+ * @author Braxton Fitts
+ * @author Ziran Zhang
+ */
+
 public class DotReaderTask extends AbstractCyNetworkReader {
 	
 	// debug logger
@@ -41,6 +49,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	private FileHandler handler;
 	
 	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
+
 	/*
 	 * InputStreamReader used as input to the JPGD Parser
 	 */
@@ -61,10 +70,22 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	private VisualStyleFactory vizStyleFact;
 	
-	public DotReaderTask(InputStream inStream, CyNetworkViewFactory cyNetViewFctry,
-			CyNetworkFactory cyNetFctry, CyNetworkManager cyNetMgr,
-			CyRootNetworkManager cyRootNetMgr, VisualMappingManager vizMapMgr, VisualStyleFactory vizStyleFact) {
-		super(inStream, cyNetViewFctry, cyNetFctry, cyNetMgr, cyRootNetMgr);
+	
+	/**
+	 * Constructs a DotReaderTask object for importing a dot file
+	 * 
+	 * @param inStream the stream to be read from
+	 * @param netViewFact instance of CyNetworkViewFactory
+	 * @param netFact instance of CyNetworkFactory
+	 * @param netMgr instance of CyNetworkManager
+	 * @param rootNetMgr instance of CyRootNetworkManager
+	 * @param vizMapMgr instance of VisualMappingManager
+	 * @param vizStyleFact instance of VisualStyleFactory
+	 */
+	public DotReaderTask(InputStream inStream, CyNetworkViewFactory netViewFact,
+			CyNetworkFactory netFact, CyNetworkManager netMgr,
+			CyRootNetworkManager rootNetMgr, VisualMappingManager vizMapMgr, VisualStyleFactory vizStyleFact) {
+		super(inStream, netViewFact, netFact, netMgr, rootNetMgr);
 		// Make logger write to file
 		handler = null;
 		try {
@@ -86,6 +107,13 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		this.vizStyleFact = vizStyleFact;
 	}
 
+	
+	/**
+	 * Causes the task to begin execution.
+	 * 
+	 * @param taskMonitor The TaskMonitor provided by TaskManager to allow the
+	 * Task to modify its user interface.
+	 */
 	@Override
 	public void run(TaskMonitor monitor) throws Exception {
 		// TODO Auto-generated method stub
@@ -110,9 +138,15 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 */
 
 	}
-
+	
+	
+	/**
+	 * build an instance of CyNetworkView based on the passed in CyNetwork instance
+	 * 
+	 * @param CyNetwork network from which we want to build the CyNetworkView
+	 */
 	@Override
-	public CyNetworkView buildCyNetworkView(CyNetwork arg0) {
+	public CyNetworkView buildCyNetworkView(CyNetwork network) {
 		// TODO Auto-generated method stub
 		/*
 		 * Steps:
