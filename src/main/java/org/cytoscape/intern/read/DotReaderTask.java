@@ -116,7 +116,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	@Override
 	public void run(TaskMonitor monitor) throws Exception {
-		// TODO Auto-generated method stub
+		// TODO 
 		/*
 		 * Steps:
 		 * 1. Use Parser to generate Graph objects representing
