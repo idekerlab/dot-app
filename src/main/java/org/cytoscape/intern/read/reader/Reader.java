@@ -27,9 +27,9 @@ import com.alexmerz.graphviz.objects.Graph;
 public abstract class Reader {
 	
 	//debug logger declaration 
-	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.read.Reader");
-	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
-	private FileHandler handler = null;
+	protected static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.read.Reader");
+	protected static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
+	protected FileHandler handler = null;
 
 	// view of network being created/modified
 	protected CyNetworkView networkView;
@@ -40,9 +40,7 @@ public abstract class Reader {
 	// visualStyle being applied to network, used to set default values
 	protected VisualStyle vizStyle;
 
-	// represents .dot graph
-	protected Graph graph;
-	
+
 	/*
 	 * Map of explicitly defined default attributes
 	 * key is attribute name, value is value
