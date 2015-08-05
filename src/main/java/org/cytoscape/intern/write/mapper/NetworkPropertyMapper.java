@@ -239,7 +239,7 @@ public class NetworkPropertyMapper extends Mapper {
 		
 		LOGGER.info("Appending Default style attribute to .dot string");
 		String styleString = mapDefaultEdgeDotStyle();
-		elementString.append(mapDotStyle() + ",");
+		edgeDefaults.append(mapDotStyle() + ",");
 		edgeDefaults.append("dir = \"both\"]");
 		return edgeDefaults.toString();
 	}

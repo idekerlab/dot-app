@@ -254,6 +254,12 @@ public abstract class Mapper {
 		return dotStyle.toString();
 	}
 	
+	/**
+	 * Checks whether a VisualProperty is equal to the default value for that VP
+	 * 
+	 * @param vizProp VisualProperty being compared
+	 * @return boolean. True when value is equal, false if not
+	 */
 	protected boolean isEqualToDefault(VisualProperty<?> vizProp) {
 		return view.getVisualProperty(vizProp).equals(vizStyle.getDefaultValue(vizProp));
 	}

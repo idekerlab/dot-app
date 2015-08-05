@@ -127,7 +127,7 @@ public class NodePropertyMapper extends Mapper {
 		
 		// Write fillcolor and color attribute
 		String colorsString = mapColors();
-		if (!colorsString.equals("")) {
+		if (colorsString != null) {
 			elementString.append(mapColors() + ",");
 		}
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
@@ -197,7 +197,8 @@ public class NodePropertyMapper extends Mapper {
 			String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, transparency));
 			if (elementString != null) {
 				elementString.append(dotFillColor);
-			} else {
+			}
+			else {
 				elementString = new StringBuilder(dotFillColor);
 			}
 		}
