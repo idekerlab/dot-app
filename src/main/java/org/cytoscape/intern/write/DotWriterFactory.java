@@ -14,6 +14,7 @@ import org.cytoscape.io.write.CyNetworkViewWriterFactory;
 import org.cytoscape.io.write.CyWriter;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.vizmap.VisualMappingManager;
 
 /**
  * Task factory that creates the file writing task.
@@ -26,6 +27,8 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	
 	private CyFileFilter fileFilter;
 	
+	private VisualMappingManager vizMapMgr;
+	
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.write.DotWriterFactory");
 	
 	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
@@ -35,8 +38,9 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	 * so it knows where to write to file
 	 * 
 	 * @param fileFilter CyFileFilter associated with this factory
+	 * @param vizMapMgr 
 	 */
-	public DotWriterFactory(CyFileFilter fileFilter) {
+	public DotWriterFactory(CyFileFilter fileFilter, VisualMappingManager vizMapMgr) {
 		// make logger write to file
 		FileHandler handler = null;
 		try {
@@ -52,6 +56,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 		FILE_HANDLER_MGR.registerFileHandler(handler);
 
 		this.fileFilter = fileFilter;
+		this.vizMapMgr = vizMapMgr;
 	}
 
 	/**
@@ -95,6 +100,6 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	@Override
 	public CyWriter createWriter(OutputStream outStream, CyNetworkView view) {
 		LOGGER.info("createWriter with CyNetworkView param called");
-		return new DotWriterTask(outStream, view);
+		return new DotWriterTask(outStream, view, vizMapMgr);
 	}
 }

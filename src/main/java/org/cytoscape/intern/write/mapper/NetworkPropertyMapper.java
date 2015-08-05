@@ -1,6 +1,7 @@
 package org.cytoscape.intern.write.mapper;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -8,9 +9,15 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
-import org.cytoscape.view.presentation.property.BasicVisualLexicon;
+
+import static org.cytoscape.view.presentation.property.ArrowShapeVisualProperty.*;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.*;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.*;
+
 import org.cytoscape.view.presentation.property.values.ArrowShape;
+import org.cytoscape.view.presentation.property.values.LineType;
+import org.cytoscape.view.presentation.property.values.NodeShape;
+import org.cytoscape.view.vizmap.VisualStyle;
 
 public class NetworkPropertyMapper extends Mapper {
 
@@ -21,18 +28,25 @@ public class NetworkPropertyMapper extends Mapper {
 	
 	// Location of graph label, null if no graph label is desired
 	private String labelLoc;
-	
+
+	// enum for mapDefaultDotStyle()
+	private enum MapDefaultType {
+		NODE_D, EDGE_D
+	}
+
 	/**
 	 * Constructs NetworkPropertyMapper object
+	 * @param vizStyle 
 	 * 
 	 * @param view of network we are converting
 	 */
-	public NetworkPropertyMapper(CyNetworkView netView, boolean directed, String splinesVal, String labelLoc) {
-		super(netView);
+	public NetworkPropertyMapper(CyNetworkView netView, boolean directed, String splinesVal, String labelLoc, VisualStyle vizStyle) {
+		super(netView, vizStyle);
 		simpleVisPropsToDot = new ArrayList<String>();
 		this.directed = directed;
 		this.splinesVal = splinesVal;
 		this.labelLoc = labelLoc;
+		this.vizStyle = vizStyle;
 		
 		populateMaps();		
 	}
@@ -64,6 +78,13 @@ public class NetworkPropertyMapper extends Mapper {
 		        elementString.append(dotAttribute + "\n");
 		}
 		
+		elementString.append(
+			getNodeDefaults() + "\n"
+		);
+		elementString.append(
+			getEdgeDefaults() + "\n"
+		);
+		
 		return elementString.toString();
 	}
 	
@@ -74,7 +95,7 @@ public class NetworkPropertyMapper extends Mapper {
 		// if graph label is desired
 		if(labelLoc != null) {
 			// label attribute of graph
-			String label = view.getVisualProperty(BasicVisualLexicon.NETWORK_TITLE);
+			String label = view.getVisualProperty(NETWORK_TITLE);
 			label = label.replace("\"", "\\\"");
 			String dotLabel = String.format("label = \"%s\"", label);
 			simpleVisPropsToDot.add(dotLabel);
@@ -84,7 +105,7 @@ public class NetworkPropertyMapper extends Mapper {
 		}
 
 		// Background color of graph
-		Color netBgColor = (Color)view.getVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_PAINT);
+		Color netBgColor = (Color)view.getVisualProperty(NETWORK_BACKGROUND_PAINT);
 		String dotBgColor = String.format("bgcolor = \"%s\"", mapColorToDot(netBgColor, netBgColor.getAlpha()));
 		simpleVisPropsToDot.add(dotBgColor);
 		
@@ -111,6 +132,143 @@ public class NetworkPropertyMapper extends Mapper {
 		return output;
 	}
 	
+	private String getNodeDefaults() {
+		StringBuilder nodeDefaults = new StringBuilder("node [");
+		
+		//Node SimpleVizProps
+		Double borderWidth = vizStyle.getDefaultValue(NODE_BORDER_WIDTH);
+		nodeDefaults.append(
+			String.format("penwidth = \"%f\"", borderWidth) + ","
+		);
+		
+		Double height = vizStyle.getDefaultValue(NODE_HEIGHT);
+		nodeDefaults.append(
+			String.format("height = \"%f\"", height/PPI) + ","
+		);
+
+		Double width = vizStyle.getDefaultValue(NODE_WIDTH);
+		nodeDefaults.append(
+			String.format("width = \"%f\"", width/PPI) + ","
+		);
+
+		String tooltip = vizStyle.getDefaultValue(NODE_TOOLTIP);
+		nodeDefaults.append(
+			String.format("tooltip = \"%s\"", tooltip) + ","
+		);
+
+		// Get the color string (border color). Append to attribute string
+		Color borderColor = (Color) vizStyle.getDefaultValue(NODE_BORDER_PAINT);
+		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
+		Integer borderTransparency = ((Number)vizStyle.getDefaultValue(NODE_BORDER_TRANSPARENCY)).intValue();
+		String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
+		nodeDefaults.append(dotBorderColor + ",");
+		
+		// Write node fill color
+		Color fillColor = (Color) vizStyle.getDefaultValue(NODE_FILL_COLOR);
+		Integer nodeTransparency = ((Number)vizStyle.getDefaultValue(NODE_TRANSPARENCY)).intValue();
+		String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, nodeTransparency));
+		nodeDefaults.append(dotFillColor + ",");
+
+		// Get the .dot string for the node shape. Append to attribute string
+		NodeShape shape = vizStyle.getDefaultValue(NODE_SHAPE);
+		String shapeStr = NODE_SHAPE_MAP.get(shape);
+		
+		// default if there is no match
+		if (shapeStr == null) {
+			shapeStr = "rectangle"; 
+			LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+		}
+		
+		String dotShape = String.format("shape = \"%s\"", shapeStr);
+		nodeDefaults.append(dotShape + ",");
+		
+		nodeDefaults.append(
+			mapDefaultDotStyle(MapDefaultType.NODE_D, shape) +","
+		);
+
+
+		Font fontName = vizStyle.getDefaultValue(NODE_LABEL_FONT_FACE);
+		LOGGER.info("Retrieving font size...");
+		Integer fontSize = ((Number)vizStyle.getDefaultValue(NODE_LABEL_FONT_SIZE)).intValue();
+		Color fontColor = (Color)(vizStyle.getDefaultValue(NODE_LABEL_COLOR));
+		Integer fontTransparency = ((Number)vizStyle.getDefaultValue(NODE_LABEL_TRANSPARENCY)).intValue();
+		
+		String fontString = mapDefaultFont(fontName, fontSize, fontColor, fontTransparency, MapDefaultType.NODE_D);
+		nodeDefaults.append(fontString + ",");
+		
+		nodeDefaults.append(
+			"fixedsize = \"true\",labelloc = \"" + labelLoc + "\"]"
+		);
+		return nodeDefaults.toString();
+	}
+	
+	private String getEdgeDefaults() {
+		StringBuilder edgeDefaults = new StringBuilder("edge [");
+		edgeDefaults.append("dir = \"both\"]");
+		return edgeDefaults.toString();
+	}
+	
+	private String mapDefaultFont(Font font, Integer size, Color color, Integer transparency, MapDefaultType type) {
+		
+		LOGGER.info("Label font, size, color, and transparency translation");
+		 
+		String returnValue = "";
+		
+		if (type == MapDefaultType.NODE_D) {
+			LOGGER.info("Label font, size, color, and transparency translation");
+			 
+			returnValue += "fontname = \"" + font.getFontName() + "\",";  
+			returnValue += "fontsize = \"" + size.toString() + "\","; 
+			returnValue += "fontcolor = \"" + mapColorToDot(color, transparency) + "\"";
+
+			LOGGER.info("Dot attributes associate with font is: " + returnValue);
+			
+		} else if (type == MapDefaultType.EDGE_D) {
+			LOGGER.info("Label font, size, color, and transparency translation");
+			 
+			returnValue += "fontname = \"" + font.getFontName() + "\",";  
+			returnValue += "fontsize = \"" + size.toString() + "\","; 
+			returnValue += "fontcolor = \"" + mapColorToDot(color, transparency) + "\"";
+
+			LOGGER.info("Dot attributes associate with font is: " + returnValue);
+			
+		}
+		LOGGER.info("Dot attributes associate with font is: " + returnValue);
+		
+		return returnValue;
+		
+	}
+	
+	private String mapDefaultDotStyle(MapDefaultType type, NodeShape shape) {
+		StringBuilder dotStyle = new StringBuilder();
+		if (type == MapDefaultType.NODE_D) {
+			//NODE_BORDER_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
+			LineType lineType = vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE);
+			// get .dot equivalent of line style
+			String lineStr = LINE_TYPE_MAP.get(lineType);
+			if (lineStr == null) {
+				lineStr = "solid";
+				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+			}
+			String shapeString = (shape.equals(ROUND_RECTANGLE)) ? "rounded," : "";
+			String style = String.format("style = \"%s,%sfilled\"", lineStr, shapeString);
+
+			dotStyle.append(style);
+		} 
+		else if (type == MapDefaultType.EDGE_D) {
+			//EDGE_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
+			LineType lineType = vizStyle.getDefaultValue(EDGE_LINE_TYPE);
+			String lineStr = LINE_TYPE_MAP.get(lineType);
+			if (lineStr == null) {
+				lineStr = "solid";
+				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+			}
+			String style = String.format("style = \"%s\"", lineStr);
+			dotStyle.append(style);
+		}
+		return dotStyle.toString();
+	}
+	
 	/**
 	 * Determines whether the graph is visibly directed or not
 	 * 
@@ -125,10 +283,10 @@ public class NetworkPropertyMapper extends Mapper {
 		 * iterate each edgeview to check whether there is a target arrow shape
 		 * or a source arrow shape for that edge
 		 */
-		ArrowShape noArrow = ArrowShapeVisualProperty.NONE;
+		ArrowShape noArrow = NONE;
         for (View<CyEdge> edge: edgeViews){
-        	ArrowShape sourceArrow = edge.getVisualProperty(BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE);
-        	ArrowShape targetArrow = edge.getVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE);
+        	ArrowShape sourceArrow = edge.getVisualProperty(EDGE_SOURCE_ARROW_SHAPE);
+        	ArrowShape targetArrow = edge.getVisualProperty(EDGE_TARGET_ARROW_SHAPE);
         	if(!targetArrow.equals(noArrow) || !sourceArrow.equals(noArrow)) {
         		//return true if there is at least one not NONE arrow shape
         		return true;

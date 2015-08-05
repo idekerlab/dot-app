@@ -26,54 +26,44 @@ public class MapperTest {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
 		CyNode node = network.addNode();
+		TestVisualStyle vizStyle = new TestVisualStyle();
 		network.getRow(node).set(CyNetwork.NAME, "\"Test\"Node1\"\"");
 		CyNetworkView networkView = new TestNetworkView(network);
 		View<CyNode> nodeView = networkView.getNodeView(node);
 		String label = "\"Hello World!\"";
 		String tooltip = "Hello!";
-		Double height = nodeView.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT);
-		Double width = nodeView.getVisualProperty(BasicVisualLexicon.NODE_WIDTH);
-		Double bwidth = nodeView.getVisualProperty(BasicVisualLexicon.NODE_BORDER_WIDTH);
 
 		String escLabel = label.replace("\"", "\\\"");
 		String labelString = String.format("label = \"%s\"", escLabel);
 		String tooltipString = String.format("tooltip = \"%s\"", tooltip);
-		String colorString = "color = \"#FF0000FF\"";
-		String fillColorString = "fillcolor = \"#00DD99FF\"";
+		String fillColorString = "fillcolor = \"#95DDEEFF\"";
 		String expectedDotString = null;
 		String actualDotString = null;
-		String heightString = String.format("height = \"%f\"", height/72);
-		String widthString = String.format("width = \"%f\"", width/72);
-		String bwidthString = String.format("penwidth = \"%f\"", bwidth);
 		String fontString = String.format("fontname = \"%s\"", new Font(Font.DIALOG, Font.PLAIN, 12).getFontName());
-		String fontSizeString = "fontsize = \"12\"";
-		String fontColor = "fontcolor = \"#000000FF\"";
+		String fontSizeString = "fontsize = \"21\"";
+		String fontColor = "fontcolor = \"#FFFF00FF\"";
 
 		
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL, label);
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_PAINT, new Color(0xFF, 0x00, 0x00));
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_BORDER_TRANSPARENCY, new Integer(0xFF));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_TOOLTIP, tooltip);
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_X_LOCATION, new Double(0));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION, new Double(0));
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR, new Color(0x00, 0xDD, 0x99));
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_TRANSPARENCY, new Integer(0xFF));
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_FACE, new Font(Font.DIALOG, Font.PLAIN, 12));
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_SIZE, new Integer(12));
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_COLOR, new Color(0x00, 0x00, 0x00));
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_TRANSPARENCY, new Integer(0xFF));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR, new Color(0x95, 0xDD, 0xEE));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_FACE, new Font(Font.DIALOG, Font.PLAIN, 21));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_SIZE, new Integer(21));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_COLOR, new Color(0xFF, 0xFF, 0x00));
 		
 		
 		
 		
 		
-		expectedDotString = String.format("[%s,%s,%s,%s,%s,%s,%s,shape = \"ellipse\","
-				+ "style = \"solid,filled\",pos = \"%f,%f\",%s,%s,%s,fixedsize = \"true\",labelloc = t]",
-				labelString, bwidthString, heightString, widthString, tooltipString, colorString, fillColorString,
+		expectedDotString = String.format("[%s,%s,%s,"
+				+ "pos = \"%f,%f\",%s,%s,%s]",
+				labelString, tooltipString, fillColorString,
 				new Double(0), new Double(0) * -1.0,fontString, fontSizeString, fontColor); 
 
 		// todo
-		Mapper mapper = new NodePropertyMapper(nodeView, "t");
+		Mapper mapper = new NodePropertyMapper(nodeView, vizStyle, "t");
 		actualDotString = mapper.getElementString();
 
 		assertEquals("Node Cytoscape property translation failed.", expectedDotString, actualDotString);
@@ -87,6 +77,7 @@ public class MapperTest {
 		CyNode node = network.addNode();
 		CyNode node2 = network.addNode();
 		CyEdge edge = network.addEdge(node, node2, true);
+		TestVisualStyle vizStyle = new TestVisualStyle();
 		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
 		network.getRow(node2).set(CyNetwork.NAME, "TestNode2");
 		network.getRow(edge).set(CyNetwork.NAME, "TestEdge1");
@@ -119,7 +110,7 @@ public class MapperTest {
 		expectedDotString = String.format("[%s,%s,%s,arrowhead = \"none\",arrowtail = \"none\",%s,%s,%s,%s,style = \"dashed\",dir = \"both\"]", labelString, widthString,
 				tooltipString, colorString, fontString, fontSizeString, fontColor);
 
-		Mapper mapper = new EdgePropertyMapper(edgeView, networkView);
+		Mapper mapper = new EdgePropertyMapper(edgeView, vizStyle, networkView);
 		actualDotString = mapper.getElementString();
 
 		assertEquals("Edge Cytoscape property translation failed", expectedDotString, actualDotString);
@@ -132,6 +123,7 @@ public class MapperTest {
 		CyNetwork network = nts.getNetwork();
 		CyNode node = network.addNode();
 		CyNode node2 = network.addNode();
+		TestVisualStyle vizStyle = new TestVisualStyle();
 		CyEdge edge = network.addEdge(node, node2, true);
 		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
 		network.getRow(node2).set(CyNetwork.NAME, "TestNode2");
@@ -150,10 +142,12 @@ public class MapperTest {
 		String outputString = "outputorder = \"edgesfirst\"";
 		String esepString = "esep = \"0\"";
 		String marginString = "pad = \"2\"";
-		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
-				labelString, labelLocString, colorString, splinesString, outputString, esepString, marginString); 
+		String nodeDefaults = "node [penwidth = \"2.000000\",height = \"0.555556\",width = \"0.833333\",tooltip = \"\",color = \"#000000FF\",fillcolor = \"#C80000FF\",shape = \"ellipse\",style = \"solid,filled\",fontname = \"SansSerif.plain\",fontsize = \"12\",fontcolor = \"#000000FF\",fixedsize = \"true\",labelloc = \"b\"]";
+		String edgeDefaults = "edge []";
+		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
+				labelString, labelLocString, colorString, splinesString, outputString, esepString, marginString, nodeDefaults, edgeDefaults); 
 
-		Mapper mapper = new NetworkPropertyMapper(networkView, NetworkPropertyMapper.isDirected(networkView), "false", "b");
+		Mapper mapper = new NetworkPropertyMapper(networkView, NetworkPropertyMapper.isDirected(networkView), "false", "b", vizStyle);
 		String actualDotString = mapper.getElementString();
 
 		assertEquals("Edge Cytoscape property translation failed", expectedDotString, actualDotString);

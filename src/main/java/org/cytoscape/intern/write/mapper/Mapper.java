@@ -15,9 +15,15 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.View;
-import org.cytoscape.view.presentation.property.BasicVisualLexicon;
-import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
+import org.cytoscape.view.model.VisualProperty;
+
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.*;
+import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.*;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.*;
+
 import org.cytoscape.view.presentation.property.values.LineType;
+import org.cytoscape.view.presentation.property.values.NodeShape;
+import org.cytoscape.view.vizmap.VisualStyle;
 
 /**
  * Handles mapping of Cytoscape properties to .dot attributes in the form of a String.
@@ -33,15 +39,35 @@ public abstract class Mapper {
 	// maps Cytoscape properties  by their ID Strings to their .dot equivalents if relationship is simple equivalency
 	protected ArrayList<String> simpleVisPropsToDot; 
 	
+	// VisualStyle applied to the view
+	protected VisualStyle vizStyle;
+	
 	// maps Cytoscape line types to the equivalent string used in .dot
-	private static final HashMap<LineType, String> LINE_TYPE_MAP = new HashMap<LineType, String>();
+	// line types are fields in org.cytoscape.view.presentation.property.LineTypeVisualProperty
+	protected static final HashMap<LineType, String> LINE_TYPE_MAP = new HashMap<LineType, String>();
 	static {
-		LINE_TYPE_MAP.put(LineTypeVisualProperty.LONG_DASH, "dashed");
-		LINE_TYPE_MAP.put(LineTypeVisualProperty.EQUAL_DASH, "dashed");
-		LINE_TYPE_MAP.put(LineTypeVisualProperty.SOLID, "solid");
-		LINE_TYPE_MAP.put(LineTypeVisualProperty.DOT, "dotted");
+		LINE_TYPE_MAP.put(LONG_DASH, "dashed");
+		LINE_TYPE_MAP.put(EQUAL_DASH, "dashed");
+		LINE_TYPE_MAP.put(SOLID, "solid");
+		LINE_TYPE_MAP.put(DOT, "dotted");
 	}
 	
+	/**
+	 *  maps Cytoscape node shape types to the equivalent string used in .dot
+	 */
+	// node shapesare fields in org.cytoscape.view.presentation.property.NodeShapeVisualProperty
+	protected static final HashMap<NodeShape, String> NODE_SHAPE_MAP = new HashMap<NodeShape, String>();
+	static {
+		NODE_SHAPE_MAP.put(TRIANGLE, "triangle");
+		NODE_SHAPE_MAP.put(DIAMOND, "diamond");
+		NODE_SHAPE_MAP.put(ELLIPSE, "ellipse");
+		NODE_SHAPE_MAP.put(HEXAGON, "hexagon");
+		NODE_SHAPE_MAP.put(OCTAGON, "octagon");
+		NODE_SHAPE_MAP.put(PARALLELOGRAM, "parallelogram");
+		NODE_SHAPE_MAP.put(ROUND_RECTANGLE, "rectangle");
+		NODE_SHAPE_MAP.put(RECTANGLE, "rectangle");
+	}
+
 	// view that this mapper object is mapping
 	protected View<? extends CyIdentifiable> view;
 	
@@ -76,8 +102,9 @@ public abstract class Mapper {
 	 * 
 	 * @param view View that this mapper is being used to map to dot
 	 */
-	public Mapper(View<? extends CyIdentifiable> view) {
+	public Mapper(View<? extends CyIdentifiable> view, VisualStyle vizStyle) {
 		this.view = view;
+		this.vizStyle = vizStyle;
 	}	
 	
 	/**
@@ -97,7 +124,6 @@ public abstract class Mapper {
 		LOGGER.info("Created .dot color attribute string. Result: " + result);
 		return result;
 	}
-	
 	/**
 	 * Given a font, returns the .dot equivalent in String form including the
 	 * font name, size and color
@@ -112,15 +138,65 @@ public abstract class Mapper {
 		
 		LOGGER.info("Label font, size, color, and transparency translation");
 		 
-		String returnValue = "";
+		StringBuilder returnValue = null;
 		
-		returnValue += "fontname = \"" + font.getFontName() + "\",";  
-		returnValue += "fontsize = \"" + size.toString() + "\","; 
-		returnValue += "fontcolor = \"" + mapColorToDot(color, transparency) + "\"";
+		if (view.getModel() instanceof CyNode) {
+			if (!font.equals(vizStyle.getDefaultValue(NODE_LABEL_FONT_FACE))) {
+				String fontName = String.format("fontname = \"%s\"", font.getFontName());
+				if (returnValue == null) {
+					returnValue = new StringBuilder(fontName);
+				}
+			}
+			if (!size.equals(vizStyle.getDefaultValue(NODE_LABEL_FONT_SIZE))) {
+				String fontSize = String.format("fontsize = \"%d\"", size);
+				if (returnValue == null) {
+					returnValue = new StringBuilder(fontSize);
+				} else {
+					returnValue.append(","+fontSize);
+				}
+			}
+			if (!color.equals((Color)vizStyle.getDefaultValue(NODE_LABEL_COLOR)) ||
+					!transparency.equals(vizStyle.getDefaultValue(NODE_LABEL_TRANSPARENCY))) {
+				String fontColor = String.format("fontcolor = \"%s\"", mapColorToDot(color, transparency));
+				if (returnValue == null) {
+					returnValue = new StringBuilder(fontColor);
+				} else {
+					returnValue.append(","+fontColor);
+				}
+			}
+		} else if (view.getModel() instanceof CyEdge) {
+			if (!font.equals(vizStyle.getDefaultValue(EDGE_LABEL_FONT_FACE))) {
+				String fontName = String.format("fontname = \"%s\"", font.getFontName());
+				if (returnValue == null) {
+					returnValue = new StringBuilder(fontName);
+				}
+			}
+			if (!size.equals(vizStyle.getDefaultValue(EDGE_LABEL_FONT_SIZE))) {
+				String fontSize = String.format("fontsize = \"%d\"", size);
+				if (returnValue == null) {
+					returnValue = new StringBuilder(fontSize);
+				} else {
+					returnValue.append(","+fontSize);
+				}
+			}
+			if (!color.equals((Color)vizStyle.getDefaultValue(EDGE_LABEL_COLOR)) ||
+					!transparency.equals(vizStyle.getDefaultValue(EDGE_LABEL_TRANSPARENCY))) {
+				String fontColor = String.format("fontcolor = \"%s\"", mapColorToDot(color, transparency));
+				if (returnValue == null) {
+					returnValue = new StringBuilder(fontColor);
+				} else {
+					returnValue.append(","+fontColor);
+				}
+			}
+		}
 
-		LOGGER.info("Dot attributes associate with font is: " + returnValue);
+		if (returnValue == null) {
+			LOGGER.info("Font attributes are defaults");
+			return null;
+		}
+		LOGGER.info("Dot attributes associate with font is: " + returnValue.toString());
 		
-		return returnValue;		
+		return returnValue.toString();		
 		
 	}
 	
@@ -131,18 +207,23 @@ public abstract class Mapper {
 	protected String mapDotStyle() {
 		StringBuilder dotStyle = new StringBuilder();
 		if (view.getModel() instanceof CyNode) {
-			LineType lineType = view.getVisualProperty(BasicVisualLexicon.NODE_BORDER_LINE_TYPE);
-			// get .dot equivalent of line style
-			String lineStr = LINE_TYPE_MAP.get(lineType);
-			if (lineStr == null) {
-				lineStr = "solid";
-				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+			//NODE_BORDER_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
+			LineType lineType = view.getVisualProperty(NODE_BORDER_LINE_TYPE);
+			String lineStr = "";
+			if (!lineType.equals(vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE))) {
+				// get .dot equivalent of line style
+				lineStr = LINE_TYPE_MAP.get(lineType);
+				if (lineStr == null) {
+					lineStr = "solid";
+					LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+				}
 			}
-			String style = String.format("style = \"%s,", lineStr);
-			dotStyle.append(style);
+				String style = String.format("style = \"%s,", lineStr);
+				dotStyle.append(style);
 		} 
 		else if (view.getModel() instanceof CyEdge) {
-			LineType lineType = view.getVisualProperty(BasicVisualLexicon.EDGE_LINE_TYPE);
+			//EDGE_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
+			LineType lineType = view.getVisualProperty(EDGE_LINE_TYPE);
 			String lineStr = LINE_TYPE_MAP.get(lineType);
 			if (lineStr == null) {
 				lineStr = "solid";
@@ -152,6 +233,10 @@ public abstract class Mapper {
 			dotStyle.append(style);
 		}
 		return dotStyle.toString();
+	}
+	
+	protected boolean isEqualToDefault(VisualProperty<?> vizProp) {
+		return view.getVisualProperty(vizProp).equals(vizStyle.getDefaultValue(vizProp));
 	}
 	
 	/**

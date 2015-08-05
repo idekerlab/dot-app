@@ -22,6 +22,8 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.vizmap.VisualMappingManager;
+import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.Tunable;
 import org.cytoscape.work.util.ListSingleSelection;
@@ -95,13 +97,17 @@ public class DotWriterTask implements CyWriter {
 	// location of network label
 	private String networkLabelLoc;
 	
+	// VisualStyle applied to network view
+	private VisualStyle vizStyle;
+	
 	/**
 	 * Constructs a DotWriterTask object for exporting network view
 	 * 
 	 * @param output OutputStream that is being written to
 	 * @param networkView CyNetworkView that is being exported
+	 * @param vizMapMgr 
 	 */
-	public DotWriterTask(OutputStream output, CyNetworkView networkView) {
+	public DotWriterTask(OutputStream output, CyNetworkView networkView, VisualMappingManager vizMapMgr) {
 		// Make logger write to file
 		handler = null;
 		try {
@@ -118,6 +124,7 @@ public class DotWriterTask implements CyWriter {
 		
 		outputWriter = new OutputStreamWriter(output);
 		this.networkView = networkView;
+		this.vizStyle = vizMapMgr.getVisualStyle(networkView);
 		directed = NetworkPropertyMapper.isDirected(networkView);
 		
 		LOGGER.info("DotWriterTask constructed");
@@ -166,7 +173,7 @@ public class DotWriterTask implements CyWriter {
 		
 		if(networkView != null) {
 			// constructed here because splinesVal is needed, splinesVal can't be determined until run()
-			this.networkMapper = new NetworkPropertyMapper(networkView, directed, splinesVal, networkLabelLoc);
+			this.networkMapper = new NetworkPropertyMapper(networkView, directed, splinesVal, networkLabelLoc, vizStyle);
 		}
 		
 		LOGGER.info("Writing .dot file...");
@@ -252,7 +259,7 @@ public class DotWriterTask implements CyWriter {
 		
 			// for each node, write declaration string
 			for(View<CyNode> nodeView: nodeViewList) {
-				nodeMapper = new NodePropertyMapper(nodeView, nodeLabelLoc);
+				nodeMapper = new NodePropertyMapper(nodeView, vizStyle, nodeLabelLoc);
 	  		
 				try {
 					// Retrieve node name
@@ -313,7 +320,7 @@ public class DotWriterTask implements CyWriter {
 		
 			// for each edge, write declaration string
 			for(View<CyEdge> edgeView: edgeViewList) {
-				edgeMapper = new EdgePropertyMapper(edgeView, networkView);
+				edgeMapper = new EdgePropertyMapper(edgeView, vizStyle, networkView);
 	  		
 				try {
 					// Retrieve source+target node names
