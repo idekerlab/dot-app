@@ -46,7 +46,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	
 	// debug logger
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.read.DotReaderTask");
-	private FileHandler handler;
+	private FileHandler handler = null;
 	
 	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
 
@@ -81,11 +81,9 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		super(inStream, netViewFact, netFact, netMgr, rootNetMgr);
 		
 		// Make logger write to file
-		handler = null;
 		try {
 			handler = new FileHandler("log_DotReaderTask.txt");
 			handler.setLevel(Level.ALL);
-			
 			handler.setFormatter(new SimpleFormatter());
 		}
 		catch(IOException e) {
