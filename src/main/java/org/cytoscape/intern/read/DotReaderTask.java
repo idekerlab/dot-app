@@ -3,7 +3,7 @@ package org.cytoscape.intern.read;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,8 +21,8 @@ import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskMonitor;
 
-/*import com.alexmerz.graphviz.Parser;
-import com.alexmerz.graphviz.ParseException;*/
+import com.alexmerz.graphviz.Parser;
+import com.alexmerz.graphviz.ParseException;
 import com.alexmerz.graphviz.objects.Graph;
 
 /**
@@ -38,14 +38,13 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	// debug logger
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.read.DotReaderTask");
 	private FileHandler handler = null;
-	
 	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
 
 	// InputStreamReader used as input to the JPGD Parser 
 	private InputStreamReader inStreamReader;
 	
 	// HashMap that maps the created CyNetworks to their JPGD Graph object
-	private HashMap<CyNetwork, Graph> dotGraphs;
+	private Map<Graph, CyNetwork> dotGraphs;
 	
 	// VisualMappingManager to which the new visual style will be added	
 	private VisualMappingManager vizMapMgr;
@@ -161,4 +160,29 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		return null;
 	}
 
+	/**
+	 * Returns array of CyNetworks read
+	 * 
+	 * @return array of CyNetworks read
+	 */
+	public CyNetwork[] getNetworks() {
+		// Make array of right size
+		CyNetwork[] output = new CyNetwork[dotGraphs.size()];
+		
+		// fill with CyNetworks
+		int i = 0;
+		for(Map.Entry<Graph, CyNetwork> entry: dotGraphs.entrySet()) {
+			output[i] = entry.getValue();
+			i++;
+		}
+		
+		return output;
+	}
 }
+
+
+
+
+
+
+
