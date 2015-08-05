@@ -1,24 +1,19 @@
 package org.cytoscape.intern.write;
 
-import org.cytoscape.intern.FileHandlerManager;
-import org.cytoscape.intern.Notifier;
-
-import org.cytoscape.io.CyFileFilter;
-
-import org.cytoscape.io.write.CyNetworkViewWriterFactory;
-import org.cytoscape.io.write.CyWriter;
-
-import org.cytoscape.model.CyNetwork;
-
-import org.cytoscape.view.model.CyNetworkView;
-
 import java.io.IOException;
 import java.io.OutputStream;
-
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+
+import org.cytoscape.intern.FileHandlerManager;
+import org.cytoscape.intern.Notifier;
+import org.cytoscape.io.CyFileFilter;
+import org.cytoscape.io.write.CyNetworkViewWriterFactory;
+import org.cytoscape.io.write.CyWriter;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.view.model.CyNetworkView;
 
 /**
  * Task factory that creates the file writing task.

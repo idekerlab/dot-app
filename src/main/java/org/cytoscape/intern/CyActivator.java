@@ -1,40 +1,28 @@
 package org.cytoscape.intern;
 
-import org.cytoscape.intern.read.DotReaderFactory;
-import org.cytoscape.intern.write.DotWriterFactory;
-
-import org.cytoscape.io.BasicCyFileFilter;
-import org.cytoscape.io.DataCategory;
-
-import org.cytoscape.io.read.InputStreamTaskFactory;
-
-import org.cytoscape.io.util.StreamUtil;
-
-import org.cytoscape.io.write.CyNetworkViewWriterFactory;
-
-import org.cytoscape.model.CyNetworkFactory;
-import org.cytoscape.model.CyNetworkManager;
-
-import org.cytoscape.model.subnetwork.CyRootNetworkManager;
-
-import org.cytoscape.service.util.AbstractCyActivator;
-
-import org.cytoscape.view.model.CyNetworkViewFactory;
-
-import org.cytoscape.view.vizmap.VisualMappingManager;
-import org.cytoscape.view.vizmap.VisualStyleFactory;
-
-import org.osgi.framework.BundleContext;
-
 import java.io.IOException;
-
 import java.util.HashSet;
 import java.util.Properties;
-
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+
+import org.cytoscape.intern.read.DotReaderFactory;
+import org.cytoscape.intern.write.DotWriterFactory;
+import org.cytoscape.io.BasicCyFileFilter;
+import org.cytoscape.io.DataCategory;
+import org.cytoscape.io.read.InputStreamTaskFactory;
+import org.cytoscape.io.util.StreamUtil;
+import org.cytoscape.io.write.CyNetworkViewWriterFactory;
+import org.cytoscape.model.CyNetworkFactory;
+import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.subnetwork.CyRootNetworkManager;
+import org.cytoscape.service.util.AbstractCyActivator;
+import org.cytoscape.view.model.CyNetworkViewFactory;
+import org.cytoscape.view.vizmap.VisualMappingManager;
+import org.cytoscape.view.vizmap.VisualStyleFactory;
+import org.osgi.framework.BundleContext;
 
 /**
  * Runs the program-- fetches all needed services

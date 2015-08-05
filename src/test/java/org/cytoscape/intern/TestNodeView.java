@@ -1,14 +1,12 @@
 package org.cytoscape.intern;
 
-import org.cytoscape.model.CyNode;
+import java.util.HashMap;
 
+import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
-
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.NullVisualProperty;
-
-import java.util.HashMap;
 
 public class TestNodeView implements View<CyNode> {
 	private HashMap<VisualProperty<Object>, Object> visualProperties;

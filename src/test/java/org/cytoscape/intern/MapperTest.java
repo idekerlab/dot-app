@@ -1,28 +1,24 @@
 package org.cytoscape.intern;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
-
-import org.cytoscape.model.CyEdge;
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNode;
-import org.cytoscape.model.NetworkTestSupport;
-
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.view.model.View;
-
-import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
-import org.cytoscape.view.presentation.property.BasicVisualLexicon;
-import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
+import java.awt.Color;
+import java.awt.Font;
 
 import org.cytoscape.intern.write.mapper.EdgePropertyMapper;
 import org.cytoscape.intern.write.mapper.Mapper;
 import org.cytoscape.intern.write.mapper.NetworkPropertyMapper;
 import org.cytoscape.intern.write.mapper.NodePropertyMapper;
-
-import java.awt.Color;
-import java.awt.Font;
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
+import org.cytoscape.model.NetworkTestSupport;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
+import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
+import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
+import org.junit.Test;
 public class MapperTest {
 
 	@Test

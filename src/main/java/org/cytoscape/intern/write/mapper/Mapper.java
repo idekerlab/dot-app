@@ -1,30 +1,23 @@
 package org.cytoscape.intern.write.mapper;
 
-import org.cytoscape.intern.FileHandlerManager;
-
-import org.cytoscape.model.CyEdge;
-import org.cytoscape.model.CyIdentifiable;
-import org.cytoscape.model.CyNode;
-
-import org.cytoscape.view.model.View;
-
-import org.cytoscape.view.presentation.property.BasicVisualLexicon;
-import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
-
-import org.cytoscape.view.presentation.property.values.LineType;
-
 import java.awt.Color;
 import java.awt.Font;
-
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+
+import org.cytoscape.intern.FileHandlerManager;
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyNode;
+import org.cytoscape.view.model.View;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
+import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
+import org.cytoscape.view.presentation.property.values.LineType;
 
 /**
  * Handles mapping of Cytoscape properties to .dot attributes in the form of a String.

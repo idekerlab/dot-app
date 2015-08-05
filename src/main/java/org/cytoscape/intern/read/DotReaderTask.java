@@ -1,38 +1,29 @@
 package org.cytoscape.intern.read;
 
-import org.cytoscape.intern.FileHandlerManager;
-
-import org.cytoscape.io.read.AbstractCyNetworkReader;
-
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNetworkFactory;
-import org.cytoscape.model.CyNetworkManager;
-
-import org.cytoscape.model.subnetwork.CyRootNetworkManager;
-
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.view.model.CyNetworkViewFactory;
-
-import org.cytoscape.view.vizmap.VisualMappingManager;
-import org.cytoscape.view.vizmap.VisualStyle;
-import org.cytoscape.view.vizmap.VisualStyleFactory;
-
-import org.cytoscape.work.TaskMonitor;
-
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.IOException;
-
 import java.util.HashMap;
-
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import org.cytoscape.intern.FileHandlerManager;
+import org.cytoscape.io.read.AbstractCyNetworkReader;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNetworkFactory;
+import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.subnetwork.CyRootNetworkManager;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.CyNetworkViewFactory;
+import org.cytoscape.view.vizmap.VisualMappingManager;
+import org.cytoscape.view.vizmap.VisualStyleFactory;
+import org.cytoscape.work.TaskMonitor;
+
 /*import com.alexmerz.graphviz.Parser;
 import com.alexmerz.graphviz.ParseException;*/
-import com.alexmerz.graphviz.objects.*;
+import com.alexmerz.graphviz.objects.Graph;
 
 /**
  * Task object that reads a dot file into a network/ network view
