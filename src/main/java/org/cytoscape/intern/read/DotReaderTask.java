@@ -50,24 +50,16 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	
 	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
 
-	/*
-	 * InputStreamReader used as input to the JPGD Parser
-	 */
+	// InputStreamReader used as input to the JPGD Parser 
 	private InputStreamReader inStreamReader;
 	
-	/*
-	 * HashMap that maps the created CyNetworks to their JPGD Graph object
-	 */
+	// HashMap that maps the created CyNetworks to their JPGD Graph object
 	private HashMap<CyNetwork, Graph> dotGraphs;
 	
-	/*
-	 * VisualMappingManager to which the new visual style will be added
-	 */
+	// VisualMappingManager to which the new visual style will be added	
 	private VisualMappingManager vizMapMgr;
 	
-	/*
-	 * VisualStyleFactory that will create the VisualStyle for the CyNetwork
-	 */
+	// VisualStyleFactory that will create the VisualStyle for the CyNetwork
 	private VisualStyleFactory vizStyleFact;
 	
 	
@@ -85,7 +77,9 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	public DotReaderTask(InputStream inStream, CyNetworkViewFactory netViewFact,
 			CyNetworkFactory netFact, CyNetworkManager netMgr,
 			CyRootNetworkManager rootNetMgr, VisualMappingManager vizMapMgr, VisualStyleFactory vizStyleFact) {
+		
 		super(inStream, netViewFact, netFact, netMgr, rootNetMgr);
+		
 		// Make logger write to file
 		handler = null;
 		try {
@@ -100,7 +94,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		LOGGER.addHandler(handler);
 		FILE_HANDLER_MGR.registerFileHandler(handler);
 
-		// Init
+		// Initialize variables
 		inStreamReader = new InputStreamReader(inStream);
 		dotGraphs = null;
 		this.vizMapMgr = vizMapMgr;
@@ -135,6 +129,23 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 *			- set the name and shared_name of CyEdge to Sourcename (interaction) Targetname
 		 * 3. Add CyNetwork to "networks"
 		 * 4. Add <CyNetwork, Graph> pair to HashMap
+		 */
+		/**
+		 * Everything we need to do (to help design-- not necessarily in this order):
+		 * 1. Use parser to generate Graph objects representing
+		 * the graphs from the InputStreamReader
+		 * 2. For each graph object do the following:
+		 * 		a. Create a CyNetwork
+		 * 		b. Set the name of the CyNetwork to the Graph's Id
+		 * 		-  Set all network properties
+		 * 		[-  Add all CyNodes to network
+		 * 		-  set default VPs if exists defaults in .dot file. using getGenericAttriubte()
+		 * 		-  If not, use cytoscape defaults (do nothing)
+		 * 		-  Set default Visual Properties for nodes
+		 * 		-]  Set any bypass VPs
+		 * 		-  Do bracketed points for CyEdges. And also:
+		 * 			-  If digraph, set interaction to "interaction", else set to undirected
+		 * 			-  set the name and shared_name of CyEdge to Sourcename (interaction) Targetname
 		 */
 
 	}
