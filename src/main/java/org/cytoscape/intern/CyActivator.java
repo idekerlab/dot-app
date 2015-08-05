@@ -6,7 +6,7 @@ import org.cytoscape.intern.write.DotWriterFactory;
 import org.cytoscape.io.BasicCyFileFilter;
 import org.cytoscape.io.DataCategory;
 
-import org.cytoscape.io.read.CyNetworkReader;
+import org.cytoscape.io.read.InputStreamTaskFactory;
 
 import org.cytoscape.io.util.StreamUtil;
 
@@ -104,7 +104,7 @@ public class CyActivator extends AbstractCyActivator {
 		
 		LOGGER.info("Registering Reader Factory as OSGI service...");
 		//register DotReaderFactory as an OSGI service
-		registerService(context, dotReadFact, CyNetworkReader.class, new Properties());
+		registerService(context, dotReadFact, InputStreamTaskFactory.class, new Properties());
 
 	}
 	

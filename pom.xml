@@ -12,7 +12,7 @@
 		file. When the pom.xml file has repeated elements, it's best to use them 
 		as properties. -->
 	<properties>
-		<cytoscape.api.version>3.2.0</cytoscape.api.version>
+		<cytoscape.api.version>3.2.1</cytoscape.api.version>
 		<maven-compiler-plugin.version>2.0.2</maven-compiler-plugin.version>
 		<maven-bundle-plugin.version>2.3.4</maven-bundle-plugin.version>
 		<osgi.api.version>4.2.0</osgi.api.version>
@@ -52,12 +52,13 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Bundle-SymbolicName>edu.ucsf.rbvi.MyApp</Bundle-SymbolicName>
+						<Bundle-SymbolicName>org.cytoscpae.intern.DOTApp</Bundle-SymbolicName>
 						<Bundle-Version>${project.version}</Bundle-Version>
 
 						<!-- This tells the bundle plugin which packages should not be exported. -->
 						<!-- M not sure if this is correct. -->
 						<Private-Package>org.cytoscape.intern.*</Private-Package>
+						<Include-Resource>{maven-resources}, @./jars/com.alexmerz.graphviz.jar</Include-Resource>
 
 						<Bundle-Activator>org.cytoscape.intern.CyActivator</Bundle-Activator>
 					</instructions>
@@ -95,12 +96,6 @@
 			<url>http://code.cytoscape.org/nexus/content/repositories/releases/</url>
 		</repository>
 
-		<!-- In project repo to reference java graphviz api jar-->
-		<repository>
-			<id>in-project</id>
-			<name>In Project Repo</name>
-			<url>file://${project.basedir}/jars</url>
-		</repository>
 
 	
 	</repositories>
