@@ -78,6 +78,14 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 		}
 		LOGGER.addHandler(handler);
 		FILE_HANDLER_MGR.registerFileHandler(handler);
+		
+		this.fileFilter = fileFilter;
+		this.netViewFact = netViewFact;
+		this.netFact = netFact;
+		this.netMgr = netMgr;
+		this.rootNetMgr = rootNetMgr;
+		this.vizMapMgr = vizMapMgr;
+		this.vizStyleFact = vizStyleFact;
 
 	}
 	
