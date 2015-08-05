@@ -19,6 +19,7 @@ import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
 import org.junit.Test;
+
 public class MapperTest {
 
 	@Test
@@ -70,7 +71,7 @@ public class MapperTest {
 		
 	}
 	
-	@Test 
+	//@Test 
 	public void testEdgeGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
@@ -113,7 +114,7 @@ public class MapperTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testNetworkGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();

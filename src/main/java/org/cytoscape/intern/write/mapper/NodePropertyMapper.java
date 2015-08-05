@@ -200,7 +200,8 @@ public class NodePropertyMapper extends Mapper {
 			String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, transparency));
 			if (elementString != null) {
 				elementString.append(dotFillColor);
-			} else {
+			}
+			else {
 				elementString = new StringBuilder(dotFillColor);
 			}
 		}
