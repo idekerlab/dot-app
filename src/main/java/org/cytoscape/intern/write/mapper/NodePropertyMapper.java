@@ -127,7 +127,7 @@ public class NodePropertyMapper extends Mapper {
 		
 		// Write fillcolor and color attribute
 		String colorsString = mapColors();
-		if (!colorsString.equals("")) {
+		if (colorsString != null) {
 			elementString.append(mapColors() + ",");
 		}
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
@@ -158,11 +158,14 @@ public class NodePropertyMapper extends Mapper {
 		// Append font name+size+color attributes
 		LOGGER.info("Appending font data");
 		String fontString = mapFontHelper();
-		if (!fontString.equals("")) {
-			elementString.append(mapFontHelper());
+		if (fontString != null) {
+			elementString.append(fontString);
 		}
 
 		// Finish Attribute List
+		if (elementString.charAt(elementString.length() - 1) == ',') {
+			elementString.deleteCharAt(elementString.length() - 1);
+		}
 		elementString.append("]");
 		LOGGER.info("Created .dot string. Result: " + elementString);
 		return elementString.toString();

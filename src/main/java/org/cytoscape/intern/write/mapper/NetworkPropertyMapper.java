@@ -29,11 +29,6 @@ public class NetworkPropertyMapper extends Mapper {
 	// Location of graph label, null if no graph label is desired
 	private String labelLoc;
 
-	// enum for mapDefaultDotStyle()
-	private enum MapDefaultType {
-		NODE_D, EDGE_D
-	}
-
 	/**
 	 * Constructs NetworkPropertyMapper object
 	 * @param vizStyle 
@@ -235,11 +230,11 @@ public class NetworkPropertyMapper extends Mapper {
 		Font labelFont = vizStyle.getDefaultValue(EDGE_LABEL_FONT_FACE);
 		Integer labelSize = ((Number)vizStyle.getDefaultValue(EDGE_LABEL_FONT_SIZE)).intValue();
 		String fontString = mapDefaultFont(labelFont, labelSize, labelColor, labelTransparency);
-		edgeDefaults.append(fontString);
+		edgeDefaults.append(fontString + ",");
 		
 		LOGGER.info("Appending Default style attribute to .dot string");
 		String styleString = mapDefaultEdgeDotStyle();
-		elementString.append(mapDotStyle() + ",");
+		edgeDefaults.append(styleString + ",");
 		edgeDefaults.append("dir = \"both\"]");
 		return edgeDefaults.toString();
 	}

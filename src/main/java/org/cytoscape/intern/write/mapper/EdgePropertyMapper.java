@@ -3,13 +3,11 @@ package org.cytoscape.intern.write.mapper;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-import static org.cytoscape.view.presentation.property.ArrowShapeVisualProperty.*;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.*;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.vizmap.VisualStyle;
@@ -188,13 +186,16 @@ public class EdgePropertyMapper extends Mapper {
 		LOGGER.info("Appending style attribute to .dot string");
 		String styleString = mapDotStyle();
 		if (styleString != null) {
-			elementString.append(mapDotStyle() + ",");
+			elementString.append(mapDotStyle());
 			LOGGER.info("Appended style attribute. Result: " + elementString);
 		}
 		
 		// append dir=both so both arrowShapes show up and close off attr string
 		if (!visible) {
-			elementString.append("dir = \"none\"");
+			elementString.append(",dir = \"none\"");
+		}
+		if (elementString.charAt(elementString.length() - 1) == ',') {
+			elementString.deleteCharAt(elementString.length() - 1);
 		}
 		elementString.append("]");
 		LOGGER.info("Created .dot string. Result: " + elementString);

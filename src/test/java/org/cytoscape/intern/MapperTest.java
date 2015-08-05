@@ -85,30 +85,26 @@ public class MapperTest {
 		View<CyEdge> edgeView = networkView.getEdgeView(edge);
 		String label = "Hello World!";
 		String tooltip = "Hello!";
-		Double width = edgeView.getVisualProperty(BasicVisualLexicon.EDGE_WIDTH);
+		Double width = new Double(25);
 
 		String labelString = String.format("label = \"%s\"", label);
 		String tooltipString = String.format("tooltip = \"%s\"", tooltip);
-		String colorString = "color = \"#FF0000FF\"";
 		String expectedDotString = null;
 		String actualDotString = null;
 		String widthString = String.format("penwidth = \"%f\"", width);
-		String fontString = String.format("fontname = \"%s\"", new Font(Font.DIALOG, Font.PLAIN, 12).getFontName());
-		String fontSizeString = "fontsize = \"12\"";
-		String fontColor = "fontcolor = \"#000000FF\"";
+		String fontColor = "fontcolor = \"#FF00FFFF\"";
+		String colorString = "color = \"#FFFF00FF\"";
 
 		
 		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LABEL, label);
+		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, width);
 		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP, tooltip);
-		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, new Color(0x33, 0x33, 0x33));
-		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_TRANSPARENCY, new Integer(0xFF));
-		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_FACE, new Font(Font.DIALOG, Font.PLAIN, 12));
-		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LABEL_FONT_SIZE, new Integer(12));
+		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, new Color(0xFF, 0xFF, 0x00));
+		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LABEL_COLOR, new Color(0xFF, 0x00, 0xFF));
 		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LINE_TYPE, LineTypeVisualProperty.EQUAL_DASH);
 		labelString = String.format("label = \"%s\"", label);
-		colorString = "color = \"#333333FF\"";
-		expectedDotString = String.format("[%s,%s,%s,arrowhead = \"none\",arrowtail = \"none\",%s,%s,%s,%s,style = \"dashed\",dir = \"both\"]", labelString, widthString,
-				tooltipString, colorString, fontString, fontSizeString, fontColor);
+		expectedDotString = String.format("[%s,%s,%s,%s,%s,style = \"dashed\"]", labelString, widthString,
+				tooltipString, colorString,  fontColor);
 
 		Mapper mapper = new EdgePropertyMapper(edgeView, vizStyle, networkView);
 		actualDotString = mapper.getElementString();
@@ -143,14 +139,14 @@ public class MapperTest {
 		String esepString = "esep = \"0\"";
 		String marginString = "pad = \"2\"";
 		String nodeDefaults = "node [penwidth = \"2.000000\",height = \"0.555556\",width = \"0.833333\",tooltip = \"\",color = \"#000000FF\",fillcolor = \"#C80000FF\",shape = \"ellipse\",style = \"solid,filled\",fontname = \"SansSerif.plain\",fontsize = \"12\",fontcolor = \"#000000FF\",fixedsize = \"true\",labelloc = \"b\"]";
-		String edgeDefaults = "edge []";
+		String edgeDefaults = "edge [penwidth = \"1.000000\",tooltip = \"\",arrowhead = \"none\",arrowtail = \"none\",color = \"#404040FF\",fontname = \"SansSerif.plain\",fontsize = \"10\",fontcolor = \"#000000FF\",style = \"solid\",dir = \"both\"]";
 		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
 				labelString, labelLocString, colorString, splinesString, outputString, esepString, marginString, nodeDefaults, edgeDefaults); 
 
 		Mapper mapper = new NetworkPropertyMapper(networkView, NetworkPropertyMapper.isDirected(networkView), "false", "b", vizStyle);
 		String actualDotString = mapper.getElementString();
 
-		assertEquals("Edge Cytoscape property translation failed", expectedDotString, actualDotString);
+		assertEquals("Network Properties and Visual Style translation failed", expectedDotString, actualDotString);
 	}
 	
 	@Test
