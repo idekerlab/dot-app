@@ -1,7 +1,6 @@
 package org.cytoscape.intern;
 
 import java.util.ArrayList;
-
 import java.util.logging.FileHandler;
 
 public class FileHandlerManager {

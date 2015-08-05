@@ -1,30 +1,22 @@
 package org.cytoscape.intern.read;
 
-import org.cytoscape.intern.FileHandlerManager;
-
-import org.cytoscape.io.CyFileFilter;
-
-import org.cytoscape.io.read.InputStreamTaskFactory;
-
-import org.cytoscape.model.CyNetworkFactory;
-import org.cytoscape.model.CyNetworkManager;
-
-import org.cytoscape.model.subnetwork.CyRootNetworkManager;
-
-import org.cytoscape.view.model.CyNetworkViewFactory;
-
-import org.cytoscape.view.vizmap.VisualMappingManager;
-import org.cytoscape.view.vizmap.VisualStyleFactory;
-
-import org.cytoscape.work.TaskIterator;
-
-import java.io.InputStream;
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+
+import org.cytoscape.intern.FileHandlerManager;
+import org.cytoscape.io.CyFileFilter;
+import org.cytoscape.io.read.InputStreamTaskFactory;
+import org.cytoscape.model.CyNetworkFactory;
+import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.subnetwork.CyRootNetworkManager;
+import org.cytoscape.view.model.CyNetworkViewFactory;
+import org.cytoscape.view.vizmap.VisualMappingManager;
+import org.cytoscape.view.vizmap.VisualStyleFactory;
+import org.cytoscape.work.TaskIterator;
 
 /**
  * Allows the input stream to be set for reader task factories
