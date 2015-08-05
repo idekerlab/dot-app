@@ -58,11 +58,12 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 	public DotReaderFactory(CyFileFilter fileFilter, CyNetworkViewFactory netViewFact,
 			CyNetworkFactory netFact, CyNetworkManager netMgr, CyRootNetworkManager rootNetMgr,
 			VisualMappingManager vizMapMgr, VisualStyleFactory vizStyleFact) {
+
+		// make logger write to file
 		FileHandler handler = null;
 		try {
 			handler = new FileHandler("log_DotReaderFactory.txt");
 			handler.setLevel(Level.ALL);
-			
 			handler.setFormatter(new SimpleFormatter());
 		}
 		catch(IOException e) {
@@ -119,7 +120,7 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 	@Override
 	public boolean isReady(InputStream inStream, String inputName) {
 		
-		// 
+		// check file extension
 		if (inStream != null && inputName != null) {
 			String[] parts = inputName.split(".");
 			String extension = parts[parts.length-1];

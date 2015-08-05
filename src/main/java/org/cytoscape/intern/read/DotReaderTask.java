@@ -32,7 +32,6 @@ import com.alexmerz.graphviz.objects.Graph;
  * @author Braxton Fitts
  * @author Ziran Zhang
  */
-
 public class DotReaderTask extends AbstractCyNetworkReader {
 	
 	// debug logger
