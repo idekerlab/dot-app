@@ -1,5 +1,28 @@
 package org.cytoscape.intern.write.mapper;
 
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LINE_TYPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_LINE_TYPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_FACE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_SIZE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.DOT;
+import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.EQUAL_DASH;
+import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.LONG_DASH;
+import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.SOLID;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.DIAMOND;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.ELLIPSE;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.HEXAGON;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.OCTAGON;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.PARALLELOGRAM;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.RECTANGLE;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.ROUND_RECTANGLE;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.TRIANGLE;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.io.IOException;
@@ -16,13 +39,7 @@ import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
-
-
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.*;
-import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.*;
-import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.*;
-
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;

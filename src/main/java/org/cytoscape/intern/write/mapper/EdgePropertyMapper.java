@@ -1,5 +1,20 @@
 package org.cytoscape.intern.write.mapper;
 
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LINE_TYPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TOOLTIP;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_VISIBLE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_WIDTH;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_VISIBLE;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -8,7 +23,6 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.*;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.vizmap.VisualStyle;
 

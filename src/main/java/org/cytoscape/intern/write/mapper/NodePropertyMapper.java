@@ -1,15 +1,31 @@
 package org.cytoscape.intern.write.mapper;
 
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_LINE_TYPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_WIDTH;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_FILL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_HEIGHT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_FACE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_SIZE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TOOLTIP;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_VISIBLE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_WIDTH;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_X_LOCATION;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_Y_LOCATION;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.ROUND_RECTANGLE;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.View;
-
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.*;
-import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.ROUND_RECTANGLE;
-
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.vizmap.VisualStyle;
 

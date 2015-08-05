@@ -1,5 +1,35 @@
 package org.cytoscape.intern.write.mapper;
 
+import static org.cytoscape.view.presentation.property.ArrowShapeVisualProperty.NONE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LINE_TYPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TOOLTIP;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_WIDTH;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_BACKGROUND_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_TITLE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_LINE_TYPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_WIDTH;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_FILL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_HEIGHT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_FACE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_SIZE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TOOLTIP;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_WIDTH;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.ROUND_RECTANGLE;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -9,11 +39,6 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-
-import static org.cytoscape.view.presentation.property.ArrowShapeVisualProperty.*;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.*;
-import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.*;
-
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;

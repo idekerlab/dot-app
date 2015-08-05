@@ -71,7 +71,7 @@ public class MapperTest {
 		
 	}
 	
-	//@Test 
+	@Test 
 	public void testEdgeGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
@@ -114,7 +114,7 @@ public class MapperTest {
 		
 	}
 	
-	//@Test
+	@Test
 	public void testNetworkGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
