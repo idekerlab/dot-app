@@ -17,10 +17,13 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 
+
+import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.*;
 import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.*;
 import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.*;
 
+import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.vizmap.VisualStyle;
@@ -66,6 +69,22 @@ public abstract class Mapper {
 		NODE_SHAPE_MAP.put(PARALLELOGRAM, "parallelogram");
 		NODE_SHAPE_MAP.put(ROUND_RECTANGLE, "rectangle");
 		NODE_SHAPE_MAP.put(RECTANGLE, "rectangle");
+	}
+
+	/**
+	 * Maps Cytoscape arrowhead types to the equivalent dot attribute
+	 */
+	// arrowheads come from org.cytoscape.view.presentation.property.ArrowShapeVisualProperty
+	protected static final HashMap<ArrowShape, String> ARROW_SHAPE_MAP = new HashMap<ArrowShape, String>();
+	static {
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.ARROW, "vee");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.CIRCLE, "dot");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.DELTA, "normal");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.DIAMOND, "diamond");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.HALF_BOTTOM, "ornormal");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.HALF_TOP, "olnormal");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.NONE, "none");
+		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.T, "tee");
 	}
 
 	// view that this mapper object is mapping

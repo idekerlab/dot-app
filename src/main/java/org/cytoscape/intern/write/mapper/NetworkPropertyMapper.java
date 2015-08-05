@@ -183,7 +183,7 @@ public class NetworkPropertyMapper extends Mapper {
 		nodeDefaults.append(dotShape + ",");
 		
 		nodeDefaults.append(
-			mapDefaultDotStyle(MapDefaultType.NODE_D, shape) +","
+			mapDefaultNodeDotStyle(shape) +","
 		);
 
 
@@ -193,7 +193,7 @@ public class NetworkPropertyMapper extends Mapper {
 		Color fontColor = (Color)(vizStyle.getDefaultValue(NODE_LABEL_COLOR));
 		Integer fontTransparency = ((Number)vizStyle.getDefaultValue(NODE_LABEL_TRANSPARENCY)).intValue();
 		
-		String fontString = mapDefaultFont(fontName, fontSize, fontColor, fontTransparency, MapDefaultType.NODE_D);
+		String fontString = mapDefaultFont(fontName, fontSize, fontColor, fontTransparency);
 		nodeDefaults.append(fontString + ",");
 		
 		nodeDefaults.append(
@@ -204,69 +204,89 @@ public class NetworkPropertyMapper extends Mapper {
 	
 	private String getEdgeDefaults() {
 		StringBuilder edgeDefaults = new StringBuilder("edge [");
+		Double width = vizStyle.getDefaultValue(EDGE_WIDTH);
+		edgeDefaults.append(String.format("penwidth = \"%f\"", width) + ",");
+
+		String tooltip = vizStyle.getDefaultValue(EDGE_TOOLTIP);
+		edgeDefaults.append(String.format("tooltip = \"%s\"", tooltip) + ",");
+		
+		// block is non-functioning. only works for bypasses due to what we think is source error
+		ArrowShape targetArrow = vizStyle.getDefaultValue(EDGE_TARGET_ARROW_SHAPE);
+		LOGGER.info("Retrieving Default target/head arrow. CS version is: " + targetArrow);
+		String dotTargetArrow = ARROW_SHAPE_MAP.get(targetArrow);
+		LOGGER.info("Target/head arrow retrieved. .dot verison is: " + dotTargetArrow);
+		edgeDefaults.append(String.format("arrowhead = \"%s\"", dotTargetArrow) + ",");
+			
+		ArrowShape sourceArrow = vizStyle.getDefaultValue(EDGE_SOURCE_ARROW_SHAPE);
+		LOGGER.info("Retrieving Default source/tail arrow. CS version is: " + sourceArrow);
+		String dotSourceArrow = ARROW_SHAPE_MAP.get(sourceArrow);
+		LOGGER.info("Source/tail arrow retrieved. .dot verison is: " + dotSourceArrow);
+		edgeDefaults.append(String.format("arrowtail = \"%s\"", dotSourceArrow) + ",");
+		
+		Color strokeColor = (Color) vizStyle.getDefaultValue(EDGE_STROKE_UNSELECTED_PAINT);
+		Integer strokeTransparency = ((Number)vizStyle.getDefaultValue(EDGE_TRANSPARENCY)).intValue();
+		String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
+		edgeDefaults.append(dotColor + ",");
+
+		// Get label font information and append in proper format
+		Color labelColor = (Color) vizStyle.getDefaultValue(EDGE_LABEL_COLOR);
+		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
+		Integer labelTransparency = ((Number)vizStyle.getDefaultValue(EDGE_LABEL_TRANSPARENCY)).intValue();
+		Font labelFont = vizStyle.getDefaultValue(EDGE_LABEL_FONT_FACE);
+		Integer labelSize = ((Number)vizStyle.getDefaultValue(EDGE_LABEL_FONT_SIZE)).intValue();
+		String fontString = mapDefaultFont(labelFont, labelSize, labelColor, labelTransparency);
+		edgeDefaults.append(fontString);
+		
+		LOGGER.info("Appending Default style attribute to .dot string");
+		String styleString = mapDefaultEdgeDotStyle();
+		elementString.append(mapDotStyle() + ",");
 		edgeDefaults.append("dir = \"both\"]");
 		return edgeDefaults.toString();
 	}
 	
-	private String mapDefaultFont(Font font, Integer size, Color color, Integer transparency, MapDefaultType type) {
+	private String mapDefaultFont(Font font, Integer size, Color color, Integer transparency) {
 		
 		LOGGER.info("Label font, size, color, and transparency translation");
 		 
 		String returnValue = "";
 		
-		if (type == MapDefaultType.NODE_D) {
-			LOGGER.info("Label font, size, color, and transparency translation");
-			 
-			returnValue += "fontname = \"" + font.getFontName() + "\",";  
-			returnValue += "fontsize = \"" + size.toString() + "\","; 
-			returnValue += "fontcolor = \"" + mapColorToDot(color, transparency) + "\"";
+		LOGGER.info("Label font, size, color, and transparency translation");
+		 
+		returnValue += "fontname = \"" + font.getFontName() + "\",";  
+		returnValue += "fontsize = \"" + size.toString() + "\","; 
+		returnValue += "fontcolor = \"" + mapColorToDot(color, transparency) + "\"";
 
-			LOGGER.info("Dot attributes associate with font is: " + returnValue);
-			
-		} else if (type == MapDefaultType.EDGE_D) {
-			LOGGER.info("Label font, size, color, and transparency translation");
-			 
-			returnValue += "fontname = \"" + font.getFontName() + "\",";  
-			returnValue += "fontsize = \"" + size.toString() + "\","; 
-			returnValue += "fontcolor = \"" + mapColorToDot(color, transparency) + "\"";
-
-			LOGGER.info("Dot attributes associate with font is: " + returnValue);
-			
-		}
 		LOGGER.info("Dot attributes associate with font is: " + returnValue);
+			
 		
 		return returnValue;
 		
 	}
 	
-	private String mapDefaultDotStyle(MapDefaultType type, NodeShape shape) {
-		StringBuilder dotStyle = new StringBuilder();
-		if (type == MapDefaultType.NODE_D) {
-			//NODE_BORDER_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
-			LineType lineType = vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE);
-			// get .dot equivalent of line style
-			String lineStr = LINE_TYPE_MAP.get(lineType);
-			if (lineStr == null) {
-				lineStr = "solid";
-				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
-			}
-			String shapeString = (shape.equals(ROUND_RECTANGLE)) ? "rounded," : "";
-			String style = String.format("style = \"%s,%sfilled\"", lineStr, shapeString);
-
-			dotStyle.append(style);
-		} 
-		else if (type == MapDefaultType.EDGE_D) {
-			//EDGE_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
-			LineType lineType = vizStyle.getDefaultValue(EDGE_LINE_TYPE);
-			String lineStr = LINE_TYPE_MAP.get(lineType);
-			if (lineStr == null) {
-				lineStr = "solid";
-				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
-			}
-			String style = String.format("style = \"%s\"", lineStr);
-			dotStyle.append(style);
+	private String mapDefaultNodeDotStyle(NodeShape shape) {
+		//NODE_BORDER_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
+		LineType lineType = vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE);
+		// get .dot equivalent of line style
+		String lineStr = LINE_TYPE_MAP.get(lineType);
+		if (lineStr == null) {
+			lineStr = "solid";
+			LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
 		}
-		return dotStyle.toString();
+		String shapeString = (shape.equals(ROUND_RECTANGLE)) ? "rounded," : "";
+		String style = String.format("style = \"%s,%sfilled\"", lineStr, shapeString);
+
+		return style;
+	}
+	private String mapDefaultEdgeDotStyle() {
+		//EDGE_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
+		LineType lineType = vizStyle.getDefaultValue(EDGE_LINE_TYPE);
+		String lineStr = LINE_TYPE_MAP.get(lineType);
+		if (lineStr == null) {
+			lineStr = "solid";
+			LOGGER.warning("Visual Style default EDGE_LINE_TYPE doesn't map to a .dot attribute. Setting to default");
+		}
+		String style = String.format("style = \"%s\"", lineStr);
+		return style;
 	}
 	
 	/**

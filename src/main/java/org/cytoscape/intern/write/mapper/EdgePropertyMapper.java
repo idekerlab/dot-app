@@ -25,22 +25,6 @@ import org.cytoscape.view.vizmap.VisualStyle;
  */
 public class EdgePropertyMapper extends Mapper {
 	
-	/**
-	 * Maps Cytoscape arrowhead types to the equivalent dot attribute
-	 */
-	// arrowheads come from org.cytoscape.view.presentation.property.ArrowShapeVisualProperty
-	private static final HashMap<ArrowShape, String> ARROW_SHAPE_MAP = new HashMap<ArrowShape, String>();
-	static {
-		ARROW_SHAPE_MAP.put(ARROW, "vee");
-		ARROW_SHAPE_MAP.put(CIRCLE, "dot");
-		ARROW_SHAPE_MAP.put(DELTA, "normal");
-		ARROW_SHAPE_MAP.put(DIAMOND, "diamond");
-		ARROW_SHAPE_MAP.put(HALF_BOTTOM, "ornormal");
-		ARROW_SHAPE_MAP.put(HALF_TOP, "olnormal");
-		ARROW_SHAPE_MAP.put(NONE, "none");
-		ARROW_SHAPE_MAP.put(T, "tee");
-	}
-	
 	private CyNetworkView networkView;
 	
 	/**
@@ -92,7 +76,7 @@ public class EdgePropertyMapper extends Mapper {
 
 		if (!isEqualToDefault(EDGE_WIDTH)) {
 			Double width = view.getVisualProperty(EDGE_WIDTH);
-			simpleVisPropsToDot.add(String.format("penwidth = \"%f\"", width/PPI));
+			simpleVisPropsToDot.add(String.format("penwidth = \"%f\"", width));
 		}
 
 		if (!isEqualToDefault(EDGE_TOOLTIP)) {
