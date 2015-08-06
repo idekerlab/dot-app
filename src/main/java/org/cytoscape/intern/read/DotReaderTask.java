@@ -149,7 +149,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 * 			-  set the name and shared_name of CyEdge to Sourcename (interaction) Targetname
 		 */
 		
-		//pesudocode starts from below
+		//pesudocodes start at below
 		try {
 			LOGGER.info("Running run() function...");
 			
@@ -159,7 +159,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			 *   run(), but we will need to handle those when we try to build networkView
 			 * ***************************************************************
 			 */
-			InputStream inputStream = new FileInputStream(""); 
+			InputStream inputStream = new FileInputStream(""); //Has not been set up properly
 			
 			InputStreamReader input = new InputStreamReader(inputStream);
 			Parser parser = new Parser();
