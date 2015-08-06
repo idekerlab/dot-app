@@ -241,32 +241,37 @@ public abstract class Mapper {
 	 * Does not include "style=" bit
 	 */
 	protected String mapDotStyle() {
-		StringBuilder dotStyle = new StringBuilder();
+		StringBuilder dotStyle = null;
 		if (view.getModel() instanceof CyNode) {
 			//NODE_BORDER_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
 			LineType lineType = view.getVisualProperty(NODE_BORDER_LINE_TYPE);
 			String lineStr = "";
 			if (!lineType.equals(vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE))) {
+				dotStyle = new StringBuilder();
 				// get .dot equivalent of line style
 				lineStr = LINE_TYPE_MAP.get(lineType);
 				if (lineStr == null) {
 					lineStr = "solid";
 					LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
 				}
+                String style = String.format("style = \"%s,", lineStr);
+                dotStyle.append(style);
 			}
-				String style = String.format("style = \"%s,", lineStr);
-				dotStyle.append(style);
 		} 
 		else if (view.getModel() instanceof CyEdge) {
 			//EDGE_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
 			LineType lineType = view.getVisualProperty(EDGE_LINE_TYPE);
 			String lineStr = LINE_TYPE_MAP.get(lineType);
+			dotStyle = new StringBuilder();
 			if (lineStr == null) {
 				lineStr = "solid";
 				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
 			}
 			String style = String.format("style = \"%s\"", lineStr);
 			dotStyle.append(style);
+		}
+		if(dotStyle == null) {
+			return null;
 		}
 		return dotStyle.toString();
 	}

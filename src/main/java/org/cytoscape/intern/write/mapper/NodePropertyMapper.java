@@ -65,15 +65,18 @@ public class NodePropertyMapper extends Mapper {
 	protected String mapDotStyle() {
 		if (!isEqualToDefault(NODE_BORDER_LINE_TYPE) ||
 			!isEqualToDefault(NODE_SHAPE)) {
-			StringBuilder dotStyle = new StringBuilder(super.mapDotStyle());
-			NodeShape shape = view.getVisualProperty(NODE_SHAPE);
+			String styleString = super.mapDotStyle();
+			if (styleString != null) {
+				StringBuilder dotStyle = new StringBuilder(super.mapDotStyle());
+				NodeShape shape = view.getVisualProperty(NODE_SHAPE);
 		
-			if (shape.equals(ROUND_RECTANGLE)) {
-				dotStyle.append("rounded,");
+				if (shape.equals(ROUND_RECTANGLE)) {
+					dotStyle.append("rounded,");
+				}
+		
+				dotStyle.append("filled\"");
+				return dotStyle.toString();
 			}
-		
-			dotStyle.append("filled\"");
-			return dotStyle.toString();
 		}
 		return null;
 	}
