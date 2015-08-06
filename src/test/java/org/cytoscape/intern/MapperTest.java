@@ -54,15 +54,18 @@ public class MapperTest {
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_SIZE, new Integer(21));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_COLOR, new Color(0xFF, 0xFF, 0x00));
 		
-		
-		
-		
-		
+		/* original, had to move pos around
 		expectedDotString = String.format("[%s,%s,%s,"
 				+ "pos = \"%f,%f\",%s,%s,%s]",
 				labelString, tooltipString, fillColorString,
 				new Double(0), new Double(0) * -1.0,fontString, fontSizeString, fontColor); 
+		*/
 
+		expectedDotString = String.format("[%s,%s,"
+				+ "pos = \"%f,%f\",%s,%s,%s,%s]",
+				labelString, tooltipString,
+				new Double(0), new Double(0) * -1.0, fillColorString, fontString, fontSizeString, fontColor); 
+		
 		// todo
 		Mapper mapper = new NodePropertyMapper(nodeView, vizStyle, "t");
 		actualDotString = mapper.getElementString();

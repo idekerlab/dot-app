@@ -89,7 +89,6 @@ public class NetworkPropertyMapper extends Mapper {
 		// Get network name from model. Remove spaces from name
 		CyNetwork network = (CyNetwork)view.getModel();
 		String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
-		// remove dis-allowed characters to avoid errors
 		// filter out disallowed chars
 		networkName = Mapper.modifyElementId(networkName);
 
@@ -108,12 +107,8 @@ public class NetworkPropertyMapper extends Mapper {
 		        elementString.append(dotAttribute + "\n");
 		}
 		
-		elementString.append(
-			getNodeDefaults() + "\n"
-		);
-		elementString.append(
-			getEdgeDefaults() + "\n"
-		);
+		elementString.append(getNodeDefaults() + "\n");
+		elementString.append(getEdgeDefaults() + "\n");
 		
 		return elementString.toString();
 	}
@@ -162,6 +157,13 @@ public class NetworkPropertyMapper extends Mapper {
 		return output;
 	}
 	
+	/**
+	 * Returns a string that has the node[attrs] declaration
+	 * defines default attribute values for nodes
+	 * 
+	 * @return String in form node[attrs=..] that sets the default
+	 * value for attributes
+	 */
 	private String getNodeDefaults() {
 		StringBuilder nodeDefaults = new StringBuilder("node [");
 		
@@ -247,6 +249,13 @@ public class NetworkPropertyMapper extends Mapper {
 		return nodeDefaults.toString();
 	}
 	
+	/**
+	 * Returns a string that has the edge[attrs] declaration
+	 * defines default attribute values for edges
+	 * 
+	 * @return String in form edges[attrs=..] that sets the default
+	 * value for attributes
+	 */
 	private String getEdgeDefaults() {
 		StringBuilder edgeDefaults = new StringBuilder("edge [");
 
@@ -295,7 +304,16 @@ public class NetworkPropertyMapper extends Mapper {
 		edgeDefaults.append("dir = \"both\"]");
 		return edgeDefaults.toString();
 	}
-	
+
+	/**
+	 * Returns String for default Fonts
+	 * 
+	 * @param font font face
+	 * @param size size of font
+	 * @param color color
+	 * @param transparency alpha value. 0-255
+	 * @return String in form "fontname=...,fontsize=...,fontcolor=..."
+	 */
 	private String mapDefaultFont(Font font, Integer size, Color color, Integer transparency) {
 		
 		LOGGER.info("Label font, size, color, and transparency translation");
@@ -314,7 +332,13 @@ public class NetworkPropertyMapper extends Mapper {
 		return returnValue;
 		
 	}
-	
+
+	/**
+	 * Returns "style" attribute intended for default node declaration
+	 * 
+	 * @param shape NodeShape default value
+	 * @return String in form "style=...,filled"
+	 */
 	private String mapDefaultNodeDotStyle(NodeShape shape) {
 		//NODE_BORDER_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
 		LineType lineType = vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE);
@@ -329,6 +353,12 @@ public class NetworkPropertyMapper extends Mapper {
 
 		return style;
 	}
+
+	/**
+	 * Returns "style" attribute intended for default edge declaration
+	 * 
+	 * @return String in form "style=..."
+	 */
 	private String mapDefaultEdgeDotStyle() {
 		//EDGE_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
 		LineType lineType = vizStyle.getDefaultValue(EDGE_LINE_TYPE);

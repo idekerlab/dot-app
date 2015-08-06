@@ -41,7 +41,6 @@ public class NodePropertyMapper extends Mapper {
 	// location of node label
 	private String labelLoc;
 	
-	private static final int TRANSPARENT = 0x00;
 	/**
 	 * Initializes and populates instance variables with mappings
 	 * 
@@ -60,8 +59,10 @@ public class NodePropertyMapper extends Mapper {
 	 * Creates string for .dot style attribute. Appends border lineStyle and shape style (rounded or not etc.) to 
 	 * "style = filled"
 	 * 
+	 * DEPERECATED-- see mapDotStyle in Mapper
 	 * @return String for style attribute
 	 */
+	/*
 	protected String mapDotStyle() {
 		if (!isEqualToDefault(NODE_BORDER_LINE_TYPE) ||
 			!isEqualToDefault(NODE_SHAPE)) {
@@ -77,9 +78,11 @@ public class NodePropertyMapper extends Mapper {
 				dotStyle.append("filled\"");
 				return dotStyle.toString();
 			}
+
 		}
 		return null;
 	}
+	*/
 	
 	/**
 	 * Helper method to fill the hashmap instance variable with constants we need
@@ -124,6 +127,12 @@ public class NodePropertyMapper extends Mapper {
 			simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
 		}
 		
+        // Get node location and append in proper format
+        Double xLoc = view.getVisualProperty(NODE_X_LOCATION);
+        Double yLoc = view.getVisualProperty(NODE_Y_LOCATION);
+        String dotPosition = String.format("pos = \"%s\"", mapPosition(xLoc, yLoc));
+        simpleVisPropsToDot.add(dotPosition);
+		
 		// Put Node Shape Key/Values
 		LOGGER.info("HashMaps populated");
 	}
@@ -148,7 +157,7 @@ public class NodePropertyMapper extends Mapper {
 		// Write fillcolor and color attribute
 		String colorsString = mapColors();
 		if (colorsString != null) {
-			elementString.append(mapColors() + ",");
+			elementString.append(colorsString + ",");
 		}
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 
@@ -167,14 +176,6 @@ public class NodePropertyMapper extends Mapper {
 		}
 		LOGGER.info("Style info appended. Resulting String: " + elementString);
 		
-		// Get node location and append in proper format
-		Double xLoc = view.getVisualProperty(NODE_X_LOCATION);
-		Double yLoc = view.getVisualProperty(NODE_Y_LOCATION);
-		String dotPosition = String.format("pos = \"%s\"", mapPosition(xLoc, yLoc));
-		elementString.append(dotPosition + ",");
-		
-
-
 		// Append font name+size+color attributes
 		LOGGER.info("Appending font data");
 		String fontString = mapFontHelper();
