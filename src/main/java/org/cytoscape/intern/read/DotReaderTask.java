@@ -1,8 +1,11 @@
 package org.cytoscape.intern.read;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -12,6 +15,8 @@ import java.util.logging.SimpleFormatter;
 import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.io.read.AbstractCyNetworkReader;
 import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.subnetwork.CyRootNetworkManager;
@@ -20,10 +25,15 @@ import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskMonitor;
+import org.cytoscape.session.CyNetworkNaming;
 
 import com.alexmerz.graphviz.Parser;
 import com.alexmerz.graphviz.ParseException;
 import com.alexmerz.graphviz.objects.Graph;
+import com.alexmerz.graphviz.objects.GraphAttributes;
+import com.alexmerz.graphviz.objects.Node;
+import com.alexmerz.graphviz.objects.Edge;
+import com.alexmerz.graphviz.objects.PortNode;
 
 /**
  * Task object that reads a dot file into a network/ network view
@@ -43,13 +53,17 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	private InputStreamReader inStreamReader;
 	
 	// HashMap that maps the created CyNetworks to their JPGD Graph object
-	private Map<Graph, CyNetwork> dotGraphs;
+	private HashMap<Graph, CyNetwork> dotGraphs;
 	
 	// VisualMappingManager to which the new visual style will be added	
 	private VisualMappingManager vizMapMgr;
 	
 	// VisualStyleFactory that will create the VisualStyle for the CyNetwork
 	private VisualStyleFactory vizStyleFact;
+	
+	// HashMap that maps the Node in Graph to the CyNode in CyNetwork
+	private HashMap<Node, CyNode> nodeMap;
+
 	
 	
 	/**
@@ -134,6 +148,106 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 * 			-  If digraph, set interaction to "interaction", else set to undirected
 		 * 			-  set the name and shared_name of CyEdge to Sourcename (interaction) Targetname
 		 */
+		
+		//pesudocode starts from below
+		try {
+			LOGGER.info("Running run() function...");
+			
+			/*****************************************************************
+			 * 1. don‘t know how to set up the inputStream properly
+			 * 2. I believe we don't need to worry about the default VPs stuff in 
+			 *   run(), but we will need to handle those when we try to build networkView
+			 * ***************************************************************
+			 */
+			InputStream inputStream = new FileInputStream(""); 
+			
+			InputStreamReader input = new InputStreamReader(inputStream);
+			Parser parser = new Parser();
+			
+			try{
+				
+			    LOGGER.info("begin parsing the input...");
+				parser.parse(input);
+				
+				//graphList holds all the graphs the parser read from the input
+				ArrayList <Graph> graphList = parser.getGraphs();
+				//initialize a CyNetwork array that holds created CyNetwork from graph
+				CyNetwork [] networks = new CyNetwork [graphList.size()];
+				//set the counter for the CyNetwork array above
+				int networkCounter = 0;
+				
+				//iterate each graph the parser got from input file
+				for (Graph graph : graphList){
+					
+					LOGGER.info("iterating graphs...");
+					//create a new empty network from cyNetworkFactory
+					CyNetwork network = cyNetworkFactory.createNetwork();
+					//get the name of the network from the graph
+					String networkName = graph.getId().toString(); 
+					//set the name for the network
+					network.getRow(network).set(CyNetwork.NAME, networkName);
+					
+					//get all the nodes from the graph, and group them into a nodeList
+					ArrayList<Node> nodeList = graph.getNodes(true);
+					//iterator each node in the nodeList
+					for (Node node : nodeList){
+						//initialize a new Cynode into the network
+						CyNode cyNode = network.addNode();
+						//get the name of the Cynode from the node id 
+						String nodeName = node.getId().toString();
+						//set the node name for the node
+						network.getDefaultNodeTable().getRow(cyNode.getSUID()).set("name", nodeName);
+						//add the node and the corresponding cyNode into a hashmap for later tracking
+						nodeMap.put(node, cyNode);
+					}
+					//get all the edges from the graph, and group them into a edgeList
+					ArrayList<Edge> edgeList = graph.getEdges();
+					//iterate each edge in the edgeList
+					for(Edge edge : edgeList){
+						//get the source and target portNode from the edge
+						PortNode sourcePort = edge.getSource();
+						PortNode targetPort = edge.getTarget();
+						
+						//get the name of both nodes
+						String sourceName = sourcePort.getNode().getId().toString();
+						String targetName = targetPort.getNode().getId().toString();
+						
+						//get the CyNode of the source and target node from the hashmap
+						CyNode source = nodeMap.get(sourcePort.getNode());
+						CyNode target = nodeMap.get(targetPort.getNode());
+						//initialize the cyEdge 
+						CyEdge cyEdge = null;
+						
+						//if getType return 2, it's directed, else it's undirected
+						//set the cyEdge and add the cyEdge into the network
+						if (edge.getType() == 2) {
+							cyEdge = network.addEdge(source, target, true );
+						}else{
+							cyEdge = network.addEdge(source, target,false );
+						}
+						
+						//set the interation, a attribute of table, to be "interaction"
+						network.getDefaultEdgeTable().getRow(cyEdge.getSUID()).set("interaction", "interaction");
+						
+						//set the edge name
+						network.getDefaultEdgeTable().getRow(cyEdge.getSUID()).set("name", sourceName + " (interaction) "+ targetName);
+					}
+					//at the end of each graph iteration, add the created CyNetwork into the CyNetworks array
+					networks[networkCounter++] = network;
+					
+					//add the graph and the created CyNetwork based on that graph into the dotGraphs hashmap
+					dotGraphs.put(graph, network);
+									
+				}
+			}catch(ParseException e){
+				//avoid compiling error
+				LOGGER.log(Level.SEVERE, "CyNetwork/CyEdge/CyNode initialization failed @ for-each loop in run()");
+			}
+			
+		}catch (IOException e){
+			//avoid compiling error
+			LOGGER.log(Level.SEVERE, "InputStream/InputStreamReader/Parser failed @ run() before for-each loop");
+		}
 
 	}
 	
