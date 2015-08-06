@@ -59,8 +59,10 @@ public class NodePropertyMapper extends Mapper {
 	 * Creates string for .dot style attribute. Appends border lineStyle and shape style (rounded or not etc.) to 
 	 * "style = filled"
 	 * 
+	 * DEPERECATED-- see mapDotStyle in Mapper
 	 * @return String for style attribute
 	 */
+	/*
 	protected String mapDotStyle() {
 		if (!isEqualToDefault(NODE_BORDER_LINE_TYPE) ||
 			!isEqualToDefault(NODE_SHAPE)) {
@@ -80,6 +82,7 @@ public class NodePropertyMapper extends Mapper {
 		}
 		return null;
 	}
+	*/
 	
 	/**
 	 * Helper method to fill the hashmap instance variable with constants we need
@@ -123,13 +126,11 @@ public class NodePropertyMapper extends Mapper {
 			simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
 		}
 		
-		if(!isEqualToDefault(NODE_X_LOCATION) || !isEqualToDefault(NODE_Y_LOCATION)) {
-			// Get node location and append in proper format
-			Double xLoc = view.getVisualProperty(NODE_X_LOCATION);
-			Double yLoc = view.getVisualProperty(NODE_Y_LOCATION);
-			String dotPosition = String.format("pos = \"%s\"", mapPosition(xLoc, yLoc));
-			simpleVisPropsToDot.add(dotPosition);
-		}
+        // Get node location and append in proper format
+        Double xLoc = view.getVisualProperty(NODE_X_LOCATION);
+        Double yLoc = view.getVisualProperty(NODE_Y_LOCATION);
+        String dotPosition = String.format("pos = \"%s\"", mapPosition(xLoc, yLoc));
+        simpleVisPropsToDot.add(dotPosition);
 		
 		// Put Node Shape Key/Values
 		LOGGER.info("HashMaps populated");

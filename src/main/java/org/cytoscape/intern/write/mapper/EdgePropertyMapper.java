@@ -136,13 +136,16 @@ public class EdgePropertyMapper extends Mapper {
 		LOGGER.finest("Edge is visible");
 		return true;
 	}
-	
+
+	/*
 	protected String mapDotStyle() {
 		if (!isEqualToDefault(EDGE_LINE_TYPE)) {
 			return super.mapDotStyle();
 		}
 		return null;
 	}
+	*/
+	
 	/**
 	 * Returns a String that contains all relevant attributes for this element 
 	 */

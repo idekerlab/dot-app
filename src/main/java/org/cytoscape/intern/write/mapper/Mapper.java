@@ -10,6 +10,7 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_L
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_FACE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SHAPE;
 import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.DOT;
 import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.EQUAL_DASH;
 import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.LONG_DASH;
@@ -249,34 +250,46 @@ public abstract class Mapper {
 		if (view.getModel() instanceof CyNode) {
 			//NODE_BORDER_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
 			LineType lineType = view.getVisualProperty(NODE_BORDER_LINE_TYPE);
+			NodeShape nodeShape = view.getVisualProperty(NODE_SHAPE);
 			String lineStr = "";
-			if (!lineType.equals(vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE))) {
+
+			if (!lineType.equals(vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE)) || 
+					!nodeShape.equals(vizStyle.getDefaultValue(NODE_SHAPE))) {
 				dotStyle = new StringBuilder();
-				// get .dot equivalent of line style
+
+				// get .dot equivalent of line style, see if we need rounded
 				lineStr = LINE_TYPE_MAP.get(lineType);
 				if (lineStr == null) {
 					lineStr = "solid";
 					LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
 				}
-                String style = String.format("style = \"%s,", lineStr);
+				boolean rounded = nodeShape.equals(ROUND_RECTANGLE);
+				String roundedString = (rounded) ? ",rounded" : "";
+				
+                String style = String.format("style = \"%s,%sfilled\"", lineStr, roundedString);
                 dotStyle.append(style);
 			}
 		} 
 		else if (view.getModel() instanceof CyEdge) {
-			//EDGE_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
-			LineType lineType = view.getVisualProperty(EDGE_LINE_TYPE);
-			String lineStr = LINE_TYPE_MAP.get(lineType);
-			dotStyle = new StringBuilder();
-			if (lineStr == null) {
-				lineStr = "solid";
-				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+			if(!isEqualToDefault(EDGE_LINE_TYPE)); {
+				//EDGE_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
+				LineType lineType = view.getVisualProperty(EDGE_LINE_TYPE);
+				String lineStr = LINE_TYPE_MAP.get(lineType);
+				dotStyle = new StringBuilder();
+
+				if (lineStr == null) {
+					lineStr = "solid";
+					LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+				}
+				String style = String.format("style = \"%s\"", lineStr);
+				dotStyle.append(style);
 			}
-			String style = String.format("style = \"%s\"", lineStr);
-			dotStyle.append(style);
 		}
+
 		if(dotStyle == null) {
 			return null;
 		}
+
 		return dotStyle.toString();
 	}
 	
