@@ -148,7 +148,6 @@ public class EdgePropertyMapper extends Mapper {
 	 */
 	@Override
 	public String getElementString() {
-		final int TRANSPARENT = 0x00;
 		
 		LOGGER.info("Preparing to get .dot declaration for an edge.");
 
@@ -176,14 +175,13 @@ public class EdgePropertyMapper extends Mapper {
 		}
 		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 		
-		/*LOGGER.info("Preparing to map edge bends");
-		String dotPos = mapEdgeBend();
-		if (!(dotPos.equals(""))) {
-			elementString.append(dotPos + ",");
+		LOGGER.info("Preparing to map edge label Font attributes");
+		String fontString = mapFontHelper();
+		if(fontString != null) {
+			elementString.append(fontString + ",");
+			LOGGER.info("Appened label attributes to .dot string. Result: " + elementString);
 		}
-		LOGGER.info("Appended edge bend attributes to .dot string. Result: " + elementString);
-		*/
-		LOGGER.info("Preparing to map edge label attributes");
+		/*
 		// Get label font information and append in proper format
 		Color labelColor = (Color) view.getVisualProperty(EDGE_LABEL_COLOR);
 		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
@@ -196,7 +194,9 @@ public class EdgePropertyMapper extends Mapper {
 			elementString.append(mapFont(labelFont, labelSize, labelColor, labelTransparency) + ",");
 			LOGGER.info("Appened label attributes to .dot string. Result: " + elementString);
 		}
-		
+		*/
+
+		// Style attr
 		LOGGER.info("Appending style attribute to .dot string");
 		String styleString = mapDotStyle();
 		if (styleString != null) {
@@ -215,4 +215,60 @@ public class EdgePropertyMapper extends Mapper {
 		LOGGER.info("Created .dot string. Result: " + elementString);
 		return elementString.toString();
 	}
+	
+	/**
+	 * Helper method that returns String that contains font face, size, color and transparency
+	 * handles opacity.
+	 * 
+	 * @return String that defines fontname, fontcolor and fontsize attributes. Returns null if font should not be mapped
+	 */
+	private String mapFontHelper() {
+		boolean visible = isVisible();
+		String elementString;
+
+		// Get label font information and append in proper format
+		Color labelColor = (Color) view.getVisualProperty(EDGE_LABEL_COLOR);
+		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
+		Integer labelTransparency = (visible) ? ((Number)view.getVisualProperty(EDGE_LABEL_TRANSPARENCY)).intValue()
+											  : TRANSPARENT;
+		Font labelFont = view.getVisualProperty(EDGE_LABEL_FONT_FACE);
+		Integer labelSize = ((Number)view.getVisualProperty(EDGE_LABEL_FONT_SIZE)).intValue();
+		String fontString = mapFont(labelFont, labelSize, labelColor, labelTransparency);
+		if (fontString != null) {
+			return fontString;
+		}
+		else {
+			return null;
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

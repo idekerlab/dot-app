@@ -62,8 +62,12 @@ public abstract class Mapper {
 	// VisualStyle applied to the view
 	protected VisualStyle vizStyle;
 	
-	// maps Cytoscape line types to the equivalent string used in .dot
-	// line types are fields in org.cytoscape.view.presentation.property.LineTypeVisualProperty
+	protected static final int TRANSPARENT = 0x00;
+	
+	/*
+	 * maps Cytoscape line types to the equivalent string used in .dot
+	 * line types are fields in org.cytoscape.view.presentation.property.LineTypeVisualProperty
+	 */ 
 	protected static final HashMap<LineType, String> LINE_TYPE_MAP = new HashMap<LineType, String>();
 	static {
 		LINE_TYPE_MAP.put(LONG_DASH, "dashed");
