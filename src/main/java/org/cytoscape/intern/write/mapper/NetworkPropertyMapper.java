@@ -1,6 +1,7 @@
 package org.cytoscape.intern.write.mapper;
 
 import static org.cytoscape.view.presentation.property.ArrowShapeVisualProperty.NONE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_COLOR;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
@@ -20,6 +21,7 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_B
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_WIDTH;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_FILL_COLOR;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_HEIGHT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_COLOR;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_FACE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_SIZE;
@@ -53,19 +55,27 @@ public class NetworkPropertyMapper extends Mapper {
 	
 	// Location of graph label, null if no graph label is desired
 	private String labelLoc;
+	
+	// Location of node label
+	private String nodeLabelLoc;
 
 	/**
 	 * Constructs NetworkPropertyMapper object
-	 * @param vizStyle 
+	 * @param netView view being mapped
+	 * @param directed records whether network is directed
+	 * @param splinesVal how edges should be drawn by GraphViz programs
+	 * @param labelLoc label location of graph label (if shown)
+	 * @param nodeLabelLoc label location of node labels
+	 * @param vizStyle VisualStyle applied to view
 	 * 
-	 * @param view of network we are converting
 	 */
-	public NetworkPropertyMapper(CyNetworkView netView, boolean directed, String splinesVal, String labelLoc, VisualStyle vizStyle) {
+	public NetworkPropertyMapper(CyNetworkView netView, boolean directed, String splinesVal, String labelLoc, String nodeLabelLoc, VisualStyle vizStyle) {
 		super(netView, vizStyle);
 		simpleVisPropsToDot = new ArrayList<String>();
 		this.directed = directed;
 		this.splinesVal = splinesVal;
 		this.labelLoc = labelLoc;
+		this.nodeLabelLoc = nodeLabelLoc;
 		this.vizStyle = vizStyle;
 		
 		populateMaps();		
@@ -156,6 +166,21 @@ public class NetworkPropertyMapper extends Mapper {
 		StringBuilder nodeDefaults = new StringBuilder("node [");
 		
 		//Node SimpleVizProps
+		String nodeLabel = vizStyle.getDefaultValue(NODE_LABEL);
+		nodeLabel = nodeLabel.replace("\"", "\\\"");
+		if(!nodeLabelLoc.equals("ex")) {
+			nodeDefaults.append(
+				String.format("label = \"%s\"", nodeLabel) + ","
+			);
+		}
+		// if external label
+		else {
+			nodeDefaults.append("label = \"\"");
+			nodeDefaults.append(
+				String.format("xlabel = \"%s\"", nodeLabel)
+			);
+		}
+		
 		Double borderWidth = vizStyle.getDefaultValue(NODE_BORDER_WIDTH);
 		nodeDefaults.append(
 			String.format("penwidth = \"%f\"", borderWidth) + ","
@@ -217,13 +242,20 @@ public class NetworkPropertyMapper extends Mapper {
 		nodeDefaults.append(fontString + ",");
 		
 		nodeDefaults.append(
-			"fixedsize = \"true\",labelloc = \"" + labelLoc + "\"]"
+			"fixedsize = \"true\",labelloc = \"" + nodeLabelLoc + "\"]"
 		);
 		return nodeDefaults.toString();
 	}
 	
 	private String getEdgeDefaults() {
 		StringBuilder edgeDefaults = new StringBuilder("edge [");
+
+		String edgeLabel = vizStyle.getDefaultValue(EDGE_LABEL);
+		edgeLabel = edgeLabel.replace("\"", "\\\"");
+		edgeDefaults.append(
+			String.format("label = \"%s\"", edgeLabel) + ","
+		);
+
 		Double width = vizStyle.getDefaultValue(EDGE_WIDTH);
 		edgeDefaults.append(String.format("penwidth = \"%f\"", width) + ",");
 

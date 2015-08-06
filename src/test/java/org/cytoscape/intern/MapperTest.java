@@ -139,12 +139,12 @@ public class MapperTest {
 		String outputString = "outputorder = \"edgesfirst\"";
 		String esepString = "esep = \"0\"";
 		String marginString = "pad = \"2\"";
-		String nodeDefaults = "node [penwidth = \"2.000000\",height = \"0.555556\",width = \"0.833333\",tooltip = \"\",color = \"#000000FF\",fillcolor = \"#C80000FF\",shape = \"ellipse\",style = \"solid,filled\",fontname = \"SansSerif.plain\",fontsize = \"12\",fontcolor = \"#000000FF\",fixedsize = \"true\",labelloc = \"b\"]";
-		String edgeDefaults = "edge [penwidth = \"1.000000\",tooltip = \"\",arrowhead = \"none\",arrowtail = \"none\",color = \"#404040FF\",fontname = \"SansSerif.plain\",fontsize = \"10\",fontcolor = \"#000000FF\",style = \"solid\",dir = \"both\"]";
+		String nodeDefaults = "node [label = \"\",penwidth = \"2.000000\",height = \"0.555556\",width = \"0.833333\",tooltip = \"\",color = \"#000000FF\",fillcolor = \"#C80000FF\",shape = \"ellipse\",style = \"solid,filled\",fontname = \"SansSerif.plain\",fontsize = \"12\",fontcolor = \"#000000FF\",fixedsize = \"true\",labelloc = \"c\"]";
+		String edgeDefaults = "edge [label = \"\",penwidth = \"1.000000\",tooltip = \"\",arrowhead = \"none\",arrowtail = \"none\",color = \"#404040FF\",fontname = \"SansSerif.plain\",fontsize = \"10\",fontcolor = \"#000000FF\",style = \"solid\",dir = \"both\"]";
 		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
 				labelString, labelLocString, colorString, splinesString, outputString, esepString, marginString, nodeDefaults, edgeDefaults); 
 
-		Mapper mapper = new NetworkPropertyMapper(networkView, NetworkPropertyMapper.isDirected(networkView), "false", "b", vizStyle);
+		Mapper mapper = new NetworkPropertyMapper(networkView, NetworkPropertyMapper.isDirected(networkView), "false", "b" , "c", vizStyle);
 		String actualDotString = mapper.getElementString();
 
 		assertEquals("Network Properties and Visual Style translation failed", expectedDotString, actualDotString);

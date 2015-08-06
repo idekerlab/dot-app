@@ -173,7 +173,8 @@ public class DotWriterTask implements CyWriter {
 		
 		if(networkView != null) {
 			// constructed here because splinesVal is needed, splinesVal can't be determined until run()
-			this.networkMapper = new NetworkPropertyMapper(networkView, directed, splinesVal, networkLabelLoc, vizStyle);
+			this.networkMapper = new NetworkPropertyMapper(
+					networkView, directed, splinesVal, networkLabelLoc, nodeLabelLoc, vizStyle);
 		}
 		
 		LOGGER.info("Writing .dot file...");
@@ -231,7 +232,11 @@ public class DotWriterTask implements CyWriter {
 			}
 			// if we are only exporting network
 			else {
-				networkProps = String.format("graph %s {\nsplines = \"%s\"\n", networkName, splinesVal);
+				String moddedName = Mapper.modifyElementId(networkName);
+				String label = (networkLabelLoc != null) ? moddedName : "";
+				networkProps = String.format(
+					"graph %s {\nlabel = \"%s\"\nsplines = \"%s\"\n", moddedName, label, splinesVal
+				);
 			}
 			// if network name was modified
 			if (!networkProps.contains(networkName)) {

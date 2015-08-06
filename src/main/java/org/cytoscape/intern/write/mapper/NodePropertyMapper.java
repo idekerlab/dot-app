@@ -94,13 +94,14 @@ public class NodePropertyMapper extends Mapper {
 		// Replace quotes with escaped quotes if any
 		nodeLabel = nodeLabel.replace("\"", "\\\"");
 		// if internal label
-		if(!labelLoc.equals("ex")) {
-			simpleVisPropsToDot.add(String.format("label = \"%s\"", nodeLabel));
-		}
-		// if external label
-		else {
-			simpleVisPropsToDot.add("label = \"\"");
-			simpleVisPropsToDot.add(String.format("xlabel = \"%s\"", nodeLabel));
+		if (!isEqualToDefault(NODE_LABEL)) {
+			if(!labelLoc.equals("ex")) {
+				simpleVisPropsToDot.add(String.format("label = \"%s\"", nodeLabel));
+			}
+			// if external label
+			else {
+				simpleVisPropsToDot.add(String.format("xlabel = \"%s\"", nodeLabel));
+			}
 		}
 		
 		if (!isEqualToDefault(NODE_BORDER_WIDTH)) {
