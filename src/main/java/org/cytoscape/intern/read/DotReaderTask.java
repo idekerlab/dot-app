@@ -154,7 +154,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			LOGGER.info("Running run() function...");
 			
 			/*****************************************************************
-			 * 1. don‘t know how to set up the inputStream properly
+			 * 1. don‘t know how to set up the inputStream properly, it, therefore,
+			 *    has not been tested yet.
 			 * 2. I believe we don't need to worry about the default VPs stuff in 
 			 *   run(), but we will need to handle those when we try to build networkView
 			 * ***************************************************************
