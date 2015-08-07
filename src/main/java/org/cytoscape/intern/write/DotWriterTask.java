@@ -264,10 +264,12 @@ public class DotWriterTask implements CyWriter {
 		if(networkView != null){
 			// create list of all node views
 			ArrayList< View<CyNode> > nodeViewList = new ArrayList< View<CyNode> >( networkView.getNodeViews() );
+			
+			boolean isLocked = Mapper.nodeSizesLocked(vizStyle);
 		
 			// for each node, write declaration string
 			for(View<CyNode> nodeView: nodeViewList) {
-				nodeMapper = new NodePropertyMapper(nodeView, vizStyle, nodeLabelLoc);
+				nodeMapper = new NodePropertyMapper(nodeView, vizStyle, nodeLabelLoc, isLocked);
 	  		
 				try {
 					// Retrieve node name

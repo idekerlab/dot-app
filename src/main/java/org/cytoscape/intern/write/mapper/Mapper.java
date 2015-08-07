@@ -29,6 +29,7 @@ import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +45,7 @@ import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
+import org.cytoscape.view.vizmap.VisualPropertyDependency;
 import org.cytoscape.view.vizmap.VisualStyle;
 
 /**
@@ -200,11 +202,13 @@ public abstract class Mapper {
 				String fontColor = String.format("fontcolor = \"%s\"", mapColorToDot(color, transparency));
 				if (returnValue == null) {
 					returnValue = new StringBuilder(fontColor);
-				} else {
+				} 
+				else {
 					returnValue.append(","+fontColor);
 				}
 			}
-		} else if (view.getModel() instanceof CyEdge) {
+		} 
+		else if (view.getModel() instanceof CyEdge) {
 			if (!font.equals(vizStyle.getDefaultValue(EDGE_LABEL_FONT_FACE))) {
 				String fontName = String.format("fontname = \"%s\"", font.getFontName());
 				if (returnValue == null) {
@@ -215,7 +219,8 @@ public abstract class Mapper {
 				String fontSize = String.format("fontsize = \"%d\"", size);
 				if (returnValue == null) {
 					returnValue = new StringBuilder(fontSize);
-				} else {
+				} 
+				else {
 					returnValue.append(","+fontSize);
 				}
 			}
@@ -224,7 +229,8 @@ public abstract class Mapper {
 				String fontColor = String.format("fontcolor = \"%s\"", mapColorToDot(color, transparency));
 				if (returnValue == null) {
 					returnValue = new StringBuilder(fontColor);
-				} else {
+				} 
+				else {
 					returnValue.append(","+fontColor);
 				}
 			}
@@ -363,7 +369,28 @@ public abstract class Mapper {
 		output.append('\"');
 		return output.toString();
 	}
-	
+
+	/**
+	 * Checks whether node size is locked,
+	 * "Lock node and width height" checkbox
+	 * 
+	 * @param visualStyle VisualStyle being checked if node sizes are locked
+	 * @return true if size is locked, false if not
+	 */
+	public static boolean nodeSizesLocked(VisualStyle visualStyle) {
+		Set<VisualPropertyDependency<?>> vizDependencies = visualStyle.getAllVisualPropertyDependencies();
+		boolean output = false;
+		
+		// go through all dependencies and find lock height and width one
+		for(VisualPropertyDependency<?> dependency: vizDependencies) {
+			if((dependency.getDisplayName()).equals("Lock node width and height")) {
+				output = dependency.isDependencyEnabled();
+			}
+		}
+
+		return output;
+	}	
+
 	/**
 	 * Returns a String that contains all relevant attributes for this element 
 	 */

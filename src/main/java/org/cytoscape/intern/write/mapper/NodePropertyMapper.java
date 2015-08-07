@@ -16,6 +16,7 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_T
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TRANSPARENCY;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_VISIBLE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_WIDTH;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_X_LOCATION;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_Y_LOCATION;
 import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.ROUND_RECTANGLE;
@@ -43,16 +44,20 @@ public class NodePropertyMapper extends Mapper {
 	// location of node label
 	private String labelLoc;
 	
+	// Whether node height+width is locked
+	private boolean isLocked;
+	
 	/**
 	 * Initializes and populates instance variables with mappings
 	 * 
 	 * @param view View of Node we are converting to .dot
 	 */
-	public NodePropertyMapper(View<CyNode> view, VisualStyle vizStyle, String labelLoc) {
+	public NodePropertyMapper(View<CyNode> view, VisualStyle vizStyle, String labelLoc, boolean isLocked) {
 		super(view, vizStyle);
 		// initialize data structure
 		simpleVisPropsToDot = new ArrayList<String>();
 		this.labelLoc = labelLoc;
+		this.isLocked = isLocked;
 		
 		populateMaps();
 	}
@@ -114,17 +119,48 @@ public class NodePropertyMapper extends Mapper {
 			simpleVisPropsToDot.add(String.format("penwidth = \"%f\"", borderWidth));
 		}
 		
+
+		/*
 		if (!isEqualToDefault(NODE_HEIGHT)) {
-			Double height = view.getVisualProperty(NODE_HEIGHT);
+			Double height; 
+			if(isLocked) {
+				height = view.getVisualProperty(NODE_SIZE);
+			}
+			else {
+				height = view.getVisualProperty(NODE_HEIGHT);
+			}
 			LOGGER.info("BVL height: " + height);
 			LOGGER.info("vizStyle height: " + vizStyle.getDefaultValue(NODE_HEIGHT));
 			simpleVisPropsToDot.add(String.format("height = \"%f\"", height/PPI));
 		}
 
 		if (!isEqualToDefault(NODE_WIDTH)) {
+			Double width; 
+			if(isLocked) {
+				width = view.getVisualProperty(NODE_SIZE);
+			}
+			else {
+				width = view.getVisualProperty(NODE_WIDTH);
+			}
+			simpleVisPropsToDot.add(String.format("width = \"%f\"", width/PPI));
+		}
+		*/
+		if(isLocked) {
+			if(!isEqualToDefault(NODE_SIZE)){
+				Double size = view.getVisualProperty(NODE_SIZE);
+				simpleVisPropsToDot.add(String.format("height = \"%f\"", size/PPI));
+				simpleVisPropsToDot.add(String.format("width = \"%f\"", size/PPI));
+			}
+		}
+		else if(!isEqualToDefault(NODE_HEIGHT)) {
+			Double height = view.getVisualProperty(NODE_HEIGHT);
+			simpleVisPropsToDot.add(String.format("height = \"%f\"", height/PPI));
+		}
+		else if(!isEqualToDefault(NODE_WIDTH)) {
 			Double width = view.getVisualProperty(NODE_WIDTH);
 			simpleVisPropsToDot.add(String.format("width = \"%f\"", width/PPI));
 		}
+
 
 		if (!isEqualToDefault(NODE_TOOLTIP)) {
 			String tooltip = view.getVisualProperty(NODE_TOOLTIP);
@@ -281,4 +317,11 @@ public class NodePropertyMapper extends Mapper {
 		return mapFont(fontName, fontSize, fontColor, fontTransparency);
 	}
 
+
 }
+
+
+
+
+
+

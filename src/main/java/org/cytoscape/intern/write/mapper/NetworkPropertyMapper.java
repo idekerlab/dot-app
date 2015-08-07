@@ -21,6 +21,7 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_B
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_WIDTH;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_FILL_COLOR;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_HEIGHT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_COLOR;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_FACE;
@@ -35,6 +36,7 @@ import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.R
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.Collection;
 
 import org.cytoscape.model.CyEdge;
@@ -45,6 +47,7 @@ import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.vizmap.VisualStyle;
+import org.cytoscape.view.vizmap.VisualPropertyDependency;
 
 public class NetworkPropertyMapper extends Mapper {
 
@@ -166,6 +169,7 @@ public class NetworkPropertyMapper extends Mapper {
 	 */
 	private String getNodeDefaults() {
 		StringBuilder nodeDefaults = new StringBuilder("node [");
+		boolean isLocked = Mapper.nodeSizesLocked(vizStyle);
 		
 		//Node SimpleVizProps
 		String nodeLabel = vizStyle.getDefaultValue(NODE_LABEL);
@@ -187,17 +191,27 @@ public class NetworkPropertyMapper extends Mapper {
 		nodeDefaults.append(
 			String.format("penwidth = \"%f\"", borderWidth) + ","
 		);
-		
-		Double height = vizStyle.getDefaultValue(NODE_HEIGHT);
+	
+		// set width and height, if they are locked, must set to NODE_SIZE prop
+		Double height, width;
+		if(isLocked) {
+			height = vizStyle.getDefaultValue(NODE_SIZE);
+			width = vizStyle.getDefaultValue(NODE_SIZE);
+		}
+		else {
+			height = vizStyle.getDefaultValue(NODE_HEIGHT);
+			width = vizStyle.getDefaultValue(NODE_WIDTH);
+		}
 		nodeDefaults.append(
 			String.format("height = \"%f\"", height/PPI) + ","
 		);
 
-		Double width = vizStyle.getDefaultValue(NODE_WIDTH);
 		nodeDefaults.append(
 			String.format("width = \"%f\"", width/PPI) + ","
 		);
 
+		
+		
 		String tooltip = vizStyle.getDefaultValue(NODE_TOOLTIP);
 		nodeDefaults.append(
 			String.format("tooltip = \"%s\"", tooltip) + ","
@@ -399,4 +413,5 @@ public class NetworkPropertyMapper extends Mapper {
         return false;
 		
 	}
+
 }
