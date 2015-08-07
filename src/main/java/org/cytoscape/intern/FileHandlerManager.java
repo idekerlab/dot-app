@@ -35,6 +35,7 @@ public class FileHandlerManager {
 	public void closeAllFileHandlers() {
 		for(FileHandler handler: fileHandlers) {
 			handler.close();
+			fileHandlers.remove(handler);
 		}
 	}
 

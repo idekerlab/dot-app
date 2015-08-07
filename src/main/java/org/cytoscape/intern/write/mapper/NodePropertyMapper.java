@@ -23,11 +23,13 @@ import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.R
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.vizmap.VisualStyle;
+import org.cytoscape.view.vizmap.VisualPropertyDependency;
 
 /**
  * Handles mapping of CyNode properties to .dot equivalent Strings
@@ -114,6 +116,8 @@ public class NodePropertyMapper extends Mapper {
 		
 		if (!isEqualToDefault(NODE_HEIGHT)) {
 			Double height = view.getVisualProperty(NODE_HEIGHT);
+			LOGGER.info("BVL height: " + height);
+			LOGGER.info("vizStyle height: " + vizStyle.getDefaultValue(NODE_HEIGHT));
 			simpleVisPropsToDot.add(String.format("height = \"%f\"", height/PPI));
 		}
 
@@ -276,4 +280,5 @@ public class NodePropertyMapper extends Mapper {
 		
 		return mapFont(fontName, fontSize, fontColor, fontTransparency);
 	}
+
 }
