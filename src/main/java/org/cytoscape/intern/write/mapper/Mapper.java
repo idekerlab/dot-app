@@ -183,22 +183,31 @@ public abstract class Mapper {
 		StringBuilder returnValue = null;
 		
 		if (view.getModel() instanceof CyNode) {
-			if (!font.equals(vizStyle.getDefaultValue(NODE_LABEL_FONT_FACE))) {
-				String fontName = String.format("fontname = \"%s\"", font.getFontName());
-				if (returnValue == null) {
-					returnValue = new StringBuilder(fontName);
+			LOGGER.finest("Mapping font attributes for a node view...");
+			LOGGER.info("Determining need for fontname attr");
+			if (!isEqualToDefault(font, NODE_LABEL_FONT_FACE)) {
+				Font styleFont = vizStyle.getDefaultValue(NODE_LABEL_FONT_FACE);
+				if (!font.getFontName().equals(styleFont.getFontName()) || 
+						!font.getFamily().equals(styleFont.getFamily())) {
+					String fontName = String.format("fontname = \"%s\"", font.getFontName());
+					if (returnValue == null) {
+						returnValue = new StringBuilder(fontName);
+					}
 				}
 			}
-			if (!size.equals(vizStyle.getDefaultValue(NODE_LABEL_FONT_SIZE))) {
+			LOGGER.info("Determining need for fontsize attr");
+			if (!isEqualToDefault(size, NODE_LABEL_FONT_SIZE)) {
 				String fontSize = String.format("fontsize = \"%d\"", size);
 				if (returnValue == null) {
 					returnValue = new StringBuilder(fontSize);
-				} else {
+				} 
+				else {
 					returnValue.append(","+fontSize);
 				}
 			}
-			if (!color.equals((Color)vizStyle.getDefaultValue(NODE_LABEL_COLOR)) ||
-					!transparency.equals(vizStyle.getDefaultValue(NODE_LABEL_TRANSPARENCY))) {
+			LOGGER.info("Determining need for fontcolor attr");
+			if (!isEqualToDefault(color, NODE_LABEL_COLOR) ||
+					!isEqualToDefault(transparency, NODE_LABEL_TRANSPARENCY)) {
 				String fontColor = String.format("fontcolor = \"%s\"", mapColorToDot(color, transparency));
 				if (returnValue == null) {
 					returnValue = new StringBuilder(fontColor);
@@ -208,14 +217,15 @@ public abstract class Mapper {
 				}
 			}
 		} 
+		// had an ugly conflict in this area. note if there are font problems it could be from here
 		else if (view.getModel() instanceof CyEdge) {
-			if (!font.equals(vizStyle.getDefaultValue(EDGE_LABEL_FONT_FACE))) {
+			if (!isEqualToDefault(font, EDGE_LABEL_FONT_FACE)) {
 				String fontName = String.format("fontname = \"%s\"", font.getFontName());
 				if (returnValue == null) {
 					returnValue = new StringBuilder(fontName);
 				}
 			}
-			if (!size.equals(vizStyle.getDefaultValue(EDGE_LABEL_FONT_SIZE))) {
+			if (!isEqualToDefault(size, EDGE_LABEL_FONT_SIZE)) {
 				String fontSize = String.format("fontsize = \"%d\"", size);
 				if (returnValue == null) {
 					returnValue = new StringBuilder(fontSize);
@@ -224,8 +234,8 @@ public abstract class Mapper {
 					returnValue.append(","+fontSize);
 				}
 			}
-			if (!color.equals((Color)vizStyle.getDefaultValue(EDGE_LABEL_COLOR)) ||
-					!transparency.equals(vizStyle.getDefaultValue(EDGE_LABEL_TRANSPARENCY))) {
+			if (!isEqualToDefault(color, EDGE_LABEL_COLOR) ||
+					!isEqualToDefault(transparency, EDGE_LABEL_TRANSPARENCY)) {
 				String fontColor = String.format("fontcolor = \"%s\"", mapColorToDot(color, transparency));
 				if (returnValue == null) {
 					returnValue = new StringBuilder(fontColor);
@@ -251,15 +261,15 @@ public abstract class Mapper {
 	 * Does not include "style=" bit
 	 */
 	protected String mapDotStyle() {
+		LOGGER.info("Building style attr string...");
 		StringBuilder dotStyle = null;
 		if (view.getModel() instanceof CyNode) {
-			//NODE_BORDER_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
-			LineType lineType = view.getVisualProperty(NODE_BORDER_LINE_TYPE);
-			NodeShape nodeShape = view.getVisualProperty(NODE_SHAPE);
-			String lineStr = "";
-
-			if (!lineType.equals(vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE)) || 
-					!nodeShape.equals(vizStyle.getDefaultValue(NODE_SHAPE))) {
+			LOGGER.finest("Building style string for node view...");
+			if (!isEqualToDefault(NODE_BORDER_LINE_TYPE) || !isEqualToDefault(NODE_SHAPE)) {
+				LOGGER.info("Not default style attr, building node's own...");
+				LineType lineType = view.getVisualProperty(NODE_BORDER_LINE_TYPE);
+				NodeShape nodeShape = view.getVisualProperty(NODE_SHAPE);
+				String lineStr = "";
 				dotStyle = new StringBuilder();
 
 				// get .dot equivalent of line style, see if we need rounded
@@ -269,15 +279,16 @@ public abstract class Mapper {
 					LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
 				}
 				boolean rounded = nodeShape.equals(ROUND_RECTANGLE);
-				String roundedString = (rounded) ? ",rounded" : "";
-				
-                String style = String.format("style = \"%s,%sfilled\"", lineStr, roundedString);
-                dotStyle.append(style);
+				String roundedString = (rounded) ? "rounded," : "";
+            	String style = String.format("style = \"%s,%sfilled\"", lineStr, roundedString);
+            	dotStyle.append(style);
 			}
 		} 
 		else if (view.getModel() instanceof CyEdge) {
-			if(!isEqualToDefault(EDGE_LINE_TYPE)); {
-				//EDGE_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
+			LOGGER.finest("Building style string for edge view...");
+			LOGGER.info("Determining need for style attr...");
+			if(!isEqualToDefault(EDGE_LINE_TYPE)) {
+				LOGGER.info("Not default style attr, building edge's own...");
 				LineType lineType = view.getVisualProperty(EDGE_LINE_TYPE);
 				String lineStr = LINE_TYPE_MAP.get(lineType);
 				dotStyle = new StringBuilder();
@@ -299,13 +310,26 @@ public abstract class Mapper {
 	}
 	
 	/**
-	 * Checks whether a VisualProperty is equal to the default value for that VP
+	 * Checks whether the value of a VisualProperty applied to the view is equal
+	 * to the default value set for that VP by the Visual Style applied to the network
 	 * 
 	 * @param vizProp VisualProperty being compared
 	 * @return boolean. True when value is equal, false if not
 	 */
 	protected boolean isEqualToDefault(VisualProperty<?> vizProp) {
 		return view.getVisualProperty(vizProp).equals(vizStyle.getDefaultValue(vizProp));
+	}
+	
+	/**
+	 * Checks whether a value is equal to the default value set for a
+	 * VisualProperty by the Visual Style applied to the network
+	 * 
+	 * @param val The value being checked
+	 * @param vizProp VisualProperty against which val is being checked
+	 * @return boolean. True when value is equal, false if not
+	 */
+	protected <T> boolean isEqualToDefault(T val, VisualProperty<T> vizProp) {
+		return val.equals(vizStyle.getDefaultValue(vizProp));
 	}
 	
 	/**

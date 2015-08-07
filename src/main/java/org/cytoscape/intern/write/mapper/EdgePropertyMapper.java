@@ -5,7 +5,6 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_L
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LINE_TYPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE;
@@ -55,6 +54,7 @@ public class EdgePropertyMapper extends Mapper {
 	/**
 	 * Translates the Cytoscape Bend property of the View<CyEdge> object to the
 	 * equivalent dot attribute string
+	 * DEPRECATED
 	 * 
 	 * @return String that represents edge bend attribute
 	 */
@@ -140,6 +140,7 @@ public class EdgePropertyMapper extends Mapper {
 	}
 
 	/*
+	 * DEPRECATED
 	protected String mapDotStyle() {
 		if (!isEqualToDefault(EDGE_LINE_TYPE)) {
 			return super.mapDotStyle();
@@ -171,10 +172,10 @@ public class EdgePropertyMapper extends Mapper {
 		
 		LOGGER.info("Preparing to get color properties");
 		// Get the color and fillcolor .dot strings. Append to attribute string
-		Color strokeColor = (Color) view.getVisualProperty(EDGE_STROKE_UNSELECTED_PAINT);
-		Integer strokeTransparency = (visible) ? ((Number)view.getVisualProperty(EDGE_TRANSPARENCY)).intValue()
-											   : TRANSPARENT;
 		if (!isEqualToDefault(EDGE_STROKE_UNSELECTED_PAINT) || !isEqualToDefault(EDGE_TRANSPARENCY)) {
+			Color strokeColor = (Color) view.getVisualProperty(EDGE_STROKE_UNSELECTED_PAINT);
+			Integer strokeTransparency = (visible) ? ((Number)view.getVisualProperty(EDGE_TRANSPARENCY)).intValue()
+											   : TRANSPARENT;
 			String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
 			elementString.append(dotColor + ",");
 		}
@@ -205,7 +206,7 @@ public class EdgePropertyMapper extends Mapper {
 		LOGGER.info("Appending style attribute to .dot string");
 		String styleString = mapDotStyle();
 		if (styleString != null) {
-			elementString.append(mapDotStyle());
+			elementString.append(styleString);
 			LOGGER.info("Appended style attribute. Result: " + elementString);
 		}
 		
@@ -217,8 +218,12 @@ public class EdgePropertyMapper extends Mapper {
 			elementString.deleteCharAt(elementString.length() - 1);
 		}
 		elementString.append("]");
-		LOGGER.info("Created .dot string. Result: " + elementString);
-		return elementString.toString();
+		String result = elementString.toString();
+		if (result.matches("^\\[\\]$")) {
+			result = "";
+		}
+		LOGGER.info("Created .dot string. Result: " + result);
+		return result;
 	}
 	
 	/**
@@ -229,7 +234,6 @@ public class EdgePropertyMapper extends Mapper {
 	 */
 	private String mapFontHelper() {
 		boolean visible = isVisible();
-		String elementString;
 
 		// Get label font information and append in proper format
 		Color labelColor = (Color) view.getVisualProperty(EDGE_LABEL_COLOR);
@@ -247,33 +251,3 @@ public class EdgePropertyMapper extends Mapper {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
