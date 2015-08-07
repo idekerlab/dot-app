@@ -1,6 +1,8 @@
 package org.cytoscape.intern.read;
 
-import org.cytoscape.intern.read.reader.Reader;
+//In order to access the Reader class that is in the other package
+//haven't called the Reader class yet from buildCyNetworkView function
+import org.cytoscape.intern.read.reader.Reader; 
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -316,10 +318,14 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		//created a new CyNetworkView based on the cyNetworkViewFactory
 		CyNetworkView networkView = cyNetworkViewFactory.createNetworkView(network);
 		
-		//Somewhere in this method, we need to call the Reader() from 
-		//org.cytoscape.intern.read.reader package (already imported this 
-		// package) by passing in the networkView and visualStyle just 
-		//created above, in order to set all the VPs
+		
+		/******************************************************************
+		 *Somewhere in this method, we need to call the Reader() from 
+		 *org.cytoscape.intern.read.reader package (already imported this 
+		 *package) by passing in the networkView and visualStyle just 
+		 *created above, in order to set all the VPs
+		 ******************************************************************
+		 */
 		
 		//Reader.Reader(networkView, visualStyle);
 		
