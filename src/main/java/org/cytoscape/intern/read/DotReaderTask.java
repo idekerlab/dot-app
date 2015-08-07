@@ -1,5 +1,7 @@
 package org.cytoscape.intern.read;
 
+import org.cytoscape.intern.read.reader.Reader;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,6 +27,7 @@ import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskMonitor;
+import org.cytoscape.view.vizmap.VisualStyle;
 
 import com.alexmerz.graphviz.Parser;
 import com.alexmerz.graphviz.ParseException;
@@ -272,7 +275,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	@Override
 	public CyNetworkView buildCyNetworkView(CyNetwork network) {
-		// TODO Auto-generated method stub
+		// TODO
 		/*
 		 * Steps:
 		 * Retrieve Graph object corresponding to "arg0" from HashMap
@@ -283,7 +286,48 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 * add VisualStyle to VisualMappingManager
 		 * return CyNetworkView
 		 */
-		return null;
+		
+		//codes start at below
+		
+		LOGGER.info("begin to execute buildCyNetworkView()...");
+		
+		//initialize the graph object
+		Graph graph = null;
+		
+		//the for loop's purpose below is to get the corresponding graph
+		//based on the input network from the hashmap
+		for (HashMap.Entry<Graph, CyNetwork> entry: dotGraphs.entrySet()){
+			//loop through each entry in hashmap until the corresponding graph is found
+			if(network == entry.getValue()){
+				graph = entry.getKey();
+				break;
+			}
+		}
+		
+		//error checking if the graph object is not found
+		if (graph == null){
+			LOGGER.log(Level.SEVERE, "graph is null, either it's a empty graph or is not found in HashMap");
+			return null;
+		}
+		
+		//created a new VisualStyle based on the visualStyleFactory
+		VisualStyle visualStyle = vizStyleFact.createVisualStyle("new visual style");
+		
+		//created a new CyNetworkView based on the cyNetworkViewFactory
+		CyNetworkView networkView = cyNetworkViewFactory.createNetworkView(network);
+		
+		//Somewhere in this method, we need to call the Reader() from 
+		//org.cytoscape.intern.read.reader package (already imported this 
+		// package) by passing in the networkView and visualStyle just 
+		//created above, in order to set all the VPs
+		
+		//Reader.Reader(networkView, visualStyle);
+		
+		//add the created visualStyle to VisualMappingManager
+		vizMapMgr.addVisualStyle(visualStyle);
+		
+		//return the created cyNetworkView at the end
+		return networkView;
 	}
 
 	/**
