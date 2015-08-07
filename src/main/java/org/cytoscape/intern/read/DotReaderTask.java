@@ -25,12 +25,10 @@ import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskMonitor;
-import org.cytoscape.session.CyNetworkNaming;
 
 import com.alexmerz.graphviz.Parser;
 import com.alexmerz.graphviz.ParseException;
 import com.alexmerz.graphviz.objects.Graph;
-import com.alexmerz.graphviz.objects.GraphAttributes;
 import com.alexmerz.graphviz.objects.Node;
 import com.alexmerz.graphviz.objects.Edge;
 import com.alexmerz.graphviz.objects.PortNode;
@@ -149,20 +147,23 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 * 			-  set the name and shared_name of CyEdge to Sourcename (interaction) Targetname
 		 */
 		
-		//pesudocodes start at below
+		//codes start at below
 		try {
 			LOGGER.info("Running run() function...");
 			
-			/*****************************************************************
+			/*******************************************************************************
 			 * 1. don‘t know how to set up the inputStream properly, it, therefore,
 			 *    has not been tested yet.
 			 * 2. I believe we don't need to worry about the default VPs stuff in 
 			 *   run(), but we will need to handle those when we try to build networkView
-			 * ***************************************************************
+			 * *****************************************************************************
 			 */
 			InputStream inputStream = new FileInputStream(""); //Has not been set up properly
 			
+			//set up the InputStreamReader with the inputStream
 			InputStreamReader input = new InputStreamReader(inputStream);
+			
+			//Initialize the parser
 			Parser parser = new Parser();
 			
 			try{
@@ -180,7 +181,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 				//iterate each graph the parser got from input file
 				for (Graph graph : graphList){
 					
-					LOGGER.info("iterating graphs...");
+					LOGGER.info("iterating each graph in graphList...");
 					//create a new empty network from cyNetworkFactory
 					CyNetwork network = cyNetworkFactory.createNetwork();
 					//get the name of the network from the graph
@@ -222,17 +223,28 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 						//if getType return 2, it's directed, else it's undirected
 						//set the cyEdge and add the cyEdge into the network
 						if (edge.getType() == 2) {
-							cyEdge = network.addEdge(source, target, true );
+							cyEdge = network.addEdge(source, target, true);
 						}else{
-							cyEdge = network.addEdge(source, target,false );
+							cyEdge = network.addEdge(source, target, false);
 						}
 						
-						//set the interation, a attribute of table, to be "interaction"
+						//set the interaction, a attribute of table, to be "interaction"
 						network.getDefaultEdgeTable().getRow(cyEdge.getSUID()).set("interaction", "interaction");
 						
 						//set the edge name
 						network.getDefaultEdgeTable().getRow(cyEdge.getSUID()).set("name", sourceName + " (interaction) "+ targetName);
 					}
+					
+					/*********************************************************************************
+					 * Not sure whether the ArrayList graphList might contain empty graph (The unsure
+					 * code is: ArrayList <Graph> graphList = parser.getGraphs(); at the beginning of 
+					 * second try{}), if it's possible for graphList to have empty graph, we probably 
+					 * need to check whether network is null(has not been created) before we add it to 
+					 * the network array (networks) and before we add it to 
+					 * dotGraphs (ArrayList <graph, CyNetwork>)
+					 **********************************************************************************
+					 */
+					
 					//at the end of each graph iteration, add the created CyNetwork into the CyNetworks array
 					networks[networkCounter++] = network;
 					
