@@ -152,121 +152,109 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 * 			-  set the name and shared_name of CyEdge to Sourcename (interaction) Targetname
 		 */
 		
-		//codes start at below
-		try {
-			LOGGER.info("Running run() function...");
-			
-			/*******************************************************************************
-			 * 1. don‘t know how to set up the inputStream properly, it, therefore,
-			 *    has not been tested yet.
-			 * 2. I believe we don't need to worry about the default VPs stuff in 
-			 *   run(), but we will need to handle those when we try to build networkView
-			 * *****************************************************************************
-			 */
-			InputStream inputStream = new FileInputStream(""); //Has not been set up properly
-			
-			//set up the InputStreamReader with the inputStream
-			InputStreamReader input = new InputStreamReader(inputStream);
-			
-			//Initialize the parser
-			Parser parser = new Parser();
-			
-			try{
-				
-			    LOGGER.info("begin parsing the input...");
-				parser.parse(input);
-				
-				//graphList holds all the graphs the parser read from the input
-				ArrayList <Graph> graphList = parser.getGraphs();
-				//initialize a CyNetwork array that holds created CyNetwork from graph
-				CyNetwork [] networks = new CyNetwork [graphList.size()];
-				//set the counter for the CyNetwork array above
-				int networkCounter = 0;
-				
-				//iterate each graph the parser got from input file
-				for (Graph graph : graphList){
-					
-					LOGGER.info("iterating each graph in graphList...");
-					//create a new empty network from cyNetworkFactory
-					CyNetwork network = cyNetworkFactory.createNetwork();
-					//get the name of the network from the graph
-					String networkName = graph.getId().toString(); 
-					//set the name for the network
-					network.getRow(network).set(CyNetwork.NAME, networkName);
-					
-					//get all the nodes from the graph, and group them into a nodeList
-					ArrayList<Node> nodeList = graph.getNodes(true);
-					//iterator each node in the nodeList
-					for (Node node : nodeList){
-						//initialize a new Cynode into the network
-						CyNode cyNode = network.addNode();
-						//get the name of the Cynode from the node id 
-						String nodeName = node.getId().toString();
-						//set the node name for the node
-						network.getDefaultNodeTable().getRow(cyNode.getSUID()).set("name", nodeName);
-						//add the node and the corresponding cyNode into a hashmap for later tracking
-						nodeMap.put(node, cyNode);
-					}
-					//get all the edges from the graph, and group them into a edgeList
-					ArrayList<Edge> edgeList = graph.getEdges();
-					//iterate each edge in the edgeList
-					for(Edge edge : edgeList){
-						//get the source and target portNode from the edge
-						PortNode sourcePort = edge.getSource();
-						PortNode targetPort = edge.getTarget();
-						
-						//get the name of both nodes
-						String sourceName = sourcePort.getNode().getId().toString();
-						String targetName = targetPort.getNode().getId().toString();
-						
-						//get the CyNode of the source and target node from the hashmap
-						CyNode source = nodeMap.get(sourcePort.getNode());
-						CyNode target = nodeMap.get(targetPort.getNode());
-						//initialize the cyEdge 
-						CyEdge cyEdge = null;
-						
-						//if getType return 2, it's directed, else it's undirected
-						//set the cyEdge and add the cyEdge into the network
-						if (edge.getType() == 2) {
-							cyEdge = network.addEdge(source, target, true);
-						}else{
-							cyEdge = network.addEdge(source, target, false);
-						}
-						
-						//set the interaction, a attribute of table, to be "interaction"
-						network.getDefaultEdgeTable().getRow(cyEdge.getSUID()).set("interaction", "interaction");
-						
-						//set the edge name
-						network.getDefaultEdgeTable().getRow(cyEdge.getSUID()).set("name", sourceName + " (interaction) "+ targetName);
-					}
-					
-					/*********************************************************************************
-					 * Not sure whether the ArrayList graphList might contain empty graph (The unsure
-					 * code is: ArrayList <Graph> graphList = parser.getGraphs(); at the beginning of 
-					 * second try{}), if it's possible for graphList to have empty graph, we probably 
-					 * need to check whether network is null(has not been created) before we add it to 
-					 * the network array (networks) and before we add it to 
-					 * dotGraphs (ArrayList <graph, CyNetwork>)
-					 **********************************************************************************
-					 */
-					
-					//at the end of each graph iteration, add the created CyNetwork into the CyNetworks array
-					networks[networkCounter++] = network;
-					
-					//add the graph and the created CyNetwork based on that graph into the dotGraphs hashmap
-					dotGraphs.put(graph, network);
-									
-				}
-			}catch(ParseException e){
-				//avoid compiling error
-				LOGGER.log(Level.SEVERE, "CyNetwork/CyEdge/CyNode initialization failed @ for-each loop in run()");
-			}
-			
-		}catch (IOException e){
-			//avoid compiling error
-			LOGGER.log(Level.SEVERE, "InputStream/InputStreamReader/Parser failed @ run() before for-each loop");
-		}
+		LOGGER.info("Running run() function...");
+		
+		/*******************************************************************************
+		 * I believe we don't need to worry about the default VPs stuff in 
+		 * run(), but we will need to handle those when we try to build networkView
+		 * *****************************************************************************
+		 */
 
+		//Initialize the parser
+		Parser parser = new Parser();
+		
+		try{
+			
+		    LOGGER.info("begin parsing the input...");
+		    
+		    //parse the passed in input
+			parser.parse(inStreamReader);
+			
+			//graphList holds all the graphs the parser read from the input
+			ArrayList <Graph> graphList = parser.getGraphs();
+			//initialize a CyNetwork array that holds created CyNetwork from graph
+			CyNetwork [] networks = new CyNetwork [graphList.size()];
+			//set the counter for the CyNetwork array above
+			int networkCounter = 0;
+			
+			//iterate each graph the parser got from input file
+			for (Graph graph : graphList){
+				
+				LOGGER.info("iterating each graph in graphList...");
+				//create a new empty network from cyNetworkFactory
+				CyNetwork network = cyNetworkFactory.createNetwork();
+				//get the name of the network from the graph
+				String networkName = graph.getId().toString(); 
+				//set the name for the network
+				network.getRow(network).set(CyNetwork.NAME, networkName);
+				
+				//get all the nodes from the graph, and group them into a nodeList
+				ArrayList<Node> nodeList = graph.getNodes(true);
+				//iterator each node in the nodeList
+				for (Node node : nodeList){
+					//initialize a new Cynode into the network
+					CyNode cyNode = network.addNode();
+					//get the name of the Cynode from the node id 
+					String nodeName = node.getId().toString();
+					//set the node name for the node
+					network.getDefaultNodeTable().getRow(cyNode.getSUID()).set("name", nodeName);
+					//add the node and the corresponding cyNode into a hashmap for later tracking
+					nodeMap.put(node, cyNode);
+				}
+				//get all the edges from the graph, and group them into a edgeList
+				ArrayList<Edge> edgeList = graph.getEdges();
+				//iterate each edge in the edgeList
+				for(Edge edge : edgeList){
+					//get the source and target portNode from the edge
+					PortNode sourcePort = edge.getSource();
+					PortNode targetPort = edge.getTarget();
+					
+					//get the name of both nodes
+					String sourceName = sourcePort.getNode().getId().toString();
+					String targetName = targetPort.getNode().getId().toString();
+					
+					//get the CyNode of the source and target node from the hashmap
+					CyNode source = nodeMap.get(sourcePort.getNode());
+					CyNode target = nodeMap.get(targetPort.getNode());
+					//initialize the cyEdge 
+					CyEdge cyEdge = null;
+					
+					//if getType return 2, it's directed, else it's undirected
+					//set the cyEdge and add the cyEdge into the network
+					if (edge.getType() == 2) {
+						cyEdge = network.addEdge(source, target, true);
+					}else{
+						cyEdge = network.addEdge(source, target, false);
+					}
+					
+					//set the interaction, a attribute of table, to be "interaction"
+					network.getDefaultEdgeTable().getRow(cyEdge.getSUID()).set("interaction", "interaction");
+					
+					//set the edge name
+					network.getDefaultEdgeTable().getRow(cyEdge.getSUID()).set("name", sourceName + " (interaction) "+ targetName);
+				}
+				
+				/*********************************************************************************
+				 * Not sure whether the ArrayList graphList might contain empty graph (The unsure
+				 * code is: ArrayList <Graph> graphList = parser.getGraphs(); at the beginning of 
+				 * second try{}), if it's possible for graphList to have empty graph, we probably 
+				 * need to check whether network is null(has not been created) before we add it to 
+				 * the network array (networks) and before we add it to 
+				 * dotGraphs (ArrayList <graph, CyNetwork>)
+				 **********************************************************************************
+				 */
+				
+				//at the end of each graph iteration, add the created CyNetwork into the CyNetworks array
+				networks[networkCounter++] = network;
+				
+				//add the graph and the created CyNetwork based on that graph into the dotGraphs hashmap
+				dotGraphs.put(graph, network);
+								
+			}
+		}catch(ParseException e){
+			//avoid compiling error
+			LOGGER.log(Level.SEVERE, "CyNetwork/CyEdge/CyNode initialization failed @ for-each loop in run()");
+		}
 	}
 	
 	
