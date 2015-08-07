@@ -114,7 +114,7 @@ public abstract class Mapper {
 	
 	// Pixel per inch scaling factor
 	protected static final double PPI = 72;
-	
+	protected static FileHandler handler = null;
 	// debug logger
 	protected static final Logger LOGGER;
 	
@@ -122,7 +122,6 @@ public abstract class Mapper {
 	// Initialize logger with file handler
 	static {
 		LOGGER = Logger.getLogger("org.cytoscape.intern.mapper.Mapper");
-		FileHandler handler = null;
 		
 		try {
 			handler = new FileHandler("log_Mapper.txt");

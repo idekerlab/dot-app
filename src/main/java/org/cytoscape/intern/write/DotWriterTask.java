@@ -194,13 +194,16 @@ public class DotWriterTask implements CyWriter {
 			if (nameModified) {
 				Notifier.showMessage("Some node names have been modified in order to comply to DOT syntax", Notifier.MessageType.WARNING);
 			}
-		} catch(IOException e) {
+		} 
+		catch(IOException e) {
 			LOGGER.severe("Failed to close file, IOException in DotWriterTask");
-		} catch(Exception e) {
+		} 
+		catch(Exception e) {
 			LOGGER.severe("Not an IOException");
 			FILE_HANDLER_MGR.closeFileHandler(handler);
 			throw new RuntimeException(e);
-		} finally {
+		} 
+		finally {
 			FILE_HANDLER_MGR.closeFileHandler(handler);
 		}
 	}
