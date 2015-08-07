@@ -165,9 +165,11 @@ public class NetworkPropertyMapper extends Mapper {
 	 * value for attributes
 	 */
 	private String getNodeDefaults() {
+		LOGGER.info("Building node default string...");
 		StringBuilder nodeDefaults = new StringBuilder("node [");
 		
 		//Node SimpleVizProps
+		LOGGER.info("Appending label attr to default string...");
 		String nodeLabel = vizStyle.getDefaultValue(NODE_LABEL);
 		nodeLabel = nodeLabel.replace("\"", "\\\"");
 		if(!nodeLabelLoc.equals("ex")) {
@@ -183,26 +185,31 @@ public class NetworkPropertyMapper extends Mapper {
 			);
 		}
 		
+		LOGGER.info("Appending penwidth attr to default string...");
 		Double borderWidth = vizStyle.getDefaultValue(NODE_BORDER_WIDTH);
 		nodeDefaults.append(
 			String.format("penwidth = \"%f\"", borderWidth) + ","
 		);
 		
+		LOGGER.info("Appending height attr to default string...");
 		Double height = vizStyle.getDefaultValue(NODE_HEIGHT);
 		nodeDefaults.append(
 			String.format("height = \"%f\"", height/PPI) + ","
 		);
 
+		LOGGER.info("Appending width attr to default string...");
 		Double width = vizStyle.getDefaultValue(NODE_WIDTH);
 		nodeDefaults.append(
 			String.format("width = \"%f\"", width/PPI) + ","
 		);
 
+		LOGGER.info("Appending tooltip attr to default string...");
 		String tooltip = vizStyle.getDefaultValue(NODE_TOOLTIP);
 		nodeDefaults.append(
 			String.format("tooltip = \"%s\"", tooltip) + ","
 		);
 
+		LOGGER.info("Appending color attr to default string...");
 		// Get the color string (border color). Append to attribute string
 		Color borderColor = (Color) vizStyle.getDefaultValue(NODE_BORDER_PAINT);
 		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
@@ -210,12 +217,14 @@ public class NetworkPropertyMapper extends Mapper {
 		String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
 		nodeDefaults.append(dotBorderColor + ",");
 		
+		LOGGER.info("Appending fillcolor attr to default string...");
 		// Write node fill color
 		Color fillColor = (Color) vizStyle.getDefaultValue(NODE_FILL_COLOR);
 		Integer nodeTransparency = ((Number)vizStyle.getDefaultValue(NODE_TRANSPARENCY)).intValue();
 		String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, nodeTransparency));
 		nodeDefaults.append(dotFillColor + ",");
 
+		LOGGER.info("Appending shape attr to default string...");
 		// Get the .dot string for the node shape. Append to attribute string
 		NodeShape shape = vizStyle.getDefaultValue(NODE_SHAPE);
 		String shapeStr = NODE_SHAPE_MAP.get(shape);
@@ -229,11 +238,14 @@ public class NetworkPropertyMapper extends Mapper {
 		String dotShape = String.format("shape = \"%s\"", shapeStr);
 		nodeDefaults.append(dotShape + ",");
 		
+		LOGGER.info("Appending style attr to default string...");
 		nodeDefaults.append(
 			mapDefaultNodeDotStyle(shape) +","
 		);
 
 
+		LOGGER.info("Appending fontname, fontsize, and fontcolor attrs"
+				+ " to default string...");
 		Font fontName = vizStyle.getDefaultValue(NODE_LABEL_FONT_FACE);
 		LOGGER.info("Retrieving font size...");
 		Integer fontSize = ((Number)vizStyle.getDefaultValue(NODE_LABEL_FONT_SIZE)).intValue();
@@ -243,10 +255,14 @@ public class NetworkPropertyMapper extends Mapper {
 		String fontString = mapDefaultFont(fontName, fontSize, fontColor, fontTransparency);
 		nodeDefaults.append(fontString + ",");
 		
+		LOGGER.info("Appending fixedsize and labelloc attrs to default string");
 		nodeDefaults.append(
 			"fixedsize = \"true\",labelloc = \"" + nodeLabelLoc + "\"]"
 		);
-		return nodeDefaults.toString();
+		
+		String result = nodeDefaults.toString();
+		LOGGER.info("Built node default string: " + result);
+		return result;
 	}
 	
 	/**
@@ -257,38 +273,47 @@ public class NetworkPropertyMapper extends Mapper {
 	 * value for attributes
 	 */
 	private String getEdgeDefaults() {
+		LOGGER.info("Building edge default string...");
 		StringBuilder edgeDefaults = new StringBuilder("edge [");
 
+		LOGGER.info("Appending label attr to default string...");
 		String edgeLabel = vizStyle.getDefaultValue(EDGE_LABEL);
 		edgeLabel = edgeLabel.replace("\"", "\\\"");
 		edgeDefaults.append(
 			String.format("label = \"%s\"", edgeLabel) + ","
 		);
 
+		LOGGER.info("Appending penwidth attr to default string...");
 		Double width = vizStyle.getDefaultValue(EDGE_WIDTH);
 		edgeDefaults.append(String.format("penwidth = \"%f\"", width) + ",");
 
+		LOGGER.info("Appending tooltip attr to default string...");
 		String tooltip = vizStyle.getDefaultValue(EDGE_TOOLTIP);
 		edgeDefaults.append(String.format("tooltip = \"%s\"", tooltip) + ",");
 		
 		// block is non-functioning. only works for bypasses due to what we think is source error
+		LOGGER.info("Appending arrowhead attr to default string...");
 		ArrowShape targetArrow = vizStyle.getDefaultValue(EDGE_TARGET_ARROW_SHAPE);
-		LOGGER.info("Retrieving Default target/head arrow. CS version is: " + targetArrow);
+		LOGGER.info("CS target/head arrow: " + targetArrow);
 		String dotTargetArrow = ARROW_SHAPE_MAP.get(targetArrow);
-		LOGGER.info("Target/head arrow retrieved. .dot verison is: " + dotTargetArrow);
+		LOGGER.info(".dot Target/head arrow: " + dotTargetArrow);
 		edgeDefaults.append(String.format("arrowhead = \"%s\"", dotTargetArrow) + ",");
 			
+		LOGGER.info("Appending arrowtail attr to default string...");
 		ArrowShape sourceArrow = vizStyle.getDefaultValue(EDGE_SOURCE_ARROW_SHAPE);
-		LOGGER.info("Retrieving Default source/tail arrow. CS version is: " + sourceArrow);
+		LOGGER.info("CS source/tail arrow: " + sourceArrow);
 		String dotSourceArrow = ARROW_SHAPE_MAP.get(sourceArrow);
-		LOGGER.info("Source/tail arrow retrieved. .dot verison is: " + dotSourceArrow);
+		LOGGER.info(".dot source/tail arrow: " + dotSourceArrow);
 		edgeDefaults.append(String.format("arrowtail = \"%s\"", dotSourceArrow) + ",");
 		
+		LOGGER.info("Appending color attr to default string...");
 		Color strokeColor = (Color) vizStyle.getDefaultValue(EDGE_STROKE_UNSELECTED_PAINT);
 		Integer strokeTransparency = ((Number)vizStyle.getDefaultValue(EDGE_TRANSPARENCY)).intValue();
 		String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
 		edgeDefaults.append(dotColor + ",");
 
+		LOGGER.info("Appending fontname, fontsize, and fontcolor attrs"
+				+ " to default string...");
 		// Get label font information and append in proper format
 		Color labelColor = (Color) vizStyle.getDefaultValue(EDGE_LABEL_COLOR);
 		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
@@ -340,7 +365,6 @@ public class NetworkPropertyMapper extends Mapper {
 	 * @return String in form "style=...,filled"
 	 */
 	private String mapDefaultNodeDotStyle(NodeShape shape) {
-		//NODE_BORDER_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
 		LineType lineType = vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE);
 		// get .dot equivalent of line style
 		String lineStr = LINE_TYPE_MAP.get(lineType);
@@ -360,7 +384,6 @@ public class NetworkPropertyMapper extends Mapper {
 	 * @return String in form "style=..."
 	 */
 	private String mapDefaultEdgeDotStyle() {
-		//EDGE_LINE_TYPE is field in org.cytoscape.view.presentation.property.BasicVisualLexicon
 		LineType lineType = vizStyle.getDefaultValue(EDGE_LINE_TYPE);
 		String lineStr = LINE_TYPE_MAP.get(lineType);
 		if (lineStr == null) {

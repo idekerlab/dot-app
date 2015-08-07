@@ -1,6 +1,5 @@
 package org.cytoscape.intern.write.mapper;
 
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_LINE_TYPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_PAINT;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_TRANSPARENCY;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_WIDTH;
@@ -18,7 +17,6 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_V
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_WIDTH;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_X_LOCATION;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_Y_LOCATION;
-import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.ROUND_RECTANGLE;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -188,8 +186,12 @@ public class NodePropertyMapper extends Mapper {
 			elementString.deleteCharAt(elementString.length() - 1);
 		}
 		elementString.append("]");
-		LOGGER.info("Created .dot string. Result: " + elementString);
-		return elementString.toString();
+		String result = elementString.toString();
+		if (result.matches("^\\[\\]$")) {
+			result = "";
+		}
+		LOGGER.info("Created .dot string. Result: " + result);
+		return result;
 	}
 	
 	/**
@@ -209,7 +211,7 @@ public class NodePropertyMapper extends Mapper {
 			Integer borderTransparency = (visible) ? ((Number)view.getVisualProperty(NODE_BORDER_TRANSPARENCY)).intValue()
 												: TRANSPARENT;
 			String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
-			elementString = new StringBuilder(dotBorderColor + ",");
+			elementString = new StringBuilder(dotBorderColor);
 		}
 		
 		// Write node fill color
@@ -220,7 +222,7 @@ public class NodePropertyMapper extends Mapper {
 												: TRANSPARENT;
 			String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, transparency));
 			if (elementString != null) {
-				elementString.append(dotFillColor);
+				elementString.append("," + dotFillColor);
 			}
 			else {
 				elementString = new StringBuilder(dotFillColor);
