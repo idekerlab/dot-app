@@ -116,10 +116,10 @@ public abstract class Mapper {
 	
 	// Pixel per inch scaling factor
 	protected static final double PPI = 72;
-	protected static FileHandler handler = null;
+
 	// debug logger
 	protected static final Logger LOGGER;
-	
+	protected static FileHandler handler = null;
 	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
 	// Initialize logger with file handler
 	static {
@@ -342,6 +342,8 @@ public abstract class Mapper {
 	 * @return String in form %x,%y!
 	 */
 	protected String mapPosition(Double x, Double y) {
+		/*x /= PPI;
+		y /= PPI;*/
 		return String.format("%f,%f", x, -1*y);
 	}
 	

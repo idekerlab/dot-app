@@ -27,7 +27,7 @@ import org.junit.Test;
 
 public class MapperTest {
 
-	@Test
+	//@Test
 	public void testNodeGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
@@ -139,7 +139,7 @@ public class MapperTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testNetworkGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
