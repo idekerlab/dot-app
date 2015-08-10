@@ -140,9 +140,17 @@ public class NodePropertyMapper extends Mapper {
 			simpleVisPropsToDot.add(String.format("width = \"%f\"", width/PPI));
 		}
 		*/
+		// Get node height and width
 		if(isLocked) {
-			if(!isEqualToDefault(NODE_SIZE)){
-				Double size = view.getVisualProperty(NODE_SIZE);
+			//NODE_HEIGHT = NODE_WIDTH if isLocked is true, so only use one
+			/* 
+			 * view.getVisualProperty(NODE_SIZE) does not return the actual
+			 * dimension of the node view when a mapping is applied to
+			 * NODE_SIZE, so getting dimension from NODE_HEIGHT instead
+			 */
+			
+			Double size = view.getVisualProperty(NODE_HEIGHT);
+			if(!isEqualToDefault(size, NODE_SIZE)){
 				simpleVisPropsToDot.add(String.format("height = \"%f\"", size/PPI));
 				simpleVisPropsToDot.add(String.format("width = \"%f\"", size/PPI));
 			}
@@ -158,6 +166,7 @@ public class NodePropertyMapper extends Mapper {
 			}
 		}
 
+		// Get node tooltip
 		if (!isEqualToDefault(NODE_TOOLTIP)) {
 			String tooltip = view.getVisualProperty(NODE_TOOLTIP);
 			simpleVisPropsToDot.add(String.format("tooltip = \"%s\"", tooltip));
