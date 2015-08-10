@@ -22,13 +22,10 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_Y
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
-import java.util.Set;
-
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.vizmap.VisualStyle;
-import org.cytoscape.view.vizmap.VisualPropertyDependency;
 
 /**
  * Handles mapping of CyNode properties to .dot equivalent Strings
@@ -150,15 +147,16 @@ public class NodePropertyMapper extends Mapper {
 				simpleVisPropsToDot.add(String.format("width = \"%f\"", size/PPI));
 			}
 		}
-		else if(!isEqualToDefault(NODE_HEIGHT)) {
-			Double height = view.getVisualProperty(NODE_HEIGHT);
-			simpleVisPropsToDot.add(String.format("height = \"%f\"", height/PPI));
+		else {
+			if(!isEqualToDefault(NODE_HEIGHT)) {
+				Double height = view.getVisualProperty(NODE_HEIGHT);
+				simpleVisPropsToDot.add(String.format("height = \"%f\"", height/PPI));
+			}
+			if(!isEqualToDefault(NODE_WIDTH)) {
+				Double width = view.getVisualProperty(NODE_WIDTH);
+				simpleVisPropsToDot.add(String.format("width = \"%f\"", width/PPI));
+			}
 		}
-		else if(!isEqualToDefault(NODE_WIDTH)) {
-			Double width = view.getVisualProperty(NODE_WIDTH);
-			simpleVisPropsToDot.add(String.format("width = \"%f\"", width/PPI));
-		}
-
 
 		if (!isEqualToDefault(NODE_TOOLTIP)) {
 			String tooltip = view.getVisualProperty(NODE_TOOLTIP);
