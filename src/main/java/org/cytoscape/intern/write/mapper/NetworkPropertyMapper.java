@@ -36,7 +36,6 @@ import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.R
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.Collection;
 
 import org.cytoscape.model.CyEdge;
@@ -47,7 +46,6 @@ import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.vizmap.VisualStyle;
-import org.cytoscape.view.vizmap.VisualPropertyDependency;
 
 public class NetworkPropertyMapper extends Mapper {
 
@@ -205,7 +203,17 @@ public class NetworkPropertyMapper extends Mapper {
 			height = vizStyle.getDefaultValue(NODE_HEIGHT);
 			width = vizStyle.getDefaultValue(NODE_WIDTH);
 		}
+		LOGGER.info("Appending height attr to default string...");
+		nodeDefaults.append(
+			String.format("height = \"%f\"", height/PPI) + ","
+		);
 
+		LOGGER.info("Appending width attr to default string...");
+		nodeDefaults.append(
+			String.format("width = \"%f\"", width/PPI) + ","
+		);
+
+		// set tooltip
 		LOGGER.info("Appending tooltip attr to default string...");
 		String tooltip = vizStyle.getDefaultValue(NODE_TOOLTIP);
 		nodeDefaults.append(

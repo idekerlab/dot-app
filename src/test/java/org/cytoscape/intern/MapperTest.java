@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.cytoscape.intern.write.mapper.EdgePropertyMapper;
 import org.cytoscape.intern.write.mapper.Mapper;
@@ -15,19 +17,35 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.model.NetworkTestSupport;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
+import org.cytoscape.view.presentation.property.NullVisualProperty;
+import org.cytoscape.view.vizmap.VisualPropertyDependency;
 import org.junit.Test;
 
 public class MapperTest {
 
-	//@Test
+	@Test
 	public void testNodeGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
 		CyNode node = network.addNode();
 		TestVisualStyle vizStyle = new TestVisualStyle();
+		BasicVisualLexicon bvl = new BasicVisualLexicon(new NullVisualProperty("root", "Root Property"));
+		
+		//Testing node with NODE_SIZE prop used instead of NODE_HEIGHT and NODE_WIDTH
+		final Set<VisualProperty<Double>> nodeSizeVisualProperties = new HashSet<VisualProperty<Double>>();
+		nodeSizeVisualProperties.add(BasicVisualLexicon.NODE_WIDTH);
+		nodeSizeVisualProperties.add(BasicVisualLexicon.NODE_HEIGHT);
+
+		VisualPropertyDependency<Double> vpDep = new VisualPropertyDependency<Double>(
+			"nodeSizeLocked", "Lock node width and height", nodeSizeVisualProperties, bvl
+		);
+		vpDep.setDependency(false);
+		vizStyle.addVisualPropertyDependency(vpDep);
+
 		network.getRow(node).set(CyNetwork.NAME, "\"Test\"Node1\"\"");
 		CyNetworkView networkView = new TestNetworkView(network);
 		View<CyNode> nodeView = networkView.getNodeView(node);
@@ -36,6 +54,8 @@ public class MapperTest {
 
 		String escLabel = label.replace("\"", "\\\"");
 		String labelString = String.format("label = \"%s\"", escLabel);
+		String heightString = String.format("height = \"%f\"", new Double(46.99)/72.0);
+		String widthString = String.format("width = \"%f\"", new Double(35.55)/72.0);
 		String tooltipString = String.format("tooltip = \"%s\"", tooltip);
 		String fillColorString = "fillcolor = \"#95DDEEFF\"";
 		String expectedDotString = null;
@@ -47,6 +67,8 @@ public class MapperTest {
 		
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL, label);
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_TOOLTIP, tooltip);
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_HEIGHT, new Double(46.99));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_WIDTH, new Double(35.55));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_X_LOCATION, new Double(0));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION, new Double(0));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR, new Color(0x95, 0xDD, 0xEE));
@@ -61,9 +83,9 @@ public class MapperTest {
 				new Double(0), new Double(0) * -1.0,fontString, fontSizeString, fontColor); 
 		*/
 
-		expectedDotString = String.format("[%s,%s,"
+		expectedDotString = String.format("[%s,%s,%s,%s,"
 				+ "pos = \"%f,%f\",%s,%s,%s,%s]",
-				labelString, tooltipString,
+				labelString, heightString, widthString, tooltipString,
 				new Double(0), new Double(0) * -1.0, fillColorString, fontString, fontSizeString, fontColor); 
 		
 		// todo
@@ -117,7 +139,7 @@ public class MapperTest {
 		
 	}
 	
-	//@Test
+	@Test
 	public void testNetworkGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();

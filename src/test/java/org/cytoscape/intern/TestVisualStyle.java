@@ -2,6 +2,7 @@ package org.cytoscape.intern;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.cytoscape.model.CyIdentifiable;
@@ -18,6 +19,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
 public class TestVisualStyle implements VisualStyle {
 
 	HashMap<Object, Object> vizPropDefaults;
+	HashSet<VisualPropertyDependency<?>> vizDependencies;
 	
 	public TestVisualStyle() {
 		BasicVisualLexicon bvl = new BasicVisualLexicon(new NullVisualProperty("root", "Root Property"));
@@ -26,6 +28,7 @@ public class TestVisualStyle implements VisualStyle {
 		for (VisualProperty<?> vizProp : collection) {
 			vizPropDefaults.put(vizProp, vizProp.getDefault());
 		}
+		vizDependencies = new HashSet<VisualPropertyDependency<?>>();
 	}
 	@Override
 	public void addVisualMappingFunction(VisualMappingFunction<?, ?> arg0) {
@@ -35,8 +38,7 @@ public class TestVisualStyle implements VisualStyle {
 
 	@Override
 	public void addVisualPropertyDependency(VisualPropertyDependency<?> arg0) {
-		// TODO Auto-generated method stub
-
+		vizDependencies.add(arg0);
 	}
 
 	@Override
@@ -59,8 +61,7 @@ public class TestVisualStyle implements VisualStyle {
 
 	@Override
 	public Set<VisualPropertyDependency<?>> getAllVisualPropertyDependencies() {
-		// TODO Auto-generated method stub
-		return null;
+		return vizDependencies;
 	}
 
 	@SuppressWarnings("unchecked")
