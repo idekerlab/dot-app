@@ -197,6 +197,7 @@ public class NetworkPropertyMapper extends Mapper {
 	
 		// set width and height, if they are locked, must set to NODE_SIZE prop
 		Double height, width;
+		LOGGER.info("ISLOCKED: " + isLocked);
 		if(isLocked) {
 			height = vizStyle.getDefaultValue(NODE_SIZE);
 			width = vizStyle.getDefaultValue(NODE_SIZE);
@@ -205,6 +206,15 @@ public class NetworkPropertyMapper extends Mapper {
 			height = vizStyle.getDefaultValue(NODE_HEIGHT);
 			width = vizStyle.getDefaultValue(NODE_WIDTH);
 		}
+		height /= PPI;
+		width /= PPI;
+		
+		nodeDefaults.append(
+			String.format("height = \"%s\"", height) + ","
+		);
+		nodeDefaults.append(
+			String.format("width = \"%s\"", width) + ","
+		);
 
 		LOGGER.info("Appending tooltip attr to default string...");
 		String tooltip = vizStyle.getDefaultValue(NODE_TOOLTIP);
