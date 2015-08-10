@@ -7,10 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class FileOutputTest {
 
+	@Ignore("Used for testing after a file is made")
 	@Test
 	public void testOutput() {
 		InputStream expectedFile = ClassLoader.getSystemResourceAsStream("expected_dot_files/karate.gv");
