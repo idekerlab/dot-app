@@ -112,7 +112,7 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 
 	
 	/**
-	 * Returns true if the factory is ready to be produce a TaskIterator and false otherwise.
+	 * Returns true if the factory is ready to produce a TaskIterator and false otherwise.
 	 * 
 	 * @param inStream The InputStream to be read
 	 * @param inputName The name of the input
