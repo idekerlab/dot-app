@@ -23,11 +23,13 @@ import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
 import org.cytoscape.view.presentation.property.NullVisualProperty;
 import org.cytoscape.view.vizmap.VisualPropertyDependency;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class MapperTest {
 
-	//@Test
+	//@Ignore()
+	@Test
 	public void testNodeGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
@@ -96,6 +98,7 @@ public class MapperTest {
 		
 	}
 	
+	//@Ignore
 	@Test 
 	public void testEdgeGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
@@ -139,7 +142,8 @@ public class MapperTest {
 		
 	}
 	
-	//@Test
+	//@Ignore
+	@Test
 	public void testNetworkGetElementString() {
 		NetworkTestSupport nts = new NetworkTestSupport();
 		CyNetwork network = nts.getNetwork();
@@ -177,14 +181,16 @@ public class MapperTest {
 	
 	@Test
 	public void testModifyElementID() {
-		assertEquals("ModifyElementId is wrong", "TestNode1", Mapper.modifyElementId("TestNode1"));
-		assertEquals("ModifyElementId is wrong", ".59", Mapper.modifyElementId(".59"));
-		assertEquals("ModifyElementId is wrong", "\"9.-\"", Mapper.modifyElementId("9.-"));
-		assertEquals("ModifyElementId is wrong", "8.8", Mapper.modifyElementId("8.8"));
-		assertEquals("ModifyElementId is wrong", "\"Hello\"", Mapper.modifyElementId("\"Hello\""));
-		assertEquals("ModifyElementId is wrong", "<Hello>", Mapper.modifyElementId("<Hello>"));
-		assertEquals("ModifyElementId is wrong", "\"123baba\"", Mapper.modifyElementId("123baba"));
-		assertEquals("ModifyElementId is wrong", "\"\\\"Hi\\\"Harry\\\"\\\"\"", Mapper.modifyElementId("\"Hi\"Harry\"\""));
+		assertEquals("ModifyElementId is wrong", "TestNode1", Mapper.modifyElementID("TestNode1"));
+		assertEquals("ModifyElementId is wrong", ".59", Mapper.modifyElementID(".59"));
+		assertEquals("ModifyElementId is wrong", "\"9.-\"", Mapper.modifyElementID("9.-"));
+		assertEquals("ModifyElementId is wrong", "8.8", Mapper.modifyElementID("8.8"));
+		assertEquals("ModifyElementId is wrong", "\"Hello\"", Mapper.modifyElementID("\"Hello\""));
+		assertEquals("ModifyElementId is wrong", "<Hello>", Mapper.modifyElementID("<Hello>"));
+		assertEquals("ModifyElementId is wrong", "\"123baba\"", Mapper.modifyElementID("123baba"));
+		assertEquals("ModifyElementId is wrong", "\"\\\"Hi\\\"Harry\\\"\\\"\"", Mapper.modifyElementID("\"Hi\"Harry\"\""));
+		System.out.println(String.valueOf(new Character('\u2014')));
+		assertEquals("ModifyElementId is wrong", "\227", Mapper.modifyElementID("\227"));
 		
 	}
 }

@@ -91,7 +91,7 @@ public class NetworkPropertyMapper extends Mapper {
 		CyNetwork network = (CyNetwork)view.getModel();
 		String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
 		// filter out disallowed chars
-		networkName = Mapper.modifyElementId(networkName);
+		networkName = Mapper.modifyElementID(networkName);
 
 		// Build the network properties string
 		StringBuilder elementString = new StringBuilder();

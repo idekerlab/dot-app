@@ -235,7 +235,7 @@ public class DotWriterTask implements CyWriter {
 			}
 			// if we are only exporting network
 			else {
-				String moddedName = Mapper.modifyElementId(networkName);
+				String moddedName = Mapper.modifyElementID(networkName);
 				String label = (networkLabelLoc != null) ? moddedName : "";
 				networkProps = String.format(
 					"graph %s {\nlabel = \"%s\"\nsplines = \"%s\"\n", moddedName, label, splinesVal
@@ -274,16 +274,9 @@ public class DotWriterTask implements CyWriter {
 				try {
 					// Retrieve node name
 					CyNode nodeModel = nodeView.getModel();
-					Long nodeSUID = nodeModel.getSUID();
-					CyNetwork networkModel = networkView.getModel();
-					/*String nodeName = networkModel.getRow(nodeModel).get(CyNetwork.NAME, String.class);
-	  
-					String newNodeName = Mapper.modifyElementId(nodeName);
-					if (!newNodeName.equals(nodeName)) {
-						nameModified = true;
-					}*/
+					String nodeID = buildNodeID(nodeModel);
 
-					String declaration = String.format("%s %s\n", nodeSUID, nodeMapper.getElementString());
+					String declaration = String.format("%s %s\n", nodeID, nodeMapper.getElementString());
 
 					outputWriter.write(declaration);
 				}
@@ -300,7 +293,7 @@ public class DotWriterTask implements CyWriter {
 			for(CyNode node: nodeList){
 				try{
 					String nodeName = network.getRow(node).get(CyNetwork.NAME,String.class);
-					String newNodeName = Mapper.modifyElementId(nodeName);
+					String newNodeName = Mapper.modifyElementID(nodeName);
 				
 					if(!newNodeName.equals(nodeName)) {
 						nameModified = true;
@@ -336,23 +329,16 @@ public class DotWriterTask implements CyWriter {
 				try {
 					// Retrieve source+target node names
 					CyEdge edgeModel = edgeView.getModel();
-					CyNetwork networkModel = networkView.getModel();
 
 					CyNode sourceNode = edgeModel.getSource();
 					CyNode targetNode = edgeModel.getTarget();
 	  			
-					/*String sourceName = networkModel.getRow(sourceNode).get(CyNetwork.NAME, String.class);
-					// filter out disallowed chars
-					sourceName = Mapper.modifyElementId(sourceName);
+					String sourceID = buildNodeID(sourceNode);
+					String targetID = buildNodeID(targetNode);
 	  			
-					String targetName = networkModel.getRow(targetNode).get(CyNetwork.NAME, String.class);
-					// filter out disallowed chars
-					targetName = Mapper.modifyElementId(targetName);*/
-					Long sourceSUID = sourceNode.getSUID();
-					Long targetSUID = sourceNode.getSUID();
 
-					String edgeName = String.format("%s %s %s", sourceSUID, edgeType, targetSUID);
-					String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());
+					String edgeID = String.format("%s %s %s", sourceID, edgeType, targetID);
+					String declaration = String.format("%s %s\n", edgeID, edgeMapper.getElementString());
 
 					outputWriter.write(declaration);
 				}
@@ -371,10 +357,10 @@ public class DotWriterTask implements CyWriter {
 					CyNode targetNode = edge.getTarget();
 					
 					String sourceName = network.getRow(sourceNode).get(CyNetwork.NAME, String.class);
-					sourceName = Mapper.modifyElementId(sourceName);
+					sourceName = Mapper.modifyElementID(sourceName);
 				
 					String targetName = network.getRow(targetNode).get(CyNetwork.NAME, String.class);
-					targetName = Mapper.modifyElementId(targetName);
+					targetName = Mapper.modifyElementID(targetName);
 				
 					String edgeName = String.format("%s %s %s", sourceName, "--", targetName);
 					String declaration = String.format("%s\n", edgeName);
@@ -447,5 +433,14 @@ public class DotWriterTask implements CyWriter {
 				break;
 		}
 		LOGGER.info("Converted networkLabelLoc: " + networkLabelLoc);
+	}
+	
+	private String buildNodeID(CyNode node) {
+		Long nodeSUID = node.getSUID();
+		CyNetwork networkModel = networkView.getModel();
+		String nodeID = networkModel.getRow(node).get(CyNetwork.NAME, String.class);
+		nodeID = String.format("%s——%s", nodeID, nodeSUID);
+		nodeID = Mapper.modifyElementID(nodeID);
+		return nodeID;
 	}
 }
