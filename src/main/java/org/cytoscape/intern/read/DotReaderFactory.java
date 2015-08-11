@@ -104,6 +104,8 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 	 */
 	@Override
 	public TaskIterator createTaskIterator(InputStream inStream, String inputName) {
+		LOGGER.info("create TaskIterator with params");
+		
 		return new TaskIterator(new DotReaderTask(inStream, netViewFact,
 				netFact, netMgr, rootNetMgr, vizMapMgr, vizStyleFact));
 	}
@@ -122,9 +124,13 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 		
 		// check file extension
 		if (inStream != null && inputName != null) {
+			LOGGER.info("Valid input is found");
+			
 			String[] parts = inputName.split(".");
 			String extension = parts[parts.length-1];
 			if (extension.matches(("gv|dot"))) {
+				
+				LOGGER.info("gv|dot extention is matched");
 				return true;
 			}
 		}
