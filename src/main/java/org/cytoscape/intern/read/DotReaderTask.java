@@ -268,7 +268,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		// TODO
 		/*
 		 * Steps:
-		 * Retrieve Graph object corresponding to "arg0" from HashMap
+		 * Retrieve Graph object corresponding to input(CyNetwork network) from HashMap
 		 * Create new VisualStyle with VisualStyleFactory
 		 * Create new CyNetworkView with CyNetworkViewFactory
 		 * Pass Graph Object, VisualStyle, CyNetworkView into Reader
@@ -315,7 +315,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 ******************************************************************
 		 */
 		
-		//Reader.Reader(networkView, visualStyle);
+		//Reader.Reader(networkView, visualStyle); //It actually generates a compiler error
+		//It's syntaxially wrong.
 		
 		//add the created visualStyle to VisualMappingManager
 		vizMapMgr.addVisualStyle(visualStyle);
