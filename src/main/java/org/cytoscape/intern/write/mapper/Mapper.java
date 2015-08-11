@@ -364,7 +364,7 @@ public abstract class Mapper {
 	 *	any double-quoted string ("...") possibly containing escaped quotes (\");
 	 *	an HTML string (<...>). 
 	 */
-	public static String modifyElementId(String id) {
+	public static String modifyElementID(String id) {
 		LOGGER.info("Preparing to transform ID");
 		String alphaNumRegEx = "[a-zA-Z\200-\377_]+[a-zA-Z\200-\377_0-9]*";
 		String numericRegEx = "[-]?([.][0-9]+|[0-9]+([.][0-9]*)?)";
