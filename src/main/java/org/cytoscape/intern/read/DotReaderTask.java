@@ -223,7 +223,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 					//set the cyEdge and add the cyEdge into the network
 					if (edge.getType() == 2) {
 						cyEdge = network.addEdge(source, target, true);
-					}else{
+					}
+					else{
 						cyEdge = network.addEdge(source, target, false);
 					}
 					
@@ -251,7 +252,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 				dotGraphs.put(graph, network);
 								
 			}
-		}catch(ParseException e){
+		}
+		catch(ParseException e){
 			//avoid compiling error
 			LOGGER.log(Level.SEVERE, "CyNetwork/CyEdge/CyNode initialization failed @ for-each loop in run()");
 		}
