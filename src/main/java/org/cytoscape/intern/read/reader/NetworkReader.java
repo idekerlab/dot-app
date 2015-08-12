@@ -1,9 +1,14 @@
 package org.cytoscape.intern.read.reader;
 
+import java.util.Map;
+
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.vizmap.VisualStyle;
 
 import com.alexmerz.graphviz.objects.Graph;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Class that contains definitions and some implementation for converting a
@@ -16,32 +21,33 @@ import com.alexmerz.graphviz.objects.Graph;
  */
 public class NetworkReader extends Reader{
 
-	// Represents .dot representation of graph we are importing
-	private Graph dotGraph;
-	
+
 	/**
-	 * Constructs a NetworkReader object
+	 * Constructs an object of type Reader. Sets up Logger.
 	 * 
-	 * @param networkView View of network being exported
-	 * @param vizStyle VisualStyle being applied to network-- needed for defaults
-	 * @param dotGraph  .dot representation of graph being exported
+	 * @param networkView view of network we are creating/modifying
+	 * @param vizStyle VisualStyle that we are applying to the network
+	 * @param defaultAttrs Map that contains default attributes for Reader of this type
+	 * eg. for NodeReader will be a list of default
 	 */
-	public NetworkReader(CyNetworkView networkView, VisualStyle vizStyle, Graph dotGraph) {
-		
-		super(networkView, vizStyle);
-		this.dotGraph = dotGraph;
+	public NetworkReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs) {
+		super(networkView, vizStyle, defaultAttrs);
+
 	}
-	
+
 	/**
 	 * Converts the specified .dot attribute to Cytoscape equivalent
-	 * by modifying internal data structures like networkView or vizStyle
+	 * and returns the corresponding VisualProperty and its value
+	 * Must be overidden and defined in each sub-class
 	 * 
 	 * @param name Name of attribute
 	 * @param val Value of attribute
-	 * @param isDefault Whether attribute is to be set as default or bypass,
-	 * 			doesn't matter for some attributes
+	 * 
+	 * @return Pair where left value is VisualProperty and right value
+	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
+	 * attribute
 	 */
-	protected void convertAttribute(String name, String value, boolean isDefault) {
-		
+	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
+		return null;
 	}
 }

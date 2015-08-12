@@ -3,7 +3,11 @@ package org.cytoscape.intern.read.reader;
 import java.util.ArrayList;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.Pair;
+
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 
@@ -20,38 +24,38 @@ import com.alexmerz.graphviz.objects.Edge;
  */
 public class EdgeReader extends Reader{
 
-	// List of all edges in network being imported
-	private ArrayList<Edge> edges;
-	
 	// Map to convert from .dot arrow shape to Cytoscape
 	private static final Map<String, ArrowShape> ARROW_SHAPE_MAP = null;
 	
-
 	/**
-	 * Constructs a EdgeReader object
+	 * Constructs an object of type Reader. Sets up Logger.
 	 * 
-	 * @param networkView View of network being exported
-	 * @param vizStyle VisualStyle being applied to network-- needed for defaults
-	 * @param edges List of all edges in graph
+	 * @param networkView view of network we are creating/modifying
+	 * @param vizStyle VisualStyle that we are applying to the network
+	 * @param defaultAttrs Map that contains default attributes for Reader of this type
+	 * eg. for NodeReader will be a list of default
+	 * @param elementMap Map where keys are JPGD node objects and Values are corresponding Cytoscape CyNodes
 	 */
-	public EdgeReader(CyNetworkView networkView, VisualStyle vizStyle, ArrayList<Edge> edges) {
-		super(networkView, vizStyle);
-		
-		this.edges = edges;
+	public EdgeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Map<Object, CyIdentifiable> elementMap) {
+		super(networkView, vizStyle, defaultAttrs);
+		this.elementMap = elementMap;
+
 	}
 	
 	/**
 	 * Converts the specified .dot attribute to Cytoscape equivalent
-	 * by modifying internal data structures like networkView or vizStyle
+	 * and returns the corresponding VisualProperty and its value
+	 * Must be overidden and defined in each sub-class
 	 * 
 	 * @param name Name of attribute
 	 * @param val Value of attribute
-	 * @param isDefault Whether attribute is to be set as default or bypass,
-	 * 			doesn't matter for some attributes
+	 * 
+	 * @return Pair where left value is VisualProperty and right value
+	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
+	 * attribute
 	 */
-	protected void convertAttribute(String name, String val, boolean isDefault) {
-		// TODO
-		// remember to export edge weights
+	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
+		return null;
 	}
 	
 }

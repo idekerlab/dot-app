@@ -7,10 +7,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.presentation.property.values.LineType;
+import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyIdentifiable;
 
 import org.cytoscape.intern.FileHandlerManager;
 
@@ -49,12 +53,18 @@ public abstract class Reader {
 	
 	/*
 	 * Map of defined bypass attributes
-	 * (attributes that are defined at node declaration)
+	 * (attributes that are defined at node declaration in file)
 	 */
 	protected Map<String, String> bypassAttrs;
 	
 	// Maps lineStyle attribute values to Cytoscape values
-	private static final Map<String, LineType> LINE_TYPE_MAP = null;
+	protected static final Map<String, LineType> LINE_TYPE_MAP = null;
+
+	/*
+	 * Contains elements of Cytoscape graph and their corresponding JPGD elements
+	 * is null for NetworkReader
+	 */
+	protected Map<Object, CyIdentifiable> elementMap;
 	
 
 	/**
@@ -62,8 +72,10 @@ public abstract class Reader {
 	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
+	 * @param defaultAttrs Map that contains default attributes for Reader of this type
+	 * eg. for NodeReader will be a list of default
 	 */
-	public Reader(CyNetworkView networkView, VisualStyle vizStyle) {
+	public Reader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs) {
 
 		// Make logger write to file
 		try {
@@ -79,6 +91,7 @@ public abstract class Reader {
 
 		this.networkView = networkView;
 		this.vizStyle = vizStyle;
+		this.defaultAttrs = defaultAttrs;
 	}
 	
 
@@ -90,7 +103,10 @@ public abstract class Reader {
 	private void setDefaults() {
 		/*
 		 * for each entry in defaultAttrs
-		 * 		convertAttribute(getKey(), getValue())
+		 * 		Pair p = convertAttribute(getKey(), getValue());
+		 * 		VP = p.left()
+		 * 		val = p.right()
+		 * 		vizStyle.setDefaultValue( VP, val);
 		 */
 	}
 
@@ -102,33 +118,68 @@ public abstract class Reader {
 	 */
 	private void setBypasses() {
 		/*
-		 * for each entry in bypassAttrs
-		 * 		convertAttribute(getKey(), getValue())
+		 * for each entry in elementMap
+		 * 		bypassMap = getAttrMap(elementMap.getKey())
+		 * 		for each entry in bypassMap
+		 * 			Pair p = convertAttribute(name, val);
+		 * 			VP = p.left()
+		 * 			val = p.right()
+		 * 			getValue().setLockedValue( VP, val);	
 		 */
 	}
 	
-
 	/**
-	 * Sets all properties, default and bypass for this type of Reader
-	 * eg. NodeReader sets all node default and bypass properties
-	 * Also sets edgeweights in table for edges
+	 * Returns the Map of bypass attributes for a given JPGD object.
+	 * We define bypass attributes as any attributes declared at the individual
+	 * node declaration.
+	 * 
+	 * @param element Graph element that we are getting list of attributes for. Should be
+	 * either a Node or an Edge, inputs of any other type will throw an IllegalArgumentException
+	 * @return Map<String, String> Where key is attribute name and value is attribute value. Map
+	 * contains all attributes in node declaration
 	 */
-	public void setAllProperties() {
-		setDefaults();
-		setBypasses();
-	}
+	protected Map<String, String> getAttrMap(Object element) {
 	
+		 /*
+		  * if element instance of Node
+		  *		return (Map)((Node)element.getAttributes() )	
+		  * if element instanceof Edge
+		  * 	sameThing
+		  * else
+		  * 	throw IllegalArgException
+		  */
+		return null;
+	}
 
 	/**
 	 * Converts the specified .dot attribute to Cytoscape equivalent
-	 * by modifying internal data structures like networkView or vizStyle
+	 * and returns the corresponding VisualProperty and its value
 	 * Must be overidden and defined in each sub-class
 	 * 
 	 * @param name Name of attribute
 	 * @param val Value of attribute
-	 * @param isDefault Whether attribute is to be set as default or bypass,
-	 * 			doesn't matter for some attributes
+	 * 
+	 * @return Pair where left value is VisualProperty and right value
+	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
+	 * attribute
 	 */
-	protected abstract void convertAttribute(String name, String val, boolean isDefault);
+	protected abstract Pair<VisualProperty, Object> convertAttribute(String name, String val);
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

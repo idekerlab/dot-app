@@ -96,8 +96,6 @@
 			<url>http://code.cytoscape.org/nexus/content/repositories/releases/</url>
 		</repository>
 
-
-	
 	</repositories>
 
 	<!-- Our app depends on other OSGi bundle JARs. We list all the JARs we 
@@ -196,6 +194,13 @@
 			<version>${slf4jVersion}</version>
 			<scope>test</scope>
 		</dependency>	
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
+
 	</dependencies>
   
 </project>

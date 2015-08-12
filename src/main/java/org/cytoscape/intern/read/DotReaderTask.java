@@ -345,6 +345,11 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 		return output;
 	}
+	
+	/**
+	 * Adds nodes into Cytoscape network when given a list of Nodes,
+	 * also sets attributes for each node
+	 */
 }
 
 
