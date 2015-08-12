@@ -42,6 +42,18 @@ public class NetworkReader extends Reader{
 	 * 			doesn't matter for some attributes
 	 */
 	protected void convertAttribute(String name, String value, boolean isDefault) {
+		//TODO
 		
+		//to modify internal data structures like networkView or visualStyle
+		
+		//For default one, vizStyle.setDefaultValue(VisualProperty<V> vp, S value);
+		//@param vp: (VisualProperty) target VisualProperty 
+		//@param value: (actual default value) value to be set as default
+		//Void function
+		
+		//For bypass one, (all kinds of Views)View.setLockedValue(VisualProperty vp, V value)
+		//@param vp: (VisualProperty) target VisualProperty
+		//@param value: (value of VisualProperty) the value that will bypass the style
+		//Void function
 	}
 }
