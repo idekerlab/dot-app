@@ -70,7 +70,9 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	
 	// Array of CyNetwork for getNetworks
 	private CyNetwork[] outNetworks;
-	
+
+	// list of all relevant attributes
+	private static final ArrayList<String> ATTRIBUTES = new ArrayList<String>();
 	
 	/**
 	 * Constructs a DotReaderTask object for importing a dot file
@@ -240,26 +242,26 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 * return CyNetworkView
 		 */
 		
-		//codes start at below
+		// codes start at below
 		
-		LOGGER.info("begin to execute buildCyNetworkView()...");
+		LOGGER.info("Executing buildCyNetworkView()...");
 		
-		//initialize the graph object
+		// initialize the graph object
 		Graph graph = null;
 		
-		//the for loop's purpose below is to get the corresponding graph
-		//based on the input network from the hashmap
+		// the for loop's purpose below is to get the corresponding graph
+		// based on the input network from the hashmap
 		for (HashMap.Entry<Graph, CyNetwork> entry: graphMap.entrySet()){
 			//loop through each entry in hashmap until the corresponding graph is found
-			if(network == entry.getValue()){
+			if(network.equals( entry.getValue() )) {
 				graph = entry.getKey();
 				break;
 			}
 		}
 		
-		//error checking if the graph object is not found
+		// error checking if the graph object is not found
 		if (graph == null){
-			LOGGER.log(Level.SEVERE, "graph is null, either it's a empty graph or is not found in HashMap");
+			LOGGER.log(Level.SEVERE, "Graph is null, either it's a empty graph or is not found in HashMap");
 			return null;
 		}
 		
@@ -269,6 +271,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		//created a new CyNetworkView based on the cyNetworkViewFactory
 		CyNetworkView networkView = cyNetworkViewFactory.createNetworkView(network);
 		
+		//add the created visualStyle to VisualMappingManager
+		vizMapMgr.addVisualStyle(visualStyle);
 		
 		/******************************************************************
 		 *Somewhere in this method, we need to call the Reader() from 
@@ -281,8 +285,10 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		//Reader.Reader(networkView, visualStyle); //It actually generates a compiler error
 		//It's syntaxially wrong.
 		
-		//add the created visualStyle to VisualMappingManager
-		vizMapMgr.addVisualStyle(visualStyle);
+		/*
+		 * NetworkReader netReader = new NetworkReader(networkView, visualStyle, graph.getAttributes());
+		 * 
+		 */
 		
 		//return the created cyNetworkView at the end
 		return networkView;
@@ -354,6 +360,55 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 
 		// add the node and the corresponding cyNode into a hashmap for later tracking
 		nodeMap.put(node, cyNode);
+	}
+	
+	/**
+	 * Returns Map of default attributes and their values for nodes
+	 * 
+	 * @param graph Graph whose defaults are being returend
+	 * @return Map<String, String> where key is attribute name and value
+	 * is attribute value
+	 */
+	private Map<String, String> getNodeDefaultMap(Graph graph) {
+		
+		/*
+		 * Map output = new HashMap<String, String>();
+		 * for each element attr in ATTRIBUTES
+		 * 		val = graph.getGenericNodeAttribute(attr)
+		 * 		if(val != null)
+		 * 			output.put(attr, val);
+		 *
+		 * 	return output;
+		 */
+		return null;
+	}
+
+	/**
+	 * Returns Map of default attributes and their values for edges
+	 * 
+	 * @param graph Graph whose defaults are being returend
+	 * @return Map<String, String> where key is attribute name and value
+	 * is attribute value
+	 */
+	private Map<String, String> getEdgeDefaultMap(Graph graph) {
+		
+		/*
+		 * Map output = new HashMap<String, String>();
+		 * for each element attr in ATTRIBUTES
+		 * 		val = graph.getGenericEdgeAttribute(attr)
+		 * 		if(val != null)
+		 * 			output.put(attr, val);
+		 *
+		 * 	return output;
+		 */
+		return null;
+	}
+	
+	/**
+	 * Fills ATTRIBUTES variables with all attributes
+	 */
+	private void populateAttributes() {
+		
 	}
 }
 
