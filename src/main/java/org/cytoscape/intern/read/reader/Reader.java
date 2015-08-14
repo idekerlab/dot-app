@@ -6,6 +6,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import java.awt.Color;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -62,7 +63,7 @@ public abstract class Reader {
 
 	/*
 	 * Contains elements of Cytoscape graph and their corresponding JPGD elements
-	 * is null for NetworkReader
+	 * is null for NetworkReader. Is initialized on Node, Edge Reader
 	 */
 	protected Map<Object, CyIdentifiable> elementMap;
 	
@@ -129,6 +130,16 @@ public abstract class Reader {
 	}
 	
 	/**
+	 * Sets default VisualProperties and bypasses for each element in list.
+	 * Children classes may override this method, with a super call, to handle
+	 * exception properties such as location and edge weights
+	 */
+	public void setProperties() {
+		setDefaults();
+		setBypasses();
+	}
+
+	/**
 	 * Returns the Map of bypass attributes for a given JPGD object.
 	 * We define bypass attributes as any attributes declared at the individual
 	 * node declaration.
@@ -150,6 +161,21 @@ public abstract class Reader {
 		  */
 		return null;
 	}
+	
+	/**
+	 * Takes in a dot color string and returns the equivalent Color object
+	 * Color formats are:
+	 * #RRGGBB (in hex)
+	 * #RRGGBBAA (in hex)
+	 * H S V (0 <= Hue, saturation, value <= 1.0)
+	 * String that is name of color
+	 *  
+	 * @param color Color from dot file-- takes all color formats
+	 */
+	protected Color convertColor(String color) {
+		return null;
+	}
+	
 
 	/**
 	 * Converts the specified .dot attribute to Cytoscape equivalent

@@ -13,6 +13,8 @@ import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SHAPE;
+
 import com.alexmerz.graphviz.objects.Node;
 
 /**
@@ -31,7 +33,7 @@ public class NodeReader extends Reader{
 	
 
 	/**
-	 * Constructs an object of type Reader. Sets up Logger.
+	 * Constructs an object of type Reader.
 	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
@@ -53,7 +55,32 @@ public class NodeReader extends Reader{
 		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.RECTANGLE);     
 	}
 	
+	/**
+	 * Sets defaults and bypass attributes for each node and sets positions
+	 */
+	public void setProperties() {
+		super.setProperties();
+		setPositions();
+		setStyle();
+	}
 	
+	/**
+	 * Sets VisualProperties for each node related to location of node.
+	 * Here because cannot return 2 VisualProperties from convertAttribute
+	 * and want to make exception clear
+	 */
+	private void setPositions() {
+		
+	}
+	
+	/**
+	 * Sets VisualProperties that map to "style" attribute of dot
+	 */
+	private void setStyle() {
+		
+	}
+
+
 	/**
 	 * Converts the specified .dot attribute to Cytoscape equivalent
 	 * and returns the corresponding VisualProperty and its value
@@ -72,23 +99,39 @@ public class NodeReader extends Reader{
 		 * 
 		 * shape
 		 * fill color
-		 * border color
+		 * border color/transparency
 		 * border line type
+		 * border width
 		 * size
 		 * label
+		 * label position
 		 * tooltip
-		 * label font
+		 * label font/size/color
+		 * 
+		 * 
+		 * Pair output = null;
+		 * switch(name) {
+		 *		"shape":
+		 *			
+		 * 
+		 * }
+		 * 
 		 */
-		return null;
+		
+		Pair output = null;
+		switch(name) {
+			case "shape":
+				output = Pair.of(NODE_SHAPE, NODE_SHAPE_MAP.get(val));
+				break;
+		}
+
+
+		if(output == null) {
+			LOGGER.info("No match found for name, val: " + name + ", " + val);
+		}
+		return output;
 	}
 	
-	/**
-	 * Sets VisualProperties for each node related to location of node.
-	 * Here because cannot return 2 VisualProperties from convertAttribute
-	 * and want to make exception clear
-	 */
-	private void setPositions() {
-		
-	}
+
 }
 

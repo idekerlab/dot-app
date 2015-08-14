@@ -43,6 +43,21 @@ public class EdgeReader extends Reader{
 	}
 	
 	/**
+	 * Sets defaults and bypass attributes for each node and sets positions
+	 */
+	public void setProperties() {
+		super.setProperties();
+		setEdgeWeights();
+	}
+	
+	/**
+	 * Converts edge weights by putting into a new column in the table
+	 */
+	private void setEdgeWeights(){
+
+	}
+
+	/**
 	 * Converts the specified .dot attribute to Cytoscape equivalent
 	 * and returns the corresponding VisualProperty and its value
 	 * Must be overidden and defined in each sub-class
