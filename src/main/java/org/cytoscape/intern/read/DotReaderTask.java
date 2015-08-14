@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,6 +35,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
 import com.alexmerz.graphviz.Parser;
 import com.alexmerz.graphviz.ParseException;
 import com.alexmerz.graphviz.objects.Graph;
+import com.alexmerz.graphviz.objects.Id;
 import com.alexmerz.graphviz.objects.Node;
 import com.alexmerz.graphviz.objects.Edge;
 import com.alexmerz.graphviz.objects.PortNode;
@@ -259,7 +261,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 		// the for loop's purpose below is to get the corresponding graph
 		// based on the input network from the hashmap
-		for (HashMap.Entry<Graph, CyNetwork> entry: graphMap.entrySet()){
+		for (Entry<Graph, CyNetwork> entry: graphMap.entrySet()){
 			//loop through each entry in hashmap until the corresponding graph is found
 			if(network.equals( entry.getValue() )) {
 				graph = entry.getKey();
@@ -309,6 +311,26 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	public CyNetwork[] getNetworks() {
 		return networks;
+	}
+	
+	/**
+	 * Retrieves the name of the node from its Id object that will be inserted
+	 * into the CyNode table of the CyNetwork
+	 * @param node the JPGD node object containing the information
+	 * @return The name of the node
+	 */
+	private String getNodeName(Node node) {
+		Id nodeId = node.getId();
+		String idString = nodeId.getId();
+		String labelString = nodeId.getLabel();
+		if (!idString.equals("")) {
+			return idString;
+		}
+		else if (!labelString.equals("")) {
+			String[] parts = labelString.split("§");
+			return parts[0];
+		}
+		return null;
 	}
 	
 	/**
@@ -368,7 +390,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	private void importNode(Node node, CyNetwork network) {
 		// add cyNode and set name
 		CyNode cyNode = network.addNode();
-		String nodeName = node.getId().toString();
+		String nodeName = getNodeName(node);
 		network.getDefaultNodeTable().getRow(cyNode.getSUID()).set(CyNetwork.NAME, nodeName);
 
 		// add the node and the corresponding cyNode into a hashmap for later tracking
