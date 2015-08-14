@@ -274,7 +274,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		}
 		
 		//created a new VisualStyle based on the visualStyleFactory
-		VisualStyle visualStyle = vizStyleFact.createVisualStyle("new visual style");
+		VisualStyle visualStyle = vizStyleFact.createVisualStyle("vizStyle");
 		
 		//created a new CyNetworkView based on the cyNetworkViewFactory
 		CyNetworkView networkView = cyNetworkViewFactory.createNetworkView(network);

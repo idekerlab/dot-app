@@ -31,7 +31,7 @@ public class NodeReader extends Reader{
 	
 
 	/**
-	 * Constructs an object of type Reader. Sets up Logger.
+	 * Constructs an object of type Reader.
 	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
@@ -53,7 +53,24 @@ public class NodeReader extends Reader{
 		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.RECTANGLE);     
 	}
 	
+	/**
+	 * Sets defaults and bypass attributes for each node and sets positions
+	 */
+	public void setProperties() {
+		super.setProperties();
+		setPositions();
+	}
 	
+	/**
+	 * Sets VisualProperties for each node related to location of node.
+	 * Here because cannot return 2 VisualProperties from convertAttribute
+	 * and want to make exception clear
+	 */
+	private void setPositions() {
+		
+	}
+
+
 	/**
 	 * Converts the specified .dot attribute to Cytoscape equivalent
 	 * and returns the corresponding VisualProperty and its value
@@ -82,13 +99,6 @@ public class NodeReader extends Reader{
 		return null;
 	}
 	
-	/**
-	 * Sets VisualProperties for each node related to location of node.
-	 * Here because cannot return 2 VisualProperties from convertAttribute
-	 * and want to make exception clear
-	 */
-	private void setPositions() {
-		
-	}
+
 }
 

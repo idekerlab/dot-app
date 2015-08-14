@@ -23,7 +23,7 @@ public class NodePropertyMapper extends Mapper {
 	// location of node label
 	private String labelLoc;
 	
-	/**
+	/*
 	 *  maps Cytoscape node shape types to the equivalent string used in .dot
 	 */
 	private static final HashMap<NodeShape, String> NODE_SHAPE_MAP = new HashMap<NodeShape, String>();

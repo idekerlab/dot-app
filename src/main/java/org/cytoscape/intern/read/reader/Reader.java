@@ -62,7 +62,7 @@ public abstract class Reader {
 
 	/*
 	 * Contains elements of Cytoscape graph and their corresponding JPGD elements
-	 * is null for NetworkReader
+	 * is null for NetworkReader. Is initialized on Node, Edge Reader
 	 */
 	protected Map<Object, CyIdentifiable> elementMap;
 	
@@ -129,6 +129,16 @@ public abstract class Reader {
 	}
 	
 	/**
+	 * Sets default VisualProperties and bypasses for each element in list.
+	 * Children classes may override this method, with a super call, to handle
+	 * exception properties such as location and edge weights
+	 */
+	public void setProperties() {
+		setDefaults();
+		setBypasses();
+	}
+
+	/**
 	 * Returns the Map of bypass attributes for a given JPGD object.
 	 * We define bypass attributes as any attributes declared at the individual
 	 * node declaration.
@@ -150,6 +160,7 @@ public abstract class Reader {
 		  */
 		return null;
 	}
+	
 
 	/**
 	 * Converts the specified .dot attribute to Cytoscape equivalent
