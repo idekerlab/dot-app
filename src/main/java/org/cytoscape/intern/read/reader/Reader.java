@@ -6,6 +6,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import java.awt.Color;
 
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -158,6 +159,20 @@ public abstract class Reader {
 		  * else
 		  * 	throw IllegalArgException
 		  */
+		return null;
+	}
+	
+	/**
+	 * Takes in a dot color string and returns the equivalent Color object
+	 * Color formats are:
+	 * #RRGGBB (in hex)
+	 * #RRGGBBAA (in hex)
+	 * H S V (0 <= Hue, saturation, value <= 1.0)
+	 * String that is name of color
+	 *  
+	 * @param color Color from dot file-- takes all color formats
+	 */
+	protected Color convertColor(String color) {
 		return null;
 	}
 	

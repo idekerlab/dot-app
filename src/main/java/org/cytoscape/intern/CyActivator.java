@@ -96,7 +96,10 @@ public class CyActivator extends AbstractCyActivator {
 		registerAllServices(context, dotReadFact, dotReaderFactProps);
 
 	}
-	
+
+	/**
+	 * Closes file handlers and shuts down app using super call
+	 */
 	@Override
 	public void shutDown() {
 		FILE_HANDLER_MGR.closeAllFileHandlers();

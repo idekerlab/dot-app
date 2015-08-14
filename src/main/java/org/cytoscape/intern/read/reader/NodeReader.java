@@ -13,6 +13,8 @@ import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SHAPE;
+
 import com.alexmerz.graphviz.objects.Node;
 
 /**
@@ -59,6 +61,7 @@ public class NodeReader extends Reader{
 	public void setProperties() {
 		super.setProperties();
 		setPositions();
+		setStyle();
 	}
 	
 	/**
@@ -67,6 +70,13 @@ public class NodeReader extends Reader{
 	 * and want to make exception clear
 	 */
 	private void setPositions() {
+		
+	}
+	
+	/**
+	 * Sets VisualProperties that map to "style" attribute of dot
+	 */
+	private void setStyle() {
 		
 	}
 
@@ -89,14 +99,37 @@ public class NodeReader extends Reader{
 		 * 
 		 * shape
 		 * fill color
-		 * border color
+		 * border color/transparency
 		 * border line type
+		 * border width
 		 * size
 		 * label
+		 * label position
 		 * tooltip
-		 * label font
+		 * label font/size/color
+		 * 
+		 * 
+		 * Pair output = null;
+		 * switch(name) {
+		 *		"shape":
+		 *			
+		 * 
+		 * }
+		 * 
 		 */
-		return null;
+		
+		Pair output = null;
+		switch(name) {
+			case "shape":
+				output = Pair.of(NODE_SHAPE, NODE_SHAPE_MAP.get(val));
+				break;
+		}
+
+
+		if(output == null) {
+			LOGGER.info("No match found for name, val: " + name + ", " + val);
+		}
+		return output;
 	}
 	
 

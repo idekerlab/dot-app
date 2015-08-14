@@ -259,7 +259,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 		// the for loop's purpose below is to get the corresponding graph
 		// based on the input network from the hashmap
-		for (HashMap.Entry<Graph, CyNetwork> entry: graphMap.entrySet()){
+		for (Map.Entry<Graph, CyNetwork> entry: graphMap.entrySet()){
 			//loop through each entry in hashmap until the corresponding graph is found
 			if(network.equals( entry.getValue() )) {
 				graph = entry.getKey();
