@@ -11,6 +11,7 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.presentation.property.values.NodeShape;
+import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 
 import com.alexmerz.graphviz.objects.Node;
 
@@ -42,6 +43,14 @@ public class NodeReader extends Reader{
 		super(networkView, vizStyle, defaultAttrs);
 		this.elementMap = elementMap;
 
+		NODE_SHAPE_MAP.put("triangle", NodeShapeVisualProperty.TRIANGLE);
+		NODE_SHAPE_MAP.put("diamond", NodeShapeVisualProperty.DIAMOND);
+		NODE_SHAPE_MAP.put("ellipse", NodeShapeVisualProperty.ELLIPSE);
+		NODE_SHAPE_MAP.put("hexagon", NodeShapeVisualProperty.HEXAGON);
+		NODE_SHAPE_MAP.put("octagon", NodeShapeVisualProperty.OCTAGON);
+		NODE_SHAPE_MAP.put("parallelogram", NodeShapeVisualProperty.PARALLELOGRAM);
+		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.ROUND_RECTANGLE);
+		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.RECTANGLE);     
 	}
 	
 	
@@ -58,7 +67,28 @@ public class NodeReader extends Reader{
 	 * attribute
 	 */
 	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
+		/**
+		 * properties to Map:
+		 * 
+		 * shape
+		 * fill color
+		 * border color
+		 * border line type
+		 * size
+		 * label
+		 * tooltip
+		 * label font
+		 */
 		return null;
+	}
+	
+	/**
+	 * Sets VisualProperties for each node related to location of node.
+	 * Here because cannot return 2 VisualProperties from convertAttribute
+	 * and want to make exception clear
+	 */
+	private void setPositions() {
+		
 	}
 }
 
