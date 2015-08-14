@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
-
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.VisualProperty;
@@ -69,7 +68,7 @@ public class EdgeReader extends Reader{
 	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
 	 * attribute
 	 */
-	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
+	protected Pair<VisualProperty<Object>, Object> convertAttribute(String name, String val) {
 		return null;
 	}
 	

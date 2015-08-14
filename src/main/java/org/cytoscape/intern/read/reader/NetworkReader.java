@@ -47,7 +47,7 @@ public class NetworkReader extends Reader{
 	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
 	 * attribute
 	 */
-	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
+	protected Pair<VisualProperty<Object>, Object> convertAttribute(String name, String val) {
 		return null;
 	}
 }

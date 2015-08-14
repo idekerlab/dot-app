@@ -9,14 +9,12 @@ import java.util.logging.SimpleFormatter;
 import java.awt.Color;
 
 import org.apache.commons.lang3.tuple.Pair;
-
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyIdentifiable;
-
 import org.cytoscape.intern.FileHandlerManager;
 
 import com.alexmerz.graphviz.objects.Graph;
@@ -173,6 +171,19 @@ public abstract class Reader {
 	 * @param color Color from dot file-- takes all color formats
 	 */
 	protected Color convertColor(String color) {
+		/*
+		 * Match string to #RRGGBB
+		 * if (matched) then return new Color(RR, GG, BB)
+		 * OR
+		 * Match string to #RRGGBBAA
+		 * if (matched) then return new Color(RR, GG, BB, AA)
+		 * OR
+		 * Split string by "," or " "
+		 * Convert sub strings to Floats
+		 * return Color.getHSBColor()
+		 * OR
+		 * return Color.getColor(String)
+		 */
 		return null;
 	}
 	
@@ -189,7 +200,7 @@ public abstract class Reader {
 	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
 	 * attribute
 	 */
-	protected abstract Pair<VisualProperty, Object> convertAttribute(String name, String val);
+	protected abstract Pair<VisualProperty<Object>, Object> convertAttribute(String name, String val);
 
 }
 

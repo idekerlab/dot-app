@@ -1,10 +1,10 @@
 package org.cytoscape.intern.read.reader;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
-
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
@@ -13,6 +13,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_HEIGHT;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SHAPE;
 
 import com.alexmerz.graphviz.objects.Node;
@@ -29,11 +30,27 @@ import com.alexmerz.graphviz.objects.Node;
 public class NodeReader extends Reader{
 
 	// Map to convert from .dot node shape to Cytoscape
-	private static final Map<String, NodeShape> NODE_SHAPE_MAP = null;
+	private static final Map<String, NodeShape> NODE_SHAPE_MAP = new HashMap<String, NodeShape>();
+	static {
+		NODE_SHAPE_MAP.put("triangle", NodeShapeVisualProperty.TRIANGLE);
+		NODE_SHAPE_MAP.put("diamond", NodeShapeVisualProperty.DIAMOND);
+		NODE_SHAPE_MAP.put("ellipse", NodeShapeVisualProperty.ELLIPSE);
+		NODE_SHAPE_MAP.put("hexagon", NodeShapeVisualProperty.HEXAGON);
+		NODE_SHAPE_MAP.put("octagon", NodeShapeVisualProperty.OCTAGON);
+		NODE_SHAPE_MAP.put("parallelogram", NodeShapeVisualProperty.PARALLELOGRAM);
+		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.ROUND_RECTANGLE);
+		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.RECTANGLE);     
+	}
+	private static final Map<String, VisualProperty<?>> DOT_TO_CYTOSCAPE = new HashMap<String, VisualProperty<?>>();
+	static {
+		DOT_TO_CYTOSCAPE.put("shape", NODE_SHAPE);
+		DOT_TO_CYTOSCAPE.put("height", NODE_HEIGHT);
+	}
 	
 
 	/**
 	 * Constructs an object of type Reader.
+	 * 
 	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
@@ -45,14 +62,6 @@ public class NodeReader extends Reader{
 		super(networkView, vizStyle, defaultAttrs);
 		this.elementMap = elementMap;
 
-		NODE_SHAPE_MAP.put("triangle", NodeShapeVisualProperty.TRIANGLE);
-		NODE_SHAPE_MAP.put("diamond", NodeShapeVisualProperty.DIAMOND);
-		NODE_SHAPE_MAP.put("ellipse", NodeShapeVisualProperty.ELLIPSE);
-		NODE_SHAPE_MAP.put("hexagon", NodeShapeVisualProperty.HEXAGON);
-		NODE_SHAPE_MAP.put("octagon", NodeShapeVisualProperty.OCTAGON);
-		NODE_SHAPE_MAP.put("parallelogram", NodeShapeVisualProperty.PARALLELOGRAM);
-		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.ROUND_RECTANGLE);
-		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.RECTANGLE);     
 	}
 	
 	/**
@@ -70,14 +79,25 @@ public class NodeReader extends Reader{
 	 * and want to make exception clear
 	 */
 	private void setPositions() {
-		
+		/*
+		 * Get pos attribute
+		 * Split string by ","
+		 * Convert parts to Doubles
+		 * Multiple Y coordinate by -1
+		 * Set NODE_X_POSITION and NODE_Y_POSITION
+		 */
 	}
 	
 	/**
 	 * Sets VisualProperties that map to "style" attribute of dot
 	 */
 	private void setStyle() {
-		
+		/*
+		 * Get style attribute
+		 * split string by ","
+		 * attempt to retrieve value from line_type map with each string
+		 * set NODE_BORDER_LINE_TYPE
+		 */
 	}
 
 
@@ -93,7 +113,8 @@ public class NodeReader extends Reader{
 	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
 	 * attribute
 	 */
-	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
+	@SuppressWarnings("unchecked")
+	protected Pair<VisualProperty<Object>, Object> convertAttribute(String name, String val) {
 		/**
 		 * properties to Map:
 		 * 
@@ -118,20 +139,17 @@ public class NodeReader extends Reader{
 		 * 
 		 */
 		
-		Pair output = null;
+		VisualProperty<?> retrievedProp;
 		switch(name) {
-			case "shape":
-				output = Pair.of(NODE_SHAPE, NODE_SHAPE_MAP.get(val));
-				break;
+			case "shape": {
+				retrievedProp = DOT_TO_CYTOSCAPE.get(name);
+				Object retrievedVal = NODE_SHAPE_MAP.get(val);
+				return Pair.of((VisualProperty<Object>)retrievedProp, retrievedVal);
+			}
 		}
+		return null;
 
-
-		if(output == null) {
-			LOGGER.info("No match found for name, val: " + name + ", " + val);
-		}
-		return output;
 	}
-	
 
 }
 

@@ -73,7 +73,17 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	private Map<Graph, CyNetwork> graphMap;
 
 	// list of all relevant attributes
-	private static final ArrayList<String> ATTRIBUTES = new ArrayList<String>();
+	private static final String[] EDGE_ATTRIBUTES = {
+		"arrowhead", "arrowtail", "dir"
+	};
+	private static final String[] NODE_ATTRIBUTES = {
+		"height", "width", "shape"
+	};
+	private static final ArrayList<String> GRAPH_ATTRIBUTES = new ArrayList<String>();
+	private static final String[] COMMON_ATTRIBUTES = {
+		"color", "fillcolor", "fontcolor", "fontname", "fontsize", "label",
+		"penwidth", "pos", "style", "tooltip", "xlabel"
+	};
 	
 	/**
 	 * Constructs a DotReaderTask object for importing a dot file
@@ -192,7 +202,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 				}
 				
 				// set the name for the network
-				String networkName = graph.getId().toString(); 
+				String networkName = getGraphName(graph);
 				network.getRow(network).set(CyNetwork.NAME, networkName);
 			
 				// import nodes
@@ -276,7 +286,9 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		}
 		
 		//created a new VisualStyle based on the visualStyleFactory
-		VisualStyle visualStyle = vizStyleFact.createVisualStyle("vizStyle");
+		VisualStyle visualStyle = vizStyleFact.createVisualStyle(
+			String.format("%s vizStyle", getGraphName(graph))
+		);
 		
 		//created a new CyNetworkView based on the cyNetworkViewFactory
 		CyNetworkView networkView = cyNetworkViewFactory.createNetworkView(network);
@@ -314,6 +326,23 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	}
 	
 	/**
+	 * Retrieves the name of the graph from its Id Object
+	 * @param graph The JPGD graph object containing the information
+	 * @return The name of the graph
+	 */
+	private String getGraphName(Graph graph) {
+		Id graphId = graph.getId();
+		String idString = graphId.getId();
+		String labelString = graphId.getLabel();
+		if (!idString.equals("")) {
+			return idString;
+		}
+		else if (!labelString.equals("")) {
+			return labelString;
+		}
+		return null;
+	}
+	/**
 	 * Retrieves the name of the node from its Id object that will be inserted
 	 * into the CyNode table of the CyNetwork
 	 * @param node the JPGD node object containing the information
@@ -347,8 +376,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		Node target = edge.getTarget().getNode();
 		
 		// get the name of both nodes
-		String sourceName = source.getId().toString();
-		String targetName = target.getId().toString();
+		String sourceName = getNodeName(source);
+		String targetName = getNodeName(target);
 		
 		// get the CyNode of the source and target node from the hashmap
 		CyNode sourceCyNode = nodeMap.get(source);
@@ -439,12 +468,6 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		return null;
 	}
 	
-	/**
-	 * Fills ATTRIBUTES variables with all attributes
-	 */
-	private void populateAttributes() {
-		
-	}
 }
 
 
