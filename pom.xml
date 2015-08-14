@@ -59,7 +59,7 @@
 						<!-- M not sure if this is correct. -->
 						<Private-Package>org.cytoscape.intern.*</Private-Package>
 						<Include-Resource>{maven-resources}, @./jars/com.alexmerz.graphviz.jar</Include-Resource>
-
+						<Embed-Dependency>commons-lang3;scope=compile|runtime</Embed-Dependency>
 						<Bundle-Activator>org.cytoscape.intern.CyActivator</Bundle-Activator>
 					</instructions>
 				</configuration>
@@ -105,14 +105,6 @@
 		must be inlined or embedded into this bundle. -->
 	<dependencies>
 
-		<!--
-		<dependency>
-			<groupId>com.alexmerz</groupId>
-			<artifactId>java-graphviz-api</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		-->
-		
 		<dependency>
 			<groupId>org.cytoscape</groupId>
 			<artifactId>service-api</artifactId>
@@ -149,6 +141,11 @@
 			<version>${cytoscape.api.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3</version>
+		</dependency>
 		<!-- OSGi core API -->
 		<dependency>
 			<groupId>org.osgi</groupId>
@@ -195,11 +192,6 @@
 			<scope>test</scope>
 		</dependency>	
 
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
-		</dependency>
 
 	</dependencies>
   
