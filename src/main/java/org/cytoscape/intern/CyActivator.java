@@ -1,7 +1,6 @@
 package org.cytoscape.intern;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Properties;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -12,9 +11,7 @@ import org.cytoscape.intern.read.DotReaderFactory;
 import org.cytoscape.intern.write.DotWriterFactory;
 import org.cytoscape.io.BasicCyFileFilter;
 import org.cytoscape.io.DataCategory;
-import org.cytoscape.io.read.InputStreamTaskFactory;
 import org.cytoscape.io.util.StreamUtil;
-import org.cytoscape.io.write.CyNetworkViewWriterFactory;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.subnetwork.CyRootNetworkManager;
@@ -22,6 +19,7 @@ import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
+import org.cytoscape.work.ServiceProperties;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -59,13 +57,10 @@ public class CyActivator extends AbstractCyActivator {
 		FILE_HANDLER_MGR.registerFileHandler(handler);
      
 		//Create the GraphViz file filter
-		HashSet<String> extensions = new HashSet<String>();
-		HashSet<String> contentTypes = new HashSet<String>();
+		String[] extensions = {"dot", "gv"};
+		String[] contentTypes = {"text/plain"};
 		DataCategory category = DataCategory.NETWORK;
 		StreamUtil streamUtil = getService(context, StreamUtil.class);
-		extensions.add("dot");
-		extensions.add("gv");
-		contentTypes.add("text/plain");
 		BasicCyFileFilter fileFilter = new BasicCyFileFilter(extensions, contentTypes, "GraphViz files", category, streamUtil);
 				 
 		// get necessary services for factories
@@ -75,6 +70,12 @@ public class CyActivator extends AbstractCyActivator {
 		CyRootNetworkManager rootNetMgr = getService(context, CyRootNetworkManager.class);
 		VisualMappingManager vizMapMgr = getService(context, VisualMappingManager.class);
 		VisualStyleFactory vizStyleFact = getService(context, VisualStyleFactory.class);
+		
+		// create properties for TaskFactories
+		Properties dotWriterFactProps = new Properties();
+		Properties dotReaderFactProps = new Properties();
+		dotWriterFactProps.put(ServiceProperties.ID, "dotWriterFactory");
+		dotReaderFactProps.put(ServiceProperties.ID, "dotReaderFactory");
 
 		
 		// initialize the DotWriterFactory for later use
@@ -88,24 +89,12 @@ public class CyActivator extends AbstractCyActivator {
 		
 		LOGGER.info("Registering Writer Factory as OSGI service...");
 		//register DotWriterFactory as an OSGI service
-		registerService(context, dotWriteFact, CyNetworkViewWriterFactory.class, new Properties());
+		registerAllServices(context, dotWriteFact, dotWriterFactProps);
 		
 		LOGGER.info("Registering Reader Factory as OSGI service...");
 		//register DotReaderFactory as an OSGI service
-		registerService(context, dotReadFact, InputStreamTaskFactory.class, new Properties());
+		registerAllServices(context, dotReadFact, dotReaderFactProps);
 
-		/**
-		 * getService for:
-		 * CyNetworkFactory
-		 * CyNetworkViewFactory
-		 * VisualStyleFactory
-		 * 
-		 * create a VisualStyle and pass into DotReaderFactory
-		 * Pass CyNetworkFactory and CyNetworkViewFactory in
-		 * because we do not want to create a network until we know user is reading.
-		 * And we need a network to create a networkView
-		 */
-		
 	}
 	
 	@Override

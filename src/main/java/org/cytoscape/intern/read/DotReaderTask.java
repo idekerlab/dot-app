@@ -21,7 +21,9 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.model.subnetwork.CyRootNetworkManager;
+import org.cytoscape.model.subnetwork.CySubNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.vizmap.VisualMappingManager;
@@ -67,9 +69,6 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 
 	// Maps the created CyNetworks to their JPGD Graph object
 	private Map<Graph, CyNetwork> graphMap;
-	
-	// Array of CyNetwork for getNetworks
-	private CyNetwork[] outNetworks;
 
 	// list of all relevant attributes
 	private static final ArrayList<String> ATTRIBUTES = new ArrayList<String>();
@@ -175,11 +174,20 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			ArrayList<Graph> graphList = parser.getGraphs();
 			CyNetwork [] networks = new CyNetwork [graphList.size()];
 			
+			// Get the root network
+			CyRootNetwork root = getRootNetwork();
+			
 			int networkCounter = 0;
 			for (Graph graph : graphList) {
 				
 				LOGGER.info("Iterating graph in graphList...");
-				CyNetwork network = cyNetworkFactory.createNetwork();
+				CySubNetwork network;
+				if (root != null) {
+					network = root.addSubNetwork();
+				}
+				else {
+					network = (CySubNetwork)cyNetworkFactory.createNetwork();
+				}
 				
 				// set the name for the network
 				String networkName = graph.getId().toString(); 
@@ -214,12 +222,12 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 				graphMap.put(graph, network);
 								
 			}
+			this.networks = networks;
 		}
 		catch(ParseException e){
 			//avoid compiling error
 			LOGGER.log(Level.SEVERE, "CyNetwork/CyEdge/CyNode initialization failed @ for-each loop in run()");
 		}
-		this.outNetworks = networks;
 	}
 	
 	
@@ -325,22 +333,27 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		CyNode targetCyNode = nodeMap.get(target);
 		
 		CyEdge cyEdge = null;
+		
+		// Interaction of the edge
+		String interaction;
 		/*
 		 * if getType returns 2, it's directed, else it's undirected
 		 * set the cyEdge and add the cyEdge into the network
 		 */
 		if (edge.getType() == 2) {
 			cyEdge = network.addEdge(sourceCyNode, targetCyNode, true);
+			interaction = "interaction";
 		}
 		else {
 			cyEdge = network.addEdge(sourceCyNode, targetCyNode, false);
+			interaction = "undirected";
 		}
 		
 		//set the interaction, a attribute of table, to be "interaction"
-		network.getDefaultEdgeTable().getRow(cyEdge.getSUID()).set("interaction", "interaction");
+		network.getDefaultEdgeTable().getRow(cyEdge.getSUID()).set(CyEdge.INTERACTION, interaction);
 		
 		//set the edge name
-		network.getDefaultEdgeTable().getRow(cyEdge.getSUID()).set("name", sourceName + " (interaction) "+ targetName);
+		network.getDefaultEdgeTable().getRow(cyEdge.getSUID()).set(CyNetwork.NAME, String.format("%s (%s) %s", sourceName, interaction, targetName));
 		
 		edgeMap.put(edge, cyEdge);
 	}
@@ -356,7 +369,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		// add cyNode and set name
 		CyNode cyNode = network.addNode();
 		String nodeName = node.getId().toString();
-		network.getDefaultNodeTable().getRow(cyNode.getSUID()).set("name", nodeName);
+		network.getDefaultNodeTable().getRow(cyNode.getSUID()).set(CyNetwork.NAME, nodeName);
 
 		// add the node and the corresponding cyNode into a hashmap for later tracking
 		nodeMap.put(node, cyNode);
