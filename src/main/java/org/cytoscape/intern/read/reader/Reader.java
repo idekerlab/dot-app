@@ -68,12 +68,11 @@ public abstract class Reader {
 	protected Map<String, String> bypassAttrs;
 	
 	// Maps lineStyle attribute values to Cytoscape values
-	protected static final Map<LineType, String> LINE_TYPE_MAP = new HashMap<LineType, String>();
+	protected static final Map<String, LineType> LINE_TYPE_MAP = new HashMap<String, LineType>();
 	static {
-		LINE_TYPE_MAP.put(DOT, "dotted");
-		LINE_TYPE_MAP.put(EQUAL_DASH, "dashed");
-		LINE_TYPE_MAP.put(LONG_DASH, "dashed");
-		LINE_TYPE_MAP.put(SOLID, "solid");
+		LINE_TYPE_MAP.put("dotted", DOT);
+		LINE_TYPE_MAP.put("dashed", EQUAL_DASH);
+		LINE_TYPE_MAP.put("solid", SOLID);
 	}
 	
 	protected static enum ColorAttribute {

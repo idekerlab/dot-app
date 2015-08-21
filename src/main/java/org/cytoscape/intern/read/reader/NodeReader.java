@@ -13,9 +13,11 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.vizmap.VisualStyle;
+import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_LINE_TYPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_PAINT;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_TRANSPARENCY;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_WIDTH;
@@ -263,14 +265,27 @@ public class NodeReader extends Reader{
 
 	@Override
 	protected void setStyle(String attrVal, VisualStyle vizStyle) {
-		// TODO Auto-generated method stub
-		
+		String[] styleAttrs = attrVal.split(",");
+		for (String styleAttr : styleAttrs) {
+			styleAttr = styleAttr.trim();
+			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
+			if (lineType != null) {
+				vizStyle.setDefaultValue(NODE_BORDER_LINE_TYPE, lineType);
+			}
+		}
 	}
 
 	@Override
 	protected void setStyle(String attrVal,
 			View<? extends CyIdentifiable> elementView) {
-		// TODO Auto-generated method stub
+		String[] styleAttrs = attrVal.split(",");
+		for (String styleAttr : styleAttrs) {
+			styleAttr = styleAttr.trim();
+			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
+			if (lineType != null) {
+				elementView.setLockedValue(NODE_BORDER_LINE_TYPE, lineType);
+			}
+		}
 		
 	}
 

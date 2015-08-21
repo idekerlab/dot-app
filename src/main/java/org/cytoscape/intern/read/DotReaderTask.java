@@ -251,10 +251,17 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 								
 			}
 			this.networks = networks;
+			LOGGER.finest("CyNetwork objects successfully created");
+			FILE_HANDLER_MGR.closeFileHandler(handler);
+			LOGGER.removeHandler(handler);
+			handler = null;
 		}
 		catch(ParseException e){
 			//avoid compiling error
 			LOGGER.log(Level.SEVERE, "CyNetwork/CyEdge/CyNode initialization failed @ for-each loop in run()");
+			FILE_HANDLER_MGR.closeFileHandler(handler);
+			LOGGER.removeHandler(handler);
+			handler = null;
 		}
 	}
 	
@@ -266,7 +273,6 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	@Override
 	public CyNetworkView buildCyNetworkView(CyNetwork network) {
-		// TODO
 		/*
 		 * Steps:
 		 * Retrieve Graph object corresponding to input(CyNetwork network) from HashMap
@@ -280,6 +286,18 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 		// codes start at below
 		
+		if (handler == null) {
+			try {
+				handler = new FileHandler("log_DotReaderTask.txt");
+				handler.setLevel(Level.ALL);
+				handler.setFormatter(new SimpleFormatter());
+			}
+			catch(IOException e) {
+				// to prevent compiler error
+			}
+			LOGGER.addHandler(handler);
+			FILE_HANDLER_MGR.registerFileHandler(handler);
+		}
 		LOGGER.info("Executing buildCyNetworkView()...");
 		
 		// initialize the graph object
@@ -339,6 +357,10 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		vizMapMgr.addVisualStyle(vizStyle);
 		
 		//return the created cyNetworkView at the end
+		LOGGER.finest("Network View created.");
+		FILE_HANDLER_MGR.closeFileHandler(handler);
+		LOGGER.removeHandler(handler);
+		handler = null;
 		return networkView;
 	}
 
