@@ -1,16 +1,20 @@
 package org.cytoscape.intern.read.reader;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.awt.Color;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.model.VisualProperty;
@@ -20,6 +24,11 @@ import org.cytoscape.intern.FileHandlerManager;
 
 import com.alexmerz.graphviz.objects.Edge;
 import com.alexmerz.graphviz.objects.Node;
+
+import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.DOT;
+import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.EQUAL_DASH;
+import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.LONG_DASH;
+import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.SOLID;
 
 /**
  * Abstract class that contains definitions and some implementation for converting a
@@ -59,7 +68,17 @@ public abstract class Reader {
 	protected Map<String, String> bypassAttrs;
 	
 	// Maps lineStyle attribute values to Cytoscape values
-	protected static final Map<String, LineType> LINE_TYPE_MAP = null;
+	protected static final Map<LineType, String> LINE_TYPE_MAP = new HashMap<LineType, String>();
+	static {
+		LINE_TYPE_MAP.put(DOT, "dotted");
+		LINE_TYPE_MAP.put(EQUAL_DASH, "dashed");
+		LINE_TYPE_MAP.put(LONG_DASH, "dashed");
+		LINE_TYPE_MAP.put(SOLID, "solid");
+	}
+	
+	protected static enum ColorAttribute {
+		COLOR, FILLCOLOR, FONTCOLOR
+	}	
 
 	/*
 	 * Contains elements of Cytoscape graph and their corresponding JPGD elements
@@ -112,8 +131,38 @@ public abstract class Reader {
 		 * 		vizStyle.setDefaultValue( VP, val);
 		 */
 		LOGGER.info(String.valueOf(defaultAttrs.size()));
-		for (Entry<String, String> entry : defaultAttrs.entrySet()) {
-			Pair<VisualProperty, Object> p = convertAttribute(entry.getKey(), entry.getValue());
+		for (Entry<String, String> attrEntry : defaultAttrs.entrySet()) {
+			String attrKey = attrEntry.getKey();
+			String attrVal = attrEntry.getValue();
+			LOGGER.info(
+				String.format("Converting DOT attribute: %s", attrKey)
+			);
+			if (attrKey.equals("style")) {
+				setStyle(attrVal, vizStyle);
+				continue;
+			}
+			if (attrKey.equals("color") || attrKey.equals("fillcolor")
+					|| attrKey.equals("fontcolor")) {
+				switch (attrKey) {
+					case "color": {
+						setColor(attrVal, vizStyle, ColorAttribute.COLOR);
+						break;
+					}
+					case "fillcolor": {
+						setColor(attrVal, vizStyle, ColorAttribute.FILLCOLOR);
+						break;
+					}
+					case "fontcolor": {
+						setColor(attrVal, vizStyle, ColorAttribute.FONTCOLOR);
+						break;
+					}
+				}
+				continue;
+			}
+			Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
+			if (p == null) {
+				continue;
+			}
 			VisualProperty vizProp = p.getLeft();
 			Object val = p.getRight();
 			LOGGER.info("Updating Visual Style...");
@@ -141,6 +190,7 @@ public abstract class Reader {
 		LOGGER.info("Setting the properties for Visual Style...");
 		setDefaults();
 		setBypasses();
+		FILE_HANDLER_MGR.closeFileHandler(handler);
 		return vizStyle;
 	}
 
@@ -197,7 +247,28 @@ public abstract class Reader {
 		 * OR
 		 * return Color.getColor(String)
 		 */
-		return null;
+		LOGGER.info("Converting DOT color string to Java Color...");
+		String rgbRegex = "^#[0-9A-Fa-f]{6}$";
+		String rgbaRegex = "^#([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$";
+		String hsbRegex = "^(1(\\.0)?|0?(\\.[0-9]+))[,\\s]+(1(\\.0)?|0?(\\.[0-9]+))[,\\s]+(1(\\.0)?|0?(\\.[0-9]+))$";
+		// Test color string against RGB regex
+		LOGGER.info("Comparing DOT color string to #FFFFFF format");
+		Matcher matcher = Pattern.compile(rgbRegex).matcher(color);
+		if (matcher.matches()) {
+			return Color.decode(color);
+		}
+		// Test color string against RGBA regex
+		LOGGER.info("Comparing DOT color string to #FFFFFFFF format");
+		matcher.usePattern(Pattern.compile(rgbaRegex));
+		if (matcher.matches()) {
+			Integer red = Integer.valueOf(matcher.group(1), 16);
+			Integer green = Integer.valueOf(matcher.group(2), 16);
+			Integer blue = Integer.valueOf(matcher.group(3), 16);
+			Integer alpha = Integer.valueOf(matcher.group(4), 16);
+			return new Color(red, green, blue, alpha);
+		}
+		//TODO HSV format
+		return Color.black;
 	}
 	
 
@@ -215,7 +286,11 @@ public abstract class Reader {
 	 */
 	@SuppressWarnings("rawtypes")
 	protected abstract Pair<VisualProperty, Object> convertAttribute(String name, String val);
-
+	
+	abstract protected void setStyle(String attrVal, VisualStyle vizStyle);
+	abstract protected void setStyle(String attrVal, View<? extends CyIdentifiable> elementView);
+	abstract protected void setColor(String attrVal, VisualStyle vizStyle, ColorAttribute attr);
+	abstract protected void setColor(String attrVal, View<? extends CyIdentifiable> elementView, ColorAttribute attr);
 }
 
 

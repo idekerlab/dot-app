@@ -23,6 +23,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.CyTable;
 import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.model.subnetwork.CyRootNetworkManager;
 import org.cytoscape.model.subnetwork.CySubNetwork;
@@ -207,6 +208,18 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 				// set the name for the network
 				String networkName = getGraphName(graph);
 				network.getRow(network).set(CyNetwork.NAME, networkName);
+				
+				// add DOT_network Identifier to Network Table
+				LOGGER.info("Writing DOT_network identifer to Network table...");
+				CyTable networkTable = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
+				networkTable.createColumn("DOT_network", Boolean.class, true);
+				networkTable.getRow(network.getSUID()).set("DOT_network", true);
+				LOGGER.info(
+					String.format("DOT_network identifier written. Result: %s",
+						networkTable.getRow(network.getSUID()).get("DOT_network", Boolean.class)
+					)
+				);
+
 			
 				// import nodes
 				ArrayList<Node> nodeList = graph.getNodes(true);
@@ -290,13 +303,9 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 		// copy the original VisualStyle to save it
 		// the new visual style will overwrite the existing one
-		VisualStyle vizStyle = vizMapMgr.getCurrentVisualStyle();
-		VisualStyle currentVizStyleCopy = vizStyleFact.createVisualStyle(vizStyle);
-		currentVizStyleCopy.setTitle(vizStyle.getTitle());
-		vizStyle.setTitle(
+		VisualStyle vizStyle = vizStyleFact.createVisualStyle(
 			String.format("%s vizStyle", getGraphName(graph))
 		);
-		
 		//Disable all VisualPropertyDependencies
 		for (VisualPropertyDependency<?> dep : vizStyle.getAllVisualPropertyDependencies()) {
 			dep.setDependency(false);
@@ -327,7 +336,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 
 
 		//add the created visualStyle to VisualMappingManager
-		vizMapMgr.addVisualStyle(currentVizStyleCopy);
+		vizMapMgr.addVisualStyle(vizStyle);
 		
 		//return the created cyNetworkView at the end
 		return networkView;

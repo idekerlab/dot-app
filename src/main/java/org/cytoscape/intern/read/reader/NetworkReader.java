@@ -2,7 +2,9 @@ package org.cytoscape.intern.read.reader;
 
 import java.util.Map;
 
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.vizmap.VisualStyle;
 
@@ -53,6 +55,33 @@ public class NetworkReader extends Reader{
 
 	@Override
 	protected void setBypasses() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setStyle(String attrVal, VisualStyle vizStyle) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setStyle(String attrVal,
+			View<? extends CyIdentifiable> elementView) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setColor(String attrVal, VisualStyle vizStyle,
+			ColorAttribute attr) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setColor(String attrVal,
+			View<? extends CyIdentifiable> elementView, ColorAttribute attr) {
 		// TODO Auto-generated method stub
 		
 	}

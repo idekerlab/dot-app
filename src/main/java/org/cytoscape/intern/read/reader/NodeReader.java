@@ -1,5 +1,6 @@
 package org.cytoscape.intern.read.reader;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +48,7 @@ import com.alexmerz.graphviz.objects.Node;
  */
 public class NodeReader extends Reader{
 
+	
 	// Map to convert from .dot node shape to Cytoscape
 	private static final Map<String, NodeShape> NODE_SHAPE_MAP = new HashMap<String, NodeShape>();
 	static {
@@ -111,6 +113,9 @@ public class NodeReader extends Reader{
 			for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
 				String attrKey = attrEntry.getKey();
 				String attrVal = attrEntry.getValue();
+				LOGGER.info(
+					String.format("Converting DOT attribute: %s", attrKey)
+				);
 				if (attrKey.equals("pos")) {
 					setPositions(attrVal, elementView);
 					continue;
@@ -121,7 +126,20 @@ public class NodeReader extends Reader{
 				}
 				if (attrKey.equals("color") || attrKey.equals("fillcolor")
 						|| attrKey.equals("fontcolor")) {
-					//TODO
+					switch (attrKey) {
+						case "color": {
+							setColor(attrVal, elementView, ColorAttribute.COLOR);
+							break;
+						}
+						case "fillcolor": {
+							setColor(attrVal, elementView, ColorAttribute.FILLCOLOR);
+							break;
+						}
+						case "fontcolor": {
+							setColor(attrVal, elementView, ColorAttribute.FONTCOLOR);
+							break;
+						}
+					}
 					continue;
 				}
 				Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
@@ -167,21 +185,6 @@ public class NodeReader extends Reader{
 		elementView.setVisualProperty(NODE_Y_LOCATION, y);
 	}
 	
-	/**
-	 * Sets VisualProperties that map to "style" attribute of dot
-	 * @param attrVal 
-	 * @param elementView 
-	 */
-	private void setStyle(String attrVal, View<CyNode> elementView) {
-		/*
-		 * Get style attribute
-		 * split string by ","
-		 * attempt to retrieve value from line_type map with each string
-		 * set NODE_BORDER_LINE_TYPE
-		 */
-	}
-
-
 	/**
 	 * Converts the specified .dot attribute to Cytoscape equivalent
 	 * and returns the corresponding VisualProperty and its value
@@ -256,6 +259,70 @@ public class NodeReader extends Reader{
 		}
 		return Pair.of(retrievedProp, retrievedVal);
 
+	}
+
+	@Override
+	protected void setStyle(String attrVal, VisualStyle vizStyle) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setStyle(String attrVal,
+			View<? extends CyIdentifiable> elementView) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void setColor(String attrVal, VisualStyle vizStyle,
+			ColorAttribute attr) {
+		// TODO Auto-generated method stub
+		Color color = convertColor(attrVal);
+		Integer transparency = color.getAlpha();
+		switch (attr) {
+			case COLOR: {
+				vizStyle.setDefaultValue(NODE_BORDER_PAINT, color);
+				vizStyle.setDefaultValue(NODE_BORDER_TRANSPARENCY, transparency);
+				break;
+			}
+			case FILLCOLOR: {
+				vizStyle.setDefaultValue(NODE_FILL_COLOR, color);
+				vizStyle.setDefaultValue(NODE_TRANSPARENCY, transparency);
+				break;
+			}
+			case FONTCOLOR: {
+				vizStyle.setDefaultValue(NODE_LABEL_COLOR, color);
+				vizStyle.setDefaultValue(NODE_LABEL_TRANSPARENCY, transparency);
+				break;
+			}
+		}
+		
+	}
+
+	@Override
+	protected void setColor(String attrVal,
+			View<? extends CyIdentifiable> elementView, ColorAttribute attr) {
+		Color color = convertColor(attrVal);
+		Integer transparency = color.getAlpha();
+		switch (attr) {
+			case COLOR: {
+				elementView.setLockedValue(NODE_BORDER_PAINT, color);
+				elementView.setLockedValue(NODE_BORDER_TRANSPARENCY, transparency);
+				break;
+			}
+			case FILLCOLOR: {
+				elementView.setLockedValue(NODE_FILL_COLOR, color);
+				elementView.setLockedValue(NODE_TRANSPARENCY, transparency);
+				break;
+			}
+			case FONTCOLOR: {
+				elementView.setLockedValue(NODE_LABEL_COLOR, color);
+				elementView.setLockedValue(NODE_LABEL_TRANSPARENCY, transparency);
+				break;
+			}
+		}
+		
 	}
 
 }

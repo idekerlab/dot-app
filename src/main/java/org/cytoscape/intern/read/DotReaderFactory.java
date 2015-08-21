@@ -7,14 +7,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import javax.swing.SwingUtilities;
+
 import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.io.CyFileFilter;
 import org.cytoscape.io.read.InputStreamTaskFactory;
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.CyTable;
 import org.cytoscape.model.subnetwork.CyRootNetworkManager;
+import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewFactory;
+import org.cytoscape.view.model.events.NetworkViewAddedEvent;
+import org.cytoscape.view.model.events.NetworkViewAddedListener;
 import org.cytoscape.view.vizmap.VisualMappingManager;
+import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskIterator;
 
@@ -26,7 +34,7 @@ import org.cytoscape.work.TaskIterator;
  * @author Ziran Zhang
  */
 
-public class DotReaderFactory implements InputStreamTaskFactory {
+public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAddedListener {
     
 	
 	//debug logger declaration 
@@ -136,6 +144,43 @@ public class DotReaderFactory implements InputStreamTaskFactory {
 		}
 		
 		return false;
+	}
+
+
+	private boolean isDotNetwork(CyNetwork network) {
+		CyTable hidden = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
+		return hidden.getRow(network.getSUID()).get("DOT_network", Boolean.class);
+	}
+	/**
+	 * Applies the VisualStyle created for the newly created CyNetworkView
+	 * 
+	 * @param arg0 event fired when a CyNetworkView is added to
+	 * CyNetworkViewManager
+	 */
+	@Override
+	public void handleEvent(NetworkViewAddedEvent arg0) {
+		LOGGER.info("NetworkView was added. Apply VisualStyle if DOT network");
+		final CyNetworkView networkView = arg0.getNetworkView();
+		CyNetwork model = networkView.getModel();
+		if (!isDotNetwork(model)) {
+			return;
+		}
+		LOGGER.info("Network is a DOT network. Applying VisualStyle...");
+		String name = model.getRow(model).get(CyNetwork.NAME, String.class);
+		String vizStyleName = String.format("%s vizStyle", name);
+		for (final VisualStyle vizStyle : vizMapMgr.getAllVisualStyles()) {
+			if (vizStyle.getTitle().equals(vizStyleName)) {
+				SwingUtilities.invokeLater( new Runnable()
+				{
+					public void run() {
+						vizMapMgr.setVisualStyle(vizStyle, networkView);
+						vizStyle.apply(networkView);
+						networkView.updateView();
+					}
+				});
+			}
+		}
+		
 	}
 
 }
