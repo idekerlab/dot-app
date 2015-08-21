@@ -43,10 +43,12 @@ public class EdgeReader extends Reader{
 	
 	/**
 	 * Sets defaults and bypass attributes for each node and sets positions
+	 * @return 
 	 */
-	public void setProperties() {
+	public VisualStyle setProperties() {
 		super.setProperties();
 		setEdgeWeights();
+		return vizStyle;
 	}
 	
 	/**
@@ -68,8 +70,15 @@ public class EdgeReader extends Reader{
 	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
 	 * attribute
 	 */
-	protected Pair<VisualProperty<Object>, Object> convertAttribute(String name, String val) {
+	@SuppressWarnings("rawtypes")
+	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
 		return null;
+	}
+
+	@Override
+	protected void setBypasses() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

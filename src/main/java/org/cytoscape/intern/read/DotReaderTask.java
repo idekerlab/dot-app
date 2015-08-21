@@ -1,5 +1,6 @@
 package org.cytoscape.intern.read;
 
+import org.cytoscape.intern.read.reader.NodeReader;
 import org.cytoscape.intern.read.reader.Reader; 
 
 import java.io.FileInputStream;
@@ -28,7 +29,9 @@ import org.cytoscape.model.subnetwork.CySubNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.vizmap.VisualMappingManager;
+import org.cytoscape.view.vizmap.VisualPropertyDependency;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
+import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.view.vizmap.VisualStyle;
 
@@ -285,16 +288,22 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			return null;
 		}
 		
-		//created a new VisualStyle based on the visualStyleFactory
-		VisualStyle visualStyle = vizStyleFact.createVisualStyle(
+		// copy the original VisualStyle to save it
+		// the new visual style will overwrite the existing one
+		VisualStyle vizStyle = vizMapMgr.getCurrentVisualStyle();
+		VisualStyle currentVizStyleCopy = vizStyleFact.createVisualStyle(vizStyle);
+		currentVizStyleCopy.setTitle(vizStyle.getTitle());
+		vizStyle.setTitle(
 			String.format("%s vizStyle", getGraphName(graph))
 		);
 		
-		//created a new CyNetworkView based on the cyNetworkViewFactory
-		CyNetworkView networkView = cyNetworkViewFactory.createNetworkView(network);
+		//Disable all VisualPropertyDependencies
+		for (VisualPropertyDependency<?> dep : vizStyle.getAllVisualPropertyDependencies()) {
+			dep.setDependency(false);
+		}
 		
-		//add the created visualStyle to VisualMappingManager
-		vizMapMgr.addVisualStyle(visualStyle);
+		//created a new CyNetworkView based on the cyNetworkViewFactory
+		final CyNetworkView networkView = cyNetworkViewFactory.createNetworkView(network);
 		
 		/******************************************************************
 		 *Somewhere in this method, we need to call the Reader() from 
@@ -311,6 +320,14 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 * NetworkReader netReader = new NetworkReader(networkView, visualStyle, graph.getAttributes());
 		 * 
 		 */
+		
+
+		NodeReader nodeReader = new NodeReader(networkView, vizStyle, getNodeDefaultMap(graph), nodeMap);
+		vizStyle = nodeReader.setProperties();
+
+
+		//add the created visualStyle to VisualMappingManager
+		vizMapMgr.addVisualStyle(currentVizStyleCopy);
 		
 		//return the created cyNetworkView at the end
 		return networkView;
@@ -434,6 +451,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 * is attribute value
 	 */
 	private Map<String, String> getNodeDefaultMap(Graph graph) {
+		LOGGER.info("Generating the Node Defaults...");
 		
 		/*
 		 * Map output = new HashMap<String, String>();
@@ -444,7 +462,22 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 *
 		 * 	return output;
 		 */
-		return null;
+		Map<String, String> output = new HashMap<String, String>();
+		for (String commonAttrs : COMMON_ATTRIBUTES) {
+			LOGGER.info(String.format("Setting default node attribute: %s", commonAttrs));
+			String val = graph.getGenericNodeAttribute(commonAttrs);
+			if (val != null) {
+				output.put(commonAttrs, val);
+			}
+		}
+		for (String nodeAttrs : NODE_ATTRIBUTES) {
+			String val = graph.getGenericNodeAttribute(nodeAttrs);
+			if (val != null) {
+				output.put(nodeAttrs, val);
+			}
+		}
+		LOGGER.info(String.valueOf(output.size()));
+		return output;
 	}
 
 	/**
@@ -465,7 +498,22 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 *
 		 * 	return output;
 		 */
-		return null;
+		Map<String, String> output = new HashMap<String, String>();
+		for (String commonAttrs : COMMON_ATTRIBUTES) {
+			LOGGER.info(String.format("Setting default node attribute: %s", commonAttrs));
+			String val = graph.getGenericNodeAttribute(commonAttrs);
+			if (val != null) {
+				output.put(commonAttrs, val);
+			}
+		}
+		for (String nodeAttrs : EDGE_ATTRIBUTES) {
+			String val = graph.getGenericEdgeAttribute(nodeAttrs);
+			if (val != null) {
+				output.put(nodeAttrs, val);
+			}
+		}
+		LOGGER.info(String.valueOf(output.size()));
+		return output;
 	}
 	
 }

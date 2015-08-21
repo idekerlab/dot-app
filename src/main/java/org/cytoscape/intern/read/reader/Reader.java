@@ -2,6 +2,7 @@ package org.cytoscape.intern.read.reader;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,8 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.intern.FileHandlerManager;
 
-import com.alexmerz.graphviz.objects.Graph;
+import com.alexmerz.graphviz.objects.Edge;
+import com.alexmerz.graphviz.objects.Node;
 
 /**
  * Abstract class that contains definitions and some implementation for converting a
@@ -63,7 +65,7 @@ public abstract class Reader {
 	 * Contains elements of Cytoscape graph and their corresponding JPGD elements
 	 * is null for NetworkReader. Is initialized on Node, Edge Reader
 	 */
-	protected Map<Object, CyIdentifiable> elementMap;
+	protected Map<? extends Object, ? extends CyIdentifiable> elementMap;
 	
 
 	/**
@@ -99,7 +101,9 @@ public abstract class Reader {
 	 * eg. NetworkReader sets all network props, same for nodes
 	 * Modifies CyNetworkView networkView, VisualStyle vizStyle etc. 
 	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void setDefaults() {
+		LOGGER.info("Setting the Default values for Visual Style...");
 		/*
 		 * for each entry in defaultAttrs
 		 * 		Pair p = convertAttribute(getKey(), getValue());
@@ -107,6 +111,15 @@ public abstract class Reader {
 		 * 		val = p.right()
 		 * 		vizStyle.setDefaultValue( VP, val);
 		 */
+		LOGGER.info(String.valueOf(defaultAttrs.size()));
+		for (Entry<String, String> entry : defaultAttrs.entrySet()) {
+			Pair<VisualProperty, Object> p = convertAttribute(entry.getKey(), entry.getValue());
+			VisualProperty vizProp = p.getLeft();
+			Object val = p.getRight();
+			LOGGER.info("Updating Visual Style...");
+			LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
+			vizStyle.setDefaultValue(vizProp, val);
+		}
 	}
 
 
@@ -114,27 +127,21 @@ public abstract class Reader {
 	 * Sets all the bypass Visual Properties in Cytoscape for this type of reader
 	 * eg. NetworkReader sets all network props, same for nodes
 	 * Modifies CyNetworkView networkView, VisualStyle vizStyle etc. 
+	 * @return 
 	 */
-	private void setBypasses() {
-		/*
-		 * for each entry in elementMap
-		 * 		bypassMap = getAttrMap(elementMap.getKey())
-		 * 		for each entry in bypassMap
-		 * 			Pair p = convertAttribute(name, val);
-		 * 			VP = p.left()
-		 * 			val = p.right()
-		 * 			getValue().setLockedValue( VP, val);	
-		 */
-	}
+	abstract protected void setBypasses();
 	
 	/**
 	 * Sets default VisualProperties and bypasses for each element in list.
 	 * Children classes may override this method, with a super call, to handle
 	 * exception properties such as location and edge weights
+	 * @return 
 	 */
-	public void setProperties() {
+	public VisualStyle setProperties() {
+		LOGGER.info("Setting the properties for Visual Style...");
 		setDefaults();
 		setBypasses();
+		return vizStyle;
 	}
 
 	/**
@@ -157,7 +164,13 @@ public abstract class Reader {
 		  * else
 		  * 	throw IllegalArgException
 		  */
-		return null;
+		if (element instanceof Node) {
+			return ((Node) element).getAttributes();
+		}
+		if (element instanceof Edge) {
+			return ((Edge) element).getAttributes();
+		}
+		throw new IllegalArgumentException();
 	}
 	
 	/**
@@ -200,7 +213,8 @@ public abstract class Reader {
 	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
 	 * attribute
 	 */
-	protected abstract Pair<VisualProperty<Object>, Object> convertAttribute(String name, String val);
+	@SuppressWarnings("rawtypes")
+	protected abstract Pair<VisualProperty, Object> convertAttribute(String name, String val);
 
 }
 

@@ -1,20 +1,38 @@
 package org.cytoscape.intern.read.reader;
 
-import java.util.ArrayList;
+import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_WIDTH;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_FILL_COLOR;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_HEIGHT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_FACE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_SIZE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_TRANSPARENCY;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TOOLTIP;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_VISIBLE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_WIDTH;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SIZE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_X_LOCATION;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_Y_LOCATION;
 
 import com.alexmerz.graphviz.objects.Node;
 
@@ -43,8 +61,15 @@ public class NodeReader extends Reader{
 	}
 	private static final Map<String, VisualProperty<?>> DOT_TO_CYTOSCAPE = new HashMap<String, VisualProperty<?>>();
 	static {
-		DOT_TO_CYTOSCAPE.put("shape", NODE_SHAPE);
+		DOT_TO_CYTOSCAPE.put("label", NODE_LABEL);
+		DOT_TO_CYTOSCAPE.put("xlabel", NODE_LABEL);
+		DOT_TO_CYTOSCAPE.put("penwidth", NODE_BORDER_WIDTH);
 		DOT_TO_CYTOSCAPE.put("height", NODE_HEIGHT);
+		DOT_TO_CYTOSCAPE.put("width", NODE_WIDTH);
+		DOT_TO_CYTOSCAPE.put("tooltip", NODE_TOOLTIP);
+		DOT_TO_CYTOSCAPE.put("shape", NODE_SHAPE);
+		DOT_TO_CYTOSCAPE.put("fontname", NODE_LABEL_FONT_FACE);
+		DOT_TO_CYTOSCAPE.put("fontsize", NODE_LABEL_FONT_SIZE);
 	}
 	
 
@@ -58,27 +83,76 @@ public class NodeReader extends Reader{
 	 * eg. for NodeReader will be a list of default
 	 * @param elementMap Map where keys are JPGD node objects and Values are corresponding Cytoscape CyNodes
 	 */
-	public NodeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Map<Object, CyIdentifiable> elementMap) {
+	public NodeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Map<Node, CyNode> elementMap) {
 		super(networkView, vizStyle, defaultAttrs);
 		this.elementMap = elementMap;
+		LOGGER.info(String.valueOf(defaultAttrs.size()));
 
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+	protected void setBypasses() {
+		LOGGER.info("Setting the Bypass values for Visual Style...");
+		/*
+		 * for each entry in elementMap
+		 * 		bypassMap = getAttrMap(elementMap.getKey())
+		 * 		for each entry in bypassMap
+		 * 			Pair p = convertAttribute(name, val);
+		 * 			VP = p.left()
+		 * 			val = p.right()
+		 * 			getValue().setLockedValue( VP, val);	
+		 */
+		for (Entry<? extends Object, ? extends CyIdentifiable> entry : elementMap.entrySet()) {
+			bypassAttrs = getAttrMap(entry.getKey()); 
+			CyNode element = (CyNode)entry.getValue();
+			View<CyNode> elementView = networkView.getNodeView(element);
+
+			for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
+				String attrKey = attrEntry.getKey();
+				String attrVal = attrEntry.getValue();
+				if (attrKey.equals("pos")) {
+					setPositions(attrVal, elementView);
+					continue;
+				}
+				if (attrKey.equals("style")) {
+					setStyle(attrVal, elementView);
+					continue;
+				}
+				if (attrKey.equals("color") || attrKey.equals("fillcolor")
+						|| attrKey.equals("fontcolor")) {
+					//TODO
+					continue;
+				}
+				Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
+				if (p == null) {
+					continue;
+				}
+				VisualProperty vizProp = p.getLeft();
+				Object val = p.getRight();
+				LOGGER.info("Updating Visual Style...");
+				LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
+				elementView.setLockedValue(vizProp, val);
+			}
+		}
+	}
 	/**
 	 * Sets defaults and bypass attributes for each node and sets positions
 	 */
-	public void setProperties() {
+	public VisualStyle setProperties() {
+		LOGGER.info("NodeReader: Setting properties for VisualStyle...");
 		super.setProperties();
-		setPositions();
-		setStyle();
+		return vizStyle;
 	}
 	
 	/**
 	 * Sets VisualProperties for each node related to location of node.
 	 * Here because cannot return 2 VisualProperties from convertAttribute
 	 * and want to make exception clear
+	 * @param attrVal 
+	 * @param elementView 
 	 */
-	private void setPositions() {
+	private void setPositions(String attrVal, View<CyNode> elementView) {
 		/*
 		 * Get pos attribute
 		 * Split string by ","
@@ -86,12 +160,19 @@ public class NodeReader extends Reader{
 		 * Multiple Y coordinate by -1
 		 * Set NODE_X_POSITION and NODE_Y_POSITION
 		 */
+		String[] coords = attrVal.split(",");
+		Double x = Double.parseDouble(coords[0]);
+		Double y = -1 * Double.parseDouble(coords[1]);
+		elementView.setVisualProperty(NODE_X_LOCATION, x);
+		elementView.setVisualProperty(NODE_Y_LOCATION, y);
 	}
 	
 	/**
 	 * Sets VisualProperties that map to "style" attribute of dot
+	 * @param attrVal 
+	 * @param elementView 
 	 */
-	private void setStyle() {
+	private void setStyle(String attrVal, View<CyNode> elementView) {
 		/*
 		 * Get style attribute
 		 * split string by ","
@@ -113,8 +194,8 @@ public class NodeReader extends Reader{
 	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
 	 * attribute
 	 */
-	@SuppressWarnings("unchecked")
-	protected Pair<VisualProperty<Object>, Object> convertAttribute(String name, String val) {
+	@SuppressWarnings({ "rawtypes" })
+	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
 		/**
 		 * properties to Map:
 		 * 
@@ -139,15 +220,41 @@ public class NodeReader extends Reader{
 		 * 
 		 */
 		
-		VisualProperty<?> retrievedProp;
+		VisualProperty retrievedProp = DOT_TO_CYTOSCAPE.get(name);
+		Object retrievedVal = null;
 		switch(name) {
+			case "xlabel": {
+				//Fall through to label case
+			}
+			case "label" : {
+				retrievedVal = val;
+				break;
+			}
+			case "penwidth": {
+				retrievedVal = (Object)Double.parseDouble(val);
+				break;
+			}
+			case "width": {
+				//Fall through to height case
+			}
+			case "height": {
+				retrievedVal = (Object)(Double.parseDouble(val) * 72.0);
+				break;
+			}
 			case "shape": {
-				retrievedProp = DOT_TO_CYTOSCAPE.get(name);
-				Object retrievedVal = NODE_SHAPE_MAP.get(val);
-				return Pair.of((VisualProperty<Object>)retrievedProp, retrievedVal);
+				retrievedVal = NODE_SHAPE_MAP.get(val);
+				break;
+			}
+			case "fontname": {
+				retrievedVal = (Object)Font.decode(val);
+				break;
+			}
+			case "fontsize": {
+				retrievedVal = (Object)Integer.parseInt(val);
+				break;
 			}
 		}
-		return null;
+		return Pair.of(retrievedProp, retrievedVal);
 
 	}
 
