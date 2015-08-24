@@ -59,6 +59,7 @@ public class NodePropertyMapper extends Mapper {
 	 * 
 	 * @return String for style attribute
 	 */
+	@Override
 	protected String mapDotStyle() {
 		StringBuilder dotStyle = new StringBuilder(super.mapDotStyle());
 		NodeShape shape = view.getVisualProperty(BasicVisualLexicon.NODE_SHAPE);

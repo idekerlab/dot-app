@@ -212,7 +212,7 @@ public class DotWriterTask implements CyWriter {
 		try {
 			LOGGER.info("Writing network properties...");
 			if(network == null) {
-				network = (CyNetwork)networkView.getModel();
+				network = networkView.getModel();
 			}
 						
 			String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);

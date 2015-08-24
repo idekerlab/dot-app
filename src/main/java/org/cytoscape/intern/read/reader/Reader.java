@@ -1,5 +1,10 @@
 package org.cytoscape.intern.read.reader;
 
+import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.DOT;
+import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.EQUAL_DASH;
+import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.SOLID;
+
+import java.awt.Color;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,27 +13,21 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-import java.awt.Color;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.cytoscape.intern.FileHandlerManager;
+import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-import org.cytoscape.view.vizmap.VisualStyle;
-import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.model.VisualProperty;
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyIdentifiable;
-import org.cytoscape.intern.FileHandlerManager;
+import org.cytoscape.view.presentation.property.values.LineType;
+import org.cytoscape.view.vizmap.VisualStyle;
 
 import com.alexmerz.graphviz.objects.Edge;
 import com.alexmerz.graphviz.objects.Node;
-
-import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.DOT;
-import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.EQUAL_DASH;
-import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.LONG_DASH;
-import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.SOLID;
 
 /**
  * Abstract class that contains definitions and some implementation for converting a
@@ -76,7 +75,7 @@ public abstract class Reader {
 	}
 	
 	protected static enum ColorAttribute {
-		COLOR, FILLCOLOR, FONTCOLOR
+		COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
 	}	
 
 	/*
@@ -170,6 +169,9 @@ public abstract class Reader {
 
 			VisualProperty vizProp = p.getLeft();
 			Object val = p.getRight();
+			if (vizProp == null || val == null) {
+				continue;
+			}
 			LOGGER.info("Updating Visual Style...");
 			LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
 			vizStyle.setDefaultValue(vizProp, val);
@@ -188,14 +190,12 @@ public abstract class Reader {
 	 * Sets default VisualProperties and bypasses for each element in list.
 	 * Children classes may override this method, with a super call, to handle
 	 * exception properties such as location and edge weights
-	 * @return 
 	 */
-	public VisualStyle setProperties() {
+	public void setProperties() {
 		LOGGER.info("Setting the properties for Visual Style...");
 		setDefaults();
 		setBypasses();
 		FILE_HANDLER_MGR.closeFileHandler(handler);
-		return vizStyle;
 	}
 
 	/**

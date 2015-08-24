@@ -1,734 +1,737 @@
 graph "football.gml" {
-label = ""
 bgcolor = "#333333FF"
 splines = "false"
 outputorder = "edgesfirst"
-"TexasA&M" [label = "TexasA&M",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "1.541667,-5.111111!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-EastCarolina [label = "EastCarolina",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "7.861111,-9.152778!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-FloridaState [label = "FloridaState",penwidth = "4.000000",height = "0.763889",width = "0.763889",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "8.875000,-8.569444!",fontname = "Bitstream Vera Sans Bold",fontsize = "13",fontcolor = "#FFFF00FF",fixedsize = "true"]
-BallState [label = "BallState",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "8.902778,-6.500000!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-UtahState [label = "UtahState",penwidth = "4.000000",height = "0.347222",width = "0.347222",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "0.569444,-5.777778!",fontname = "Bitstream Vera Sans Bold",fontsize = "7",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Ohio [label = "Ohio",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "9.333333,-2.875000!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Utah [label = "Utah",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "1.055556,-3.486111!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Akron [label = "Akron",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "11.736111,-4.819444!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-OklahomaState [label = "OklahomaState",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "2.347222,-7.541667!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Florida [label = "Florida",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "8.138889,-11.152778!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-UCLA [label = "UCLA",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.541667,-2.777778!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Temple [label = "Temple",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "11.736111,-5.736111!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Connecticut [label = "Connecticut",penwidth = "4.000000",height = "0.694444",width = "0.694444",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "10.972222,-7.819444!",fontname = "Bitstream Vera Sans Bold",fontsize = "14",fontcolor = "#FFFF00FF",fixedsize = "true"]
-ArizonaState [label = "ArizonaState",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "0.555556,-1.569444!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Indiana [label = "Indiana",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "7.430556,-4.986111!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-WashingtonState [label = "WashingtonState",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "1.166667,-2.055556!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Louisville [label = "Louisville",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "7.625000,-10.513889!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Navy [label = "Navy",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "8.138889,-6.541667!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Wyoming [label = "Wyoming",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.361111,-5.555556!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Auburn [label = "Auburn",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "6.430556,-9.152778!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Alabama [label = "Alabama",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "5.250000,-8.583333!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Iowa [label = "Iowa",penwidth = "4.000000",height = "0.763889",width = "0.763889",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "6.208333,-2.666667!",fontname = "Bitstream Vera Sans Bold",fontsize = "13",fontcolor = "#FFFF00FF",fixedsize = "true"]
-BostonCollege [label = "BostonCollege",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "9.500000,-5.500000!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Vanderbilt [label = "Vanderbilt",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "8.236111,-9.791667!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Army [label = "Army",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "6.222222,-8.013889!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-OregonState [label = "OregonState",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "0.805556,-0.847222!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-ColoradoState [label = "ColoradoState",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "0.472222,-4.416667!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Houston [label = "Houston",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "4.416667,-8.708333!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Kansas [label = "Kansas",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "1.944444,-7.347222!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Washington [label = "Washington",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.819444,-1.500000!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Pittsburgh [label = "Pittsburgh",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "11.250000,-4.069444!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Minnesota [label = "Minnesota",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "6.527778,-3.986111!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-MississippiState [label = "MississippiState",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "5.513889,-11.125000!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-NotreDame [label = "NotreDame",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "5.902778,-3.569444!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Kent [label = "Kent",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "11.375000,-2.027778!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Maryland [label = "Maryland",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "11.000000,-8.722222!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-AirForce [label = "AirForce",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.708333,-5.236111!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-WesternMichigan [label = "WesternMichigan",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "10.027778,-2.930556!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Oregon [label = "Oregon",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "2.930556,-0.611111!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-TexasElPaso [label = "TexasElPaso",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "2.388889,-4.208333!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-KansasState [label = "KansasState",penwidth = "4.000000",height = "0.763889",width = "0.763889",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.736111,-6.277778!",fontname = "Bitstream Vera Sans Bold",fontsize = "13",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Toledo [label = "Toledo",penwidth = "4.000000",height = "0.347222",width = "0.347222",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "10.680556,-3.666667!",fontname = "Bitstream Vera Sans Bold",fontsize = "7",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Wisconsin [label = "Wisconsin",penwidth = "4.000000",height = "0.763889",width = "0.763889",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "6.791667,-2.277778!",fontname = "Bitstream Vera Sans Bold",fontsize = "13",fontcolor = "#FFFF00FF",fixedsize = "true"]
-California [label = "California",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "2.069444,-0.444444!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-NevadaLasVegas [label = "NevadaLasVegas",penwidth = "4.000000",height = "0.763889",width = "0.763889",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "1.638889,-6.069444!",fontname = "Bitstream Vera Sans Bold",fontsize = "13",fontcolor = "#FFFF00FF",fixedsize = "true"]
-BoiseState [label = "BoiseState",penwidth = "4.000000",height = "0.347222",width = "0.347222",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.027778,-6.347222!",fontname = "Bitstream Vera Sans Bold",fontsize = "7",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Oklahoma [label = "Oklahoma",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "0.444444,-6.416667!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Purdue [label = "Purdue",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "8.638889,-1.444444!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-CentralFlorida [label = "CentralFlorida",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "9.180556,-7.694444!",fontname = "Bitstream Vera Sans Bold",fontsize = "6",fontcolor = "#FFFF00FF",fixedsize = "true"]
-IowaState [label = "IowaState",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "4.375000,-4.625000!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-SanJoseState [label = "SanJoseState",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.069444,-2.291667!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-NewMexicoState [label = "NewMexicoState",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.277778,-8.027778!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-MiddleTennesseeState [label = "MiddleTennesseeState",penwidth = "4.000000",height = "0.347222",width = "0.347222",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "7.194444,-7.986111!",fontname = "Bitstream Vera Sans Bold",fontsize = "7",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Illinois [label = "Illinois",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "5.652778,-2.847222!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-BowlingGreenState [label = "BowlingGreenState",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "11.569444,-2.680556!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-SanDiegoState [label = "SanDiegoState",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "1.805556,-3.222222!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-SouthernCalifornia [label = "SouthernCalifornia",penwidth = "4.000000",height = "0.763889",width = "0.763889",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.625000,-0.486111!",fontname = "Bitstream Vera Sans Bold",fontsize = "13",fontcolor = "#FFFF00FF",fixedsize = "true"]
-TexasTech [label = "TexasTech",penwidth = "4.000000",height = "0.763889",width = "0.763889",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "0.000000,-7.388889!",fontname = "Bitstream Vera Sans Bold",fontsize = "13",fontcolor = "#FFFF00FF",fixedsize = "true"]
-LouisianaState [label = "LouisianaState",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "5.069444,-12.166667!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Arkansas [label = "Arkansas",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "4.027778,-10.944444!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Tulane [label = "Tulane",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "5.597222,-9.347222!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Hawaii [label = "Hawaii",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "4.097222,-3.236111!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-NorthernIllinois [label = "NorthernIllinois",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "10.236111,-5.958333!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-ArkansasState [label = "ArkansasState",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.527778,-7.652778!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Colorado [label = "Colorado",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "1.819444,-4.166667!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-LouisianaMonroe [label = "LouisianaMonroe",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "6.097222,-8.597222!",fontname = "Bitstream Vera Sans Bold",fontsize = "6",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Idaho [label = "Idaho",penwidth = "4.000000",height = "0.347222",width = "0.347222",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.291667,-4.611111!",fontname = "Bitstream Vera Sans Bold",fontsize = "7",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Northwestern [label = "Northwestern",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "8.625000,-3.680556!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-LouisianaLafayette [label = "LouisianaLafayette",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.333333,-8.708333!",fontname = "Bitstream Vera Sans Bold",fontsize = "6",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Tennessee [label = "Tennessee",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "6.347222,-12.250000!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Michigan [label = "Michigan",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "7.250000,-1.583333!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Syracuse [label = "Syracuse",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "9.388889,-6.375000!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-CentralMichigan [label = "CentralMichigan",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "7.958333,-4.291667!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-NorthCarolina [label = "NorthCarolina",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "10.097222,-6.972222!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Buffalo [label = "Buffalo",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "12.263889,-4.736111!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-WestVirginia [label = "WestVirginia",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "8.458333,-5.694444!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-SouthCarolina [label = "SouthCarolina",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "7.194444,-9.916667!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Georgia [label = "Georgia",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "6.305556,-11.611111!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-SouthernMethodist [label = "SouthernMethodist",penwidth = "4.000000",height = "0.763889",width = "0.763889",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "4.472222,-5.611111!",fontname = "Bitstream Vera Sans Bold",fontsize = "13",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Marshall [label = "Marshall",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "12.069444,-3.236111!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Stanford [label = "Stanford",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "1.875000,-1.972222!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-WakeForest [label = "WakeForest",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "10.916667,-9.708333!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Arizona [label = "Arizona",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "2.402778,-0.000000!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-GeorgiaTech [label = "GeorgiaTech",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "9.958333,-10.194444!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Memphis [label = "Memphis",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "5.513889,-10.583333!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Nebraska [label = "Nebraska",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "2.513889,-4.791667!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-FresnoState [label = "FresnoState",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "4.263889,-1.875000!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Nevada [label = "Nevada",penwidth = "4.000000",height = "0.763889",width = "0.763889",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "2.402778,-2.972222!",fontname = "Bitstream Vera Sans Bold",fontsize = "13",fontcolor = "#FFFF00FF",fixedsize = "true"]
-AlabamaBirmingham [label = "AlabamaBirmingham",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "4.819444,-9.986111!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-MichiganState [label = "MichiganState",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "8.125000,-2.555556!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Baylor [label = "Baylor",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "2.263889,-6.027778!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Rutgers [label = "Rutgers",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "10.291667,-4.319444!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-PennState [label = "PennState",penwidth = "4.000000",height = "0.763889",width = "0.763889",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "7.930556,-1.833333!",fontname = "Bitstream Vera Sans Bold",fontsize = "13",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Rice [label = "Rice",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.722222,-4.097222!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-LouisianaTech [label = "LouisianaTech",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "6.361111,-5.958333!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Missouri [label = "Missouri",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "4.986111,-6.319444!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-NorthCarolinaState [label = "NorthCarolinaState",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "8.013889,-8.138889!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-EasternMichigan [label = "EasternMichigan",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "10.791667,-6.152778!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-MiamiOhio [label = "MiamiOhio",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "9.652778,-4.680556!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-MiamiFlorida [label = "MiamiFlorida",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "8.611111,-4.402778!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-OhioState [label = "OhioState",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "6.708333,-0.763889!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-SouthernMississippi [label = "SouthernMississippi",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "4.763889,-10.763889!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Cincinnati [label = "Cincinnati",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "6.791667,-7.305556!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Tulsa [label = "Tulsa",penwidth = "4.000000",height = "0.763889",width = "0.763889",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "5.180556,-5.000000!",fontname = "Bitstream Vera Sans Bold",fontsize = "13",fontcolor = "#FFFF00FF",fixedsize = "true"]
-TexasChristian [label = "TexasChristian",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "5.138889,-4.041667!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Mississippi [label = "Mississippi",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "3.958333,-10.208333!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Kentucky [label = "Kentucky",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "6.763889,-10.416667!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-NorthTexas [label = "NorthTexas",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "0.958333,-7.875000!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Duke [label = "Duke",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "10.500000,-8.208333!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Clemson [label = "Clemson",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "9.055556,-9.611111!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-NewMexico [label = "NewMexico",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "0.708333,-5.069444!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-BrighamYoung [label = "BrighamYoung",penwidth = "4.000000",height = "0.763889",width = "0.763889",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "4.430556,-6.791667!",fontname = "Bitstream Vera Sans Bold",fontsize = "13",fontcolor = "#FFFF00FF",fixedsize = "true"]
-VirginiaTech [label = "VirginiaTech",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "11.263889,-6.805556!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Texas [label = "Texas",penwidth = "4.000000",height = "0.625000",width = "0.625000",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "1.222222,-6.541667!",fontname = "Bitstream Vera Sans Bold",fontsize = "12",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Virginia [label = "Virginia",penwidth = "4.000000",height = "0.486111",width = "0.486111",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",pos = "9.291667,-8.958333!",fontname = "Bitstream Vera Sans Bold",fontsize = "8",fontcolor = "#FFFF00FF",fixedsize = "true"]
-Colorado -- KansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Maryland -- Duke [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthCarolina -- Florida [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OklahomaState -- Colorado [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cincinnati -- MiamiOhio [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arkansas -- LouisianaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Wyoming -- NewMexico [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Army -- NewMexicoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Florida -- FloridaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Colorado -- SouthernCalifornia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Indiana -- Iowa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Rutgers -- Syracuse [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MichiganState -- Michigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiOhio -- EasternMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-California -- WashingtonState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Ohio -- Minnesota [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WashingtonState -- SouthernCalifornia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-CentralMichigan -- BoiseState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Minnesota -- LouisianaMonroe [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AirForce -- SanDiegoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-BallState -- WesternMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NevadaLasVegas -- Mississippi [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arkansas -- Tennessee [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthernMississippi -- EastCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Rutgers -- WestVirginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasChristian -- TexasElPaso [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arizona -- SouthernCalifornia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Indiana -- Kentucky [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Rutgers -- NotreDame [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Florida -- Auburn [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthernCalifornia -- PennState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-UCLA -- Alabama [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Michigan -- Northwestern [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiOhio -- Akron [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaState -- Alabama [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-BowlingGreenState -- Akron [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-UtahState -- ArizonaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulane -- Navy [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Kent -- CentralMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasElPaso -- NewMexicoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-PennState -- Iowa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Ohio -- MiamiOhio [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Temple -- EasternMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Maryland -- MiddleTennesseeState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MississippiState -- Florida [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-California -- OregonState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Northwestern -- Iowa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-EasternMichigan -- NorthernIllinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arkansas -- Alabama [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-California -- Washington [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasChristian -- Northwestern [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Duke -- Virginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-UtahState -- NorthTexas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiOhio -- BallState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-IowaState -- Kansas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Vanderbilt -- Auburn [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaLafayette -- LouisianaMonroe [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Duke -- Northwestern [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiFlorida -- Temple [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marshall -- Ohio [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arkansas -- SouthCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WakeForest -- Virginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oregon -- Idaho [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MichiganState -- Marshall [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oregon -- Nevada [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Clemson -- NorthCarolinaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthernMethodist -- NorthCarolinaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaTech -- PennState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Clemson -- Virginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NotreDame -- "TexasA&M" [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthCarolina -- MississippiState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OklahomaState -- Oklahoma [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Texas -- TexasTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Baylor -- TexasTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Florida -- BallState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Army -- Louisville [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-ColoradoState -- NewMexico [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Texas -- Kansas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Temple -- BostonCollege [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NevadaLasVegas -- IowaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Illinois -- Minnesota [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nevada -- ColoradoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Temple -- WestVirginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tennessee -- LouisianaMonroe [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Mississippi -- Auburn [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Purdue -- Wisconsin [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Washington -- Idaho [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulsa -- NewMexicoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-UtahState -- BrighamYoung [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MississippiState -- Auburn [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Purdue -- PennState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NewMexicoState -- ArkansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marshall -- Buffalo [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-GeorgiaTech -- Virginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Rutgers -- Temple [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OhioState -- Iowa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Illinois -- Northwestern [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Vanderbilt -- Alabama [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Pittsburgh -- BowlingGreenState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MichiganState -- Purdue [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Texas -- Colorado [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Stanford -- ArizonaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-UCLA -- ArizonaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Minnesota -- Northwestern [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OklahomaState -- Texas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Duke -- GeorgiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Texas -- Houston [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-UtahState -- TexasTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Akron -- NorthernIllinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WakeForest -- Clemson [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AlabamaBirmingham -- EastCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Pittsburgh -- Kent [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Missouri -- Kansas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Louisville -- EastCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Indiana -- Northwestern [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Texas -- Stanford [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaState -- Mississippi [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AlabamaBirmingham -- Memphis [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NevadaLasVegas -- BrighamYoung [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-ColoradoState -- Wyoming [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-CentralFlorida -- NorthernIllinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nebraska -- SanJoseState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-BallState -- KansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthernMississippi -- Memphis [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NorthTexas -- Baylor [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasChristian -- Navy [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Clemson -- GeorgiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arizona -- ArizonaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-"TexasA&M" -- Wyoming [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulsa -- TexasElPaso [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthernMississippi -- Houston [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaState -- Tennessee [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Maryland -- WestVirginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Kent -- BowlingGreenState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulane -- Louisville [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-"TexasA&M" -- Baylor [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulane -- Memphis [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaState -- Kentucky [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NorthCarolinaState -- ArkansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WakeForest -- Vanderbilt [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Indiana -- PennState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulsa -- LouisianaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NotreDame -- Purdue [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasElPaso -- "TexasA&M" [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AirForce -- ColoradoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NewMexicoState -- Idaho [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Army -- EastCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Missouri -- Nebraska [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Ohio -- Akron [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Missouri -- IowaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-CentralMichigan -- NorthernIllinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Washington -- Arizona [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oklahoma -- ArkansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-"TexasA&M" -- KansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NevadaLasVegas -- Utah [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-UtahState -- NewMexicoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Maryland -- NorthCarolinaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arkansas -- Georgia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Buffalo -- BallState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Navy -- BostonCollege [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaState -- Florida [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Northwestern -- NorthernIllinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiFlorida -- Pittsburgh [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-"TexasA&M" -- TexasTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SanJoseState -- FresnoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WesternMichigan -- NorthernIllinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SanJoseState -- Rice [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Rutgers -- Pittsburgh [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Kent -- Buffalo [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AirForce -- Navy [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cincinnati -- Tulane [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Georgia -- Auburn [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Georgia -- Mississippi [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arizona -- SanDiegoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Michigan -- BowlingGreenState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OhioState -- FresnoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-EasternMichigan -- BallState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasChristian -- ArkansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tennessee -- Alabama [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Memphis -- MississippiState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaMonroe -- LouisianaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulsa -- SanJoseState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AirForce -- NotreDame [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Vanderbilt -- Florida [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaLafayette -- NorthTexas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NevadaLasVegas -- ColoradoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthernMethodist -- Kansas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nevada -- Rice [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Idaho -- BoiseState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Buffalo -- BowlingGreenState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulsa -- Rice [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NevadaLasVegas -- SanDiegoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthernMississippi -- Louisville [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MichiganState -- Illinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-VirginiaTech -- Akron [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cincinnati -- Houston [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-ColoradoState -- SanDiegoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Memphis -- ArkansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-ArkansasState -- NorthTexas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Syracuse -- BostonCollege [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Clemson -- Duke [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WashingtonState -- Oregon [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NotreDame -- Nebraska [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-UtahState -- ArkansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Indiana -- Cincinnati [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Hawaii -- FresnoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasElPaso -- FresnoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaTech -- Auburn [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WashingtonState -- Stanford [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-EasternMichigan -- WesternMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OhioState -- Michigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nebraska -- Iowa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Purdue -- Michigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AlabamaBirmingham -- Louisville [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Rutgers -- BostonCollege [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Temple -- Syracuse [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-"TexasA&M" -- IowaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oregon -- UCLA [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Maryland -- GeorgiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthCarolina -- EasternMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-California -- Oregon [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthCarolina -- NewMexicoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasChristian -- Nevada [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-"TexasA&M" -- Colorado [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OregonState -- SanDiegoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Temple -- BowlingGreenState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Clemson -- SouthCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marshall -- NorthCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-ColoradoState -- ArizonaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-CentralMichigan -- WesternMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-UtahState -- Utah [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Pittsburgh -- WestVirginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaTech -- CentralFlorida [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WestVirginia -- BostonCollege [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nevada -- FresnoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasChristian -- SouthernMethodist [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NewMexicoState -- BoiseState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Mississippi -- MississippiState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaMonroe -- CentralFlorida [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cincinnati -- Memphis [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Missouri -- Colorado [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OklahomaState -- Missouri [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasTech -- NewMexico [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulsa -- SouthernMethodist [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-UtahState -- Idaho [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MississippiState -- BrighamYoung [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NotreDame -- Stanford [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tennessee -- SouthernMississippi [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SanJoseState -- SouthernMethodist [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marshall -- Toledo [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Buffalo -- Akron [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Louisville -- FloridaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Indiana -- Minnesota [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OregonState -- SouthernCalifornia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthernMethodist -- Houston [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiOhio -- OhioState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oregon -- Washington [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasChristian -- SanJoseState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Illinois -- SanDiegoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Indiana -- Illinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OklahomaState -- "TexasA&M" [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Alabama -- Auburn [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oklahoma -- Nebraska [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-CentralMichigan -- Akron [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Minnesota -- Purdue [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NorthCarolina -- FloridaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OklahomaState -- TexasTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Pittsburgh -- PennState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Vanderbilt -- Duke [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Maryland -- Temple [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Missouri -- Texas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Kent -- WesternMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Toledo -- CentralMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WakeForest -- NorthCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NorthTexas -- KansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Utah -- Arizona [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Connecticut -- Buffalo [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaState -- Auburn [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasElPaso -- SanJoseState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Mississippi -- ArkansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AirForce -- Wyoming [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Washington -- ArizonaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Wisconsin -- Iowa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-California -- FresnoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-IowaState -- Baylor [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasTech -- KansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Army -- Tulane [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Louisville -- Houston [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-IowaState -- Colorado [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Rice -- Michigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Idaho -- ArkansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nevada -- Wyoming [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AlabamaBirmingham -- MiddleTennesseeState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Stanford -- UCLA [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-California -- Illinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Utah -- Wyoming [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Memphis -- EastCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NotreDame -- SouthernCalifornia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Hawaii -- Wisconsin [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AirForce -- BrighamYoung [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Hawaii -- TexasChristian [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NorthTexas -- TexasTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Texas -- LouisianaLafayette [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NorthCarolina -- GeorgiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-CentralMichigan -- Wyoming [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Temple -- VirginiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Toledo -- EasternMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marshall -- WesternMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaLafayette -- Tulane [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Houston -- EastCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Toledo -- WesternMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Connecticut -- Akron [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OregonState -- Washington [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-EasternMichigan -- CentralFlorida [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiFlorida -- FloridaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OklahomaState -- Baylor [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NotreDame -- Navy [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WashingtonState -- Washington [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oregon -- ArizonaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arkansas -- LouisianaMonroe [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MississippiState -- MiddleTennesseeState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marshall -- Kent [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Hawaii -- Rice [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Clemson -- NorthCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MichiganState -- Iowa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasChristian -- Rice [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OregonState -- Stanford [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Maryland -- Clemson [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-BallState -- NorthernIllinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tennessee -- Kentucky [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OklahomaState -- SouthernMississippi [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-IowaState -- KansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OregonState -- UCLA [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WashingtonState -- ArizonaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SanDiegoState -- BrighamYoung [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OhioState -- Purdue [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Purdue -- CentralMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nevada -- SouthernMethodist [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Missouri -- MichiganState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Army -- Memphis [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NevadaLasVegas -- Wyoming [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-FresnoState -- UCLA [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Duke -- EastCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Indiana -- Wisconsin [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AlabamaBirmingham -- Army [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-ColoradoState -- Utah [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oklahoma -- Baylor [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WakeForest -- Navy [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oregon -- Arizona [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Rutgers -- Buffalo [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Hawaii -- Nevada [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaTech -- KansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SanDiegoState -- NewMexico [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nebraska -- Kansas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NewMexico -- BrighamYoung [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Wisconsin -- WesternMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OhioState -- PennState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Auburn -- NorthernIllinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OklahomaState -- IowaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AlabamaBirmingham -- Kansas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Army -- BostonCollege [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nebraska -- IowaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasElPaso -- SouthernMethodist [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arkansas -- BoiseState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cincinnati -- Louisville [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oklahoma -- Rice [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Memphis -- Houston [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NewMexicoState -- NorthTexas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WesternMichigan -- Iowa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiddleTennesseeState -- LouisianaMonroe [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OregonState -- WashingtonState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Georgia -- Florida [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-CentralFlorida -- Alabama [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Ohio -- Kent [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WakeForest -- NorthCarolinaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Stanford -- SanJoseState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Pittsburgh -- VirginiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AlabamaBirmingham -- Cincinnati [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Maryland -- FloridaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Navy -- GeorgiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Missouri -- KansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-UtahState -- BoiseState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulane -- Houston [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Clemson -- FloridaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Illinois -- OhioState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WestVirginia -- VirginiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NotreDame -- WestVirginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Army -- Houston [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-EastCarolina -- WestVirginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaLafayette -- MiddleTennesseeState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthernMississippi -- Alabama [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulane -- SouthernMethodist [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nebraska -- Colorado [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marshall -- BowlingGreenState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Utah -- NewMexico [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Ohio -- BowlingGreenState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Temple -- Pittsburgh [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-FloridaState -- BrighamYoung [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Navy -- Temple [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Mississippi -- Vanderbilt [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Illinois -- Iowa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nebraska -- KansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oklahoma -- TexasElPaso [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Texas -- Oklahoma [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NevadaLasVegas -- Nevada [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Duke -- FloridaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-GeorgiaTech -- NorthCarolinaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oklahoma -- Kansas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Utah -- BrighamYoung [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Virginia -- NorthCarolinaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Georgia -- SouthCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-BoiseState -- ArkansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasElPaso -- Rice [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-EasternMichigan -- Connecticut [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MississippiState -- Alabama [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NorthCarolina -- NorthCarolinaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulane -- EastCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-EastCarolina -- Syracuse [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-California -- ArizonaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Georgia -- NewMexicoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-BostonCollege -- VirginiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Missouri -- Baylor [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cincinnati -- Syracuse [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-ArizonaState -- SouthernCalifornia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Kent -- Akron [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-California -- Stanford [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MichiganState -- Northwestern [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Virginia -- VirginiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Connecticut -- BallState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OregonState -- NewMexico [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Hawaii -- SouthernMethodist [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SanJoseState -- Nevada [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NorthCarolina -- Virginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasChristian -- Tulsa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Texas -- Baylor [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NorthCarolina -- Tulsa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AirForce -- Utah [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NewMexicoState -- NewMexico [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WakeForest -- FloridaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiFlorida -- LouisianaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Wyoming -- SanDiegoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NotreDame -- BostonCollege [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OklahomaState -- Tulsa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arizona -- UCLA [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oregon -- Wisconsin [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oklahoma -- TexasTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NevadaLasVegas -- NorthTexas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WashingtonState -- Idaho [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Minnesota -- Iowa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Ohio -- CentralMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cincinnati -- Army [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulsa -- FresnoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OhioState -- Arizona [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AlabamaBirmingham -- SouthernMississippi [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaState -- MississippiState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Toledo -- Navy [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NevadaLasVegas -- AirForce [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Michigan -- PennState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Minnesota -- Wisconsin [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arkansas -- Mississippi [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Mississippi -- Alabama [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Georgia -- Tennessee [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-GeorgiaTech -- FloridaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaLafayette -- LouisianaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-EasternMichigan -- BowlingGreenState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tennessee -- SouthCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Memphis -- LouisianaMonroe [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-UCLA -- SouthernCalifornia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MichiganState -- OhioState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Syracuse -- VirginiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Indiana -- Purdue [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiFlorida -- VirginiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Clemson -- Missouri [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Louisville -- Kentucky [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OregonState -- Arizona [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-ColoradoState -- BrighamYoung [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiOhio -- Kent [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MichiganState -- PennState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Mississippi -- Kentucky [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Syracuse -- WestVirginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Georgia -- Vanderbilt [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Rice -- FresnoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oregon -- SouthernCalifornia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-California -- UCLA [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Georgia -- Kentucky [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Washington -- UCLA [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Washington -- Colorado [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-CentralFlorida -- VirginiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiddleTennesseeState -- LouisianaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WakeForest -- GeorgiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-ColoradoState -- Colorado [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marshall -- Akron [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Stanford -- Washington [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Kansas -- Colorado [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Rutgers -- Navy [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Vanderbilt -- Kentucky [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Stanford -- Arizona [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiddleTennesseeState -- Florida [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Texas -- "TexasA&M" [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Wyoming -- BrighamYoung [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthCarolina -- Kentucky [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NevadaLasVegas -- NewMexico [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OregonState -- Oregon [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthCarolina -- Vanderbilt [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Toledo -- NorthernIllinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Virginia -- BrighamYoung [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WashingtonState -- Utah [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-IowaState -- Iowa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Idaho -- NorthTexas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SanDiegoState -- ArizonaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Minnesota -- OhioState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Hawaii -- SanJoseState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OhioState -- Wisconsin [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-GeorgiaTech -- CentralFlorida [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthernMethodist -- Rice [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Kent -- Purdue [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Vanderbilt -- MiamiOhio [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-CentralFlorida -- Akron [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-EasternMichigan -- CentralMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tennessee -- Vanderbilt [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Toledo -- BallState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Army -- Navy [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiFlorida -- Washington [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Hawaii -- LouisianaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-California -- SouthernCalifornia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Illinois -- MiddleTennesseeState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-BoiseState -- NorthTexas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiFlorida -- Syracuse [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasChristian -- FresnoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MichiganState -- NotreDame [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-California -- Utah [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Duke -- NorthCarolinaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AirForce -- Army [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Stanford -- SouthernCalifornia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Virginia -- FloridaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Minnesota -- PennState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-IowaState -- Ohio [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nebraska -- TexasTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiFlorida -- BostonCollege [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Ohio -- Buffalo [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MichiganState -- Wisconsin [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AlabamaBirmingham -- LouisianaLafayette [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Syracuse -- Buffalo [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arkansas -- Auburn [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Hawaii -- Tulsa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Michigan -- UCLA [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Pittsburgh -- BostonCollege [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthernMethodist -- FresnoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AlabamaBirmingham -- LouisianaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Wisconsin -- Northwestern [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MississippiState -- Kentucky [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiFlorida -- Rutgers [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Nebraska -- Baylor [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NorthCarolina -- Pittsburgh [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaState -- Houston [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oklahoma -- KansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Connecticut -- BostonCollege [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Kansas -- TexasTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Kentucky -- Florida [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Maryland -- Virginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Buffalo -- NorthernIllinois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marshall -- MiamiOhio [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cincinnati -- Wisconsin [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-CentralMichigan -- BallState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Indiana -- Michigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tennessee -- Memphis [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Toledo -- PennState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-AirForce -- NewMexico [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Purdue -- Northwestern [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiOhio -- Buffalo [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Oklahoma -- "TexasA&M" [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Kansas -- KansasState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SouthCarolina -- Alabama [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Rutgers -- VirginiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cincinnati -- SouthernMississippi [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LouisianaLafayette -- TexasTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WakeForest -- Duke [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-KansasState -- Iowa [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tennessee -- Florida [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Toledo -- BowlingGreenState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-EastCarolina -- VirginiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Maryland -- WakeForest [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Michigan -- Wisconsin [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Indiana -- NorthCarolinaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Auburn -- Wyoming [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Georgia -- GeorgiaTech [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Hawaii -- TexasElPaso [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Minnesota -- Baylor [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NorthCarolina -- Duke [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Illinois -- PennState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Maryland -- NorthCarolina [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Syracuse -- BrighamYoung [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Utah -- SanDiegoState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Hawaii -- NevadaLasVegas [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Idaho -- WestVirginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulane -- SouthernMississippi [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-SanJoseState -- SouthernCalifornia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiddleTennesseeState -- Connecticut [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Ohio -- WesternMichigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-TexasElPaso -- Nevada [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiFlorida -- WestVirginia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WashingtonState -- Arizona [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MiamiOhio -- BowlingGreenState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Tulsa -- Nevada [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Mississippi -- Tulane [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Arkansas -- MississippiState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Pittsburgh -- Syracuse [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Rice -- Houston [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Louisville -- Connecticut [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-WashingtonState -- BoiseState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-NorthCarolinaState -- FloridaState [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-BoiseState -- NewMexico [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Illinois -- Michigan [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
+esep = "0"
+pad = "2"
+node [label = "",penwidth = "4.000000",height = "0.694444",width = "0.694444",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",fontname = "Bitstream Vera Sans Bold",fontsize = "14",fontcolor = "#FFFF00FF",fixedsize = "true",labelloc = "c"]
+edge [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",style = "solid",dir = "both"]
+Buffalo [label = "Buffalo",height = "0.625000",width = "0.625000",pos = "883.000000,-341.000000",fontsize = "12"]
+Washington [label = "Washington",height = "0.625000",width = "0.625000",pos = "275.000000,-108.000000",fontsize = "12"]
+SouthCarolina [label = "SouthCarolina",height = "0.625000",width = "0.625000",pos = "518.000000,-714.000000",fontsize = "12"]
+OregonState [label = "OregonState",height = "0.486111",width = "0.486111",pos = "58.000000,-61.000000",fontsize = "8"]
+Tulane [label = "Tulane",height = "0.625000",width = "0.625000",pos = "403.000000,-673.000000",fontsize = "12"]
+BowlingGreenState [label = "BowlingGreenState",height = "0.625000",width = "0.625000",pos = "833.000000,-193.000000",fontsize = "12"]
+LouisianaMonroe [label = "LouisianaMonroe",height = "0.208333",width = "0.208333",pos = "439.000000,-619.000000",fontsize = "6"]
+Ohio [label = "Ohio",height = "0.486111",width = "0.486111",pos = "672.000000,-207.000000",fontsize = "8"]
+AirForce [label = "AirForce",height = "0.486111",width = "0.486111",pos = "267.000000,-377.000000",fontsize = "8"]
+LouisianaTech [label = "LouisianaTech",height = "0.486111",width = "0.486111",pos = "458.000000,-429.000000",fontsize = "8"]
+MiddleTennesseeState [label = "MiddleTennesseeState",height = "0.347222",width = "0.347222",pos = "518.000000,-575.000000",fontsize = "7"]
+WestVirginia [label = "WestVirginia",height = "0.625000",width = "0.625000",pos = "609.000000,-410.000000",fontsize = "12"]
+Colorado [label = "Colorado",height = "0.625000",width = "0.625000",pos = "131.000000,-300.000000",fontsize = "12"]
+Kansas [label = "Kansas",height = "0.486111",width = "0.486111",pos = "140.000000,-529.000000",fontsize = "8"]
+Marshall [label = "Marshall",height = "0.486111",width = "0.486111",pos = "869.000000,-233.000000",fontsize = "8"]
+NorthCarolinaState [label = "NorthCarolinaState",height = "0.625000",width = "0.625000",pos = "577.000000,-586.000000",fontsize = "12"]
+Clemson [label = "Clemson",height = "0.486111",width = "0.486111",pos = "652.000000,-692.000000",fontsize = "8"]
+BoiseState [label = "BoiseState",height = "0.347222",width = "0.347222",pos = "218.000000,-457.000000",fontsize = "7"]
+Missouri [label = "Missouri",height = "0.486111",width = "0.486111",pos = "359.000000,-455.000000",fontsize = "8"]
+Pittsburgh [label = "Pittsburgh",height = "0.625000",width = "0.625000",pos = "810.000000,-293.000000",fontsize = "12"]
+BrighamYoung [label = "BrighamYoung",height = "0.763889",width = "0.763889",pos = "319.000000,-489.000000",fontsize = "13"]
+Rice [label = "Rice",height = "0.625000",width = "0.625000",pos = "268.000000,-295.000000",fontsize = "12"]
+Mississippi [label = "Mississippi",height = "0.625000",width = "0.625000",pos = "285.000000,-735.000000",fontsize = "12"]
+WesternMichigan [label = "WesternMichigan",height = "0.486111",width = "0.486111",pos = "722.000000,-211.000000",fontsize = "8"]
+Kent [label = "Kent",height = "0.486111",width = "0.486111",pos = "819.000000,-146.000000",fontsize = "8"]
+California [label = "California",height = "0.625000",width = "0.625000",pos = "149.000000,-32.000000",fontsize = "12"]
+ColoradoState [label = "ColoradoState",height = "0.486111",width = "0.486111",pos = "34.000000,-318.000000",fontsize = "8"]
+TexasTech [label = "TexasTech",height = "0.763889",width = "0.763889",pos = "0.000000,-532.000000",fontsize = "13"]
+Akron [label = "Akron",height = "0.625000",width = "0.625000",pos = "845.000000,-347.000000",fontsize = "12"]
+TexasChristian [label = "TexasChristian",height = "0.625000",width = "0.625000",pos = "370.000000,-291.000000",fontsize = "12"]
+Navy [label = "Navy",height = "0.625000",width = "0.625000",pos = "586.000000,-471.000000",fontsize = "12"]
+ArizonaState [label = "ArizonaState",height = "0.625000",width = "0.625000",pos = "40.000000,-113.000000",fontsize = "12"]
+NewMexico [label = "NewMexico",height = "0.625000",width = "0.625000",pos = "51.000000,-365.000000",fontsize = "12"]
+ArkansasState [label = "ArkansasState",height = "0.486111",width = "0.486111",pos = "254.000000,-551.000000",fontsize = "8"]
+Northwestern [label = "Northwestern",height = "0.625000",width = "0.625000",pos = "621.000000,-265.000000",fontsize = "12"]
+Rutgers [label = "Rutgers",height = "0.486111",width = "0.486111",pos = "741.000000,-311.000000",fontsize = "8"]
+FloridaState [label = "FloridaState",height = "0.763889",width = "0.763889",pos = "639.000000,-617.000000",fontsize = "13"]
+Vanderbilt [label = "Vanderbilt",height = "0.625000",width = "0.625000",pos = "593.000000,-705.000000",fontsize = "12"]
+SouthernCalifornia [label = "SouthernCalifornia",height = "0.763889",width = "0.763889",pos = "261.000000,-35.000000",fontsize = "13"]
+NorthernIllinois [label = "NorthernIllinois",height = "0.486111",width = "0.486111",pos = "737.000000,-429.000000",fontsize = "8"]
+Toledo [label = "Toledo",height = "0.347222",width = "0.347222",pos = "769.000000,-264.000000",fontsize = "7"]
+Oregon [label = "Oregon",height = "0.625000",width = "0.625000",pos = "211.000000,-44.000000",fontsize = "12"]
+Stanford [label = "Stanford",height = "0.625000",width = "0.625000",pos = "135.000000,-142.000000",fontsize = "12"]
+Utah [label = "Utah",height = "0.625000",width = "0.625000",pos = "76.000000,-251.000000",fontsize = "12"]
+Connecticut [label = "Connecticut",pos = "790.000000,-563.000000"]
+Texas [label = "Texas",height = "0.625000",width = "0.625000",pos = "88.000000,-471.000000",fontsize = "12"]
+Georgia [label = "Georgia",height = "0.486111",width = "0.486111",pos = "454.000000,-836.000000",fontsize = "8"]
+EasternMichigan [label = "EasternMichigan",height = "0.625000",width = "0.625000",pos = "777.000000,-443.000000",fontsize = "12"]
+SouthernMethodist [label = "SouthernMethodist",height = "0.763889",width = "0.763889",pos = "322.000000,-404.000000",fontsize = "13"]
+Oklahoma [label = "Oklahoma",height = "0.625000",width = "0.625000",pos = "32.000000,-462.000000",fontsize = "12"]
+Syracuse [label = "Syracuse",height = "0.625000",width = "0.625000",pos = "676.000000,-459.000000",fontsize = "12"]
+Cincinnati [label = "Cincinnati",height = "0.625000",width = "0.625000",pos = "489.000000,-526.000000",fontsize = "12"]
+Temple [label = "Temple",height = "0.625000",width = "0.625000",pos = "845.000000,-413.000000",fontsize = "12"]
+PennState [label = "PennState",height = "0.763889",width = "0.763889",pos = "571.000000,-132.000000",fontsize = "13"]
+VirginiaTech [label = "VirginiaTech",height = "0.625000",width = "0.625000",pos = "811.000000,-490.000000",fontsize = "12"]
+Maryland [label = "Maryland",height = "0.625000",width = "0.625000",pos = "792.000000,-628.000000",fontsize = "12"]
+Hawaii [label = "Hawaii",height = "0.625000",width = "0.625000",pos = "295.000000,-233.000000",fontsize = "12"]
+WashingtonState [label = "WashingtonState",height = "0.625000",width = "0.625000",pos = "84.000000,-148.000000",fontsize = "12"]
+OhioState [label = "OhioState",height = "0.625000",width = "0.625000",pos = "483.000000,-55.000000",fontsize = "12"]
+SouthernMississippi [label = "SouthernMississippi",height = "0.486111",width = "0.486111",pos = "343.000000,-775.000000",fontsize = "8"]
+Wyoming [label = "Wyoming",height = "0.625000",width = "0.625000",pos = "242.000000,-400.000000",fontsize = "12"]
+Memphis [label = "Memphis",height = "0.625000",width = "0.625000",pos = "397.000000,-762.000000",fontsize = "12"]
+Illinois [label = "Illinois",height = "0.625000",width = "0.625000",pos = "407.000000,-205.000000",fontsize = "12"]
+Kentucky [label = "Kentucky",height = "0.486111",width = "0.486111",pos = "487.000000,-750.000000",fontsize = "8"]
+"TexasA&M" [label = "TexasA&M",height = "0.625000",width = "0.625000",pos = "111.000000,-368.000000",fontsize = "12"]
+NorthTexas [label = "NorthTexas",height = "0.486111",width = "0.486111",pos = "69.000000,-567.000000",fontsize = "8"]
+Houston [label = "Houston",height = "0.625000",width = "0.625000",pos = "318.000000,-627.000000",fontsize = "12"]
+NotreDame [label = "NotreDame",height = "0.625000",width = "0.625000",pos = "425.000000,-257.000000",fontsize = "12"]
+TexasElPaso [label = "TexasElPaso",height = "0.625000",width = "0.625000",pos = "172.000000,-303.000000",fontsize = "12"]
+Florida [label = "Florida",height = "0.625000",width = "0.625000",pos = "586.000000,-803.000000",fontsize = "12"]
+CentralFlorida [label = "CentralFlorida",height = "0.208333",width = "0.208333",pos = "661.000000,-554.000000",fontsize = "6"]
+Louisville [label = "Louisville",height = "0.486111",width = "0.486111",pos = "549.000000,-757.000000",fontsize = "8"]
+Wisconsin [label = "Wisconsin",height = "0.763889",width = "0.763889",pos = "489.000000,-164.000000",fontsize = "13"]
+NewMexicoState [label = "NewMexicoState",height = "0.625000",width = "0.625000",pos = "236.000000,-578.000000",fontsize = "12"]
+FresnoState [label = "FresnoState",height = "0.625000",width = "0.625000",pos = "307.000000,-135.000000",fontsize = "12"]
+MiamiOhio [label = "MiamiOhio",height = "0.625000",width = "0.625000",pos = "695.000000,-337.000000",fontsize = "12"]
+Army [label = "Army",height = "0.625000",width = "0.625000",pos = "448.000000,-577.000000",fontsize = "12"]
+Iowa [label = "Iowa",height = "0.763889",width = "0.763889",pos = "447.000000,-192.000000",fontsize = "13"]
+LouisianaState [label = "LouisianaState",height = "0.486111",width = "0.486111",pos = "365.000000,-876.000000",fontsize = "8"]
+GeorgiaTech [label = "GeorgiaTech",height = "0.625000",width = "0.625000",pos = "717.000000,-734.000000",fontsize = "12"]
+Auburn [label = "Auburn",height = "0.625000",width = "0.625000",pos = "463.000000,-659.000000",fontsize = "12"]
+CentralMichigan [label = "CentralMichigan",height = "0.625000",width = "0.625000",pos = "573.000000,-309.000000",fontsize = "12"]
+Tulsa [label = "Tulsa",height = "0.763889",width = "0.763889",pos = "373.000000,-360.000000",fontsize = "13"]
+WakeForest [label = "WakeForest",height = "0.486111",width = "0.486111",pos = "786.000000,-699.000000",fontsize = "8"]
+Arkansas [label = "Arkansas",height = "0.486111",width = "0.486111",pos = "290.000000,-788.000000",fontsize = "8"]
+KansasState [label = "KansasState",height = "0.763889",width = "0.763889",pos = "269.000000,-452.000000",fontsize = "13"]
+MichiganState [label = "MichiganState",height = "0.625000",width = "0.625000",pos = "585.000000,-184.000000",fontsize = "12"]
+Duke [label = "Duke",height = "0.625000",width = "0.625000",pos = "756.000000,-591.000000",fontsize = "12"]
+Michigan [label = "Michigan",height = "0.625000",width = "0.625000",pos = "522.000000,-114.000000",fontsize = "12"]
+UtahState [label = "UtahState",height = "0.347222",width = "0.347222",pos = "41.000000,-416.000000",fontsize = "7"]
+Nebraska [label = "Nebraska",height = "0.625000",width = "0.625000",pos = "181.000000,-345.000000",fontsize = "12"]
+BallState [label = "BallState",height = "0.486111",width = "0.486111",pos = "641.000000,-468.000000",fontsize = "8"]
+LouisianaLafayette [label = "LouisianaLafayette",height = "0.208333",width = "0.208333",pos = "240.000000,-627.000000",fontsize = "6"]
+NorthCarolina [label = "NorthCarolina",height = "0.625000",width = "0.625000",pos = "727.000000,-502.000000",fontsize = "12"]
+SanDiegoState [label = "SanDiegoState",height = "0.625000",width = "0.625000",pos = "130.000000,-232.000000",fontsize = "12"]
+OklahomaState [label = "OklahomaState",height = "0.486111",width = "0.486111",pos = "169.000000,-543.000000",fontsize = "8"]
+Virginia [label = "Virginia",height = "0.486111",width = "0.486111",pos = "669.000000,-645.000000",fontsize = "8"]
+MiamiFlorida [label = "MiamiFlorida",height = "0.486111",width = "0.486111",pos = "620.000000,-317.000000",fontsize = "8"]
+Baylor [label = "Baylor",height = "0.486111",width = "0.486111",pos = "163.000000,-434.000000",fontsize = "8"]
+IowaState [label = "IowaState",height = "0.625000",width = "0.625000",pos = "315.000000,-333.000000",fontsize = "12"]
+MississippiState [label = "MississippiState",height = "0.625000",width = "0.625000",pos = "397.000000,-801.000000",fontsize = "12"]
+Alabama [label = "Alabama",height = "0.625000",width = "0.625000",pos = "378.000000,-618.000000",fontsize = "12"]
+Tennessee [label = "Tennessee",height = "0.625000",width = "0.625000",pos = "457.000000,-882.000000",fontsize = "12"]
+SanJoseState [label = "SanJoseState",height = "0.625000",width = "0.625000",pos = "221.000000,-165.000000",fontsize = "12"]
+UCLA [label = "UCLA",height = "0.625000",width = "0.625000",pos = "255.000000,-200.000000",fontsize = "12"]
+AlabamaBirmingham [label = "AlabamaBirmingham",height = "0.486111",width = "0.486111",pos = "347.000000,-719.000000",fontsize = "8"]
+EastCarolina [label = "EastCarolina",height = "0.625000",width = "0.625000",pos = "566.000000,-659.000000",fontsize = "12"]
+NevadaLasVegas [label = "NevadaLasVegas",height = "0.763889",width = "0.763889",pos = "118.000000,-437.000000",fontsize = "13"]
+Purdue [label = "Purdue",height = "0.625000",width = "0.625000",pos = "622.000000,-104.000000",fontsize = "12"]
+Idaho [label = "Idaho",height = "0.347222",width = "0.347222",pos = "237.000000,-332.000000",fontsize = "7"]
+Arizona [label = "Arizona",height = "0.625000",width = "0.625000",pos = "173.000000,-0.000000",fontsize = "12"]
+Minnesota [label = "Minnesota",height = "0.625000",width = "0.625000",pos = "470.000000,-287.000000",fontsize = "12"]
+Indiana [label = "Indiana",height = "0.625000",width = "0.625000",pos = "535.000000,-359.000000",fontsize = "12"]
+BostonCollege [label = "BostonCollege",height = "0.625000",width = "0.625000",pos = "684.000000,-396.000000",fontsize = "12"]
+Nevada [label = "Nevada",height = "0.763889",width = "0.763889",pos = "173.000000,-214.000000",fontsize = "13"]
+California -- UCLA 
+Washington -- Arizona 
+Wisconsin -- Northwestern 
+Army -- Memphis 
+SouthernMississippi -- Houston 
+Pittsburgh -- Syracuse 
+"TexasA&M" -- Baylor 
+Arizona -- SouthernCalifornia 
+OklahomaState -- Tulsa 
+WashingtonState -- SouthernCalifornia 
+Minnesota -- Wisconsin 
+Tulsa -- Nevada 
+CentralFlorida -- Alabama 
+Louisville -- EastCarolina 
+IowaState -- Ohio 
+WesternMichigan -- NorthernIllinois 
+OregonState -- Stanford 
+Minnesota -- LouisianaMonroe 
+SouthCarolina -- MississippiState 
+Mississippi -- ArkansasState 
+SouthCarolina -- Vanderbilt 
+WashingtonState -- Utah 
+LouisianaLafayette -- LouisianaTech 
+Virginia -- BrighamYoung 
+LouisianaTech -- KansasState 
+Memphis -- Houston 
+Missouri -- KansasState 
+Indiana -- Cincinnati 
+LouisianaMonroe -- CentralFlorida 
+Rutgers -- Navy 
+Arkansas -- Tennessee 
+IowaState -- Baylor 
+NewMexicoState -- NewMexico 
+TexasChristian -- TexasElPaso 
+AirForce -- SanDiegoState 
+Maryland -- Temple 
+Utah -- BrighamYoung 
+LouisianaLafayette -- NorthTexas 
+NorthTexas -- TexasTech 
+Indiana -- Kentucky 
+NorthTexas -- KansasState 
+Rutgers -- Pittsburgh 
+Cincinnati -- Tulane 
+EasternMichigan -- BallState 
+WakeForest -- Vanderbilt 
+FloridaState -- BrighamYoung 
+Maryland -- Duke 
+Minnesota -- Baylor 
+Rice -- Michigan 
+MississippiState -- BrighamYoung 
+Buffalo -- NorthernIllinois 
+Louisville -- Kentucky 
+NotreDame -- Purdue 
+ArkansasState -- NorthTexas 
+LouisianaState -- Kentucky 
+California -- SouthernCalifornia 
+Wyoming -- BrighamYoung 
+Maryland -- NorthCarolinaState 
+Rutgers -- NotreDame 
+Arizona -- UCLA 
+OregonState -- Washington 
+Temple -- BowlingGreenState 
+Rutgers -- BostonCollege 
+Maryland -- WakeForest 
+LouisianaTech -- Auburn 
+Texas -- "TexasA&M" 
+Vanderbilt -- Florida 
+SouthernMississippi -- EastCarolina 
+PennState -- Iowa 
+TexasChristian -- SanJoseState 
+MichiganState -- Northwestern 
+TexasElPaso -- SanJoseState 
+ColoradoState -- Wyoming 
+Duke -- Virginia 
+Nebraska -- Colorado 
+NorthCarolinaState -- FloridaState 
+LouisianaState -- Auburn 
+Marshall -- MiamiOhio 
+WesternMichigan -- Iowa 
+"TexasA&M" -- TexasTech 
+Mississippi -- Kentucky 
+ColoradoState -- BrighamYoung 
+BallState -- WesternMichigan 
+Oregon -- ArizonaState 
+Mississippi -- Auburn 
+MichiganState -- Michigan 
+BoiseState -- ArkansasState 
+Tennessee -- SouthernMississippi 
+TexasChristian -- Rice 
+MichiganState -- Purdue 
+Oregon -- Nevada 
+LouisianaState -- Florida 
+Idaho -- WestVirginia 
+Idaho -- NorthTexas 
+NorthCarolinaState -- ArkansasState 
+Vanderbilt -- Auburn 
+Cincinnati -- Army 
+OhioState -- PennState 
+SouthernMississippi -- Louisville 
+Marshall -- Akron 
+Colorado -- SouthernCalifornia 
+Purdue -- CentralMichigan 
+EasternMichigan -- NorthernIllinois 
+Oklahoma -- "TexasA&M" 
+OklahomaState -- Colorado 
+Tulane -- SouthernMississippi 
+Kent -- Buffalo 
+NotreDame -- Stanford 
+Vanderbilt -- Duke 
+AirForce -- Wyoming 
+Duke -- NorthCarolinaState 
+Navy -- GeorgiaTech 
+Clemson -- NorthCarolinaState 
+Stanford -- SanJoseState 
+Ohio -- BowlingGreenState 
+"TexasA&M" -- KansasState 
+Maryland -- Clemson 
+SouthernMethodist -- NorthCarolinaState 
+MississippiState -- MiddleTennesseeState 
+Hawaii -- Tulsa 
+Clemson -- GeorgiaTech 
+OhioState -- Purdue 
+California -- OregonState 
+Toledo -- Navy 
+OklahomaState -- Texas 
+Wyoming -- SanDiegoState 
+LouisianaState -- MississippiState 
+MiamiFlorida -- Pittsburgh 
+OklahomaState -- Oklahoma 
+Oregon -- Wisconsin 
+WashingtonState -- Stanford 
+MississippiState -- Florida 
+Toledo -- BowlingGreenState 
+Oklahoma -- Baylor 
+OklahomaState -- Baylor 
+Ohio -- CentralMichigan 
+SouthCarolina -- Florida 
+LouisianaTech -- PennState 
+Oregon -- UCLA 
+IowaState -- Iowa 
+Maryland -- GeorgiaTech 
+GeorgiaTech -- FloridaState 
+Ohio -- Minnesota 
+"TexasA&M" -- Colorado 
+Georgia -- NewMexicoState 
+"TexasA&M" -- Wyoming 
+SouthCarolina -- Alabama 
+CentralFlorida -- Akron 
+Missouri -- Kansas 
+Oregon -- Arizona 
+OregonState -- Oregon 
+TexasElPaso -- SouthernMethodist 
+Cincinnati -- Syracuse 
+Temple -- WestVirginia 
+Mississippi -- Vanderbilt 
+WashingtonState -- Oregon 
+EasternMichigan -- WesternMichigan 
+Texas -- Kansas 
+Marshall -- Kent 
+NevadaLasVegas -- Nevada 
+Stanford -- UCLA 
+Michigan -- Wisconsin 
+ColoradoState -- Utah 
+Memphis -- EastCarolina 
+Tulane -- Navy 
+EasternMichigan -- CentralFlorida 
+UtahState -- NorthTexas 
+OklahomaState -- TexasTech 
+California -- WashingtonState 
+Pittsburgh -- BostonCollege 
+Tennessee -- Florida 
+Pittsburgh -- BowlingGreenState 
+Oregon -- Idaho 
+SouthernCalifornia -- PennState 
+Army -- Houston 
+Syracuse -- Buffalo 
+SouthCarolina -- NewMexicoState 
+Buffalo -- BallState 
+OregonState -- NewMexico 
+UtahState -- ArkansasState 
+TexasElPaso -- "TexasA&M" 
+CentralMichigan -- NorthernIllinois 
+Idaho -- BoiseState 
+Louisville -- Connecticut 
+LouisianaMonroe -- LouisianaTech 
+GeorgiaTech -- NorthCarolinaState 
+Stanford -- ArizonaState 
+GeorgiaTech -- Virginia 
+Tennessee -- SouthCarolina 
+Army -- Louisville 
+Ohio -- MiamiOhio 
+Clemson -- Duke 
+Indiana -- NorthCarolinaState 
+CentralMichigan -- Akron 
+Kent -- Akron 
+MichiganState -- Marshall 
+AirForce -- Navy 
+Rutgers -- Buffalo 
+Hawaii -- TexasElPaso 
+Georgia -- Auburn 
+MississippiState -- Auburn 
+AirForce -- ColoradoState 
+SouthernMethodist -- Rice 
+TexasChristian -- Nevada 
+Clemson -- FloridaState 
+NorthCarolina -- Duke 
+SanJoseState -- SouthernMethodist 
+Georgia -- SouthCarolina 
+Maryland -- NorthCarolina 
+Nebraska -- TexasTech 
+Cincinnati -- Louisville 
+Cincinnati -- MiamiOhio 
+OhioState -- Michigan 
+Arkansas -- Auburn 
+MichiganState -- OhioState 
+Tennessee -- Alabama 
+SanJoseState -- FresnoState 
+Missouri -- MichiganState 
+NevadaLasVegas -- Wyoming 
+SanDiegoState -- ArizonaState 
+Kent -- WesternMichigan 
+MiamiOhio -- EasternMichigan 
+MiamiFlorida -- Temple 
+Missouri -- Nebraska 
+Pittsburgh -- PennState 
+Texas -- Baylor 
+Alabama -- Auburn 
+WashingtonState -- Washington 
+OregonState -- SouthernCalifornia 
+UCLA -- Alabama 
+Memphis -- ArkansasState 
+Texas -- Stanford 
+Arizona -- SanDiegoState 
+SouthernMethodist -- Kansas 
+NewMexicoState -- ArkansasState 
+Oklahoma -- TexasTech 
+SanJoseState -- Nevada 
+EasternMichigan -- CentralMichigan 
+NewMexicoState -- Idaho 
+Hawaii -- SouthernMethodist 
+Florida -- BallState 
+Temple -- EasternMichigan 
+Minnesota -- Northwestern 
+BostonCollege -- VirginiaTech 
+Oklahoma -- ArkansasState 
+TexasChristian -- FresnoState 
+MiamiFlorida -- Rutgers 
+MiamiOhio -- OhioState 
+TexasElPaso -- NewMexicoState 
+NorthCarolina -- Pittsburgh 
+Oklahoma -- Nebraska 
+Washington -- UCLA 
+Army -- NewMexicoState 
+Clemson -- Virginia 
+NevadaLasVegas -- AirForce 
+Duke -- GeorgiaTech 
+Virginia -- FloridaState 
+SouthernMethodist -- Houston 
+UtahState -- TexasTech 
+Marshall -- Buffalo 
+Tulane -- Houston 
+Temple -- Pittsburgh 
+Duke -- FloridaState 
+California -- Oregon 
+Tennessee -- LouisianaMonroe 
+IowaState -- KansasState 
+Arkansas -- SouthCarolina 
+Marshall -- Ohio 
+Cincinnati -- Wisconsin 
+ArizonaState -- SouthernCalifornia 
+Cincinnati -- Houston 
+Nevada -- Wyoming 
+OklahomaState -- Missouri 
+Army -- Navy 
+Minnesota -- Iowa 
+Georgia -- Vanderbilt 
+Army -- BostonCollege 
+Arkansas -- Mississippi 
+Illinois -- MiddleTennesseeState 
+AlabamaBirmingham -- Memphis 
+Buffalo -- Akron 
+CentralFlorida -- NorthernIllinois 
+Arkansas -- BoiseState 
+Vanderbilt -- Kentucky 
+Ohio -- Kent 
+Kent -- BowlingGreenState 
+Oklahoma -- KansasState 
+TexasTech -- KansasState 
+Toledo -- EasternMichigan 
+EasternMichigan -- BowlingGreenState 
+Nebraska -- Baylor 
+EastCarolina -- VirginiaTech 
+LouisianaState -- Alabama 
+TexasTech -- NewMexico 
+CentralMichigan -- BoiseState 
+Pittsburgh -- Kent 
+Illinois -- Michigan 
+TexasChristian -- SouthernMethodist 
+NorthCarolina -- GeorgiaTech 
+Army -- EastCarolina 
+AirForce -- BrighamYoung 
+LouisianaState -- Mississippi 
+MississippiState -- Kentucky 
+Nebraska -- IowaState 
+LouisianaLafayette -- LouisianaMonroe 
+MiamiFlorida -- Washington 
+Stanford -- Arizona 
+NorthCarolina -- FloridaState 
+Marshall -- NorthCarolina 
+Baylor -- TexasTech 
+OregonState -- UCLA 
+NewMexico -- BrighamYoung 
+Connecticut -- BostonCollege 
+Colorado -- KansasState 
+OregonState -- SanDiegoState 
+MiddleTennesseeState -- LouisianaMonroe 
+Nebraska -- SanJoseState 
+MiamiFlorida -- WestVirginia 
+Florida -- Auburn 
+Tulsa -- SouthernMethodist 
+TexasChristian -- Tulsa 
+MiamiOhio -- Kent 
+Arizona -- ArizonaState 
+MiamiFlorida -- VirginiaTech 
+Maryland -- WestVirginia 
+LouisianaState -- Houston 
+Temple -- VirginiaTech 
+Indiana -- Iowa 
+OhioState -- Arizona 
+Illinois -- OhioState 
+Tulane -- SouthernMethodist 
+Rutgers -- VirginiaTech 
+Tennessee -- Vanderbilt 
+Hawaii -- Nevada 
+Nevada -- ColoradoState 
+IowaState -- Colorado 
+TexasChristian -- Navy 
+Hawaii -- Rice 
+Illinois -- Iowa 
+AirForce -- Utah 
+Michigan -- UCLA 
+Hawaii -- TexasChristian 
+NorthTexas -- Baylor 
+"TexasA&M" -- IowaState 
+LouisianaState -- Tennessee 
+UCLA -- SouthernCalifornia 
+OklahomaState -- SouthernMississippi 
+Nevada -- FresnoState 
+NevadaLasVegas -- ColoradoState 
+MiddleTennesseeState -- Florida 
+LouisianaLafayette -- Tulane 
+Rice -- FresnoState 
+MiamiOhio -- BowlingGreenState 
+AirForce -- NewMexico 
+MiamiFlorida -- LouisianaTech 
+OhioState -- Iowa 
+Vanderbilt -- Alabama 
+Oklahoma -- Rice 
+NotreDame -- SouthernCalifornia 
+Maryland -- FloridaState 
+Georgia -- Mississippi 
+Wyoming -- NewMexico 
+WakeForest -- Duke 
+MiamiOhio -- Buffalo 
+Rutgers -- Syracuse 
+Houston -- EastCarolina 
+Kansas -- TexasTech 
+Clemson -- SouthCarolina 
+WashingtonState -- Arizona 
+Connecticut -- Buffalo 
+Nevada -- SouthernMethodist 
+Washington -- ArizonaState 
+Indiana -- PennState 
+Syracuse -- BrighamYoung 
+CentralMichigan -- Wyoming 
+Tulsa -- Rice 
+California -- Illinois 
+Rutgers -- Temple 
+OregonState -- WashingtonState 
+Toledo -- PennState 
+Mississippi -- MississippiState 
+WashingtonState -- ArizonaState 
+Hawaii -- FresnoState 
+Oklahoma -- Kansas 
+EasternMichigan -- Connecticut 
+NevadaLasVegas -- IowaState 
+Temple -- BostonCollege 
+Auburn -- NorthernIllinois 
+Wisconsin -- Iowa 
+Pittsburgh -- WestVirginia 
+Arkansas -- Alabama 
+BoiseState -- NewMexico 
+Ohio -- Akron 
+Kansas -- Colorado 
+IowaState -- Kansas 
+AlabamaBirmingham -- Kansas 
+SanDiegoState -- NewMexico 
+Stanford -- Washington 
+UCLA -- ArizonaState 
+SouthCarolina -- Kentucky 
+NevadaLasVegas -- SanDiegoState 
+Tennessee -- Kentucky 
+NotreDame -- WestVirginia 
+SouthernMississippi -- Alabama 
+Indiana -- Wisconsin 
+Duke -- EastCarolina 
+Georgia -- Kentucky 
+UtahState -- Idaho 
+Marshall -- WesternMichigan 
+Memphis -- LouisianaMonroe 
+MiddleTennesseeState -- Connecticut 
+MichiganState -- Illinois 
+Virginia -- NorthCarolinaState 
+AlabamaBirmingham -- SouthernMississippi 
+Texas -- Oklahoma 
+CentralFlorida -- VirginiaTech 
+Washington -- Idaho 
+TexasElPaso -- Nevada 
+Idaho -- ArkansasState 
+VirginiaTech -- Akron 
+LouisianaLafayette -- MiddleTennesseeState 
+Oregon -- Washington 
+California -- Washington 
+Utah -- Arizona 
+NevadaLasVegas -- Mississippi 
+LouisianaTech -- CentralFlorida 
+Texas -- Colorado 
+Northwestern -- NorthernIllinois 
+Louisville -- Houston 
+Marshall -- Toledo 
+UtahState -- NewMexicoState 
+WakeForest -- NorthCarolina 
+Syracuse -- WestVirginia 
+Rice -- Houston 
+Temple -- Syracuse 
+Nebraska -- Iowa 
+AlabamaBirmingham -- MiddleTennesseeState 
+Georgia -- Tennessee 
+BallState -- NorthernIllinois 
+Maryland -- MiddleTennesseeState 
+Texas -- TexasTech 
+Syracuse -- VirginiaTech 
+WakeForest -- Navy 
+CentralMichigan -- BallState 
+TexasElPaso -- FresnoState 
+Hawaii -- NevadaLasVegas 
+Toledo -- BallState 
+Nebraska -- Kansas 
+Tulane -- Louisville 
+Michigan -- PennState 
+AlabamaBirmingham -- LouisianaState 
+Ohio -- Buffalo 
+OklahomaState -- "TexasA&M" 
+NorthCarolina -- Tulsa 
+Hawaii -- Wisconsin 
+WestVirginia -- BostonCollege 
+BallState -- KansasState 
+GeorgiaTech -- CentralFlorida 
+Marshall -- BowlingGreenState 
+Oregon -- SouthernCalifornia 
+Mississippi -- Tulane 
+WashingtonState -- Idaho 
+AlabamaBirmingham -- LouisianaLafayette 
+MiamiOhio -- BallState 
+California -- Stanford 
+MiamiFlorida -- Syracuse 
+Illinois -- SanDiegoState 
+Illinois -- Minnesota 
+AirForce -- NotreDame 
+Cincinnati -- Memphis 
+Florida -- FloridaState 
+NewMexicoState -- NorthTexas 
+SouthCarolina -- EasternMichigan 
+NorthCarolina -- Virginia 
+Texas -- LouisianaLafayette 
+Stanford -- SouthernCalifornia 
+OregonState -- Arizona 
+Minnesota -- Purdue 
+WestVirginia -- VirginiaTech 
+Navy -- Temple 
+EastCarolina -- WestVirginia 
+Akron -- NorthernIllinois 
+Tulsa -- SanJoseState 
+NewMexicoState -- BoiseState 
+NotreDame -- Navy 
+ColoradoState -- Colorado 
+Minnesota -- PennState 
+SanJoseState -- Rice 
+LouisianaLafayette -- TexasTech 
+Toledo -- NorthernIllinois 
+EastCarolina -- Syracuse 
+Washington -- Colorado 
+Arkansas -- Georgia 
+NevadaLasVegas -- NorthTexas 
+Ohio -- WesternMichigan 
+UtahState -- ArizonaState 
+Vanderbilt -- MiamiOhio 
+Memphis -- MississippiState 
+Connecticut -- Akron 
+Kansas -- KansasState 
+TexasChristian -- ArkansasState 
+Minnesota -- OhioState 
+California -- FresnoState 
+Michigan -- BowlingGreenState 
+Connecticut -- BallState 
+Louisville -- FloridaState 
+UtahState -- BoiseState 
+Georgia -- GeorgiaTech 
+Auburn -- Wyoming 
+OhioState -- FresnoState 
+Maryland -- Virginia 
+Purdue -- Wisconsin 
+TexasElPaso -- Rice 
+Michigan -- Northwestern 
+Nebraska -- KansasState 
+Army -- Tulane 
+Texas -- Houston 
+Illinois -- Northwestern 
+Oklahoma -- TexasElPaso 
+ColoradoState -- ArizonaState 
+AirForce -- Army 
+Cincinnati -- SouthernMississippi 
+SouthernMethodist -- FresnoState 
+NorthCarolina -- NorthCarolinaState 
+MichiganState -- NotreDame 
+Kent -- Purdue 
+MiamiOhio -- Akron 
+WashingtonState -- BoiseState 
+Georgia -- Florida 
+Syracuse -- BostonCollege 
+MiddleTennesseeState -- LouisianaTech 
+Nevada -- Rice 
+KansasState -- Iowa 
+Hawaii -- LouisianaTech 
+UtahState -- Utah 
+Kentucky -- Florida 
+MiamiFlorida -- FloridaState 
+California -- Utah 
+Wisconsin -- WesternMichigan 
+Clemson -- Missouri 
+AlabamaBirmingham -- Army 
+Kent -- CentralMichigan 
+Hawaii -- SanJoseState 
+UtahState -- BrighamYoung 
+Arkansas -- LouisianaState 
+Arkansas -- LouisianaMonroe 
+Navy -- BostonCollege 
+Tulsa -- FresnoState 
+Purdue -- Northwestern 
+Clemson -- NorthCarolina 
+Indiana -- Minnesota 
+Pittsburgh -- VirginiaTech 
+FresnoState -- UCLA 
+California -- ArizonaState 
+NotreDame -- Nebraska 
+NevadaLasVegas -- BrighamYoung 
+MiamiFlorida -- BostonCollege 
+MichiganState -- Wisconsin 
+Tulsa -- LouisianaTech 
+MississippiState -- Alabama 
+Utah -- SanDiegoState 
+MichiganState -- Iowa 
+WakeForest -- FloridaState 
+Rutgers -- WestVirginia 
+NotreDame -- "TexasA&M" 
+Tulane -- EastCarolina 
+WakeForest -- GeorgiaTech 
+Purdue -- Michigan 
+CentralMichigan -- WesternMichigan 
+SouthernMississippi -- Memphis 
+Missouri -- IowaState 
+AlabamaBirmingham -- Louisville 
+WakeForest -- Clemson 
+AlabamaBirmingham -- EastCarolina 
+SanDiegoState -- BrighamYoung 
+Toledo -- WesternMichigan 
+Purdue -- PennState 
+Missouri -- Colorado 
+WakeForest -- NorthCarolinaState 
+Tulsa -- NewMexicoState 
+ColoradoState -- SanDiegoState 
+Tulane -- Memphis 
+NevadaLasVegas -- NewMexico 
+Arkansas -- MississippiState 
+Northwestern -- Iowa 
+AlabamaBirmingham -- Cincinnati 
+BowlingGreenState -- Akron 
+WakeForest -- Virginia 
+Indiana -- Northwestern 
+Indiana -- Illinois 
+Indiana -- Purdue 
+BoiseState -- NorthTexas 
+OhioState -- Wisconsin 
+Toledo -- CentralMichigan 
+TexasChristian -- Northwestern 
+OklahomaState -- IowaState 
+SanJoseState -- SouthernCalifornia 
+MichiganState -- PennState 
+Utah -- NewMexico 
+ColoradoState -- NewMexico 
+Missouri -- Baylor 
+Utah -- Wyoming 
+Missouri -- Texas 
+Buffalo -- BowlingGreenState 
+NotreDame -- BostonCollege 
+Tulsa -- TexasElPaso 
+NevadaLasVegas -- Utah 
+Illinois -- PennState 
+Mississippi -- Alabama 
+Duke -- Northwestern 
+Indiana -- Michigan 
+Virginia -- VirginiaTech 
+Tennessee -- Memphis 
 }

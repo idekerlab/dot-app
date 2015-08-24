@@ -1,337 +1,340 @@
 graph "lesmis.gml" {
-label = ""
 bgcolor = "#666666FF"
 splines = "false"
 outputorder = "edgesfirst"
-Fameuil [label = "Fameuil",penwidth = "4.000000",height = "0.315476",width = "0.315476",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-3.902261,0.881188!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Champtercier [label = "Champtercier",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.583587,-6.733046!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Jondrette [label = "Jondrette",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "2.208006,6.977066!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Enjolras [label = "Enjolras",penwidth = "4.000000",height = "0.458333",width = "0.458333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.977740,1.865186!",fontname = "FreeSans",fontsize = "17",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-MlleBaptistine [label = "MlleBaptistine",penwidth = "4.000000",height = "0.244048",width = "0.244048",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.489165,-3.196722!",fontname = "FreeSans",fontsize = "7",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Woman2 [label = "Woman2",penwidth = "4.000000",height = "0.244048",width = "0.244048",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.331052,-1.138685!",fontname = "FreeSans",fontsize = "7",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Listolier [label = "Listolier",penwidth = "4.000000",height = "0.315476",width = "0.315476",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-3.925653,1.741854!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Perpetue [label = "Perpetue",penwidth = "4.000000",height = "0.226190",width = "0.226190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-3.860556,-1.434547!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Eponine [label = "Eponine",penwidth = "4.000000",height = "0.386905",width = "0.386905",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-0.423226,2.516086!",fontname = "FreeSans",fontsize = "14",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-MmeMagloire [label = "MmeMagloire",penwidth = "4.000000",height = "0.244048",width = "0.244048",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.399575,-3.631273!",fontname = "FreeSans",fontsize = "7",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-MotherPlutarch [label = "MotherPlutarch",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-0.516167,5.832317!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Mabeuf [label = "Mabeuf",penwidth = "4.000000",height = "0.386905",width = "0.386905",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.127507,3.708928!",fontname = "FreeSans",fontsize = "14",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Bamatabois [label = "Bamatabois",penwidth = "4.000000",height = "0.333333",width = "0.333333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.130209,-1.724726!",fontname = "FreeSans",fontsize = "11",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-BaronessT [label = "BaronessT",penwidth = "4.000000",height = "0.226190",width = "0.226190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.880522,2.816897!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Valjean [label = "Valjean",penwidth = "4.000000",height = "0.833333",width = "0.833333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-0.066601,-0.925030!",fontname = "FreeSans",fontsize = "35",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Tholomyes [label = "Tholomyes",penwidth = "4.000000",height = "0.351190",width = "0.351190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-2.802318,1.150603!",fontname = "FreeSans",fontsize = "12",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Boulatruelle [label = "Boulatruelle",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "2.134820,0.438585!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Toussaint [label = "Toussaint",penwidth = "4.000000",height = "0.244048",width = "0.244048",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.905636,-0.534235!",fontname = "FreeSans",fontsize = "7",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Fauchelevent [label = "Fauchelevent",penwidth = "4.000000",height = "0.261905",width = "0.261905",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.814024,-0.788819!",fontname = "FreeSans",fontsize = "8",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Zephine [label = "Zephine",penwidth = "4.000000",height = "0.315476",width = "0.315476",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-4.557221,-0.168514!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Cravatte [label = "Cravatte",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "2.320972,-6.013611!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Montparnasse [label = "Montparnasse",penwidth = "4.000000",height = "0.351190",width = "0.351190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-0.756847,0.822020!",fontname = "FreeSans",fontsize = "12",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-MlleVaubois [label = "MlleVaubois",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "3.555117,0.054274!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Simplice [label = "Simplice",penwidth = "4.000000",height = "0.261905",width = "0.261905",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-2.043099,-1.215879!",fontname = "FreeSans",fontsize = "8",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Anzelma [label = "Anzelma",penwidth = "4.000000",height = "0.244048",width = "0.244048",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.320252,3.256916!",fontname = "FreeSans",fontsize = "7",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Blacheville [label = "Blacheville",penwidth = "4.000000",height = "0.315476",width = "0.315476",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-3.790689,0.005216!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-MmeBurgon [label = "MmeBurgon",penwidth = "4.000000",height = "0.226190",width = "0.226190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.521301,5.239288!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Myriel [label = "Myriel",penwidth = "4.000000",height = "0.369048",width = "0.369048",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.400231,-4.855229!",fontname = "FreeSans",fontsize = "13",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Brevet [label = "Brevet",penwidth = "4.000000",height = "0.297619",width = "0.297619",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.063058,-3.444998!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-MmePontmercy [label = "MmePontmercy",penwidth = "4.000000",height = "0.226190",width = "0.226190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "3.384336,1.071355!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Prouvaire [label = "Prouvaire",penwidth = "4.000000",height = "0.351190",width = "0.351190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "2.218552,3.881217!",fontname = "FreeSans",fontsize = "12",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Gueulemer [label = "Gueulemer",penwidth = "4.000000",height = "0.369048",width = "0.369048",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.380748,0.717445!",fontname = "FreeSans",fontsize = "13",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-MlleGillenormand [label = "MlleGillenormand",penwidth = "4.000000",height = "0.315476",width = "0.315476",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.274920,0.512422!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Brujon [label = "Brujon",penwidth = "4.000000",height = "0.315476",width = "0.315476",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.238998,2.154713!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Favourite [label = "Favourite",penwidth = "4.000000",height = "0.315476",width = "0.315476",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-4.735809,1.407559!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Napoleon [label = "Napoleon",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "3.242344,-4.800997!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-CountessDeLo [label = "CountessDeLo",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.431821,-6.887987!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Cosette [label = "Cosette",penwidth = "4.000000",height = "0.386905",width = "0.386905",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.034469,0.208262!",fontname = "FreeSans",fontsize = "14",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Joly [label = "Joly",penwidth = "4.000000",height = "0.404762",width = "0.404762",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.997954,2.617730!",fontname = "FreeSans",fontsize = "15",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Bossuet [label = "Bossuet",penwidth = "4.000000",height = "0.422619",width = "0.422619",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.614599,1.935789!",fontname = "FreeSans",fontsize = "15",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Chenildieu [label = "Chenildieu",penwidth = "4.000000",height = "0.297619",width = "0.297619",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-0.257436,-2.208655!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Grantaire [label = "Grantaire",penwidth = "4.000000",height = "0.369048",width = "0.369048",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "2.697218,3.140617!",fontname = "FreeSans",fontsize = "13",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Judge [label = "Judge",penwidth = "4.000000",height = "0.297619",width = "0.297619",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.291446,-2.615636!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-MmeHucheloup [label = "MmeHucheloup",penwidth = "4.000000",height = "0.315476",width = "0.315476",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "2.736578,2.044366!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Fantine [label = "Fantine",penwidth = "4.000000",height = "0.458333",width = "0.458333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-2.594031,0.069717!",fontname = "FreeSans",fontsize = "17",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-MmeThenardier [label = "MmeThenardier",penwidth = "4.000000",height = "0.386905",width = "0.386905",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.500688,1.405541!",fontname = "FreeSans",fontsize = "14",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Javert [label = "Javert",penwidth = "4.000000",height = "0.494048",width = "0.494048",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-0.323804,-0.120532!",fontname = "FreeSans",fontsize = "19",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Courfeyrac [label = "Courfeyrac",penwidth = "4.000000",height = "0.422619",width = "0.422619",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.216446,2.842875!",fontname = "FreeSans",fontsize = "15",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-MotherInnocent [label = "MotherInnocent",penwidth = "4.000000",height = "0.226190",width = "0.226190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "2.248421,-2.279119!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Claquesous [label = "Claquesous",penwidth = "4.000000",height = "0.369048",width = "0.369048",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.216845,0.642487!",fontname = "FreeSans",fontsize = "13",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Gribier [label = "Gribier",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "3.919813,-1.457955!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Babet [label = "Babet",penwidth = "4.000000",height = "0.369048",width = "0.369048",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.461115,1.267708!",fontname = "FreeSans",fontsize = "13",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Combeferre [label = "Combeferre",penwidth = "4.000000",height = "0.386905",width = "0.386905",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.845517,3.487988!",fontname = "FreeSans",fontsize = "14",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-MmeDeR [label = "MmeDeR",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.140845,-2.418623!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Cochepaille [label = "Cochepaille",penwidth = "4.000000",height = "0.297619",width = "0.297619",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.407156,-2.671080!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Child1 [label = "Child1",penwidth = "4.000000",height = "0.226190",width = "0.226190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.247316,4.862415!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Geborand [label = "Geborand",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "2.467792,-6.865700!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Gavroche [label = "Gavroche",penwidth = "4.000000",height = "0.583333",width = "0.583333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.402843,2.536056!",fontname = "FreeSans",fontsize = "23",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Magnon [label = "Magnon",penwidth = "4.000000",height = "0.226190",width = "0.226190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-2.756492,2.543536!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Marguerite [label = "Marguerite",penwidth = "4.000000",height = "0.226190",width = "0.226190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-2.635376,-1.495658!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Pontmercy [label = "Pontmercy",penwidth = "4.000000",height = "0.244048",width = "0.244048",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.898551,1.252269!",fontname = "FreeSans",fontsize = "7",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Woman1 [label = "Woman1",penwidth = "4.000000",height = "0.226190",width = "0.226190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.970561,-1.302877!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Dahlia [label = "Dahlia",penwidth = "4.000000",height = "0.315476",width = "0.315476",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-4.969474,0.581604!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Gervais [label = "Gervais",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.965928,-3.096488!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-OldMan [label = "OldMan",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-0.076155,-6.023638!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Isabeau [label = "Isabeau",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.652123,-1.825095!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-LtGillenormand [label = "LtGillenormand",penwidth = "4.000000",height = "0.261905",width = "0.261905",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.446080,0.005420!",fontname = "FreeSans",fontsize = "8",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Champmathieu [label = "Champmathieu",penwidth = "4.000000",height = "0.297619",width = "0.297619",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-0.260476,-3.357631!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Bahorel [label = "Bahorel",penwidth = "4.000000",height = "0.404762",width = "0.404762",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.759241,3.245046!",fontname = "FreeSans",fontsize = "15",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Gillenormand [label = "Gillenormand",penwidth = "4.000000",height = "0.315476",width = "0.315476",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-0.867764,1.455492!",fontname = "FreeSans",fontsize = "10",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Thenardier [label = "Thenardier",penwidth = "4.000000",height = "0.476190",width = "0.476190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-0.268412,1.190946!",fontname = "FreeSans",fontsize = "18",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Feuilly [label = "Feuilly",penwidth = "4.000000",height = "0.386905",width = "0.386905",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "1.326981,3.986451!",fontname = "FreeSans",fontsize = "14",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Labarre [label = "Labarre",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "2.390898,-1.340270!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Scaufflaire [label = "Scaufflaire",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-2.134222,-2.294445!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Marius [label = "Marius",penwidth = "4.000000",height = "0.529762",width = "0.529762",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "0.146222,1.866505!",fontname = "FreeSans",fontsize = "20",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Child2 [label = "Child2",penwidth = "4.000000",height = "0.226190",width = "0.226190",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "-1.022274,4.421420!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Count [label = "Count",penwidth = "4.000000",height = "0.208333",width = "0.208333",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",pos = "3.294242,-5.793676!",fontname = "FreeSans",fontsize = "6",fontcolor = "#FFFFFFFF",fixedsize = "true"]
-Fantine -- Blacheville [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Babet -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Grantaire -- Combeferre [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marius -- Eponine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Brujon -- Claquesous [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Isabeau -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeHucheloup -- Courfeyrac [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Simplice -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Joly -- Feuilly [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Claquesous -- Javert [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Joly -- Bahorel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Geborand -- Myriel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Babet -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Mabeuf -- Eponine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Champmathieu -- Judge [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Claquesous -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Courfeyrac -- Prouvaire [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Grantaire -- Courfeyrac [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Montparnasse -- Javert [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Joly -- Courfeyrac [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Grantaire -- Enjolras [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Joly -- Combeferre [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Claquesous -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Perpetue -- Fantine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Boulatruelle -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeHucheloup -- Grantaire [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gribier -- Fauchelevent [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Simplice -- Javert [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Feuilly -- Marius [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LtGillenormand -- MlleGillenormand [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Child1 -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Grantaire -- Bahorel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LtGillenormand -- Gillenormand [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Zephine -- Favourite [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bossuet -- Mabeuf [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cosette -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Brevet -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Enjolras -- Javert [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Zephine -- Blacheville [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MotherInnocent -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Favourite -- Listolier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Simplice -- Perpetue [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Fantine -- Marguerite [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Woman1 -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Brujon -- Babet [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Grantaire -- Joly [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Grantaire -- Feuilly [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cosette -- MmeThenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bahorel -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Champtercier -- Myriel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeDeR -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-CountessDeLo -- Myriel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Javert -- Cosette [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Fantine -- Zephine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cosette -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bossuet -- Marius [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Woman2 -- Javert [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Grantaire -- Bossuet [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Fantine -- Listolier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marius -- LtGillenormand [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeMagloire -- MlleBaptistine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gavroche -- MmeBurgon [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Claquesous -- Enjolras [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Joly -- Enjolras [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Fantine -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Joly -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Javert -- MmeThenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Combeferre -- Enjolras [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MlleVaubois -- MlleGillenormand [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Feuilly -- Mabeuf [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Courfeyrac -- Combeferre [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bossuet -- Courfeyrac [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Dahlia -- Blacheville [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Courfeyrac -- Marius [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Javert -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Zephine -- Dahlia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeBurgon -- Jondrette [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Javert -- Fantine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Chenildieu -- Champmathieu [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gavroche -- Javert [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MlleGillenormand -- Gillenormand [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MlleGillenormand -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Woman2 -- Cosette [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Listolier -- Tholomyes [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Toussaint -- Javert [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Brevet -- Bamatabois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeMagloire -- Myriel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Fantine -- Dahlia [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cosette -- Tholomyes [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Blacheville -- Tholomyes [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marguerite -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Eponine -- MmeThenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marius -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bossuet -- Bahorel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeHucheloup -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-BaronessT -- Gillenormand [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MlleGillenormand -- Cosette [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Eponine -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Dahlia -- Fameuil [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Babet -- Gueulemer [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MlleBaptistine -- Myriel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marius -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-OldMan -- Myriel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Valjean -- Myriel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Dahlia -- Listolier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeThenardier -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Dahlia -- Tholomyes [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bossuet -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-BaronessT -- Marius [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Grantaire -- Prouvaire [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeHucheloup -- Joly [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bossuet -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Enjolras -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Pontmercy -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeHucheloup -- Bossuet [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Thenardier -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gavroche -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Enjolras -- Mabeuf [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Blacheville -- Fameuil [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cochepaille -- Bamatabois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Courfeyrac -- Eponine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Fauchelevent -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Fantine -- Tholomyes [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Montparnasse -- Gueulemer [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Child2 -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Babet -- MmeThenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Montparnasse -- Eponine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Judge -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Chenildieu -- Brevet [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marius -- Cosette [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Toussaint -- Cosette [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cravatte -- Myriel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Joly -- Marius [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Combeferre -- Mabeuf [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cochepaille -- Judge [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gueulemer -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Favourite -- Fameuil [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Brujon -- Gueulemer [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marius -- Tholomyes [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cochepaille -- Brevet [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marius -- MlleGillenormand [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Scaufflaire -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Woman2 -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Chenildieu -- Bamatabois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Enjolras -- Marius [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Brevet -- Champmathieu [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Combeferre -- Marius [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Brujon -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Courfeyrac -- Mabeuf [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Champmathieu -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Champmathieu -- Bamatabois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Courfeyrac -- Enjolras [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bahorel -- Courfeyrac [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Montparnasse -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Brevet -- Judge [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Chenildieu -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Feuilly -- Enjolras [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gueulemer -- Eponine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Brujon -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Montparnasse -- Claquesous [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Valjean -- MlleBaptistine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bossuet -- Enjolras [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Magnon -- Gillenormand [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Feuilly -- Combeferre [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bahorel -- Mabeuf [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marius -- Pontmercy [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Feuilly -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bahorel -- Enjolras [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmePontmercy -- Pontmercy [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marius -- Gillenormand [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Joly -- Mabeuf [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Fauchelevent -- Javert [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Zephine -- Fameuil [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Claquesous -- Eponine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Thenardier -- MmeThenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeThenardier -- Fantine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bamatabois -- Fantine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Valjean -- MmeMagloire [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Zephine -- Listolier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Claquesous -- MmeThenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Favourite -- Tholomyes [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmePontmercy -- MlleGillenormand [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Babet -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bahorel -- Marius [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gillenormand -- Cosette [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Prouvaire -- Enjolras [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Chenildieu -- Judge [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Brujon -- Eponine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-LtGillenormand -- Cosette [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Joly -- Bossuet [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Mabeuf -- Marius [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bamatabois -- Javert [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeHucheloup -- Enjolras [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Anzelma -- Thenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gueulemer -- Javert [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bossuet -- Combeferre [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Brujon -- Montparnasse [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Feuilly -- Prouvaire [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Thenardier -- Fantine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bossuet -- Feuilly [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gueulemer -- MmeThenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Anzelma -- MmeThenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Favourite -- Blacheville [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Marius -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Count -- Myriel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Fameuil -- Tholomyes [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Joly -- Prouvaire [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bossuet -- Prouvaire [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gueulemer -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gervais -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Woman1 -- Javert [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Fantine -- Favourite [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Montparnasse -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bahorel -- Prouvaire [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cochepaille -- Chenildieu [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gueulemer -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Valjean -- Labarre [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Claquesous -- Gueulemer [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Babet -- Javert [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MotherInnocent -- Fauchelevent [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Napoleon -- Myriel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Magnon -- MmeThenardier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Anzelma -- Eponine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Zephine -- Tholomyes [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Prouvaire -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Child2 -- Child1 [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Montparnasse -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Montparnasse -- Babet [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MmeHucheloup -- Bahorel [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cochepaille -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Toussaint -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Courfeyrac -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gavroche -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bamatabois -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Fantine -- Fameuil [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Simplice -- Fantine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Mabeuf -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Prouvaire -- Combeferre [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Claquesous -- Babet [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Cochepaille -- Champmathieu [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bahorel -- Feuilly [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Bahorel -- Combeferre [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Dahlia -- Favourite [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Babet -- Eponine [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Blacheville -- Listolier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Fameuil -- Listolier [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Enjolras -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Gillenormand -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Judge -- Bamatabois [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Grantaire -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Combeferre -- Gavroche [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-MotherPlutarch -- Mabeuf [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Javert -- Valjean [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
-Courfeyrac -- Feuilly [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",dir = "both"]
+esep = "0"
+pad = "2"
+node [label = "",penwidth = "4.000000",height = "0.694444",width = "0.694444",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",fontname = "FreeSans",fontsize = "14",fontcolor = "#FFFFFFFF",fixedsize = "true",labelloc = "c"]
+edge [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",style = "solid",dir = "both"]
+MmeHucheloup [label = "MmeHucheloup",height = "0.315476",width = "0.315476",pos = "197.033581,147.194362",fontsize = "10"]
+MlleGillenormand [label = "MlleGillenormand",height = "0.315476",width = "0.315476",pos = "91.794270,36.894409",fontsize = "10"]
+Woman2 [label = "Woman2",height = "0.244048",width = "0.244048",pos = "-95.835735,-81.985336",fontsize = "7"]
+MmeBurgon [label = "MmeBurgon",height = "0.226190",width = "0.226190",pos = "109.533680,377.228714",fontsize = "6"]
+Eponine [label = "Eponine",height = "0.386905",width = "0.386905",pos = "-30.472301,181.158188"]
+Bossuet [label = "Bossuet",height = "0.422619",width = "0.422619",pos = "116.251118,139.376808",fontsize = "15"]
+Enjolras [label = "Enjolras",height = "0.458333",width = "0.458333",pos = "70.397312,134.293419",fontsize = "17"]
+Judge [label = "Judge",height = "0.297619",width = "0.297619",pos = "-92.984081,-188.325791",fontsize = "10"]
+Claquesous [label = "Claquesous",height = "0.369048",width = "0.369048",pos = "15.612843,46.259094",fontsize = "13"]
+OldMan [label = "OldMan",height = "0.208333",width = "0.208333",pos = "-5.483165,-433.701950",fontsize = "6"]
+Bahorel [label = "Bahorel",height = "0.404762",width = "0.404762",pos = "126.665348,233.643322",fontsize = "15"]
+MlleVaubois [label = "MlleVaubois",height = "0.208333",width = "0.208333",pos = "255.968392,3.907730",fontsize = "6"]
+Brevet [label = "Brevet",height = "0.297619",width = "0.297619",pos = "-76.540203,-248.039841",fontsize = "10"]
+Combeferre [label = "Combeferre",height = "0.386905",width = "0.386905",pos = "60.877201,251.135151"]
+Thenardier [label = "Thenardier",height = "0.476190",width = "0.476190",pos = "-19.325695,85.748146",fontsize = "18"]
+Magnon [label = "Magnon",height = "0.226190",width = "0.226190",pos = "-198.467418,183.134593",fontsize = "6"]
+Courfeyrac [label = "Courfeyrac",height = "0.422619",width = "0.422619",pos = "87.584080,204.687013",fontsize = "15"]
+Napoleon [label = "Napoleon",height = "0.208333",width = "0.208333",pos = "233.448780,-345.671799",fontsize = "6"]
+Anzelma [label = "Anzelma",height = "0.244048",width = "0.244048",pos = "-95.058178,234.497951",fontsize = "7"]
+Toussaint [label = "Toussaint",height = "0.244048",width = "0.244048",pos = "-137.205822,-38.464905",fontsize = "7"]
+Montparnasse [label = "Montparnasse",height = "0.351190",width = "0.351190",pos = "-54.492962,59.185409",fontsize = "12"]
+Champtercier [label = "Champtercier",height = "0.208333",width = "0.208333",pos = "42.018269,-484.779343",fontsize = "6"]
+Cravatte [label = "Cravatte",height = "0.208333",width = "0.208333",pos = "167.109989,-432.980026",fontsize = "6"]
+Myriel [label = "Myriel",height = "0.369048",width = "0.369048",pos = "100.816624,-349.576462",fontsize = "13"]
+Gavroche [label = "Gavroche",height = "0.583333",width = "0.583333",pos = "29.004689,182.595998",fontsize = "23"]
+MmeThenardier [label = "MmeThenardier",height = "0.386905",width = "0.386905",pos = "-108.049572,101.198921"]
+Babet [label = "Babet",height = "0.369048",width = "0.369048",pos = "33.200306,91.274994",fontsize = "13"]
+Jondrette [label = "Jondrette",height = "0.208333",width = "0.208333",pos = "158.976445,502.348739",fontsize = "6"]
+Champmathieu [label = "Champmathieu",height = "0.297619",width = "0.297619",pos = "-18.754284,-241.749405",fontsize = "10"]
+Fantine [label = "Fantine",height = "0.458333",width = "0.458333",pos = "-186.770214,5.019607",fontsize = "17"]
+MotherInnocent [label = "MotherInnocent",height = "0.226190",width = "0.226190",pos = "161.886296,-164.096543",fontsize = "6"]
+Listolier [label = "Listolier",height = "0.315476",width = "0.315476",pos = "-282.647045,125.413460",fontsize = "10"]
+Mabeuf [label = "Mabeuf",height = "0.386905",width = "0.386905",pos = "9.180470,267.042786"]
+Prouvaire [label = "Prouvaire",height = "0.351190",width = "0.351190",pos = "159.735737,279.447609",fontsize = "12"]
+Chenildieu [label = "Chenildieu",height = "0.297619",width = "0.297619",pos = "-18.535381,-159.023148",fontsize = "10"]
+Count [label = "Count",height = "0.208333",width = "0.208333",pos = "237.185414,-417.144638",fontsize = "6"]
+Woman1 [label = "Woman1",height = "0.226190",width = "0.226190",pos = "69.880360,-93.807175",fontsize = "6"]
+MlleBaptistine [label = "MlleBaptistine",height = "0.244048",width = "0.244048",pos = "107.219853,-230.163986",fontsize = "7"]
+Pontmercy [label = "Pontmercy",height = "0.244048",width = "0.244048",pos = "136.695652,90.163391",fontsize = "7"]
+Zephine [label = "Zephine",height = "0.315476",width = "0.315476",pos = "-328.119945,-12.133042",fontsize = "10"]
+Fameuil [label = "Fameuil",height = "0.315476",width = "0.315476",pos = "-280.962780,63.445572",fontsize = "10"]
+Grantaire [label = "Grantaire",height = "0.369048",width = "0.369048",pos = "194.199673,226.124451",fontsize = "13"]
+Valjean [label = "Valjean",height = "0.833333",width = "0.833333",pos = "-4.795299,-66.602188",fontsize = "35"]
+Joly [label = "Joly",height = "0.404762",width = "0.404762",pos = "143.852711,188.476588",fontsize = "15"]
+Feuilly [label = "Feuilly",height = "0.386905",width = "0.386905",pos = "95.542652,287.024467"]
+Javert [label = "Javert",height = "0.494048",width = "0.494048",pos = "-23.313915,-8.678314",fontsize = "19"]
+Gervais [label = "Gervais",height = "0.208333",width = "0.208333",pos = "-141.546825,-222.947128",fontsize = "6"]
+MmeDeR [label = "MmeDeR",height = "0.208333",width = "0.208333",pos = "82.140843,-174.140854",fontsize = "6"]
+MmeMagloire [label = "MmeMagloire",height = "0.244048",width = "0.244048",pos = "28.769398,-261.451645",fontsize = "7"]
+Brujon [label = "Brujon",height = "0.315476",width = "0.315476",pos = "-89.207866,155.139370",fontsize = "10"]
+Cochepaille [label = "Cochepaille",height = "0.297619",width = "0.297619",pos = "29.315205,-192.317734",fontsize = "10"]
+BaronessT [label = "BaronessT",height = "0.226190",width = "0.226190",pos = "-135.397594,202.816578",fontsize = "6"]
+Perpetue [label = "Perpetue",height = "0.226190",width = "0.226190",pos = "-277.960033,-103.287399",fontsize = "6"]
+MmePontmercy [label = "MmePontmercy",height = "0.226190",width = "0.226190",pos = "243.672184,77.137581",fontsize = "6"]
+Geborand [label = "Geborand",height = "0.208333",width = "0.208333",pos = "177.681019,-494.330429",fontsize = "6"]
+Marius [label = "Marius",height = "0.529762",width = "0.529762",pos = "10.528004,134.388351",fontsize = "20"]
+Dahlia [label = "Dahlia",height = "0.315476",width = "0.315476",pos = "-357.802135,41.875488",fontsize = "10"]
+Tholomyes [label = "Tholomyes",height = "0.351190",width = "0.351190",pos = "-201.766918,82.843445",fontsize = "12"]
+Isabeau [label = "Isabeau",height = "0.208333",width = "0.208333",pos = "118.952824,-131.406876",fontsize = "6"]
+Gribier [label = "Gribier",height = "0.208333",width = "0.208333",pos = "282.226523,-104.972733",fontsize = "6"]
+Child2 [label = "Child2",height = "0.226190",width = "0.226190",pos = "-73.603710,318.342262",fontsize = "6"]
+Bamatabois [label = "Bamatabois",height = "0.333333",width = "0.333333",pos = "-81.375072,-124.180283",fontsize = "11"]
+Gillenormand [label = "Gillenormand",height = "0.315476",width = "0.315476",pos = "-62.479015,104.795395",fontsize = "10"]
+CountessDeLo [label = "CountessDeLo",height = "0.208333",width = "0.208333",pos = "103.091130,-495.935043",fontsize = "6"]
+Labarre [label = "Labarre",height = "0.208333",width = "0.208333",pos = "172.144673,-96.499405",fontsize = "6"]
+Cosette [label = "Cosette",height = "0.386905",width = "0.386905",pos = "-74.481762,14.994873"]
+Gueulemer [label = "Gueulemer",height = "0.369048",width = "0.369048",pos = "-99.413830,51.656051",fontsize = "13"]
+Boulatruelle [label = "Boulatruelle",height = "0.208333",width = "0.208333",pos = "153.707035,31.578110",fontsize = "6"]
+MotherPlutarch [label = "MotherPlutarch",height = "0.208333",width = "0.208333",pos = "-37.164013,419.926819",fontsize = "6"]
+Simplice [label = "Simplice",height = "0.261905",width = "0.261905",pos = "-147.103130,-87.543320",fontsize = "8"]
+Blacheville [label = "Blacheville",height = "0.315476",width = "0.315476",pos = "-272.929638,0.375549",fontsize = "10"]
+Marguerite [label = "Marguerite",height = "0.226190",width = "0.226190",pos = "-189.747051,-107.687393",fontsize = "6"]
+Fauchelevent [label = "Fauchelevent",height = "0.261905",width = "0.261905",pos = "130.609700,-56.794983",fontsize = "8"]
+Favourite [label = "Favourite",height = "0.315476",width = "0.315476",pos = "-340.978222,101.344269",fontsize = "10"]
+Child1 [label = "Child1",height = "0.226190",width = "0.226190",pos = "17.806721,350.093857",fontsize = "6"]
+Scaufflaire [label = "Scaufflaire",height = "0.208333",width = "0.208333",pos = "-153.663952,-165.200028",fontsize = "6"]
+LtGillenormand [label = "LtGillenormand",height = "0.261905",width = "0.261905",pos = "32.117756,0.390259",fontsize = "8"]
+LtGillenormand -- Cosette 
+Marius -- Gavroche 
+Claquesous -- MmeThenardier 
+Montparnasse -- Gueulemer 
+Chenildieu -- Judge 
+Grantaire -- Courfeyrac 
+Brujon -- Eponine 
+Claquesous -- Thenardier 
+Montparnasse -- Babet 
+Courfeyrac -- Enjolras 
+Courfeyrac -- Marius 
+Montparnasse -- Gavroche 
+Courfeyrac -- Gavroche 
+Thenardier -- MmeThenardier 
+Bahorel -- Marius 
+Woman2 -- Cosette 
+Claquesous -- Babet 
+Brujon -- Gueulemer 
+Combeferre -- Gavroche 
+Champmathieu -- Valjean 
+Bahorel -- Mabeuf 
+Magnon -- Gillenormand 
+Bossuet -- Marius 
+Montparnasse -- Eponine 
+Blacheville -- Tholomyes 
+MmeDeR -- Valjean 
+Montparnasse -- Claquesous 
+Gillenormand -- Cosette 
+Bossuet -- Feuilly 
+Bossuet -- Mabeuf 
+Dahlia -- Favourite 
+MlleGillenormand -- Valjean 
+MmeHucheloup -- Enjolras 
+Cochepaille -- Brevet 
+Cosette -- Thenardier 
+Joly -- Marius 
+Brujon -- Claquesous 
+Chenildieu -- Champmathieu 
+Babet -- Eponine 
+Toussaint -- Cosette 
+Child2 -- Child1 
+Cochepaille -- Judge 
+Javert -- Cosette 
+Dahlia -- Blacheville 
+Combeferre -- Marius 
+Javert -- Fantine 
+Judge -- Valjean 
+Bossuet -- Combeferre 
+Joly -- Prouvaire 
+Brevet -- Judge 
+Feuilly -- Enjolras 
+Claquesous -- Valjean 
+Zephine -- Dahlia 
+Valjean -- Labarre 
+Perpetue -- Fantine 
+Javert -- MmeThenardier 
+Cosette -- MmeThenardier 
+Fantine -- Zephine 
+Fauchelevent -- Valjean 
+Bahorel -- Feuilly 
+Cosette -- Tholomyes 
+Fameuil -- Listolier 
+Boulatruelle -- Thenardier 
+Babet -- Thenardier 
+Grantaire -- Enjolras 
+Thenardier -- Fantine 
+Gueulemer -- Thenardier 
+Woman1 -- Valjean 
+Scaufflaire -- Valjean 
+MmeMagloire -- MlleBaptistine 
+Joly -- Combeferre 
+Count -- Myriel 
+Gueulemer -- Gavroche 
+Enjolras -- Valjean 
+Grantaire -- Bahorel 
+Fantine -- Fameuil 
+Valjean -- MlleBaptistine 
+Courfeyrac -- Combeferre 
+Gillenormand -- Valjean 
+Brujon -- Babet 
+Magnon -- MmeThenardier 
+Geborand -- Myriel 
+Blacheville -- Fameuil 
+Grantaire -- Bossuet 
+Bahorel -- Prouvaire 
+MmeMagloire -- Myriel 
+Favourite -- Blacheville 
+MmeHucheloup -- Bossuet 
+Child2 -- Gavroche 
+Gueulemer -- Eponine 
+Marius -- Thenardier 
+Fantine -- Tholomyes 
+Toussaint -- Valjean 
+Champmathieu -- Judge 
+Grantaire -- Combeferre 
+Marguerite -- Valjean 
+Bahorel -- Enjolras 
+Mabeuf -- Gavroche 
+Combeferre -- Enjolras 
+Eponine -- MmeThenardier 
+BaronessT -- Gillenormand 
+Brevet -- Bamatabois 
+Marius -- Eponine 
+MlleVaubois -- MlleGillenormand 
+Pontmercy -- Thenardier 
+Listolier -- Tholomyes 
+MmePontmercy -- MlleGillenormand 
+Courfeyrac -- Prouvaire 
+Feuilly -- Gavroche 
+Bamatabois -- Valjean 
+Joly -- Mabeuf 
+Babet -- Gavroche 
+Courfeyrac -- Eponine 
+Joly -- Gavroche 
+Valjean -- MmeMagloire 
+Claquesous -- Gueulemer 
+Judge -- Bamatabois 
+Feuilly -- Mabeuf 
+Marius -- Pontmercy 
+Woman1 -- Javert 
+MmeHucheloup -- Gavroche 
+Champmathieu -- Bamatabois 
+MmeThenardier -- Fantine 
+Zephine -- Favourite 
+Chenildieu -- Brevet 
+Brujon -- Montparnasse 
+Bossuet -- Prouvaire 
+MmePontmercy -- Pontmercy 
+Claquesous -- Javert 
+BaronessT -- Marius 
+Claquesous -- Eponine 
+Marius -- LtGillenormand 
+Woman2 -- Valjean 
+MotherPlutarch -- Mabeuf 
+Zephine -- Blacheville 
+Valjean -- Myriel 
+Brujon -- Thenardier 
+MlleGillenormand -- Gillenormand 
+Anzelma -- Thenardier 
+Brevet -- Valjean 
+Simplice -- Valjean 
+Bossuet -- Enjolras 
+Zephine -- Fameuil 
+Gueulemer -- Valjean 
+Dahlia -- Fameuil 
+Napoleon -- Myriel 
+Bamatabois -- Fantine 
+Joly -- Bossuet 
+Anzelma -- MmeThenardier 
+Simplice -- Javert 
+Fameuil -- Tholomyes 
+Toussaint -- Javert 
+Montparnasse -- Thenardier 
+Eponine -- Thenardier 
+Dahlia -- Tholomyes 
+Joly -- Bahorel 
+Gueulemer -- Javert 
+Courfeyrac -- Feuilly 
+MotherInnocent -- Fauchelevent 
+Woman2 -- Javert 
+Child1 -- Gavroche 
+Prouvaire -- Combeferre 
+Fantine -- Blacheville 
+Bahorel -- Courfeyrac 
+Babet -- Gueulemer 
+LtGillenormand -- MlleGillenormand 
+Javert -- Thenardier 
+Zephine -- Listolier 
+Joly -- Courfeyrac 
+Marius -- Gillenormand 
+MmeHucheloup -- Courfeyrac 
+Babet -- Javert 
+Claquesous -- Enjolras 
+Cochepaille -- Bamatabois 
+Simplice -- Perpetue 
+Feuilly -- Marius 
+Fantine -- Listolier 
+Chenildieu -- Valjean 
+MmeHucheloup -- Bahorel 
+Fantine -- Favourite 
+Zephine -- Tholomyes 
+Enjolras -- Gavroche 
+Grantaire -- Feuilly 
+Brevet -- Champmathieu 
+Bamatabois -- Javert 
+Favourite -- Fameuil 
+Enjolras -- Marius 
+Mabeuf -- Eponine 
+Combeferre -- Mabeuf 
+Simplice -- Fantine 
+Fauchelevent -- Javert 
+Anzelma -- Eponine 
+Fantine -- Dahlia 
+OldMan -- Myriel 
+Bossuet -- Bahorel 
+Fantine -- Marguerite 
+Thenardier -- Valjean 
+MmeHucheloup -- Joly 
+Bossuet -- Gavroche 
+MmeHucheloup -- Grantaire 
+Cochepaille -- Valjean 
+Gavroche -- Thenardier 
+Javert -- Valjean 
+Marius -- Tholomyes 
+Gavroche -- Javert 
+Cochepaille -- Chenildieu 
+Bossuet -- Courfeyrac 
+Mabeuf -- Marius 
+Courfeyrac -- Mabeuf 
+MotherInnocent -- Valjean 
+Bahorel -- Gavroche 
+Feuilly -- Prouvaire 
+Montparnasse -- Javert 
+Champtercier -- Myriel 
+Gavroche -- MmeBurgon 
+Babet -- MmeThenardier 
+Bossuet -- Valjean 
+Cravatte -- Myriel 
+Cosette -- Valjean 
+Montparnasse -- Valjean 
+Feuilly -- Combeferre 
+LtGillenormand -- Gillenormand 
+Joly -- Enjolras 
+Prouvaire -- Enjolras 
+Grantaire -- Gavroche 
+Grantaire -- Joly 
+Fantine -- Valjean 
+Marius -- Valjean 
+Cochepaille -- Champmathieu 
+Gervais -- Valjean 
+Gribier -- Fauchelevent 
+MlleGillenormand -- Cosette 
+CountessDeLo -- Myriel 
+Favourite -- Listolier 
+Enjolras -- Javert 
+Marius -- Cosette 
+Babet -- Valjean 
+Dahlia -- Listolier 
+MlleBaptistine -- Myriel 
+Brujon -- Gavroche 
+Favourite -- Tholomyes 
+Isabeau -- Valjean 
+Chenildieu -- Bamatabois 
+Prouvaire -- Gavroche 
+MmeBurgon -- Jondrette 
+Bahorel -- Combeferre 
+Gueulemer -- MmeThenardier 
+Gavroche -- Valjean 
+MmeThenardier -- Valjean 
+Blacheville -- Listolier 
+Enjolras -- Mabeuf 
+Marius -- MlleGillenormand 
+Grantaire -- Prouvaire 
+Joly -- Feuilly 
 }
