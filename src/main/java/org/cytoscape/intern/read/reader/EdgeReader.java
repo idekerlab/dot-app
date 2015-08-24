@@ -1,12 +1,14 @@
 package org.cytoscape.intern.read.reader;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.HashMap;
 import java.awt.Color;
 import java.awt.Font;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
@@ -160,7 +162,7 @@ public class EdgeReader extends Reader{
 			}
 		}
 		
-		return null;
+		return Pair.of(retrievedProp, retrievedVal);
 	}
 
 	/**
@@ -189,6 +191,63 @@ public class EdgeReader extends Reader{
 		 * 			val = p.right()
 		 * 			getValue().setLockedValue( VP, val);	
 		 */
+		
+		for(Entry<? extends Object, ? extends CyIdentifiable> entry: elementMap.entrySet() ) {
+			// get map of attributes for this edge and the View for this CyEdge
+			Map<String, String> bypassAttrs = getAttrMap(entry.getKey());
+			CyEdge element = (CyEdge)entry.getValue();
+			View<CyEdge> elementView = networkView.getEdgeView(element);
+			
+			// for each bypass attribute
+			for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
+				String attrKey = attrEntry.getKey();
+				String attrVal = attrEntry.getValue();
+				LOGGER.info(
+					String.format("Converting DOT attribute: %s", attrKey)
+				);
+				
+				// Handle special cases
+				if(attrKey.equals("style")) {
+					setStyle(attrVal, elementView);
+					continue;
+				}
+				if (attrKey.equals("color") || attrKey.equals("fillcolor")
+						|| attrKey.equals("fontcolor")) {
+					switch (attrKey) {
+						case "fillcolor": {
+							// Fall through to "color" case
+						}
+						case "color": {
+							setColor(attrVal, elementView, ColorAttribute.COLOR);
+							break;
+						}
+						case "fontcolor": {
+							setColor(attrVal, elementView, ColorAttribute.FONTCOLOR);
+							break;
+						}
+					}
+					continue;
+				}
+				
+				// Get corresponding VisualProperty
+				Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
+				if (p == null) {
+					// Abort if conversion not found
+					continue;
+				}
+
+				// Apply the VisualProperty
+				VisualProperty vizProp = p.getLeft();
+				Object val = p.getRight();
+				if (vizProp == null || val == null) {
+					// Abort if conversion not found
+					continue;
+				}
+				LOGGER.info("Updating Visual Style...");
+				LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
+				elementView.setLockedValue(vizProp, val);
+			}
+		}
 	}
 
 	/**

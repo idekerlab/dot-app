@@ -50,18 +50,11 @@ public abstract class Reader {
 	// visualStyle being applied to network, used to set default values
 	protected VisualStyle vizStyle;
 
-
 	/*
 	 * Map of explicitly defined default attributes
 	 * key is attribute name, value is value
 	 */
 	protected Map<String, String> defaultAttrs;
-	
-	/*
-	 * Map of defined bypass attributes
-	 * (attributes that are defined at node declaration in file)
-	 */
-	protected Map<String, String> bypassAttrs;
 	
 	// Maps lineStyle attribute values to Cytoscape values
 	protected static final Map<String, LineType> LINE_TYPE_MAP = new HashMap<String, LineType>();

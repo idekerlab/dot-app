@@ -116,7 +116,7 @@ public class NodeReader extends Reader{
 		 */
 		// for each element, get bypass attributes
 		for (Entry<? extends Object, ? extends CyIdentifiable> entry : elementMap.entrySet()) {
-			bypassAttrs = getAttrMap(entry.getKey()); 
+			Map<String, String> bypassAttrs = getAttrMap(entry.getKey()); 
 			CyNode element = (CyNode)entry.getValue();
 			View<CyNode> elementView = networkView.getNodeView(element);
 
