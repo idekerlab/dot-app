@@ -1,23 +1,32 @@
 package org.cytoscape.intern.read.reader;
 
 import java.util.Map;
+import java.util.HashMap;
 import java.awt.Color;
+import java.awt.Font;
 
 import org.apache.commons.lang3.tuple.Pair;
-
 import org.cytoscape.model.CyIdentifiable;
-
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
-
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.LineType;
+import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
+
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LINE_TYPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TRANSPARENCY;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_WIDTH;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TOOLTIP;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_COLOR;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE;
+
 
 import org.cytoscape.view.vizmap.VisualStyle;
 
@@ -33,7 +42,30 @@ import org.cytoscape.view.vizmap.VisualStyle;
 public class EdgeReader extends Reader{
 
 	// Map to convert from .dot arrow shape to Cytoscape
-	private static final Map<String, ArrowShape> ARROW_SHAPE_MAP = null;
+	private static final Map<String, ArrowShape> ARROW_SHAPE_MAP = new HashMap<String, ArrowShape>();
+	static {
+		ARROW_SHAPE_MAP.put("vee", ArrowShapeVisualProperty.ARROW);
+		ARROW_SHAPE_MAP.put("circle", ArrowShapeVisualProperty.CIRCLE);
+		ARROW_SHAPE_MAP.put("normal", ArrowShapeVisualProperty.DELTA);
+		ARROW_SHAPE_MAP.put("diamond", ArrowShapeVisualProperty.DIAMOND);
+		ARROW_SHAPE_MAP.put("ornormal", ArrowShapeVisualProperty.HALF_BOTTOM);
+		ARROW_SHAPE_MAP.put("olnormal", ArrowShapeVisualProperty.HALF_TOP);
+		ARROW_SHAPE_MAP.put("none", ArrowShapeVisualProperty.NONE);
+		ARROW_SHAPE_MAP.put("tee", ArrowShapeVisualProperty.T);
+	}
+	
+	// Map that associates .dot attributes with corresponding CS VisualProperty
+	private static final Map<String, VisualProperty<?>> DOT_TO_CYTOSCAPE = new HashMap<String, VisualProperty<?>>();
+	static {
+		DOT_TO_CYTOSCAPE.put("label", EDGE_LABEL);
+		DOT_TO_CYTOSCAPE.put("xlabel", EDGE_LABEL);
+		DOT_TO_CYTOSCAPE.put("fontname", EDGE_LABEL_FONT_FACE);
+		DOT_TO_CYTOSCAPE.put("fontsize", EDGE_LABEL_FONT_SIZE);
+		DOT_TO_CYTOSCAPE.put("penwidth", EDGE_WIDTH);
+		DOT_TO_CYTOSCAPE.put("arrowhead", EDGE_TARGET_ARROW_SHAPE);
+		DOT_TO_CYTOSCAPE.put("arrowtail", EDGE_SOURCE_ARROW_SHAPE);
+		DOT_TO_CYTOSCAPE.put("tooltip", EDGE_TOOLTIP);
+	}
 	
 	/**
 	 * Constructs an object of type Reader. Sets up Logger.
@@ -44,7 +76,8 @@ public class EdgeReader extends Reader{
 	 * eg. for NodeReader will be a list of default
 	 * @param elementMap Map where keys are JPGD node objects and Values are corresponding Cytoscape CyNodes
 	 */
-	public EdgeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Map<Object, CyIdentifiable> elementMap) {
+	public EdgeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, 
+			Map<Object, CyIdentifiable> elementMap) {
 		super(networkView, vizStyle, defaultAttrs);
 		this.elementMap = elementMap;
 
@@ -95,6 +128,37 @@ public class EdgeReader extends Reader{
 		 * source/target arrow shape
 		 * visibility-- check style for "invis"
 		 */
+		
+		VisualProperty retrievedProp = DOT_TO_CYTOSCAPE.get(name);
+		Object retrievedVal = null;
+		switch(name) {
+			case "xlabel": {
+				// Fall through to label case
+			}
+			case "label" : {
+				retrievedVal = val;
+				break;
+			}
+			case "penwidth": {
+				retrievedVal = Double.parseDouble(val);
+				break;
+			}
+			case "fontname": {
+				retrievedVal = Font.decode(val);
+				break;
+			}
+			case "fontsize": {
+				retrievedVal = Integer.parseInt(val);
+				break;
+			}
+			case "arrowhead": {
+				// Fall through to arrowtail
+			}
+			case "arrowtail": {
+				retrievedVal = ARROW_SHAPE_MAP.get(val);
+				break;
+			}
+		}
 		
 		return null;
 	}
