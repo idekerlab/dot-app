@@ -314,7 +314,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		}
 		
 		// error checking if the graph object is not found
-		if (graph == null){
+		if (graph == null) {
 			LOGGER.log(Level.SEVERE, "Graph is null, either it's a empty graph or is not found in HashMap");
 			return null;
 		}
