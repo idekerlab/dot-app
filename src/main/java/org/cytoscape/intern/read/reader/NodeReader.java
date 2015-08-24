@@ -66,7 +66,7 @@ public class NodeReader extends Reader{
 	 * Map to convert .dot attributes with a single Cytoscape VisualProperty equivalent
 	 * Other .dot attributes are handled separately
 	 */
-	private static final Map<String, VisualProperty<?>> DOT_TO_CYTOSCAPE = new HashMap<String, VisualProperty<?>>();
+	private static final Map<String, VisualProperty<?>> DOT_TO_CYTOSCAPE = new HashMap<String, VisualProperty<?>>(9);
 	static {
 		DOT_TO_CYTOSCAPE.put("label", NODE_LABEL);
 		DOT_TO_CYTOSCAPE.put("xlabel", NODE_LABEL);

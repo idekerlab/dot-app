@@ -3,7 +3,9 @@ package org.cytoscape.intern.read.reader;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_BACKGROUND_PAINT;
 
 import java.awt.Color;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.cytoscape.model.CyIdentifiable;
@@ -11,6 +13,8 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.vizmap.VisualStyle;
+
+import com.alexmerz.graphviz.objects.Graph;
 
 /**
  * Class that contains definitions and some implementation for converting a
@@ -24,6 +28,8 @@ import org.cytoscape.view.vizmap.VisualStyle;
 public class NetworkReader extends Reader{
 
 
+	// JPGD object that contains visual information for this network view
+	private Graph graph;
 	/**
 	 * Constructs an object of type Reader. Sets up Logger.
 	 * 
@@ -32,8 +38,9 @@ public class NetworkReader extends Reader{
 	 * @param defaultAttrs Map that contains default attributes for Reader of this type
 	 * eg. for NodeReader will be a list of default
 	 */
-	public NetworkReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs) {
+	public NetworkReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Graph graph) {
 		super(networkView, vizStyle, defaultAttrs);
+		this.graph = graph;
 
 	}
 
@@ -57,7 +64,23 @@ public class NetworkReader extends Reader{
 
 	@Override
 	protected void setBypasses() {
-		//Network Properties don't set the Bypass
+		//Network doesn't set bypass value with the Graph object's attributes
+		//overrides the defaults set in setDefault()
+		LOGGER.info("Setting the Bypass values for Visual Style...");
+		/*
+		 * for attribute in graph.getAttributes() 
+		 * 		Pair p = convertAttribute(name, val);
+		 * 		VP = p.left()
+		 * 		val = p.right()
+		 * 		vizStyle.setDefaultValue( VP, val);	
+		 */
+		for (Entry<String, String> attrEntry : graph.getAttributes().entrySet()) {
+			String attrKey = attrEntry.getKey();
+			String attrVal = attrEntry.getValue();
+			if (attrKey.equals("bgcolor")) {
+				setColor(attrVal, vizStyle, ColorAttribute.BGCOLOR);
+			}
+		}
 	}
 
 	@Override
@@ -80,8 +103,9 @@ public class NetworkReader extends Reader{
 				vizStyle.setDefaultValue(NETWORK_BACKGROUND_PAINT, color);
 				break;
 			}
-		default:
-			break;
+			default: {
+				break;
+			}
 		}
 	}
 
@@ -93,9 +117,7 @@ public class NetworkReader extends Reader{
 
 	@Override
 	public void setProperties(){
-		String colorVal = defaultAttrs.get("bgcolor");
-		if (colorVal != null) {
-			setColor(colorVal, vizStyle, ColorAttribute.BGCOLOR);
-		}
+		LOGGER.info("NetworkReader: Setting properties for VisualStyle...");
+		super.setProperties();
 	}
 }
