@@ -167,6 +167,7 @@ public abstract class Reader {
 				continue;
 			}
 
+			// set in vizStyle
 			VisualProperty vizProp = p.getLeft();
 			Object val = p.getRight();
 			if (vizProp == null || val == null) {

@@ -1,13 +1,24 @@
 package org.cytoscape.intern.read.reader;
 
 import java.util.Map;
+import java.awt.Color;
 
 import org.apache.commons.lang3.tuple.Pair;
+
 import org.cytoscape.model.CyIdentifiable;
+
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
+
 import org.cytoscape.view.presentation.property.values.ArrowShape;
+import org.cytoscape.view.presentation.property.values.LineType;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LINE_TYPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY;
+
 import org.cytoscape.view.vizmap.VisualStyle;
 
 /**
@@ -42,16 +53,16 @@ public class EdgeReader extends Reader{
 	/**
 	 * Sets defaults and bypass attributes for each node and sets positions
 	 */
-	@Override
+	/*@Override
 	public void setProperties() {
 		super.setProperties();
 		setEdgeWeights();
-	}
+	}*/
 	
 	/**
 	 * Converts edge weights by putting into a new column in the table
 	 */
-	private void setEdgeWeights(){
+	private void setWeight() {
 
 	}
 
@@ -126,8 +137,21 @@ public class EdgeReader extends Reader{
 	 */
 	@Override
 	protected void setStyle(String attrVal, VisualStyle vizStyle) {
-		// TODO Auto-generated method stub
-		
+		String[] styleAttrs = attrVal.split(",");
+
+		for (String styleAttr : styleAttrs) {
+			styleAttr = styleAttr.trim();
+			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
+			
+			// set line type if defined
+			if (lineType != null) {
+				vizStyle.setDefaultValue(EDGE_LINE_TYPE, lineType);
+			}
+			// make invisible if needed
+			if(styleAttr.equals("invis")) {
+				vizStyle.setDefaultValue(EDGE_TRANSPARENCY, 0);
+			}
+		}
 	}
 
 	/**
@@ -141,12 +165,27 @@ public class EdgeReader extends Reader{
 	@Override
 	protected void setStyle(String attrVal,
 			View<? extends CyIdentifiable> elementView) {
-		// TODO Auto-generated method stub
 		
+		String[] styleAttrs = attrVal.split(",");
+
+		for (String styleAttr : styleAttrs) {
+			styleAttr = styleAttr.trim();
+			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
+			
+			// set line type if defined
+			if (lineType != null) {
+				elementView.setLockedValue(EDGE_LINE_TYPE, lineType);
+			}
+			// make invisible if needed
+			if(styleAttr.equals("invis")) {
+				elementView.setLockedValue(EDGE_TRANSPARENCY, 0);
+			}
+		}
 	}
 
 	/**
-	 * Converts .dot color to Cytoscape default value
+	 * Converts .dot color to Cytoscape default value. Does not handle
+	 * colors of edge arrows
 	 * 
 	 * @param attrVal String that is value of color from dot file
 	 * @param vizStyle VisualStyle that this color is being used in
@@ -155,12 +194,27 @@ public class EdgeReader extends Reader{
 	@Override
 	protected void setColor(String attrVal, VisualStyle vizStyle,
 			ColorAttribute attr) {
-		// TODO Auto-generated method stub
 		
+		Color color = convertColor(attrVal);
+		Integer transparency = color.getAlpha();
+
+		switch (attr) {
+			case COLOR: {
+				vizStyle.setDefaultValue(EDGE_STROKE_UNSELECTED_PAINT, color);
+				vizStyle.setDefaultValue(EDGE_TRANSPARENCY, transparency);
+				break;
+			}
+			case FONTCOLOR: {
+				vizStyle.setDefaultValue(EDGE_LABEL_COLOR, color);
+				vizStyle.setDefaultValue(EDGE_LABEL_TRANSPARENCY, transparency);
+				break;
+			}
+		}
 	}
 
 	/**
-	 * Converts .dot color to Cytoscape bypass value
+	 * Converts .dot color to Cytoscape bypass value. Does not handle arrow
+	 * colors
 	 * 
 	 * @param attrVal String that is value of color from dot file
 	 * @param elementView View of element that color is being applied to
@@ -169,8 +223,22 @@ public class EdgeReader extends Reader{
 	@Override
 	protected void setColor(String attrVal,
 			View<? extends CyIdentifiable> elementView, ColorAttribute attr) {
-		// TODO Auto-generated method stub
-		
+
+		Color color = convertColor(attrVal);
+		Integer transparency = color.getAlpha();
+
+		switch (attr) {
+			case COLOR: {
+				elementView.setLockedValue(EDGE_STROKE_UNSELECTED_PAINT, color);
+				elementView.setLockedValue(EDGE_TRANSPARENCY, transparency);
+				break;
+			}
+			case FONTCOLOR: {
+				elementView.setLockedValue(EDGE_LABEL_COLOR, color);
+				elementView.setLockedValue(EDGE_LABEL_TRANSPARENCY, transparency);
+				break;
+			}
+		}
 	}
 	
 }

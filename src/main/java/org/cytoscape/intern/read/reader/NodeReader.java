@@ -132,11 +132,11 @@ public class NodeReader extends Reader{
 					setPositions(attrVal, elementView);
 					continue;
 				}
-				else if (attrKey.equals("style")) {
+				if (attrKey.equals("style")) {
 					setStyle(attrVal, elementView);
 					continue;
 				}
-				else if (attrKey.equals("color") || attrKey.equals("fillcolor")
+				if (attrKey.equals("color") || attrKey.equals("fillcolor")
 						|| attrKey.equals("fontcolor")) {
 					switch (attrKey) {
 						case "color": {
@@ -175,11 +175,11 @@ public class NodeReader extends Reader{
 	/**
 	 * Sets defaults and bypass attributes for each node and sets positions
 	 */
-	@Override
+	/*@Override
 	public void setProperties() {
 		LOGGER.info("NodeReader: Setting properties for VisualStyle...");
 		super.setProperties();
-	}
+	}*/
 	
 	/**
 	 * Sets VisualProperties for each node related to location of node.
@@ -327,8 +327,10 @@ public class NodeReader extends Reader{
 	@Override
 	protected void setColor(String attrVal, VisualStyle vizStyle,
 			ColorAttribute attr) {
+
 		Color color = convertColor(attrVal);
 		Integer transparency = color.getAlpha();
+
 		switch (attr) {
 			case COLOR: {
 				vizStyle.setDefaultValue(NODE_BORDER_PAINT, color);
@@ -359,8 +361,10 @@ public class NodeReader extends Reader{
 	@Override
 	protected void setColor(String attrVal,
 			View<? extends CyIdentifiable> elementView, ColorAttribute attr) {
+
 		Color color = convertColor(attrVal);
 		Integer transparency = color.getAlpha();
+
 		switch (attr) {
 			case COLOR: {
 				elementView.setLockedValue(NODE_BORDER_PAINT, color);
