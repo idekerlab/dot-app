@@ -40,15 +40,6 @@ public class EdgeReader extends Reader{
 	}
 	
 	/**
-	 * Sets defaults and bypass attributes for each node and sets positions
-	 */
-	@Override
-	public void setProperties() {
-		super.setProperties();
-		setEdgeWeights();
-	}
-	
-	/**
 	 * Converts edge weights by putting into a new column in the table
 	 */
 	private void setEdgeWeights(){

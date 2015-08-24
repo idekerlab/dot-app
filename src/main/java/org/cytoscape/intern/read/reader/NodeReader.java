@@ -173,15 +173,6 @@ public class NodeReader extends Reader{
 	}
 
 	/**
-	 * Sets defaults and bypass attributes for each node and sets positions
-	 */
-	@Override
-	public void setProperties() {
-		LOGGER.info("NodeReader: Setting properties for VisualStyle...");
-		super.setProperties();
-	}
-	
-	/**
 	 * Sets VisualProperties for each node related to location of node.
 	 * Here because cannot return 2 VisualProperties from convertAttribute
 	 * and want to make exception clear
