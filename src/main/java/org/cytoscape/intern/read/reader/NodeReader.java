@@ -1,22 +1,5 @@
 package org.cytoscape.intern.read.reader;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import org.apache.commons.lang3.tuple.Pair;
-import org.cytoscape.model.CyNode;
-import org.cytoscape.model.CyIdentifiable;
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.view.model.View;
-import org.cytoscape.view.model.VisualProperty;
-import org.cytoscape.view.vizmap.VisualStyle;
-import org.cytoscape.view.presentation.property.values.LineType;
-import org.cytoscape.view.presentation.property.values.NodeShape;
-import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
-
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_LINE_TYPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_PAINT;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_TRANSPARENCY;
@@ -31,11 +14,26 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_L
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SHAPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TOOLTIP;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TRANSPARENCY;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_VISIBLE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_WIDTH;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_X_LOCATION;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_Y_LOCATION;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.lang3.tuple.Pair;
+import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyNode;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
+import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
+import org.cytoscape.view.presentation.property.values.LineType;
+import org.cytoscape.view.presentation.property.values.NodeShape;
+import org.cytoscape.view.vizmap.VisualStyle;
 
 import com.alexmerz.graphviz.objects.Node;
 
@@ -90,8 +88,6 @@ public class NodeReader extends Reader{
 	public NodeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Map<Node, CyNode> elementMap) {
 		super(networkView, vizStyle, defaultAttrs);
 		this.elementMap = elementMap;
-		LOGGER.info(String.valueOf(defaultAttrs.size()));
-
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -150,6 +146,9 @@ public class NodeReader extends Reader{
 				}
 				VisualProperty vizProp = p.getLeft();
 				Object val = p.getRight();
+				if (vizProp == null || val == null) {
+					continue;
+				}
 				LOGGER.info("Updating Visual Style...");
 				LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
 				elementView.setLockedValue(vizProp, val);
@@ -159,10 +158,10 @@ public class NodeReader extends Reader{
 	/**
 	 * Sets defaults and bypass attributes for each node and sets positions
 	 */
-	public VisualStyle setProperties() {
+	@Override
+	public void setProperties() {
 		LOGGER.info("NodeReader: Setting properties for VisualStyle...");
 		super.setProperties();
-		return vizStyle;
 	}
 	
 	/**
@@ -199,6 +198,7 @@ public class NodeReader extends Reader{
 	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
 	 * attribute
 	 */
+	@Override
 	@SuppressWarnings({ "rawtypes" })
 	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
 		/**
@@ -236,14 +236,14 @@ public class NodeReader extends Reader{
 				break;
 			}
 			case "penwidth": {
-				retrievedVal = (Object)Double.parseDouble(val);
+				retrievedVal = Double.parseDouble(val);
 				break;
 			}
 			case "width": {
 				//Fall through to height case
 			}
 			case "height": {
-				retrievedVal = (Object)(Double.parseDouble(val) * 72.0);
+				retrievedVal = Double.parseDouble(val) * 72.0;
 				break;
 			}
 			case "shape": {
@@ -251,11 +251,11 @@ public class NodeReader extends Reader{
 				break;
 			}
 			case "fontname": {
-				retrievedVal = (Object)Font.decode(val);
+				retrievedVal = Font.decode(val);
 				break;
 			}
 			case "fontsize": {
-				retrievedVal = (Object)Integer.parseInt(val);
+				retrievedVal = Integer.parseInt(val);
 				break;
 			}
 		}
@@ -292,7 +292,6 @@ public class NodeReader extends Reader{
 	@Override
 	protected void setColor(String attrVal, VisualStyle vizStyle,
 			ColorAttribute attr) {
-		// TODO Auto-generated method stub
 		Color color = convertColor(attrVal);
 		Integer transparency = color.getAlpha();
 		switch (attr) {

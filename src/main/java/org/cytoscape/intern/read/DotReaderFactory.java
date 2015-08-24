@@ -172,6 +172,7 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 			if (vizStyle.getTitle().equals(vizStyleName)) {
 				SwingUtilities.invokeLater( new Runnable()
 				{
+					@Override
 					public void run() {
 						vizMapMgr.setVisualStyle(vizStyle, networkView);
 						vizStyle.apply(networkView);

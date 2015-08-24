@@ -1,14 +1,10 @@
 package org.cytoscape.intern.read;
 
-import org.cytoscape.intern.read.reader.NodeReader;
-import org.cytoscape.intern.read.reader.Reader; 
-
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.FileHandler;
@@ -17,12 +13,14 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import org.cytoscape.intern.FileHandlerManager;
+import org.cytoscape.intern.read.reader.NetworkReader;
+import org.cytoscape.intern.read.reader.NodeReader;
 import org.cytoscape.io.read.AbstractCyNetworkReader;
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.model.subnetwork.CyRootNetworkManager;
@@ -31,18 +29,16 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualPropertyDependency;
-import org.cytoscape.view.vizmap.VisualStyleFactory;
-import org.cytoscape.work.AbstractTask;
-import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.view.vizmap.VisualStyle;
+import org.cytoscape.view.vizmap.VisualStyleFactory;
+import org.cytoscape.work.TaskMonitor;
 
-import com.alexmerz.graphviz.Parser;
 import com.alexmerz.graphviz.ParseException;
+import com.alexmerz.graphviz.Parser;
+import com.alexmerz.graphviz.objects.Edge;
 import com.alexmerz.graphviz.objects.Graph;
 import com.alexmerz.graphviz.objects.Id;
 import com.alexmerz.graphviz.objects.Node;
-import com.alexmerz.graphviz.objects.Edge;
-import com.alexmerz.graphviz.objects.PortNode;
 
 /**
  * Task object that reads a dot file into a network/ network view
@@ -83,7 +79,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	private static final String[] NODE_ATTRIBUTES = {
 		"height", "width", "shape"
 	};
-	private static final ArrayList<String> GRAPH_ATTRIBUTES = new ArrayList<String>();
+	private static final String[] GRAPH_ATTRIBUTES = {"bgcolor"};
 	private static final String[] COMMON_ATTRIBUTES = {
 		"color", "fillcolor", "fontcolor", "fontname", "fontsize", "label",
 		"penwidth", "pos", "style", "tooltip", "xlabel"
@@ -350,8 +346,9 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 
 		NodeReader nodeReader = new NodeReader(networkView, vizStyle, getNodeDefaultMap(graph), nodeMap);
-		vizStyle = nodeReader.setProperties();
-
+		nodeReader.setProperties();
+		NetworkReader networkReader = new NetworkReader(networkView, vizStyle, getGraphDefaultMap(graph));
+		networkReader.setProperties();
 
 		//add the created visualStyle to VisualMappingManager
 		vizMapMgr.addVisualStyle(vizStyle);
@@ -369,6 +366,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 * 
 	 * @return array of CyNetworks read
 	 */
+	@Override
 	public CyNetwork[] getNetworks() {
 		return networks;
 	}
@@ -544,6 +542,17 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			}
 		}
 		LOGGER.info(String.valueOf(output.size()));
+		return output;
+	}
+	
+	private Map<String, String> getGraphDefaultMap(Graph graph) {
+		Map<String, String> output = new HashMap<String, String>();
+		for (String graphAttrs : GRAPH_ATTRIBUTES) {
+			String val = graph.getAttribute(graphAttrs);
+			if (val != null) {
+				output.put(graphAttrs, val);
+			}
+		}
 		return output;
 	}
 	

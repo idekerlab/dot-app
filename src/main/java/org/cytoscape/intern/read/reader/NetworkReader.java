@@ -1,16 +1,16 @@
 package org.cytoscape.intern.read.reader;
 
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_BACKGROUND_PAINT;
+
+import java.awt.Color;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.Pair;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.vizmap.VisualStyle;
-
-import com.alexmerz.graphviz.objects.Graph;
-
-import org.apache.commons.lang3.tuple.Pair;
 
 /**
  * Class that contains definitions and some implementation for converting a
@@ -49,40 +49,53 @@ public class NetworkReader extends Reader{
 	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
 	 * attribute
 	 */
+	@Override
+	@SuppressWarnings("rawtypes")
 	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
 		return null;
 	}
 
 	@Override
 	protected void setBypasses() {
-		// TODO Auto-generated method stub
-		
+		//Network Properties don't set the Bypass
 	}
 
 	@Override
 	protected void setStyle(String attrVal, VisualStyle vizStyle) {
-		// TODO Auto-generated method stub
-		
+		//Network doesn't have properties set with style attribute
 	}
 
 	@Override
 	protected void setStyle(String attrVal,
 			View<? extends CyIdentifiable> elementView) {
-		// TODO Auto-generated method stub
-		
+		//Network doesn't have properties set with style attribute
 	}
 
 	@Override
 	protected void setColor(String attrVal, VisualStyle vizStyle,
 			ColorAttribute attr) {
-		// TODO Auto-generated method stub
-		
+		Color color = convertColor(attrVal);
+		switch (attr) {
+			case BGCOLOR: {
+				vizStyle.setDefaultValue(NETWORK_BACKGROUND_PAINT, color);
+				break;
+			}
+		default:
+			break;
+		}
 	}
 
 	@Override
 	protected void setColor(String attrVal,
 			View<? extends CyIdentifiable> elementView, ColorAttribute attr) {
-		// TODO Auto-generated method stub
-		
+		//Network doesn't set Background color with bypass
+	}
+
+	@Override
+	public void setProperties(){
+		String colorVal = defaultAttrs.get("bgcolor");
+		if (colorVal != null) {
+			setColor(colorVal, vizStyle, ColorAttribute.BGCOLOR);
+		}
 	}
 }

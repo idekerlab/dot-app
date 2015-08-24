@@ -1,6 +1,5 @@
 package org.cytoscape.intern.read.reader;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -8,10 +7,8 @@ import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
-import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
-
-import com.alexmerz.graphviz.objects.Edge;
+import org.cytoscape.view.vizmap.VisualStyle;
 
 /**
  * Class that contains definitions and some implementation for converting a
@@ -44,12 +41,11 @@ public class EdgeReader extends Reader{
 	
 	/**
 	 * Sets defaults and bypass attributes for each node and sets positions
-	 * @return 
 	 */
-	public VisualStyle setProperties() {
+	@Override
+	public void setProperties() {
 		super.setProperties();
 		setEdgeWeights();
-		return vizStyle;
 	}
 	
 	/**
@@ -71,6 +67,7 @@ public class EdgeReader extends Reader{
 	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
 	 * attribute
 	 */
+	@Override
 	@SuppressWarnings("rawtypes")
 	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
 		return null;
