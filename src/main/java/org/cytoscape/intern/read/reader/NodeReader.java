@@ -61,6 +61,11 @@ public class NodeReader extends Reader{
 		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.ROUND_RECTANGLE);
 		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.RECTANGLE);     
 	}
+	
+	/*
+	 * Map to convert .dot attributes with a single Cytoscape VisualProperty equivalent
+	 * Other .dot attributes are handled separately
+	 */
 	private static final Map<String, VisualProperty<?>> DOT_TO_CYTOSCAPE = new HashMap<String, VisualProperty<?>>();
 	static {
 		DOT_TO_CYTOSCAPE.put("label", NODE_LABEL);
@@ -90,6 +95,11 @@ public class NodeReader extends Reader{
 		this.elementMap = elementMap;
 	}
 	
+	/**
+	 * Sets all the bypass Visual Properties in Cytoscape for this type of reader
+	 * eg. NetworkReader sets all network props, same for nodes
+	 * Modifies CyNetworkView networkView, VisualStyle vizStyle etc. 
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	protected void setBypasses() {
@@ -103,26 +113,30 @@ public class NodeReader extends Reader{
 		 * 			val = p.right()
 		 * 			getValue().setLockedValue( VP, val);	
 		 */
+		// for each element, get bypass attributes
 		for (Entry<? extends Object, ? extends CyIdentifiable> entry : elementMap.entrySet()) {
 			bypassAttrs = getAttrMap(entry.getKey()); 
 			CyNode element = (CyNode)entry.getValue();
 			View<CyNode> elementView = networkView.getNodeView(element);
 
+			// for each bypass attribute
 			for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
 				String attrKey = attrEntry.getKey();
 				String attrVal = attrEntry.getValue();
 				LOGGER.info(
 					String.format("Converting DOT attribute: %s", attrKey)
 				);
+
+				// Handle specialty attributes
 				if (attrKey.equals("pos")) {
 					setPositions(attrVal, elementView);
 					continue;
 				}
-				if (attrKey.equals("style")) {
+				else if (attrKey.equals("style")) {
 					setStyle(attrVal, elementView);
 					continue;
 				}
-				if (attrKey.equals("color") || attrKey.equals("fillcolor")
+				else if (attrKey.equals("color") || attrKey.equals("fillcolor")
 						|| attrKey.equals("fontcolor")) {
 					switch (attrKey) {
 						case "color": {
@@ -140,10 +154,12 @@ public class NodeReader extends Reader{
 					}
 					continue;
 				}
+
 				Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
 				if (p == null) {
 					continue;
 				}
+
 				VisualProperty vizProp = p.getLeft();
 				Object val = p.getRight();
 				if (vizProp == null || val == null) {
@@ -155,6 +171,7 @@ public class NodeReader extends Reader{
 			}
 		}
 	}
+
 	/**
 	 * Sets defaults and bypass attributes for each node and sets positions
 	 */
@@ -214,15 +231,6 @@ public class NodeReader extends Reader{
 		 * label position
 		 * tooltip
 		 * label font/size/color
-		 * 
-		 * 
-		 * Pair output = null;
-		 * switch(name) {
-		 *		"shape":
-		 *			
-		 * 
-		 * }
-		 * 
 		 */
 		
 		VisualProperty retrievedProp = DOT_TO_CYTOSCAPE.get(name);
@@ -263,24 +271,44 @@ public class NodeReader extends Reader{
 
 	}
 
+	/**
+	 * Converts the "style" attribute from graphviz for default value of Cytoscape.
+	 * Handles node border line type only.
+	 * 
+	 * @param attrVal String that is the value of "style" 
+	 * eg. "dashed, rounded"
+	 * @param vizStyle VisualStyle that "style" is being applied to
+	 */
 	@Override
 	protected void setStyle(String attrVal, VisualStyle vizStyle) {
 		String[] styleAttrs = attrVal.split(",");
+
 		for (String styleAttr : styleAttrs) {
 			styleAttr = styleAttr.trim();
 			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
+
 			if (lineType != null) {
 				vizStyle.setDefaultValue(NODE_BORDER_LINE_TYPE, lineType);
 			}
 		}
 	}
 
+	/**
+	 * Converts the "style" attribute from graphviz for bypass value of Cytoscape.
+	 * Only handles node border line type.
+	 * 
+	 * @param attrVal String that is the value of "style" 
+	 * eg. "dashed, rounded"
+	 * @param elementView View of element that "style" is being applied to eg. View<CyNode> 
+	 */
 	@Override
 	protected void setStyle(String attrVal,
 			View<? extends CyIdentifiable> elementView) {
+
 		String[] styleAttrs = attrVal.split(",");
 		for (String styleAttr : styleAttrs) {
 			styleAttr = styleAttr.trim();
+
 			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
 			if (lineType != null) {
 				elementView.setLockedValue(NODE_BORDER_LINE_TYPE, lineType);
@@ -289,6 +317,13 @@ public class NodeReader extends Reader{
 		
 	}
 
+	/**
+	 * Converts .dot color to Cytoscape default value
+	 * 
+	 * @param attrVal String that is value of color from dot file
+	 * @param vizStyle VisualStyle that this color is being used in
+	 * @param attr enum for type of color: COLOR, FILLCOLOR or FONTCOLOR 
+	 */
 	@Override
 	protected void setColor(String attrVal, VisualStyle vizStyle,
 			ColorAttribute attr) {
@@ -314,6 +349,13 @@ public class NodeReader extends Reader{
 		
 	}
 
+	/**
+	 * Converts .dot color to Cytoscape bypass value
+	 * 
+	 * @param attrVal String that is value of color from dot file
+	 * @param elementView View of element that color is being applied to
+	 * @param attr enum for type of color: COLOR, FILLCOLOR or FONTCOLOR 
+	 */
 	@Override
 	protected void setColor(String attrVal,
 			View<? extends CyIdentifiable> elementView, ColorAttribute attr) {

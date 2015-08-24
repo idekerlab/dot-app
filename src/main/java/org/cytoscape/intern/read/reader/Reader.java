@@ -135,8 +135,10 @@ public abstract class Reader {
 			LOGGER.info(
 				String.format("Converting DOT attribute: %s", attrKey)
 			);
+
 			if (attrKey.equals("style")) {
 				setStyle(attrVal, vizStyle);
+				// this attribute has been handled, move on to next one
 				continue;
 			}
 			if (attrKey.equals("color") || attrKey.equals("fillcolor")
@@ -155,12 +157,16 @@ public abstract class Reader {
 						break;
 					}
 				}
+				// this attribute has been handled, move on to next one
 				continue;
 			}
+
 			Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
+			// if attribute cannot be converted, move on to next one
 			if (p == null) {
 				continue;
 			}
+
 			VisualProperty vizProp = p.getLeft();
 			Object val = p.getRight();
 			if (vizProp == null || val == null) {
@@ -177,7 +183,6 @@ public abstract class Reader {
 	 * Sets all the bypass Visual Properties in Cytoscape for this type of reader
 	 * eg. NetworkReader sets all network props, same for nodes
 	 * Modifies CyNetworkView networkView, VisualStyle vizStyle etc. 
-	 * @return 
 	 */
 	abstract protected void setBypasses();
 	
@@ -285,10 +290,41 @@ public abstract class Reader {
 	 */
 	@SuppressWarnings("rawtypes")
 	protected abstract Pair<VisualProperty, Object> convertAttribute(String name, String val);
-	
+
+	/**
+	 * Converts the "style" attribute from graphviz for default value of Cytoscape
+	 * 
+	 * @param attrVal String that is the value of "style" 
+	 * eg. "dashed, rounded"
+	 * @param vizStyle VisualStyle that "style" is being applied to
+	 */
 	abstract protected void setStyle(String attrVal, VisualStyle vizStyle);
+
+	/**
+	 * Converts the "style" attribute from graphviz for bypass value of Cytoscape
+	 * 
+	 * @param attrVal String that is the value of "style" 
+	 * eg. "dashed, rounded"
+	 * @param elementView View of element that "style" is being applied to eg. View<CyNode> 
+	 */
 	abstract protected void setStyle(String attrVal, View<? extends CyIdentifiable> elementView);
+
+	/**
+	 * Converts .dot color to Cytoscape default value
+	 * 
+	 * @param attrVal String that is value of color from dot file
+	 * @param vizStyle VisualStyle that this color is being used in
+	 * @param attr enum for type of color: COLOR, FILLCOLOR or FONTCOLOR 
+	 */
 	abstract protected void setColor(String attrVal, VisualStyle vizStyle, ColorAttribute attr);
+
+	/**
+	 * Converts .dot color to Cytoscape bypass value
+	 * 
+	 * @param attrVal String that is value of color from dot file
+	 * @param elementView View of element that color is being applied to
+	 * @param attr enum for type of color: COLOR, FILLCOLOR or FONTCOLOR 
+	 */
 	abstract protected void setColor(String attrVal, View<? extends CyIdentifiable> elementView, ColorAttribute attr);
 }
 
