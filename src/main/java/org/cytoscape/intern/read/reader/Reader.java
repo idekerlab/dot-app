@@ -47,9 +47,6 @@ public abstract class Reader {
 	// view of network being created/modified
 	protected CyNetworkView networkView;
 
-	// network being created/modified
-	protected CyNetwork network;
-
 	// visualStyle being applied to network, used to set default values
 	protected VisualStyle vizStyle;
 
@@ -128,7 +125,6 @@ public abstract class Reader {
 		 * 		val = p.right()
 		 * 		vizStyle.setDefaultValue( VP, val);
 		 */
-		LOGGER.info(String.valueOf(defaultAttrs.size()));
 		for (Entry<String, String> attrEntry : defaultAttrs.entrySet()) {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();
@@ -142,7 +138,7 @@ public abstract class Reader {
 				continue;
 			}
 			if (attrKey.equals("color") || attrKey.equals("fillcolor")
-					|| attrKey.equals("fontcolor")) {
+					|| attrKey.equals("fontcolor") || attrKey.equals("bgcolor")) {
 				switch (attrKey) {
 					case "color": {
 						setColor(attrVal, vizStyle, ColorAttribute.COLOR);
@@ -154,6 +150,10 @@ public abstract class Reader {
 					}
 					case "fontcolor": {
 						setColor(attrVal, vizStyle, ColorAttribute.FONTCOLOR);
+						break;
+					}
+					case "bgcolor": {
+						setColor(attrVal, vizStyle, ColorAttribute.BGCOLOR);
 						break;
 					}
 				}
@@ -202,7 +202,7 @@ public abstract class Reader {
 	/**
 	 * Returns the Map of bypass attributes for a given JPGD object.
 	 * We define bypass attributes as any attributes declared at the individual
-	 * node declaration.
+	 * GraphViz element declaration.
 	 * 
 	 * @param element Graph element that we are getting list of attributes for. Should be
 	 * either a Node or an Edge, inputs of any other type will throw an IllegalArgumentException

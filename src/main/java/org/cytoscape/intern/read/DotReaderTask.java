@@ -134,7 +134,6 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	@Override
 	public void run(TaskMonitor monitor) {
-		// TODO 
 		/*
 		 * Steps:
 		 * 1. Use Parser to generate Graph objects representing
@@ -347,7 +346,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 
 		NodeReader nodeReader = new NodeReader(networkView, vizStyle, getNodeDefaultMap(graph), nodeMap);
 		nodeReader.setProperties();
-		NetworkReader networkReader = new NetworkReader(networkView, vizStyle, getGraphDefaultMap(graph));
+		NetworkReader networkReader = new NetworkReader(networkView, vizStyle, getGraphDefaultMap(graph), graph);
 		networkReader.setProperties();
 
 		//add the created visualStyle to VisualMappingManager
@@ -492,17 +491,18 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 * 	return output;
 		 */
 		Map<String, String> output = new HashMap<String, String>();
-		for (String commonAttrs : COMMON_ATTRIBUTES) {
-			LOGGER.info(String.format("Setting default node attribute: %s", commonAttrs));
-			String val = graph.getGenericNodeAttribute(commonAttrs);
+		for (String commonAttr : COMMON_ATTRIBUTES) {
+			LOGGER.info(String.format("Getting default node attribute: %s", commonAttr));
+			String val = graph.getGenericNodeAttribute(commonAttr);
 			if (val != null) {
-				output.put(commonAttrs, val);
+				output.put(commonAttr, val);
 			}
 		}
-		for (String nodeAttrs : NODE_ATTRIBUTES) {
-			String val = graph.getGenericNodeAttribute(nodeAttrs);
+		for (String nodeAttr : NODE_ATTRIBUTES) {
+			LOGGER.info(String.format("Getting default node attribute: %s", nodeAttr));
+			String val = graph.getGenericNodeAttribute(nodeAttr);
 			if (val != null) {
-				output.put(nodeAttrs, val);
+				output.put(nodeAttr, val);
 			}
 		}
 		LOGGER.info(String.valueOf(output.size()));
@@ -528,29 +528,30 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 * 	return output;
 		 */
 		Map<String, String> output = new HashMap<String, String>();
-		for (String commonAttrs : COMMON_ATTRIBUTES) {
-			LOGGER.info(String.format("Setting default node attribute: %s", commonAttrs));
-			String val = graph.getGenericNodeAttribute(commonAttrs);
+		for (String commonAttr : COMMON_ATTRIBUTES) {
+			LOGGER.info(String.format("Getting default edge attribute: %s", commonAttr));
+			String val = graph.getGenericNodeAttribute(commonAttr);
 			if (val != null) {
-				output.put(commonAttrs, val);
+				output.put(commonAttr, val);
 			}
 		}
-		for (String nodeAttrs : EDGE_ATTRIBUTES) {
-			String val = graph.getGenericEdgeAttribute(nodeAttrs);
+		for (String edgeAttr : EDGE_ATTRIBUTES) {
+			LOGGER.info(String.format("Getting default edge attribute: %s", edgeAttr));
+			String val = graph.getGenericEdgeAttribute(edgeAttr);
 			if (val != null) {
-				output.put(nodeAttrs, val);
+				output.put(edgeAttr, val);
 			}
 		}
-		LOGGER.info(String.valueOf(output.size()));
 		return output;
 	}
 	
 	private Map<String, String> getGraphDefaultMap(Graph graph) {
 		Map<String, String> output = new HashMap<String, String>();
-		for (String graphAttrs : GRAPH_ATTRIBUTES) {
-			String val = graph.getAttribute(graphAttrs);
+		for (String graphAttr : GRAPH_ATTRIBUTES) {
+			LOGGER.info(String.format("Getting default graph attribute: %s", graphAttr));
+			String val = graph.getGenericGraphAttribute(graphAttr);
 			if (val != null) {
-				output.put(graphAttrs, val);
+				output.put(graphAttr, val);
 			}
 		}
 		return output;
