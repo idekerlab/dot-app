@@ -15,6 +15,7 @@ import java.util.logging.SimpleFormatter;
 import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.intern.read.reader.NetworkReader;
 import org.cytoscape.intern.read.reader.NodeReader;
+import org.cytoscape.intern.read.reader.EdgeReader;
 import org.cytoscape.io.read.AbstractCyNetworkReader;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
@@ -344,10 +345,12 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		 */
 		
 
-		NodeReader nodeReader = new NodeReader(networkView, vizStyle, getNodeDefaultMap(graph), nodeMap);
-		nodeReader.setProperties();
 		NetworkReader networkReader = new NetworkReader(networkView, vizStyle, getGraphDefaultMap(graph), graph);
 		networkReader.setProperties();
+		NodeReader nodeReader = new NodeReader(networkView, vizStyle, getNodeDefaultMap(graph), nodeMap);
+		nodeReader.setProperties();
+		EdgeReader edgeReader = new EdgeReader(networkView, vizStyle, getEdgeDefaultMap(graph), edgeMap);
+		edgeReader.setProperties();
 
 		//add the created visualStyle to VisualMappingManager
 		vizMapMgr.addVisualStyle(vizStyle);

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.awt.Color;
 import java.awt.Font;
 
+import com.alexmerz.graphviz.objects.Edge;
+
 import org.apache.commons.lang3.tuple.Pair;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyEdge;
@@ -79,10 +81,12 @@ public class EdgeReader extends Reader{
 	 * @param elementMap Map where keys are JPGD node objects and Values are corresponding Cytoscape CyNodes
 	 */
 	public EdgeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, 
-			Map<Object, CyIdentifiable> elementMap) {
+			Map<Edge, CyEdge> elementMap) {
+		
 		super(networkView, vizStyle, defaultAttrs);
 		this.elementMap = elementMap;
 
+		LOGGER.info("EdgeReader constructed");
 	}
 	
 	/**
@@ -91,7 +95,6 @@ public class EdgeReader extends Reader{
 	/*@Override
 	public void setProperties() {
 		super.setProperties();
-		setEdgeWeights();
 	}*/
 	
 	/**
@@ -116,6 +119,8 @@ public class EdgeReader extends Reader{
 	@Override
 	@SuppressWarnings("rawtypes")
 	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
+		
+		LOGGER.info("Edge convert attr: " + name);
 		
 		/*
 		 * attributes to convert:
@@ -172,6 +177,7 @@ public class EdgeReader extends Reader{
 	 */
 	@Override
 	protected void setBypasses() {
+		LOGGER.info("setBypasses called");
 		/*
 		 * for each entry in elementMap
 		 * 		bypassMap = getAttrMap(elementMap.getKey())
