@@ -1,24 +1,20 @@
 package org.cytoscape.intern;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.logging.FileHandler;
 
 public class FileHandlerManager {
 
-	private static FileHandlerManager instance = null;
+	private static final FileHandlerManager INSTANCE = new FileHandlerManager();
 	private ArrayList<FileHandler> fileHandlers = null;
 	
 	private FileHandlerManager() {
-		instance = this;
 		fileHandlers = new ArrayList<FileHandler>();
 	}
 
 	public static FileHandlerManager getManager() {
-		if (instance != null) {
-			return instance;
-		}
-		instance = new FileHandlerManager();
-		return instance;
+		return INSTANCE;
 	}
 	
 	public void registerFileHandler(FileHandler handler) {
@@ -33,9 +29,11 @@ public class FileHandlerManager {
 	}
 
 	public void closeAllFileHandlers() {
-		for(FileHandler handler: fileHandlers) {
+		Iterator<FileHandler> fileHandlersIter = fileHandlers.iterator();
+		while (fileHandlersIter.hasNext()) {
+			FileHandler handler = fileHandlersIter.next();
 			handler.close();
-			fileHandlers.remove(handler);
+			fileHandlersIter.remove();
 		}
 	}
 
