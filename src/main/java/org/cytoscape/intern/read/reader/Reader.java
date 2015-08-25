@@ -42,7 +42,19 @@ public abstract class Reader {
 	//debug logger declaration 
 	protected static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.read.Reader");
 	protected static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
-	protected FileHandler handler = null;
+	static {
+		FileHandler handler = null;
+		try {
+			handler = new FileHandler("log_Reader.txt");
+			handler.setLevel(Level.ALL);
+			handler.setFormatter(new SimpleFormatter());
+		}
+		catch(IOException e) {
+			// to prevent compiler error
+		}
+		LOGGER.addHandler(handler);
+		FILE_HANDLER_MGR.registerFileHandler(handler);
+	}
 
 	// view of network being created/modified
 	protected CyNetworkView networkView;
@@ -93,16 +105,6 @@ public abstract class Reader {
 	public Reader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs) {
 
 		// Make logger write to file
-		try {
-			handler = new FileHandler("log_Reader.txt");
-			handler.setLevel(Level.ALL);
-			handler.setFormatter(new SimpleFormatter());
-		}
-		catch(IOException e) {
-			// to prevent compiler error
-		}
-		LOGGER.addHandler(handler);
-		FILE_HANDLER_MGR.registerFileHandler(handler);
 
 		this.networkView = networkView;
 		this.vizStyle = vizStyle;
@@ -132,6 +134,21 @@ public abstract class Reader {
 				String.format("Converting DOT attribute: %s", attrKey)
 			);
 
+			/*
+			 * label attribute may be a special case if label="\N".
+			 * In dot, \N is an escape sequence that maps the node name
+			 * to the node label. So setDefaults needs to run additional code
+			 * which should be added to NodeReader to handle the creation of
+			 * the mapping
+			 */
+			/*
+			 * if attrKey is "label"
+
+			 *   call handleLabelDefault()
+			 *   Method will written differently for each subclass
+			 *   NodeReader will create a passthrough mapping if label="\N"
+			 *   Every other subclass will return immediately
+			 */
 			if (attrKey.equals("style")) {
 				setStyle(attrVal, vizStyle);
 				// this attribute has been handled, move on to next one
@@ -196,7 +213,6 @@ public abstract class Reader {
 		LOGGER.info("Setting the properties for Visual Style...");
 		setDefaults();
 		setBypasses();
-		FILE_HANDLER_MGR.closeFileHandler(handler);
 	}
 
 	/**
@@ -253,10 +269,20 @@ public abstract class Reader {
 		 * return Color.getColor(String)
 		 */
 		LOGGER.info("Converting DOT color string to Java Color...");
+		//Remove trailing/leading whitespace
+		color = color.trim();
+
+		//Regex patterns for DOT color strings
 		String rgbRegex = "^#[0-9A-Fa-f]{6}$";
-		String rgbaRegex = "^#([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})([0-9A-Fa-f]{2})$";
-		String hsbRegex = "^(1(\\.0)?|0?(\\.[0-9]+))[,\\s]+(1(\\.0)?|0?(\\.[0-9]+))[,\\s]+(1(\\.0)?|0?(\\.[0-9]+))$";
+		String rgbaRegex = "^#(?<RED>[0-9A-Fa-f]{2})"
+						   + "(?<GREEN>[0-9A-Fa-f]{2})"
+						   + "(?<BLUE>[0-9A-Fa-f]{2})"
+						   + "(?<ALPHA>[0-9A-Fa-f]{2})$";
+		String hsbRegex = "^(?<HUE>1(?:\\.0+)?|0*(?:\\.[0-9]+))(?:,|\\s)+"
+						 + "(?<SAT>1(?:\\.0+)?|0*(?:\\.[0-9]+))(?:,|\\s)+"
+						 + "(?<VAL>1(?:\\.0+)?|0*(?:\\.[0-9]+))$";
 		// Test color string against RGB regex
+		LOGGER.info(String.format("Color string: %s", color));
 		LOGGER.info("Comparing DOT color string to #FFFFFF format");
 		Matcher matcher = Pattern.compile(rgbRegex).matcher(color);
 		if (matcher.matches()) {
@@ -266,14 +292,23 @@ public abstract class Reader {
 		LOGGER.info("Comparing DOT color string to #FFFFFFFF format");
 		matcher.usePattern(Pattern.compile(rgbaRegex));
 		if (matcher.matches()) {
-			Integer red = Integer.valueOf(matcher.group(1), 16);
-			Integer green = Integer.valueOf(matcher.group(2), 16);
-			Integer blue = Integer.valueOf(matcher.group(3), 16);
-			Integer alpha = Integer.valueOf(matcher.group(4), 16);
+			Integer red = Integer.valueOf(matcher.group("RED"), 16);
+			Integer green = Integer.valueOf(matcher.group("GREEN"), 16);
+			Integer blue = Integer.valueOf(matcher.group("BLUE"), 16);
+			Integer alpha = Integer.valueOf(matcher.group("ALPHA"), 16);
 			return new Color(red, green, blue, alpha);
 		}
-		//TODO HSV format
-		return Color.black;
+		// Test color string against HSB regex
+		LOGGER.info("Comparing DOT color string to H S V format");
+		matcher.usePattern(Pattern.compile(hsbRegex));
+		if (matcher.matches()) {
+			Float hue = Float.valueOf(matcher.group("HUE"));
+			Float saturation = Float.valueOf(matcher.group("SAT"));
+			Float value = Float.valueOf(matcher.group("VAL"));
+			return Color.getHSBColor(hue, saturation, value);
+		}
+		// Cannot translate color names to Java colors, so just return BLUE
+		return Color.BLUE;
 	}
 	
 
