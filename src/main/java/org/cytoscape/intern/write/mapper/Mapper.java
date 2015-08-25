@@ -51,7 +51,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
 /**
  * Handles mapping of Cytoscape properties to .dot attributes in the form of a String.
  * Contains implementation for properties that are shared by nodes and edges and declarations
- * for unshared properties. 
+ * for unshared properties. Also contains variable definitions needed the subclasses
  * 
  * @author Massoud Maher
  * @author Braxton Fitts
@@ -66,6 +66,10 @@ public abstract class Mapper {
 	protected VisualStyle vizStyle;
 	
 	protected static final int TRANSPARENT = 0x00;
+	
+	// if node width and height are locked
+	private static boolean nodeSizesLockedIsSet = false;
+	protected static boolean nodeSizesLocked;
 	
 	/*
 	 * maps Cytoscape line types to the equivalent string used in .dot
@@ -140,13 +144,18 @@ public abstract class Mapper {
 	}
 	
 	/**
-	 * Initializes view field
+	 * Constructor for Mapper objects
 	 * 
-	 * @param view View that this mapper is being used to map to dot
+	 * @param view View being mapped to dot by this mapper
+	 * @param vizStyle Visual Style being applied to the view
 	 */
 	public Mapper(View<? extends CyIdentifiable> view, VisualStyle vizStyle) {
 		this.view = view;
 		this.vizStyle = vizStyle;
+		if (!nodeSizesLockedIsSet) {
+			nodeSizesLocked = areNodeSizesLocked(vizStyle);
+			nodeSizesLockedIsSet = true;
+		}
 	}	
 	
 	/**
@@ -219,12 +228,19 @@ public abstract class Mapper {
 		} 
 		// had an ugly conflict in this area. note if there are font problems it could be from here
 		else if (view.getModel() instanceof CyEdge) {
+			LOGGER.finest("Mapping font attributes for an edge view...");
+			LOGGER.info("Determining need for fontname attr");
 			if (!isEqualToDefault(font, EDGE_LABEL_FONT_FACE)) {
-				String fontName = String.format("fontname = \"%s\"", font.getFontName());
-				if (returnValue == null) {
-					returnValue = new StringBuilder(fontName);
+				Font styleFont = vizStyle.getDefaultValue(EDGE_LABEL_FONT_FACE);
+				if (!font.getFontName().equals(styleFont.getFontName()) || 
+						!font.getFamily().equals(styleFont.getFamily())) {
+					String fontName = String.format("fontname = \"%s\"", font.getFontName());
+					if (returnValue == null) {
+						returnValue = new StringBuilder(fontName);
+					}
 				}
 			}
+			LOGGER.info("Determining need for fontsize attr");
 			if (!isEqualToDefault(size, EDGE_LABEL_FONT_SIZE)) {
 				String fontSize = String.format("fontsize = \"%d\"", size);
 				if (returnValue == null) {
@@ -234,6 +250,7 @@ public abstract class Mapper {
 					returnValue.append(","+fontSize);
 				}
 			}
+			LOGGER.info("Determining need for fontcolor attr");
 			if (!isEqualToDefault(color, EDGE_LABEL_COLOR) ||
 					!isEqualToDefault(transparency, EDGE_LABEL_TRANSPARENCY)) {
 				String fontColor = String.format("fontcolor = \"%s\"", mapColorToDot(color, transparency));
@@ -339,7 +356,7 @@ public abstract class Mapper {
 	 * 
 	 * @param x x coordinate of position
 	 * @param y y coordinate of position
-	 * @return String in form %x,%y!
+	 * @return String in form %x,%y
 	 */
 	protected String mapPosition(Double x, Double y) {
 		/*x /= PPI;
@@ -366,24 +383,24 @@ public abstract class Mapper {
 	 */
 	public static String modifyElementID(String id) {
 		LOGGER.info("Preparing to transform ID");
-		String alphaNumRegEx = "[a-zA-Z\200-\377_]+[a-zA-Z\200-\377_0-9]*";
+		String alphaNumRegEx = "[a-zA-Z\200-\377_][a-zA-Z\200-\377_0-9]*";
 		String numericRegEx = "[-]?([.][0-9]+|[0-9]+([.][0-9]*)?)";
 		String quotedRegEx = "\"[^\"]*(\\\")*[^\"]*\"";
 		String htmlRegEx = "<.*>";
 		if (id.matches(alphaNumRegEx)) {
-			LOGGER.info("Alphanumeric ID");
+			LOGGER.info("Passed-in ID is an Alphanumeric ID");
 			return id;
 		}
 		if (id.matches(numericRegEx)) {
-			LOGGER.info("Numeric ID");
+			LOGGER.info("Passed-in ID is a Numeric ID");
 			return id;
 		}
 		if (id.matches(quotedRegEx)) {
-			LOGGER.info("Quoted ID");
+			LOGGER.info("Passed-in ID is a Quoted ID");
 			return id;
 		}
 		if (id.matches(htmlRegEx)) {
-			LOGGER.info("HTML ID");
+			LOGGER.info("Passed-in ID is an HTML ID");
 			return id;
 		}
 		LOGGER.info("None of the above. Transforming to Quoted ID");
@@ -403,13 +420,14 @@ public abstract class Mapper {
 	 * @param visualStyle VisualStyle being checked if node sizes are locked
 	 * @return true if size is locked, false if not
 	 */
-	public static boolean nodeSizesLocked(VisualStyle visualStyle) {
+	private static boolean areNodeSizesLocked(VisualStyle visualStyle) {
+		LOGGER.info("Determining if NODE_HEIGHT/NODE_WIDTH are locked...");
 		Set<VisualPropertyDependency<?>> vizDependencies = visualStyle.getAllVisualPropertyDependencies();
 		boolean output = false;
 		
 		// go through all dependencies and find lock height and width one
 		for(VisualPropertyDependency<?> dependency: vizDependencies) {
-			if((dependency.getDisplayName()).equals("Lock node width and height")) {
+			if((dependency.getIdString()).equals("nodeSizeLocked")) {
 				output = dependency.isDependencyEnabled();
 			}
 		}

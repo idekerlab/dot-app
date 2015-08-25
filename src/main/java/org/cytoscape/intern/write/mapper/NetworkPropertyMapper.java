@@ -168,7 +168,6 @@ public class NetworkPropertyMapper extends Mapper {
 	private String getNodeDefaults() {
 		LOGGER.info("Building node default string...");
 		StringBuilder nodeDefaults = new StringBuilder("node [");
-		boolean isLocked = Mapper.nodeSizesLocked(vizStyle);
 		
 		//Node SimpleVizProps
 		LOGGER.info("Appending label attr to default string...");
@@ -195,8 +194,8 @@ public class NetworkPropertyMapper extends Mapper {
 	
 		// set width and height, if they are locked, must set to NODE_SIZE prop
 		Double height, width;
-		LOGGER.info("ISLOCKED: " + isLocked);
-		if(isLocked) {
+		LOGGER.info("ISLOCKED: " + nodeSizesLocked);
+		if(nodeSizesLocked) {
 			height = vizStyle.getDefaultValue(NODE_SIZE);
 			width = vizStyle.getDefaultValue(NODE_SIZE);
 		}

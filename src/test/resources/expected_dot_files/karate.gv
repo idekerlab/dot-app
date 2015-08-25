@@ -4,7 +4,7 @@ splines = "false"
 outputorder = "edgesfirst"
 esep = "0"
 pad = "2"
-node [label = "",penwidth = "4.000000",height = "0.694444",width = "0.694444",tooltip = "",color = "#000000FF",fillcolor = "#00C6F4FF",shape = "ellipse",style = "solid,filled",fontname = "FreeSans",fontsize = "14",fontcolor = "#FFFFFFFF",fixedsize = "true",labelloc = "c"]
+node [label = "",penwidth = "4.000000",height = "0.694444",width = "0.694444",tooltip = "",color = "#000000FF",fillcolor = ".447 .51 .51",shape = "ellipse",style = "solid,filled",fontname = "FreeSans",fontsize = "14",fontcolor = "#FFFFFFFF",fixedsize = "true",labelloc = "c"]
 edge [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",style = "solid",dir = "both"]
 29 [label = "29",height = "0.286458",width = "0.286458",pos = "792.256034,-24.803465",fontsize = "9"]
 1 [label = "1",height = "0.794271",width = "0.794271",pos = "546.495781,-171.678360",fontsize = "33"]

@@ -38,6 +38,7 @@ public class EdgePropertyMapper extends Mapper {
 	
 	private CyNetworkView networkView;
 	
+	private boolean visible;
 	/**
 	 * Constructs EdgePropertyMapper object
 	 * 
@@ -48,6 +49,7 @@ public class EdgePropertyMapper extends Mapper {
 		// initialize data structure
 		simpleVisPropsToDot = new ArrayList<String>();
 		this.networkView = networkView;
+		this.visible = isVisible();
 		populateMaps();		
 	}
 	
@@ -160,9 +162,6 @@ public class EdgePropertyMapper extends Mapper {
 		// Build attribute string
 		StringBuilder elementString = new StringBuilder("[");
 		
-		// Control for writing color attributes
-		boolean visible = isVisible();
-
 		// Get .dot strings for simple dot attributes. Append to attribute string
 		for (String dotAttribute : simpleVisPropsToDot) {
 		        elementString.append(dotAttribute);
@@ -233,7 +232,6 @@ public class EdgePropertyMapper extends Mapper {
 	 * @return String that defines fontname, fontcolor and fontsize attributes. Returns null if font should not be mapped
 	 */
 	private String mapFontHelper() {
-		boolean visible = isVisible();
 
 		// Get label font information and append in proper format
 		Color labelColor = (Color) view.getVisualProperty(EDGE_LABEL_COLOR);

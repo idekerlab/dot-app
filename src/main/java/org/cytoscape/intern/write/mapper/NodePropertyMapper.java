@@ -22,11 +22,8 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_Y
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.View;
-import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.vizmap.VisualStyle;
 
@@ -42,35 +39,16 @@ public class NodePropertyMapper extends Mapper {
 	// location of node label
 	private String labelLoc;
 	
-	/*
-	 *  maps Cytoscape node shape types to the equivalent string used in .dot
-	 */
-	private static final HashMap<NodeShape, String> NODE_SHAPE_MAP = new HashMap<NodeShape, String>();
-	static {
-		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.TRIANGLE, "triangle");
-		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.DIAMOND, "diamond");
-		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.ELLIPSE, "ellipse");
-		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.HEXAGON, "hexagon");
-		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.OCTAGON, "octagon");
-		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.PARALLELOGRAM, "parallelogram");
-		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.ROUND_RECTANGLE, "rectangle");
-		NODE_SHAPE_MAP.put(NodeShapeVisualProperty.RECTANGLE, "rectangle");
-	}
-
-	// Whether node height+width is locked
-	private boolean isLocked;
-	
 	/**
 	 * Initializes and populates instance variables with mappings
 	 * 
 	 * @param view View of Node we are converting to .dot
 	 */
-	public NodePropertyMapper(View<CyNode> view, VisualStyle vizStyle, String labelLoc, boolean isLocked) {
+	public NodePropertyMapper(View<CyNode> view, VisualStyle vizStyle, String labelLoc) {
 		super(view, vizStyle);
 		// initialize data structure
 		simpleVisPropsToDot = new ArrayList<String>();
 		this.labelLoc = labelLoc;
-		this.isLocked = isLocked;
 		
 		populateMaps();
 	}
@@ -83,7 +61,6 @@ public class NodePropertyMapper extends Mapper {
 	 * @return String for style attribute
 	 */
 	/*
-	>>>>>>> WriteRevamp
 	protected String mapDotStyle() {
 		if (!isEqualToDefault(NODE_BORDER_LINE_TYPE) ||
 			!isEqualToDefault(NODE_SHAPE)) {
@@ -160,7 +137,7 @@ public class NodePropertyMapper extends Mapper {
 		}
 		*/
 		// Get node height and width
-		if(isLocked) {
+		if(nodeSizesLocked) {
 			//NODE_HEIGHT = NODE_WIDTH if isLocked is true, so only use one
 			/* 
 			 * view.getVisualProperty(NODE_SIZE) does not return the actual

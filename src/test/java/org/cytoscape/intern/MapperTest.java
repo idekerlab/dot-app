@@ -91,7 +91,7 @@ public class MapperTest {
 				new Double(0), new Double(0) * -1.0, fillColorString, fontString, fontSizeString, fontColor); 
 		
 		// todo
-		Mapper mapper = new NodePropertyMapper(nodeView, vizStyle, "t", false);
+		Mapper mapper = new NodePropertyMapper(nodeView, vizStyle, "t");
 		actualDotString = mapper.getElementString();
 
 		assertEquals("Node Cytoscape property translation failed.", expectedDotString, actualDotString);
