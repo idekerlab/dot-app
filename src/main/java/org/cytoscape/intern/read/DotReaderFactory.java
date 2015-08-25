@@ -151,6 +151,7 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 		CyTable hidden = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
 		return hidden.getRow(network.getSUID()).get("DOT_network", Boolean.class);
 	}
+
 	/**
 	 * Applies the VisualStyle created for the newly created CyNetworkView
 	 * 

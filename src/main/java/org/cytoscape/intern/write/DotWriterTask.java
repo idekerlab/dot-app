@@ -22,6 +22,8 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.vizmap.VisualMappingManager;
+import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.Tunable;
 import org.cytoscape.work.util.ListSingleSelection;
@@ -34,6 +36,9 @@ import org.cytoscape.work.util.ListSingleSelection;
  * @author Ziran Zhang
  */
 public class DotWriterTask implements CyWriter {
+	
+	// whether task is cancelled or not
+	private boolean cancelled = false;
 	
 	// handles mapping from CS to .dot of respective elements
 	private NetworkPropertyMapper networkMapper;
@@ -95,13 +100,17 @@ public class DotWriterTask implements CyWriter {
 	// location of network label
 	private String networkLabelLoc;
 	
+	// VisualStyle applied to network view
+	private VisualStyle vizStyle;
+	
 	/**
 	 * Constructs a DotWriterTask object for exporting network view
 	 * 
 	 * @param output OutputStream that is being written to
 	 * @param networkView CyNetworkView that is being exported
+	 * @param vizMapMgr 
 	 */
-	public DotWriterTask(OutputStream output, CyNetworkView networkView) {
+	public DotWriterTask(OutputStream output, CyNetworkView networkView, VisualMappingManager vizMapMgr) {
 		// Make logger write to file
 		handler = null;
 		try {
@@ -118,6 +127,7 @@ public class DotWriterTask implements CyWriter {
 		
 		outputWriter = new OutputStreamWriter(output);
 		this.networkView = networkView;
+		this.vizStyle = vizMapMgr.getVisualStyle(networkView);
 		directed = NetworkPropertyMapper.isDirected(networkView);
 		
 		LOGGER.info("DotWriterTask constructed");
@@ -166,16 +176,17 @@ public class DotWriterTask implements CyWriter {
 		
 		if(networkView != null) {
 			// constructed here because splinesVal is needed, splinesVal can't be determined until run()
-			this.networkMapper = new NetworkPropertyMapper(networkView, directed, splinesVal, networkLabelLoc);
+			this.networkMapper = new NetworkPropertyMapper(
+					networkView, directed, splinesVal, networkLabelLoc, nodeLabelLoc, vizStyle);
 		}
 		
 		LOGGER.info("Writing .dot file...");
 		taskMonitor.setStatusMessage("Writing network attributes...");
 		writeProps();
 		taskMonitor.setStatusMessage("Writing node declarations...");
-		writeNodes();
+		writeNodes(cancelled);
 		taskMonitor.setStatusMessage("Writing edge declarations...");
-		writeEdges();
+		writeEdges(cancelled);
 		
 		taskMonitor.setStatusMessage("Closing off file");
 		// Close off file and notify if needed
@@ -186,13 +197,19 @@ public class DotWriterTask implements CyWriter {
 			if (nameModified) {
 				Notifier.showMessage("Some node names have been modified in order to comply to DOT syntax", Notifier.MessageType.WARNING);
 			}
-		} catch(IOException e) {
+			else if(cancelled) {
+				Notifier.showMessage("Export cancelled", Notifier.MessageType.WARNING);
+			}
+		} 
+		catch(IOException e) {
 			LOGGER.severe("Failed to close file, IOException in DotWriterTask");
-		} catch(Exception e) {
+		} 
+		catch(Exception e) {
 			LOGGER.severe("Not an IOException");
 			FILE_HANDLER_MGR.closeFileHandler(handler);
 			throw new RuntimeException(e);
-		} finally {
+		} 
+		finally {
 			FILE_HANDLER_MGR.closeFileHandler(handler);
 		}
 	}
@@ -202,8 +219,9 @@ public class DotWriterTask implements CyWriter {
 	 */
 	@Override
 	public void cancel() {
-		// TODO
+		cancelled = true;
 	}
+	
 	
 	/**
 	 * Writes the network properties to file
@@ -224,7 +242,11 @@ public class DotWriterTask implements CyWriter {
 			}
 			// if we are only exporting network
 			else {
-				networkProps = String.format("graph %s {\nsplines = \"%s\"\n", networkName, splinesVal);
+				String moddedName = Mapper.modifyElementID(networkName);
+				String label = (networkLabelLoc != null) ? moddedName : "";
+				networkProps = String.format(
+					"graph %s {\nlabel = \"%s\"\nsplines = \"%s\"\n", moddedName, label, splinesVal
+				);
 			}
 			// if network name was modified
 			if (!networkProps.contains(networkName)) {
@@ -241,36 +263,46 @@ public class DotWriterTask implements CyWriter {
 	
 	/**
 	 * Writes the .dot declaration of each node to file
+	 * 
+	 * @param cancelled whether we want to cancel task or not. Only true if user clicks cancel.
 	 */
-	private void writeNodes() {
+	private void writeNodes(boolean cancelled) {
 		LOGGER.info("Writing node declarations...");
 		
 		// if the user passed in networkView
 		if(networkView != null){
 			// create list of all node views
 			ArrayList< View<CyNode> > nodeViewList = new ArrayList< View<CyNode> >( networkView.getNodeViews() );
+			
+			boolean isLocked = Mapper.nodeSizesLocked(vizStyle);
 		
 			// for each node, write declaration string
 			for(View<CyNode> nodeView: nodeViewList) {
-				nodeMapper = new NodePropertyMapper(nodeView, nodeLabelLoc);
-	  		
-				try {
-					// Retrieve node name
-					CyNode nodeModel = nodeView.getModel();
-					CyNetwork networkModel = networkView.getModel();
-					String nodeName = networkModel.getRow(nodeModel).get(CyNetwork.NAME, String.class);
-	  
-					String newNodeName = Mapper.modifyElementId(nodeName);
-					if (!newNodeName.equals(nodeName)) {
-						nameModified = true;
+				if(!cancelled) {
+					nodeMapper = new NodePropertyMapper(nodeView, vizStyle, nodeLabelLoc, isLocked);
+				  
+					try {
+						// Retrieve node name
+						CyNode nodeModel = nodeView.getModel();
+						Long nodeSUID = nodeModel.getSUID();
+						CyNetwork networkModel = networkView.getModel();
+						/*String nodeName = networkModel.getRow(nodeModel).get(CyNetwork.NAME, String.class);
+		  
+						String newNodeName = Mapper.modifyElementId(nodeName);
+						if (!newNodeName.equals(nodeName)) {
+							nameModified = true;
+						}*/
+
+						String declaration = String.format("%s %s\n", nodeSUID, nodeMapper.getElementString());
+
+						outputWriter.write(declaration);
 					}
-
-					String declaration = String.format("%s %s\n", newNodeName, nodeMapper.getElementString());
-
-					outputWriter.write(declaration);
+					catch(IOException exception) {
+						LOGGER.log(Level.SEVERE, "Write failed @ writeNodes()");
+					}
 				}
-				catch(IOException exception) {
-					LOGGER.log(Level.SEVERE, "Write failed @ writeNodes()");
+				else {
+					return;
 				}
 			}	
 			
@@ -278,21 +310,26 @@ public class DotWriterTask implements CyWriter {
 		// if the user passed in network
 		else {
 			List<CyNode> nodeList = network.getNodeList();
-			
 			for(CyNode node: nodeList){
-				try{
-					String nodeName = network.getRow(node).get(CyNetwork.NAME,String.class);
-					String newNodeName = Mapper.modifyElementId(nodeName);
-				
-					if(!newNodeName.equals(nodeName)) {
-						nameModified = true;
-					}
-					String declaration = String.format("%s\n", newNodeName);
+				if(!cancelled) {
+					try{
+						String nodeName = network.getRow(node).get(CyNetwork.NAME,String.class);
+						String newNodeName = Mapper.modifyElementID(nodeName);
+					
+						if(!newNodeName.equals(nodeName)) {
+							nameModified = true;
+						}
+						String declaration = String.format("%s\n", newNodeName);
 
-					outputWriter.write(declaration);
+						outputWriter.write(declaration);
+					}
+					catch(IOException exception){
+						LOGGER.log(Level.SEVERE, "Write failed @ writeNodes() passed in network instead of networkView");
+					}
 				}
-				catch(IOException exception){
-					LOGGER.log(Level.SEVERE, "Write failed @ writeNodes() passed in network instead of networkView");
+				// abort if cancelled
+				else {
+					return;
 				}
 			}
 		}
@@ -301,8 +338,10 @@ public class DotWriterTask implements CyWriter {
 	
 	/**
 	 * Writes the .dot declaration of each edge to file
+	 * 
+	 * @param cancelled whether we want to cancel task or not. Only true if user clicks cancel.
 	 */
-	private void writeEdges() {
+	private void writeEdges(boolean cancelled) {
 		LOGGER.info("Writing edge declarations...");
 		
 		// do the following if user passed in the networkView
@@ -313,32 +352,40 @@ public class DotWriterTask implements CyWriter {
 		
 			// for each edge, write declaration string
 			for(View<CyEdge> edgeView: edgeViewList) {
-				edgeMapper = new EdgePropertyMapper(edgeView, networkView);
-	  		
-				try {
-					// Retrieve source+target node names
-					CyEdge edgeModel = edgeView.getModel();
-					CyNetwork networkModel = networkView.getModel();
+				if(!cancelled) {
+					edgeMapper = new EdgePropertyMapper(edgeView, vizStyle, networkView);
+				  
+					try {
+						// Retrieve source+target node names
+						CyEdge edgeModel = edgeView.getModel();
+						CyNetwork networkModel = networkView.getModel();
 
-					CyNode sourceNode = edgeModel.getSource();
-					CyNode targetNode = edgeModel.getTarget();
-	  			
-					String sourceName = networkModel.getRow(sourceNode).get(CyNetwork.NAME, String.class);
-					// filter out disallowed chars
-					sourceName = Mapper.modifyElementId(sourceName);
-	  			
-					String targetName = networkModel.getRow(targetNode).get(CyNetwork.NAME, String.class);
-					// filter out disallowed chars
-					targetName = Mapper.modifyElementId(targetName);
+						CyNode sourceNode = edgeModel.getSource();
+						CyNode targetNode = edgeModel.getTarget();
+					  
+						/*String sourceName = networkModel.getRow(sourceNode).get(CyNetwork.NAME, String.class);
+						// filter out disallowed chars
+						sourceName = Mapper.modifyElementId(sourceName);
+					  
+						String targetName = networkModel.getRow(targetNode).get(CyNetwork.NAME, String.class);
+						// filter out disallowed chars
+						targetName = Mapper.modifyElementId(targetName);*/
+						Long sourceSUID = sourceNode.getSUID();
+						Long targetSUID = targetNode.getSUID();
 
-					String edgeName = String.format("%s %s %s", sourceName, edgeType, targetName);
-					String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());
+						String edgeName = String.format("%s %s %s", sourceSUID, edgeType, targetSUID);
+						String declaration = String.format("%s %s\n", edgeName, edgeMapper.getElementString());
 
-					outputWriter.write(declaration);
+						outputWriter.write(declaration);
+					}
+					catch(IOException exception) {
+						LOGGER.log(Level.SEVERE, "Write failed @ writeEdges()");
+					}	
 				}
-				catch(IOException exception) {
-					LOGGER.log(Level.SEVERE, "Write failed @ writeEdges()");
-				}	
+				// abort if cancelled
+				else {
+					return;
+				}
 			}	
 		}
 		// do the following if user passed in the network
@@ -346,23 +393,28 @@ public class DotWriterTask implements CyWriter {
 			List<CyEdge> edgeList = network.getEdgeList();
 			
 			for(CyEdge edge : edgeList){
-				try{
-					CyNode sourceNode = edge.getSource();
-					CyNode targetNode = edge.getTarget();
+				if(!cancelled) {
+					try{
+						CyNode sourceNode = edge.getSource();
+						CyNode targetNode = edge.getTarget();
+						
+						String sourceName = network.getRow(sourceNode).get(CyNetwork.NAME, String.class);
+						sourceName = Mapper.modifyElementID(sourceName);
 					
-					String sourceName = network.getRow(sourceNode).get(CyNetwork.NAME, String.class);
-					sourceName = Mapper.modifyElementId(sourceName);
-				
-					String targetName = network.getRow(targetNode).get(CyNetwork.NAME, String.class);
-					targetName = Mapper.modifyElementId(targetName);
-				
-					String edgeName = String.format("%s %s %s", sourceName, "--", targetName);
-					String declaration = String.format("%s\n", edgeName);
+						String targetName = network.getRow(targetNode).get(CyNetwork.NAME, String.class);
+						targetName = Mapper.modifyElementID(targetName);
+					
+						String edgeName = String.format("%s %s %s", sourceName, "--", targetName);
+						String declaration = String.format("%s\n", edgeName);
 
-					outputWriter.write(declaration);
+						outputWriter.write(declaration);
+					}
+					catch(IOException exception){
+						LOGGER.log(Level.SEVERE, "Write failed @ writeEdges() (passed in network instead of networkView)");
+					}
 				}
-				catch(IOException exception){
-					LOGGER.log(Level.SEVERE, "Write failed @ writeEdges() (passed in network instead of networkView)");
+				else {
+					return;
 				}
 			}
 		}
@@ -427,5 +479,14 @@ public class DotWriterTask implements CyWriter {
 				break;
 		}
 		LOGGER.info("Converted networkLabelLoc: " + networkLabelLoc);
+	}
+	
+	private String buildNodeID(CyNode node) {
+		Long nodeSUID = node.getSUID();
+		CyNetwork networkModel = networkView.getModel();
+		String nodeID = networkModel.getRow(node).get(CyNetwork.NAME, String.class);
+		nodeID = String.format("%s——%s", nodeID, nodeSUID);
+		nodeID = Mapper.modifyElementID(nodeID);
+		return nodeID;
 	}
 }

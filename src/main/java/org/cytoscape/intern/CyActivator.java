@@ -80,7 +80,7 @@ public class CyActivator extends AbstractCyActivator {
 		
 		// initialize the DotWriterFactory for later use
 		LOGGER.info("Constructing Writer Factory...");
-		DotWriterFactory dotWriteFact = new DotWriterFactory(fileFilter);
+		DotWriterFactory dotWriteFact = new DotWriterFactory(fileFilter, vizMapMgr);
 		
 		// initialize the DotReaderFactory for later use
 		LOGGER.info("Constructing Reader Factory...");

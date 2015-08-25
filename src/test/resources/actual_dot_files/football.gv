@@ -1,0 +1,737 @@
+graph "football.gml" {
+bgcolor = "#333333FF"
+splines = "false"
+outputorder = "edgesfirst"
+esep = "0"
+pad = "2"
+node [label = "",penwidth = "4.000000",height = "0.694444",width = "0.694444",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",fontname = "Bitstream Vera Sans Bold",fontsize = "14",fontcolor = "#FFFF00FF",fixedsize = "true",labelloc = "c"]
+edge [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",style = "solid",dir = "both"]
+Buffalo [label = "Buffalo",height = "0.625000",width = "0.625000",pos = "883.000000,-341.000000",fontsize = "12"]
+Washington [label = "Washington",height = "0.625000",width = "0.625000",pos = "275.000000,-108.000000",fontsize = "12"]
+SouthCarolina [label = "SouthCarolina",height = "0.625000",width = "0.625000",pos = "518.000000,-714.000000",fontsize = "12"]
+OregonState [label = "OregonState",height = "0.486111",width = "0.486111",pos = "58.000000,-61.000000",fontsize = "8"]
+Tulane [label = "Tulane",height = "0.625000",width = "0.625000",pos = "403.000000,-673.000000",fontsize = "12"]
+BowlingGreenState [label = "BowlingGreenState",height = "0.625000",width = "0.625000",pos = "833.000000,-193.000000",fontsize = "12"]
+LouisianaMonroe [label = "LouisianaMonroe",height = "0.208333",width = "0.208333",pos = "439.000000,-619.000000",fontsize = "6"]
+Ohio [label = "Ohio",height = "0.486111",width = "0.486111",pos = "672.000000,-207.000000",fontsize = "8"]
+AirForce [label = "AirForce",height = "0.486111",width = "0.486111",pos = "267.000000,-377.000000",fontsize = "8"]
+LouisianaTech [label = "LouisianaTech",height = "0.486111",width = "0.486111",pos = "458.000000,-429.000000",fontsize = "8"]
+MiddleTennesseeState [label = "MiddleTennesseeState",height = "0.347222",width = "0.347222",pos = "518.000000,-575.000000",fontsize = "7"]
+WestVirginia [label = "WestVirginia",height = "0.625000",width = "0.625000",pos = "609.000000,-410.000000",fontsize = "12"]
+Colorado [label = "Colorado",height = "0.625000",width = "0.625000",pos = "131.000000,-300.000000",fontsize = "12"]
+Kansas [label = "Kansas",height = "0.486111",width = "0.486111",pos = "140.000000,-529.000000",fontsize = "8"]
+Marshall [label = "Marshall",height = "0.486111",width = "0.486111",pos = "869.000000,-233.000000",fontsize = "8"]
+NorthCarolinaState [label = "NorthCarolinaState",height = "0.625000",width = "0.625000",pos = "577.000000,-586.000000",fontsize = "12"]
+Clemson [label = "Clemson",height = "0.486111",width = "0.486111",pos = "652.000000,-692.000000",fontsize = "8"]
+BoiseState [label = "BoiseState",height = "0.347222",width = "0.347222",pos = "218.000000,-457.000000",fontsize = "7"]
+Missouri [label = "Missouri",height = "0.486111",width = "0.486111",pos = "359.000000,-455.000000",fontsize = "8"]
+Pittsburgh [label = "Pittsburgh",height = "0.625000",width = "0.625000",pos = "810.000000,-293.000000",fontsize = "12"]
+BrighamYoung [label = "BrighamYoung",height = "0.763889",width = "0.763889",pos = "319.000000,-489.000000",fontsize = "13"]
+Rice [label = "Rice",height = "0.625000",width = "0.625000",pos = "268.000000,-295.000000",fontsize = "12"]
+Mississippi [label = "Mississippi",height = "0.625000",width = "0.625000",pos = "285.000000,-735.000000",fontsize = "12"]
+WesternMichigan [label = "WesternMichigan",height = "0.486111",width = "0.486111",pos = "722.000000,-211.000000",fontsize = "8"]
+Kent [label = "Kent",height = "0.486111",width = "0.486111",pos = "819.000000,-146.000000",fontsize = "8"]
+California [label = "California",height = "0.625000",width = "0.625000",pos = "149.000000,-32.000000",fontsize = "12"]
+ColoradoState [label = "ColoradoState",height = "0.486111",width = "0.486111",pos = "34.000000,-318.000000",fontsize = "8"]
+TexasTech [label = "TexasTech",height = "0.763889",width = "0.763889",pos = "0.000000,-532.000000",fontsize = "13"]
+Akron [label = "Akron",height = "0.625000",width = "0.625000",pos = "845.000000,-347.000000",fontsize = "12"]
+TexasChristian [label = "TexasChristian",height = "0.625000",width = "0.625000",pos = "370.000000,-291.000000",fontsize = "12"]
+Navy [label = "Navy",height = "0.625000",width = "0.625000",pos = "586.000000,-471.000000",fontsize = "12"]
+ArizonaState [label = "ArizonaState",height = "0.625000",width = "0.625000",pos = "40.000000,-113.000000",fontsize = "12"]
+NewMexico [label = "NewMexico",height = "0.625000",width = "0.625000",pos = "51.000000,-365.000000",fontsize = "12"]
+ArkansasState [label = "ArkansasState",height = "0.486111",width = "0.486111",pos = "254.000000,-551.000000",fontsize = "8"]
+Northwestern [label = "Northwestern",height = "0.625000",width = "0.625000",pos = "621.000000,-265.000000",fontsize = "12"]
+Rutgers [label = "Rutgers",height = "0.486111",width = "0.486111",pos = "741.000000,-311.000000",fontsize = "8"]
+FloridaState [label = "FloridaState",height = "0.763889",width = "0.763889",pos = "639.000000,-617.000000",fontsize = "13"]
+Vanderbilt [label = "Vanderbilt",height = "0.625000",width = "0.625000",pos = "593.000000,-705.000000",fontsize = "12"]
+SouthernCalifornia [label = "SouthernCalifornia",height = "0.763889",width = "0.763889",pos = "261.000000,-35.000000",fontsize = "13"]
+NorthernIllinois [label = "NorthernIllinois",height = "0.486111",width = "0.486111",pos = "737.000000,-429.000000",fontsize = "8"]
+Toledo [label = "Toledo",height = "0.347222",width = "0.347222",pos = "769.000000,-264.000000",fontsize = "7"]
+Oregon [label = "Oregon",height = "0.625000",width = "0.625000",pos = "211.000000,-44.000000",fontsize = "12"]
+Stanford [label = "Stanford",height = "0.625000",width = "0.625000",pos = "135.000000,-142.000000",fontsize = "12"]
+Utah [label = "Utah",height = "0.625000",width = "0.625000",pos = "76.000000,-251.000000",fontsize = "12"]
+Connecticut [label = "Connecticut",pos = "790.000000,-563.000000"]
+Texas [label = "Texas",height = "0.625000",width = "0.625000",pos = "88.000000,-471.000000",fontsize = "12"]
+Georgia [label = "Georgia",height = "0.486111",width = "0.486111",pos = "454.000000,-836.000000",fontsize = "8"]
+EasternMichigan [label = "EasternMichigan",height = "0.625000",width = "0.625000",pos = "777.000000,-443.000000",fontsize = "12"]
+SouthernMethodist [label = "SouthernMethodist",height = "0.763889",width = "0.763889",pos = "322.000000,-404.000000",fontsize = "13"]
+Oklahoma [label = "Oklahoma",height = "0.625000",width = "0.625000",pos = "32.000000,-462.000000",fontsize = "12"]
+Syracuse [label = "Syracuse",height = "0.625000",width = "0.625000",pos = "676.000000,-459.000000",fontsize = "12"]
+Cincinnati [label = "Cincinnati",height = "0.625000",width = "0.625000",pos = "489.000000,-526.000000",fontsize = "12"]
+Temple [label = "Temple",height = "0.625000",width = "0.625000",pos = "845.000000,-413.000000",fontsize = "12"]
+PennState [label = "PennState",height = "0.763889",width = "0.763889",pos = "571.000000,-132.000000",fontsize = "13"]
+VirginiaTech [label = "VirginiaTech",height = "0.625000",width = "0.625000",pos = "811.000000,-490.000000",fontsize = "12"]
+Maryland [label = "Maryland",height = "0.625000",width = "0.625000",pos = "792.000000,-628.000000",fontsize = "12"]
+Hawaii [label = "Hawaii",height = "0.625000",width = "0.625000",pos = "295.000000,-233.000000",fontsize = "12"]
+WashingtonState [label = "WashingtonState",height = "0.625000",width = "0.625000",pos = "84.000000,-148.000000",fontsize = "12"]
+OhioState [label = "OhioState",height = "0.625000",width = "0.625000",pos = "483.000000,-55.000000",fontsize = "12"]
+SouthernMississippi [label = "SouthernMississippi",height = "0.486111",width = "0.486111",pos = "343.000000,-775.000000",fontsize = "8"]
+Wyoming [label = "Wyoming",height = "0.625000",width = "0.625000",pos = "242.000000,-400.000000",fontsize = "12"]
+Memphis [label = "Memphis",height = "0.625000",width = "0.625000",pos = "397.000000,-762.000000",fontsize = "12"]
+Illinois [label = "Illinois",height = "0.625000",width = "0.625000",pos = "407.000000,-205.000000",fontsize = "12"]
+Kentucky [label = "Kentucky",height = "0.486111",width = "0.486111",pos = "487.000000,-750.000000",fontsize = "8"]
+"TexasA&M" [label = "TexasA&M",height = "0.625000",width = "0.625000",pos = "111.000000,-368.000000",fontsize = "12"]
+NorthTexas [label = "NorthTexas",height = "0.486111",width = "0.486111",pos = "69.000000,-567.000000",fontsize = "8"]
+Houston [label = "Houston",height = "0.625000",width = "0.625000",pos = "318.000000,-627.000000",fontsize = "12"]
+NotreDame [label = "NotreDame",height = "0.625000",width = "0.625000",pos = "425.000000,-257.000000",fontsize = "12"]
+TexasElPaso [label = "TexasElPaso",height = "0.625000",width = "0.625000",pos = "172.000000,-303.000000",fontsize = "12"]
+Florida [label = "Florida",height = "0.625000",width = "0.625000",pos = "586.000000,-803.000000",fontsize = "12"]
+CentralFlorida [label = "CentralFlorida",height = "0.208333",width = "0.208333",pos = "661.000000,-554.000000",fontsize = "6"]
+Louisville [label = "Louisville",height = "0.486111",width = "0.486111",pos = "549.000000,-757.000000",fontsize = "8"]
+Wisconsin [label = "Wisconsin",height = "0.763889",width = "0.763889",pos = "489.000000,-164.000000",fontsize = "13"]
+NewMexicoState [label = "NewMexicoState",height = "0.625000",width = "0.625000",pos = "236.000000,-578.000000",fontsize = "12"]
+FresnoState [label = "FresnoState",height = "0.625000",width = "0.625000",pos = "307.000000,-135.000000",fontsize = "12"]
+MiamiOhio [label = "MiamiOhio",height = "0.625000",width = "0.625000",pos = "695.000000,-337.000000",fontsize = "12"]
+Army [label = "Army",height = "0.625000",width = "0.625000",pos = "448.000000,-577.000000",fontsize = "12"]
+Iowa [label = "Iowa",height = "0.763889",width = "0.763889",pos = "447.000000,-192.000000",fontsize = "13"]
+LouisianaState [label = "LouisianaState",height = "0.486111",width = "0.486111",pos = "365.000000,-876.000000",fontsize = "8"]
+GeorgiaTech [label = "GeorgiaTech",height = "0.625000",width = "0.625000",pos = "717.000000,-734.000000",fontsize = "12"]
+Auburn [label = "Auburn",height = "0.625000",width = "0.625000",pos = "463.000000,-659.000000",fontsize = "12"]
+CentralMichigan [label = "CentralMichigan",height = "0.625000",width = "0.625000",pos = "573.000000,-309.000000",fontsize = "12"]
+Tulsa [label = "Tulsa",height = "0.763889",width = "0.763889",pos = "373.000000,-360.000000",fontsize = "13"]
+WakeForest [label = "WakeForest",height = "0.486111",width = "0.486111",pos = "786.000000,-699.000000",fontsize = "8"]
+Arkansas [label = "Arkansas",height = "0.486111",width = "0.486111",pos = "290.000000,-788.000000",fontsize = "8"]
+KansasState [label = "KansasState",height = "0.763889",width = "0.763889",pos = "269.000000,-452.000000",fontsize = "13"]
+MichiganState [label = "MichiganState",height = "0.625000",width = "0.625000",pos = "585.000000,-184.000000",fontsize = "12"]
+Duke [label = "Duke",height = "0.625000",width = "0.625000",pos = "756.000000,-591.000000",fontsize = "12"]
+Michigan [label = "Michigan",height = "0.625000",width = "0.625000",pos = "522.000000,-114.000000",fontsize = "12"]
+UtahState [label = "UtahState",height = "0.347222",width = "0.347222",pos = "41.000000,-416.000000",fontsize = "7"]
+Nebraska [label = "Nebraska",height = "0.625000",width = "0.625000",pos = "181.000000,-345.000000",fontsize = "12"]
+BallState [label = "BallState",height = "0.486111",width = "0.486111",pos = "641.000000,-468.000000",fontsize = "8"]
+LouisianaLafayette [label = "LouisianaLafayette",height = "0.208333",width = "0.208333",pos = "240.000000,-627.000000",fontsize = "6"]
+NorthCarolina [label = "NorthCarolina",height = "0.625000",width = "0.625000",pos = "727.000000,-502.000000",fontsize = "12"]
+SanDiegoState [label = "SanDiegoState",height = "0.625000",width = "0.625000",pos = "130.000000,-232.000000",fontsize = "12"]
+OklahomaState [label = "OklahomaState",height = "0.486111",width = "0.486111",pos = "169.000000,-543.000000",fontsize = "8"]
+Virginia [label = "Virginia",height = "0.486111",width = "0.486111",pos = "669.000000,-645.000000",fontsize = "8"]
+MiamiFlorida [label = "MiamiFlorida",height = "0.486111",width = "0.486111",pos = "620.000000,-317.000000",fontsize = "8"]
+Baylor [label = "Baylor",height = "0.486111",width = "0.486111",pos = "163.000000,-434.000000",fontsize = "8"]
+IowaState [label = "IowaState",height = "0.625000",width = "0.625000",pos = "315.000000,-333.000000",fontsize = "12"]
+MississippiState [label = "MississippiState",height = "0.625000",width = "0.625000",pos = "397.000000,-801.000000",fontsize = "12"]
+Alabama [label = "Alabama",height = "0.625000",width = "0.625000",pos = "378.000000,-618.000000",fontsize = "12"]
+Tennessee [label = "Tennessee",height = "0.625000",width = "0.625000",pos = "457.000000,-882.000000",fontsize = "12"]
+SanJoseState [label = "SanJoseState",height = "0.625000",width = "0.625000",pos = "221.000000,-165.000000",fontsize = "12"]
+UCLA [label = "UCLA",height = "0.625000",width = "0.625000",pos = "255.000000,-200.000000",fontsize = "12"]
+AlabamaBirmingham [label = "AlabamaBirmingham",height = "0.486111",width = "0.486111",pos = "347.000000,-719.000000",fontsize = "8"]
+EastCarolina [label = "EastCarolina",height = "0.625000",width = "0.625000",pos = "566.000000,-659.000000",fontsize = "12"]
+NevadaLasVegas [label = "NevadaLasVegas",height = "0.763889",width = "0.763889",pos = "118.000000,-437.000000",fontsize = "13"]
+Purdue [label = "Purdue",height = "0.625000",width = "0.625000",pos = "622.000000,-104.000000",fontsize = "12"]
+Idaho [label = "Idaho",height = "0.347222",width = "0.347222",pos = "237.000000,-332.000000",fontsize = "7"]
+Arizona [label = "Arizona",height = "0.625000",width = "0.625000",pos = "173.000000,-0.000000",fontsize = "12"]
+Minnesota [label = "Minnesota",height = "0.625000",width = "0.625000",pos = "470.000000,-287.000000",fontsize = "12"]
+Indiana [label = "Indiana",height = "0.625000",width = "0.625000",pos = "535.000000,-359.000000",fontsize = "12"]
+BostonCollege [label = "BostonCollege",height = "0.625000",width = "0.625000",pos = "684.000000,-396.000000",fontsize = "12"]
+Nevada [label = "Nevada",height = "0.763889",width = "0.763889",pos = "173.000000,-214.000000",fontsize = "13"]
+California -- UCLA 
+Washington -- Arizona 
+Wisconsin -- Northwestern 
+Army -- Memphis 
+SouthernMississippi -- Houston 
+Pittsburgh -- Syracuse 
+"TexasA&M" -- Baylor 
+Arizona -- SouthernCalifornia 
+OklahomaState -- Tulsa 
+WashingtonState -- SouthernCalifornia 
+Minnesota -- Wisconsin 
+Tulsa -- Nevada 
+CentralFlorida -- Alabama 
+Louisville -- EastCarolina 
+IowaState -- Ohio 
+WesternMichigan -- NorthernIllinois 
+OregonState -- Stanford 
+Minnesota -- LouisianaMonroe 
+SouthCarolina -- MississippiState 
+Mississippi -- ArkansasState 
+SouthCarolina -- Vanderbilt 
+WashingtonState -- Utah 
+LouisianaLafayette -- LouisianaTech 
+Virginia -- BrighamYoung 
+LouisianaTech -- KansasState 
+Memphis -- Houston 
+Missouri -- KansasState 
+Indiana -- Cincinnati 
+LouisianaMonroe -- CentralFlorida 
+Rutgers -- Navy 
+Arkansas -- Tennessee 
+IowaState -- Baylor 
+NewMexicoState -- NewMexico 
+TexasChristian -- TexasElPaso 
+AirForce -- SanDiegoState 
+Maryland -- Temple 
+Utah -- BrighamYoung 
+LouisianaLafayette -- NorthTexas 
+NorthTexas -- TexasTech 
+Indiana -- Kentucky 
+NorthTexas -- KansasState 
+Rutgers -- Pittsburgh 
+Cincinnati -- Tulane 
+EasternMichigan -- BallState 
+WakeForest -- Vanderbilt 
+FloridaState -- BrighamYoung 
+Maryland -- Duke 
+Minnesota -- Baylor 
+Rice -- Michigan 
+MississippiState -- BrighamYoung 
+Buffalo -- NorthernIllinois 
+Louisville -- Kentucky 
+NotreDame -- Purdue 
+ArkansasState -- NorthTexas 
+LouisianaState -- Kentucky 
+California -- SouthernCalifornia 
+Wyoming -- BrighamYoung 
+Maryland -- NorthCarolinaState 
+Rutgers -- NotreDame 
+Arizona -- UCLA 
+OregonState -- Washington 
+Temple -- BowlingGreenState 
+Rutgers -- BostonCollege 
+Maryland -- WakeForest 
+LouisianaTech -- Auburn 
+Texas -- "TexasA&M" 
+Vanderbilt -- Florida 
+SouthernMississippi -- EastCarolina 
+PennState -- Iowa 
+TexasChristian -- SanJoseState 
+MichiganState -- Northwestern 
+TexasElPaso -- SanJoseState 
+ColoradoState -- Wyoming 
+Duke -- Virginia 
+Nebraska -- Colorado 
+NorthCarolinaState -- FloridaState 
+LouisianaState -- Auburn 
+Marshall -- MiamiOhio 
+WesternMichigan -- Iowa 
+"TexasA&M" -- TexasTech 
+Mississippi -- Kentucky 
+ColoradoState -- BrighamYoung 
+BallState -- WesternMichigan 
+Oregon -- ArizonaState 
+Mississippi -- Auburn 
+MichiganState -- Michigan 
+BoiseState -- ArkansasState 
+Tennessee -- SouthernMississippi 
+TexasChristian -- Rice 
+MichiganState -- Purdue 
+Oregon -- Nevada 
+LouisianaState -- Florida 
+Idaho -- WestVirginia 
+Idaho -- NorthTexas 
+NorthCarolinaState -- ArkansasState 
+Vanderbilt -- Auburn 
+Cincinnati -- Army 
+OhioState -- PennState 
+SouthernMississippi -- Louisville 
+Marshall -- Akron 
+Colorado -- SouthernCalifornia 
+Purdue -- CentralMichigan 
+EasternMichigan -- NorthernIllinois 
+Oklahoma -- "TexasA&M" 
+OklahomaState -- Colorado 
+Tulane -- SouthernMississippi 
+Kent -- Buffalo 
+NotreDame -- Stanford 
+Vanderbilt -- Duke 
+AirForce -- Wyoming 
+Duke -- NorthCarolinaState 
+Navy -- GeorgiaTech 
+Clemson -- NorthCarolinaState 
+Stanford -- SanJoseState 
+Ohio -- BowlingGreenState 
+"TexasA&M" -- KansasState 
+Maryland -- Clemson 
+SouthernMethodist -- NorthCarolinaState 
+MississippiState -- MiddleTennesseeState 
+Hawaii -- Tulsa 
+Clemson -- GeorgiaTech 
+OhioState -- Purdue 
+California -- OregonState 
+Toledo -- Navy 
+OklahomaState -- Texas 
+Wyoming -- SanDiegoState 
+LouisianaState -- MississippiState 
+MiamiFlorida -- Pittsburgh 
+OklahomaState -- Oklahoma 
+Oregon -- Wisconsin 
+WashingtonState -- Stanford 
+MississippiState -- Florida 
+Toledo -- BowlingGreenState 
+Oklahoma -- Baylor 
+OklahomaState -- Baylor 
+Ohio -- CentralMichigan 
+SouthCarolina -- Florida 
+LouisianaTech -- PennState 
+Oregon -- UCLA 
+IowaState -- Iowa 
+Maryland -- GeorgiaTech 
+GeorgiaTech -- FloridaState 
+Ohio -- Minnesota 
+"TexasA&M" -- Colorado 
+Georgia -- NewMexicoState 
+"TexasA&M" -- Wyoming 
+SouthCarolina -- Alabama 
+CentralFlorida -- Akron 
+Missouri -- Kansas 
+Oregon -- Arizona 
+OregonState -- Oregon 
+TexasElPaso -- SouthernMethodist 
+Cincinnati -- Syracuse 
+Temple -- WestVirginia 
+Mississippi -- Vanderbilt 
+WashingtonState -- Oregon 
+EasternMichigan -- WesternMichigan 
+Texas -- Kansas 
+Marshall -- Kent 
+NevadaLasVegas -- Nevada 
+Stanford -- UCLA 
+Michigan -- Wisconsin 
+ColoradoState -- Utah 
+Memphis -- EastCarolina 
+Tulane -- Navy 
+EasternMichigan -- CentralFlorida 
+UtahState -- NorthTexas 
+OklahomaState -- TexasTech 
+California -- WashingtonState 
+Pittsburgh -- BostonCollege 
+Tennessee -- Florida 
+Pittsburgh -- BowlingGreenState 
+Oregon -- Idaho 
+SouthernCalifornia -- PennState 
+Army -- Houston 
+Syracuse -- Buffalo 
+SouthCarolina -- NewMexicoState 
+Buffalo -- BallState 
+OregonState -- NewMexico 
+UtahState -- ArkansasState 
+TexasElPaso -- "TexasA&M" 
+CentralMichigan -- NorthernIllinois 
+Idaho -- BoiseState 
+Louisville -- Connecticut 
+LouisianaMonroe -- LouisianaTech 
+GeorgiaTech -- NorthCarolinaState 
+Stanford -- ArizonaState 
+GeorgiaTech -- Virginia 
+Tennessee -- SouthCarolina 
+Army -- Louisville 
+Ohio -- MiamiOhio 
+Clemson -- Duke 
+Indiana -- NorthCarolinaState 
+CentralMichigan -- Akron 
+Kent -- Akron 
+MichiganState -- Marshall 
+AirForce -- Navy 
+Rutgers -- Buffalo 
+Hawaii -- TexasElPaso 
+Georgia -- Auburn 
+MississippiState -- Auburn 
+AirForce -- ColoradoState 
+SouthernMethodist -- Rice 
+TexasChristian -- Nevada 
+Clemson -- FloridaState 
+NorthCarolina -- Duke 
+SanJoseState -- SouthernMethodist 
+Georgia -- SouthCarolina 
+Maryland -- NorthCarolina 
+Nebraska -- TexasTech 
+Cincinnati -- Louisville 
+Cincinnati -- MiamiOhio 
+OhioState -- Michigan 
+Arkansas -- Auburn 
+MichiganState -- OhioState 
+Tennessee -- Alabama 
+SanJoseState -- FresnoState 
+Missouri -- MichiganState 
+NevadaLasVegas -- Wyoming 
+SanDiegoState -- ArizonaState 
+Kent -- WesternMichigan 
+MiamiOhio -- EasternMichigan 
+MiamiFlorida -- Temple 
+Missouri -- Nebraska 
+Pittsburgh -- PennState 
+Texas -- Baylor 
+Alabama -- Auburn 
+WashingtonState -- Washington 
+OregonState -- SouthernCalifornia 
+UCLA -- Alabama 
+Memphis -- ArkansasState 
+Texas -- Stanford 
+Arizona -- SanDiegoState 
+SouthernMethodist -- Kansas 
+NewMexicoState -- ArkansasState 
+Oklahoma -- TexasTech 
+SanJoseState -- Nevada 
+EasternMichigan -- CentralMichigan 
+NewMexicoState -- Idaho 
+Hawaii -- SouthernMethodist 
+Florida -- BallState 
+Temple -- EasternMichigan 
+Minnesota -- Northwestern 
+BostonCollege -- VirginiaTech 
+Oklahoma -- ArkansasState 
+TexasChristian -- FresnoState 
+MiamiFlorida -- Rutgers 
+MiamiOhio -- OhioState 
+TexasElPaso -- NewMexicoState 
+NorthCarolina -- Pittsburgh 
+Oklahoma -- Nebraska 
+Washington -- UCLA 
+Army -- NewMexicoState 
+Clemson -- Virginia 
+NevadaLasVegas -- AirForce 
+Duke -- GeorgiaTech 
+Virginia -- FloridaState 
+SouthernMethodist -- Houston 
+UtahState -- TexasTech 
+Marshall -- Buffalo 
+Tulane -- Houston 
+Temple -- Pittsburgh 
+Duke -- FloridaState 
+California -- Oregon 
+Tennessee -- LouisianaMonroe 
+IowaState -- KansasState 
+Arkansas -- SouthCarolina 
+Marshall -- Ohio 
+Cincinnati -- Wisconsin 
+ArizonaState -- SouthernCalifornia 
+Cincinnati -- Houston 
+Nevada -- Wyoming 
+OklahomaState -- Missouri 
+Army -- Navy 
+Minnesota -- Iowa 
+Georgia -- Vanderbilt 
+Army -- BostonCollege 
+Arkansas -- Mississippi 
+Illinois -- MiddleTennesseeState 
+AlabamaBirmingham -- Memphis 
+Buffalo -- Akron 
+CentralFlorida -- NorthernIllinois 
+Arkansas -- BoiseState 
+Vanderbilt -- Kentucky 
+Ohio -- Kent 
+Kent -- BowlingGreenState 
+Oklahoma -- KansasState 
+TexasTech -- KansasState 
+Toledo -- EasternMichigan 
+EasternMichigan -- BowlingGreenState 
+Nebraska -- Baylor 
+EastCarolina -- VirginiaTech 
+LouisianaState -- Alabama 
+TexasTech -- NewMexico 
+CentralMichigan -- BoiseState 
+Pittsburgh -- Kent 
+Illinois -- Michigan 
+TexasChristian -- SouthernMethodist 
+NorthCarolina -- GeorgiaTech 
+Army -- EastCarolina 
+AirForce -- BrighamYoung 
+LouisianaState -- Mississippi 
+MississippiState -- Kentucky 
+Nebraska -- IowaState 
+LouisianaLafayette -- LouisianaMonroe 
+MiamiFlorida -- Washington 
+Stanford -- Arizona 
+NorthCarolina -- FloridaState 
+Marshall -- NorthCarolina 
+Baylor -- TexasTech 
+OregonState -- UCLA 
+NewMexico -- BrighamYoung 
+Connecticut -- BostonCollege 
+Colorado -- KansasState 
+OregonState -- SanDiegoState 
+MiddleTennesseeState -- LouisianaMonroe 
+Nebraska -- SanJoseState 
+MiamiFlorida -- WestVirginia 
+Florida -- Auburn 
+Tulsa -- SouthernMethodist 
+TexasChristian -- Tulsa 
+MiamiOhio -- Kent 
+Arizona -- ArizonaState 
+MiamiFlorida -- VirginiaTech 
+Maryland -- WestVirginia 
+LouisianaState -- Houston 
+Temple -- VirginiaTech 
+Indiana -- Iowa 
+OhioState -- Arizona 
+Illinois -- OhioState 
+Tulane -- SouthernMethodist 
+Rutgers -- VirginiaTech 
+Tennessee -- Vanderbilt 
+Hawaii -- Nevada 
+Nevada -- ColoradoState 
+IowaState -- Colorado 
+TexasChristian -- Navy 
+Hawaii -- Rice 
+Illinois -- Iowa 
+AirForce -- Utah 
+Michigan -- UCLA 
+Hawaii -- TexasChristian 
+NorthTexas -- Baylor 
+"TexasA&M" -- IowaState 
+LouisianaState -- Tennessee 
+UCLA -- SouthernCalifornia 
+OklahomaState -- SouthernMississippi 
+Nevada -- FresnoState 
+NevadaLasVegas -- ColoradoState 
+MiddleTennesseeState -- Florida 
+LouisianaLafayette -- Tulane 
+Rice -- FresnoState 
+MiamiOhio -- BowlingGreenState 
+AirForce -- NewMexico 
+MiamiFlorida -- LouisianaTech 
+OhioState -- Iowa 
+Vanderbilt -- Alabama 
+Oklahoma -- Rice 
+NotreDame -- SouthernCalifornia 
+Maryland -- FloridaState 
+Georgia -- Mississippi 
+Wyoming -- NewMexico 
+WakeForest -- Duke 
+MiamiOhio -- Buffalo 
+Rutgers -- Syracuse 
+Houston -- EastCarolina 
+Kansas -- TexasTech 
+Clemson -- SouthCarolina 
+WashingtonState -- Arizona 
+Connecticut -- Buffalo 
+Nevada -- SouthernMethodist 
+Washington -- ArizonaState 
+Indiana -- PennState 
+Syracuse -- BrighamYoung 
+CentralMichigan -- Wyoming 
+Tulsa -- Rice 
+California -- Illinois 
+Rutgers -- Temple 
+OregonState -- WashingtonState 
+Toledo -- PennState 
+Mississippi -- MississippiState 
+WashingtonState -- ArizonaState 
+Hawaii -- FresnoState 
+Oklahoma -- Kansas 
+EasternMichigan -- Connecticut 
+NevadaLasVegas -- IowaState 
+Temple -- BostonCollege 
+Auburn -- NorthernIllinois 
+Wisconsin -- Iowa 
+Pittsburgh -- WestVirginia 
+Arkansas -- Alabama 
+BoiseState -- NewMexico 
+Ohio -- Akron 
+Kansas -- Colorado 
+IowaState -- Kansas 
+AlabamaBirmingham -- Kansas 
+SanDiegoState -- NewMexico 
+Stanford -- Washington 
+UCLA -- ArizonaState 
+SouthCarolina -- Kentucky 
+NevadaLasVegas -- SanDiegoState 
+Tennessee -- Kentucky 
+NotreDame -- WestVirginia 
+SouthernMississippi -- Alabama 
+Indiana -- Wisconsin 
+Duke -- EastCarolina 
+Georgia -- Kentucky 
+UtahState -- Idaho 
+Marshall -- WesternMichigan 
+Memphis -- LouisianaMonroe 
+MiddleTennesseeState -- Connecticut 
+MichiganState -- Illinois 
+Virginia -- NorthCarolinaState 
+AlabamaBirmingham -- SouthernMississippi 
+Texas -- Oklahoma 
+CentralFlorida -- VirginiaTech 
+Washington -- Idaho 
+TexasElPaso -- Nevada 
+Idaho -- ArkansasState 
+VirginiaTech -- Akron 
+LouisianaLafayette -- MiddleTennesseeState 
+Oregon -- Washington 
+California -- Washington 
+Utah -- Arizona 
+NevadaLasVegas -- Mississippi 
+LouisianaTech -- CentralFlorida 
+Texas -- Colorado 
+Northwestern -- NorthernIllinois 
+Louisville -- Houston 
+Marshall -- Toledo 
+UtahState -- NewMexicoState 
+WakeForest -- NorthCarolina 
+Syracuse -- WestVirginia 
+Rice -- Houston 
+Temple -- Syracuse 
+Nebraska -- Iowa 
+AlabamaBirmingham -- MiddleTennesseeState 
+Georgia -- Tennessee 
+BallState -- NorthernIllinois 
+Maryland -- MiddleTennesseeState 
+Texas -- TexasTech 
+Syracuse -- VirginiaTech 
+WakeForest -- Navy 
+CentralMichigan -- BallState 
+TexasElPaso -- FresnoState 
+Hawaii -- NevadaLasVegas 
+Toledo -- BallState 
+Nebraska -- Kansas 
+Tulane -- Louisville 
+Michigan -- PennState 
+AlabamaBirmingham -- LouisianaState 
+Ohio -- Buffalo 
+OklahomaState -- "TexasA&M" 
+NorthCarolina -- Tulsa 
+Hawaii -- Wisconsin 
+WestVirginia -- BostonCollege 
+BallState -- KansasState 
+GeorgiaTech -- CentralFlorida 
+Marshall -- BowlingGreenState 
+Oregon -- SouthernCalifornia 
+Mississippi -- Tulane 
+WashingtonState -- Idaho 
+AlabamaBirmingham -- LouisianaLafayette 
+MiamiOhio -- BallState 
+California -- Stanford 
+MiamiFlorida -- Syracuse 
+Illinois -- SanDiegoState 
+Illinois -- Minnesota 
+AirForce -- NotreDame 
+Cincinnati -- Memphis 
+Florida -- FloridaState 
+NewMexicoState -- NorthTexas 
+SouthCarolina -- EasternMichigan 
+NorthCarolina -- Virginia 
+Texas -- LouisianaLafayette 
+Stanford -- SouthernCalifornia 
+OregonState -- Arizona 
+Minnesota -- Purdue 
+WestVirginia -- VirginiaTech 
+Navy -- Temple 
+EastCarolina -- WestVirginia 
+Akron -- NorthernIllinois 
+Tulsa -- SanJoseState 
+NewMexicoState -- BoiseState 
+NotreDame -- Navy 
+ColoradoState -- Colorado 
+Minnesota -- PennState 
+SanJoseState -- Rice 
+LouisianaLafayette -- TexasTech 
+Toledo -- NorthernIllinois 
+EastCarolina -- Syracuse 
+Washington -- Colorado 
+Arkansas -- Georgia 
+NevadaLasVegas -- NorthTexas 
+Ohio -- WesternMichigan 
+UtahState -- ArizonaState 
+Vanderbilt -- MiamiOhio 
+Memphis -- MississippiState 
+Connecticut -- Akron 
+Kansas -- KansasState 
+TexasChristian -- ArkansasState 
+Minnesota -- OhioState 
+California -- FresnoState 
+Michigan -- BowlingGreenState 
+Connecticut -- BallState 
+Louisville -- FloridaState 
+UtahState -- BoiseState 
+Georgia -- GeorgiaTech 
+Auburn -- Wyoming 
+OhioState -- FresnoState 
+Maryland -- Virginia 
+Purdue -- Wisconsin 
+TexasElPaso -- Rice 
+Michigan -- Northwestern 
+Nebraska -- KansasState 
+Army -- Tulane 
+Texas -- Houston 
+Illinois -- Northwestern 
+Oklahoma -- TexasElPaso 
+ColoradoState -- ArizonaState 
+AirForce -- Army 
+Cincinnati -- SouthernMississippi 
+SouthernMethodist -- FresnoState 
+NorthCarolina -- NorthCarolinaState 
+MichiganState -- NotreDame 
+Kent -- Purdue 
+MiamiOhio -- Akron 
+WashingtonState -- BoiseState 
+Georgia -- Florida 
+Syracuse -- BostonCollege 
+MiddleTennesseeState -- LouisianaTech 
+Nevada -- Rice 
+KansasState -- Iowa 
+Hawaii -- LouisianaTech 
+UtahState -- Utah 
+Kentucky -- Florida 
+MiamiFlorida -- FloridaState 
+California -- Utah 
+Wisconsin -- WesternMichigan 
+Clemson -- Missouri 
+AlabamaBirmingham -- Army 
+Kent -- CentralMichigan 
+Hawaii -- SanJoseState 
+UtahState -- BrighamYoung 
+Arkansas -- LouisianaState 
+Arkansas -- LouisianaMonroe 
+Navy -- BostonCollege 
+Tulsa -- FresnoState 
+Purdue -- Northwestern 
+Clemson -- NorthCarolina 
+Indiana -- Minnesota 
+Pittsburgh -- VirginiaTech 
+FresnoState -- UCLA 
+California -- ArizonaState 
+NotreDame -- Nebraska 
+NevadaLasVegas -- BrighamYoung 
+MiamiFlorida -- BostonCollege 
+MichiganState -- Wisconsin 
+Tulsa -- LouisianaTech 
+MississippiState -- Alabama 
+Utah -- SanDiegoState 
+MichiganState -- Iowa 
+WakeForest -- FloridaState 
+Rutgers -- WestVirginia 
+NotreDame -- "TexasA&M" 
+Tulane -- EastCarolina 
+WakeForest -- GeorgiaTech 
+Purdue -- Michigan 
+CentralMichigan -- WesternMichigan 
+SouthernMississippi -- Memphis 
+Missouri -- IowaState 
+AlabamaBirmingham -- Louisville 
+WakeForest -- Clemson 
+AlabamaBirmingham -- EastCarolina 
+SanDiegoState -- BrighamYoung 
+Toledo -- WesternMichigan 
+Purdue -- PennState 
+Missouri -- Colorado 
+WakeForest -- NorthCarolinaState 
+Tulsa -- NewMexicoState 
+ColoradoState -- SanDiegoState 
+Tulane -- Memphis 
+NevadaLasVegas -- NewMexico 
+Arkansas -- MississippiState 
+Northwestern -- Iowa 
+AlabamaBirmingham -- Cincinnati 
+BowlingGreenState -- Akron 
+WakeForest -- Virginia 
+Indiana -- Northwestern 
+Indiana -- Illinois 
+Indiana -- Purdue 
+BoiseState -- NorthTexas 
+OhioState -- Wisconsin 
+Toledo -- CentralMichigan 
+TexasChristian -- Northwestern 
+OklahomaState -- IowaState 
+SanJoseState -- SouthernCalifornia 
+MichiganState -- PennState 
+Utah -- NewMexico 
+ColoradoState -- NewMexico 
+Missouri -- Baylor 
+Utah -- Wyoming 
+Missouri -- Texas 
+Buffalo -- BowlingGreenState 
+NotreDame -- BostonCollege 
+Tulsa -- TexasElPaso 
+NevadaLasVegas -- Utah 
+Illinois -- PennState 
+Mississippi -- Alabama 
+Duke -- Northwestern 
+Indiana -- Michigan 
+Virginia -- VirginiaTech 
+Tennessee -- Memphis 
+}
