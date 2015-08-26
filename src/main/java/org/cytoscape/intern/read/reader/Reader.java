@@ -62,6 +62,8 @@ public abstract class Reader {
 	// visualStyle being applied to network, used to set default values
 	protected VisualStyle vizStyle;
 
+	//True if "fillcolor" attribute has already been consumed for VisualStyle
+	protected boolean usedDefaultFillColor = false;
 	/*
 	 * Map of explicitly defined default attributes
 	 * key is attribute name, value is value
@@ -149,8 +151,6 @@ public abstract class Reader {
 			}
 			if (attrKey.equals("color") || attrKey.equals("fillcolor")
 					|| attrKey.equals("fontcolor") || attrKey.equals("bgcolor")) {
-
-				LOGGER.info("Color: " + attrVal + " being read...");
 				switch (attrKey) {
 					case "color": {
 						setColor(attrVal, vizStyle, ColorAttribute.COLOR);
@@ -158,6 +158,7 @@ public abstract class Reader {
 					}
 					case "fillcolor": {
 						setColor(attrVal, vizStyle, ColorAttribute.FILLCOLOR);
+						usedDefaultFillColor = true;
 						break;
 					}
 					case "fontcolor": {
@@ -302,7 +303,14 @@ public abstract class Reader {
 			Float value = Float.valueOf(matcher.group("VAL"));
 			return Color.getHSBColor(hue, saturation, value);
 		}
-		// Cannot translate color names to Java colors, so just return BLUE
+		// Don't handle the different color schemes, just the default (X11)
+		// Only handle a few colors from the color scheme
+		// TODO
+		/*
+		 * Map color string to a Java Color
+		 * return Java Color
+		 */
+		// If not in map then return a default color
 		return Color.BLUE;
 	}
 	

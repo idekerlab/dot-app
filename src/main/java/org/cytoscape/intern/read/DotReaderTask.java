@@ -315,14 +315,23 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			return null;
 		}
 		
-		// copy the original VisualStyle to save it
-		// the new visual style will overwrite the existing one
-		VisualStyle vizStyle = vizStyleFact.createVisualStyle(
+		// Base new VisualStyle off the default style
+		VisualStyle defaultVizStyle = vizMapMgr.getDefaultVisualStyle();
+		VisualStyle vizStyle = vizStyleFact.createVisualStyle(defaultVizStyle);
+		vizStyle.setTitle(
 			String.format("%s vizStyle", getGraphName(graph))
 		);
-		//Disable all VisualPropertyDependencies
+		//Enable "Custom Graphics fit to Node" and "Edge color to arrows" dependency
+		//Also disable "Lock Node height and width"
 		for (VisualPropertyDependency<?> dep : vizStyle.getAllVisualPropertyDependencies()) {
-			dep.setDependency(false);
+			if (dep.getIdString().equals("nodeCustomGraphicsSizeSync") ||
+				dep.getIdString().equals("arrowColorMatchesEdge")) {
+				dep.setDependency(true);
+			}
+			else if (dep.getIdString().equals("nodeSizeLocked")) {
+				dep.setDependency(false);
+			}
+
 		}
 		
 		//created a new CyNetworkView based on the cyNetworkViewFactory

@@ -21,6 +21,7 @@ import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LINE_TYPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TRANSPARENCY;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_UNSELECTED_PAINT;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_WIDTH;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TOOLTIP;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL;
@@ -31,7 +32,6 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_L
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE;
-
 
 import org.cytoscape.view.vizmap.VisualStyle;
 
@@ -180,6 +180,7 @@ public class EdgeReader extends Reader{
 	 * eg. NetworkReader sets all network props, same for nodes
 	 * Modifies CyNetworkView networkView, VisualStyle vizStyle etc. 
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected void setBypasses() {
 		LOGGER.info("setBypasses called");
@@ -226,7 +227,8 @@ public class EdgeReader extends Reader{
 						|| attrKey.equals("fontcolor")) {
 					switch (attrKey) {
 						case "fillcolor": {
-							// Fall through to "color" case
+							// DO NOTHING. Can't handle arrow colors yet.
+							break;
 						}
 						case "color": {
 							setColor(attrVal, elementView, ColorAttribute.COLOR);
@@ -342,6 +344,7 @@ public class EdgeReader extends Reader{
 			case COLOR: {
 				LOGGER.info("Edge stroke color being set to: " + color.toString());
 				vizStyle.setDefaultValue(EDGE_STROKE_UNSELECTED_PAINT, color);
+				vizStyle.setDefaultValue(EDGE_UNSELECTED_PAINT, color);
 				vizStyle.setDefaultValue(EDGE_TRANSPARENCY, transparency);
 				break;
 			}
@@ -371,7 +374,7 @@ public class EdgeReader extends Reader{
 
 		switch (attr) {
 			case COLOR: {
-				elementView.setLockedValue(EDGE_STROKE_UNSELECTED_PAINT, color);
+				elementView.setLockedValue(EDGE_UNSELECTED_PAINT, color);
 				elementView.setLockedValue(EDGE_TRANSPARENCY, transparency);
 				break;
 			}
@@ -380,8 +383,11 @@ public class EdgeReader extends Reader{
 				elementView.setLockedValue(EDGE_LABEL_TRANSPARENCY, transparency);
 				break;
 			}
+			default: {
+				break;
+			}
 		}
 	}
-	
+
 }
 

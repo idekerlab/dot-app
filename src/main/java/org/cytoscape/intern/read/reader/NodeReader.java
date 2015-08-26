@@ -80,7 +80,9 @@ public class NodeReader extends Reader{
 		DOT_TO_CYTOSCAPE.put("fontsize", NODE_LABEL_FONT_SIZE);
 	}
 	
-
+	//True if "fillcolor" attribute has already been consumed for a node
+	private boolean usedFillColor = false;
+	
 	/**
 	 * Constructs an object of type Reader.
 	 * 
@@ -120,6 +122,9 @@ public class NodeReader extends Reader{
 			CyNode element = (CyNode)entry.getValue();
 			View<CyNode> elementView = networkView.getNodeView(element);
 
+			//reset the usedFillColor boolean for each node
+			usedFillColor = false;
+
 			// for each bypass attribute
 			for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
 				String attrKey = attrEntry.getKey();
@@ -146,6 +151,7 @@ public class NodeReader extends Reader{
 						}
 						case "fillcolor": {
 							setColor(attrVal, elementView, ColorAttribute.FILLCOLOR);
+							usedFillColor = true;
 							break;
 						}
 						case "fontcolor": {
@@ -200,6 +206,7 @@ public class NodeReader extends Reader{
 		String[] coords = attrVal.split(",");
 		Double x = Double.parseDouble(coords[0]);
 		Double y = -1 * Double.parseDouble(coords[1]);
+		//Position attributes are not set with bypasses
 		elementView.setVisualProperty(NODE_X_LOCATION, x);
 		elementView.setVisualProperty(NODE_Y_LOCATION, y);
 	}
@@ -256,7 +263,6 @@ public class NodeReader extends Reader{
 				break;
 			}
 			case "shape": {
-				val.toLowerCase();
 				retrievedVal = NODE_SHAPE_MAP.get(val);
 				break;
 			}
@@ -366,7 +372,13 @@ public class NodeReader extends Reader{
 			case COLOR: {
 				vizStyle.setDefaultValue(NODE_BORDER_PAINT, color);
 				vizStyle.setDefaultValue(NODE_BORDER_TRANSPARENCY, transparency);
-				break;
+				if (usedDefaultFillColor) {
+					//default fillcolor has already been applied, should not redo
+					//with color attribute
+					break;
+				}
+				//color attribute used for NODE_FILL_COLOR if
+				//fillcolor not present
 			}
 			case FILLCOLOR: {
 				vizStyle.setDefaultValue(NODE_FILL_COLOR, color);
@@ -400,7 +412,14 @@ public class NodeReader extends Reader{
 			case COLOR: {
 				elementView.setLockedValue(NODE_BORDER_PAINT, color);
 				elementView.setLockedValue(NODE_BORDER_TRANSPARENCY, transparency);
-				break;
+				//default fillcolor has already been applied, should not redo
+				//with color attribute
+				if (usedFillColor) {
+					break;
+				}
+				//color attribute used for NODE_FILL_COLOR if
+				//fillcolor not present
+				//Fall through to fillcolor case
 			}
 			case FILLCOLOR: {
 				elementView.setLockedValue(NODE_FILL_COLOR, color);
@@ -412,9 +431,11 @@ public class NodeReader extends Reader{
 				elementView.setLockedValue(NODE_LABEL_TRANSPARENCY, transparency);
 				break;
 			}
+			default: {
+				break;
+			}
 		}
 		
 	}
-
 }
 
