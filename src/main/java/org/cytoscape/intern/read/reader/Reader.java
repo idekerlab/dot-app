@@ -149,6 +149,8 @@ public abstract class Reader {
 			}
 			if (attrKey.equals("color") || attrKey.equals("fillcolor")
 					|| attrKey.equals("fontcolor") || attrKey.equals("bgcolor")) {
+
+				LOGGER.info("Color: " + attrVal + " being read...");
 				switch (attrKey) {
 					case "color": {
 						setColor(attrVal, vizStyle, ColorAttribute.COLOR);

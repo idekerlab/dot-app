@@ -533,7 +533,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		Map<String, String> output = new HashMap<String, String>();
 		for (String commonAttr : COMMON_ATTRIBUTES) {
 			LOGGER.info(String.format("Getting default edge attribute: %s", commonAttr));
-			String val = graph.getGenericNodeAttribute(commonAttr);
+			//String val = graph.getGenericNodeAttribute(commonAttr);
+			String val = graph.getGenericEdgeAttribute(commonAttr);
 			if (val != null) {
 				output.put(commonAttr, val);
 			}

@@ -49,7 +49,7 @@ public class EdgeReader extends Reader{
 	private static final Map<String, ArrowShape> ARROW_SHAPE_MAP = new HashMap<String, ArrowShape>();
 	static {
 		ARROW_SHAPE_MAP.put("vee", ArrowShapeVisualProperty.ARROW);
-		ARROW_SHAPE_MAP.put("circle", ArrowShapeVisualProperty.CIRCLE);
+		ARROW_SHAPE_MAP.put("dot", ArrowShapeVisualProperty.CIRCLE);
 		ARROW_SHAPE_MAP.put("normal", ArrowShapeVisualProperty.DELTA);
 		ARROW_SHAPE_MAP.put("diamond", ArrowShapeVisualProperty.DIAMOND);
 		ARROW_SHAPE_MAP.put("ornormal", ArrowShapeVisualProperty.HALF_BOTTOM);
@@ -87,6 +87,7 @@ public class EdgeReader extends Reader{
 		this.elementMap = elementMap;
 
 		LOGGER.info("EdgeReader constructed");
+		LOGGER.severe(defaultAttrs.toString());
 	}
 	
 	/**
@@ -101,7 +102,7 @@ public class EdgeReader extends Reader{
 	 * Converts edge weights by putting into a new column in the table
 	 */
 	private void setWeight() {
-
+		// TODO
 	}
 
 	/**
@@ -159,7 +160,8 @@ public class EdgeReader extends Reader{
 				break;
 			}
 			case "arrowhead": {
-				// Fall through to arrowtail
+				retrievedVal = ARROW_SHAPE_MAP.get(val);
+				break;
 			}
 			case "arrowtail": {
 				retrievedVal = ARROW_SHAPE_MAP.get(val);
@@ -323,17 +325,20 @@ public class EdgeReader extends Reader{
 	@Override
 	protected void setColor(String attrVal, VisualStyle vizStyle,
 			ColorAttribute attr) {
-		
+	
+		LOGGER.info("Edge color: " + attrVal + " being set...");
 		Color color = convertColor(attrVal);
 		Integer transparency = color.getAlpha();
 
 		switch (attr) {
 			case COLOR: {
+				LOGGER.info("Edge stroke color being set to: " + color.toString());
 				vizStyle.setDefaultValue(EDGE_STROKE_UNSELECTED_PAINT, color);
 				vizStyle.setDefaultValue(EDGE_TRANSPARENCY, transparency);
 				break;
 			}
 			case FONTCOLOR: {
+				LOGGER.info("Edge font color being set to: " + color.toString());
 				vizStyle.setDefaultValue(EDGE_LABEL_COLOR, color);
 				vizStyle.setDefaultValue(EDGE_LABEL_TRANSPARENCY, transparency);
 				break;
