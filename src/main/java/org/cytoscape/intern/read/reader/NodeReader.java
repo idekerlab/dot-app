@@ -256,6 +256,7 @@ public class NodeReader extends Reader{
 				break;
 			}
 			case "shape": {
+				val.toLowerCase();
 				retrievedVal = NODE_SHAPE_MAP.get(val);
 				break;
 			}

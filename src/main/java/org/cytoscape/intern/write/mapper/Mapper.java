@@ -427,7 +427,9 @@ public abstract class Mapper {
 		
 		// go through all dependencies and find lock height and width one
 		for(VisualPropertyDependency<?> dependency: vizDependencies) {
+			LOGGER.info(dependency.getIdString());
 			if((dependency.getIdString()).equals("nodeSizeLocked")) {
+				LOGGER.info("nodeSizeLocked val: " + dependency.isDependencyEnabled());
 				output = dependency.isDependencyEnabled();
 			}
 		}

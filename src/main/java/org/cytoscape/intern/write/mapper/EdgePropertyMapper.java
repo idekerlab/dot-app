@@ -111,10 +111,10 @@ public class EdgePropertyMapper extends Mapper {
 				
 		if (!isEqualToDefault(EDGE_SOURCE_ARROW_SHAPE)) {
 			ArrowShape sourceArrow = view.getVisualProperty(EDGE_SOURCE_ARROW_SHAPE);
-			LOGGER.info("Retrieving target/head arrow. CS version is: " + sourceArrow);
+			LOGGER.info("Retrieving source/tail arrow. CS version is: " + sourceArrow);
 			String dotSourceArrow = ARROW_SHAPE_MAP.get(sourceArrow);
-			LOGGER.info("Target/head arrow retrieved. .dot verison is: " + dotSourceArrow);
-			simpleVisPropsToDot.add(String.format("arrowhead = \"%s\"", dotSourceArrow));
+			LOGGER.info("Source/tail arrow retrieved. .dot verison is: " + dotSourceArrow);
+			simpleVisPropsToDot.add(String.format("arrowtail = \"%s\"", dotSourceArrow));
 		}
 	}
 	

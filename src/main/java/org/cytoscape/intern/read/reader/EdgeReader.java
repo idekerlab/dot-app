@@ -160,10 +160,12 @@ public class EdgeReader extends Reader{
 				break;
 			}
 			case "arrowhead": {
+				val.toLowerCase();
 				retrievedVal = ARROW_SHAPE_MAP.get(val);
 				break;
 			}
 			case "arrowtail": {
+				val.toLowerCase();
 				retrievedVal = ARROW_SHAPE_MAP.get(val);
 				break;
 			}
