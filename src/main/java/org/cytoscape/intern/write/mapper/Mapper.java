@@ -429,7 +429,6 @@ public abstract class Mapper {
 		for(VisualPropertyDependency<?> dependency: vizDependencies) {
 			LOGGER.info(dependency.getIdString());
 			if((dependency.getIdString()).equals("nodeSizeLocked")) {
-				LOGGER.info("nodeSizeLocked val: " + dependency.isDependencyEnabled());
 				output = dependency.isDependencyEnabled();
 			}
 		}

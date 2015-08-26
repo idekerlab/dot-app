@@ -59,7 +59,6 @@ public class NodeReader extends Reader{
 		NODE_SHAPE_MAP.put("hexagon", NodeShapeVisualProperty.HEXAGON);
 		NODE_SHAPE_MAP.put("octagon", NodeShapeVisualProperty.OCTAGON);
 		NODE_SHAPE_MAP.put("parallelogram", NodeShapeVisualProperty.PARALLELOGRAM);
-		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.ROUND_RECTANGLE);
 		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.RECTANGLE);     
 	}
 	
@@ -283,8 +282,9 @@ public class NodeReader extends Reader{
 	 */
 	@Override
 	protected void setStyle(String attrVal, VisualStyle vizStyle) {
+		attrVal.toLowerCase();
 		String[] styleAttrs = attrVal.split(",");
-
+		
 		for (String styleAttr : styleAttrs) {
 			styleAttr = styleAttr.trim();
 			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
@@ -292,6 +292,14 @@ public class NodeReader extends Reader{
 			if (lineType != null) {
 				vizStyle.setDefaultValue(NODE_BORDER_LINE_TYPE, lineType);
 			}
+		}
+		
+		// check if rounded rectangle and set
+		if( attrVal.contains("rounded") && 
+				(vizStyle.getDefaultValue(NODE_SHAPE)).equals(NodeShapeVisualProperty.RECTANGLE) ) {
+				
+			vizStyle.setDefaultValue(NODE_SHAPE, NodeShapeVisualProperty.ROUND_RECTANGLE);
+			
 		}
 	}
 
@@ -308,6 +316,8 @@ public class NodeReader extends Reader{
 			View<? extends CyIdentifiable> elementView) {
 
 		String[] styleAttrs = attrVal.split(",");
+		attrVal.toLowerCase();
+
 		for (String styleAttr : styleAttrs) {
 			styleAttr = styleAttr.trim();
 
@@ -317,6 +327,13 @@ public class NodeReader extends Reader{
 			}
 		}
 		
+		// check if rounded rectangle and set
+		if( attrVal.contains("rounded") && 
+				(elementView.getVisualProperty(NODE_SHAPE)).equals(NodeShapeVisualProperty.RECTANGLE) ) {
+				
+			elementView.setLockedValue(NODE_SHAPE, NodeShapeVisualProperty.ROUND_RECTANGLE);
+			
+		}
 	}
 
 	/**
