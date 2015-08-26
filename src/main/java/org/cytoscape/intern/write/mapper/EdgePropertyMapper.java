@@ -84,7 +84,7 @@ public class EdgePropertyMapper extends Mapper {
 	 */
 	private void populateMaps() {
 		// Put Simple Props Key/Values
-		if (!isEqualToDefault(EDGE_WIDTH)) {
+		if (!isEqualToDefault(EDGE_LABEL)) {
 			String edgeLabel = view.getVisualProperty(EDGE_LABEL);
 			edgeLabel = edgeLabel.replace("\"", "\\\"");
 			simpleVisPropsToDot.add(String.format("label = \"%s\"", edgeLabel));
