@@ -113,6 +113,8 @@ public abstract class Reader {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void setDefaults() {
 		LOGGER.info("Setting the Default values for Visual Style...");
+		//Boolean for checking if the size attribute has been set
+		boolean setSize = false;
 		/*
 		 * for each entry in defaultAttrs
 		 * 		Pair p = convertAttribute(getKey(), getValue());
@@ -142,6 +144,9 @@ public abstract class Reader {
 			 *   NodeReader will create a passthrough mapping if label="\N"
 			 *   Every other subclass will return immediately
 			 */
+			/*
+			 * if attrKey is "height/width"
+			 */
 			if (attrKey.equals("style")) {
 				setStyle(attrVal, vizStyle);
 				// this attribute has been handled, move on to next one
@@ -149,6 +154,8 @@ public abstract class Reader {
 			}
 			if (attrKey.equals("color") || attrKey.equals("fillcolor")
 					|| attrKey.equals("fontcolor") || attrKey.equals("bgcolor")) {
+
+				LOGGER.info("Color: " + attrVal + " being read...");
 				switch (attrKey) {
 					case "color": {
 						setColor(attrVal, vizStyle, ColorAttribute.COLOR);
@@ -300,7 +307,14 @@ public abstract class Reader {
 			Float value = Float.valueOf(matcher.group("VAL"));
 			return Color.getHSBColor(hue, saturation, value);
 		}
-		// Cannot translate color names to Java colors, so just return BLUE
+		// Don't handle the different color schemes, just the default (X11)
+		// Only handle a few colors from the color scheme
+		// TODO
+		/*
+		 * Map color string to a Java Color
+		 * return Java Color
+		 */
+		// If not in map then return a default color
 		return Color.BLUE;
 	}
 	
