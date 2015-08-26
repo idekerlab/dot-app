@@ -62,6 +62,8 @@ public abstract class Reader {
 	// visualStyle being applied to network, used to set default values
 	protected VisualStyle vizStyle;
 
+	//True if "fillcolor" attribute has already been consumed for VisualStyle
+	protected boolean usedDefaultFillColor = false;
 	/*
 	 * Map of explicitly defined default attributes
 	 * key is attribute name, value is value
@@ -113,8 +115,6 @@ public abstract class Reader {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void setDefaults() {
 		LOGGER.info("Setting the Default values for Visual Style...");
-		//Boolean for checking if the size attribute has been set
-		boolean setSize = false;
 		/*
 		 * for each entry in defaultAttrs
 		 * 		Pair p = convertAttribute(getKey(), getValue());
@@ -144,9 +144,6 @@ public abstract class Reader {
 			 *   NodeReader will create a passthrough mapping if label="\N"
 			 *   Every other subclass will return immediately
 			 */
-			/*
-			 * if attrKey is "height/width"
-			 */
 			if (attrKey.equals("style")) {
 				setStyle(attrVal, vizStyle);
 				// this attribute has been handled, move on to next one
@@ -154,8 +151,6 @@ public abstract class Reader {
 			}
 			if (attrKey.equals("color") || attrKey.equals("fillcolor")
 					|| attrKey.equals("fontcolor") || attrKey.equals("bgcolor")) {
-
-				LOGGER.info("Color: " + attrVal + " being read...");
 				switch (attrKey) {
 					case "color": {
 						setColor(attrVal, vizStyle, ColorAttribute.COLOR);
@@ -163,6 +158,7 @@ public abstract class Reader {
 					}
 					case "fillcolor": {
 						setColor(attrVal, vizStyle, ColorAttribute.FILLCOLOR);
+						usedDefaultFillColor = true;
 						break;
 					}
 					case "fontcolor": {

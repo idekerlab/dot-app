@@ -322,9 +322,15 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			String.format("%s vizStyle", getGraphName(graph))
 		);
 		//Enable "Custom Graphics fit to Node" and "Edge color to arrows" dependency
+		//Also disable "Lock Node height and width"
 		for (VisualPropertyDependency<?> dep : vizStyle.getAllVisualPropertyDependencies()) {
-			if (dep.getIdString().equals("nodeCustomGraphicsSizeSync")) {
+			if (dep.getIdString().equals("nodeCustomGraphicsSizeSync") ||
+				dep.getIdString().equals("arrowColorMatchesEdge")) {
 				dep.setDependency(true);
+			}
+			else if (dep.getIdString().equals("nodeSizeLocked")) {
+				dep.setDependency(false);
+			}
 
 		}
 		
