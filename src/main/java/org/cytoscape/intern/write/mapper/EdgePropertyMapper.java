@@ -5,6 +5,7 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_L
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LINE_TYPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE;
@@ -23,6 +24,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
+import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.vizmap.VisualStyle;
 
 /**
@@ -38,7 +40,6 @@ public class EdgePropertyMapper extends Mapper {
 	
 	private CyNetworkView networkView;
 	
-	private boolean visible;
 	/**
 	 * Constructs EdgePropertyMapper object
 	 * 
@@ -49,7 +50,6 @@ public class EdgePropertyMapper extends Mapper {
 		// initialize data structure
 		simpleVisPropsToDot = new ArrayList<String>();
 		this.networkView = networkView;
-		this.visible = isVisible();
 		populateMaps();		
 	}
 	
@@ -134,7 +134,7 @@ public class EdgePropertyMapper extends Mapper {
 		boolean visibleBySource = sourceView.getVisualProperty(NODE_VISIBLE);
 		boolean visibleByTarget = targetView.getVisualProperty(NODE_VISIBLE);
 		if (!visibleBySource || !visibleByTarget) {
-			LOGGER.finest("Edge not visible due to source or target's property.");
+			LOGGER.finest("Edge not visible due to source node or target node's property.");
 			return false;
 		}
 		LOGGER.finest("Edge is visible");
@@ -173,8 +173,7 @@ public class EdgePropertyMapper extends Mapper {
 		// Get the color and fillcolor .dot strings. Append to attribute string
 		if (!isEqualToDefault(EDGE_STROKE_UNSELECTED_PAINT) || !isEqualToDefault(EDGE_TRANSPARENCY)) {
 			Color strokeColor = (Color) view.getVisualProperty(EDGE_STROKE_UNSELECTED_PAINT);
-			Integer strokeTransparency = (visible) ? ((Number)view.getVisualProperty(EDGE_TRANSPARENCY)).intValue()
-											   : TRANSPARENT;
+			Integer strokeTransparency = ((Number)view.getVisualProperty(EDGE_TRANSPARENCY)).intValue();
 			String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
 			elementString.append(dotColor + ",");
 		}
@@ -210,9 +209,9 @@ public class EdgePropertyMapper extends Mapper {
 		}
 		
 		// append dir=both so both arrowShapes show up and close off attr string
-		if (!visible) {
+		/*if (!visible) {
 			elementString.append(",dir = \"none\"");
-		}
+		}*/
 		if (elementString.charAt(elementString.length() - 1) == ',') {
 			elementString.deleteCharAt(elementString.length() - 1);
 		}
@@ -236,8 +235,7 @@ public class EdgePropertyMapper extends Mapper {
 		// Get label font information and append in proper format
 		Color labelColor = (Color) view.getVisualProperty(EDGE_LABEL_COLOR);
 		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
-		Integer labelTransparency = (visible) ? ((Number)view.getVisualProperty(EDGE_LABEL_TRANSPARENCY)).intValue()
-											  : TRANSPARENT;
+		Integer labelTransparency = ((Number)view.getVisualProperty(EDGE_LABEL_TRANSPARENCY)).intValue();
 		Font labelFont = view.getVisualProperty(EDGE_LABEL_FONT_FACE);
 		Integer labelSize = ((Number)view.getVisualProperty(EDGE_LABEL_FONT_SIZE)).intValue();
 		String fontString = mapFont(labelFont, labelSize, labelColor, labelTransparency);
@@ -247,5 +245,31 @@ public class EdgePropertyMapper extends Mapper {
 		else {
 			return null;
 		}
+	}
+
+	@Override
+	protected String mapDotStyle() {
+		LOGGER.finest("Building style string for edge view...");
+		LOGGER.info("Determining need for style attr...");
+		StringBuilder dotStyle = null;
+		boolean isVisible = isVisible();
+		if(!isEqualToDefault(EDGE_LINE_TYPE) || !isEqualToDefault(isVisible, EDGE_VISIBLE)) {
+			LOGGER.info("Not default style attr, building edge's own...");
+			LineType lineType = view.getVisualProperty(EDGE_LINE_TYPE);
+			String lineStr = LINE_TYPE_MAP.get(lineType);
+			dotStyle = new StringBuilder();
+			if (lineStr == null) {
+				lineStr = "solid";
+				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+			}
+			String invisString = (!isVisible) ? ",invis" : "";
+			String style = String.format("style = \"%s%s\"", lineStr, invisString);
+			dotStyle.append(style);
+		}
+		if(dotStyle == null) {
+			return null;
+		}
+
+		return dotStyle.toString();
 	}
 }

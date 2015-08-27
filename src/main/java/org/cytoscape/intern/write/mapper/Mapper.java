@@ -4,13 +4,10 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_L
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LINE_TYPE;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_LINE_TYPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_COLOR;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_FACE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_TRANSPARENCY;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SHAPE;
 import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.DOT;
 import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.EQUAL_DASH;
 import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.LONG_DASH;
@@ -64,8 +61,6 @@ public abstract class Mapper {
 	
 	// VisualStyle applied to the view
 	protected VisualStyle vizStyle;
-	
-	protected static final int TRANSPARENT = 0x00;
 	
 	// if node width and height are locked
 	private static boolean nodeSizesLockedIsSet = false;
@@ -277,54 +272,7 @@ public abstract class Mapper {
 	 * Returns the .dot equivalent in String form for style attribute. Only handles linestyle
 	 * Does not include "style=" bit
 	 */
-	protected String mapDotStyle() {
-		LOGGER.info("Building style attr string...");
-		StringBuilder dotStyle = null;
-		if (view.getModel() instanceof CyNode) {
-			LOGGER.finest("Building style string for node view...");
-			if (!isEqualToDefault(NODE_BORDER_LINE_TYPE) || !isEqualToDefault(NODE_SHAPE)) {
-				LOGGER.info("Not default style attr, building node's own...");
-				LineType lineType = view.getVisualProperty(NODE_BORDER_LINE_TYPE);
-				NodeShape nodeShape = view.getVisualProperty(NODE_SHAPE);
-				String lineStr = "";
-				dotStyle = new StringBuilder();
-
-				// get .dot equivalent of line style, see if we need rounded
-				lineStr = LINE_TYPE_MAP.get(lineType);
-				if (lineStr == null) {
-					lineStr = "solid";
-					LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
-				}
-				boolean rounded = nodeShape.equals(ROUND_RECTANGLE);
-				String roundedString = (rounded) ? "rounded," : "";
-            	String style = String.format("style = \"%s,%sfilled\"", lineStr, roundedString);
-            	dotStyle.append(style);
-			}
-		} 
-		else if (view.getModel() instanceof CyEdge) {
-			LOGGER.finest("Building style string for edge view...");
-			LOGGER.info("Determining need for style attr...");
-			if(!isEqualToDefault(EDGE_LINE_TYPE)) {
-				LOGGER.info("Not default style attr, building edge's own...");
-				LineType lineType = view.getVisualProperty(EDGE_LINE_TYPE);
-				String lineStr = LINE_TYPE_MAP.get(lineType);
-				dotStyle = new StringBuilder();
-
-				if (lineStr == null) {
-					lineStr = "solid";
-					LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
-				}
-				String style = String.format("style = \"%s\"", lineStr);
-				dotStyle.append(style);
-			}
-		}
-
-		if(dotStyle == null) {
-			return null;
-		}
-
-		return dotStyle.toString();
-	}
+	abstract protected String mapDotStyle();
 	
 	/**
 	 * Checks whether the value of a VisualProperty applied to the view is equal
