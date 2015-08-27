@@ -36,6 +36,7 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_T
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_WIDTH;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_X_LOCATION;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_Y_LOCATION;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_VISIBLE;
 
 
 /**
@@ -307,6 +308,10 @@ public class NodeReader extends Reader{
 			vizStyle.setDefaultValue(NODE_SHAPE, NodeShapeVisualProperty.ROUND_RECTANGLE);
 			
 		}
+		// check if invisible is enabled
+		if( attrVal.contains("invis") ) {
+			vizStyle.setDefaultValue(NODE_VISIBLE, false);
+		}
 	}
 
 	/**
@@ -324,6 +329,9 @@ public class NodeReader extends Reader{
 		String[] styleAttrs = attrVal.split(",");
 		attrVal.toLowerCase();
 
+		// Default to visible
+		elementView.setLockedValue(NODE_VISIBLE, true);
+
 		for (String styleAttr : styleAttrs) {
 			styleAttr = styleAttr.trim();
 
@@ -339,6 +347,10 @@ public class NodeReader extends Reader{
 				
 			elementView.setLockedValue(NODE_SHAPE, NodeShapeVisualProperty.ROUND_RECTANGLE);
 			
+		}
+		// check if invisible is enabled
+		if( attrVal.contains("invis") ) {
+			elementView.setLockedValue(NODE_VISIBLE, false);
 		}
 	}
 

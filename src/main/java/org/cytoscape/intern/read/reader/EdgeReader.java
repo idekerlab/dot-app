@@ -25,6 +25,7 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_U
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_WIDTH;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TOOLTIP;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_VISIBLE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_COLOR;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
@@ -272,6 +273,7 @@ public class EdgeReader extends Reader{
 	 */
 	@Override
 	protected void setStyle(String attrVal, VisualStyle vizStyle) {
+		attrVal.toLowerCase();
 		String[] styleAttrs = attrVal.split(",");
 
 		for (String styleAttr : styleAttrs) {
@@ -282,10 +284,10 @@ public class EdgeReader extends Reader{
 			if (lineType != null) {
 				vizStyle.setDefaultValue(EDGE_LINE_TYPE, lineType);
 			}
-			// make invisible if needed
-			if(styleAttr.equals("invis")) {
-				vizStyle.setDefaultValue(EDGE_TRANSPARENCY, 0);
-			}
+		}
+		// make invisible if needed
+		if(attrVal.contains("invis")) {
+			vizStyle.setDefaultValue(EDGE_VISIBLE, false);
 		}
 	}
 
@@ -301,7 +303,11 @@ public class EdgeReader extends Reader{
 	protected void setStyle(String attrVal,
 			View<? extends CyIdentifiable> elementView) {
 		
+		attrVal.toLowerCase();
 		String[] styleAttrs = attrVal.split(",");
+	
+		// Default to visible
+		elementView.setLockedValue(EDGE_VISIBLE, true);
 
 		for (String styleAttr : styleAttrs) {
 			styleAttr = styleAttr.trim();
@@ -311,10 +317,10 @@ public class EdgeReader extends Reader{
 			if (lineType != null) {
 				elementView.setLockedValue(EDGE_LINE_TYPE, lineType);
 			}
-			// make invisible if needed
-			if(styleAttr.equals("invis")) {
-				elementView.setLockedValue(EDGE_TRANSPARENCY, 0);
-			}
+		}
+		// make invisible if needed
+		if(attrVal.contains("invis")) {
+			elementView.setLockedValue(EDGE_VISIBLE, false);
 		}
 	}
 
