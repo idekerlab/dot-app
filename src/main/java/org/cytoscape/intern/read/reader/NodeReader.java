@@ -378,6 +378,9 @@ public class NodeReader extends Reader{
 				vizStyle.setDefaultValue(NODE_LABEL_TRANSPARENCY, transparency);
 				break;
 			}
+			default: {
+				break;
+			}
 		}
 		
 	}
