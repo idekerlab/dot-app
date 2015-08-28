@@ -6,7 +6,10 @@ import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.SO
 
 import java.awt.Color;
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.FileHandler;
@@ -22,7 +25,10 @@ import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.presentation.RenderingEngine;
+import org.cytoscape.view.presentation.RenderingEngineManager;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.vizmap.VisualStyle;
 
@@ -42,6 +48,15 @@ public abstract class Reader {
 	//debug logger declaration 
 	protected static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.read.Reader");
 	protected static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
+		//Regex patterns for DOT color strings
+	private static final String RGB_REGEX = "^#[0-9A-Fa-f]{6}$";
+	private static final String RGBA_REGEX = "^#(?<RED>[0-9A-Fa-f]{2})"
+						   + "(?<GREEN>[0-9A-Fa-f]{2})"
+						   + "(?<BLUE>[0-9A-Fa-f]{2})"
+						   + "(?<ALPHA>[0-9A-Fa-f]{2})$";
+	private static final String HSB_REGEX = "^(?<HUE>1(?:\\.0+)?|0*(?:\\.[0-9]+))(?:,|\\s)+"
+						 + "(?<SAT>1(?:\\.0+)?|0*(?:\\.[0-9]+))(?:,|\\s)+"
+						 + "(?<VAL>1(?:\\.0+)?|0*(?:\\.[0-9]+))$";
 	static {
 		FileHandler handler = null;
 		try {
@@ -70,6 +85,10 @@ public abstract class Reader {
 	 */
 	protected Map<String, String> defaultAttrs;
 	
+	// VisualLexicon containing definitions of all VisualProperties
+	// Used for compatibility with "Ding" specific VisualProperties
+	protected VisualLexicon vizLexicon;
+	
 	// Maps lineStyle attribute values to Cytoscape values
 	protected static final Map<String, LineType> LINE_TYPE_MAP = new HashMap<String, LineType>();
 	static {
@@ -96,14 +115,16 @@ public abstract class Reader {
 	 * @param vizStyle VisualStyle that we are applying to the network
 	 * @param defaultAttrs Map that contains default attributes for Reader of this type
 	 * eg. for NodeReader will be a list of default
+	 * @param rendEngMgr TODO
 	 */
-	public Reader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs) {
+	public Reader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, RenderingEngineManager rendEngMgr) {
 
 		// Make logger write to file
 
 		this.networkView = networkView;
 		this.vizStyle = vizStyle;
 		this.defaultAttrs = defaultAttrs;
+		this.vizLexicon = rendEngMgr.getDefaultVisualLexicon();
 	}
 	
 
@@ -269,24 +290,16 @@ public abstract class Reader {
 		color = color.trim();
 
 		//Regex patterns for DOT color strings
-		String rgbRegex = "^#[0-9A-Fa-f]{6}$";
-		String rgbaRegex = "^#(?<RED>[0-9A-Fa-f]{2})"
-						   + "(?<GREEN>[0-9A-Fa-f]{2})"
-						   + "(?<BLUE>[0-9A-Fa-f]{2})"
-						   + "(?<ALPHA>[0-9A-Fa-f]{2})$";
-		String hsbRegex = "^(?<HUE>1(?:\\.0+)?|0*(?:\\.[0-9]+))(?:,|\\s)+"
-						 + "(?<SAT>1(?:\\.0+)?|0*(?:\\.[0-9]+))(?:,|\\s)+"
-						 + "(?<VAL>1(?:\\.0+)?|0*(?:\\.[0-9]+))$";
 		// Test color string against RGB regex
 		LOGGER.info(String.format("Color string: %s", color));
 		LOGGER.info("Comparing DOT color string to #FFFFFF format");
-		Matcher matcher = Pattern.compile(rgbRegex).matcher(color);
+		Matcher matcher = Pattern.compile(RGB_REGEX).matcher(color);
 		if (matcher.matches()) {
 			return Color.decode(color);
 		}
 		// Test color string against RGBA regex
 		LOGGER.info("Comparing DOT color string to #FFFFFFFF format");
-		matcher.usePattern(Pattern.compile(rgbaRegex));
+		matcher.usePattern(Pattern.compile(RGBA_REGEX));
 		if (matcher.matches()) {
 			Integer red = Integer.valueOf(matcher.group("RED"), 16);
 			Integer green = Integer.valueOf(matcher.group("GREEN"), 16);
@@ -296,7 +309,7 @@ public abstract class Reader {
 		}
 		// Test color string against HSB regex
 		LOGGER.info("Comparing DOT color string to H S V format");
-		matcher.usePattern(Pattern.compile(hsbRegex));
+		matcher.usePattern(Pattern.compile(HSB_REGEX));
 		if (matcher.matches()) {
 			Float hue = Float.valueOf(matcher.group("HUE"));
 			Float saturation = Float.valueOf(matcher.group("SAT"));
@@ -311,9 +324,45 @@ public abstract class Reader {
 		 * return Java Color
 		 */
 		// If not in map then return a default color
+		LOGGER.info("Color string isn't handled. Returning default color...");
 		return Color.BLUE;
 	}
 	
+	protected List<Pair<Color, Float>> convertColorList(String colorList) {
+		LOGGER.info("Converting DOT color list to Java aray...");
+		//Split color list into weighted colors
+		if (!colorList.contains(":")) {
+			return null;
+		}
+		String[] weightedColors = colorList.split(":");
+		int numColors = 0;
+		ArrayList<Pair<Color, Float>> colorAndWeightPairs = new ArrayList<Pair<Color,Float>>(weightedColors.length);
+		for (String weightedColor : weightedColors) {
+			if (numColors == 2) {
+				break;
+			}
+			if (weightedColor.contains(";")) {
+				String[] colorAndWeight = weightedColor.split(";", 2);
+				Color color = convertColor(colorAndWeight[0]);
+				Float weight = null;
+				try {
+					weight = Float.parseFloat(colorAndWeight[1]);
+				}
+				catch (NumberFormatException exception) {
+					LOGGER.severe("Error: Color list contains invalid weight");
+				}
+				LOGGER.info(String.format("Retrieved weighted color from color list. Result: %s;%f", color.toString(), weight));
+				colorAndWeightPairs.add(Pair.of(color, weight));
+			}
+			else {
+				Color color = convertColor(weightedColor);
+				LOGGER.info(String.format("Retrieved color with no weight from color list. Result: %s", color.toString()));
+				colorAndWeightPairs.add(Pair.of(color, (Float)null));
+			}
+			numColors++;
+		}
+		return colorAndWeightPairs;
+	}
 
 	/**
 	 * Converts the specified .dot attribute to Cytoscape equivalent

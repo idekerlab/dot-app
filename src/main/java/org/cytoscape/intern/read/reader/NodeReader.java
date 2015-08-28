@@ -2,16 +2,22 @@ package org.cytoscape.intern.read.reader;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.cytoscape.intern.GradientListener;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.presentation.RenderingEngineManager;
+import org.cytoscape.view.presentation.customgraphics.CyCustomGraphics;
+import org.cytoscape.view.presentation.customgraphics.CyCustomGraphics2Factory;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
@@ -83,6 +89,9 @@ public class NodeReader extends Reader{
 	//True if "fillcolor" attribute has already been consumed for a node
 	private boolean usedFillColor = false;
 	
+	//Used to retrieve CyCustomGraphics2Factories used for gradients;
+	private GradientListener gradientListener;
+	
 	/**
 	 * Constructs an object of type Reader.
 	 * 
@@ -91,11 +100,14 @@ public class NodeReader extends Reader{
 	 * @param vizStyle VisualStyle that we are applying to the network
 	 * @param defaultAttrs Map that contains default attributes for Reader of this type
 	 * eg. for NodeReader will be a list of default
+	 * @param rendEngMgr TODO
 	 * @param elementMap Map where keys are JPGD node objects and Values are corresponding Cytoscape CyNodes
+	 * @param gradientListener TODO
 	 */
-	public NodeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Map<Node, CyNode> elementMap) {
-		super(networkView, vizStyle, defaultAttrs);
+	public NodeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, RenderingEngineManager rendEngMgr, Map<Node, CyNode> elementMap, GradientListener gradientListener) {
+		super(networkView, vizStyle, defaultAttrs, rendEngMgr);
 		this.elementMap = elementMap;
+		this.gradientListener = gradientListener;
 	}
 	
 	/**
@@ -366,13 +378,22 @@ public class NodeReader extends Reader{
 			ColorAttribute attr) {
 
 		Color color = convertColor(attrVal);
+		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal);
 		Integer transparency = color.getAlpha();
 
 		switch (attr) {
 			case COLOR: {
+				LOGGER.info("Setting default values for NODE_BORDER_PAINT and"
+						+ " NODE_BORDER_TRANSPARENCY");
+				if (colorListValues != null) {
+					LOGGER.finest("Default value coming from first color in color list");
+					color = colorListValues.get(0).getLeft();
+				}
 				vizStyle.setDefaultValue(NODE_BORDER_PAINT, color);
 				vizStyle.setDefaultValue(NODE_BORDER_TRANSPARENCY, transparency);
 				if (usedDefaultFillColor) {
+					LOGGER.finest("Setting only NODE_BORDER_PAINT and"
+							+ " NODE_BORDER_TRANSPARENCY");
 					//default fillcolor has already been applied, should not redo
 					//with color attribute
 					break;
@@ -381,6 +402,12 @@ public class NodeReader extends Reader{
 				//fillcolor not present
 			}
 			case FILLCOLOR: {
+				if (colorListValues != null) {
+					LOGGER.info("Color list found for fillcolor attribute. "
+							+ "Creating gradient...");
+					createGradient(colorListValues, vizStyle);
+					break;
+				}
 				vizStyle.setDefaultValue(NODE_FILL_COLOR, color);
 				vizStyle.setDefaultValue(NODE_TRANSPARENCY, transparency);
 				break;
@@ -394,6 +421,62 @@ public class NodeReader extends Reader{
 				break;
 			}
 		}
+		
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private void createGradient(List<Pair<Color, Float>> colorListValues,
+			VisualStyle vizStyle) {
+		// TODO Auto-generated method stub
+		LOGGER.info("Retrieving VisualProperty NODE_CUSTOM_GRAPHICS_1");
+
+		VisualProperty<CyCustomGraphics> nodeGradientProp = 
+				(VisualProperty<CyCustomGraphics>) vizLexicon.lookup(CyNode.class, "NODE_CUSTOMGRAPHICS_1");
+
+		if (nodeGradientProp == null) {
+			LOGGER.warning("Current Renderer doesn't support CustomGraphics");
+			return;
+		}
+
+		float start = 0;
+		float remain = 1;
+		boolean adjustStart = false;
+		/*
+		 * Determine which Gradient graphic factory to get based on style attribute
+		 * if it contains "radial" get the radial factory
+		 * otherwise get the linear
+		 */
+		CyCustomGraphics2Factory<?> factory = gradientListener.getLinearFactory();
+		List<Color> colors = new ArrayList<Color>(colorListValues.size());
+		List<Float> weights = new ArrayList<Float>(colorListValues.size());
+
+		for (Pair<Color, Float> colorAndWeightPair : colorListValues) {
+			colors.add(colorAndWeightPair.getLeft());
+			Float weight = colorAndWeightPair.getRight();
+			if (weight == null) {
+				adjustStart = true;
+				weights.add(new Float(start));
+				continue;
+			}
+			if (adjustStart) {
+				start = remain - weight.floatValue();
+			}
+			weights.add(new Float(start));
+			start = start + weight.floatValue();
+		}
+		if (start == 0 && remain == 1) {
+			weights = new ArrayList<Float>(colorListValues.size());
+			for (; start < remain; start += (1f/colorListValues.size())) {
+				weights.add(start);
+			}
+		}
+		LOGGER.info("Number of colors in gradient: " + colors.size());
+		HashMap<String, Object> gradientProps = new HashMap();
+		gradientProps.put("cy_gradientFractions", weights);
+		gradientProps.put("cy_gradientColors", colors);
+		gradientProps.put("cy_angle", new Double(0));
+		vizStyle.setDefaultValue(nodeGradientProp, factory.getInstance(gradientProps));
+		
 		
 	}
 

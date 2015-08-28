@@ -12,6 +12,7 @@ import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.presentation.RenderingEngineManager;
 import org.cytoscape.view.vizmap.VisualStyle;
 
 import com.alexmerz.graphviz.objects.Graph;
@@ -37,9 +38,10 @@ public class NetworkReader extends Reader{
 	 * @param vizStyle VisualStyle that we are applying to the network
 	 * @param defaultAttrs Map that contains default attributes for Reader of this type
 	 * eg. for NodeReader will be a list of default
+	 * @param rendEngMgr TODO
 	 */
-	public NetworkReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Graph graph) {
-		super(networkView, vizStyle, defaultAttrs);
+	public NetworkReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Graph graph, RenderingEngineManager rendEngMgr) {
+		super(networkView, vizStyle, defaultAttrs, rendEngMgr);
 		this.graph = graph;
 
 	}

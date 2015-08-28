@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.intern.read.DotReaderFactory;
 import org.cytoscape.intern.write.DotWriterFactory;
 import org.cytoscape.io.BasicCyFileFilter;
@@ -17,6 +18,8 @@ import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.subnetwork.CyRootNetworkManager;
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.view.model.CyNetworkViewFactory;
+import org.cytoscape.view.presentation.RenderingEngineManager;
+import org.cytoscape.view.presentation.customgraphics.CyCustomGraphics2Factory;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.ServiceProperties;
@@ -64,6 +67,7 @@ public class CyActivator extends AbstractCyActivator {
 		BasicCyFileFilter fileFilter = new BasicCyFileFilter(extensions, contentTypes, "GraphViz files", category, streamUtil);
 				 
 		// get necessary services for factories
+		RenderingEngineManager rendEngMgr = getService(context, RenderingEngineManager.class);
 		CyNetworkViewFactory netViewFact = getService(context, CyNetworkViewFactory.class);
 		CyNetworkFactory netFact = getService(context, CyNetworkFactory.class);
 		CyNetworkManager netMgr = getService(context, CyNetworkManager.class);
@@ -77,6 +81,9 @@ public class CyActivator extends AbstractCyActivator {
 		dotWriterFactProps.put(ServiceProperties.ID, "dotWriterFactory");
 		dotReaderFactProps.put(ServiceProperties.ID, "dotReaderFactory");
 
+		// initialize the GradientListener for later use
+		LOGGER.info("Constructing Gradient Listener...");
+		GradientListener gradientListener = new GradientListener();
 		
 		// initialize the DotWriterFactory for later use
 		LOGGER.info("Constructing Writer Factory...");
@@ -85,7 +92,8 @@ public class CyActivator extends AbstractCyActivator {
 		// initialize the DotReaderFactory for later use
 		LOGGER.info("Constructing Reader Factory...");
 		DotReaderFactory dotReadFact = new DotReaderFactory(fileFilter, netViewFact,
-				netFact, netMgr, rootNetMgr, vizMapMgr, vizStyleFact);
+				netFact, netMgr, rootNetMgr, vizMapMgr, vizStyleFact, gradientListener, rendEngMgr);
+		
 		
 		LOGGER.info("Registering Writer Factory as OSGI service...");
 		//register DotWriterFactory as an OSGI service
@@ -94,6 +102,9 @@ public class CyActivator extends AbstractCyActivator {
 		LOGGER.info("Registering Reader Factory as OSGI service...");
 		//register DotReaderFactory as an OSGI service
 		registerAllServices(context, dotReadFact, dotReaderFactProps);
+		
+		LOGGER.info("Registering GradientListener as OSGI service listener...");
+		registerServiceListener(context, gradientListener, "addCustomGraphicsFactory", "removeCustomGraphicsFactory", CyCustomGraphics2Factory.class);
 
 	}
 

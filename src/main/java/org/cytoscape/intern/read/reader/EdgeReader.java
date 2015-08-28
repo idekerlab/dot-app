@@ -14,6 +14,7 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.presentation.RenderingEngineManager;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
@@ -79,12 +80,13 @@ public class EdgeReader extends Reader{
 	 * @param vizStyle VisualStyle that we are applying to the network
 	 * @param defaultAttrs Map that contains default attributes for Reader of this type
 	 * eg. for NodeReader will be a list of default
+	 * @param rendEngMgr TODO
 	 * @param elementMap Map where keys are JPGD node objects and Values are corresponding Cytoscape CyNodes
 	 */
 	public EdgeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, 
-			Map<Edge, CyEdge> elementMap) {
+			RenderingEngineManager rendEngMgr, Map<Edge, CyEdge> elementMap) {
 		
-		super(networkView, vizStyle, defaultAttrs);
+		super(networkView, vizStyle, defaultAttrs, rendEngMgr);
 		this.elementMap = elementMap;
 
 		LOGGER.info("EdgeReader constructed");
