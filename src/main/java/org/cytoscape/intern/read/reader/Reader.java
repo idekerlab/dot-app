@@ -264,9 +264,25 @@ public abstract class Reader {
 		 * OR
 		 * return Color.getColor(String)
 		 */
+
+		// For testing color file reading
+		StringColor strC = new StringColor("svg_colors.txt");
+		LOGGER.severe("Color should be here!!!");
+		LOGGER.severe((strC.getColor("blue")).toString());
 		LOGGER.info("Converting DOT color string to Java Color...");
+
 		//Remove trailing/leading whitespace
 		color = color.trim();
+
+		// if color is a list-- will support later. For now, take first color 
+		if(color.contains(";") || color.contains(":")) {
+			
+			int colonIndex = color.indexOf(':');
+			int semicolonIndex = color.indexOf(';');
+			int firstIndex = (colonIndex > semicolonIndex) ? semicolonIndex : colonIndex;
+			
+			color = color.substring(0, firstIndex);
+		}
 
 		//Regex patterns for DOT color strings
 		String rgbRegex = "^#[0-9A-Fa-f]{6}$";
@@ -303,6 +319,13 @@ public abstract class Reader {
 			Float value = Float.valueOf(matcher.group("VAL"));
 			return Color.getHSBColor(hue, saturation, value);
 		}
+		// if color is a string
+		else {
+			
+		}
+		
+		
+		
 		// Don't handle the different color schemes, just the default (X11)
 		// Only handle a few colors from the color scheme
 		// TODO
