@@ -12,6 +12,7 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_S
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TOOLTIP;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_VISIBLE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_WIDTH;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_BACKGROUND_PAINT;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_TITLE;
@@ -21,15 +22,16 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_B
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_WIDTH;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_FILL_COLOR;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_HEIGHT;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_COLOR;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_FACE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_TRANSPARENCY;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TOOLTIP;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_VISIBLE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_WIDTH;
 import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.ROUND_RECTANGLE;
 
@@ -380,6 +382,7 @@ public class NetworkPropertyMapper extends Mapper {
 	 */
 	private String mapDefaultNodeDotStyle(NodeShape shape) {
 		LineType lineType = vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE);
+		Boolean isVisible = vizStyle.getDefaultValue(NODE_VISIBLE);
 		// get .dot equivalent of line style
 		String lineStr = LINE_TYPE_MAP.get(lineType);
 		if (lineStr == null) {
@@ -387,7 +390,8 @@ public class NetworkPropertyMapper extends Mapper {
 			LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
 		}
 		String shapeString = (shape.equals(ROUND_RECTANGLE)) ? "rounded," : "";
-		String style = String.format("style = \"%s,%sfilled\"", lineStr, shapeString);
+		String invisString = (!isVisible) ? "invis," : "";
+		String style = String.format("style = \"%s,%s%sfilled\"", lineStr, shapeString, invisString);
 
 		return style;
 	}
@@ -399,12 +403,14 @@ public class NetworkPropertyMapper extends Mapper {
 	 */
 	private String mapDefaultEdgeDotStyle() {
 		LineType lineType = vizStyle.getDefaultValue(EDGE_LINE_TYPE);
+		Boolean isVisible = vizStyle.getDefaultValue(EDGE_VISIBLE);
 		String lineStr = LINE_TYPE_MAP.get(lineType);
 		if (lineStr == null) {
 			lineStr = "solid";
 			LOGGER.warning("Visual Style default EDGE_LINE_TYPE doesn't map to a .dot attribute. Setting to default");
 		}
-		String style = String.format("style = \"%s\"", lineStr);
+		String invisString = (!isVisible) ? ",invis" : "";
+		String style = String.format("style = \"%s%s\"", lineStr, invisString);
 		return style;
 	}
 	
@@ -435,5 +441,11 @@ public class NetworkPropertyMapper extends Mapper {
         // return false if the graph is undirected (has only NONE arrow shapes)
         return false;
 		
+	}
+
+	@Override
+	protected String mapDotStyle() {
+		// NOT USED
+		return null;
 	}
 }

@@ -65,6 +65,7 @@ public class MapperTest {
 		String fontString = String.format("fontname = \"%s\"", new Font(Font.DIALOG, Font.PLAIN, 12).getFontName());
 		String fontSizeString = "fontsize = \"21\"";
 		String fontColor = "fontcolor = \"#FFFF00FF\"";
+		String styleString = "style = \"solid,invis,filled\"";
 
 		
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL, label);
@@ -77,6 +78,7 @@ public class MapperTest {
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_FACE, new Font(Font.DIALOG, Font.PLAIN, 21));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_SIZE, new Integer(21));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_COLOR, new Color(0xFF, 0xFF, 0x00));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_VISIBLE, new Boolean(false));
 		
 		/* original, had to move pos around
 		expectedDotString = String.format("[%s,%s,%s,"
@@ -86,11 +88,11 @@ public class MapperTest {
 		*/
 
 		expectedDotString = String.format("[%s,%s,%s,%s,"
-				+ "pos = \"%f,%f\",%s,%s,%s,%s]",
+				+ "pos = \"%f,%f\",%s,%s,%s,%s,%s]",
 				labelString, heightString, widthString, tooltipString,
-				new Double(0), new Double(0) * -1.0, fillColorString, fontString, fontSizeString, fontColor); 
+				new Double(0), new Double(0) * -1.0, fillColorString, styleString, fontString, fontSizeString, fontColor); 
 		
-		// todo
+	
 		Mapper mapper = new NodePropertyMapper(nodeView, vizStyle, "t");
 		actualDotString = mapper.getElementString();
 
@@ -179,6 +181,7 @@ public class MapperTest {
 		assertEquals("Network Properties and Visual Style translation failed", expectedDotString, actualDotString);
 	}
 	
+	//@Ignore()
 	@Test
 	public void testModifyElementID() {
 		assertEquals("ModifyElementId is wrong", "TestNode1", Mapper.modifyElementID("TestNode1"));

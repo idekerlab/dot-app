@@ -1,5 +1,6 @@
 package org.cytoscape.intern.write.mapper;
 
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_LINE_TYPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_PAINT;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_TRANSPARENCY;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_WIDTH;
@@ -11,19 +12,22 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_L
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_TRANSPARENCY;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TOOLTIP;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_TRANSPARENCY;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_VISIBLE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_WIDTH;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_X_LOCATION;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_Y_LOCATION;
+import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.ROUND_RECTANGLE;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
+
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.vizmap.VisualStyle;
 
@@ -244,15 +248,12 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	private String mapColors() {
 		StringBuilder elementString = null;
-		boolean visible = view.getVisualProperty(NODE_VISIBLE);
 		
 		LOGGER.info("Preparing to get color properties");
 		// Get the color string (border color). Append to attribute string
 		if (!isEqualToDefault(NODE_BORDER_PAINT) || !isEqualToDefault(NODE_BORDER_TRANSPARENCY)) {
 			Color borderColor = (Color) view.getVisualProperty(NODE_BORDER_PAINT);
-			// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
-			Integer borderTransparency = (visible) ? ((Number)view.getVisualProperty(NODE_BORDER_TRANSPARENCY)).intValue()
-												: TRANSPARENT;
+			Integer borderTransparency = ((Number)view.getVisualProperty(NODE_BORDER_TRANSPARENCY)).intValue();
 			String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
 			elementString = new StringBuilder(dotBorderColor);
 		}
@@ -260,9 +261,7 @@ public class NodePropertyMapper extends Mapper {
 		// Write node fill color
 		if (!isEqualToDefault(NODE_FILL_COLOR) || !isEqualToDefault(NODE_TRANSPARENCY)) {
 			Color fillColor = (Color) view.getVisualProperty(NODE_FILL_COLOR);
-			// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
-			Integer transparency = (visible) ? ((Number)view.getVisualProperty(NODE_TRANSPARENCY)).intValue()
-												: TRANSPARENT;
+			Integer transparency = ((Number)view.getVisualProperty(NODE_TRANSPARENCY)).intValue();
 			String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, transparency));
 			if (elementString != null) {
 				elementString.append("," + dotFillColor);
@@ -311,14 +310,43 @@ public class NodePropertyMapper extends Mapper {
 	 * @return String that defines fontname, fontcolor and fontsize attributes
 	 */
 	private String mapFontHelper() {
-		final boolean visible = view.getVisualProperty(NODE_VISIBLE);
 		Font fontName = view.getVisualProperty(NODE_LABEL_FONT_FACE);
 		LOGGER.info("Retrieving font size...");
 		Integer fontSize = ((Number)view.getVisualProperty(NODE_LABEL_FONT_SIZE)).intValue();
 		Color fontColor = (Color)(view.getVisualProperty(NODE_LABEL_COLOR));
-		Integer fontTransparency = (visible) ? ((Number)view.getVisualProperty(NODE_LABEL_TRANSPARENCY)).intValue()
-											 : TRANSPARENT;
+		Integer fontTransparency = ((Number)view.getVisualProperty(NODE_LABEL_TRANSPARENCY)).intValue();
 		
 		return mapFont(fontName, fontSize, fontColor, fontTransparency);
+	}
+
+	@Override
+	protected String mapDotStyle() {
+		LOGGER.finest("Building style string for node view...");
+		StringBuilder dotStyle = null;
+		if (!isEqualToDefault(NODE_BORDER_LINE_TYPE) || !isEqualToDefault(NODE_SHAPE)
+			|| !isEqualToDefault(NODE_VISIBLE)) {
+			LOGGER.info("Not default style attr, building node's own...");
+			LineType lineType = view.getVisualProperty(NODE_BORDER_LINE_TYPE);
+			NodeShape nodeShape = view.getVisualProperty(NODE_SHAPE);
+			String lineStr = "";
+			dotStyle = new StringBuilder();
+
+			// get .dot equivalent of line style, see if we need rounded
+			lineStr = LINE_TYPE_MAP.get(lineType);
+			if (lineStr == null) {
+				lineStr = "solid";
+				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+			}
+			boolean rounded = nodeShape.equals(ROUND_RECTANGLE);
+			boolean isVisible = view.getVisualProperty(NODE_VISIBLE);
+			String roundedString = (rounded) ? "rounded," : "";
+			String invisString = (!isVisible) ? "invis," : "";
+           	String style = String.format("style = \"%s,%s%sfilled\"", lineStr, roundedString, invisString);
+           	dotStyle.append(style);
+		}
+		if (dotStyle == null) {
+			return null;
+		}
+		return dotStyle.toString();
 	}
 }

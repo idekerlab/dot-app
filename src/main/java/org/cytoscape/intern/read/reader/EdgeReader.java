@@ -12,6 +12,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyTable;
+import org.cytoscape.model.CyRow;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
@@ -46,6 +49,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
  */
 public class EdgeReader extends Reader{
 
+	CyTable edgeTable;
 	// Map to convert from .dot arrow shape to Cytoscape
 	private static final Map<String, ArrowShape> ARROW_SHAPE_MAP = new HashMap<String, ArrowShape>();
 	static {
@@ -86,6 +90,10 @@ public class EdgeReader extends Reader{
 		
 		super(networkView, vizStyle, defaultAttrs);
 		this.elementMap = elementMap;
+		
+        //get the edgeTable and create a new column for edge weight with default value of 1
+		edgeTable = networkView.getModel().getDefaultEdgeTable();
+		edgeTable.createColumn("weight", Double.class, false, 1);
 
 		LOGGER.info("EdgeReader constructed");
 		LOGGER.severe(defaultAttrs.toString());
@@ -102,8 +110,11 @@ public class EdgeReader extends Reader{
 	/**
 	 * Converts edge weights by putting into a new column in the table
 	 */
-	private void setWeight() {
+	private void setWeight(String weight) {
 		// TODO
+		//get the current row and put the weight into the row
+		CyRow currentRow = networkView.getModel().getRow(edgeTable);
+		currentRow.set("weight", new Double(Double.parseDouble(weight)));
 	}
 
 	/**
@@ -223,6 +234,10 @@ public class EdgeReader extends Reader{
 					setStyle(attrVal, elementView);
 					continue;
 				}
+				if(attrKey.equals("weight")){
+					setWeight(attrVal);
+					continue;
+				}
 				if (attrKey.equals("color") || attrKey.equals("fillcolor")
 						|| attrKey.equals("fontcolor")) {
 					switch (attrKey) {
@@ -238,6 +253,7 @@ public class EdgeReader extends Reader{
 							setColor(attrVal, elementView, ColorAttribute.FONTCOLOR);
 							break;
 						}
+				
 					}
 					continue;
 				}
