@@ -20,14 +20,16 @@ import java.net.URL;
  */
 public class StringColor {
 
-	private Map<String, Color> colorMap = new HashMap<String, Color>();
+	private Map<String, Map<String, Color>> colorMap = new HashMap<String, Map<String, Color>>();
 
 	/**
 	 * Initializes colorMap with all passed in colors by reading in files
 	 * 
 	 * @param files Text files mapping RGB vals to a color string name in this format
+	 * colorscheme
 	 * R	G	B	name
-	 * separated by tabs/whitespace
+	 * separated by whitespace
+	 * Files are expected to be stored in resources folder
 	 */
 	public StringColor(String... files) {
 		
@@ -35,17 +37,32 @@ public class StringColor {
 			try {
 				URL fileURL = StringColor.class.getClassLoader().getResource(fileName);
 				Scanner scanner = new Scanner( new InputStreamReader(fileURL.openStream()) );
+				Map<String, Color> colors = new HashMap<String, Color>();
 
+				// First line of file is colorscheme
+				String colorscheme = scanner.next();
+				System.out.println("read scheme is: " + colorscheme);
 				while(scanner.hasNext()) {
-					System.out.println(scanner.nextLine());
+					// Create map of colors to color strings
 					int red = scanner.nextInt();
 					int green = scanner.nextInt();
 					int blue = scanner.nextInt();
-					String name = scanner.next();
 				
-					colorMap.put(name, new Color(red, green, blue));
-					System.out.print(name);
+					String name = "";
+					// While there are more tokens in name and not at EOF
+					while(scanner.hasNextInt() == false && scanner.hasNext()) {
+						// Add all tokens of name (some x11 names have spaces)
+						name += scanner.next() + " ";
+					}
+					name = name.trim();
+			
+					colors.put(name, new Color(red, green, blue));
+					System.out.println("Color " + name + " added");
 				}
+			
+				// Add created map with its corresponding scheme
+				colorMap.put(colorscheme, colors);
+				System.out.println(colorscheme + " added");
 			}
 			catch(FileNotFoundException fileEx) {
 				System.out.println("File " + fileName + " not found");
@@ -53,23 +70,31 @@ public class StringColor {
 			catch(IOException IOEx) {
 				System.out.println(IOEx.toString());
 			}
+			
 		}
 		
 	}
 	
 	/**
 	 * Gets the Java color associated with a color name String
-	 * 
+	 *
+	 *  @param colorScheme colorscheme desired. Either "x11" or "svg"
 	 *  @param name Name of color
 	 */
-	public Color getColor(String name) {
-		return colorMap.get(name);
+	public Color getColor(String colorScheme, String name) {
+		// Default to x11
+		if(colorScheme == null) {
+			colorScheme = "x11";
+		}
+		
+		Map<String, Color> map = colorMap.get(colorScheme);
+		return map.get(name);
 	}
 	
-	/*public static void main(String[] args) {
-		StringColor strColor = new StringColor("svg_colors.txt");
-		System.out.println( strColor.getColor("peachpuff").toString() );
-	}*/
+	public static void main(String[] args) {
+		StringColor strColor = new StringColor("svg_colors.txt", "x11_colors.txt");
+		System.out.println( (strColor.getColor("svg", "blue")).toString() );
+	}
 	
 }
 
