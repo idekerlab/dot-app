@@ -170,6 +170,7 @@ public abstract class Mapper {
 		LOGGER.info("Created .dot color attribute string. Result: " + result);
 		return result;
 	}
+	
 	/**
 	 * Given a font, returns the .dot equivalent in String form including the
 	 * font name, size and color
@@ -321,13 +322,6 @@ public abstract class Mapper {
 	 * @return is .dot-compliant ID String where all leading numbers are removed
 	 * and put at the end of the string and all dis-allowed characters are replaced
 	 * with underscores
-	 */
-	/*
-	 *  An ID is one of the following:
-	 *	Any string of alphabetic ([a-zA-Z\200-\377]) characters, underscores ('_') or digits ([0-9]), not beginning with a digit;
-	 *	a numeral [-]?(.[0-9]+ | [0-9]+(.[0-9]*)? );
-	 *	any double-quoted string ("...") possibly containing escaped quotes (\");
-	 *	an HTML string (<...>). 
 	 */
 	public static String modifyElementID(String id) {
 		LOGGER.info("Preparing to transform ID");

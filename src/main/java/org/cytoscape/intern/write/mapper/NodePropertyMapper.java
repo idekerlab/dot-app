@@ -58,35 +58,6 @@ public class NodePropertyMapper extends Mapper {
 	}
 	
 	/**
-	 * Creates string for .dot style attribute. Appends border lineStyle and shape style (rounded or not etc.) to 
-	 * "style = filled"
-	 * 
-	 * DEPERECATED-- see mapDotStyle in Mapper
-	 * @return String for style attribute
-	 */
-	/*
-	protected String mapDotStyle() {
-		if (!isEqualToDefault(NODE_BORDER_LINE_TYPE) ||
-			!isEqualToDefault(NODE_SHAPE)) {
-			String styleString = super.mapDotStyle();
-			if (styleString != null) {
-				StringBuilder dotStyle = new StringBuilder(super.mapDotStyle());
-				NodeShape shape = view.getVisualProperty(NODE_SHAPE);
-		
-				if (shape.equals(ROUND_RECTANGLE)) {
-					dotStyle.append("rounded,");
-				}
-		
-				dotStyle.append("filled\"");
-				return dotStyle.toString();
-			}
-
-		}
-		return null;
-	}
-	*/
-	
-	/**
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
@@ -113,33 +84,7 @@ public class NodePropertyMapper extends Mapper {
 			Double borderWidth = view.getVisualProperty(NODE_BORDER_WIDTH);
 			simpleVisPropsToDot.add(String.format("penwidth = \"%f\"", borderWidth));
 		}
-		
 
-		/*
-		if (!isEqualToDefault(NODE_HEIGHT)) {
-			Double height; 
-			if(isLocked) {
-				height = view.getVisualProperty(NODE_SIZE);
-			}
-			else {
-				height = view.getVisualProperty(NODE_HEIGHT);
-			}
-			LOGGER.info("BVL height: " + height);
-			LOGGER.info("vizStyle height: " + vizStyle.getDefaultValue(NODE_HEIGHT));
-			simpleVisPropsToDot.add(String.format("height = \"%f\"", height/PPI));
-		}
-
-		if (!isEqualToDefault(NODE_WIDTH)) {
-			Double width; 
-			if(isLocked) {
-				width = view.getVisualProperty(NODE_SIZE);
-			}
-			else {
-				width = view.getVisualProperty(NODE_WIDTH);
-			}
-			simpleVisPropsToDot.add(String.format("width = \"%f\"", width/PPI));
-		}
-		*/
 		// Get node height and width
 		if(nodeSizesLocked) {
 			//NODE_HEIGHT = NODE_WIDTH if isLocked is true, so only use one

@@ -104,6 +104,5 @@ public class CyActivator extends AbstractCyActivator {
 	public void shutDown() {
 		FILE_HANDLER_MGR.closeAllFileHandlers();
 		super.shutDown();
-		
 	}
 }
