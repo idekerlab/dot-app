@@ -125,7 +125,6 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		nodeMap = new HashMap<Node, CyNode>();
 		edgeMap = new HashMap<Edge, CyEdge>();
 	}
-
 	
 	/**
 	 * Causes the task to begin execution.
@@ -135,43 +134,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	@Override
 	public void run(TaskMonitor monitor) {
-		/*
-		 * Steps:
-		 * 1. Use Parser to generate Graph objects representing
-		 * the graphs from the InputStreamReader
-		 * 2. Create CyNetwork[] "networks" the size equaling the number of Graph objects
-		 * 2. For each graph object do the following:
-		 * 		a. Create a CyNetwork
-		 * 		b. Set the name of the CyNetwork to the Graph's Id
-		 * 		c. Retrieve the list of Node objects
-		 * 		d. For each node do the following:
-		 * 			- Create a CyNode
-		 * 			- Set the name and shared_name of the CyNode to the Node's Id
-		 * 		e. For each edge do the following:
-		 *			- Create a CyEdge
-		 *			- If digraph, set interaction to "interaction", else set to undirected
-		 *			- set the name and shared_name of CyEdge to Sourcename (interaction) Targetname
-		 * 3. Add CyNetwork to "networks"
-		 * 4. Add <CyNetwork, Graph> pair to HashMap
-		 */
-		/**
-		 * Everything we need to do (to help design-- not necessarily in this order):
-		 * 1. Use parser to generate Graph objects representing
-		 * the graphs from the InputStreamReader
-		 * 2. For each graph object do the following:
-		 * 		a. Create a CyNetwork
-		 * 		b. Set the name of the CyNetwork to the Graph's Id
-		 * 		-  Set all network properties
-		 * 		[-  Add all CyNodes to network
-		 * 		-  set default VPs if exists defaults in .dot file. using getGenericAttriubte()
-		 * 		-  If not, use cytoscape defaults (do nothing)
-		 * 		-  Set default Visual Properties for nodes
-		 * 		-]  Set any bypass VPs
-		 * 		-  Do bracketed points for CyEdges. And also:
-		 * 			-  If digraph, set interaction to "interaction", else set to undirected
-		 * 			-  set the name and shared_name of CyEdge to Sourcename (interaction) Targetname
-		 */
-		
+
 		LOGGER.info("Running run() function...");
 		
 		//Initialize the parser
@@ -229,16 +192,6 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 					importEdge(edge, network);
 				}
 				
-				/*********************************************************************************
-				 * Not sure whether the ArrayList graphList might contain empty graph (The unsure
-				 * code is: ArrayList <Graph> graphList = parser.getGraphs(); at the beginning of 
-				 * second try{}), if it's possible for graphList to have empty graph, we probably 
-				 * need to check whether network is null(has not been created) before we add it to 
-				 * the network array (networks) and before we add it to 
-				 * graphMap (ArrayList <graph, CyNetwork>)
-				 **********************************************************************************
-				 */
-				
 				//at the end of each graph iteration, add the created CyNetwork into the CyNetworks array
 				networks[networkCounter++] = network;
 				
@@ -260,8 +213,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			handler = null;
 		}
 	}
-	
-	
+		
 	/**
 	 * build an instance of CyNetworkView based on the passed in CyNetwork instance
 	 * 
@@ -269,19 +221,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	@Override
 	public CyNetworkView buildCyNetworkView(CyNetwork network) {
-		/*
-		 * Steps:
-		 * Retrieve Graph object corresponding to input(CyNetwork network) from HashMap
-		 * Create new VisualStyle with VisualStyleFactory
-		 * Create new CyNetworkView with CyNetworkViewFactory
-		 * Pass Graph Object, VisualStyle, CyNetworkView into Reader
-		 * in order to set Visual Properties
-		 * add VisualStyle to VisualMappingManager
-		 * return CyNetworkView
-		 */
-		
-		// codes start at below
-		
+
 		if (handler == null) {
 			try {
 				handler = new FileHandler("log_DotReaderTask.txt");
@@ -331,28 +271,10 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			else if (dep.getIdString().equals("nodeSizeLocked")) {
 				dep.setDependency(false);
 			}
-
 		}
 		
 		//created a new CyNetworkView based on the cyNetworkViewFactory
-		final CyNetworkView networkView = cyNetworkViewFactory.createNetworkView(network);
-		
-		/******************************************************************
-		 *Somewhere in this method, we need to call the Reader() from 
-		 *org.cytoscape.intern.read.reader package (already imported this 
-		 *package) by passing in the networkView and visualStyle just 
-		 *created above, in order to set all the VPs
-		 ******************************************************************
-		 */
-		
-		//Reader.Reader(networkView, visualStyle); //It actually generates a compiler error
-		//It's syntaxially wrong.
-		
-		/*
-		 * NetworkReader netReader = new NetworkReader(networkView, visualStyle, graph.getAttributes());
-		 * 
-		 */
-		
+		final CyNetworkView networkView = cyNetworkViewFactory.createNetworkView(network);		
 
 		NetworkReader networkReader = new NetworkReader(networkView, vizStyle, getGraphDefaultMap(graph), graph);
 		networkReader.setProperties();
@@ -399,6 +321,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		}
 		return null;
 	}
+	
 	/**
 	 * Retrieves the name of the node from its Id object that will be inserted
 	 * into the CyNode table of the CyNetwork
@@ -492,16 +415,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	private Map<String, String> getNodeDefaultMap(Graph graph) {
 		LOGGER.info("Generating the Node Defaults...");
-		
-		/*
-		 * Map output = new HashMap<String, String>();
-		 * for each element attr in ATTRIBUTES
-		 * 		val = graph.getGenericNodeAttribute(attr)
-		 * 		if(val != null)
-		 * 			output.put(attr, val);
-		 *
-		 * 	return output;
-		 */
+
 		Map<String, String> output = new HashMap<String, String>();
 		for (String commonAttr : COMMON_ATTRIBUTES) {
 			LOGGER.info(String.format("Getting default node attribute: %s", commonAttr));
@@ -530,15 +444,6 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	private Map<String, String> getEdgeDefaultMap(Graph graph) {
 		
-		/*
-		 * Map output = new HashMap<String, String>();
-		 * for each element attr in ATTRIBUTES
-		 * 		val = graph.getGenericEdgeAttribute(attr)
-		 * 		if(val != null)
-		 * 			output.put(attr, val);
-		 *
-		 * 	return output;
-		 */
 		Map<String, String> output = new HashMap<String, String>();
 		for (String commonAttr : COMMON_ATTRIBUTES) {
 			LOGGER.info(String.format("Getting default edge attribute: %s", commonAttr));
@@ -569,7 +474,6 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		}
 		return output;
 	}
-	
 }
 
 
