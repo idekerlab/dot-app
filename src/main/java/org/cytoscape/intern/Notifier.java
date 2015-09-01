@@ -17,6 +17,11 @@ public class Notifier {
 	public enum MessageType {
 		WARNING, ERROR, INFO;
 	}
+	/**
+	 * Display a pop-up box of a certain type
+	 * @param message message to be displayed in pop-up box
+	 * @param type type of message to be displayed (warning, error, info)
+	 */
 	public static void showMessage(final String message, final MessageType type) {
 		SwingUtilities.invokeLater(
 			new Runnable() {

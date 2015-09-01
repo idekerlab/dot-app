@@ -54,32 +54,6 @@ public class EdgePropertyMapper extends Mapper {
 	}
 	
 	/**
-	 * Translates the Cytoscape Bend property of the View<CyEdge> object to the
-	 * equivalent dot attribute string
-	 * DEPRECATED
-	 * 
-	 * @return String that represents edge bend attribute
-	 */
-	/*@SuppressWarnings("unchecked")
-	private String mapEdgeBend(){
-		// TODO
-		StringBuilder coordinatesString = new StringBuilder();
-		Bend edgeBend = view.getVisualProperty(EDGE_BEND);
-		List<Handle> handles = edgeBend.getAllHandles();
-		for (Handle handle : handles) {
-			Point2D coords = handle.calculateHandleLocation(networkView, (View<CyEdge>)view);
-			String singlePointString = mapPosition(coords.getX(), coords.getY());
-			coordinatesString.append(singlePointString + " ");
-		}
-		if (coordinatesString.length() == 0) {
-			return "";
-		}
-		coordinatesString.deleteCharAt(coordinatesString.length() - 1);
-		String dotPos = String.format("pos = \"%s\"", coordinatesString.toString());
-		return dotPos;
-	}*/
-	
-	/**
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
@@ -140,16 +114,6 @@ public class EdgePropertyMapper extends Mapper {
 		LOGGER.finest("Edge is visible");
 		return true;
 	}
-
-	/*
-	 * DEPRECATED
-	protected String mapDotStyle() {
-		if (!isEqualToDefault(EDGE_LINE_TYPE)) {
-			return super.mapDotStyle();
-		}
-		return null;
-	}
-	*/
 	
 	/**
 	 * Returns a String that contains all relevant attributes for this element 
@@ -185,20 +149,6 @@ public class EdgePropertyMapper extends Mapper {
 			elementString.append(fontString + ",");
 			LOGGER.info("Appened label attributes to .dot string. Result: " + elementString);
 		}
-		/*
-		// Get label font information and append in proper format
-		Color labelColor = (Color) view.getVisualProperty(EDGE_LABEL_COLOR);
-		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
-		Integer labelTransparency = (visible) ? ((Number)view.getVisualProperty(EDGE_LABEL_TRANSPARENCY)).intValue()
-											  : TRANSPARENT;
-		Font labelFont = view.getVisualProperty(EDGE_LABEL_FONT_FACE);
-		Integer labelSize = ((Number)view.getVisualProperty(EDGE_LABEL_FONT_SIZE)).intValue();
-		String fontString = mapFont(labelFont, labelSize, labelColor, labelTransparency);
-		if (fontString != null) {
-			elementString.append(mapFont(labelFont, labelSize, labelColor, labelTransparency) + ",");
-			LOGGER.info("Appened label attributes to .dot string. Result: " + elementString);
-		}
-		*/
 
 		// Style attr
 		LOGGER.info("Appending style attribute to .dot string");
@@ -208,10 +158,6 @@ public class EdgePropertyMapper extends Mapper {
 			LOGGER.info("Appended style attribute. Result: " + elementString);
 		}
 		
-		// append dir=both so both arrowShapes show up and close off attr string
-		/*if (!visible) {
-			elementString.append(",dir = \"none\"");
-		}*/
 		if (elementString.charAt(elementString.length() - 1) == ',') {
 			elementString.deleteCharAt(elementString.length() - 1);
 		}
