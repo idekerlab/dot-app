@@ -49,7 +49,6 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_V
  * @author Ziran Zhang
  */
 public class NodeReader extends Reader{
-
 	
 	// Map to convert from .dot node shape to Cytoscape
 	private static final Map<String, NodeShape> NODE_SHAPE_MAP = new HashMap<String, NodeShape>();
@@ -86,7 +85,6 @@ public class NodeReader extends Reader{
 	/**
 	 * Constructs an object of type Reader.
 	 * 
-	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
 	 * @param defaultAttrs Map that contains default attributes
@@ -106,15 +104,7 @@ public class NodeReader extends Reader{
 	@Override
 	protected void setBypasses() {
 		LOGGER.info("Setting the Bypass values for Visual Style...");
-		/*
-		 * for each entry in elementMap
-		 * 		bypassMap = getAttrMap(elementMap.getKey())
-		 * 		for each entry in bypassMap
-		 * 			Pair p = convertAttribute(name, val);
-		 * 			VP = p.left()
-		 * 			val = p.right()
-		 * 			getValue().setLockedValue( VP, val);	
-		 */
+
 		// for each element, get bypass attributes
 		for (Entry<? extends Object, ? extends CyIdentifiable> entry : elementMap.entrySet()) {
 			Map<String, String> bypassAttrs = getAttrMap(entry.getKey()); 
@@ -178,15 +168,6 @@ public class NodeReader extends Reader{
 			}
 		}
 	}
-
-	/**
-	 * Sets defaults and bypass attributes for each node and sets positions
-	 */
-	/*@Override
-	public void setProperties() {
-		LOGGER.info("NodeReader: Setting properties for VisualStyle...");
-		super.setProperties();
-	}*/
 	
 	/**
 	 * Sets VisualProperties for each node related to location of node.
@@ -196,13 +177,7 @@ public class NodeReader extends Reader{
 	 * @param elementView 
 	 */
 	private void setPositions(String attrVal, View<CyNode> elementView) {
-		/*
-		 * Get pos attribute
-		 * Split string by ","
-		 * Convert parts to Doubles
-		 * Multiple Y coordinate by -1
-		 * Set NODE_X_POSITION and NODE_Y_POSITION
-		 */
+
 		String[] coords = attrVal.split(",");
 		Double x = Double.parseDouble(coords[0]);
 		Double y = -1 * Double.parseDouble(coords[1]);
@@ -291,9 +266,9 @@ public class NodeReader extends Reader{
 		if( attrVal.contains("rounded") && 
 				(vizStyle.getDefaultValue(NODE_SHAPE)).equals(NodeShapeVisualProperty.RECTANGLE) ) {
 				
-			vizStyle.setDefaultValue(NODE_SHAPE, NodeShapeVisualProperty.ROUND_RECTANGLE);
-			
+			vizStyle.setDefaultValue(NODE_SHAPE, NodeShapeVisualProperty.ROUND_RECTANGLE);	
 		}
+		
 		// check if invisible is enabled
 		if( attrVal.contains("invis") ) {
 			vizStyle.setDefaultValue(NODE_VISIBLE, false);
@@ -380,7 +355,6 @@ public class NodeReader extends Reader{
 				break;
 			}
 		}
-		
 	}
 
 	/**
@@ -424,7 +398,6 @@ public class NodeReader extends Reader{
 				break;
 			}
 		}
-		
 	}
 }
 

@@ -27,7 +27,6 @@ import com.alexmerz.graphviz.objects.Graph;
  */
 public class NetworkReader extends Reader{
 
-
 	// JPGD object that contains visual information for this network view
 	private Graph graph;
 	/**
@@ -41,7 +40,6 @@ public class NetworkReader extends Reader{
 	public NetworkReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Graph graph) {
 		super(networkView, vizStyle, defaultAttrs);
 		this.graph = graph;
-
 	}
 
 	/**
@@ -67,13 +65,7 @@ public class NetworkReader extends Reader{
 		//Network doesn't set bypass value with the Graph object's attributes
 		//overrides the defaults set in setDefault()
 		LOGGER.info("Setting the Bypass values for Visual Style...");
-		/*
-		 * for attribute in graph.getAttributes() 
-		 * 		Pair p = convertAttribute(name, val);
-		 * 		VP = p.left()
-		 * 		val = p.right()
-		 * 		vizStyle.setDefaultValue( VP, val);	
-		 */
+
 		for (Entry<String, String> attrEntry : graph.getAttributes().entrySet()) {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();

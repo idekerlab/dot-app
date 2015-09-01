@@ -86,7 +86,6 @@ public abstract class Reader {
 	 * is null for NetworkReader. Is initialized on Node, Edge Reader
 	 */
 	protected Map<? extends Object, ? extends CyIdentifiable> elementMap;
-	
 
 	/**
 	 * Constructs an object of type Reader.
@@ -103,7 +102,6 @@ public abstract class Reader {
 		this.defaultAttrs = defaultAttrs;
 	}
 	
-
 	/**
 	 * Sets all the default Visual Properties values of the Cytoscape
 	 * VisualStyle. Subclasses handle different visual properties
@@ -113,13 +111,7 @@ public abstract class Reader {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void setDefaults() {
 		LOGGER.info("Setting the Default values for Visual Style...");
-		/*
-		 * for each entry in defaultAttrs
-		 * 		Pair p = convertAttribute(getKey(), getValue());
-		 * 		VP = p.left()
-		 * 		val = p.right()
-		 * 		vizStyle.setDefaultValue( VP, val);
-		 */
+
 		for (Entry<String, String> attrEntry : defaultAttrs.entrySet()) {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();
@@ -127,21 +119,6 @@ public abstract class Reader {
 				String.format("Converting DOT attribute: %s", attrKey)
 			);
 
-			/*
-			 * label attribute may be a special case if label="\N".
-			 * In dot, \N is an escape sequence that maps the node name
-			 * to the node label. So setDefaults needs to run additional code
-			 * which should be added to NodeReader to handle the creation of
-			 * the mapping
-			 */
-			/*
-			 * if attrKey is "label"
-
-			 *   call handleLabelDefault()
-			 *   Method will written differently for each subclass
-			 *   NodeReader will create a passthrough mapping if label="\N"
-			 *   Every other subclass will return immediately
-			 */
 			if (attrKey.equals("style")) {
 				setStyle(attrVal, vizStyle);
 				// this attribute has been handled, move on to next one
@@ -190,7 +167,6 @@ public abstract class Reader {
 		}
 	}
 
-
 	/**
 	 * Sets all the bypass Visual Properties values for View objects in
 	 * Cytoscape. Implemented in subclasses to handle different subclasses of
@@ -223,14 +199,6 @@ public abstract class Reader {
 	 */
 	protected Map<String, String> getAttrMap(Object element) {
 	
-		 /*
-		  * if element instance of Node
-		  *		return (Map)((Node)element.getAttributes() )	
-		  * if element instance of Edge
-		  * 	sameThing
-		  * else
-		  * 	throw IllegalArgException
-		  */
 		if (element instanceof Node) {
 			return ((Node) element).getAttributes();
 		}
@@ -251,19 +219,6 @@ public abstract class Reader {
 	 * @param color GraphViz color string to be converted
 	 */
 	protected Color convertColor(String color) {
-		/*
-		 * Match string to #RRGGBB
-		 * if (matched) then return new Color(RR, GG, BB)
-		 * OR
-		 * Match string to #RRGGBBAA
-		 * if (matched) then return new Color(RR, GG, BB, AA)
-		 * OR
-		 * Split string by "," or " "
-		 * Convert sub strings to Floats
-		 * return Color.getHSBColor()
-		 * OR
-		 * return Color.getColor(String)
-		 */
 
 		LOGGER.info(String.format("GraphViz color string: %s", color));
 		LOGGER.info("Converting GraphViz color string to Java Color...");
@@ -320,11 +275,6 @@ public abstract class Reader {
 			Float value = Float.valueOf(matcher.group("VAL"));
 			return Color.getHSBColor(hue, saturation, value);
 		}
-		
-		// Color did not match any of the regexes.
-		// Check if it's a valid color string
-		// TODO
-		
 		
 		// Color did not match any of the regexes and is not color valid string.
 		// return a default color

@@ -100,18 +100,9 @@ public class EdgeReader extends Reader{
 	}
 	
 	/**
-	 * Sets defaults and bypass attributes for each node and sets positions
-	 */
-	/*@Override
-	public void setProperties() {
-		super.setProperties();
-	}*/
-	
-	/**
 	 * Converts edge weights by putting into a new column in the table
 	 */
 	private void setWeight(String weight) {
-		// TODO
 		//get the current row and put the weight into the row
 		CyRow currentRow = networkView.getModel().getRow(edgeTable);
 		currentRow.set("weight", new Double(Double.parseDouble(weight)));
@@ -134,20 +125,6 @@ public class EdgeReader extends Reader{
 	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
 		
 		LOGGER.info("Edge convert attr: " + name);
-		
-		/*
-		 * attributes to convert:
-		 * color
-		 * line type / style
-		 * width
-		 * curve/spline maybe
-		 * label
-		 * label font/color/size
-		 * tooltip
-		 * source/target arrow size
-		 * source/target arrow shape
-		 * visibility-- check style for "invis"
-		 */
 		
 		VisualProperty retrievedProp = DOT_TO_CYTOSCAPE.get(name);
 		Object retrievedVal = null;
@@ -195,25 +172,6 @@ public class EdgeReader extends Reader{
 	@Override
 	protected void setBypasses() {
 		LOGGER.info("setBypasses called");
-		/*
-		 * for each entry in elementMap
-		 * 		bypassMap = getAttrMap(elementMap.getKey())
-		 * 		for each entry in bypassMap
-		 * 			if(name == "style")
-		 * 				setStyle(val, elementView)
-		 * 				continue;
-		 * 			if(name == "weight")
-		 * 				setWeight()
-		 * 				continue;
-		 * 			if(name == "color")
-		 * 				setColor(...)
-		 * 				continue
-		 * 			
-		 * 			Pair p = convertAttribute(name, val);
-		 * 			VP = p.left()
-		 * 			val = p.right()
-		 * 			getValue().setLockedValue( VP, val);	
-		 */
 		
 		for(Entry<? extends Object, ? extends CyIdentifiable> entry: elementMap.entrySet() ) {
 			// get map of attributes for this edge and the View for this CyEdge
@@ -404,6 +362,5 @@ public class EdgeReader extends Reader{
 			}
 		}
 	}
-
 }
 
