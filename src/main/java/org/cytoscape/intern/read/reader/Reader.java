@@ -336,7 +336,9 @@ public abstract class Reader {
 	/**
 	 * Converts the specified GraphViz attribute and value to its Cytoscape 
 	 * equivalent VisualProperty and VisualPropertyValue. If an equivalent value
-	 * is not found, then a default Cytoscape VisualPropertyValue is used
+	 * is not found, then a default Cytoscape VisualPropertyValue is used.
+	 * This method only handles GraphViz attributes that do not correspond to
+	 * more than one Cytoscape VisualProperty.
 	 * 
 	 * @param name the name of the attribute
 	 * @param val the value of the attribute
@@ -362,8 +364,7 @@ public abstract class Reader {
 	 * for a Cytoscape View object
 	 * 
 	 * @param attrVal String that is the value of "style" (eg. "dashed, round")
-	 * @param elementView View of Cytoscape element to which "style" is being
-	 * applied (eg. View<CyNode>)
+	 * @param elementView view to which "style" is being applied
 	 */
 	abstract protected void setStyle(String attrVal, View<? extends CyIdentifiable> elementView);
 
@@ -371,7 +372,7 @@ public abstract class Reader {
 	 * Converts a GraphViz color attribute into a default VisualProperty value
 	 * for a Cytoscape VisualStyle
 	 * 
-	 * @param attrVal String that is value of color from dot file
+	 * @param attrVal GraphViz color string
 	 * @param vizStyle VisualStyle that this color is being used in
 	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
 	 */
@@ -381,9 +382,9 @@ public abstract class Reader {
 	 * Converts a GraphViz color attribute into a VisualProperty bypass value
 	 * for a Cytoscape View object
 	 * 
-	 * @param attrVal String that is value of color from dot file
-	 * @param elementView View of Cytoscape element to which a color 
-	 * VisualProperty being set
+	 * @param attrVal GraphViz color string
+	 * @param elementView View of Cytoscape element to which a color
+	 * VisualProperty is being set
 	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
 	 */
 	abstract protected void setColor(String attrVal, View<? extends CyIdentifiable> elementView, ColorAttribute attr);

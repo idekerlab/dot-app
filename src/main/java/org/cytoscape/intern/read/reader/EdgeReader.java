@@ -12,7 +12,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.view.model.View;
@@ -49,8 +48,10 @@ import org.cytoscape.view.vizmap.VisualStyle;
  */
 public class EdgeReader extends Reader{
 
+	// reference default CyEdge table for network from networkView
 	CyTable edgeTable;
-	// Map to convert from .dot arrow shape to Cytoscape
+
+	// maps GraphViz arrow shapes with corresponding Cytoscape arrow shapes
 	private static final Map<String, ArrowShape> ARROW_SHAPE_MAP = new HashMap<String, ArrowShape>();
 	static {
 		ARROW_SHAPE_MAP.put("vee", ArrowShapeVisualProperty.ARROW);
@@ -63,7 +64,10 @@ public class EdgeReader extends Reader{
 		ARROW_SHAPE_MAP.put("tee", ArrowShapeVisualProperty.T);
 	}
 	
-	// Map that associates .dot attributes with corresponding CS VisualProperty
+	/*
+	 * maps GraphViz attributes with a single Cytoscape VisualProperty
+	 * equivalent. Other GraphViz attributes are handled separately
+	 */
 	private static final Map<String, VisualProperty<?>> DOT_TO_CYTOSCAPE = new HashMap<String, VisualProperty<?>>();
 	static {
 		DOT_TO_CYTOSCAPE.put("label", EDGE_LABEL);
@@ -77,13 +81,14 @@ public class EdgeReader extends Reader{
 	}
 	
 	/**
-	 * Constructs an object of type Reader. Sets up Logger.
+	 * Constructs an object of type Reader.
+	 * 
 	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
-	 * @param defaultAttrs Map that contains default attributes for Reader of this type
-	 * eg. for NodeReader will be a list of default
-	 * @param elementMap Map where keys are JPGD node objects and Values are corresponding Cytoscape CyNodes
+	 * @param defaultAttrs Map that contains default attributes
+	 * @param elementMap Map of which the keys are JPGD Edge objects and the 
+	 * values are corresponding Cytoscape CyEdge objects 
 	 */
 	public EdgeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, 
 			Map<Edge, CyEdge> elementMap) {
@@ -93,62 +98,44 @@ public class EdgeReader extends Reader{
 		
         //get the edgeTable and create a new column for edge weight with default value of 1
 		edgeTable = networkView.getModel().getDefaultEdgeTable();
-		edgeTable.createColumn("weight", Double.class, false, 1);
+		edgeTable.createColumn("weight", Double.class, false, 1d);
 
 		LOGGER.info("EdgeReader constructed");
-		LOGGER.severe(defaultAttrs.toString());
 	}
 	
 	/**
-	 * Sets defaults and bypass attributes for each node and sets positions
-	 */
-	/*@Override
-	public void setProperties() {
-		super.setProperties();
-	}*/
-	
-	/**
 	 * Converts edge weights by putting into a new column in the table
+	 * 
+	 * @param weight the edge weight
+	 * @param elementView the edgeView corresponding to the edge of which the
+	 * weight is an attribute
 	 */
-	private void setWeight(String weight) {
-		// TODO
+	private void setWeight(String weight, View<CyEdge> elementView) {
 		//get the current row and put the weight into the row
-		CyRow currentRow = networkView.getModel().getRow(edgeTable);
+		CyRow currentRow = edgeTable.getRow(elementView.getModel().getSUID());
 		currentRow.set("weight", new Double(Double.parseDouble(weight)));
 	}
 
 	/**
-	 * Converts the specified .dot attribute to Cytoscape equivalent
-	 * and returns the corresponding VisualProperty and its value
-	 * Must be overidden and defined in each sub-class
+	 * Converts the specified GraphViz attribute and value to its Cytoscape 
+	 * equivalent VisualProperty and VisualPropertyValue. If an equivalent value
+	 * is not found, then a default Cytoscape VisualPropertyValue is used.
+	 * This method only handles GraphViz attributes that do not correspond to
+	 * more than one Cytoscape VisualProperty.
 	 * 
-	 * @param name Name of attribute
-	 * @param val Value of attribute
+	 * @param name the name of the attribute
+	 * @param val the value of the attribute
 	 * 
-	 * @return Pair where left value is VisualProperty and right value
-	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
-	 * attribute
+	 * @return Pair object of which the left value is the VisualProperty and the right value
+	 * is the VisualPropertyValue.
 	 */
 	@Override
 	@SuppressWarnings("rawtypes")
 	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
-		
-		LOGGER.info("Edge convert attr: " + name);
-		
-		/*
-		 * attributes to convert:
-		 * color
-		 * line type / style
-		 * width
-		 * curve/spline maybe
-		 * label
-		 * label font/color/size
-		 * tooltip
-		 * source/target arrow size
-		 * source/target arrow shape
-		 * visibility-- check style for "invis"
-		 */
-		
+		LOGGER.info(
+			String.format("Converting GraphViz attribute %s with value %s", name, val)
+		);
+
 		VisualProperty retrievedProp = DOT_TO_CYTOSCAPE.get(name);
 		Object retrievedVal = null;
 		switch(name) {
@@ -172,12 +159,10 @@ public class EdgeReader extends Reader{
 				break;
 			}
 			case "arrowhead": {
-				val.toLowerCase();
 				retrievedVal = ARROW_SHAPE_MAP.get(val);
 				break;
 			}
 			case "arrowtail": {
-				val.toLowerCase();
 				retrievedVal = ARROW_SHAPE_MAP.get(val);
 				break;
 			}
@@ -187,41 +172,21 @@ public class EdgeReader extends Reader{
 	}
 
 	/**
-	 * Sets all the bypass Visual Properties in Cytoscape for this type of reader
-	 * eg. NetworkReader sets all network props, same for nodes
-	 * Modifies CyNetworkView networkView, VisualStyle vizStyle etc. 
+	 * Sets all the bypass Visual Properties values for Cytoscape View objects
+	 * corresponding to CyEdge objects
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected void setBypasses() {
-		LOGGER.info("setBypasses called");
-		/*
-		 * for each entry in elementMap
-		 * 		bypassMap = getAttrMap(elementMap.getKey())
-		 * 		for each entry in bypassMap
-		 * 			if(name == "style")
-		 * 				setStyle(val, elementView)
-		 * 				continue;
-		 * 			if(name == "weight")
-		 * 				setWeight()
-		 * 				continue;
-		 * 			if(name == "color")
-		 * 				setColor(...)
-		 * 				continue
-		 * 			
-		 * 			Pair p = convertAttribute(name, val);
-		 * 			VP = p.left()
-		 * 			val = p.right()
-		 * 			getValue().setLockedValue( VP, val);	
-		 */
-		
+		LOGGER.info("Setting the Bypass values for edge views...");
+	
 		for(Entry<? extends Object, ? extends CyIdentifiable> entry: elementMap.entrySet() ) {
 			// get map of attributes for this edge and the View for this CyEdge
 			Map<String, String> bypassAttrs = getAttrMap(entry.getKey());
 			CyEdge element = (CyEdge)entry.getValue();
 			View<CyEdge> elementView = networkView.getEdgeView(element);
 			
-			// for each bypass attribute
+			// loop through attribute list for edge
 			for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
 				String attrKey = attrEntry.getKey();
 				String attrVal = attrEntry.getValue();
@@ -235,7 +200,7 @@ public class EdgeReader extends Reader{
 					continue;
 				}
 				if(attrKey.equals("weight")){
-					setWeight(attrVal);
+					setWeight(attrVal, elementView);
 					continue;
 				}
 				if (attrKey.equals("color") || attrKey.equals("fillcolor")
@@ -258,7 +223,8 @@ public class EdgeReader extends Reader{
 					continue;
 				}
 				
-				// Get corresponding VisualProperty
+				// handle normal cases
+				// get corresponding VisualProperty
 				Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
 				if (p == null) {
 					// Abort if conversion not found
@@ -280,11 +246,11 @@ public class EdgeReader extends Reader{
 	}
 
 	/**
-	 * Converts the "style" attribute from graphviz for default value of Cytoscape.
-	 * Handles node border line type only.
+	 * Converts the GraphViz "style" attribute into default VisualProperty
+	 * values for a Cytoscape VisualStyle
 	 * 
 	 * @param attrVal String that is the value of "style" 
-	 * eg. "dashed, rounded"
+	 * eg. "dashed, invis"
 	 * @param vizStyle VisualStyle that "style" is being applied to
 	 */
 	@Override
@@ -308,12 +274,11 @@ public class EdgeReader extends Reader{
 	}
 
 	/**
-	 * Converts the "style" attribute from graphviz for bypass value of Cytoscape.
-	 * Only handles node border line type.
+	 * Converts the GraphViz "style" attribute into VisualProperty bypass values
+	 * for a Cytoscape View object
 	 * 
-	 * @param attrVal String that is the value of "style" 
-	 * eg. "dashed, rounded"
-	 * @param elementView View of element that "style" is being applied to eg. View<CyNode> 
+	 * @param attrVal String that is the value of "style" (eg. "dashed, round")
+	 * @param elementView view to which "style" is being applied
 	 */
 	@Override
 	protected void setStyle(String attrVal,
@@ -341,12 +306,13 @@ public class EdgeReader extends Reader{
 	}
 
 	/**
-	 * Converts .dot color to Cytoscape default value. Does not handle
-	 * colors of edge arrows
+	 * Converts a GraphViz color attribute into the corresponding default
+	 * VisualProperty values for a Cytoscape VisualStyle. Does not support
+	 * fillcolor.
 	 * 
-	 * @param attrVal String that is value of color from dot file
+	 * @param attrVal GraphViz color string
 	 * @param vizStyle VisualStyle that this color is being used in
-	 * @param attr enum for type of color: COLOR, FILLCOLOR or FONTCOLOR 
+	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
 	 */
 	@Override
 	protected void setColor(String attrVal, VisualStyle vizStyle,
@@ -370,16 +336,20 @@ public class EdgeReader extends Reader{
 				vizStyle.setDefaultValue(EDGE_LABEL_TRANSPARENCY, transparency);
 				break;
 			}
+			default: {
+				break;
+			}
 		}
 	}
 
 	/**
-	 * Converts .dot color to Cytoscape bypass value. Does not handle arrow
-	 * colors
+	 * Converts a GraphViz color attribute into corresponding VisualProperty
+	 * bypass values for a Cytoscape View object. Does not support fillcolor.
 	 * 
-	 * @param attrVal String that is value of color from dot file
-	 * @param elementView View of element that color is being applied to
-	 * @param attr enum for type of color: COLOR, FILLCOLOR or FONTCOLOR 
+	 * @param attrVal GraphViz color string
+	 * @param elementView View of Cytoscape element to which a color 
+	 * VisualProperty is being set
+	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
 	 */
 	@Override
 	protected void setColor(String attrVal,

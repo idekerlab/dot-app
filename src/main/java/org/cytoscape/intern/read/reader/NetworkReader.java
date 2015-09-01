@@ -3,7 +3,6 @@ package org.cytoscape.intern.read.reader;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_BACKGROUND_PAINT;
 
 import java.awt.Color;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -30,31 +29,25 @@ public class NetworkReader extends Reader{
 
 	// JPGD object that contains visual information for this network view
 	private Graph graph;
+
 	/**
-	 * Constructs an object of type Reader. Sets up Logger.
+	 * Constructs an object of type Reader.
+	 * 
 	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
-	 * @param defaultAttrs Map that contains default attributes for Reader of this type
-	 * eg. for NodeReader will be a list of default
+	 * @param defaultAttrs Map that contains default attributes
+	 * @param elementMap Map of which the keys are JPGD Edge objects and the 
+	 * values are corresponding Cytoscape CyEdge objects 
 	 */
 	public NetworkReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Graph graph) {
 		super(networkView, vizStyle, defaultAttrs);
 		this.graph = graph;
-
 	}
 
 	/**
-	 * Converts the specified .dot attribute to Cytoscape equivalent
-	 * and returns the corresponding VisualProperty and its value
-	 * Must be overidden and defined in each sub-class
-	 * 
-	 * @param name Name of attribute
-	 * @param val Value of attribute
-	 * 
-	 * @return Pair where left value is VisualProperty and right value
-	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
-	 * attribute
+	 * Does nothing. A network view has no GraphViz attributes that correspond
+	 * to a single Cytoscape VisualProperty
 	 */
 	@Override
 	@SuppressWarnings("rawtypes")
@@ -62,18 +55,17 @@ public class NetworkReader extends Reader{
 		return null;
 	}
 
+	/**
+	 * Overwrites the default VisualProperty values for the Cytoscape VisualStyle
+	 * that came from converting the default attribute list with new values from
+	 * converting the attribute list from the JPGD object that corresponds to
+	 * the network view.
+	 */
 	@Override
 	protected void setBypasses() {
 		//Network doesn't set bypass value with the Graph object's attributes
 		//overrides the defaults set in setDefault()
 		LOGGER.info("Setting the Bypass values for Visual Style...");
-		/*
-		 * for attribute in graph.getAttributes() 
-		 * 		Pair p = convertAttribute(name, val);
-		 * 		VP = p.left()
-		 * 		val = p.right()
-		 * 		vizStyle.setDefaultValue( VP, val);	
-		 */
 		for (Entry<String, String> attrEntry : graph.getAttributes().entrySet()) {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();
@@ -83,11 +75,19 @@ public class NetworkReader extends Reader{
 		}
 	}
 
+	/**
+	 * Does nothing. The GraphViz style attribute does not affect the
+	 * network view
+	 */
 	@Override
 	protected void setStyle(String attrVal, VisualStyle vizStyle) {
 		//Network doesn't have properties set with style attribute
 	}
 
+	/**
+	 * Does nothing. The GraphViz style attribute does not affect the
+	 * network view
+	 */
 	@Override
 	protected void setStyle(String attrVal,
 			View<? extends CyIdentifiable> elementView) {
@@ -109,15 +109,14 @@ public class NetworkReader extends Reader{
 		}
 	}
 
+	/**
+	 * Does nothing. A network view does not set a color attribute with a
+	 * bypass.
+	 */
 	@Override
 	protected void setColor(String attrVal,
 			View<? extends CyIdentifiable> elementView, ColorAttribute attr) {
 		//Network doesn't set Background color with bypass
 	}
 
-	@Override
-	public void setProperties(){
-		LOGGER.info("NetworkReader: Setting properties for VisualStyle...");
-		super.setProperties();
-	}
 }

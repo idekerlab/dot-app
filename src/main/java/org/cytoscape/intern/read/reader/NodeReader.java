@@ -51,7 +51,7 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_V
 public class NodeReader extends Reader{
 
 	
-	// Map to convert from .dot node shape to Cytoscape
+	// maps GraphViz node shapes with corresponding Cytoscape node shapes
 	private static final Map<String, NodeShape> NODE_SHAPE_MAP = new HashMap<String, NodeShape>();
 	static {
 		NODE_SHAPE_MAP.put("triangle", NodeShapeVisualProperty.TRIANGLE);
@@ -64,8 +64,8 @@ public class NodeReader extends Reader{
 	}
 	
 	/*
-	 * Map to convert GraphViz attributes with a single Cytoscape VisualProperty
-	 * Equivalent. Other GraphViz attributes are handled separately
+	 * maps GraphViz attributes with a single Cytoscape VisualProperty
+	 * equivalent. Other GraphViz attributes are handled separately
 	 */
 	private static final Map<String, VisualProperty<?>> DOT_TO_CYTOSCAPE = new HashMap<String, VisualProperty<?>>(9);
 	static {
@@ -80,7 +80,7 @@ public class NodeReader extends Reader{
 		DOT_TO_CYTOSCAPE.put("fontsize", NODE_LABEL_FONT_SIZE);
 	}
 	
-	//True if "fillcolor" attribute has already been consumed for a node
+	// true if "fillcolor" attribute has already been consumed for a node
 	private boolean usedFillColor = false;
 	
 	/**
@@ -100,21 +100,13 @@ public class NodeReader extends Reader{
 	
 	/**
 	 * Sets all the bypass Visual Properties values for Cytoscape View objects
-	 * corresponding to CyNode objects
+	 * corresponding to CyNode objects in the elementMap
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	protected void setBypasses() {
-		LOGGER.info("Setting the Bypass values for Visual Style...");
-		/*
-		 * for each entry in elementMap
-		 * 		bypassMap = getAttrMap(elementMap.getKey())
-		 * 		for each entry in bypassMap
-		 * 			Pair p = convertAttribute(name, val);
-		 * 			VP = p.left()
-		 * 			val = p.right()
-		 * 			getValue().setLockedValue( VP, val);	
-		 */
+		LOGGER.info("Setting the Bypass values for node views...");
+
 		// for each element, get bypass attributes
 		for (Entry<? extends Object, ? extends CyIdentifiable> entry : elementMap.entrySet()) {
 			Map<String, String> bypassAttrs = getAttrMap(entry.getKey()); 
@@ -180,53 +172,43 @@ public class NodeReader extends Reader{
 	}
 
 	/**
-	 * Sets defaults and bypass attributes for each node and sets positions
-	 */
-	/*@Override
-	public void setProperties() {
-		LOGGER.info("NodeReader: Setting properties for VisualStyle...");
-		super.setProperties();
-	}*/
-	
-	/**
-	 * Sets VisualProperties for each node related to location of node.
-	 * Here because cannot return 2 VisualProperties from convertAttribute
-	 * and want to make exception clear
-	 * @param attrVal 
-	 * @param elementView 
+	 * Sets the NODE_X_LOCATION and NODE_Y_LOCATION Cytoscape visual properties
+	 * from the given GraphViz "pos" value.
+	 * @param attrVal GraphViz "pos" value 
+	 * @param elementView view for which the visual properties are being set
 	 */
 	private void setPositions(String attrVal, View<CyNode> elementView) {
-		/*
-		 * Get pos attribute
-		 * Split string by ","
-		 * Convert parts to Doubles
-		 * Multiple Y coordinate by -1
-		 * Set NODE_X_POSITION and NODE_Y_POSITION
-		 */
 		String[] coords = attrVal.split(",");
 		Double x = Double.parseDouble(coords[0]);
+		
+		//Y coordinate is different between GraphViz and Java.
 		Double y = -1 * Double.parseDouble(coords[1]);
-		//Position attributes are not set with bypasses
+
+		//Position attributes are not set with bypasses.
 		elementView.setVisualProperty(NODE_X_LOCATION, x);
 		elementView.setVisualProperty(NODE_Y_LOCATION, y);
 	}
 	
 	/**
-	 * Converts the specified .dot attribute to Cytoscape equivalent
-	 * and returns the corresponding VisualProperty and its value
-	 * Must be overidden and defined in each sub-class
+	 * Converts the specified GraphViz attribute and value to its Cytoscape 
+	 * equivalent VisualProperty and VisualPropertyValue. If an equivalent value
+	 * is not found, then a default Cytoscape VisualPropertyValue is used.
+	 * This method only handles GraphViz attributes that do not correspond to
+	 * more than one Cytoscape VisualProperty.
 	 * 
-	 * @param name Name of attribute
-	 * @param val Value of attribute
+	 * @param name the name of the attribute
+	 * @param val the value of the attribute
 	 * 
-	 * @return Pair where left value is VisualProperty and right value
-	 * is the value of that VisualProperty. VisualProperty corresponds to graphviz
-	 * attribute
+	 * @return Pair object of which the left value is the VisualProperty and the right value
+	 * is the VisualPropertyValue.
 	 */
 	@Override
 	@SuppressWarnings({ "rawtypes" })
 	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
-		
+		LOGGER.info(
+			String.format("Converting GraphViz attribute %s with value %s", name, val)
+		);
+
 		VisualProperty retrievedProp = DOT_TO_CYTOSCAPE.get(name);
 		Object retrievedVal = null;
 		switch(name) {
@@ -266,8 +248,8 @@ public class NodeReader extends Reader{
 	}
 
 	/**
-	 * Converts the "style" attribute from graphviz for default value of Cytoscape.
-	 * Handles node border line type only.
+	 * Converts the GraphViz "style" attribute into default VisualProperty
+	 * values for a Cytoscape VisualStyle
 	 * 
 	 * @param attrVal String that is the value of "style" 
 	 * eg. "dashed, rounded"
@@ -301,12 +283,11 @@ public class NodeReader extends Reader{
 	}
 
 	/**
-	 * Converts the "style" attribute from graphviz for bypass value of Cytoscape.
-	 * Only handles node border line type.
+	 * Converts the GraphViz "style" attribute into VisualProperty bypass values
+	 * for a Cytoscape View object
 	 * 
-	 * @param attrVal String that is the value of "style" 
-	 * eg. "dashed, rounded"
-	 * @param elementView View of element that "style" is being applied to eg. View<CyNode> 
+	 * @param attrVal String that is the value of "style" (eg. "dashed, round")
+	 * @param elementView view to which "style" is being applied
 	 */
 	@Override
 	protected void setStyle(String attrVal,
@@ -341,11 +322,12 @@ public class NodeReader extends Reader{
 	}
 
 	/**
-	 * Converts .dot color to Cytoscape default value
+	 * Converts a GraphViz color attribute into the corresponding default
+	 * VisualProperty values for a Cytoscape VisualStyle
 	 * 
-	 * @param attrVal String that is value of color from dot file
+	 * @param attrVal GraphViz color string
 	 * @param vizStyle VisualStyle that this color is being used in
-	 * @param attr enum for type of color: COLOR, FILLCOLOR or FONTCOLOR 
+	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
 	 */
 	@Override
 	protected void setColor(String attrVal, VisualStyle vizStyle,
@@ -384,11 +366,13 @@ public class NodeReader extends Reader{
 	}
 
 	/**
-	 * Converts .dot color to Cytoscape bypass value
+	 * Converts a GraphViz color attribute into corresponding VisualProperty
+	 * bypass values for a Cytoscape View object
 	 * 
-	 * @param attrVal String that is value of color from dot file
-	 * @param elementView View of element that color is being applied to
-	 * @param attr enum for type of color: COLOR, FILLCOLOR or FONTCOLOR 
+	 * @param attrVal GraphViz color string
+	 * @param elementView View of Cytoscape element to which a color 
+	 * VisualProperty is being set
+	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
 	 */
 	@Override
 	protected void setColor(String attrVal,
@@ -401,14 +385,18 @@ public class NodeReader extends Reader{
 			case COLOR: {
 				elementView.setLockedValue(NODE_BORDER_PAINT, color);
 				elementView.setLockedValue(NODE_BORDER_TRANSPARENCY, transparency);
-				//default fillcolor has already been applied, should not redo
+
+				//fillcolor has already been applied, should not redo
 				//with color attribute
 				if (usedFillColor) {
 					break;
 				}
-				//color attribute used for NODE_FILL_COLOR if
-				//fillcolor not present
-				//Fall through to fillcolor case
+
+				/*
+				 * color attribute used for NODE_FILL_COLOR if
+				 * fillcolor attribute not present, thus fall through
+				 * to fillcolor case
+				 */
 			}
 			case FILLCOLOR: {
 				elementView.setLockedValue(NODE_FILL_COLOR, color);
