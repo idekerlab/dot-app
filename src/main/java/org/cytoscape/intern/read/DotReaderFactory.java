@@ -35,12 +35,10 @@ import org.cytoscape.work.TaskIterator;
  */
 
 public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAddedListener {
-    
-	
+    	
 	//debug logger declaration 
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.read.DotReaderFactory");
 	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
-
 	
 	//Variable Declarations
 	private CyFileFilter fileFilter;
@@ -87,9 +85,7 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 		this.rootNetMgr = rootNetMgr;
 		this.vizMapMgr = vizMapMgr;
 		this.vizStyleFact = vizStyleFact;
-
-	}
-	
+	}	
 	
 	/**
 	 * Returns CyFileFilter associated with this factory
@@ -100,7 +96,6 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 	public CyFileFilter getFileFilter() {
 		return fileFilter;
 	}
-
 	
 	/**
 	 * Sets the input stream that will be read by the Reader created from this factory
@@ -117,7 +112,6 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 		return new TaskIterator(new DotReaderTask(inStream, netViewFact,
 				netFact, netMgr, rootNetMgr, vizMapMgr, vizStyleFact));
 	}
-
 	
 	/**
 	 * Returns true if the factory is ready to produce a TaskIterator and false otherwise.
@@ -141,11 +135,9 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 				LOGGER.info("gv|dot extention is matched");
 				return true;
 			}
-		}
-		
+		}		
 		return false;
 	}
-
 
 	private boolean isDotNetwork(CyNetwork network) {
 		CyTable hidden = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
@@ -181,8 +173,6 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 					}
 				});
 			}
-		}
-		
+		}	
 	}
-
 }

@@ -270,8 +270,6 @@ public class DotWriterTask implements CyWriter {
 
 	/**
 	 * Writes the .dot declaration of each node to file
-	 * 
-	 * 
 	 */
 	private void writeNodes() {
 		LOGGER.info("Writing node declarations...");
@@ -304,7 +302,6 @@ public class DotWriterTask implements CyWriter {
 					return;
 				}
 			}
-
 		}
 		// if the user passed in network
 		else {
