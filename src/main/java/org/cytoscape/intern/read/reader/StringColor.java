@@ -66,6 +66,11 @@ public class StringColor {
 		return colorMap.get(name);
 	}
 	
+	//haven't formatted this String Color Class
+    //if by the end of this Friday, color class has not been finished 
+	//we can comment it out first and add this class in 1.0 App
+	//it's optional for our 0.9 release this Friday
+	
 	/*public static void main(String[] args) {
 		StringColor strColor = new StringColor("svg_colors.txt");
 		System.out.println( strColor.getColor("peachpuff").toString() );
