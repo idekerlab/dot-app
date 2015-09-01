@@ -42,7 +42,7 @@ import com.alexmerz.graphviz.objects.Id;
 import com.alexmerz.graphviz.objects.Node;
 
 /**
- * Task object that reads a dot file into a network/ network view
+ * Task object that reads a GraphViz file into a network/ network view
  * 
  * @author Massoud Maher
  * @author Braxton Fitts
@@ -125,6 +125,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		nodeMap = new HashMap<Node, CyNode>();
 		edgeMap = new HashMap<Edge, CyEdge>();
 	}
+
 	
 	/**
 	 * Causes the task to begin execution.
@@ -134,7 +135,6 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	@Override
 	public void run(TaskMonitor monitor) {
-
 		LOGGER.info("Running run() function...");
 		
 		//Initialize the parser
@@ -213,7 +213,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			handler = null;
 		}
 	}
-		
+	
+	
 	/**
 	 * build an instance of CyNetworkView based on the passed in CyNetwork instance
 	 * 
@@ -221,7 +222,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	@Override
 	public CyNetworkView buildCyNetworkView(CyNetwork network) {
-
+		
+		// FileHandler for error logging
 		if (handler == null) {
 			try {
 				handler = new FileHandler("log_DotReaderTask.txt");
@@ -239,10 +241,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		// initialize the graph object
 		Graph graph = null;
 		
-		// the for loop's purpose below is to get the corresponding graph
-		// based on the input network from the hashmap
+		// get JPGD graph object from passed-in network object
 		for (Entry<Graph, CyNetwork> entry: graphMap.entrySet()){
-			//loop through each entry in hashmap until the corresponding graph is found
 			if(network.equals( entry.getValue() )) {
 				graph = entry.getKey();
 				break;
@@ -271,15 +271,20 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			else if (dep.getIdString().equals("nodeSizeLocked")) {
 				dep.setDependency(false);
 			}
+
 		}
 		
 		//created a new CyNetworkView based on the cyNetworkViewFactory
-		final CyNetworkView networkView = cyNetworkViewFactory.createNetworkView(network);		
+		final CyNetworkView networkView = cyNetworkViewFactory.createNetworkView(network);
+		
 
+		// initialize readers and begin setting visual properties
 		NetworkReader networkReader = new NetworkReader(networkView, vizStyle, getGraphDefaultMap(graph), graph);
 		networkReader.setProperties();
+
 		NodeReader nodeReader = new NodeReader(networkView, vizStyle, getNodeDefaultMap(graph), nodeMap);
 		nodeReader.setProperties();
+
 		EdgeReader edgeReader = new EdgeReader(networkView, vizStyle, getEdgeDefaultMap(graph), edgeMap);
 		edgeReader.setProperties();
 
@@ -306,8 +311,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	
 	/**
 	 * Retrieves the name of the graph from its Id Object
-	 * @param graph The JPGD graph object containing the information
-	 * @return The name of the graph
+	 * @param graph JPGD graph object containing the information
+	 * @return name of the graph
 	 */
 	private String getGraphName(Graph graph) {
 		Id graphId = graph.getId();
@@ -321,12 +326,11 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		}
 		return null;
 	}
-	
 	/**
 	 * Retrieves the name of the node from its Id object that will be inserted
 	 * into the CyNode table of the CyNetwork
-	 * @param node the JPGD node object containing the information
-	 * @return The name of the node
+	 * @param node JPGD node object containing the information
+	 * @return name of the node
 	 */
 	private String getNodeName(Node node) {
 		Id nodeId = node.getId();
@@ -415,7 +419,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	private Map<String, String> getNodeDefaultMap(Graph graph) {
 		LOGGER.info("Generating the Node Defaults...");
-
+		
+		// add each generic Node attribute and value to map
 		Map<String, String> output = new HashMap<String, String>();
 		for (String commonAttr : COMMON_ATTRIBUTES) {
 			LOGGER.info(String.format("Getting default node attribute: %s", commonAttr));
@@ -431,7 +436,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 				output.put(nodeAttr, val);
 			}
 		}
-		LOGGER.info(String.valueOf(output.size()));
+
 		return output;
 	}
 
@@ -445,9 +450,10 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	private Map<String, String> getEdgeDefaultMap(Graph graph) {
 		
 		Map<String, String> output = new HashMap<String, String>();
+		
+		// add each generic Edge attribute and value to map
 		for (String commonAttr : COMMON_ATTRIBUTES) {
 			LOGGER.info(String.format("Getting default edge attribute: %s", commonAttr));
-			//String val = graph.getGenericNodeAttribute(commonAttr);
 			String val = graph.getGenericEdgeAttribute(commonAttr);
 			if (val != null) {
 				output.put(commonAttr, val);
@@ -460,11 +466,14 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 				output.put(edgeAttr, val);
 			}
 		}
+
 		return output;
 	}
 	
 	private Map<String, String> getGraphDefaultMap(Graph graph) {
 		Map<String, String> output = new HashMap<String, String>();
+		
+		// add each generic Graph attribute and value to map
 		for (String graphAttr : GRAPH_ATTRIBUTES) {
 			LOGGER.info(String.format("Getting default graph attribute: %s", graphAttr));
 			String val = graph.getGenericGraphAttribute(graphAttr);
@@ -472,8 +481,10 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 				output.put(graphAttr, val);
 			}
 		}
+
 		return output;
 	}
+	
 }
 
 
