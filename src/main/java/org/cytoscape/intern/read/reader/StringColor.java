@@ -46,6 +46,7 @@ public class StringColor {
 					colorMap.put(name, new Color(red, green, blue));
 					System.out.print(name);
 				}
+				scanner.close();
 			}
 			catch(FileNotFoundException fileEx) {
 				System.out.println("File " + fileName + " not found");
