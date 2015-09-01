@@ -64,8 +64,8 @@ public class NodeReader extends Reader{
 	}
 	
 	/*
-	 * Map to convert .dot attributes with a single Cytoscape VisualProperty equivalent
-	 * Other .dot attributes are handled separately
+	 * Map to convert GraphViz attributes with a single Cytoscape VisualProperty
+	 * Equivalent. Other GraphViz attributes are handled separately
 	 */
 	private static final Map<String, VisualProperty<?>> DOT_TO_CYTOSCAPE = new HashMap<String, VisualProperty<?>>(9);
 	static {
@@ -89,9 +89,9 @@ public class NodeReader extends Reader{
 	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
-	 * @param defaultAttrs Map that contains default attributes for Reader of this type
-	 * eg. for NodeReader will be a list of default
-	 * @param elementMap Map where keys are JPGD node objects and Values are corresponding Cytoscape CyNodes
+	 * @param defaultAttrs Map that contains default attributes
+	 * @param elementMap Map of which the keys are JPGD Node objects and the 
+	 * values are corresponding Cytoscape CyNode objects 
 	 */
 	public NodeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Map<Node, CyNode> elementMap) {
 		super(networkView, vizStyle, defaultAttrs);
@@ -99,9 +99,8 @@ public class NodeReader extends Reader{
 	}
 	
 	/**
-	 * Sets all the bypass Visual Properties in Cytoscape for this type of reader
-	 * eg. NetworkReader sets all network props, same for nodes
-	 * Modifies CyNetworkView networkView, VisualStyle vizStyle etc. 
+	 * Sets all the bypass Visual Properties values for Cytoscape View objects
+	 * corresponding to CyNode objects
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
@@ -130,10 +129,11 @@ public class NodeReader extends Reader{
 				String attrKey = attrEntry.getKey();
 				String attrVal = attrEntry.getValue();
 				LOGGER.info(
-					String.format("Converting DOT attribute: %s", attrKey)
+					String.format("Converting GraphViz attribute: %s", attrKey)
 				);
 
-				// Handle specialty attributes
+				// handle special attributes
+				// These attributes map to more than one VisualProperty.
 				if (attrKey.equals("pos")) {
 					setPositions(attrVal, elementView);
 					continue;
@@ -226,20 +226,6 @@ public class NodeReader extends Reader{
 	@Override
 	@SuppressWarnings({ "rawtypes" })
 	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
-		/**
-		 * properties to Map:
-		 * 
-		 * shape
-		 * fill color
-		 * border color/transparency
-		 * border line type
-		 * border width
-		 * size
-		 * label
-		 * label position
-		 * tooltip
-		 * label font/size/color
-		 */
 		
 		VisualProperty retrievedProp = DOT_TO_CYTOSCAPE.get(name);
 		Object retrievedVal = null;
