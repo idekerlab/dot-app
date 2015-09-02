@@ -369,9 +369,7 @@ public class NetworkPropertyMapper extends Mapper {
 
 		LOGGER.info("Dot attributes associate with font is: " + returnValue);
 			
-		
 		return returnValue;
-		
 	}
 
 	/**
@@ -440,7 +438,6 @@ public class NetworkPropertyMapper extends Mapper {
         
         // return false if the graph is undirected (has only NONE arrow shapes)
         return false;
-		
 	}
 
 	@Override

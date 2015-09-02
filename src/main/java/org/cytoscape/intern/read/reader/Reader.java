@@ -112,6 +112,14 @@ public abstract class Reader {
 	private void setDefaults() {
 		LOGGER.info("Setting the Default values for Visual Style...");
 
+		/*
+		 * for each entry in defaultAttrs
+		 * 		Pair p = convertAttribute(getKey(), getValue());
+		 * 		VP = p.left()
+		 * 		val = p.right()
+		 * 		vizStyle.setDefaultValue( VP, val);
+		 */
+		String colorScheme = defaultAttrs.get("colorscheme");
 		for (Entry<String, String> attrEntry : defaultAttrs.entrySet()) {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();
@@ -221,8 +229,9 @@ public abstract class Reader {
 	 */
 	protected Color convertColor(String color, String colorScheme) {
 
-		LOGGER.info(String.format("GraphViz color string: %s", color));
-		LOGGER.info("Converting GraphViz color string to Java Color...");
+		// For testing color file reading
+		StringColor strC = new StringColor("svg_colors.txt");
+		LOGGER.info("Converting DOT color string to Java Color...");
 
 		//Remove trailing/leading whitespace
 		color = color.trim();
