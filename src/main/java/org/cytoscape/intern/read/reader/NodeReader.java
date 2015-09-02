@@ -110,6 +110,7 @@ public class NodeReader extends Reader{
 		// for each element, get bypass attributes
 		for (Entry<? extends Object, ? extends CyIdentifiable> entry : elementMap.entrySet()) {
 			Map<String, String> bypassAttrs = getAttrMap(entry.getKey()); 
+			String colorScheme = bypassAttrs.get("colorscheme");
 			CyNode element = (CyNode)entry.getValue();
 			View<CyNode> elementView = networkView.getNodeView(element);
 
@@ -138,16 +139,16 @@ public class NodeReader extends Reader{
 						|| attrKey.equals("fontcolor")) {
 					switch (attrKey) {
 						case "color": {
-							setColor(attrVal, elementView, ColorAttribute.COLOR);
+							setColor(attrVal, elementView, ColorAttribute.COLOR, colorScheme);
 							break;
 						}
 						case "fillcolor": {
-							setColor(attrVal, elementView, ColorAttribute.FILLCOLOR);
+							setColor(attrVal, elementView, ColorAttribute.FILLCOLOR, colorScheme);
 							usedFillColor = true;
 							break;
 						}
 						case "fontcolor": {
-							setColor(attrVal, elementView, ColorAttribute.FONTCOLOR);
+							setColor(attrVal, elementView, ColorAttribute.FONTCOLOR, colorScheme);
 							break;
 						}
 					}
@@ -327,13 +328,14 @@ public class NodeReader extends Reader{
 	 * 
 	 * @param attrVal GraphViz color string
 	 * @param vizStyle VisualStyle that this color is being used in
-	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
+	 * @param attr enum for type of color: COLOR, FILLCOLOR or FONTCOLOR 
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
 	 */
 	@Override
 	protected void setColor(String attrVal, VisualStyle vizStyle,
-			ColorAttribute attr) {
+			ColorAttribute attr, String colorScheme) {
 
-		Color color = convertColor(attrVal);
+		Color color = convertColor(attrVal, colorScheme);
 		Integer transparency = color.getAlpha();
 
 		switch (attr) {
@@ -373,12 +375,13 @@ public class NodeReader extends Reader{
 	 * @param elementView View of Cytoscape element to which a color 
 	 * VisualProperty is being set
 	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
 	 */
 	@Override
 	protected void setColor(String attrVal,
-			View<? extends CyIdentifiable> elementView, ColorAttribute attr) {
+			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
 
-		Color color = convertColor(attrVal);
+		Color color = convertColor(attrVal, colorScheme);
 		Integer transparency = color.getAlpha();
 
 		switch (attr) {
@@ -392,11 +395,11 @@ public class NodeReader extends Reader{
 					break;
 				}
 
-				/*
-				 * color attribute used for NODE_FILL_COLOR if
-				 * fillcolor attribute not present, thus fall through
-				 * to fillcolor case
-				 */
+			/*
+			 * color attribute used for NODE_FILL_COLOR if
+			 * fillcolor attribute not present, thus fall through
+			 * to fillcolor case
+			 */
 			}
 			case FILLCOLOR: {
 				elementView.setLockedValue(NODE_FILL_COLOR, color);
@@ -412,7 +415,6 @@ public class NodeReader extends Reader{
 				break;
 			}
 		}
-		
 	}
 }
 

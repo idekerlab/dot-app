@@ -1,5 +1,5 @@
 graph "lesmis.gml" {
-bgcolor = "#666666FF"
+bgcolor = #666666FF
 splines = "false"
 outputorder = "edgesfirst"
 esep = "0"

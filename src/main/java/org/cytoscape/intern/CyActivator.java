@@ -76,7 +76,6 @@ public class CyActivator extends AbstractCyActivator {
 		Properties dotReaderFactProps = new Properties();
 		dotWriterFactProps.put(ServiceProperties.ID, "dotWriterFactory");
 		dotReaderFactProps.put(ServiceProperties.ID, "dotReaderFactory");
-
 		
 		// initialize the DotWriterFactory for later use
 		LOGGER.info("Constructing Writer Factory...");
@@ -94,7 +93,6 @@ public class CyActivator extends AbstractCyActivator {
 		LOGGER.info("Registering Reader Factory as OSGI service...");
 		//register DotReaderFactory as an OSGI service
 		registerAllServices(context, dotReadFact, dotReaderFactProps);
-
 	}
 
 	/**

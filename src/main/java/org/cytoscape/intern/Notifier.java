@@ -14,9 +14,11 @@ import javax.swing.SwingUtilities;
  * @author Ziran Zhang
  */
 public class Notifier {
+	
 	public enum MessageType {
 		WARNING, ERROR, INFO;
 	}
+	
 	/**
 	 * Display a pop-up box of a certain type
 	 * @param message message to be displayed in pop-up box
@@ -24,7 +26,9 @@ public class Notifier {
 	 */
 	public static void showMessage(final String message, final MessageType type) {
 		SwingUtilities.invokeLater(
+				
 			new Runnable() {
+				
 				@Override
 				public void run() {
 					JOptionPane prompt = new JOptionPane();
@@ -50,6 +54,7 @@ public class Notifier {
 							break;
 						}
 					}
+					
 					dialogWindow.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
 					dialogWindow.setLocationRelativeTo(null);
 					

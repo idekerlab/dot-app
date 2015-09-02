@@ -19,6 +19,7 @@ import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
+import org.cytoscape.view.vizmap.VisualStyle;
 
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LINE_TYPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TRANSPARENCY;
@@ -34,8 +35,6 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_L
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE;
-
-import org.cytoscape.view.vizmap.VisualStyle;
 
 /**
  * Class that contains definitions and some implementation for converting a
@@ -183,6 +182,7 @@ public class EdgeReader extends Reader{
 		for(Entry<? extends Object, ? extends CyIdentifiable> entry: elementMap.entrySet() ) {
 			// get map of attributes for this edge and the View for this CyEdge
 			Map<String, String> bypassAttrs = getAttrMap(entry.getKey());
+			String colorScheme = bypassAttrs.get("colorscheme");
 			CyEdge element = (CyEdge)entry.getValue();
 			View<CyEdge> elementView = networkView.getEdgeView(element);
 			
@@ -211,11 +211,11 @@ public class EdgeReader extends Reader{
 							break;
 						}
 						case "color": {
-							setColor(attrVal, elementView, ColorAttribute.COLOR);
+							setColor(attrVal, elementView, ColorAttribute.COLOR, colorScheme);
 							break;
 						}
 						case "fontcolor": {
-							setColor(attrVal, elementView, ColorAttribute.FONTCOLOR);
+							setColor(attrVal, elementView, ColorAttribute.FONTCOLOR, colorScheme);
 							break;
 						}
 				
@@ -313,13 +313,14 @@ public class EdgeReader extends Reader{
 	 * @param attrVal GraphViz color string
 	 * @param vizStyle VisualStyle that this color is being used in
 	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
 	 */
 	@Override
 	protected void setColor(String attrVal, VisualStyle vizStyle,
-			ColorAttribute attr) {
+			ColorAttribute attr, String colorScheme) {
 	
 		LOGGER.info("Edge color: " + attrVal + " being set...");
-		Color color = convertColor(attrVal);
+		Color color = convertColor(attrVal, colorScheme);
 		Integer transparency = color.getAlpha();
 
 		switch (attr) {
@@ -350,12 +351,13 @@ public class EdgeReader extends Reader{
 	 * @param elementView View of Cytoscape element to which a color 
 	 * VisualProperty is being set
 	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
 	 */
 	@Override
 	protected void setColor(String attrVal,
-			View<? extends CyIdentifiable> elementView, ColorAttribute attr) {
+			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
 
-		Color color = convertColor(attrVal);
+		Color color = convertColor(attrVal, colorScheme);
 		Integer transparency = color.getAlpha();
 
 		switch (attr) {
@@ -374,6 +376,5 @@ public class EdgeReader extends Reader{
 			}
 		}
 	}
-
 }
 

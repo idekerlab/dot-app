@@ -36,5 +36,4 @@ public class FileHandlerManager {
 			fileHandlersIter.remove();
 		}
 	}
-
 }

@@ -66,11 +66,13 @@ public class NetworkReader extends Reader{
 		//Network doesn't set bypass value with the Graph object's attributes
 		//overrides the defaults set in setDefault()
 		LOGGER.info("Setting the Bypass values for Visual Style...");
+
+		String colorScheme = graph.getAttributes().get("colorscheme");
 		for (Entry<String, String> attrEntry : graph.getAttributes().entrySet()) {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();
 			if (attrKey.equals("bgcolor")) {
-				setColor(attrVal, vizStyle, ColorAttribute.BGCOLOR);
+				setColor(attrVal, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
 			}
 		}
 	}
@@ -96,8 +98,8 @@ public class NetworkReader extends Reader{
 
 	@Override
 	protected void setColor(String attrVal, VisualStyle vizStyle,
-			ColorAttribute attr) {
-		Color color = convertColor(attrVal);
+			ColorAttribute attr, String colorScheme) {
+		Color color = convertColor(attrVal, colorScheme);
 		switch (attr) {
 			case BGCOLOR: {
 				vizStyle.setDefaultValue(NETWORK_BACKGROUND_PAINT, color);
@@ -115,7 +117,7 @@ public class NetworkReader extends Reader{
 	 */
 	@Override
 	protected void setColor(String attrVal,
-			View<? extends CyIdentifiable> elementView, ColorAttribute attr) {
+			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
 		//Network doesn't set Background color with bypass
 	}
 
