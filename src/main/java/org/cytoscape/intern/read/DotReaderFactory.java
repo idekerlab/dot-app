@@ -33,7 +33,6 @@ import org.cytoscape.work.TaskIterator;
  * @author Braxton Fitts
  * @author Ziran Zhang
  */
-
 public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAddedListener {
     	
 	//debug logger declaration 
@@ -48,7 +47,6 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 	private CyRootNetworkManager rootNetMgr;
 	private VisualMappingManager vizMapMgr;
 	private VisualStyleFactory vizStyleFact;
-	
 	
 	/**
 	 * Sets the DotReaderFactory with associate fileFilter
@@ -75,6 +73,7 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 		catch(IOException e) {
 			// to prevent compiler error
 		}
+		
 		LOGGER.addHandler(handler);
 		FILE_HANDLER_MGR.registerFileHandler(handler);
 		

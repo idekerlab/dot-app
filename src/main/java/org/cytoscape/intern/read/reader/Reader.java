@@ -282,7 +282,6 @@ public abstract class Reader {
 		return Color.BLUE;
 	}
 	
-
 	/**
 	 * Converts the specified GraphViz attribute and value to its Cytoscape 
 	 * equivalent VisualProperty and VisualPropertyValue. If an equivalent value

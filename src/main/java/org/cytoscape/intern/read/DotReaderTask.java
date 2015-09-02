@@ -126,7 +126,6 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		edgeMap = new HashMap<Edge, CyEdge>();
 	}
 
-	
 	/**
 	 * Causes the task to begin execution.
 	 * 
@@ -178,8 +177,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 						networkTable.getRow(network.getSUID()).get("DOT_network", Boolean.class)
 					)
 				);
-
-			
+	
 				// import nodes
 				ArrayList<Node> nodeList = graph.getNodes(true);
 				for (Node node : nodeList) {
@@ -213,7 +211,6 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			handler = null;
 		}
 	}
-	
 	
 	/**
 	 * build an instance of CyNetworkView based on the passed in CyNetwork instance
@@ -466,7 +463,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 				output.put(edgeAttr, val);
 			}
 		}
-
+		
 		return output;
 	}
 	
@@ -483,8 +480,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		}
 
 		return output;
-	}
-	
+	}	
 }
 
 

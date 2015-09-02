@@ -392,11 +392,11 @@ public class NodeReader extends Reader{
 					break;
 				}
 
-				/*
-				 * color attribute used for NODE_FILL_COLOR if
-				 * fillcolor attribute not present, thus fall through
-				 * to fillcolor case
-				 */
+			/*
+			 * color attribute used for NODE_FILL_COLOR if
+			 * fillcolor attribute not present, thus fall through
+			 * to fillcolor case
+			 */
 			}
 			case FILLCOLOR: {
 				elementView.setLockedValue(NODE_FILL_COLOR, color);
@@ -412,7 +412,6 @@ public class NodeReader extends Reader{
 				break;
 			}
 		}
-		
 	}
 }
 
