@@ -112,6 +112,14 @@ public abstract class Reader {
 	private void setDefaults() {
 		LOGGER.info("Setting the Default values for Visual Style...");
 
+		/*
+		 * for each entry in defaultAttrs
+		 * 		Pair p = convertAttribute(getKey(), getValue());
+		 * 		VP = p.left()
+		 * 		val = p.right()
+		 * 		vizStyle.setDefaultValue( VP, val);
+		 */
+		String colorScheme = defaultAttrs.get("colorscheme");
 		for (Entry<String, String> attrEntry : defaultAttrs.entrySet()) {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();
@@ -128,20 +136,20 @@ public abstract class Reader {
 					|| attrKey.equals("fontcolor") || attrKey.equals("bgcolor")) {
 				switch (attrKey) {
 					case "color": {
-						setColor(attrVal, vizStyle, ColorAttribute.COLOR);
+						setColor(attrVal, vizStyle, ColorAttribute.COLOR, colorScheme);
 						break;
 					}
 					case "fillcolor": {
-						setColor(attrVal, vizStyle, ColorAttribute.FILLCOLOR);
+						setColor(attrVal, vizStyle, ColorAttribute.FILLCOLOR, colorScheme);
 						usedDefaultFillColor = true;
 						break;
 					}
 					case "fontcolor": {
-						setColor(attrVal, vizStyle, ColorAttribute.FONTCOLOR);
+						setColor(attrVal, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
 						break;
 					}
 					case "bgcolor": {
-						setColor(attrVal, vizStyle, ColorAttribute.BGCOLOR);
+						setColor(attrVal, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
 						break;
 					}
 				}
@@ -216,17 +224,19 @@ public abstract class Reader {
 	 * H S V (0 <= Hue, saturation, value <= 1.0)
 	 * String that is name of color from a GraphViz color scheme
 	 *  
-	 * @param color GraphViz color string to be converted
+	 * @param color Color from dot file-- takes all color formats
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
 	 */
-	protected Color convertColor(String color) {
+	protected Color convertColor(String color, String colorScheme) {
 
-		LOGGER.info(String.format("GraphViz color string: %s", color));
-		LOGGER.info("Converting GraphViz color string to Java Color...");
+		// For testing color file reading
+		StringColor strC = new StringColor("svg_colors.txt");
+		LOGGER.info("Converting DOT color string to Java Color...");
 
 		//Remove trailing/leading whitespace
 		color = color.trim();
 
-		// if color is a list-- will support later. For now, take first color 
+		// if color is a list-- will support later. For now, take first color  TODO
 		if(color.contains(";") || color.contains(":")) {
 			
 			int colonIndex = color.indexOf(':');
@@ -275,11 +285,21 @@ public abstract class Reader {
 			Float value = Float.valueOf(matcher.group("VAL"));
 			return Color.getHSBColor(hue, saturation, value);
 		}
-		
-		// Color did not match any of the regexes and is not color valid string.
-		// return a default color
-		LOGGER.info("DOT color string not supported. Return default color.");
-		return Color.BLUE;
+		// if color is a string
+		else {
+			// Read in color name files and find it in there
+			StringColor stringColor = new StringColor("svg_colors.txt", "x11_colors.txt");
+			Color output = stringColor.getColor(colorScheme, color);
+
+			if(output != null) {
+				return output;
+			}
+			else {
+				// If color can't be found return a default color
+				LOGGER.info("DOT color string not supported. Return default color.");
+				return Color.BLUE;
+			}
+		}
 	}
 	
 	/**
@@ -323,9 +343,10 @@ public abstract class Reader {
 	 * 
 	 * @param attrVal GraphViz color string
 	 * @param vizStyle VisualStyle that this color is being used in
-	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
+	 * @param attr enum for type of color: COLOR, FILLCOLOR or FONTCOLOR 
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
 	 */
-	abstract protected void setColor(String attrVal, VisualStyle vizStyle, ColorAttribute attr);
+	abstract protected void setColor(String attrVal, VisualStyle vizStyle, ColorAttribute attr, String colorScheme);
 
 	/**
 	 * Converts a GraphViz color attribute into a VisualProperty bypass value
@@ -335,8 +356,9 @@ public abstract class Reader {
 	 * @param elementView View of Cytoscape element to which a color
 	 * VisualProperty is being set
 	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
 	 */
-	abstract protected void setColor(String attrVal, View<? extends CyIdentifiable> elementView, ColorAttribute attr);
+	abstract protected void setColor(String attrVal, View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme);
 }
 
 

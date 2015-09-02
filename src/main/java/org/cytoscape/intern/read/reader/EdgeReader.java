@@ -182,6 +182,7 @@ public class EdgeReader extends Reader{
 		for(Entry<? extends Object, ? extends CyIdentifiable> entry: elementMap.entrySet() ) {
 			// get map of attributes for this edge and the View for this CyEdge
 			Map<String, String> bypassAttrs = getAttrMap(entry.getKey());
+			String colorScheme = bypassAttrs.get("colorscheme");
 			CyEdge element = (CyEdge)entry.getValue();
 			View<CyEdge> elementView = networkView.getEdgeView(element);
 			
@@ -210,11 +211,11 @@ public class EdgeReader extends Reader{
 							break;
 						}
 						case "color": {
-							setColor(attrVal, elementView, ColorAttribute.COLOR);
+							setColor(attrVal, elementView, ColorAttribute.COLOR, colorScheme);
 							break;
 						}
 						case "fontcolor": {
-							setColor(attrVal, elementView, ColorAttribute.FONTCOLOR);
+							setColor(attrVal, elementView, ColorAttribute.FONTCOLOR, colorScheme);
 							break;
 						}
 				
@@ -312,13 +313,14 @@ public class EdgeReader extends Reader{
 	 * @param attrVal GraphViz color string
 	 * @param vizStyle VisualStyle that this color is being used in
 	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
 	 */
 	@Override
 	protected void setColor(String attrVal, VisualStyle vizStyle,
-			ColorAttribute attr) {
+			ColorAttribute attr, String colorScheme) {
 	
 		LOGGER.info("Edge color: " + attrVal + " being set...");
-		Color color = convertColor(attrVal);
+		Color color = convertColor(attrVal, colorScheme);
 		Integer transparency = color.getAlpha();
 
 		switch (attr) {
@@ -349,12 +351,13 @@ public class EdgeReader extends Reader{
 	 * @param elementView View of Cytoscape element to which a color 
 	 * VisualProperty is being set
 	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
 	 */
 	@Override
 	protected void setColor(String attrVal,
-			View<? extends CyIdentifiable> elementView, ColorAttribute attr) {
+			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
 
-		Color color = convertColor(attrVal);
+		Color color = convertColor(attrVal, colorScheme);
 		Integer transparency = color.getAlpha();
 
 		switch (attr) {

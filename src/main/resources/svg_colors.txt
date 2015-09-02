@@ -1,3 +1,4 @@
+svg
 240	248	255	aliceblue
 250	235	215	antiquewhite
 0	255	255	aqua
