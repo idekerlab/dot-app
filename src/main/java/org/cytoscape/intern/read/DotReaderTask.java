@@ -50,6 +50,9 @@ import com.alexmerz.graphviz.objects.Node;
  */
 public class DotReaderTask extends AbstractCyNetworkReader {
 	
+	// whether task is cancelled or not
+	private boolean cancelled = false;
+	
 	// debug logger
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.read.DotReaderTask");
 	private FileHandler handler = null;
@@ -154,54 +157,67 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			int networkCounter = 0;
 			for (Graph graph : graphList) {
 				
-				LOGGER.info("Iterating graph in graphList...");
-				CySubNetwork network;
-				if (root != null) {
-					network = root.addSubNetwork();
-				}
-				else {
-					network = (CySubNetwork)cyNetworkFactory.createNetwork();
-				}
+				if(!cancelled){
+					LOGGER.info("Iterating graph in graphList...");
+					CySubNetwork network;
+					if (root != null) {
+						network = root.addSubNetwork();
+					}
+					else {
+						network = (CySubNetwork)cyNetworkFactory.createNetwork();
+					}
 				
-				// set the name for the network
-				String networkName = getGraphName(graph);
-				network.getRow(network).set(CyNetwork.NAME, networkName);
+					// set the name for the network
+					String networkName = getGraphName(graph);
+					network.getRow(network).set(CyNetwork.NAME, networkName);
 				
-				// add DOT_network Identifier to Network Table
-				LOGGER.info("Writing DOT_network identifer to Network table...");
-				CyTable networkTable = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
-				networkTable.createColumn("DOT_network", Boolean.class, true);
-				networkTable.getRow(network.getSUID()).set("DOT_network", true);
-				LOGGER.info(
-					String.format("DOT_network identifier written. Result: %s",
-						networkTable.getRow(network.getSUID()).get("DOT_network", Boolean.class)
-					)
-				);
+					// add DOT_network Identifier to Network Table
+					LOGGER.info("Writing DOT_network identifer to Network table...");
+					CyTable networkTable = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
+					networkTable.createColumn("DOT_network", Boolean.class, true);
+					networkTable.getRow(network.getSUID()).set("DOT_network", true);
+					LOGGER.info(
+							String.format("DOT_network identifier written. Result: %s",
+									networkTable.getRow(network.getSUID()).get("DOT_network", Boolean.class)
+									)
+							);
 	
-				// import nodes
-				ArrayList<Node> nodeList = graph.getNodes(true);
-				for (Node node : nodeList) {
-					importNode(node, network);
-				}
+					// import nodes
+					ArrayList<Node> nodeList = graph.getNodes(true);
+					for (Node node : nodeList) {
+						if(!cancelled){
+							importNode(node, network);
+						}else{
+							return;
+						}
+					}
 				
-				// import edges
-				ArrayList<Edge> edgeList = graph.getEdges();
-				for(Edge edge : edgeList) {
-					importEdge(edge, network);
-				}
+					// import edges
+					ArrayList<Edge> edgeList = graph.getEdges();
+					for(Edge edge : edgeList) {
+						if(!cancelled){
+							importEdge(edge, network);
+						}else{
+							return;
+						}
+					}
 				
-				//at the end of each graph iteration, add the created CyNetwork into the CyNetworks array
-				networks[networkCounter++] = network;
+					//at the end of each graph iteration, add the created CyNetwork into the CyNetworks array
+					networks[networkCounter++] = network;
 				
-				//add the graph and the created CyNetwork based on that graph into the graphMap hashmap
-				graphMap.put(graph, network);
+					//add the graph and the created CyNetwork based on that graph into the graphMap hashmap
+					graphMap.put(graph, network);
 								
+				}else{
+					return;
+				}
+				
+				this.networks = networks;
+				LOGGER.finest("CyNetwork objects successfully created");
+				FILE_HANDLER_MGR.closeFileHandler(handler);
+				LOGGER.removeHandler(handler);
+				handler = null;
 			}
-			this.networks = networks;
-			LOGGER.finest("CyNetwork objects successfully created");
-			FILE_HANDLER_MGR.closeFileHandler(handler);
-			LOGGER.removeHandler(handler);
-			handler = null;
 		}
 		catch(ParseException e){
 			//avoid compiling error
@@ -210,6 +226,14 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			LOGGER.removeHandler(handler);
 			handler = null;
 		}
+	}
+	
+	/**
+	 * Causes the task to stop execution.
+	 */
+	@Override
+	public void cancel() {
+		cancelled = true;
 	}
 	
 	/**
