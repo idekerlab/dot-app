@@ -117,6 +117,7 @@ public class NodeReader extends Reader{
 			//reset the usedFillColor boolean for each node
 			usedFillColor = false;
 
+			String styleVal = null;
 			// for each bypass attribute
 			for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
 				String attrKey = attrEntry.getKey();
@@ -132,7 +133,8 @@ public class NodeReader extends Reader{
 					continue;
 				}
 				if (attrKey.equals("style")) {
-					setStyle(attrVal, elementView);
+					// Save style value so we can call setStyle later when nodeShape dependency is guaranteed
+					styleVal = attrVal;
 					continue;
 				}
 				if (attrKey.equals("color") || attrKey.equals("fillcolor")
@@ -168,6 +170,10 @@ public class NodeReader extends Reader{
 				LOGGER.info("Updating Visual Style...");
 				LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
 				elementView.setLockedValue(vizProp, val);
+			}
+			// set style if it was declared
+			if(styleVal != null) {
+				setStyle(styleVal, elementView);
 			}
 		}
 	}
@@ -281,6 +287,10 @@ public class NodeReader extends Reader{
 		if( attrVal.contains("invis") ) {
 			vizStyle.setDefaultValue(NODE_VISIBLE, false);
 		}
+		// if node is not filled
+		if(!attrVal.contains("filled")) {
+			vizStyle.setDefaultValue(NODE_TRANSPARENCY, 0);
+		}
 	}
 
 	/**
@@ -319,6 +329,10 @@ public class NodeReader extends Reader{
 		// check if invisible is enabled
 		if( attrVal.contains("invis") ) {
 			elementView.setLockedValue(NODE_VISIBLE, false);
+		}
+		// if node is not filled
+		if(!attrVal.contains("filled")) {
+			elementView.setLockedValue(NODE_TRANSPARENCY, 0);
 		}
 	}
 

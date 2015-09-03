@@ -189,9 +189,10 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 					ArrayList<Node> nodeList = graph.getNodes(true);
 					monitor.setStatusMessage("Importing nodes...");
 					for (Node node : nodeList) {
-						if(!cancelled){
+						if(!cancelled) {
 							importNode(node, network);
-						}else{
+						}
+						else {
 							return;
 						}
 					}
@@ -201,26 +202,32 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 					ArrayList<Edge> edgeList = graph.getEdges();
 					monitor.setStatusMessage("Importing edges...");
 					for(Edge edge : edgeList) {
-						if(!cancelled){
+						if(!cancelled) {
 							importEdge(edge, network);
-						}else{
+						}
+						else {
 							return;
 						}
 					}
+					
+					LOGGER.info("All elements imported");
 				
 					//at the end of each graph iteration, add the created CyNetwork into the CyNetworks array
 					networks[networkCounter++] = network;
+					LOGGER.info("Network added to array");
 				
 					//add the graph and the created CyNetwork based on that graph into the graphMap hashmap
 					graphMap.put(graph, network);
-								
-				}else{
+					LOGGER.info("Graph added to map");
+				}
+				else {
+					// cancel if needed
 					return;
 				}
 				
 				monitor.setProgress(1.0);
 				this.networks = networks;
-				LOGGER.finest("CyNetwork objects successfully created");
+				LOGGER.info("CyNetwork objects successfully created");
 				FILE_HANDLER_MGR.closeFileHandler(handler);
 				LOGGER.removeHandler(handler);
 				handler = null;
@@ -241,6 +248,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	@Override
 	public void cancel() {
 		cancelled = true;
+		super.cancel();
 	}
 	
 	/**
