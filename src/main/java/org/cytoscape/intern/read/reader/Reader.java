@@ -237,13 +237,11 @@ public abstract class Reader {
 		color = color.toLowerCase();
 
 		// if color is a list-- will support later. For now, take first color  TODO
-		if(color.contains(";") || color.contains(":")) {
+		if(color.contains(":")) {
 			
-			int colonIndex = color.indexOf(':');
-			int semicolonIndex = color.indexOf(';');
-			int firstIndex = (colonIndex > semicolonIndex) ? semicolonIndex : colonIndex;
-			
-			color = color.substring(0, firstIndex);
+			String[] weightedColors = color.split(":");
+			String weightedFirstColor = weightedColors[0];
+			color = weightedFirstColor.split(";")[0];
 		}
 
 		//Regex patterns for DOT color strings
