@@ -1,0 +1,32 @@
+Graphviz import/export in Cytoscape
+
+Plugin that allows Cytoscape to import and export Graphviz .dot or .gv files through the import/export network menus. Can export graphs with visual information, or only with node and edge declarations.
+
+Directions
+
+To import a network, navigate to File->Import->Network->File, or click the "Import Network from File" button on the toolbar <INSERT IMAGE>
+
+To export a network
+With visual information (like colors, node locations, labels etc.):
+	Navigate to File->Export->Network and View
+	or click <INSERT IMAGE>
+Without visual information:
+	Navigate to File->Export->Network and View
+
+
+We are unable to support the import/export of the following features
+
+Import
+* Subgraphs
+* Any HTML
+* Colorlists and gradient (coming soon)
+
+Export
+* Custom graphics
+* Edge bends
+* Arrowhead colors
+* Some edge line types, arrow shapes, and node shapes
+* Annotations
+* Node group data
+
+<LINK THIS>Detailed document of conversion losses

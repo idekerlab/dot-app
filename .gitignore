@@ -3,3 +3,6 @@
 log*
 /.classpath
 /src/test/resources/expected_dot_files/*
+src/main/resources/svg_colors.txt~
+src/main/resources/x11_colors.txt~
+store_description.txt~
