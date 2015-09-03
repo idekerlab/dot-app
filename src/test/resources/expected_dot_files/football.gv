@@ -6,732 +6,732 @@ esep = "0"
 pad = "2"
 node [label = "",penwidth = "4.000000",height = "0.694444",width = "0.694444",tooltip = "",color = "#000000FF",fillcolor = "#0099FFFF",shape = "ellipse",style = "solid,filled",fontname = "Bitstream Vera Sans Bold",fontsize = "14",fontcolor = "#FFFF00FF",fixedsize = "true",labelloc = "c"]
 edge [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#9999FFFF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",style = "solid",dir = "both"]
-Buffalo [label = "Buffalo",height = "0.625000",width = "0.625000",pos = "883.000000,-341.000000",fontsize = "12"]
-Washington [label = "Washington",height = "0.625000",width = "0.625000",pos = "275.000000,-108.000000",fontsize = "12"]
-SouthCarolina [label = "SouthCarolina",height = "0.625000",width = "0.625000",pos = "518.000000,-714.000000",fontsize = "12"]
-OregonState [label = "OregonState",height = "0.486111",width = "0.486111",pos = "58.000000,-61.000000",fontsize = "8"]
-Tulane [label = "Tulane",height = "0.625000",width = "0.625000",pos = "403.000000,-673.000000",fontsize = "12"]
-BowlingGreenState [label = "BowlingGreenState",height = "0.625000",width = "0.625000",pos = "833.000000,-193.000000",fontsize = "12"]
-LouisianaMonroe [label = "LouisianaMonroe",height = "0.208333",width = "0.208333",pos = "439.000000,-619.000000",fontsize = "6"]
-Ohio [label = "Ohio",height = "0.486111",width = "0.486111",pos = "672.000000,-207.000000",fontsize = "8"]
-AirForce [label = "AirForce",height = "0.486111",width = "0.486111",pos = "267.000000,-377.000000",fontsize = "8"]
-LouisianaTech [label = "LouisianaTech",height = "0.486111",width = "0.486111",pos = "458.000000,-429.000000",fontsize = "8"]
-MiddleTennesseeState [label = "MiddleTennesseeState",height = "0.347222",width = "0.347222",pos = "518.000000,-575.000000",fontsize = "7"]
-WestVirginia [label = "WestVirginia",height = "0.625000",width = "0.625000",pos = "609.000000,-410.000000",fontsize = "12"]
-Colorado [label = "Colorado",height = "0.625000",width = "0.625000",pos = "131.000000,-300.000000",fontsize = "12"]
-Kansas [label = "Kansas",height = "0.486111",width = "0.486111",pos = "140.000000,-529.000000",fontsize = "8"]
-Marshall [label = "Marshall",height = "0.486111",width = "0.486111",pos = "869.000000,-233.000000",fontsize = "8"]
-NorthCarolinaState [label = "NorthCarolinaState",height = "0.625000",width = "0.625000",pos = "577.000000,-586.000000",fontsize = "12"]
-Clemson [label = "Clemson",height = "0.486111",width = "0.486111",pos = "652.000000,-692.000000",fontsize = "8"]
-BoiseState [label = "BoiseState",height = "0.347222",width = "0.347222",pos = "218.000000,-457.000000",fontsize = "7"]
-Missouri [label = "Missouri",height = "0.486111",width = "0.486111",pos = "359.000000,-455.000000",fontsize = "8"]
-Pittsburgh [label = "Pittsburgh",height = "0.625000",width = "0.625000",pos = "810.000000,-293.000000",fontsize = "12"]
-BrighamYoung [label = "BrighamYoung",height = "0.763889",width = "0.763889",pos = "319.000000,-489.000000",fontsize = "13"]
-Rice [label = "Rice",height = "0.625000",width = "0.625000",pos = "268.000000,-295.000000",fontsize = "12"]
-Mississippi [label = "Mississippi",height = "0.625000",width = "0.625000",pos = "285.000000,-735.000000",fontsize = "12"]
-WesternMichigan [label = "WesternMichigan",height = "0.486111",width = "0.486111",pos = "722.000000,-211.000000",fontsize = "8"]
-Kent [label = "Kent",height = "0.486111",width = "0.486111",pos = "819.000000,-146.000000",fontsize = "8"]
-California [label = "California",height = "0.625000",width = "0.625000",pos = "149.000000,-32.000000",fontsize = "12"]
-ColoradoState [label = "ColoradoState",height = "0.486111",width = "0.486111",pos = "34.000000,-318.000000",fontsize = "8"]
-TexasTech [label = "TexasTech",height = "0.763889",width = "0.763889",pos = "0.000000,-532.000000",fontsize = "13"]
-Akron [label = "Akron",height = "0.625000",width = "0.625000",pos = "845.000000,-347.000000",fontsize = "12"]
-TexasChristian [label = "TexasChristian",height = "0.625000",width = "0.625000",pos = "370.000000,-291.000000",fontsize = "12"]
-Navy [label = "Navy",height = "0.625000",width = "0.625000",pos = "586.000000,-471.000000",fontsize = "12"]
-ArizonaState [label = "ArizonaState",height = "0.625000",width = "0.625000",pos = "40.000000,-113.000000",fontsize = "12"]
-NewMexico [label = "NewMexico",height = "0.625000",width = "0.625000",pos = "51.000000,-365.000000",fontsize = "12"]
-ArkansasState [label = "ArkansasState",height = "0.486111",width = "0.486111",pos = "254.000000,-551.000000",fontsize = "8"]
-Northwestern [label = "Northwestern",height = "0.625000",width = "0.625000",pos = "621.000000,-265.000000",fontsize = "12"]
-Rutgers [label = "Rutgers",height = "0.486111",width = "0.486111",pos = "741.000000,-311.000000",fontsize = "8"]
-FloridaState [label = "FloridaState",height = "0.763889",width = "0.763889",pos = "639.000000,-617.000000",fontsize = "13"]
-Vanderbilt [label = "Vanderbilt",height = "0.625000",width = "0.625000",pos = "593.000000,-705.000000",fontsize = "12"]
-SouthernCalifornia [label = "SouthernCalifornia",height = "0.763889",width = "0.763889",pos = "261.000000,-35.000000",fontsize = "13"]
-NorthernIllinois [label = "NorthernIllinois",height = "0.486111",width = "0.486111",pos = "737.000000,-429.000000",fontsize = "8"]
-Toledo [label = "Toledo",height = "0.347222",width = "0.347222",pos = "769.000000,-264.000000",fontsize = "7"]
-Oregon [label = "Oregon",height = "0.625000",width = "0.625000",pos = "211.000000,-44.000000",fontsize = "12"]
-Stanford [label = "Stanford",height = "0.625000",width = "0.625000",pos = "135.000000,-142.000000",fontsize = "12"]
-Utah [label = "Utah",height = "0.625000",width = "0.625000",pos = "76.000000,-251.000000",fontsize = "12"]
-Connecticut [label = "Connecticut",pos = "790.000000,-563.000000"]
-Texas [label = "Texas",height = "0.625000",width = "0.625000",pos = "88.000000,-471.000000",fontsize = "12"]
-Georgia [label = "Georgia",height = "0.486111",width = "0.486111",pos = "454.000000,-836.000000",fontsize = "8"]
-EasternMichigan [label = "EasternMichigan",height = "0.625000",width = "0.625000",pos = "777.000000,-443.000000",fontsize = "12"]
-SouthernMethodist [label = "SouthernMethodist",height = "0.763889",width = "0.763889",pos = "322.000000,-404.000000",fontsize = "13"]
-Oklahoma [label = "Oklahoma",height = "0.625000",width = "0.625000",pos = "32.000000,-462.000000",fontsize = "12"]
-Syracuse [label = "Syracuse",height = "0.625000",width = "0.625000",pos = "676.000000,-459.000000",fontsize = "12"]
-Cincinnati [label = "Cincinnati",height = "0.625000",width = "0.625000",pos = "489.000000,-526.000000",fontsize = "12"]
-Temple [label = "Temple",height = "0.625000",width = "0.625000",pos = "845.000000,-413.000000",fontsize = "12"]
-PennState [label = "PennState",height = "0.763889",width = "0.763889",pos = "571.000000,-132.000000",fontsize = "13"]
-VirginiaTech [label = "VirginiaTech",height = "0.625000",width = "0.625000",pos = "811.000000,-490.000000",fontsize = "12"]
-Maryland [label = "Maryland",height = "0.625000",width = "0.625000",pos = "792.000000,-628.000000",fontsize = "12"]
-Hawaii [label = "Hawaii",height = "0.625000",width = "0.625000",pos = "295.000000,-233.000000",fontsize = "12"]
-WashingtonState [label = "WashingtonState",height = "0.625000",width = "0.625000",pos = "84.000000,-148.000000",fontsize = "12"]
-OhioState [label = "OhioState",height = "0.625000",width = "0.625000",pos = "483.000000,-55.000000",fontsize = "12"]
-SouthernMississippi [label = "SouthernMississippi",height = "0.486111",width = "0.486111",pos = "343.000000,-775.000000",fontsize = "8"]
-Wyoming [label = "Wyoming",height = "0.625000",width = "0.625000",pos = "242.000000,-400.000000",fontsize = "12"]
-Memphis [label = "Memphis",height = "0.625000",width = "0.625000",pos = "397.000000,-762.000000",fontsize = "12"]
-Illinois [label = "Illinois",height = "0.625000",width = "0.625000",pos = "407.000000,-205.000000",fontsize = "12"]
-Kentucky [label = "Kentucky",height = "0.486111",width = "0.486111",pos = "487.000000,-750.000000",fontsize = "8"]
-"TexasA&M" [label = "TexasA&M",height = "0.625000",width = "0.625000",pos = "111.000000,-368.000000",fontsize = "12"]
-NorthTexas [label = "NorthTexas",height = "0.486111",width = "0.486111",pos = "69.000000,-567.000000",fontsize = "8"]
-Houston [label = "Houston",height = "0.625000",width = "0.625000",pos = "318.000000,-627.000000",fontsize = "12"]
-NotreDame [label = "NotreDame",height = "0.625000",width = "0.625000",pos = "425.000000,-257.000000",fontsize = "12"]
-TexasElPaso [label = "TexasElPaso",height = "0.625000",width = "0.625000",pos = "172.000000,-303.000000",fontsize = "12"]
-Florida [label = "Florida",height = "0.625000",width = "0.625000",pos = "586.000000,-803.000000",fontsize = "12"]
-CentralFlorida [label = "CentralFlorida",height = "0.208333",width = "0.208333",pos = "661.000000,-554.000000",fontsize = "6"]
-Louisville [label = "Louisville",height = "0.486111",width = "0.486111",pos = "549.000000,-757.000000",fontsize = "8"]
-Wisconsin [label = "Wisconsin",height = "0.763889",width = "0.763889",pos = "489.000000,-164.000000",fontsize = "13"]
-NewMexicoState [label = "NewMexicoState",height = "0.625000",width = "0.625000",pos = "236.000000,-578.000000",fontsize = "12"]
-FresnoState [label = "FresnoState",height = "0.625000",width = "0.625000",pos = "307.000000,-135.000000",fontsize = "12"]
-MiamiOhio [label = "MiamiOhio",height = "0.625000",width = "0.625000",pos = "695.000000,-337.000000",fontsize = "12"]
-Army [label = "Army",height = "0.625000",width = "0.625000",pos = "448.000000,-577.000000",fontsize = "12"]
-Iowa [label = "Iowa",height = "0.763889",width = "0.763889",pos = "447.000000,-192.000000",fontsize = "13"]
-LouisianaState [label = "LouisianaState",height = "0.486111",width = "0.486111",pos = "365.000000,-876.000000",fontsize = "8"]
-GeorgiaTech [label = "GeorgiaTech",height = "0.625000",width = "0.625000",pos = "717.000000,-734.000000",fontsize = "12"]
-Auburn [label = "Auburn",height = "0.625000",width = "0.625000",pos = "463.000000,-659.000000",fontsize = "12"]
-CentralMichigan [label = "CentralMichigan",height = "0.625000",width = "0.625000",pos = "573.000000,-309.000000",fontsize = "12"]
-Tulsa [label = "Tulsa",height = "0.763889",width = "0.763889",pos = "373.000000,-360.000000",fontsize = "13"]
-WakeForest [label = "WakeForest",height = "0.486111",width = "0.486111",pos = "786.000000,-699.000000",fontsize = "8"]
-Arkansas [label = "Arkansas",height = "0.486111",width = "0.486111",pos = "290.000000,-788.000000",fontsize = "8"]
-KansasState [label = "KansasState",height = "0.763889",width = "0.763889",pos = "269.000000,-452.000000",fontsize = "13"]
-MichiganState [label = "MichiganState",height = "0.625000",width = "0.625000",pos = "585.000000,-184.000000",fontsize = "12"]
-Duke [label = "Duke",height = "0.625000",width = "0.625000",pos = "756.000000,-591.000000",fontsize = "12"]
-Michigan [label = "Michigan",height = "0.625000",width = "0.625000",pos = "522.000000,-114.000000",fontsize = "12"]
-UtahState [label = "UtahState",height = "0.347222",width = "0.347222",pos = "41.000000,-416.000000",fontsize = "7"]
-Nebraska [label = "Nebraska",height = "0.625000",width = "0.625000",pos = "181.000000,-345.000000",fontsize = "12"]
-BallState [label = "BallState",height = "0.486111",width = "0.486111",pos = "641.000000,-468.000000",fontsize = "8"]
-LouisianaLafayette [label = "LouisianaLafayette",height = "0.208333",width = "0.208333",pos = "240.000000,-627.000000",fontsize = "6"]
-NorthCarolina [label = "NorthCarolina",height = "0.625000",width = "0.625000",pos = "727.000000,-502.000000",fontsize = "12"]
-SanDiegoState [label = "SanDiegoState",height = "0.625000",width = "0.625000",pos = "130.000000,-232.000000",fontsize = "12"]
-OklahomaState [label = "OklahomaState",height = "0.486111",width = "0.486111",pos = "169.000000,-543.000000",fontsize = "8"]
-Virginia [label = "Virginia",height = "0.486111",width = "0.486111",pos = "669.000000,-645.000000",fontsize = "8"]
-MiamiFlorida [label = "MiamiFlorida",height = "0.486111",width = "0.486111",pos = "620.000000,-317.000000",fontsize = "8"]
-Baylor [label = "Baylor",height = "0.486111",width = "0.486111",pos = "163.000000,-434.000000",fontsize = "8"]
-IowaState [label = "IowaState",height = "0.625000",width = "0.625000",pos = "315.000000,-333.000000",fontsize = "12"]
-MississippiState [label = "MississippiState",height = "0.625000",width = "0.625000",pos = "397.000000,-801.000000",fontsize = "12"]
-Alabama [label = "Alabama",height = "0.625000",width = "0.625000",pos = "378.000000,-618.000000",fontsize = "12"]
-Tennessee [label = "Tennessee",height = "0.625000",width = "0.625000",pos = "457.000000,-882.000000",fontsize = "12"]
-SanJoseState [label = "SanJoseState",height = "0.625000",width = "0.625000",pos = "221.000000,-165.000000",fontsize = "12"]
-UCLA [label = "UCLA",height = "0.625000",width = "0.625000",pos = "255.000000,-200.000000",fontsize = "12"]
-AlabamaBirmingham [label = "AlabamaBirmingham",height = "0.486111",width = "0.486111",pos = "347.000000,-719.000000",fontsize = "8"]
-EastCarolina [label = "EastCarolina",height = "0.625000",width = "0.625000",pos = "566.000000,-659.000000",fontsize = "12"]
-NevadaLasVegas [label = "NevadaLasVegas",height = "0.763889",width = "0.763889",pos = "118.000000,-437.000000",fontsize = "13"]
-Purdue [label = "Purdue",height = "0.625000",width = "0.625000",pos = "622.000000,-104.000000",fontsize = "12"]
-Idaho [label = "Idaho",height = "0.347222",width = "0.347222",pos = "237.000000,-332.000000",fontsize = "7"]
-Arizona [label = "Arizona",height = "0.625000",width = "0.625000",pos = "173.000000,-0.000000",fontsize = "12"]
-Minnesota [label = "Minnesota",height = "0.625000",width = "0.625000",pos = "470.000000,-287.000000",fontsize = "12"]
-Indiana [label = "Indiana",height = "0.625000",width = "0.625000",pos = "535.000000,-359.000000",fontsize = "12"]
-BostonCollege [label = "BostonCollege",height = "0.625000",width = "0.625000",pos = "684.000000,-396.000000",fontsize = "12"]
-Nevada [label = "Nevada",height = "0.763889",width = "0.763889",pos = "173.000000,-214.000000",fontsize = "13"]
-California -- UCLA 
-Washington -- Arizona 
-Wisconsin -- Northwestern 
-Army -- Memphis 
-SouthernMississippi -- Houston 
-Pittsburgh -- Syracuse 
-"TexasA&M" -- Baylor 
-Arizona -- SouthernCalifornia 
-OklahomaState -- Tulsa 
-WashingtonState -- SouthernCalifornia 
-Minnesota -- Wisconsin 
-Tulsa -- Nevada 
-CentralFlorida -- Alabama 
-Louisville -- EastCarolina 
-IowaState -- Ohio 
-WesternMichigan -- NorthernIllinois 
-OregonState -- Stanford 
-Minnesota -- LouisianaMonroe 
-SouthCarolina -- MississippiState 
-Mississippi -- ArkansasState 
-SouthCarolina -- Vanderbilt 
-WashingtonState -- Utah 
-LouisianaLafayette -- LouisianaTech 
-Virginia -- BrighamYoung 
-LouisianaTech -- KansasState 
-Memphis -- Houston 
-Missouri -- KansasState 
-Indiana -- Cincinnati 
-LouisianaMonroe -- CentralFlorida 
-Rutgers -- Navy 
-Arkansas -- Tennessee 
-IowaState -- Baylor 
-NewMexicoState -- NewMexico 
-TexasChristian -- TexasElPaso 
-AirForce -- SanDiegoState 
-Maryland -- Temple 
-Utah -- BrighamYoung 
-LouisianaLafayette -- NorthTexas 
-NorthTexas -- TexasTech 
-Indiana -- Kentucky 
-NorthTexas -- KansasState 
-Rutgers -- Pittsburgh 
-Cincinnati -- Tulane 
-EasternMichigan -- BallState 
-WakeForest -- Vanderbilt 
-FloridaState -- BrighamYoung 
-Maryland -- Duke 
-Minnesota -- Baylor 
-Rice -- Michigan 
-MississippiState -- BrighamYoung 
-Buffalo -- NorthernIllinois 
-Louisville -- Kentucky 
-NotreDame -- Purdue 
-ArkansasState -- NorthTexas 
-LouisianaState -- Kentucky 
-California -- SouthernCalifornia 
-Wyoming -- BrighamYoung 
-Maryland -- NorthCarolinaState 
-Rutgers -- NotreDame 
-Arizona -- UCLA 
-OregonState -- Washington 
-Temple -- BowlingGreenState 
-Rutgers -- BostonCollege 
-Maryland -- WakeForest 
-LouisianaTech -- Auburn 
-Texas -- "TexasA&M" 
-Vanderbilt -- Florida 
-SouthernMississippi -- EastCarolina 
-PennState -- Iowa 
-TexasChristian -- SanJoseState 
-MichiganState -- Northwestern 
-TexasElPaso -- SanJoseState 
-ColoradoState -- Wyoming 
-Duke -- Virginia 
-Nebraska -- Colorado 
-NorthCarolinaState -- FloridaState 
-LouisianaState -- Auburn 
-Marshall -- MiamiOhio 
-WesternMichigan -- Iowa 
-"TexasA&M" -- TexasTech 
-Mississippi -- Kentucky 
-ColoradoState -- BrighamYoung 
-BallState -- WesternMichigan 
-Oregon -- ArizonaState 
-Mississippi -- Auburn 
-MichiganState -- Michigan 
-BoiseState -- ArkansasState 
-Tennessee -- SouthernMississippi 
-TexasChristian -- Rice 
-MichiganState -- Purdue 
-Oregon -- Nevada 
-LouisianaState -- Florida 
-Idaho -- WestVirginia 
-Idaho -- NorthTexas 
-NorthCarolinaState -- ArkansasState 
-Vanderbilt -- Auburn 
-Cincinnati -- Army 
-OhioState -- PennState 
-SouthernMississippi -- Louisville 
-Marshall -- Akron 
-Colorado -- SouthernCalifornia 
-Purdue -- CentralMichigan 
-EasternMichigan -- NorthernIllinois 
-Oklahoma -- "TexasA&M" 
-OklahomaState -- Colorado 
-Tulane -- SouthernMississippi 
-Kent -- Buffalo 
-NotreDame -- Stanford 
-Vanderbilt -- Duke 
-AirForce -- Wyoming 
-Duke -- NorthCarolinaState 
-Navy -- GeorgiaTech 
-Clemson -- NorthCarolinaState 
-Stanford -- SanJoseState 
-Ohio -- BowlingGreenState 
-"TexasA&M" -- KansasState 
-Maryland -- Clemson 
-SouthernMethodist -- NorthCarolinaState 
-MississippiState -- MiddleTennesseeState 
-Hawaii -- Tulsa 
-Clemson -- GeorgiaTech 
-OhioState -- Purdue 
-California -- OregonState 
-Toledo -- Navy 
-OklahomaState -- Texas 
-Wyoming -- SanDiegoState 
-LouisianaState -- MississippiState 
-MiamiFlorida -- Pittsburgh 
-OklahomaState -- Oklahoma 
-Oregon -- Wisconsin 
-WashingtonState -- Stanford 
-MississippiState -- Florida 
-Toledo -- BowlingGreenState 
-Oklahoma -- Baylor 
-OklahomaState -- Baylor 
-Ohio -- CentralMichigan 
-SouthCarolina -- Florida 
-LouisianaTech -- PennState 
-Oregon -- UCLA 
-IowaState -- Iowa 
-Maryland -- GeorgiaTech 
-GeorgiaTech -- FloridaState 
-Ohio -- Minnesota 
-"TexasA&M" -- Colorado 
-Georgia -- NewMexicoState 
-"TexasA&M" -- Wyoming 
-SouthCarolina -- Alabama 
-CentralFlorida -- Akron 
-Missouri -- Kansas 
-Oregon -- Arizona 
-OregonState -- Oregon 
-TexasElPaso -- SouthernMethodist 
-Cincinnati -- Syracuse 
-Temple -- WestVirginia 
-Mississippi -- Vanderbilt 
-WashingtonState -- Oregon 
-EasternMichigan -- WesternMichigan 
-Texas -- Kansas 
-Marshall -- Kent 
-NevadaLasVegas -- Nevada 
-Stanford -- UCLA 
-Michigan -- Wisconsin 
-ColoradoState -- Utah 
-Memphis -- EastCarolina 
-Tulane -- Navy 
-EasternMichigan -- CentralFlorida 
-UtahState -- NorthTexas 
-OklahomaState -- TexasTech 
-California -- WashingtonState 
-Pittsburgh -- BostonCollege 
-Tennessee -- Florida 
-Pittsburgh -- BowlingGreenState 
-Oregon -- Idaho 
-SouthernCalifornia -- PennState 
-Army -- Houston 
-Syracuse -- Buffalo 
-SouthCarolina -- NewMexicoState 
-Buffalo -- BallState 
-OregonState -- NewMexico 
-UtahState -- ArkansasState 
-TexasElPaso -- "TexasA&M" 
-CentralMichigan -- NorthernIllinois 
-Idaho -- BoiseState 
-Louisville -- Connecticut 
-LouisianaMonroe -- LouisianaTech 
-GeorgiaTech -- NorthCarolinaState 
-Stanford -- ArizonaState 
-GeorgiaTech -- Virginia 
-Tennessee -- SouthCarolina 
-Army -- Louisville 
-Ohio -- MiamiOhio 
-Clemson -- Duke 
-Indiana -- NorthCarolinaState 
-CentralMichigan -- Akron 
-Kent -- Akron 
-MichiganState -- Marshall 
-AirForce -- Navy 
-Rutgers -- Buffalo 
-Hawaii -- TexasElPaso 
-Georgia -- Auburn 
-MississippiState -- Auburn 
-AirForce -- ColoradoState 
-SouthernMethodist -- Rice 
-TexasChristian -- Nevada 
-Clemson -- FloridaState 
-NorthCarolina -- Duke 
-SanJoseState -- SouthernMethodist 
-Georgia -- SouthCarolina 
-Maryland -- NorthCarolina 
-Nebraska -- TexasTech 
-Cincinnati -- Louisville 
-Cincinnati -- MiamiOhio 
-OhioState -- Michigan 
-Arkansas -- Auburn 
-MichiganState -- OhioState 
-Tennessee -- Alabama 
-SanJoseState -- FresnoState 
-Missouri -- MichiganState 
-NevadaLasVegas -- Wyoming 
-SanDiegoState -- ArizonaState 
-Kent -- WesternMichigan 
-MiamiOhio -- EasternMichigan 
-MiamiFlorida -- Temple 
-Missouri -- Nebraska 
-Pittsburgh -- PennState 
-Texas -- Baylor 
-Alabama -- Auburn 
-WashingtonState -- Washington 
-OregonState -- SouthernCalifornia 
-UCLA -- Alabama 
-Memphis -- ArkansasState 
-Texas -- Stanford 
-Arizona -- SanDiegoState 
-SouthernMethodist -- Kansas 
-NewMexicoState -- ArkansasState 
-Oklahoma -- TexasTech 
-SanJoseState -- Nevada 
-EasternMichigan -- CentralMichigan 
-NewMexicoState -- Idaho 
-Hawaii -- SouthernMethodist 
-Florida -- BallState 
-Temple -- EasternMichigan 
-Minnesota -- Northwestern 
-BostonCollege -- VirginiaTech 
-Oklahoma -- ArkansasState 
-TexasChristian -- FresnoState 
-MiamiFlorida -- Rutgers 
-MiamiOhio -- OhioState 
-TexasElPaso -- NewMexicoState 
-NorthCarolina -- Pittsburgh 
-Oklahoma -- Nebraska 
-Washington -- UCLA 
-Army -- NewMexicoState 
-Clemson -- Virginia 
-NevadaLasVegas -- AirForce 
-Duke -- GeorgiaTech 
-Virginia -- FloridaState 
-SouthernMethodist -- Houston 
-UtahState -- TexasTech 
-Marshall -- Buffalo 
-Tulane -- Houston 
-Temple -- Pittsburgh 
-Duke -- FloridaState 
-California -- Oregon 
-Tennessee -- LouisianaMonroe 
-IowaState -- KansasState 
-Arkansas -- SouthCarolina 
-Marshall -- Ohio 
-Cincinnati -- Wisconsin 
-ArizonaState -- SouthernCalifornia 
-Cincinnati -- Houston 
-Nevada -- Wyoming 
-OklahomaState -- Missouri 
-Army -- Navy 
-Minnesota -- Iowa 
-Georgia -- Vanderbilt 
-Army -- BostonCollege 
-Arkansas -- Mississippi 
-Illinois -- MiddleTennesseeState 
-AlabamaBirmingham -- Memphis 
-Buffalo -- Akron 
-CentralFlorida -- NorthernIllinois 
-Arkansas -- BoiseState 
-Vanderbilt -- Kentucky 
-Ohio -- Kent 
-Kent -- BowlingGreenState 
-Oklahoma -- KansasState 
-TexasTech -- KansasState 
-Toledo -- EasternMichigan 
-EasternMichigan -- BowlingGreenState 
-Nebraska -- Baylor 
-EastCarolina -- VirginiaTech 
-LouisianaState -- Alabama 
-TexasTech -- NewMexico 
-CentralMichigan -- BoiseState 
-Pittsburgh -- Kent 
-Illinois -- Michigan 
-TexasChristian -- SouthernMethodist 
-NorthCarolina -- GeorgiaTech 
-Army -- EastCarolina 
-AirForce -- BrighamYoung 
-LouisianaState -- Mississippi 
-MississippiState -- Kentucky 
-Nebraska -- IowaState 
-LouisianaLafayette -- LouisianaMonroe 
-MiamiFlorida -- Washington 
-Stanford -- Arizona 
-NorthCarolina -- FloridaState 
-Marshall -- NorthCarolina 
-Baylor -- TexasTech 
-OregonState -- UCLA 
-NewMexico -- BrighamYoung 
-Connecticut -- BostonCollege 
-Colorado -- KansasState 
-OregonState -- SanDiegoState 
-MiddleTennesseeState -- LouisianaMonroe 
-Nebraska -- SanJoseState 
-MiamiFlorida -- WestVirginia 
-Florida -- Auburn 
-Tulsa -- SouthernMethodist 
-TexasChristian -- Tulsa 
-MiamiOhio -- Kent 
-Arizona -- ArizonaState 
-MiamiFlorida -- VirginiaTech 
-Maryland -- WestVirginia 
-LouisianaState -- Houston 
-Temple -- VirginiaTech 
-Indiana -- Iowa 
-OhioState -- Arizona 
-Illinois -- OhioState 
-Tulane -- SouthernMethodist 
-Rutgers -- VirginiaTech 
-Tennessee -- Vanderbilt 
-Hawaii -- Nevada 
-Nevada -- ColoradoState 
-IowaState -- Colorado 
-TexasChristian -- Navy 
-Hawaii -- Rice 
-Illinois -- Iowa 
-AirForce -- Utah 
-Michigan -- UCLA 
-Hawaii -- TexasChristian 
-NorthTexas -- Baylor 
-"TexasA&M" -- IowaState 
-LouisianaState -- Tennessee 
-UCLA -- SouthernCalifornia 
-OklahomaState -- SouthernMississippi 
-Nevada -- FresnoState 
-NevadaLasVegas -- ColoradoState 
-MiddleTennesseeState -- Florida 
-LouisianaLafayette -- Tulane 
-Rice -- FresnoState 
-MiamiOhio -- BowlingGreenState 
-AirForce -- NewMexico 
-MiamiFlorida -- LouisianaTech 
-OhioState -- Iowa 
-Vanderbilt -- Alabama 
-Oklahoma -- Rice 
-NotreDame -- SouthernCalifornia 
-Maryland -- FloridaState 
-Georgia -- Mississippi 
-Wyoming -- NewMexico 
-WakeForest -- Duke 
-MiamiOhio -- Buffalo 
-Rutgers -- Syracuse 
-Houston -- EastCarolina 
-Kansas -- TexasTech 
-Clemson -- SouthCarolina 
-WashingtonState -- Arizona 
-Connecticut -- Buffalo 
-Nevada -- SouthernMethodist 
-Washington -- ArizonaState 
-Indiana -- PennState 
-Syracuse -- BrighamYoung 
-CentralMichigan -- Wyoming 
-Tulsa -- Rice 
-California -- Illinois 
-Rutgers -- Temple 
-OregonState -- WashingtonState 
-Toledo -- PennState 
-Mississippi -- MississippiState 
-WashingtonState -- ArizonaState 
-Hawaii -- FresnoState 
-Oklahoma -- Kansas 
-EasternMichigan -- Connecticut 
-NevadaLasVegas -- IowaState 
-Temple -- BostonCollege 
-Auburn -- NorthernIllinois 
-Wisconsin -- Iowa 
-Pittsburgh -- WestVirginia 
-Arkansas -- Alabama 
-BoiseState -- NewMexico 
-Ohio -- Akron 
-Kansas -- Colorado 
-IowaState -- Kansas 
-AlabamaBirmingham -- Kansas 
-SanDiegoState -- NewMexico 
-Stanford -- Washington 
-UCLA -- ArizonaState 
-SouthCarolina -- Kentucky 
-NevadaLasVegas -- SanDiegoState 
-Tennessee -- Kentucky 
-NotreDame -- WestVirginia 
-SouthernMississippi -- Alabama 
-Indiana -- Wisconsin 
-Duke -- EastCarolina 
-Georgia -- Kentucky 
-UtahState -- Idaho 
-Marshall -- WesternMichigan 
-Memphis -- LouisianaMonroe 
-MiddleTennesseeState -- Connecticut 
-MichiganState -- Illinois 
-Virginia -- NorthCarolinaState 
-AlabamaBirmingham -- SouthernMississippi 
-Texas -- Oklahoma 
-CentralFlorida -- VirginiaTech 
-Washington -- Idaho 
-TexasElPaso -- Nevada 
-Idaho -- ArkansasState 
-VirginiaTech -- Akron 
-LouisianaLafayette -- MiddleTennesseeState 
-Oregon -- Washington 
-California -- Washington 
-Utah -- Arizona 
-NevadaLasVegas -- Mississippi 
-LouisianaTech -- CentralFlorida 
-Texas -- Colorado 
-Northwestern -- NorthernIllinois 
-Louisville -- Houston 
-Marshall -- Toledo 
-UtahState -- NewMexicoState 
-WakeForest -- NorthCarolina 
-Syracuse -- WestVirginia 
-Rice -- Houston 
-Temple -- Syracuse 
-Nebraska -- Iowa 
-AlabamaBirmingham -- MiddleTennesseeState 
-Georgia -- Tennessee 
-BallState -- NorthernIllinois 
-Maryland -- MiddleTennesseeState 
-Texas -- TexasTech 
-Syracuse -- VirginiaTech 
-WakeForest -- Navy 
-CentralMichigan -- BallState 
-TexasElPaso -- FresnoState 
-Hawaii -- NevadaLasVegas 
-Toledo -- BallState 
-Nebraska -- Kansas 
-Tulane -- Louisville 
-Michigan -- PennState 
-AlabamaBirmingham -- LouisianaState 
-Ohio -- Buffalo 
-OklahomaState -- "TexasA&M" 
-NorthCarolina -- Tulsa 
-Hawaii -- Wisconsin 
-WestVirginia -- BostonCollege 
-BallState -- KansasState 
-GeorgiaTech -- CentralFlorida 
-Marshall -- BowlingGreenState 
-Oregon -- SouthernCalifornia 
-Mississippi -- Tulane 
-WashingtonState -- Idaho 
-AlabamaBirmingham -- LouisianaLafayette 
-MiamiOhio -- BallState 
-California -- Stanford 
-MiamiFlorida -- Syracuse 
-Illinois -- SanDiegoState 
-Illinois -- Minnesota 
-AirForce -- NotreDame 
-Cincinnati -- Memphis 
-Florida -- FloridaState 
-NewMexicoState -- NorthTexas 
-SouthCarolina -- EasternMichigan 
-NorthCarolina -- Virginia 
-Texas -- LouisianaLafayette 
-Stanford -- SouthernCalifornia 
-OregonState -- Arizona 
-Minnesota -- Purdue 
-WestVirginia -- VirginiaTech 
-Navy -- Temple 
-EastCarolina -- WestVirginia 
-Akron -- NorthernIllinois 
-Tulsa -- SanJoseState 
-NewMexicoState -- BoiseState 
-NotreDame -- Navy 
-ColoradoState -- Colorado 
-Minnesota -- PennState 
-SanJoseState -- Rice 
-LouisianaLafayette -- TexasTech 
-Toledo -- NorthernIllinois 
-EastCarolina -- Syracuse 
-Washington -- Colorado 
-Arkansas -- Georgia 
-NevadaLasVegas -- NorthTexas 
-Ohio -- WesternMichigan 
-UtahState -- ArizonaState 
-Vanderbilt -- MiamiOhio 
-Memphis -- MississippiState 
-Connecticut -- Akron 
-Kansas -- KansasState 
-TexasChristian -- ArkansasState 
-Minnesota -- OhioState 
-California -- FresnoState 
-Michigan -- BowlingGreenState 
-Connecticut -- BallState 
-Louisville -- FloridaState 
-UtahState -- BoiseState 
-Georgia -- GeorgiaTech 
-Auburn -- Wyoming 
-OhioState -- FresnoState 
-Maryland -- Virginia 
-Purdue -- Wisconsin 
-TexasElPaso -- Rice 
-Michigan -- Northwestern 
-Nebraska -- KansasState 
-Army -- Tulane 
-Texas -- Houston 
-Illinois -- Northwestern 
-Oklahoma -- TexasElPaso 
-ColoradoState -- ArizonaState 
-AirForce -- Army 
-Cincinnati -- SouthernMississippi 
-SouthernMethodist -- FresnoState 
-NorthCarolina -- NorthCarolinaState 
-MichiganState -- NotreDame 
-Kent -- Purdue 
-MiamiOhio -- Akron 
-WashingtonState -- BoiseState 
-Georgia -- Florida 
-Syracuse -- BostonCollege 
-MiddleTennesseeState -- LouisianaTech 
-Nevada -- Rice 
-KansasState -- Iowa 
-Hawaii -- LouisianaTech 
-UtahState -- Utah 
-Kentucky -- Florida 
-MiamiFlorida -- FloridaState 
-California -- Utah 
-Wisconsin -- WesternMichigan 
-Clemson -- Missouri 
-AlabamaBirmingham -- Army 
-Kent -- CentralMichigan 
-Hawaii -- SanJoseState 
-UtahState -- BrighamYoung 
-Arkansas -- LouisianaState 
-Arkansas -- LouisianaMonroe 
-Navy -- BostonCollege 
-Tulsa -- FresnoState 
-Purdue -- Northwestern 
-Clemson -- NorthCarolina 
-Indiana -- Minnesota 
-Pittsburgh -- VirginiaTech 
-FresnoState -- UCLA 
-California -- ArizonaState 
-NotreDame -- Nebraska 
-NevadaLasVegas -- BrighamYoung 
-MiamiFlorida -- BostonCollege 
-MichiganState -- Wisconsin 
-Tulsa -- LouisianaTech 
-MississippiState -- Alabama 
-Utah -- SanDiegoState 
-MichiganState -- Iowa 
-WakeForest -- FloridaState 
-Rutgers -- WestVirginia 
-NotreDame -- "TexasA&M" 
-Tulane -- EastCarolina 
-WakeForest -- GeorgiaTech 
-Purdue -- Michigan 
-CentralMichigan -- WesternMichigan 
-SouthernMississippi -- Memphis 
-Missouri -- IowaState 
-AlabamaBirmingham -- Louisville 
-WakeForest -- Clemson 
-AlabamaBirmingham -- EastCarolina 
-SanDiegoState -- BrighamYoung 
-Toledo -- WesternMichigan 
-Purdue -- PennState 
-Missouri -- Colorado 
-WakeForest -- NorthCarolinaState 
-Tulsa -- NewMexicoState 
-ColoradoState -- SanDiegoState 
-Tulane -- Memphis 
-NevadaLasVegas -- NewMexico 
-Arkansas -- MississippiState 
-Northwestern -- Iowa 
-AlabamaBirmingham -- Cincinnati 
-BowlingGreenState -- Akron 
-WakeForest -- Virginia 
-Indiana -- Northwestern 
-Indiana -- Illinois 
-Indiana -- Purdue 
-BoiseState -- NorthTexas 
-OhioState -- Wisconsin 
-Toledo -- CentralMichigan 
-TexasChristian -- Northwestern 
-OklahomaState -- IowaState 
-SanJoseState -- SouthernCalifornia 
-MichiganState -- PennState 
-Utah -- NewMexico 
-ColoradoState -- NewMexico 
-Missouri -- Baylor 
-Utah -- Wyoming 
-Missouri -- Texas 
-Buffalo -- BowlingGreenState 
-NotreDame -- BostonCollege 
-Tulsa -- TexasElPaso 
-NevadaLasVegas -- Utah 
-Illinois -- PennState 
-Mississippi -- Alabama 
-Duke -- Northwestern 
-Indiana -- Michigan 
-Virginia -- VirginiaTech 
-Tennessee -- Memphis 
+"MississippiState§265" [label = "MississippiState",height = "0.625000",width = "0.625000",pos = "397.000000,-801.000000",fontsize = "12"]
+"AirForce§293" [label = "AirForce",height = "0.486111",width = "0.486111",pos = "267.000000,-377.000000",fontsize = "8"]
+"Stanford§277" [label = "Stanford",height = "0.625000",width = "0.625000",pos = "135.000000,-142.000000",fontsize = "12"]
+"OregonState§308" [label = "OregonState",height = "0.486111",width = "0.486111",pos = "58.000000,-61.000000",fontsize = "8"]
+"Colorado§240" [label = "Colorado",height = "0.625000",width = "0.625000",pos = "131.000000,-300.000000",fontsize = "12"]
+"Army§291" [label = "Army",height = "0.625000",width = "0.625000",pos = "448.000000,-577.000000",fontsize = "12"]
+"Duke§245" [label = "Duke",height = "0.625000",width = "0.625000",pos = "756.000000,-591.000000",fontsize = "12"]
+"ArizonaState§208" [label = "ArizonaState",height = "0.625000",width = "0.625000",pos = "40.000000,-113.000000",fontsize = "12"]
+"WashingtonState§278" [label = "WashingtonState",height = "0.625000",width = "0.625000",pos = "84.000000,-148.000000",fontsize = "12"]
+"OklahomaState§307" [label = "OklahomaState",height = "0.486111",width = "0.486111",pos = "169.000000,-543.000000",fontsize = "8"]
+"Kansas§252" [label = "Kansas",height = "0.486111",width = "0.486111",pos = "140.000000,-529.000000",fontsize = "8"]
+"MiamiFlorida§301" [label = "MiamiFlorida",height = "0.486111",width = "0.486111",pos = "620.000000,-317.000000",fontsize = "8"]
+"Ohio§271" [label = "Ohio",height = "0.486111",width = "0.486111",pos = "672.000000,-207.000000",fontsize = "8"]
+"Tulane§286" [label = "Tulane",height = "0.625000",width = "0.625000",pos = "403.000000,-673.000000",fontsize = "12"]
+"Idaho§250" [label = "Idaho",height = "0.347222",width = "0.347222",pos = "237.000000,-332.000000",fontsize = "7"]
+"Rice§249" [label = "Rice",height = "0.625000",width = "0.625000",pos = "268.000000,-295.000000",fontsize = "12"]
+"KansasState§203" [label = "KansasState",height = "0.763889",width = "0.763889",pos = "269.000000,-452.000000",fontsize = "13"]
+"California§311" [label = "California",height = "0.625000",width = "0.625000",pos = "149.000000,-32.000000",fontsize = "12"]
+"FloridaState§201" [label = "FloridaState",height = "0.763889",width = "0.763889",pos = "639.000000,-617.000000",fontsize = "13"]
+"EasternMichigan§243" [label = "EasternMichigan",height = "0.625000",width = "0.625000",pos = "777.000000,-443.000000",fontsize = "12"]
+"Vanderbilt§262" [label = "Vanderbilt",height = "0.625000",width = "0.625000",pos = "593.000000,-705.000000",fontsize = "12"]
+"SanDiegoState§209" [label = "SanDiegoState",height = "0.625000",width = "0.625000",pos = "130.000000,-232.000000",fontsize = "12"]
+"Connecticut§242" [label = "Connecticut",pos = "790.000000,-563.000000"]
+"NorthTexas§211" [label = "NorthTexas",height = "0.486111",width = "0.486111",pos = "69.000000,-567.000000",fontsize = "8"]
+"Georgia§295" [label = "Georgia",height = "0.486111",width = "0.486111",pos = "454.000000,-836.000000",fontsize = "8"]
+"Texas§298" [label = "Texas",height = "0.625000",width = "0.625000",pos = "88.000000,-471.000000",fontsize = "12"]
+"Washington§251" [label = "Washington",height = "0.625000",width = "0.625000",pos = "275.000000,-108.000000",fontsize = "12"]
+"Toledo§285" [label = "Toledo",height = "0.347222",width = "0.347222",pos = "769.000000,-264.000000",fontsize = "7"]
+"NewMexico§204" [label = "NewMexico",height = "0.625000",width = "0.625000",pos = "51.000000,-365.000000",fontsize = "12"]
+"GeorgiaTech§237" [label = "GeorgiaTech",height = "0.625000",width = "0.625000",pos = "717.000000,-734.000000",fontsize = "12"]
+"Kentucky§256" [label = "Kentucky",height = "0.486111",width = "0.486111",pos = "487.000000,-750.000000",fontsize = "8"]
+"SouthCarolina§270" [label = "SouthCarolina",height = "0.625000",width = "0.625000",pos = "518.000000,-714.000000",fontsize = "12"]
+"WakeForest§305" [label = "WakeForest",height = "0.486111",width = "0.486111",pos = "786.000000,-699.000000",fontsize = "8"]
+"Iowa§202" [label = "Iowa",height = "0.763889",width = "0.763889",pos = "447.000000,-192.000000",fontsize = "13"]
+"Marshall§299" [label = "Marshall",height = "0.486111",width = "0.486111",pos = "869.000000,-233.000000",fontsize = "8"]
+"Auburn§217" [label = "Auburn",height = "0.625000",width = "0.625000",pos = "463.000000,-659.000000",fontsize = "12"]
+"Indiana§306" [label = "Indiana",height = "0.625000",width = "0.625000",pos = "535.000000,-359.000000",fontsize = "12"]
+"CentralMichigan§238" [label = "CentralMichigan",height = "0.625000",width = "0.625000",pos = "573.000000,-309.000000",fontsize = "12"]
+"AlabamaBirmingham§312" [label = "AlabamaBirmingham",height = "0.486111",width = "0.486111",pos = "347.000000,-719.000000",fontsize = "8"]
+"WestVirginia§230" [label = "WestVirginia",height = "0.625000",width = "0.625000",pos = "609.000000,-410.000000",fontsize = "12"]
+"TexasElPaso§283" [label = "TexasElPaso",height = "0.625000",width = "0.625000",pos = "172.000000,-303.000000",fontsize = "12"]
+"Cincinnati§292" [label = "Cincinnati",height = "0.625000",width = "0.625000",pos = "489.000000,-526.000000",fontsize = "12"]
+"CentralFlorida§236" [label = "CentralFlorida",height = "0.208333",width = "0.208333",pos = "661.000000,-554.000000",fontsize = "6"]
+"Hawaii§314" [label = "Hawaii",height = "0.625000",width = "0.625000",pos = "295.000000,-233.000000",fontsize = "12"]
+"Oregon§268" [label = "Oregon",height = "0.625000",width = "0.625000",pos = "211.000000,-44.000000",fontsize = "12"]
+"Navy§280" [label = "Navy",height = "0.625000",width = "0.625000",pos = "586.000000,-471.000000",fontsize = "12"]
+"LouisianaState§296" [label = "LouisianaState",height = "0.486111",width = "0.486111",pos = "365.000000,-876.000000",fontsize = "8"]
+"ArkansasState§224" [label = "ArkansasState",height = "0.486111",width = "0.486111",pos = "254.000000,-551.000000",fontsize = "8"]
+"Illinois§264" [label = "Illinois",height = "0.625000",width = "0.625000",pos = "407.000000,-205.000000",fontsize = "12"]
+"SanJoseState§273" [label = "SanJoseState",height = "0.625000",width = "0.625000",pos = "221.000000,-165.000000",fontsize = "12"]
+"Wyoming§216" [label = "Wyoming",height = "0.625000",width = "0.625000",pos = "242.000000,-400.000000",fontsize = "12"]
+"Temple§279" [label = "Temple",height = "0.625000",width = "0.625000",pos = "845.000000,-413.000000",fontsize = "12"]
+"Arkansas§313" [label = "Arkansas",height = "0.486111",width = "0.486111",pos = "290.000000,-788.000000",fontsize = "8"]
+"BostonCollege§229" [label = "BostonCollege",height = "0.625000",width = "0.625000",pos = "684.000000,-396.000000",fontsize = "12"]
+"Akron§218" [label = "Akron",height = "0.625000",width = "0.625000",pos = "845.000000,-347.000000",fontsize = "12"]
+"BoiseState§228" [label = "BoiseState",height = "0.347222",width = "0.347222",pos = "218.000000,-457.000000",fontsize = "7"]
+"UtahState§290" [label = "UtahState",height = "0.347222",width = "0.347222",pos = "41.000000,-416.000000",fontsize = "7"]
+"Baylor§210" [label = "Baylor",height = "0.486111",width = "0.486111",pos = "163.000000,-434.000000",fontsize = "8"]
+"EastCarolina§244" [label = "EastCarolina",height = "0.625000",width = "0.625000",pos = "566.000000,-659.000000",fontsize = "12"]
+"Louisville§257" [label = "Louisville",height = "0.486111",width = "0.486111",pos = "549.000000,-757.000000",fontsize = "8"]
+"BowlingGreenState§231" [label = "BowlingGreenState",height = "0.625000",width = "0.625000",pos = "833.000000,-193.000000",fontsize = "12"]
+"Nevada§267" [label = "Nevada",height = "0.763889",width = "0.763889",pos = "173.000000,-214.000000",fontsize = "13"]
+"Pittsburgh§255" [label = "Pittsburgh",height = "0.625000",width = "0.625000",pos = "810.000000,-293.000000",fontsize = "12"]
+"Oklahoma§284" [label = "Oklahoma",height = "0.625000",width = "0.625000",pos = "32.000000,-462.000000",fontsize = "12"]
+"WesternMichigan§214" [label = "WesternMichigan",height = "0.486111",width = "0.486111",pos = "722.000000,-211.000000",fontsize = "8"]
+"Virginia§233" [label = "Virginia",height = "0.486111",width = "0.486111",pos = "669.000000,-645.000000",fontsize = "8"]
+"OhioState§247" [label = "OhioState",height = "0.625000",width = "0.625000",pos = "483.000000,-55.000000",fontsize = "12"]
+"Wisconsin§215" [label = "Wisconsin",height = "0.763889",width = "0.763889",pos = "489.000000,-164.000000",fontsize = "13"]
+"Syracuse§235" [label = "Syracuse",height = "0.625000",width = "0.625000",pos = "676.000000,-459.000000",fontsize = "12"]
+"Minnesota§260" [label = "Minnesota",height = "0.625000",width = "0.625000",pos = "470.000000,-287.000000",fontsize = "12"]
+"Houston§248" [label = "Houston",height = "0.625000",width = "0.625000",pos = "318.000000,-627.000000",fontsize = "12"]
+"LouisianaMonroe§259" [label = "LouisianaMonroe",height = "0.208333",width = "0.208333",pos = "439.000000,-619.000000",fontsize = "6"]
+"TexasA&M§281" [label = "TexasA&M",height = "0.625000",width = "0.625000",pos = "111.000000,-368.000000",fontsize = "12"]
+"BrighamYoung§200" [label = "BrighamYoung",height = "0.763889",width = "0.763889",pos = "319.000000,-489.000000",fontsize = "13"]
+"Utah§223" [label = "Utah",height = "0.625000",width = "0.625000",pos = "76.000000,-251.000000",fontsize = "12"]
+"Nebraska§274" [label = "Nebraska",height = "0.625000",width = "0.625000",pos = "181.000000,-345.000000",fontsize = "12"]
+"UCLA§221" [label = "UCLA",height = "0.625000",width = "0.625000",pos = "255.000000,-200.000000",fontsize = "12"]
+"NorthCarolinaState§225" [label = "NorthCarolinaState",height = "0.625000",width = "0.625000",pos = "577.000000,-586.000000",fontsize = "12"]
+"Mississippi§287" [label = "Mississippi",height = "0.625000",width = "0.625000",pos = "285.000000,-735.000000",fontsize = "12"]
+"ColoradoState§241" [label = "ColoradoState",height = "0.486111",width = "0.486111",pos = "34.000000,-318.000000",fontsize = "8"]
+"NewMexicoState§269" [label = "NewMexicoState",height = "0.625000",width = "0.625000",pos = "236.000000,-578.000000",fontsize = "12"]
+"NorthCarolina§289" [label = "NorthCarolina",height = "0.625000",width = "0.625000",pos = "727.000000,-502.000000",fontsize = "12"]
+"NevadaLasVegas§304" [label = "NevadaLasVegas",height = "0.763889",width = "0.763889",pos = "118.000000,-437.000000",fontsize = "13"]
+"Rutgers§294" [label = "Rutgers",height = "0.486111",width = "0.486111",pos = "741.000000,-311.000000",fontsize = "8"]
+"Clemson§303" [label = "Clemson",height = "0.486111",width = "0.486111",pos = "652.000000,-692.000000",fontsize = "8"]
+"MichiganState§300" [label = "MichiganState",height = "0.625000",width = "0.625000",pos = "585.000000,-184.000000",fontsize = "12"]
+"Northwestern§213" [label = "Northwestern",height = "0.625000",width = "0.625000",pos = "621.000000,-265.000000",fontsize = "12"]
+"Buffalo§234" [label = "Buffalo",height = "0.625000",width = "0.625000",pos = "883.000000,-341.000000",fontsize = "12"]
+"SouthernMississippi§275" [label = "SouthernMississippi",height = "0.486111",width = "0.486111",pos = "343.000000,-775.000000",fontsize = "8"]
+"TexasChristian§310" [label = "TexasChristian",height = "0.625000",width = "0.625000",pos = "370.000000,-291.000000",fontsize = "12"]
+"Michigan§232" [label = "Michigan",height = "0.625000",width = "0.625000",pos = "522.000000,-114.000000",fontsize = "12"]
+"Missouri§302" [label = "Missouri",height = "0.486111",width = "0.486111",pos = "359.000000,-455.000000",fontsize = "8"]
+"IowaState§272" [label = "IowaState",height = "0.625000",width = "0.625000",pos = "315.000000,-333.000000",fontsize = "12"]
+"Purdue§239" [label = "Purdue",height = "0.625000",width = "0.625000",pos = "622.000000,-104.000000",fontsize = "12"]
+"LouisianaTech§258" [label = "LouisianaTech",height = "0.486111",width = "0.486111",pos = "458.000000,-429.000000",fontsize = "8"]
+"MiddleTennesseeState§263" [label = "MiddleTennesseeState",height = "0.347222",width = "0.347222",pos = "518.000000,-575.000000",fontsize = "7"]
+"NotreDame§282" [label = "NotreDame",height = "0.625000",width = "0.625000",pos = "425.000000,-257.000000",fontsize = "12"]
+"TexasTech§205" [label = "TexasTech",height = "0.763889",width = "0.763889",pos = "0.000000,-532.000000",fontsize = "13"]
+"VirginiaTech§219" [label = "VirginiaTech",height = "0.625000",width = "0.625000",pos = "811.000000,-490.000000",fontsize = "12"]
+"SouthernMethodist§253" [label = "SouthernMethodist",height = "0.763889",width = "0.763889",pos = "322.000000,-404.000000",fontsize = "13"]
+"FresnoState§246" [label = "FresnoState",height = "0.625000",width = "0.625000",pos = "307.000000,-135.000000",fontsize = "12"]
+"Maryland§309" [label = "Maryland",height = "0.625000",width = "0.625000",pos = "792.000000,-628.000000",fontsize = "12"]
+"Arizona§222" [label = "Arizona",height = "0.625000",width = "0.625000",pos = "173.000000,-0.000000",fontsize = "12"]
+"Kent§254" [label = "Kent",height = "0.486111",width = "0.486111",pos = "819.000000,-146.000000",fontsize = "8"]
+"Tulsa§288" [label = "Tulsa",height = "0.763889",width = "0.763889",pos = "373.000000,-360.000000",fontsize = "13"]
+"MiamiOhio§261" [label = "MiamiOhio",height = "0.625000",width = "0.625000",pos = "695.000000,-337.000000",fontsize = "12"]
+"Memphis§266" [label = "Memphis",height = "0.625000",width = "0.625000",pos = "397.000000,-762.000000",fontsize = "12"]
+"Alabama§220" [label = "Alabama",height = "0.625000",width = "0.625000",pos = "378.000000,-618.000000",fontsize = "12"]
+"Florida§227" [label = "Florida",height = "0.625000",width = "0.625000",pos = "586.000000,-803.000000",fontsize = "12"]
+"SouthernCalifornia§207" [label = "SouthernCalifornia",height = "0.763889",width = "0.763889",pos = "261.000000,-35.000000",fontsize = "13"]
+"NorthernIllinois§212" [label = "NorthernIllinois",height = "0.486111",width = "0.486111",pos = "737.000000,-429.000000",fontsize = "8"]
+"BallState§226" [label = "BallState",height = "0.486111",width = "0.486111",pos = "641.000000,-468.000000",fontsize = "8"]
+"Tennessee§276" [label = "Tennessee",height = "0.625000",width = "0.625000",pos = "457.000000,-882.000000",fontsize = "12"]
+"LouisianaLafayette§297" [label = "LouisianaLafayette",height = "0.208333",width = "0.208333",pos = "240.000000,-627.000000",fontsize = "6"]
+"PennState§206" [label = "PennState",height = "0.763889",width = "0.763889",pos = "571.000000,-132.000000",fontsize = "13"]
+"Tulsa§288" -- "SouthernMethodist§253" 
+"WashingtonState§278" -- "Stanford§277" 
+"WakeForest§305" -- "Vanderbilt§262" 
+"PennState§206" -- "Iowa§202" 
+"Tulane§286" -- "SouthernMethodist§253" 
+"SanDiegoState§209" -- "ArizonaState§208" 
+"Stanford§277" -- "SanJoseState§273" 
+"LouisianaLafayette§297" -- "LouisianaMonroe§259" 
+"Tulane§286" -- "SouthernMississippi§275" 
+"Maryland§309" -- "Duke§245" 
+"EastCarolina§244" -- "VirginiaTech§219" 
+"Louisville§257" -- "Connecticut§242" 
+"Vanderbilt§262" -- "Duke§245" 
+"MichiganState§300" -- "Purdue§239" 
+"Michigan§232" -- "BowlingGreenState§231" 
+"OklahomaState§307" -- "Colorado§240" 
+"NevadaLasVegas§304" -- "IowaState§272" 
+"Clemson§303" -- "SouthCarolina§270" 
+"WesternMichigan§214" -- "NorthernIllinois§212" 
+"NotreDame§282" -- "Nebraska§274" 
+"NotreDame§282" -- "TexasA&M§281" 
+"BoiseState§228" -- "ArkansasState§224" 
+"Baylor§210" -- "TexasTech§205" 
+"Wisconsin§215" -- "WesternMichigan§214" 
+"Vanderbilt§262" -- "Alabama§220" 
+"Toledo§285" -- "BowlingGreenState§231" 
+"Tennessee§276" -- "Florida§227" 
+"NorthCarolina§289" -- "NorthCarolinaState§225" 
+"Marshall§299" -- "WesternMichigan§214" 
+"MiamiOhio§261" -- "BallState§226" 
+"Nevada§267" -- "FresnoState§246" 
+"Oklahoma§284" -- "TexasTech§205" 
+"Tulsa§288" -- "FresnoState§246" 
+"Stanford§277" -- "SouthernCalifornia§207" 
+"Washington§251" -- "ArizonaState§208" 
+"Marshall§299" -- "Akron§218" 
+"NorthCarolinaState§225" -- "FloridaState§201" 
+"Kent§254" -- "BowlingGreenState§231" 
+"UtahState§290" -- "Utah§223" 
+"Arizona§222" -- "SanDiegoState§209" 
+"Ohio§271" -- "CentralMichigan§238" 
+"SouthCarolina§270" -- "Vanderbilt§262" 
+"Army§291" -- "Navy§280" 
+"Utah§223" -- "SanDiegoState§209" 
+"Utah§223" -- "BrighamYoung§200" 
+"California§311" -- "FresnoState§246" 
+"MichiganState§300" -- "OhioState§247" 
+"Georgia§295" -- "Auburn§217" 
+"Temple§279" -- "BowlingGreenState§231" 
+"SouthernMississippi§275" -- "EastCarolina§244" 
+"Marshall§299" -- "Kent§254" 
+"WashingtonState§278" -- "Oregon§268" 
+"AlabamaBirmingham§312" -- "Louisville§257" 
+"AirForce§293" -- "NewMexico§204" 
+"Maryland§309" -- "Clemson§303" 
+"CentralFlorida§236" -- "VirginiaTech§219" 
+"EasternMichigan§243" -- "Connecticut§242" 
+"Missouri§302" -- "IowaState§272" 
+"ColoradoState§241" -- "SanDiegoState§209" 
+"California§311" -- "WashingtonState§278" 
+"NevadaLasVegas§304" -- "Mississippi§287" 
+"Georgia§295" -- "Tennessee§276" 
+"Georgia§295" -- "SouthCarolina§270" 
+"ColoradoState§241" -- "ArizonaState§208" 
+"Arizona§222" -- "UCLA§221" 
+"NevadaLasVegas§304" -- "NewMexico§204" 
+"Vanderbilt§262" -- "Auburn§217" 
+"California§311" -- "OregonState§308" 
+"Rutgers§294" -- "Temple§279" 
+"Hawaii§314" -- "SouthernMethodist§253" 
+"TexasTech§205" -- "NewMexico§204" 
+"Georgia§295" -- "NewMexicoState§269" 
+"Maryland§309" -- "Virginia§233" 
+"Washington§251" -- "Arizona§222" 
+"NotreDame§282" -- "Navy§280" 
+"AlabamaBirmingham§312" -- "Kansas§252" 
+"Idaho§250" -- "WestVirginia§230" 
+"NotreDame§282" -- "WestVirginia§230" 
+"UtahState§290" -- "TexasTech§205" 
+"Tennessee§276" -- "LouisianaMonroe§259" 
+"WashingtonState§278" -- "SouthernCalifornia§207" 
+"WashingtonState§278" -- "Washington§251" 
+"Indiana§306" -- "Minnesota§260" 
+"Washington§251" -- "UCLA§221" 
+"Navy§280" -- "BostonCollege§229" 
+"TexasChristian§310" -- "ArkansasState§224" 
+"ColoradoState§241" -- "Utah§223" 
+"TexasChristian§310" -- "Rice§249" 
+"AlabamaBirmingham§312" -- "LouisianaLafayette§297" 
+"Texas§298" -- "TexasTech§205" 
+"LouisianaLafayette§297" -- "LouisianaTech§258" 
+"Missouri§302" -- "Texas§298" 
+"Nebraska§274" -- "Iowa§202" 
+"SanJoseState§273" -- "SouthernCalifornia§207" 
+"Purdue§239" -- "Wisconsin§215" 
+"OregonState§308" -- "Washington§251" 
+"SouthernMississippi§275" -- "Alabama§220" 
+"Tulane§286" -- "Louisville§257" 
+"Duke§245" -- "GeorgiaTech§237" 
+"Indiana§306" -- "Wisconsin§215" 
+"OhioState§247" -- "Michigan§232" 
+"NotreDame§282" -- "Stanford§277" 
+"Arkansas§313" -- "Georgia§295" 
+"CentralMichigan§238" -- "NorthernIllinois§212" 
+"Illinois§264" -- "OhioState§247" 
+"Tulsa§288" -- "NewMexicoState§269" 
+"Arkansas§313" -- "Alabama§220" 
+"Texas§298" -- "Baylor§210" 
+"Clemson§303" -- "GeorgiaTech§237" 
+"Rutgers§294" -- "Buffalo§234" 
+"Nevada§267" -- "SouthernMethodist§253" 
+"Hawaii§314" -- "SanJoseState§273" 
+"TexasA&M§281" -- "Wyoming§216" 
+"TexasElPaso§283" -- "Rice§249" 
+"OklahomaState§307" -- "IowaState§272" 
+"OregonState§308" -- "SanDiegoState§209" 
+"Mississippi§287" -- "Auburn§217" 
+"Tulane§286" -- "EastCarolina§244" 
+"Nebraska§274" -- "Baylor§210" 
+"Temple§279" -- "BostonCollege§229" 
+"Duke§245" -- "Virginia§233" 
+"Toledo§285" -- "PennState§206" 
+"Kent§254" -- "Buffalo§234" 
+"LouisianaState§296" -- "Kentucky§256" 
+"GeorgiaTech§237" -- "CentralFlorida§236" 
+"Louisville§257" -- "EastCarolina§244" 
+"Pittsburgh§255" -- "Kent§254" 
+"SouthernMethodist§253" -- "Houston§248" 
+"California§311" -- "Washington§251" 
+"Oklahoma§284" -- "TexasA&M§281" 
+"Oregon§268" -- "Arizona§222" 
+"Maryland§309" -- "WakeForest§305" 
+"Army§291" -- "Houston§248" 
+"Syracuse§235" -- "Buffalo§234" 
+"Nebraska§274" -- "Colorado§240" 
+"Tennessee§276" -- "SouthernMississippi§275" 
+"Memphis§266" -- "MississippiState§265" 
+"ColoradoState§241" -- "NewMexico§204" 
+"Marshall§299" -- "Toledo§285" 
+"OklahomaState§307" -- "TexasA&M§281" 
+"Ohio§271" -- "Buffalo§234" 
+"Rutgers§294" -- "VirginiaTech§219" 
+"NewMexicoState§269" -- "BoiseState§228" 
+"MississippiState§265" -- "Alabama§220" 
+"SouthernMethodist§253" -- "Rice§249" 
+"Buffalo§234" -- "Akron§218" 
+"Missouri§302" -- "Nebraska§274" 
+"SanJoseState§273" -- "FresnoState§246" 
+"MiddleTennesseeState§263" -- "Connecticut§242" 
+"AirForce§293" -- "Wyoming§216" 
+"Indiana§306" -- "Illinois§264" 
+"Texas§298" -- "Colorado§240" 
+"Utah§223" -- "NewMexico§204" 
+"Rice§249" -- "FresnoState§246" 
+"TexasChristian§310" -- "Tulsa§288" 
+"EastCarolina§244" -- "WestVirginia§230" 
+"NorthCarolina§289" -- "Pittsburgh§255" 
+"Mississippi§287" -- "Vanderbilt§262" 
+"Missouri§302" -- "Kansas§252" 
+"Indiana§306" -- "Kentucky§256" 
+"NorthCarolina§289" -- "Virginia§233" 
+"Nevada§267" -- "Wyoming§216" 
+"Nebraska§274" -- "KansasState§203" 
+"TexasChristian§310" -- "Nevada§267" 
+"Stanford§277" -- "Arizona§222" 
+"Hawaii§314" -- "Tulsa§288" 
+"Florida§227" -- "BallState§226" 
+"NorthTexas§211" -- "Baylor§210" 
+"CentralMichigan§238" -- "BallState§226" 
+"Oregon§268" -- "UCLA§221" 
+"WashingtonState§278" -- "ArizonaState§208" 
+"SouthCarolina§270" -- "MississippiState§265" 
+"LouisianaMonroe§259" -- "LouisianaTech§258" 
+"LouisianaLafayette§297" -- "NorthTexas§211" 
+"MiamiFlorida§301" -- "FloridaState§201" 
+"Temple§279" -- "Syracuse§235" 
+"Texas§298" -- "Oklahoma§284" 
+"NevadaLasVegas§304" -- "Utah§223" 
+"Nevada§267" -- "ColoradoState§241" 
+"Indiana§306" -- "PennState§206" 
+"TexasA&M§281" -- "Colorado§240" 
+"Duke§245" -- "NorthCarolinaState§225" 
+"TexasChristian§310" -- "Northwestern§213" 
+"MiamiFlorida§301" -- "LouisianaTech§258" 
+"EasternMichigan§243" -- "CentralMichigan§238" 
+"UtahState§290" -- "NewMexicoState§269" 
+"OregonState§308" -- "SouthernCalifornia§207" 
+"SouthernMethodist§253" -- "Kansas§252" 
+"Oklahoma§284" -- "Baylor§210" 
+"Auburn§217" -- "Wyoming§216" 
+"Washington§251" -- "Colorado§240" 
+"LouisianaState§296" -- "Auburn§217" 
+"Wisconsin§215" -- "Northwestern§213" 
+"Army§291" -- "Louisville§257" 
+"Rutgers§294" -- "Syracuse§235" 
+"WakeForest§305" -- "GeorgiaTech§237" 
+"Louisville§257" -- "Houston§248" 
+"TexasA&M§281" -- "TexasTech§205" 
+"Oregon§268" -- "Washington§251" 
+"TexasElPaso§283" -- "Nevada§267" 
+"Georgia§295" -- "Vanderbilt§262" 
+"Connecticut§242" -- "BallState§226" 
+"MiamiOhio§261" -- "Kent§254" 
+"Illinois§264" -- "PennState§206" 
+"NewMexicoState§269" -- "ArkansasState§224" 
+"TexasChristian§310" -- "FresnoState§246" 
+"LouisianaTech§258" -- "CentralFlorida§236" 
+"Nebraska§274" -- "Kansas§252" 
+"Auburn§217" -- "NorthernIllinois§212" 
+"MiamiFlorida§301" -- "Temple§279" 
+"AlabamaBirmingham§312" -- "Memphis§266" 
+"MiamiOhio§261" -- "Akron§218" 
+"Idaho§250" -- "ArkansasState§224" 
+"Oregon§268" -- "SouthernCalifornia§207" 
+"MichiganState§300" -- "Michigan§232" 
+"OregonState§308" -- "Stanford§277" 
+"Kent§254" -- "WesternMichigan§214" 
+"Toledo§285" -- "Navy§280" 
+"Ohio§271" -- "Kent§254" 
+"Illinois§264" -- "Michigan§232" 
+"EasternMichigan§243" -- "NorthernIllinois§212" 
+"Georgia§295" -- "GeorgiaTech§237" 
+"California§311" -- "Illinois§264" 
+"MiamiFlorida§301" -- "VirginiaTech§219" 
+"OklahomaState§307" -- "Missouri§302" 
+"Hawaii§314" -- "NevadaLasVegas§304" 
+"Michigan§232" -- "Northwestern§213" 
+"OregonState§308" -- "WashingtonState§278" 
+"UCLA§221" -- "SouthernCalifornia§207" 
+"WakeForest§305" -- "Duke§245" 
+"BallState§226" -- "NorthernIllinois§212" 
+"AlabamaBirmingham§312" -- "Army§291" 
+"Michigan§232" -- "UCLA§221" 
+"OhioState§247" -- "Wisconsin§215" 
+"Minnesota§260" -- "PennState§206" 
+"AirForce§293" -- "BrighamYoung§200" 
+"LouisianaState§296" -- "Tennessee§276" 
+"NevadaLasVegas§304" -- "ColoradoState§241" 
+"NevadaLasVegas§304" -- "Wyoming§216" 
+"WakeForest§305" -- "FloridaState§201" 
+"Arkansas§313" -- "LouisianaMonroe§259" 
+"SouthernCalifornia§207" -- "PennState§206" 
+"OhioState§247" -- "Iowa§202" 
+"Minnesota§260" -- "LouisianaMonroe§259" 
+"Minnesota§260" -- "OhioState§247" 
+"Pittsburgh§255" -- "VirginiaTech§219" 
+"MississippiState§265" -- "Kentucky§256" 
+"BoiseState§228" -- "NorthTexas§211" 
+"MississippiState§265" -- "MiddleTennesseeState§263" 
+"Syracuse§235" -- "BostonCollege§229" 
+"NorthCarolina§289" -- "GeorgiaTech§237" 
+"TexasElPaso§283" -- "NewMexicoState§269" 
+"Pittsburgh§255" -- "WestVirginia§230" 
+"LouisianaState§296" -- "Houston§248" 
+"MichiganState§300" -- "Illinois§264" 
+"CentralMichigan§238" -- "WesternMichigan§214" 
+"GeorgiaTech§237" -- "FloridaState§201" 
+"EasternMichigan§243" -- "WesternMichigan§214" 
+"LouisianaLafayette§297" -- "Tulane§286" 
+"Toledo§285" -- "BallState§226" 
+"NotreDame§282" -- "Purdue§239" 
+"Rutgers§294" -- "Pittsburgh§255" 
+"Cincinnati§292" -- "MiamiOhio§261" 
+"California§311" -- "ArizonaState§208" 
+"Cincinnati§292" -- "Army§291" 
+"Army§291" -- "BostonCollege§229" 
+"IowaState§272" -- "Colorado§240" 
+"NorthTexas§211" -- "KansasState§203" 
+"CentralMichigan§238" -- "BoiseState§228" 
+"Virginia§233" -- "VirginiaTech§219" 
+"AirForce§293" -- "Army§291" 
+"Rutgers§294" -- "Navy§280" 
+"Arkansas§313" -- "MississippiState§265" 
+"SouthCarolina§270" -- "Kentucky§256" 
+"Michigan§232" -- "Wisconsin§215" 
+"TexasChristian§310" -- "SanJoseState§273" 
+"Pittsburgh§255" -- "BostonCollege§229" 
+"Oklahoma§284" -- "TexasElPaso§283" 
+"Syracuse§235" -- "BrighamYoung§200" 
+"Mississippi§287" -- "Kentucky§256" 
+"Cincinnati§292" -- "Memphis§266" 
+"BallState§226" -- "KansasState§203" 
+"NotreDame§282" -- "SouthernCalifornia§207" 
+"MichiganState§300" -- "Marshall§299" 
+"Clemson§303" -- "FloridaState§201" 
+"CentralMichigan§238" -- "Wyoming§216" 
+"Wyoming§216" -- "BrighamYoung§200" 
+"Illinois§264" -- "MiddleTennesseeState§263" 
+"UtahState§290" -- "BoiseState§228" 
+"BallState§226" -- "WesternMichigan§214" 
+"Tennessee§276" -- "Vanderbilt§262" 
+"OklahomaState§307" -- "Texas§298" 
+"NotreDame§282" -- "BostonCollege§229" 
+"TexasElPaso§283" -- "FresnoState§246" 
+"Oklahoma§284" -- "Nebraska§274" 
+"AirForce§293" -- "Navy§280" 
+"Hawaii§314" -- "TexasElPaso§283" 
+"IowaState§272" -- "KansasState§203" 
+"Ohio§271" -- "Akron§218" 
+"Toledo§285" -- "EasternMichigan§243" 
+"Tulsa§288" -- "LouisianaTech§258" 
+"Vanderbilt§262" -- "Kentucky§256" 
+"MississippiState§265" -- "BrighamYoung§200" 
+"Tennessee§276" -- "Kentucky§256" 
+"Texas§298" -- "Houston§248" 
+"Buffalo§234" -- "NorthernIllinois§212" 
+"Tulsa§288" -- "Rice§249" 
+"UtahState§290" -- "ArizonaState§208" 
+"Rice§249" -- "Houston§248" 
+"Marshall§299" -- "MiamiOhio§261" 
+"MississippiState§265" -- "Florida§227" 
+"TexasChristian§310" -- "SouthernMethodist§253" 
+"Cincinnati§292" -- "Houston§248" 
+"Wyoming§216" -- "SanDiegoState§209" 
+"Stanford§277" -- "ArizonaState§208" 
+"UtahState§290" -- "BrighamYoung§200" 
+"California§311" -- "Stanford§277" 
+"Nebraska§274" -- "IowaState§272" 
+"Memphis§266" -- "Houston§248" 
+"Indiana§306" -- "Cincinnati§292" 
+"Virginia§233" -- "BrighamYoung§200" 
+"Indiana§306" -- "Michigan§232" 
+"Maryland§309" -- "MiddleTennesseeState§263" 
+"Missouri§302" -- "MichiganState§300" 
+"Hawaii§314" -- "Nevada§267" 
+"Minnesota§260" -- "Purdue§239" 
+"Ohio§271" -- "Minnesota§260" 
+"GeorgiaTech§237" -- "NorthCarolinaState§225" 
+"SouthernMethodist§253" -- "FresnoState§246" 
+"MiamiFlorida§301" -- "WestVirginia§230" 
+"AirForce§293" -- "NotreDame§282" 
+"NevadaLasVegas§304" -- "AirForce§293" 
+"Oklahoma§284" -- "KansasState§203" 
+"Cincinnati§292" -- "Louisville§257" 
+"AirForce§293" -- "SanDiegoState§209" 
+"UCLA§221" -- "Alabama§220" 
+"Connecticut§242" -- "Akron§218" 
+"NevadaLasVegas§304" -- "NorthTexas§211" 
+"Oregon§268" -- "ArizonaState§208" 
+"Purdue§239" -- "Northwestern§213" 
+"LouisianaTech§258" -- "Auburn§217" 
+"Vanderbilt§262" -- "MiamiOhio§261" 
+"Georgia§295" -- "Mississippi§287" 
+"Utah§223" -- "Arizona§222" 
+"Hawaii§314" -- "LouisianaTech§258" 
+"ArkansasState§224" -- "NorthTexas§211" 
+"WakeForest§305" -- "Clemson§303" 
+"TexasElPaso§283" -- "SanJoseState§273" 
+"NorthTexas§211" -- "TexasTech§205" 
+"Georgia§295" -- "Florida§227" 
+"WakeForest§305" -- "Navy§280" 
+"SanJoseState§273" -- "Nevada§267" 
+"Mississippi§287" -- "Alabama§220" 
+"Marshall§299" -- "NorthCarolina§289" 
+"Tulane§286" -- "Houston§248" 
+"Army§291" -- "EastCarolina§244" 
+"OklahomaState§307" -- "TexasTech§205" 
+"OregonState§308" -- "NewMexico§204" 
+"Hawaii§314" -- "TexasChristian§310" 
+"BostonCollege§229" -- "VirginiaTech§219" 
+"Illinois§264" -- "SanDiegoState§209" 
+"Army§291" -- "NewMexicoState§269" 
+"Oregon§268" -- "Idaho§250" 
+"Ohio§271" -- "WesternMichigan§214" 
+"MichiganState§300" -- "Iowa§202" 
+"OhioState§247" -- "PennState§206" 
+"SouthernMethodist§253" -- "NorthCarolinaState§225" 
+"Tulsa§288" -- "TexasElPaso§283" 
+"Arizona§222" -- "ArizonaState§208" 
+"Minnesota§260" -- "Northwestern§213" 
+"Maryland§309" -- "GeorgiaTech§237" 
+"IowaState§272" -- "Baylor§210" 
+"OregonState§308" -- "Oregon§268" 
+"Pittsburgh§255" -- "Syracuse§235" 
+"Illinois§264" -- "Iowa§202" 
+"Marshall§299" -- "BowlingGreenState§231" 
+"KansasState§203" -- "Iowa§202" 
+"NorthCarolina§289" -- "Duke§245" 
+"FloridaState§201" -- "BrighamYoung§200" 
+"WakeForest§305" -- "NorthCarolina§289" 
+"MiddleTennesseeState§263" -- "Florida§227" 
+"OklahomaState§307" -- "Oklahoma§284" 
+"Temple§279" -- "WestVirginia§230" 
+"OhioState§247" -- "FresnoState§246" 
+"SanJoseState§273" -- "SouthernMethodist§253" 
+"WestVirginia§230" -- "VirginiaTech§219" 
+"NewMexicoState§269" -- "NorthTexas§211" 
+"Arkansas§313" -- "SouthCarolina§270" 
+"OklahomaState§307" -- "SouthernMississippi§275" 
+"Clemson§303" -- "NorthCarolinaState§225" 
+"WashingtonState§278" -- "Arizona§222" 
+"MiamiOhio§261" -- "Buffalo§234" 
+"LouisianaState§296" -- "Florida§227" 
+"MiddleTennesseeState§263" -- "LouisianaTech§258" 
+"Rutgers§294" -- "WestVirginia§230" 
+"California§311" -- "Utah§223" 
+"Wyoming§216" -- "NewMexico§204" 
+"TexasA&M§281" -- "KansasState§203" 
+"CentralFlorida§236" -- "Alabama§220" 
+"Clemson§303" -- "Duke§245" 
+"Vanderbilt§262" -- "Florida§227" 
+"Tulsa§288" -- "SanJoseState§273" 
+"NewMexico§204" -- "BrighamYoung§200" 
+"MiamiOhio§261" -- "EasternMichigan§243" 
+"ArizonaState§208" -- "SouthernCalifornia§207" 
+"Kentucky§256" -- "Florida§227" 
+"Louisville§257" -- "FloridaState§201" 
+"Cincinnati§292" -- "Wisconsin§215" 
+"CentralFlorida§236" -- "NorthernIllinois§212" 
+"Akron§218" -- "NorthernIllinois§212" 
+"MiamiFlorida§301" -- "Syracuse§235" 
+"California§311" -- "Oregon§268" 
+"LouisianaMonroe§259" -- "CentralFlorida§236" 
+"Army§291" -- "Memphis§266" 
+"Cincinnati§292" -- "Syracuse§235" 
+"California§311" -- "UCLA§221" 
+"Colorado§240" -- "SouthernCalifornia§207" 
+"OhioState§247" -- "Arizona§222" 
+"NevadaLasVegas§304" -- "Nevada§267" 
+"Pittsburgh§255" -- "BowlingGreenState§231" 
+"Clemson§303" -- "Missouri§302" 
+"Rice§249" -- "Michigan§232" 
+"MiddleTennesseeState§263" -- "LouisianaMonroe§259" 
+"Nevada§267" -- "Rice§249" 
+"MiamiOhio§261" -- "OhioState§247" 
+"Memphis§266" -- "EastCarolina§244" 
+"TexasChristian§310" -- "Navy§280" 
+"Illinois§264" -- "Northwestern§213" 
+"SouthernMississippi§275" -- "Houston§248" 
+"WesternMichigan§214" -- "Iowa§202" 
+"Buffalo§234" -- "BowlingGreenState§231" 
+"Minnesota§260" -- "Baylor§210" 
+"Missouri§302" -- "Colorado§240" 
+"Buffalo§234" -- "BallState§226" 
+"Mississippi§287" -- "MississippiState§265" 
+"Kent§254" -- "Akron§218" 
+"Tennessee§276" -- "SouthCarolina§270" 
+"Kent§254" -- "Purdue§239" 
+"NevadaLasVegas§304" -- "BrighamYoung§200" 
+"Indiana§306" -- "Iowa§202" 
+"Marshall§299" -- "Buffalo§234" 
+"Georgia§295" -- "Kentucky§256" 
+"MiamiFlorida§301" -- "Washington§251" 
+"Clemson§303" -- "NorthCarolina§289" 
+"UCLA§221" -- "ArizonaState§208" 
+"LouisianaState§296" -- "MississippiState§265" 
+"Maryland§309" -- "Temple§279" 
+"WashingtonState§278" -- "BoiseState§228" 
+"TexasA&M§281" -- "IowaState§272" 
+"SouthernMississippi§275" -- "Louisville§257" 
+"TexasChristian§310" -- "TexasElPaso§283" 
+"SanDiegoState§209" -- "BrighamYoung§200" 
+"Stanford§277" -- "UCLA§221" 
+"Indiana§306" -- "Northwestern§213" 
+"FresnoState§246" -- "UCLA§221" 
+"LouisianaTech§258" -- "PennState§206" 
+"Ohio§271" -- "BowlingGreenState§231" 
+"Hawaii§314" -- "FresnoState§246" 
+"Syracuse§235" -- "WestVirginia§230" 
+"AlabamaBirmingham§312" -- "EastCarolina§244" 
+"TexasTech§205" -- "KansasState§203" 
+"Rutgers§294" -- "BostonCollege§229" 
+"MiamiFlorida§301" -- "Rutgers§294" 
+"Oklahoma§284" -- "Kansas§252" 
+"Marshall§299" -- "Ohio§271" 
+"Cincinnati§292" -- "SouthernMississippi§275" 
+"Arizona§222" -- "SouthernCalifornia§207" 
+"MichiganState§300" -- "Northwestern§213" 
+"Toledo§285" -- "WesternMichigan§214" 
+"Maryland§309" -- "FloridaState§201" 
+"ColoradoState§241" -- "Colorado§240" 
+"TexasElPaso§283" -- "TexasA&M§281" 
+"WestVirginia§230" -- "BostonCollege§229" 
+"Utah§223" -- "Wyoming§216" 
+"ColoradoState§241" -- "Wyoming§216" 
+"BoiseState§228" -- "NewMexico§204" 
+"Kansas§252" -- "Colorado§240" 
+"OhioState§247" -- "Purdue§239" 
+"Washington§251" -- "Idaho§250" 
+"Tennessee§276" -- "Memphis§266" 
+"ColoradoState§241" -- "BrighamYoung§200" 
+"OklahomaState§307" -- "Tulsa§288" 
+"Oklahoma§284" -- "Rice§249" 
+"Arkansas§313" -- "Tennessee§276" 
+"AlabamaBirmingham§312" -- "Cincinnati§292" 
+"MichiganState§300" -- "PennState§206" 
+"Tulsa§288" -- "Nevada§267" 
+"Mississippi§287" -- "Tulane§286" 
+"WashingtonState§278" -- "Idaho§250" 
+"Duke§245" -- "FloridaState§201" 
+"LouisianaTech§258" -- "KansasState§203" 
+"Tulane§286" -- "Memphis§266" 
+"Texas§298" -- "LouisianaLafayette§297" 
+"Duke§245" -- "Northwestern§213" 
+"MichiganState§300" -- "Wisconsin§215" 
+"Clemson§303" -- "Virginia§233" 
+"GeorgiaTech§237" -- "Virginia§233" 
+"LouisianaLafayette§297" -- "MiddleTennesseeState§263" 
+"MississippiState§265" -- "Auburn§217" 
+"Temple§279" -- "VirginiaTech§219" 
+"Army§291" -- "Tulane§286" 
+"TexasA&M§281" -- "Baylor§210" 
+"Maryland§309" -- "NorthCarolinaState§225" 
+"MiamiOhio§261" -- "BowlingGreenState§231" 
+"VirginiaTech§219" -- "Akron§218" 
+"MichiganState§300" -- "NotreDame§282" 
+"Michigan§232" -- "PennState§206" 
+"Toledo§285" -- "NorthernIllinois§212" 
+"SouthCarolina§270" -- "Alabama§220" 
+"Navy§280" -- "GeorgiaTech§237" 
+"Maryland§309" -- "NorthCarolina§289" 
+"Kansas§252" -- "TexasTech§205" 
+"Toledo§285" -- "CentralMichigan§238" 
+"Temple§279" -- "EasternMichigan§243" 
+"Arkansas§313" -- "LouisianaState§296" 
+"Wisconsin§215" -- "Iowa§202" 
+"Purdue§239" -- "Michigan§232" 
+"Virginia§233" -- "FloridaState§201" 
+"OklahomaState§307" -- "Baylor§210" 
+"Illinois§264" -- "Minnesota§260" 
+"IowaState§272" -- "Iowa§202" 
+"Arkansas§313" -- "Auburn§217" 
+"Florida§227" -- "FloridaState§201" 
+"Syracuse§235" -- "VirginiaTech§219" 
+"Stanford§277" -- "Washington§251" 
+"MiamiFlorida§301" -- "BostonCollege§229" 
+"Idaho§250" -- "BoiseState§228" 
+"SouthCarolina§270" -- "Florida§227" 
+"IowaState§272" -- "Kansas§252" 
+"Oregon§268" -- "Nevada§267" 
+"NewMexicoState§269" -- "Idaho§250" 
+"SanJoseState§273" -- "Rice§249" 
+"Idaho§250" -- "NorthTexas§211" 
+"MiamiFlorida§301" -- "Pittsburgh§255" 
+"Rutgers§294" -- "NotreDame§282" 
+"OregonState§308" -- "UCLA§221" 
+"UtahState§290" -- "NorthTexas§211" 
+"LouisianaState§296" -- "Alabama§220" 
+"Louisville§257" -- "Kentucky§256" 
+"Oregon§268" -- "Wisconsin§215" 
+"AlabamaBirmingham§312" -- "SouthernMississippi§275" 
+"EasternMichigan§243" -- "BallState§226" 
+"Indiana§306" -- "Purdue§239" 
+"Kent§254" -- "CentralMichigan§238" 
+"Ohio§271" -- "MiamiOhio§261" 
+"AlabamaBirmingham§312" -- "LouisianaState§296" 
+"Hawaii§314" -- "Rice§249" 
+"Northwestern§213" -- "NorthernIllinois§212" 
+"AlabamaBirmingham§312" -- "MiddleTennesseeState§263" 
+"AirForce§293" -- "ColoradoState§241" 
+"CentralMichigan§238" -- "Akron§218" 
+"Arkansas§313" -- "BoiseState§228" 
+"UtahState§290" -- "ArkansasState§224" 
+"Hawaii§314" -- "Wisconsin§215" 
+"Connecticut§242" -- "BostonCollege§229" 
+"EasternMichigan§243" -- "BowlingGreenState§231" 
+"IowaState§272" -- "Ohio§271" 
+"California§311" -- "SouthernCalifornia§207" 
+"Memphis§266" -- "ArkansasState§224" 
+"CentralFlorida§236" -- "Akron§218" 
+"Missouri§302" -- "KansasState§203" 
+"Minnesota§260" -- "Iowa§202" 
+"Navy§280" -- "Temple§279" 
+"Virginia§233" -- "NorthCarolinaState§225" 
+"WakeForest§305" -- "NorthCarolinaState§225" 
+"EastCarolina§244" -- "Syracuse§235" 
+"NewMexicoState§269" -- "NewMexico§204" 
+"Purdue§239" -- "PennState§206" 
+"Connecticut§242" -- "Buffalo§234" 
+"Purdue§239" -- "CentralMichigan§238" 
+"Memphis§266" -- "LouisianaMonroe§259" 
+"Northwestern§213" -- "Iowa§202" 
+"Texas§298" -- "Kansas§252" 
+"Arkansas§313" -- "Mississippi§287" 
+"Nebraska§274" -- "TexasTech§205" 
+"EasternMichigan§243" -- "CentralFlorida§236" 
+"SouthernMississippi§275" -- "Memphis§266" 
+"Missouri§302" -- "Baylor§210" 
+"WakeForest§305" -- "Virginia§233" 
+"LouisianaLafayette§297" -- "TexasTech§205" 
+"Oklahoma§284" -- "ArkansasState§224" 
+"Maryland§309" -- "WestVirginia§230" 
+"SanDiegoState§209" -- "NewMexico§204" 
+"Indiana§306" -- "NorthCarolinaState§225" 
+"Pittsburgh§255" -- "PennState§206" 
+"Kansas§252" -- "KansasState§203" 
+"Tennessee§276" -- "Alabama§220" 
+"Duke§245" -- "EastCarolina§244" 
+"Florida§227" -- "Auburn§217" 
+"BowlingGreenState§231" -- "Akron§218" 
+"OregonState§308" -- "Arizona§222" 
+"AirForce§293" -- "Utah§223" 
+"LouisianaState§296" -- "Mississippi§287" 
+"Texas§298" -- "Stanford§277" 
+"Colorado§240" -- "KansasState§203" 
+"NorthCarolina§289" -- "Tulsa§288" 
+"Houston§248" -- "EastCarolina§244" 
+"SouthCarolina§270" -- "EasternMichigan§243" 
+"Minnesota§260" -- "Wisconsin§215" 
+"TexasElPaso§283" -- "SouthernMethodist§253" 
+"Temple§279" -- "Pittsburgh§255" 
+"Cincinnati§292" -- "Tulane§286" 
+"UtahState§290" -- "Idaho§250" 
+"WashingtonState§278" -- "Utah§223" 
+"NorthCarolinaState§225" -- "ArkansasState§224" 
+"Tulane§286" -- "Navy§280" 
+"NorthCarolina§289" -- "FloridaState§201" 
+"Mississippi§287" -- "ArkansasState§224" 
+"NevadaLasVegas§304" -- "SanDiegoState§209" 
+"Texas§298" -- "TexasA&M§281" 
+"Nebraska§274" -- "SanJoseState§273" 
+"Alabama§220" -- "Auburn§217" 
+"SouthCarolina§270" -- "NewMexicoState§269" 
 }
