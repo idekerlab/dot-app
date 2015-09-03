@@ -3,6 +3,10 @@ package org.cytoscape.intern.read.reader;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 import java.awt.Color;
 import java.io.File;
 import java.io.BufferedReader;
@@ -10,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.FileNotFoundException;
 import java.net.URL;
+
+import org.cytoscape.intern.FileHandlerManager;
 
 /**
  * Handles mapping of String colors to Java Color objects
@@ -54,6 +60,7 @@ public class StringColor {
 						name += scanner.next() + " ";
 					}
 					name = name.trim();
+					name = name.toLowerCase();
 			
 					colors.put(name, new Color(red, green, blue));
 				}
