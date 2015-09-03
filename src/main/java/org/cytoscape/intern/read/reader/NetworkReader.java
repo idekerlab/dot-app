@@ -66,13 +66,7 @@ public class NetworkReader extends Reader{
 		//Network doesn't set bypass value with the Graph object's attributes
 		//overrides the defaults set in setDefault()
 		LOGGER.info("Setting the Bypass values for Visual Style...");
-		/*
-		 * for attribute in graph.getAttributes() 
-		 * 		Pair p = convertAttribute(name, val);
-		 * 		VP = p.left()
-		 * 		val = p.right()
-		 * 		vizStyle.setDefaultValue( VP, val);	
-		 */
+
 		String colorScheme = graph.getAttributes().get("colorscheme");
 		for (Entry<String, String> attrEntry : graph.getAttributes().entrySet()) {
 			String attrKey = attrEntry.getKey();

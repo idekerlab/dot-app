@@ -178,6 +178,7 @@ public class DotWriterTask implements CyWriter {
 	public void run(TaskMonitor taskMonitor) {
 
 		taskMonitor.setTitle("Export as GraphViz file");
+		taskMonitor.setProgress(0);
 		processUserInput();
 
 		if (networkView != null) {
@@ -196,7 +197,7 @@ public class DotWriterTask implements CyWriter {
 		taskMonitor.setStatusMessage("Writing edge declarations...");
 		writeEdges();
 
-		taskMonitor.setStatusMessage("Closing off file");
+		taskMonitor.setStatusMessage("Closing off file...");
 		// Close off file and notify if needed
 		try {
 			outputWriter.write("}");
@@ -204,7 +205,7 @@ public class DotWriterTask implements CyWriter {
 			LOGGER.info("Finished writing file");
 			if (nameModified) {
 				Notifier.showMessage(
-						"Some node names have been modified in order to comply to DOT syntax",
+						"Some names have been modified in order to comply to DOT syntax",
 						Notifier.MessageType.WARNING);
 			} else if (cancelled) {
 				Notifier.showMessage("Export cancelled. Be sure to delete the created file",
