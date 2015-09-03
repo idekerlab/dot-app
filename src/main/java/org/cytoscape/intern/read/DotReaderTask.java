@@ -138,13 +138,14 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	@Override
 	public void run(TaskMonitor monitor) {
 		LOGGER.info("Running run() function...");
-		
+		monitor.setProgress(0);
 		//Initialize the parser
 		Parser parser = new Parser();
 		
 		try {
 			
 		    LOGGER.info("Begin parsing the input...");
+		    monitor.setStatusMessage("Retrieving graph from file...");
 			parser.parse(inStreamReader);
 			
 			// Get list of graphs
@@ -172,6 +173,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 					network.getRow(network).set(CyNetwork.NAME, networkName);
 				
 					// add DOT_network Identifier to Network Table
+					monitor.setStatusMessage("Creating table columns...");
 					LOGGER.info("Writing DOT_network identifer to Network table...");
 					CyTable networkTable = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
 					CyTable edgeLocalTable = network.getTable(CyEdge.class, CyNetwork.LOCAL_ATTRS);
@@ -179,13 +181,13 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 					networkTable.createColumn("DOT_network", Boolean.class, true);
 					networkTable.getRow(network.getSUID()).set("DOT_network", true);
 					LOGGER.info(
-							String.format("DOT_network identifier written. Result: %s",
-									networkTable.getRow(network.getSUID()).get("DOT_network", Boolean.class)
-									)
-							);
+						String.format("DOT_network identifier written. Result: %s",
+							networkTable.getRow(network.getSUID()).get("DOT_network", Boolean.class))
+					);
 	
 					// import nodes
 					ArrayList<Node> nodeList = graph.getNodes(true);
+					monitor.setStatusMessage("Importing nodes...");
 					for (Node node : nodeList) {
 						if(!cancelled) {
 							importNode(node, network);
@@ -195,8 +197,10 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 						}
 					}
 				
+					monitor.setProgress(0.5);
 					// import edges
 					ArrayList<Edge> edgeList = graph.getEdges();
+					monitor.setStatusMessage("Importing edges...");
 					for(Edge edge : edgeList) {
 						if(!cancelled) {
 							importEdge(edge, network);
@@ -221,6 +225,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 					return;
 				}
 				
+				monitor.setProgress(1.0);
 				this.networks = networks;
 				LOGGER.info("CyNetwork objects successfully created");
 				FILE_HANDLER_MGR.closeFileHandler(handler);

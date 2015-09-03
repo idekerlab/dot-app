@@ -178,7 +178,7 @@ public class DotWriterTask implements CyWriter {
 	public void run(TaskMonitor taskMonitor) {
 
 		taskMonitor.setTitle("Export as GraphViz file");
-		taskMonitor.setProgress(0);
+		taskMonitor.setProgress(-1.0);
 		processUserInput();
 
 		if (networkView != null) {
