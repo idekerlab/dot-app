@@ -229,8 +229,6 @@ public abstract class Reader {
 	 */
 	protected Color convertColor(String color, String colorScheme) {
 
-		// For testing color file reading
-		StringColor strC = new StringColor("svg_colors.txt");
 		LOGGER.info("Converting DOT color string to Java Color...");
 
 		//Remove trailing/leading whitespace

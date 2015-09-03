@@ -95,9 +95,7 @@ public class EdgeReader extends Reader{
 		super(networkView, vizStyle, defaultAttrs);
 		this.elementMap = elementMap;
 		
-        //get the edgeTable and create a new column for edge weight with default value of 1
 		edgeTable = networkView.getModel().getDefaultEdgeTable();
-		edgeTable.createColumn("weight", Double.class, false, 1d);
 
 		LOGGER.info("EdgeReader constructed");
 	}

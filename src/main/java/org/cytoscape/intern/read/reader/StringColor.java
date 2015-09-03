@@ -87,10 +87,6 @@ public class StringColor {
 		return map.get(name);
 	}
 	
-	public static void main(String[] args) {
-		StringColor strColor = new StringColor("svg_colors.txt", "x11_colors.txt");
-	}
-	
 }
 
 

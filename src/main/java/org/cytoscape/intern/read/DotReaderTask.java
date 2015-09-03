@@ -174,6 +174,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 					// add DOT_network Identifier to Network Table
 					LOGGER.info("Writing DOT_network identifer to Network table...");
 					CyTable networkTable = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
+					CyTable edgeLocalTable = network.getTable(CyEdge.class, CyNetwork.LOCAL_ATTRS);
+					edgeLocalTable.createColumn("weight", Double.class, false, new Double(1.0));
 					networkTable.createColumn("DOT_network", Boolean.class, true);
 					networkTable.getRow(network.getSUID()).set("DOT_network", true);
 					LOGGER.info(
