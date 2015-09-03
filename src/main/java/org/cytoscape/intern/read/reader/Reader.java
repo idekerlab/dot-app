@@ -230,9 +230,11 @@ public abstract class Reader {
 	protected Color convertColor(String color, String colorScheme) {
 
 		LOGGER.info("Converting DOT color string to Java Color...");
+		LOGGER.info("Color string: " + color);
 
-		//Remove trailing/leading whitespace
+		// Remove trailing/leading whitespace
 		color = color.trim();
+		color = color.toLowerCase();
 
 		// if color is a list-- will support later. For now, take first color  TODO
 		if(color.contains(";") || color.contains(":")) {
