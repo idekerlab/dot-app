@@ -127,34 +127,25 @@ public abstract class Reader {
 				String.format("Converting DOT attribute: %s", attrKey)
 			);
 
-			if (attrKey.equals("style")) {
-				setStyle(attrVal, vizStyle);
-				// this attribute has been handled, move on to next one
-				continue;
-			}
-			if (attrKey.equals("color") || attrKey.equals("fillcolor")
-					|| attrKey.equals("fontcolor") || attrKey.equals("bgcolor")) {
-				switch (attrKey) {
-					case "color": {
-						setColor(attrVal, vizStyle, ColorAttribute.COLOR, colorScheme);
-						break;
-					}
-					case "fillcolor": {
-						setColor(attrVal, vizStyle, ColorAttribute.FILLCOLOR, colorScheme);
-						usedDefaultFillColor = true;
-						break;
-					}
-					case "fontcolor": {
-						setColor(attrVal, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
-						break;
-					}
-					case "bgcolor": {
-						setColor(attrVal, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
-						break;
-					}
+			// Color switch
+			switch (attrKey) {
+				case "color": {
+					setColor(attrVal, vizStyle, ColorAttribute.COLOR, colorScheme);
+					continue;
 				}
-				// this attribute has been handled, move on to next one
-				continue;
+				case "fillcolor": {
+					setColor(attrVal, vizStyle, ColorAttribute.FILLCOLOR, colorScheme);
+					usedDefaultFillColor = true;
+					continue;
+				}
+				case "fontcolor": {
+					setColor(attrVal, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
+					continue;
+				}
+				case "bgcolor": {
+					setColor(attrVal, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
+					continue;
+				}
 			}
 
 			Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
@@ -172,6 +163,12 @@ public abstract class Reader {
 			LOGGER.info("Updating Visual Style...");
 			LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
 			vizStyle.setDefaultValue(vizProp, val);
+		}
+		
+		// Set style attribute here so we handle node shape dependency
+		String styleVal = defaultAttrs.get("style");
+		if(styleVal != null) {
+			setStyle(styleVal, vizStyle);
 		}
 	}
 
@@ -229,6 +226,8 @@ public abstract class Reader {
 	 */
 	protected Color convertColor(String color, String colorScheme) {
 
+		// For testing color file reading
+		StringColor strC = new StringColor("svg_colors.txt");
 		LOGGER.info("Converting DOT color string to Java Color...");
 		LOGGER.info("Color string: " + color);
 
