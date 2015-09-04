@@ -1,2 +1,2 @@
 # dot-app
-Cytoscape application for exporting to .dot file format
+Cytoscape application for exporting/importing .dot and .gv file formats
