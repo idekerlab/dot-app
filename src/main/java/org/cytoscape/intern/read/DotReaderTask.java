@@ -242,7 +242,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			FILE_HANDLER_MGR.closeFileHandler(handler);
 			LOGGER.removeHandler(handler);
 			handler = null;
-			throw new RuntimeException("File did not comply to dot language syntax");
+			throw new RuntimeException("Sorry! File did not comply to dot language syntax");
 		}
 		catch (TokenMgrError e) {
 			//Cytoscape is able to continue running even if this error is thrown
