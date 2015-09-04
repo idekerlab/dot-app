@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import org.cytoscape.intern.FileHandlerManager;
+import org.cytoscape.intern.Notifier;
+import org.cytoscape.intern.Notifier.MessageType;
 import org.cytoscape.intern.read.reader.NetworkReader;
 import org.cytoscape.intern.read.reader.NodeReader;
 import org.cytoscape.intern.read.reader.EdgeReader;
@@ -36,6 +38,7 @@ import org.cytoscape.work.TaskMonitor;
 
 import com.alexmerz.graphviz.ParseException;
 import com.alexmerz.graphviz.Parser;
+import com.alexmerz.graphviz.TokenMgrError;
 import com.alexmerz.graphviz.objects.Edge;
 import com.alexmerz.graphviz.objects.Graph;
 import com.alexmerz.graphviz.objects.Id;
@@ -234,11 +237,21 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			}
 		}
 		catch(ParseException e){
-			//avoid compiling error
-			LOGGER.log(Level.SEVERE, "CyNetwork/CyEdge/CyNode initialization failed @ for-each loop in run()");
+			//Invalid sequence of tokens found in file
+			LOGGER.severe(e.getMessage());
 			FILE_HANDLER_MGR.closeFileHandler(handler);
 			LOGGER.removeHandler(handler);
 			handler = null;
+			throw new RuntimeException("File did not comply to dot language syntax");
+		}
+		catch (TokenMgrError e) {
+			//Cytoscape is able to continue running even if this error is thrown
+			//Invalid token found in file
+			LOGGER.severe(e.getMessage());
+			FILE_HANDLER_MGR.closeFileHandler(handler);
+			LOGGER.removeHandler(handler);
+			handler = null;
+			throw new RuntimeException("Sorry! File did not comply to dot language syntax");
 		}
 	}
 	
@@ -267,6 +280,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 				handler.setFormatter(new SimpleFormatter());
 			}
 			catch(IOException e) {
+				throw new RuntimeException("Logger encountered IO failure");
 				// to prevent compiler error
 			}
 			LOGGER.addHandler(handler);
