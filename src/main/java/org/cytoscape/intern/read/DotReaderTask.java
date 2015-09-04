@@ -13,8 +13,6 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import org.cytoscape.intern.FileHandlerManager;
-import org.cytoscape.intern.Notifier;
-import org.cytoscape.intern.Notifier.MessageType;
 import org.cytoscape.intern.read.reader.NetworkReader;
 import org.cytoscape.intern.read.reader.NodeReader;
 import org.cytoscape.intern.read.reader.EdgeReader;
