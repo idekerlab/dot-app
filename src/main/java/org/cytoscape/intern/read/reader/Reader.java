@@ -6,7 +6,6 @@ import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.SO
 
 import java.awt.Color;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,12 +21,10 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.tuple.Pair;
 import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.model.CyIdentifiable;
-import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.view.model.VisualProperty;
-import org.cytoscape.view.presentation.RenderingEngine;
 import org.cytoscape.view.presentation.RenderingEngineManager;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.vizmap.VisualStyle;
@@ -165,7 +162,7 @@ public abstract class Reader {
 			 *   NodeReader will create a passthrough mapping if label="\N"
 			 *   Every other subclass will return immediately
 			 */
-			if (attrKey.equals("style")) {
+			/*if (attrKey.equals("style")) {
 				setStyle(attrVal, vizStyle);
 				// this attribute has been handled, move on to next one
 				continue;
@@ -193,9 +190,9 @@ public abstract class Reader {
 				}
 				// this attribute has been handled, move on to next one
 				continue;
-			}
+			}*/
 
-			Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
+			Pair<VisualProperty, Object> p = convertAttribute(attrKey, attrVal);
 			// if attribute cannot be converted, move on to next one
 			if (p == null) {
 				continue;
@@ -211,7 +208,19 @@ public abstract class Reader {
 			LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
 			vizStyle.setDefaultValue(vizProp, val);
 		}
+		String styleAttribute = defaultAttrs.get("style");
+		if (styleAttribute != null) {
+			setStyle(styleAttribute, vizStyle);
+		}
+		setColorDefaults(vizStyle);
 	}
+
+
+	/**
+	 * Sets all the default values of Color VisualProperties for the VisualStyle.
+	 * Subclasses implement this method to handle the different CyIdentifiables
+	 */
+	abstract protected void setColorDefaults(VisualStyle vizStyle); 
 
 
 	/**

@@ -12,12 +12,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.intern.GradientListener;
+import org.cytoscape.intern.read.reader.EdgeReader;
 import org.cytoscape.intern.read.reader.NetworkReader;
 import org.cytoscape.intern.read.reader.NodeReader;
-import org.cytoscape.intern.read.reader.EdgeReader;
 import org.cytoscape.io.read.AbstractCyNetworkReader;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;

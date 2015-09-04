@@ -9,7 +9,6 @@ import java.util.logging.SimpleFormatter;
 
 import javax.swing.SwingUtilities;
 
-import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.intern.GradientListener;
 import org.cytoscape.io.CyFileFilter;

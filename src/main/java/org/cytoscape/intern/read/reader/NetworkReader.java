@@ -3,7 +3,7 @@ package org.cytoscape.intern.read.reader;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_BACKGROUND_PAINT;
 
 import java.awt.Color;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -121,5 +121,20 @@ public class NetworkReader extends Reader{
 	public void setProperties(){
 		LOGGER.info("NetworkReader: Setting properties for VisualStyle...");
 		super.setProperties();
+	}
+
+	@Override
+	protected void setColorDefaults(VisualStyle vizStyle) {
+		String colorAttribute = defaultAttrs.get("bgcolor");
+		if (colorAttribute != null) {
+			List<Pair<Color, Float>> colorListValues = convertColorList(colorAttribute);
+			if (colorListValues != null) {
+				Color color = colorListValues.get(0).getLeft();
+				colorAttribute = String.format("#%2x%2x%2x%2x", color.getRed(), color.getGreen(),
+						color.getBlue(), color.getAlpha());
+			}
+			setColor(colorAttribute, vizStyle, ColorAttribute.BGCOLOR);
+		}
+		
 	}
 }

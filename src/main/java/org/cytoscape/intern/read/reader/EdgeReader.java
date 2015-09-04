@@ -1,40 +1,40 @@
 package org.cytoscape.intern.read.reader;
 
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.HashMap;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LINE_TYPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TOOLTIP;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TRANSPARENCY;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_UNSELECTED_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_VISIBLE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_WIDTH;
+
 import java.awt.Color;
 import java.awt.Font;
-
-import com.alexmerz.graphviz.objects.Edge;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.RenderingEngineManager;
+import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.LineType;
-import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
-
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LINE_TYPE;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TRANSPARENCY;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_UNSELECTED_PAINT;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_WIDTH;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TOOLTIP;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_VISIBLE;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_COLOR;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_TRANSPARENCY;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE;
-import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE;
-
 import org.cytoscape.view.vizmap.VisualStyle;
+
+import com.alexmerz.graphviz.objects.Edge;
 
 /**
  * Class that contains definitions and some implementation for converting a
@@ -101,13 +101,6 @@ public class EdgeReader extends Reader{
 		super.setProperties();
 	}*/
 	
-	/**
-	 * Converts edge weights by putting into a new column in the table
-	 */
-	private void setWeight() {
-		// TODO
-	}
-
 	/**
 	 * Converts the specified .dot attribute to Cytoscape equivalent
 	 * and returns the corresponding VisualProperty and its value
@@ -340,6 +333,10 @@ public class EdgeReader extends Reader{
 	
 		LOGGER.info("Edge color: " + attrVal + " being set...");
 		Color color = convertColor(attrVal);
+		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal);
+		if (colorListValues != null) {
+			color = colorListValues.get(0).getLeft();
+		}
 		Integer transparency = color.getAlpha();
 
 		switch (attr) {
@@ -356,6 +353,8 @@ public class EdgeReader extends Reader{
 				vizStyle.setDefaultValue(EDGE_LABEL_TRANSPARENCY, transparency);
 				break;
 			}
+		default:
+			break;
 		}
 	}
 
@@ -372,6 +371,10 @@ public class EdgeReader extends Reader{
 			View<? extends CyIdentifiable> elementView, ColorAttribute attr) {
 
 		Color color = convertColor(attrVal);
+		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal);
+		if (colorListValues != null) {
+			color = colorListValues.get(0).getLeft();
+		}
 		Integer transparency = color.getAlpha();
 
 		switch (attr) {
@@ -388,6 +391,20 @@ public class EdgeReader extends Reader{
 			default: {
 				break;
 			}
+		}
+	}
+
+	@Override
+	protected void setColorDefaults(VisualStyle vizStyle) {
+		String colorAttribute = defaultAttrs.get("color");
+		if (colorAttribute != null) {
+			List<Pair<Color, Float>> colorListValues = convertColorList(colorAttribute);
+			if (colorListValues != null) {
+				Color color = colorListValues.get(0).getLeft();
+				colorAttribute = String.format("#%2x%2x%2x%2x", color.getRed(), color.getGreen(),
+						color.getBlue(), color.getAlpha());
+			}
+			setColor(colorAttribute, vizStyle, ColorAttribute.COLOR);
 		}
 	}
 

@@ -23,7 +23,6 @@ import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.LineTypeVisualProperty;
 import org.cytoscape.view.presentation.property.NullVisualProperty;
 import org.cytoscape.view.vizmap.VisualPropertyDependency;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class MapperTest {

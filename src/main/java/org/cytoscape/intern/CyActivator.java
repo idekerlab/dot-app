@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.intern.read.DotReaderFactory;
 import org.cytoscape.intern.write.DotWriterFactory;
 import org.cytoscape.io.BasicCyFileFilter;
