@@ -191,29 +191,25 @@ public class NodeReader extends Reader{
 				LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
 				elementView.setLockedValue(vizProp, val);
 			}
+			//Attempt to get these attributes for the specific element
 			String styleAttribute = bypassAttrs.get("style");
-			String colorAttribute = null;
-			String fillAttribute = null;
+			String colorAttribute = bypassAttrs.get("color");
+			String fillAttribute = bypassAttrs.get("fillcolor");
 			String gradientAngle = bypassAttrs.get("gradientangle");
 			
-			boolean isBypassColorAttr;
-			boolean isBypassFillAttr;
+			//Assume that the "color" and "fillcolor" attributes are from
+			//the specific element
+			boolean isBypassColorAttr = true;
+			boolean isBypassFillAttr = true;
 
-			if (bypassAttrs.get("color") != null) {
-				isBypassColorAttr = true;
-				colorAttribute = bypassAttrs.get("color");
-			}
-			else {
+			//If a value was not found for "color" use the value from default list
+			if (colorAttribute == null) {
 				isBypassColorAttr = false;
 				colorAttribute = defaultAttrs.get("color");
 			}
 			
-
-			if (bypassAttrs.get("fillcolor") != null) {
-				isBypassFillAttr = true;
-				fillAttribute = bypassAttrs.get("fillcolor");
-			}
-			else {
+			//If a value was not found for "fillcolor" use default list value
+			if (fillAttribute == null) {
 				isBypassFillAttr = false;
 				fillAttribute = defaultAttrs.get("fillcolor");
 			}
@@ -229,6 +225,10 @@ public class NodeReader extends Reader{
 					if (gradientAngle == null) {
 						gradientAngle = "0";
 					}
+					/* A gradient needs to be applied if the color is from the
+					 * default list but the gradient style is different or angle
+					 * is different
+					 */
 					if (styleAttribute != null && !styleAttribute.equals(defaultAttrs.get("style"))) {
 						createGradient(colorListValues, elementView, styleAttribute, gradientAngle);
 					}
@@ -248,6 +248,10 @@ public class NodeReader extends Reader{
 					if (gradientAngle == null) {
 						gradientAngle = "0";
 					}
+					/* A gradient needs to be applied if the color is from the
+					 * default list but the gradient style is different or angle
+					 * is different
+					 */
 					if (styleAttribute != null && !styleAttribute.equals(defaultAttrs.get("style"))) {
 						createGradient(colorListValues, elementView, styleAttribute, gradientAngle);
 					}
@@ -261,15 +265,6 @@ public class NodeReader extends Reader{
 		}
 	}
 
-	/**
-	 * Sets defaults and bypass attributes for each node and sets positions
-	 */
-	/*@Override
-	public void setProperties() {
-		LOGGER.info("NodeReader: Setting properties for VisualStyle...");
-		super.setProperties();
-	}*/
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void createGradient(List<Pair<Color, Float>> colorListValues,
 			VisualStyle vizStyle, String styleAttribute, String gradientAngle) {
@@ -424,20 +419,6 @@ public class NodeReader extends Reader{
 	@Override
 	@SuppressWarnings({ "rawtypes" })
 	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
-		/**
-		 * properties to Map:
-		 * 
-		 * shape
-		 * fill color
-		 * border color/transparency
-		 * border line type
-		 * border width
-		 * size
-		 * label
-		 * label position
-		 * tooltip
-		 * label font/size/color
-		 */
 		
 		VisualProperty retrievedProp = DOT_TO_CYTOSCAPE.get(name);
 		Object retrievedVal = null;
