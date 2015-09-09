@@ -5,19 +5,13 @@ import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.EQ
 import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.SOLID;
 
 import java.awt.Color;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
@@ -27,6 +21,9 @@ import org.cytoscape.view.vizmap.VisualStyle;
 
 import com.alexmerz.graphviz.objects.Edge;
 import com.alexmerz.graphviz.objects.Node;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Abstract class that contains definitions and some implementation for converting a
@@ -38,22 +35,9 @@ import com.alexmerz.graphviz.objects.Node;
  */
 public abstract class Reader {
 	
-	//debug logger declaration 
-	protected static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.read.Reader");
-	protected static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
-	static {
-		FileHandler handler = null;
-		try {
-			handler = new FileHandler("log_Reader.txt");
-			handler.setLevel(Level.ALL);
-			handler.setFormatter(new SimpleFormatter());
-		}
-		catch(IOException e) {
-			// to prevent compiler error
-		}
-		LOGGER.addHandler(handler);
-		FILE_HANDLER_MGR.registerFileHandler(handler);
-	}
+
+	// Logger that outputs to Cytoscape standard log file:  .../CytoscapeConfiguration/3/framework-cytoscape.log
+	protected static final Logger LOGGER = LoggerFactory.getLogger(Reader.class);
 
 	// view of network being created/modified
 	protected CyNetworkView networkView;
@@ -110,15 +94,8 @@ public abstract class Reader {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void setDefaults() {
-		LOGGER.info("Setting the Default values for Visual Style...");
+		LOGGER.trace("Setting the Default values for Visual Style...");
 
-		/*
-		 * for each entry in defaultAttrs
-		 * 		Pair p = convertAttribute(getKey(), getValue());
-		 * 		VP = p.left()
-		 * 		val = p.right()
-		 * 		vizStyle.setDefaultValue( VP, val);
-		 */
 		String colorScheme = defaultAttrs.get("colorscheme");
 		for (Entry<String, String> attrEntry : defaultAttrs.entrySet()) {
 			String attrKey = attrEntry.getKey();
@@ -160,8 +137,8 @@ public abstract class Reader {
 			if (vizProp == null || val == null) {
 				continue;
 			}
-			LOGGER.info("Updating Visual Style...");
-			LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
+			LOGGER.trace("Updating Visual Style...");
+			LOGGER.debug(String.format("Setting Visual Property %S...", vizProp));
 			vizStyle.setDefaultValue(vizProp, val);
 		}
 		
@@ -185,7 +162,7 @@ public abstract class Reader {
 	 * exception properties such as location and edge weights
 	 */
 	public void setProperties() {
-		LOGGER.info("Setting the properties for Visual Style...");
+		LOGGER.trace("Setting the properties for Visual Style...");
 		setDefaults();
 		setBypasses();
 	}
@@ -228,8 +205,8 @@ public abstract class Reader {
 
 		// For testing color file reading
 		StringColor strC = new StringColor("svg_colors.txt");
-		LOGGER.info("Converting DOT color string to Java Color...");
-		LOGGER.info("Color string: " + color);
+		LOGGER.debug("Converting DOT color string to Java Color...");
+		LOGGER.debug("Color string: " + color);
 
 		// Remove trailing/leading whitespace
 		color = color.trim();
@@ -256,15 +233,15 @@ public abstract class Reader {
 						 + "(?<VAL>1(?:\\.0+)?|0*(?:\\.[0-9]+))$";
 
 		// Test color string against RGB regex
-		LOGGER.info("Comparing DOT color string to #FFFFFF format");
 		Matcher matcher = Pattern.compile(rgbRegex).matcher(color);
 		if (matcher.matches()) {
+		LOGGER.trace("DOT color string matches #RRGGBB format");
 			return Color.decode(color);
 		}
 
 		// Test color string against RGBA regex
-		LOGGER.info("Comparing DOT color string to #FFFFFFFF format");
 		matcher.usePattern(Pattern.compile(rgbaRegex));
+		LOGGER.trace("DOT color string matches #RRGGBBAA format");
 		if (matcher.matches()) {
 			Integer red = Integer.valueOf(matcher.group("RED"), 16);
 			Integer green = Integer.valueOf(matcher.group("GREEN"), 16);
@@ -274,9 +251,9 @@ public abstract class Reader {
 		}
 
 		// Test color string against HSB regex
-		LOGGER.info("Comparing DOT color string to H S V format");
 		matcher.usePattern(Pattern.compile(hsbRegex));
 		if (matcher.matches()) {
+		LOGGER.trace("DOT color string matches H S V format");
 			Float hue = Float.valueOf(matcher.group("HUE"));
 			Float saturation = Float.valueOf(matcher.group("SAT"));
 			Float value = Float.valueOf(matcher.group("VAL"));

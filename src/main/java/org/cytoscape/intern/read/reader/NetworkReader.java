@@ -24,8 +24,7 @@ import com.alexmerz.graphviz.objects.Graph;
  * @author Braxton Fitts
  * @author Ziran Zhang
  */
-public class NetworkReader extends Reader{
-
+public class NetworkReader extends Reader {
 
 	// JPGD object that contains visual information for this network view
 	private Graph graph;
@@ -65,7 +64,7 @@ public class NetworkReader extends Reader{
 	protected void setBypasses() {
 		//Network doesn't set bypass value with the Graph object's attributes
 		//overrides the defaults set in setDefault()
-		LOGGER.info("Setting the Bypass values for Visual Style...");
+		LOGGER.trace("Setting the Bypass values for Visual Style...");
 
 		String colorScheme = graph.getAttributes().get("colorscheme");
 		for (Entry<String, String> attrEntry : graph.getAttributes().entrySet()) {

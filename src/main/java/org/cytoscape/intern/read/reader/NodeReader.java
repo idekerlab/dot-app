@@ -105,7 +105,7 @@ public class NodeReader extends Reader{
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	protected void setBypasses() {
-		LOGGER.info("Setting the Bypass values for node views...");
+		LOGGER.trace("Setting the Bypass values for node views...");
 
 		// for each element, get bypass attributes
 		for (Entry<? extends Object, ? extends CyIdentifiable> entry : elementMap.entrySet()) {
@@ -122,7 +122,7 @@ public class NodeReader extends Reader{
 			for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
 				String attrKey = attrEntry.getKey();
 				String attrVal = attrEntry.getValue();
-				LOGGER.info(
+				LOGGER.debug(
 					String.format("Converting GraphViz attribute: %s", attrKey)
 				);
 
@@ -167,8 +167,8 @@ public class NodeReader extends Reader{
 				if (vizProp == null || val == null) {
 					continue;
 				}
-				LOGGER.info("Updating Visual Style...");
-				LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
+				LOGGER.trace("Updating Visual Style...");
+				LOGGER.debug(String.format("Setting Visual Property %S...", vizProp));
 				elementView.setLockedValue(vizProp, val);
 			}
 			// set style if it was declared
@@ -212,7 +212,7 @@ public class NodeReader extends Reader{
 	@Override
 	@SuppressWarnings({ "rawtypes" })
 	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
-		LOGGER.info(
+		LOGGER.debug(
 			String.format("Converting GraphViz attribute %s with value %s", name, val)
 		);
 

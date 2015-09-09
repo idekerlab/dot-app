@@ -97,7 +97,7 @@ public class EdgeReader extends Reader{
 		
 		edgeTable = networkView.getModel().getDefaultEdgeTable();
 
-		LOGGER.info("EdgeReader constructed");
+		LOGGER.trace("EdgeReader constructed");
 	}
 	
 	/**
@@ -175,7 +175,7 @@ public class EdgeReader extends Reader{
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected void setBypasses() {
-		LOGGER.info("Setting the Bypass values for edge views...");
+		LOGGER.trace("Setting the Bypass values for edge views...");
 	
 		for(Entry<? extends Object, ? extends CyIdentifiable> entry: elementMap.entrySet() ) {
 			// get map of attributes for this edge and the View for this CyEdge
@@ -236,7 +236,7 @@ public class EdgeReader extends Reader{
 					// Abort if conversion not found
 					continue;
 				}
-				LOGGER.info("Updating Visual Style...");
+				LOGGER.trace("Updating Visual Style...");
 				LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
 				elementView.setLockedValue(vizProp, val);
 			}
@@ -317,7 +317,7 @@ public class EdgeReader extends Reader{
 	protected void setColor(String attrVal, VisualStyle vizStyle,
 			ColorAttribute attr, String colorScheme) {
 	
-		LOGGER.info("Edge color: " + attrVal + " being set...");
+		LOGGER.debug("Edge color: " + attrVal + " being set...");
 		Color color = convertColor(attrVal, colorScheme);
 		Integer transparency = color.getAlpha();
 
