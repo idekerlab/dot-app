@@ -3,6 +3,7 @@ package org.cytoscape.intern.read.reader;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_BACKGROUND_PAINT;
 
 import java.awt.Color;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -11,6 +12,7 @@ import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.presentation.RenderingEngineManager;
 import org.cytoscape.view.vizmap.VisualStyle;
 
 import com.alexmerz.graphviz.objects.Graph;
@@ -36,12 +38,18 @@ public class NetworkReader extends Reader{
 	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
+<<<<<<< HEAD
 	 * @param defaultAttrs Map that contains default attributes
 	 * @param elementMap Map of which the keys are JPGD Edge objects and the 
 	 * values are corresponding Cytoscape CyEdge objects 
+=======
+	 * @param defaultAttrs Map that contains default attributes for Reader of this type
+	 * eg. for NodeReader will be a list of default
+	 * @param rendEngMgr TODO
+>>>>>>> refs/heads/GradientSupport
 	 */
-	public NetworkReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Graph graph) {
-		super(networkView, vizStyle, defaultAttrs);
+	public NetworkReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Graph graph, RenderingEngineManager rendEngMgr) {
+		super(networkView, vizStyle, defaultAttrs, rendEngMgr);
 		this.graph = graph;
 	}
 
@@ -121,4 +129,18 @@ public class NetworkReader extends Reader{
 		//Network doesn't set Background color with bypass
 	}
 
+	@Override
+	protected void setColorDefaults(VisualStyle vizStyle, String colorScheme) {
+		String colorAttribute = defaultAttrs.get("bgcolor");
+		if (colorAttribute != null) {
+			List<Pair<Color, Float>> colorListValues = convertColorList(colorAttribute, colorScheme);
+			if (colorListValues != null) {
+				Color color = colorListValues.get(0).getLeft();
+				colorAttribute = String.format("#%2x%2x%2x%2x", color.getRed(), color.getGreen(),
+						color.getBlue(), color.getAlpha());
+			}
+			setColor(colorAttribute, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
+		}
+		
+	}
 }

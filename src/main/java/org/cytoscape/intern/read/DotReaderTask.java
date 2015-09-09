@@ -13,11 +13,10 @@ import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
 import org.cytoscape.intern.FileHandlerManager;
-import org.cytoscape.intern.Notifier;
-import org.cytoscape.intern.Notifier.MessageType;
+import org.cytoscape.intern.GradientListener;
+import org.cytoscape.intern.read.reader.EdgeReader;
 import org.cytoscape.intern.read.reader.NetworkReader;
 import org.cytoscape.intern.read.reader.NodeReader;
-import org.cytoscape.intern.read.reader.EdgeReader;
 import org.cytoscape.io.read.AbstractCyNetworkReader;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
@@ -30,6 +29,7 @@ import org.cytoscape.model.subnetwork.CyRootNetworkManager;
 import org.cytoscape.model.subnetwork.CySubNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewFactory;
+import org.cytoscape.view.presentation.RenderingEngineManager;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualPropertyDependency;
 import org.cytoscape.view.vizmap.VisualStyle;
@@ -78,6 +78,13 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 
 	// Maps the created CyNetworks to their JPGD Graph object
 	private Map<Graph, CyNetwork> graphMap;
+	
+	// Fetches CyCustomGraphics2Factories in order to create gradients
+	private GradientListener gradientListener;
+	
+	// RenderingEngineManager used to get VisualLexicon
+	// Used to check compatibility with Non BVL Visual Properties
+	private RenderingEngineManager rendEngMr;
 
 	// list of all relevant attributes
 	private static final String[] EDGE_ATTRIBUTES = {
@@ -102,10 +109,12 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 * @param rootNetMgr instance of CyRootNetworkManager
 	 * @param vizMapMgr instance of VisualMappingManager
 	 * @param vizStyleFact instance of VisualStyleFactory
+	 * @param gradientListener TODO
+	 * @param rendEngMgr TODO
 	 */
 	public DotReaderTask(InputStream inStream, CyNetworkViewFactory netViewFact,
 			CyNetworkFactory netFact, CyNetworkManager netMgr,
-			CyRootNetworkManager rootNetMgr, VisualMappingManager vizMapMgr, VisualStyleFactory vizStyleFact) {
+			CyRootNetworkManager rootNetMgr, VisualMappingManager vizMapMgr, VisualStyleFactory vizStyleFact, GradientListener gradientListener, RenderingEngineManager rendEngMgr) {
 		
 		super(inStream, netViewFact, netFact, netMgr, rootNetMgr);
 		
@@ -126,6 +135,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		inStreamReader = new InputStreamReader(inStream);
 		this.vizMapMgr = vizMapMgr;
 		this.vizStyleFact = vizStyleFact;
+		this.gradientListener = gradientListener;
+		this.rendEngMr = rendEngMgr;
 		
 		graphMap = new HashMap<Graph, CyNetwork>();
 		nodeMap = new HashMap<Node, CyNode>();
@@ -329,13 +340,13 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 
 		// initialize readers and begin setting visual properties
-		NetworkReader networkReader = new NetworkReader(networkView, vizStyle, getGraphDefaultMap(graph), graph);
+		NetworkReader networkReader = new NetworkReader(networkView, vizStyle, getGraphDefaultMap(graph), graph, rendEngMr);
 		networkReader.setProperties();
 
-		NodeReader nodeReader = new NodeReader(networkView, vizStyle, getNodeDefaultMap(graph), nodeMap);
+		NodeReader nodeReader = new NodeReader(networkView, vizStyle, getNodeDefaultMap(graph), rendEngMr, nodeMap, gradientListener);
 		nodeReader.setProperties();
 
-		EdgeReader edgeReader = new EdgeReader(networkView, vizStyle, getEdgeDefaultMap(graph), edgeMap);
+		EdgeReader edgeReader = new EdgeReader(networkView, vizStyle, getEdgeDefaultMap(graph), rendEngMr, edgeMap);
 		edgeReader.setProperties();
 
 		//add the created visualStyle to VisualMappingManager

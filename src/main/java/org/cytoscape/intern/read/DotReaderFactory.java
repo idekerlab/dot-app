@@ -10,6 +10,7 @@ import java.util.logging.SimpleFormatter;
 import javax.swing.SwingUtilities;
 
 import org.cytoscape.intern.FileHandlerManager;
+import org.cytoscape.intern.GradientListener;
 import org.cytoscape.io.CyFileFilter;
 import org.cytoscape.io.read.InputStreamTaskFactory;
 import org.cytoscape.model.CyNetwork;
@@ -21,6 +22,7 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.model.events.NetworkViewAddedEvent;
 import org.cytoscape.view.model.events.NetworkViewAddedListener;
+import org.cytoscape.view.presentation.RenderingEngineManager;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
@@ -47,6 +49,8 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 	private CyRootNetworkManager rootNetMgr;
 	private VisualMappingManager vizMapMgr;
 	private VisualStyleFactory vizStyleFact;
+	private GradientListener gradientListener;
+	private RenderingEngineManager rendEngMgr;
 	
 	/**
 	 * Sets the DotReaderFactory with associate fileFilter
@@ -58,10 +62,12 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 	 * @param rootNetMgr CyRootNetworkManager needed for DotReaderTask
 	 * @param vizMapMgr VisualMappingManager needed for DotReaderTask
 	 * @param vizStyleFact VisualStyleFactory needed for DotReaderTask
+	 * @param gradientListener GradientListener needed for DotReaderTask
+	 * @param rendEngMgr TODO
 	 */
 	public DotReaderFactory(CyFileFilter fileFilter, CyNetworkViewFactory netViewFact,
 			CyNetworkFactory netFact, CyNetworkManager netMgr, CyRootNetworkManager rootNetMgr,
-			VisualMappingManager vizMapMgr, VisualStyleFactory vizStyleFact) {
+			VisualMappingManager vizMapMgr, VisualStyleFactory vizStyleFact, GradientListener gradientListener, RenderingEngineManager rendEngMgr) {
 
 		// make logger write to file
 		FileHandler handler = null;
@@ -84,6 +90,8 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 		this.rootNetMgr = rootNetMgr;
 		this.vizMapMgr = vizMapMgr;
 		this.vizStyleFact = vizStyleFact;
+		this.gradientListener = gradientListener;
+		this.rendEngMgr = rendEngMgr;
 	}	
 	
 	/**
@@ -109,7 +117,7 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 		LOGGER.info("create TaskIterator with params");
 		
 		return new TaskIterator(new DotReaderTask(inStream, netViewFact,
-				netFact, netMgr, rootNetMgr, vizMapMgr, vizStyleFact));
+				netFact, netMgr, rootNetMgr, vizMapMgr, vizStyleFact, gradientListener, rendEngMgr));
 	}
 	
 	/**
