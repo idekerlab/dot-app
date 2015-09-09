@@ -77,27 +77,27 @@ public class EdgePropertyMapper extends Mapper {
 		// block is non-functioning. only works for bypasses due to what we think is source error
 		if (!isEqualToDefault(EDGE_TARGET_ARROW_SHAPE)) {
 			ArrowShape targetArrow = view.getVisualProperty(EDGE_TARGET_ARROW_SHAPE);
-			LOGGER.info("Retrieving target/head arrow. CS version is: " + targetArrow);
+			LOGGER.debug("Retrieving target/head arrow. CS version is: " + targetArrow);
 			String dotTargetArrow = ARROW_SHAPE_MAP.get(targetArrow);
-			LOGGER.info("Target/head arrow retrieved. .dot verison is: " + dotTargetArrow);
+			LOGGER.debug("Target/head arrow retrieved. .dot verison is: " + dotTargetArrow);
 			simpleVisPropsToDot.add(String.format("arrowhead = \"%s\"", dotTargetArrow));
 		}
 				
 		if (!isEqualToDefault(EDGE_SOURCE_ARROW_SHAPE)) {
 			ArrowShape sourceArrow = view.getVisualProperty(EDGE_SOURCE_ARROW_SHAPE);
-			LOGGER.info("Retrieving source/tail arrow. CS version is: " + sourceArrow);
+			LOGGER.debug("Retrieving source/tail arrow. CS version is: " + sourceArrow);
 			String dotSourceArrow = ARROW_SHAPE_MAP.get(sourceArrow);
-			LOGGER.info("Source/tail arrow retrieved. .dot verison is: " + dotSourceArrow);
+			LOGGER.debug("Source/tail arrow retrieved. .dot verison is: " + dotSourceArrow);
 			simpleVisPropsToDot.add(String.format("arrowtail = \"%s\"", dotSourceArrow));
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	private boolean isVisible() {
-		LOGGER.info("Checking if edge should be visible");
+		LOGGER.trace("Checking if edge should be visible");
 		boolean visibleByProp = view.getVisualProperty(EDGE_VISIBLE);
 		if (!visibleByProp) {
-			LOGGER.finest("Edge not visible due to its own property.");
+			LOGGER.trace("Edge not visible due to its own property.");
 			return false;
 		}
 		CyEdge model = ((View<CyEdge>)view).getModel();
@@ -108,10 +108,10 @@ public class EdgePropertyMapper extends Mapper {
 		boolean visibleBySource = sourceView.getVisualProperty(NODE_VISIBLE);
 		boolean visibleByTarget = targetView.getVisualProperty(NODE_VISIBLE);
 		if (!visibleBySource || !visibleByTarget) {
-			LOGGER.finest("Edge not visible due to source node or target node's property.");
+			LOGGER.trace("Edge not visible due to source node or target node's property.");
 			return false;
 		}
-		LOGGER.finest("Edge is visible");
+		LOGGER.trace("Edge is visible");
 		return true;
 	}
 	
@@ -159,7 +159,7 @@ public class EdgePropertyMapper extends Mapper {
 		if (result.matches("^\\[\\]$")) {
 			result = "";
 		}
-		LOGGER.info("Created .dot string. Result: " + result);
+		LOGGER.debug("Created .dot string. Result: " + result);
 		return result;
 	}
 	
@@ -188,18 +188,17 @@ public class EdgePropertyMapper extends Mapper {
 
 	@Override
 	protected String mapDotStyle() {
-		LOGGER.finest("Building style string for edge view...");
-		LOGGER.info("Determining need for style attr...");
+		LOGGER.trace("Building style string for edge view...");
 		StringBuilder dotStyle = null;
 		boolean isVisible = isVisible();
 		if(!isEqualToDefault(EDGE_LINE_TYPE) || !isEqualToDefault(isVisible, EDGE_VISIBLE)) {
-			LOGGER.info("Not default style attr, building edge's own...");
+			LOGGER.debug("Not default style attr, building edge's own...");
 			LineType lineType = view.getVisualProperty(EDGE_LINE_TYPE);
 			String lineStr = LINE_TYPE_MAP.get(lineType);
 			dotStyle = new StringBuilder();
 			if (lineStr == null) {
 				lineStr = "solid";
-				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+				LOGGER.warn("Cytoscape property doesn't map to a .dot attribute. Setting to default");
 			}
 			String invisString = (!isVisible) ? ",invis" : "";
 			String style = String.format("style = \"%s%s\"", lineStr, invisString);

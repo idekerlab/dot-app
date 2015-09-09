@@ -23,16 +23,10 @@ import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.T
 
 import java.awt.Color;
 import java.awt.Font;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
-import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNode;
@@ -45,6 +39,9 @@ import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.vizmap.VisualPropertyDependency;
 import org.cytoscape.view.vizmap.VisualStyle;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Handles mapping of Cytoscape properties to .dot attributes in the form of a String.
  * Contains implementation for properties that are shared by nodes and edges and declarations
@@ -56,18 +53,18 @@ import org.cytoscape.view.vizmap.VisualStyle;
  */
 public abstract class Mapper {
 
-	// maps Cytoscape properties  by their ID Strings to their .dot equivalents if relationship is simple equivalency
+	// Maps Cytoscape properties  by their ID Strings to their .dot equivalents if relationship is simple equivalency
 	protected ArrayList<String> simpleVisPropsToDot; 
 	
 	// VisualStyle applied to the view
 	protected VisualStyle vizStyle;
 	
-	// if node width and height are locked
+	// If node width and height are locked
 	private static boolean nodeSizesLockedIsSet = false;
 	protected static boolean nodeSizesLocked;
 	
 	/*
-	 * maps Cytoscape line types to the equivalent string used in .dot
+	 * Maps Cytoscape line types to the equivalent string used in .dot
 	 * line types are fields in org.cytoscape.view.presentation.property.LineTypeVisualProperty
 	 */ 
 	protected static final HashMap<LineType, String> LINE_TYPE_MAP = new HashMap<LineType, String>();
@@ -116,28 +113,9 @@ public abstract class Mapper {
 	// Pixel per inch scaling factor
 	protected static final double PPI = 72;
 
-	// debug logger
-	protected static final Logger LOGGER;
-	protected static FileHandler handler = null;
-	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
-	// Initialize logger with file handler
-	static {
-		LOGGER = Logger.getLogger("org.cytoscape.intern.mapper.Mapper");
-		
-		try {
-			handler = new FileHandler("log_Mapper.txt");
-			handler.setLevel(Level.ALL);
-			
-			handler.setFormatter(new SimpleFormatter());
-		}
-		catch(IOException e) {
-			// to prevent compiler error
-		}
-		
-		LOGGER.addHandler(handler);
-		FILE_HANDLER_MGR.registerFileHandler(handler);
-	}
-	
+	// Logger that outputs to Cytoscape standard log file:  .../CytoscapeConfiguration/3/framework-cytoscape.log
+	protected static final Logger LOGGER = LoggerFactory.getLogger(Mapper.class);
+
 	/**
 	 * Constructor for Mapper objects
 	 * 
@@ -162,7 +140,7 @@ public abstract class Mapper {
 	 * @return String representation of color in .dot format of rgba
 	 */
 	protected String mapColorToDot(Color color, Integer alpha) {
-		LOGGER.info("Creating .dot color attribute string");
+		LOGGER.trace("Creating .dot color attribute string");
 		Integer red = color.getRed();
 		Integer green = color.getGreen();
 		Integer blue = color.getBlue();
@@ -183,13 +161,13 @@ public abstract class Mapper {
 	 */
 	protected String mapFont(Font font, Integer size, Color color, Integer transparency) {
 		
-		LOGGER.info("Label font, size, color, and transparency translation");
+		LOGGER.trace("Label font, size, color, and transparency translation");
 		 
 		StringBuilder returnValue = null;
 		
 		if (view.getModel() instanceof CyNode) {
-			LOGGER.finest("Mapping font attributes for a node view...");
-			LOGGER.info("Determining need for fontname attr");
+			LOGGER.trace("Mapping font attributes for a node view...");
+			LOGGER.trace("Determining need for fontname attr");
 			if (!isEqualToDefault(font, NODE_LABEL_FONT_FACE)) {
 				Font styleFont = vizStyle.getDefaultValue(NODE_LABEL_FONT_FACE);
 				if (!font.getFontName().equals(styleFont.getFontName()) || 
@@ -200,7 +178,7 @@ public abstract class Mapper {
 					}
 				}
 			}
-			LOGGER.info("Determining need for fontsize attr");
+			LOGGER.trace("Determining need for fontsize attr");
 			if (!isEqualToDefault(size, NODE_LABEL_FONT_SIZE)) {
 				String fontSize = String.format("fontsize = \"%d\"", size);
 				if (returnValue == null) {
@@ -210,7 +188,7 @@ public abstract class Mapper {
 					returnValue.append(","+fontSize);
 				}
 			}
-			LOGGER.info("Determining need for fontcolor attr");
+			LOGGER.trace("Determining need for fontcolor attr");
 			if (!isEqualToDefault(color, NODE_LABEL_COLOR) ||
 					!isEqualToDefault(transparency, NODE_LABEL_TRANSPARENCY)) {
 				String fontColor = String.format("fontcolor = \"%s\"", mapColorToDot(color, transparency));
@@ -224,8 +202,8 @@ public abstract class Mapper {
 		} 
 		// had an ugly conflict in this area. note if there are font problems it could be from here
 		else if (view.getModel() instanceof CyEdge) {
-			LOGGER.finest("Mapping font attributes for an edge view...");
-			LOGGER.info("Determining need for fontname attr");
+			LOGGER.trace("Mapping font attributes for an edge view...");
+			LOGGER.trace("Determining need for fontname attr");
 			if (!isEqualToDefault(font, EDGE_LABEL_FONT_FACE)) {
 				Font styleFont = vizStyle.getDefaultValue(EDGE_LABEL_FONT_FACE);
 				if (!font.getFontName().equals(styleFont.getFontName()) || 
@@ -236,7 +214,7 @@ public abstract class Mapper {
 					}
 				}
 			}
-			LOGGER.info("Determining need for fontsize attr");
+			LOGGER.trace("Determining need for fontsize attr");
 			if (!isEqualToDefault(size, EDGE_LABEL_FONT_SIZE)) {
 				String fontSize = String.format("fontsize = \"%d\"", size);
 				if (returnValue == null) {
@@ -246,7 +224,7 @@ public abstract class Mapper {
 					returnValue.append(","+fontSize);
 				}
 			}
-			LOGGER.info("Determining need for fontcolor attr");
+			LOGGER.trace("Determining need for fontcolor attr");
 			if (!isEqualToDefault(color, EDGE_LABEL_COLOR) ||
 					!isEqualToDefault(transparency, EDGE_LABEL_TRANSPARENCY)) {
 				String fontColor = String.format("fontcolor = \"%s\"", mapColorToDot(color, transparency));
@@ -263,7 +241,7 @@ public abstract class Mapper {
 			LOGGER.info("Font attributes are defaults");
 			return null;
 		}
-		LOGGER.info("Dot attributes associate with font is: " + returnValue.toString());
+		LOGGER.debug("Dot attributes associate with font is: " + returnValue.toString());
 		
 		return returnValue.toString();		
 		
@@ -324,28 +302,28 @@ public abstract class Mapper {
 	 * with underscores
 	 */
 	public static String modifyElementID(String id) {
-		LOGGER.info("Preparing to transform ID");
+		LOGGER.trace("Preparing to transform ID");
 		String alphaNumRegEx = "[a-zA-Z\200-\377_][a-zA-Z\200-\377_0-9]*";
 		String numericRegEx = "[-]?([.][0-9]+|[0-9]+([.][0-9]*)?)";
 		String quotedRegEx = "\"[^\"]*(\\\")*[^\"]*\"";
 		String htmlRegEx = "<.*>";
 		if (id.matches(alphaNumRegEx)) {
-			LOGGER.info("Passed-in ID is an Alphanumeric ID");
+			LOGGER.trace("Passed-in ID is an Alphanumeric ID");
 			return id;
 		}
 		if (id.matches(numericRegEx)) {
-			LOGGER.info("Passed-in ID is a Numeric ID");
+			LOGGER.trace("Passed-in ID is a Numeric ID");
 			return id;
 		}
 		if (id.matches(quotedRegEx)) {
-			LOGGER.info("Passed-in ID is a Quoted ID");
+			LOGGER.trace("Passed-in ID is a Quoted ID");
 			return id;
 		}
 		if (id.matches(htmlRegEx)) {
-			LOGGER.info("Passed-in ID is an HTML ID");
+			LOGGER.trace("Passed-in ID is an HTML ID");
 			return id;
 		}
-		LOGGER.info("None of the above. Transforming to Quoted ID");
+		LOGGER.trace("None of the above. Transforming to Quoted ID");
 		StringBuilder output = new StringBuilder(id.length() + 2);
 		output.append('\"');
 		// replace any quotations from name string with escaped quotes
@@ -363,13 +341,12 @@ public abstract class Mapper {
 	 * @return true if size is locked, false if not
 	 */
 	private static boolean areNodeSizesLocked(VisualStyle visualStyle) {
-		LOGGER.info("Determining if NODE_HEIGHT/NODE_WIDTH are locked...");
+		LOGGER.trace("Determining if NODE_HEIGHT/NODE_WIDTH are locked...");
 		Set<VisualPropertyDependency<?>> vizDependencies = visualStyle.getAllVisualPropertyDependencies();
 		boolean output = false;
 		
 		// go through all dependencies and find lock height and width one
 		for(VisualPropertyDependency<?> dependency: vizDependencies) {
-			LOGGER.info(dependency.getIdString());
 			if((dependency.getIdString()).equals("nodeSizeLocked")) {
 				output = dependency.isDependencyEnabled();
 			}

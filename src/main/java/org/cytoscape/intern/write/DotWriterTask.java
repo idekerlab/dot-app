@@ -5,12 +5,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
-import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.intern.Notifier;
 import org.cytoscape.intern.write.mapper.EdgePropertyMapper;
 import org.cytoscape.intern.write.mapper.Mapper;
@@ -27,6 +22,9 @@ import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.Tunable;
 import org.cytoscape.work.util.ListSingleSelection;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Task object that writes the network view to a .dot file
@@ -54,13 +52,8 @@ public class DotWriterTask implements CyWriter {
 	// Network being converted to .dot if network export is selected
 	private CyNetwork network = null;
 
-	// debug logger
-	private static final Logger LOGGER = Logger
-			.getLogger("org.cytoscape.intern.DotWriterTask");
-	private FileHandler handler;
-
-	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager
-			.getManager();
+	// Logger that outputs to Cytoscape standard log file:  .../CytoscapeConfiguration/3/framework-cytoscape.log
+	private static final Logger LOGGER = LoggerFactory.getLogger(DotWriterTask.class);
 
 	// whether or not the network view is directed
 	private boolean directed = false;
@@ -116,18 +109,6 @@ public class DotWriterTask implements CyWriter {
 	 */
 	public DotWriterTask(OutputStream output, CyNetworkView networkView,
 			VisualMappingManager vizMapMgr) {
-		// Make logger write to file
-		handler = null;
-		try {
-			handler = new FileHandler("log_DotWriterTask.txt");
-			handler.setLevel(Level.ALL);
-
-			handler.setFormatter(new SimpleFormatter());
-		} catch (IOException e) {
-			// to prevent compiler error
-		}
-		LOGGER.addHandler(handler);
-		FILE_HANDLER_MGR.registerFileHandler(handler);
 
 		outputWriter = new OutputStreamWriter(output);
 		this.networkView = networkView;
@@ -151,20 +132,7 @@ public class DotWriterTask implements CyWriter {
 		outputWriter = new OutputStreamWriter(output);
 		this.network = network;
 
-		// Make logger write to file
-		handler = null;
-		try {
-			handler = new FileHandler("log_DotWriterTask.txt");
-			handler.setLevel(Level.ALL);
-
-			handler.setFormatter(new SimpleFormatter());
-		} catch (IOException e) {
-			// to prevent compiler error
-		}
-		LOGGER.addHandler(handler);
-		FILE_HANDLER_MGR.registerFileHandler(handler);
-
-		LOGGER.info("DotWriterTask constructed");
+		LOGGER.trace("DotWriterTask constructed");
 	}
 
 	/**
@@ -189,7 +157,7 @@ public class DotWriterTask implements CyWriter {
 					vizStyle);
 		}
 
-		LOGGER.info("Writing .dot file...");
+		LOGGER.trace("Writing .dot file...");
 		taskMonitor.setStatusMessage("Writing network attributes...");
 		writeProps();
 		taskMonitor.setStatusMessage("Writing node declarations...");
@@ -202,7 +170,7 @@ public class DotWriterTask implements CyWriter {
 		try {
 			outputWriter.write("}");
 			outputWriter.close();
-			LOGGER.info("Finished writing file");
+			LOGGER.trace("Finished writing file");
 			if (nameModified) {
 				Notifier.showMessage(
 						"Some names have been modified in order to comply to DOT syntax",
@@ -211,14 +179,14 @@ public class DotWriterTask implements CyWriter {
 				Notifier.showMessage("Export cancelled. Be sure to delete the created file",
 						Notifier.MessageType.WARNING);
 			}
-		} catch (IOException e) {
-			LOGGER.severe("Failed to close file, IOException in DotWriterTask");
-		} catch (Exception e) {
-			LOGGER.severe("Not an IOException");
-			FILE_HANDLER_MGR.closeFileHandler(handler);
+		}
+		catch (IOException e) {
+			LOGGER.error("Failed to close file, IOException in DotWriterTask");
+		}
+		catch (Exception e) {
 			throw new RuntimeException(e);
-		} finally {
-			FILE_HANDLER_MGR.closeFileHandler(handler);
+		} 
+		finally {
 			taskMonitor.setProgress(1.0);
 		}
 	}
@@ -236,7 +204,7 @@ public class DotWriterTask implements CyWriter {
 	 */
 	private void writeProps() {
 		try {
-			LOGGER.info("Writing network properties...");
+			LOGGER.trace("Writing network properties...");
 			if (network == null) {
 				network = (CyNetwork) networkView.getModel();
 			}
@@ -263,9 +231,9 @@ public class DotWriterTask implements CyWriter {
 			}
 
 			outputWriter.write(networkProps);
-			LOGGER.info("Finished writing network properties");
+			LOGGER.trace("Finished writing network properties");
 		} catch (IOException exception) {
-			LOGGER.log(Level.SEVERE, "Write failed @ writeProps()");
+			LOGGER.error("Write failed @ writeProps()");
 		}
 	}
 
@@ -273,7 +241,7 @@ public class DotWriterTask implements CyWriter {
 	 * Writes the .dot declaration of each node to file
 	 */
 	private void writeNodes() {
-		LOGGER.info("Writing node declarations...");
+		LOGGER.trace("Writing node declarations...");
 
 		// if the user passed in networkView
 		if (networkView != null) {
@@ -296,10 +264,12 @@ public class DotWriterTask implements CyWriter {
 								nodeMapper.getElementString());
 
 						outputWriter.write(declaration);
-					} catch (IOException exception) {
-						LOGGER.log(Level.SEVERE, "Write failed @ writeNodes()");
+					} 
+					catch (IOException exception) {
+						LOGGER.error("Write failed @ writeNodes()");
 					}
-				} else {
+				} 
+				else {
 					return;
 				}
 			}
@@ -315,8 +285,9 @@ public class DotWriterTask implements CyWriter {
 						String declaration = String.format("%s\n", nodeName);
 
 						outputWriter.write(declaration);
-					} catch (IOException exception) {
-						LOGGER.log(Level.SEVERE,
+					} 
+					catch (IOException exception) {
+						LOGGER.error(
 								"Write failed @ writeNodes() passed in network instead of networkView");
 					}
 				}
@@ -326,14 +297,14 @@ public class DotWriterTask implements CyWriter {
 				}
 			}
 		}
-		LOGGER.info("Finished writing node declarations");
+		LOGGER.trace("Finished writing node declarations");
 	}
 
 	/**
 	 * Writes the .dot declaration of each edge to file
 	 */
 	private void writeEdges() {
-		LOGGER.info("Writing edge declarations...");
+		LOGGER.trace("Writing edge declarations...");
 
 		// do the following if user passed in the networkView
 		if (networkView != null) {
@@ -364,7 +335,7 @@ public class DotWriterTask implements CyWriter {
 
 						outputWriter.write(declaration);
 					} catch (IOException exception) {
-						LOGGER.log(Level.SEVERE, "Write failed @ writeEdges()");
+						LOGGER.error("Write failed @ writeEdges()");
 					}
 				}
 				// abort if cancelled
@@ -392,7 +363,7 @@ public class DotWriterTask implements CyWriter {
 
 						outputWriter.write(declaration);
 					} catch (IOException exception) {
-						LOGGER.log(Level.SEVERE,
+						LOGGER.error(
 								"Write failed @ writeEdges() (passed in network instead of networkView)");
 					}
 				} else {
@@ -400,7 +371,7 @@ public class DotWriterTask implements CyWriter {
 				}
 			}
 		}
-		LOGGER.info("Finished writing edge declarations...");
+		LOGGER.trace("Finished writing edge declarations...");
 	}
 
 	/**
@@ -415,7 +386,7 @@ public class DotWriterTask implements CyWriter {
 	private void processUserInput() {
 		// set splines value
 		splinesVal = typer.getSelectedValue();
-		LOGGER.info("Raw splinesVal: " + splinesVal);
+		LOGGER.debug("Raw splinesVal: " + splinesVal);
 		switch (splinesVal) {
 		case "Straight segments":
 			splinesVal = "false";
@@ -427,11 +398,11 @@ public class DotWriterTask implements CyWriter {
 			splinesVal = "true";
 			break;
 		}
-		LOGGER.info("Converted splinesVal: " + splinesVal);
+		LOGGER.debug("Converted splinesVal: " + splinesVal);
 
 		// set nodeLabelLocation
 		nodeLabelLoc = labelLocations.getSelectedValue();
-		LOGGER.info("Raw labelLoc: " + nodeLabelLoc);
+		LOGGER.debug("Raw labelLoc: " + nodeLabelLoc);
 		switch (nodeLabelLoc) {
 		case "Center":
 			nodeLabelLoc = "c";
@@ -446,11 +417,11 @@ public class DotWriterTask implements CyWriter {
 			nodeLabelLoc = "ex";
 			break;
 		}
-		LOGGER.info("Converted labelLoc: " + nodeLabelLoc);
+		LOGGER.debug("Converted labelLoc: " + nodeLabelLoc);
 
 		// set networkLabelLocation
 		networkLabelLoc = networkLabelLocations.getSelectedValue();
-		LOGGER.info("Raw networkLabelLoc: " + networkLabelLoc);
+		LOGGER.debug("Raw networkLabelLoc: " + networkLabelLoc);
 		switch (networkLabelLoc) {
 		case "No network label":
 			networkLabelLoc = null;
@@ -462,7 +433,7 @@ public class DotWriterTask implements CyWriter {
 			networkLabelLoc = "b";
 			break;
 		}
-		LOGGER.info("Converted networkLabelLoc: " + networkLabelLoc);
+		LOGGER.debug("Converted networkLabelLoc: " + networkLabelLoc);
 	}
 
 	private String buildNodeID(CyNode node) {

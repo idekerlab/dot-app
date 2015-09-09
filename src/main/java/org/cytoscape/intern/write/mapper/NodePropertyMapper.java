@@ -61,7 +61,7 @@ public class NodePropertyMapper extends Mapper {
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
-		LOGGER.info("Populating HashMaps with values");
+		LOGGER.trace("Populating HashMaps with values");
 
 		// Put Simple Props Key/Values
 		
@@ -124,7 +124,7 @@ public class NodePropertyMapper extends Mapper {
         simpleVisPropsToDot.add(dotPosition);
 		
 		// Put Node Shape Key/Values
-		LOGGER.info("HashMaps populated");
+		LOGGER.trace("HashMaps populated");
 	}
 	
 	/**
@@ -132,7 +132,7 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	@Override
 	public String getElementString() {
-		LOGGER.info("Preparing to get .dot declaration for a node.");
+		LOGGER.trace("Preparing to get .dot declaration for a node.");
 
 		// Build attribute string
 		StringBuilder elementString = new StringBuilder("[");
@@ -177,7 +177,7 @@ public class NodePropertyMapper extends Mapper {
 		if (result.matches("^\\[\\]$")) {
 			result = "";
 		}
-		LOGGER.info("Created .dot string. Result: " + result);
+		LOGGER.debug("Created .dot string. Result: " + result);
 		return result;
 	}
 	
@@ -189,7 +189,7 @@ public class NodePropertyMapper extends Mapper {
 	private String mapColors() {
 		StringBuilder elementString = null;
 		
-		LOGGER.info("Preparing to get color properties");
+		LOGGER.trace("Preparing to get color properties");
 		// Get the color string (border color). Append to attribute string
 		if (!isEqualToDefault(NODE_BORDER_PAINT) || !isEqualToDefault(NODE_BORDER_TRANSPARENCY)) {
 			Color borderColor = (Color) view.getVisualProperty(NODE_BORDER_PAINT);
@@ -223,7 +223,7 @@ public class NodePropertyMapper extends Mapper {
 	 * @return String in form in form "shape = <shape>"
 	 */
 	private String mapShape() {
-		LOGGER.info("Preparing to get shape property");
+		LOGGER.trace("Preparing to get shape property");
 		
 		// Get the .dot string for the node shape. Append to attribute string
 		if (isEqualToDefault(NODE_SHAPE)) {
@@ -235,11 +235,11 @@ public class NodePropertyMapper extends Mapper {
 		// default if there is no match
 		if (shapeStr == null) {
 			shapeStr = "rectangle"; 
-			LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+			LOGGER.warn("Cytoscape property doesn't map to a .dot attribute. Setting to default");
 		}
 		
 		String dotShape = String.format("shape = \"%s\"", shapeStr);
-		LOGGER.info("Appended shape attribute to .dot string. Result: " + dotShape);
+		LOGGER.debug("Appended shape attribute to .dot string. Result: " + dotShape);
 		
 		return dotShape;
 	}
@@ -251,7 +251,7 @@ public class NodePropertyMapper extends Mapper {
 	 */
 	private String mapFontHelper() {
 		Font fontName = view.getVisualProperty(NODE_LABEL_FONT_FACE);
-		LOGGER.info("Retrieving font size...");
+		LOGGER.trace("Retrieving font size...");
 		Integer fontSize = ((Number)view.getVisualProperty(NODE_LABEL_FONT_SIZE)).intValue();
 		Color fontColor = (Color)(view.getVisualProperty(NODE_LABEL_COLOR));
 		Integer fontTransparency = ((Number)view.getVisualProperty(NODE_LABEL_TRANSPARENCY)).intValue();
@@ -261,11 +261,11 @@ public class NodePropertyMapper extends Mapper {
 
 	@Override
 	protected String mapDotStyle() {
-		LOGGER.finest("Building style string for node view...");
+		LOGGER.trace("Building style string for node view...");
 		StringBuilder dotStyle = null;
 		if (!isEqualToDefault(NODE_BORDER_LINE_TYPE) || !isEqualToDefault(NODE_SHAPE)
 			|| !isEqualToDefault(NODE_VISIBLE)) {
-			LOGGER.info("Not default style attr, building node's own...");
+			LOGGER.trace("Not default style attr, building node's own...");
 			LineType lineType = view.getVisualProperty(NODE_BORDER_LINE_TYPE);
 			NodeShape nodeShape = view.getVisualProperty(NODE_SHAPE);
 			String lineStr = "";
@@ -275,7 +275,7 @@ public class NodePropertyMapper extends Mapper {
 			lineStr = LINE_TYPE_MAP.get(lineType);
 			if (lineStr == null) {
 				lineStr = "solid";
-				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+				LOGGER.warn("Cytoscape property doesn't map to a .dot attribute. Setting to default");
 			}
 			boolean rounded = nodeShape.equals(ROUND_RECTANGLE);
 			boolean isVisible = view.getVisualProperty(NODE_VISIBLE);
