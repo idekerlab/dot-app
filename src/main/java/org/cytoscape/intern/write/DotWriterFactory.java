@@ -21,9 +21,11 @@ import org.slf4j.LoggerFactory;
  * @author Ziran Zhang
  */
 public class DotWriterFactory implements CyNetworkViewWriterFactory {
-	
+
+	// For exporting files
 	private CyFileFilter fileFilter;
 	
+	// For visual styles 
 	private VisualMappingManager vizMapMgr;
 	
 	// Logger that outputs to Cytoscape standard log file:  .../CytoscapeConfiguration/3/framework-cytoscape.log

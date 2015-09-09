@@ -34,11 +34,16 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
     	
 	// Logger that outputs to Cytoscape standard log file:  .../CytoscapeConfiguration/3/framework-cytoscape.log
 	private static final Logger LOGGER = LoggerFactory.getLogger(DotReaderFactory.class);
-	
-	//Variable Declarations
+
+	// For file export
 	private CyFileFilter fileFilter;
+	
+	// For generating views
 	private CyNetworkViewFactory netViewFact;
+	
+	// For generating networks
 	private CyNetworkFactory netFact;
+	
 	private CyNetworkManager netMgr;
 	private CyRootNetworkManager rootNetMgr;
 	private VisualMappingManager vizMapMgr;
