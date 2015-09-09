@@ -1,11 +1,6 @@
 package org.cytoscape.intern;
 
-import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import org.cytoscape.intern.read.DotReaderFactory;
 import org.cytoscape.intern.write.DotWriterFactory;
@@ -22,6 +17,9 @@ import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.ServiceProperties;
 import org.osgi.framework.BundleContext;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Runs the program-- fetches all needed services
  * 
@@ -29,10 +27,10 @@ import org.osgi.framework.BundleContext;
  * @author Braxton Fitts
  * @author Ziran Zhang
  */
-public class CyActivator extends AbstractCyActivator {
-	
-	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.CyActivator");
-	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
+public class DotActivator extends AbstractCyActivator {
+
+	// Logger that outputs to Cytoscape standard log file:  .../CytoscapeConfiguration/3/framework-cytoscape.log
+	private static final Logger LOGGER = LoggerFactory.getLogger(DotActivator.class);
 	
 	/**
 	 * Method that runs when class is activated-- will start dot app
@@ -42,20 +40,6 @@ public class CyActivator extends AbstractCyActivator {
 	@Override
 	public void start(BundleContext context) {
 		
-		// Make logger write to file
-		FileHandler handler = null;
-		try {
-			handler = new FileHandler("log_CyActivator.txt");
-			handler.setLevel(Level.ALL);
-			
-			handler.setFormatter(new SimpleFormatter());
-		}
-		catch(IOException e) {
-			// to prevent compiler error
-		}
-		LOGGER.addHandler(handler);
-		FILE_HANDLER_MGR.registerFileHandler(handler);
-     
 		//Create the GraphViz file filter
 		String[] extensions = {"dot", "gv"};
 		String[] contentTypes = {"text/plain"};
@@ -78,19 +62,19 @@ public class CyActivator extends AbstractCyActivator {
 		dotReaderFactProps.put(ServiceProperties.ID, "dotReaderFactory");
 		
 		// initialize the DotWriterFactory for later use
-		LOGGER.info("Constructing Writer Factory...");
+		LOGGER.trace("Constructing Writer Factory...");
 		DotWriterFactory dotWriteFact = new DotWriterFactory(fileFilter, vizMapMgr);
 		
 		// initialize the DotReaderFactory for later use
-		LOGGER.info("Constructing Reader Factory...");
+		LOGGER.trace("Constructing Reader Factory...");
 		DotReaderFactory dotReadFact = new DotReaderFactory(fileFilter, netViewFact,
 				netFact, netMgr, rootNetMgr, vizMapMgr, vizStyleFact);
 		
-		LOGGER.info("Registering Writer Factory as OSGI service...");
+		LOGGER.trace("Registering Writer Factory as OSGI service...");
 		//register DotWriterFactory as an OSGI service
 		registerAllServices(context, dotWriteFact, dotWriterFactProps);
 		
-		LOGGER.info("Registering Reader Factory as OSGI service...");
+		LOGGER.trace("Registering Reader Factory as OSGI service...");
 		//register DotReaderFactory as an OSGI service
 		registerAllServices(context, dotReadFact, dotReaderFactProps);
 	}
@@ -100,7 +84,6 @@ public class CyActivator extends AbstractCyActivator {
 	 */
 	@Override
 	public void shutDown() {
-		FILE_HANDLER_MGR.closeAllFileHandlers();
 		super.shutDown();
 	}
 }

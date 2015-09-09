@@ -1,15 +1,9 @@
 package org.cytoscape.intern.read;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import javax.swing.SwingUtilities;
 
-import org.cytoscape.intern.FileHandlerManager;
 import org.cytoscape.io.CyFileFilter;
 import org.cytoscape.io.read.InputStreamTaskFactory;
 import org.cytoscape.model.CyNetwork;
@@ -26,6 +20,9 @@ import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskIterator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Allows the input stream to be set for reader task factories
  * 
@@ -35,9 +32,8 @@ import org.cytoscape.work.TaskIterator;
  */
 public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAddedListener {
     	
-	//debug logger declaration 
-	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.read.DotReaderFactory");
-	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
+	// Logger that outputs to Cytoscape standard log file:  .../CytoscapeConfiguration/3/framework-cytoscape.log
+	private static final Logger LOGGER = LoggerFactory.getLogger(DotReaderFactory.class);
 	
 	//Variable Declarations
 	private CyFileFilter fileFilter;
@@ -63,20 +59,6 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 			CyNetworkFactory netFact, CyNetworkManager netMgr, CyRootNetworkManager rootNetMgr,
 			VisualMappingManager vizMapMgr, VisualStyleFactory vizStyleFact) {
 
-		// make logger write to file
-		FileHandler handler = null;
-		try {
-			handler = new FileHandler("log_DotReaderFactory.txt");
-			handler.setLevel(Level.ALL);
-			handler.setFormatter(new SimpleFormatter());
-		}
-		catch(IOException e) {
-			// to prevent compiler error
-		}
-		
-		LOGGER.addHandler(handler);
-		FILE_HANDLER_MGR.registerFileHandler(handler);
-		
 		this.fileFilter = fileFilter;
 		this.netViewFact = netViewFact;
 		this.netFact = netFact;
@@ -106,7 +88,7 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 	 */
 	@Override
 	public TaskIterator createTaskIterator(InputStream inStream, String inputName) {
-		LOGGER.info("create TaskIterator with params");
+		LOGGER.trace("Create TaskIterator with params");
 		
 		return new TaskIterator(new DotReaderTask(inStream, netViewFact,
 				netFact, netMgr, rootNetMgr, vizMapMgr, vizStyleFact));
@@ -125,13 +107,13 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 		
 		// check file extension
 		if (inStream != null && inputName != null) {
-			LOGGER.info("Valid input is found");
+			LOGGER.trace("Valid input is found");
 			
 			String[] parts = inputName.split(".");
 			String extension = parts[parts.length-1];
 			if (extension.matches(("gv|dot"))) {
 				
-				LOGGER.info("gv|dot extention is matched");
+				LOGGER.trace("gv|dot extention is matched");
 				return true;
 			}
 		}		
@@ -151,13 +133,14 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 	 */
 	@Override
 	public void handleEvent(NetworkViewAddedEvent arg0) {
-		LOGGER.info("NetworkView was added. Apply VisualStyle if DOT network");
+		LOGGER.trace("NetworkView was added. Apply VisualStyle if DOT network");
 		final CyNetworkView networkView = arg0.getNetworkView();
 		CyNetwork model = networkView.getModel();
 		if (!isDotNetwork(model)) {
 			return;
 		}
-		LOGGER.info("Network is a DOT network. Applying VisualStyle...");
+		
+		LOGGER.trace("Network is a DOT network. Applying VisualStyle...");
 		String name = model.getRow(model).get(CyNetwork.NAME, String.class);
 		String vizStyleName = String.format("%s vizStyle", name);
 		for (final VisualStyle vizStyle : vizMapMgr.getAllVisualStyles()) {

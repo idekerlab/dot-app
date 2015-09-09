@@ -56,11 +56,10 @@
 						<Bundle-Version>${project.version}</Bundle-Version>
 
 						<!-- This tells the bundle plugin which packages should not be exported. -->
-						<!-- M not sure if this is correct. -->
 						<Private-Package>org.cytoscape.intern.*</Private-Package>
 						<Include-Resource>{maven-resources}, @./jars/com.alexmerz.graphviz.jar</Include-Resource>
 						<Embed-Dependency>commons-lang3;scope=compile|runtime</Embed-Dependency>
-						<Bundle-Activator>org.cytoscape.intern.CyActivator</Bundle-Activator>
+						<Bundle-Activator>org.cytoscape.intern.DotActivator</Bundle-Activator>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -185,13 +184,18 @@
             <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>${slf4jVersion}</version>
-			<scope>test</scope>
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-api</artifactId>
+			<version>1.5.3</version>
+			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-service</artifactId>
+			<version>1.5.3</version>
+			<scope>provided</scope>
+		</dependency>
 
 	</dependencies>
   

@@ -7,14 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import org.cytoscape.intern.FileHandlerManager;
-import org.cytoscape.intern.Notifier;
-import org.cytoscape.intern.Notifier.MessageType;
 import org.cytoscape.intern.read.reader.NetworkReader;
 import org.cytoscape.intern.read.reader.NodeReader;
 import org.cytoscape.intern.read.reader.EdgeReader;
@@ -44,6 +38,9 @@ import com.alexmerz.graphviz.objects.Graph;
 import com.alexmerz.graphviz.objects.Id;
 import com.alexmerz.graphviz.objects.Node;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Task object that reads a GraphViz file into a network/ network view
  * 
@@ -53,13 +50,14 @@ import com.alexmerz.graphviz.objects.Node;
  */
 public class DotReaderTask extends AbstractCyNetworkReader {
 	
+	// JPGD way of representing directed graphs
+	private static final int DIRECTED = 2;
+	
 	// whether task is cancelled or not
 	private boolean cancelled = false;
 	
-	// debug logger
-	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.read.DotReaderTask");
-	private FileHandler handler = null;
-	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
+	// Logger that outputs to Cytoscape standard log file:  .../CytoscapeConfiguration/3/framework-cytoscape.log
+	private static final Logger LOGGER = LoggerFactory.getLogger(DotReaderTask.class);
 
 	// InputStreamReader used as input to the JPGD Parser 
 	private InputStreamReader inStreamReader;
@@ -109,19 +107,6 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 		super(inStream, netViewFact, netFact, netMgr, rootNetMgr);
 		
-		// Make logger write to file
-		try {
-			handler = new FileHandler("log_DotReaderTask.txt");
-			handler.setLevel(Level.ALL);
-			handler.setFormatter(new SimpleFormatter());
-		}
-		catch(IOException e) {
-			// to prevent compiler error
-		}
-		LOGGER.addHandler(handler);
-		FILE_HANDLER_MGR.registerFileHandler(handler);
-
-
 		// Initialize variables
 		inStreamReader = new InputStreamReader(inStream);
 		this.vizMapMgr = vizMapMgr;
@@ -140,14 +125,14 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	@Override
 	public void run(TaskMonitor monitor) {
-		LOGGER.info("Running run() function...");
+		LOGGER.trace("Running run() function...");
 		monitor.setProgress(0);
 		//Initialize the parser
 		Parser parser = new Parser();
 		
 		try {
 			
-		    LOGGER.info("Begin parsing the input...");
+		    LOGGER.trace("Begin parsing the input...");
 		    monitor.setStatusMessage("Retrieving graph from file...");
 			parser.parse(inStreamReader);
 			
@@ -162,7 +147,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			for (Graph graph : graphList) {
 				
 				if(!cancelled){
-					LOGGER.info("Iterating graph in graphList...");
+					LOGGER.trace("Iterating graph in graphList...");
 					CySubNetwork network;
 					if (root != null) {
 						network = root.addSubNetwork();
@@ -177,13 +162,13 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 				
 					// add DOT_network Identifier to Network Table
 					monitor.setStatusMessage("Creating table columns...");
-					LOGGER.info("Writing DOT_network identifer to Network table...");
+					LOGGER.trace("Writing DOT_network identifer to Network table...");
 					CyTable networkTable = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
 					CyTable edgeLocalTable = network.getTable(CyEdge.class, CyNetwork.LOCAL_ATTRS);
 					edgeLocalTable.createColumn("weight", Double.class, false, null);
 					networkTable.createColumn("DOT_network", Boolean.class, true);
 					networkTable.getRow(network.getSUID()).set("DOT_network", true);
-					LOGGER.info(
+					LOGGER.debug(
 						String.format("DOT_network identifier written. Result: %s",
 							networkTable.getRow(network.getSUID()).get("DOT_network", Boolean.class))
 					);
@@ -213,15 +198,15 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 						}
 					}
 					
-					LOGGER.info("All elements imported");
+					LOGGER.trace("All elements imported");
 				
 					//at the end of each graph iteration, add the created CyNetwork into the CyNetworks array
 					networks[networkCounter++] = network;
-					LOGGER.info("Network added to array");
+					LOGGER.trace("Network added to array");
 				
 					//add the graph and the created CyNetwork based on that graph into the graphMap hashmap
 					graphMap.put(graph, network);
-					LOGGER.info("Graph added to map");
+					LOGGER.trace("Graph added to map");
 				}
 				else {
 					// cancel if needed
@@ -230,27 +215,18 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 				
 				monitor.setProgress(1.0);
 				this.networks = networks;
-				LOGGER.info("CyNetwork objects successfully created");
-				FILE_HANDLER_MGR.closeFileHandler(handler);
-				LOGGER.removeHandler(handler);
-				handler = null;
+				LOGGER.trace("CyNetwork objects successfully created");
 			}
 		}
 		catch(ParseException e){
 			//Invalid sequence of tokens found in file
-			LOGGER.severe(e.getMessage());
-			FILE_HANDLER_MGR.closeFileHandler(handler);
-			LOGGER.removeHandler(handler);
-			handler = null;
+			LOGGER.error(e.getMessage());
 			throw new RuntimeException("Sorry! File did not comply to dot language syntax");
 		}
 		catch (TokenMgrError e) {
-			//Cytoscape is able to continue running even if this error is thrown
-			//Invalid token found in file
-			LOGGER.severe(e.getMessage());
-			FILE_HANDLER_MGR.closeFileHandler(handler);
-			LOGGER.removeHandler(handler);
-			handler = null;
+			// Cytoscape is able to continue running even if this error is thrown
+			// Invalid token found in file
+			LOGGER.error(e.getMessage());
 			throw new RuntimeException("Sorry! File did not comply to dot language syntax");
 		}
 	}
@@ -272,26 +248,10 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	@Override
 	public CyNetworkView buildCyNetworkView(CyNetwork network) {
 		
-		// FileHandler for error logging
-		if (handler == null) {
-			try {
-				handler = new FileHandler("log_DotReaderTask.txt");
-				handler.setLevel(Level.ALL);
-				handler.setFormatter(new SimpleFormatter());
-			}
-			catch(IOException e) {
-				throw new RuntimeException("Logger encountered IO failure");
-				// to prevent compiler error
-			}
-			LOGGER.addHandler(handler);
-			FILE_HANDLER_MGR.registerFileHandler(handler);
-		}
-		LOGGER.info("Executing buildCyNetworkView()...");
-		
-		// initialize the graph object
-		Graph graph = null;
+		LOGGER.trace("Executing buildCyNetworkView()...");
 		
 		// get JPGD graph object from passed-in network object
+		Graph graph = null;
 		for (Entry<Graph, CyNetwork> entry: graphMap.entrySet()){
 			if(network.equals( entry.getValue() )) {
 				graph = entry.getKey();
@@ -301,7 +261,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 		// error checking if the graph object is not found
 		if (graph == null) {
-			LOGGER.log(Level.SEVERE, "Graph is null, either it's a empty graph or is not found in HashMap");
+			LOGGER.error("Graph is null, either it's a empty graph or is not found in HashMap");
 			return null;
 		}
 		
@@ -311,8 +271,9 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		vizStyle.setTitle(
 			String.format("%s vizStyle", getGraphName(graph))
 		);
-		//Enable "Custom Graphics fit to Node" and "Edge color to arrows" dependency
-		//Also disable "Lock Node height and width"
+		
+		// Enable "Custom Graphics fit to Node" and "Edge color to arrows" dependency
+		// Also disable "Lock Node height and width"
 		for (VisualPropertyDependency<?> dep : vizStyle.getAllVisualPropertyDependencies()) {
 			if (dep.getIdString().equals("nodeCustomGraphicsSizeSync") ||
 				dep.getIdString().equals("arrowColorMatchesEdge")) {
@@ -324,7 +285,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 
 		}
 		
-		//created a new CyNetworkView based on the cyNetworkViewFactory
+		// created a new CyNetworkView based on the cyNetworkViewFactory
 		final CyNetworkView networkView = cyNetworkViewFactory.createNetworkView(network);
 		
 
@@ -342,10 +303,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		vizMapMgr.addVisualStyle(vizStyle);
 		
 		//return the created cyNetworkView at the end
-		LOGGER.finest("Network View created.");
-		FILE_HANDLER_MGR.closeFileHandler(handler);
-		LOGGER.removeHandler(handler);
-		handler = null;
+		LOGGER.trace("Network View created.");
 		return networkView;
 	}
 
@@ -361,6 +319,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	
 	/**
 	 * Retrieves the name of the graph from its Id Object
+	 * 
 	 * @param graph JPGD graph object containing the information
 	 * @return name of the graph
 	 */
@@ -368,17 +327,20 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		Id graphId = graph.getId();
 		String idString = graphId.getId();
 		String labelString = graphId.getLabel();
+
 		if (!idString.equals("")) {
 			return idString;
 		}
 		else if (!labelString.equals("")) {
 			return labelString;
 		}
+
 		return null;
 	}
 	/**
 	 * Retrieves the name of the node from its Id object that will be inserted
 	 * into the CyNode table of the CyNetwork
+	 * 
 	 * @param node JPGD node object containing the information
 	 * @return name of the node
 	 */
@@ -386,6 +348,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		Id nodeId = node.getId();
 		String idString = nodeId.getId();
 		String labelString = nodeId.getLabel();
+
 		if (!idString.equals("")) {
 			return idString;
 		}
@@ -393,6 +356,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			String[] parts = labelString.split("§");
 			return parts[0];
 		}
+
 		return null;
 	}
 	
@@ -421,11 +385,12 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 		// Interaction of the edge
 		String interaction;
+
 		/*
 		 * if getType returns 2, it's directed, else it's undirected
 		 * set the cyEdge and add the cyEdge into the network
 		 */
-		if (edge.getType() == 2) {
+		if (edge.getType() == DIRECTED) {
 			cyEdge = network.addEdge(sourceCyNode, targetCyNode, true);
 			interaction = "interaction";
 		}
@@ -468,19 +433,19 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 * is attribute value
 	 */
 	private Map<String, String> getNodeDefaultMap(Graph graph) {
-		LOGGER.info("Generating the Node Defaults...");
+		LOGGER.trace("Generating the Node Defaults...");
 		
 		// add each generic Node attribute and value to map
 		Map<String, String> output = new HashMap<String, String>();
 		for (String commonAttr : COMMON_ATTRIBUTES) {
-			LOGGER.info(String.format("Getting default node attribute: %s", commonAttr));
+			LOGGER.debug(String.format("Getting default node attribute: %s", commonAttr));
 			String val = graph.getGenericNodeAttribute(commonAttr);
 			if (val != null) {
 				output.put(commonAttr, val);
 			}
 		}
 		for (String nodeAttr : NODE_ATTRIBUTES) {
-			LOGGER.info(String.format("Getting default node attribute: %s", nodeAttr));
+			LOGGER.debug(String.format("Getting default node attribute: %s", nodeAttr));
 			String val = graph.getGenericNodeAttribute(nodeAttr);
 			if (val != null) {
 				output.put(nodeAttr, val);
@@ -503,14 +468,14 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 		// add each generic Edge attribute and value to map
 		for (String commonAttr : COMMON_ATTRIBUTES) {
-			LOGGER.info(String.format("Getting default edge attribute: %s", commonAttr));
+			LOGGER.debug(String.format("Getting default edge attribute: %s", commonAttr));
 			String val = graph.getGenericEdgeAttribute(commonAttr);
 			if (val != null) {
 				output.put(commonAttr, val);
 			}
 		}
 		for (String edgeAttr : EDGE_ATTRIBUTES) {
-			LOGGER.info(String.format("Getting default edge attribute: %s", edgeAttr));
+			LOGGER.debug(String.format("Getting default edge attribute: %s", edgeAttr));
 			String val = graph.getGenericEdgeAttribute(edgeAttr);
 			if (val != null) {
 				output.put(edgeAttr, val);
@@ -525,7 +490,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 		// add each generic Graph attribute and value to map
 		for (String graphAttr : GRAPH_ATTRIBUTES) {
-			LOGGER.info(String.format("Getting default graph attribute: %s", graphAttr));
+			LOGGER.debug(String.format("Getting default graph attribute: %s", graphAttr));
 			String val = graph.getGenericGraphAttribute(graphAttr);
 			if (val != null) {
 				output.put(graphAttr, val);
