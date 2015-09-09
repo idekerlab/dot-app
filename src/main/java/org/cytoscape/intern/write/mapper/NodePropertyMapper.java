@@ -58,6 +58,84 @@ public class NodePropertyMapper extends Mapper {
 	}
 	
 	/**
+	 * Helper method that returns String that defines color attribute including "fillcolor=" part
+	 * 
+	 * @return String in form "color = <color>,fillcolor = <color>"
+	 */
+	private String mapColors() {
+		StringBuilder elementString = null;
+		
+		LOGGER.info("Preparing to get color properties");
+		// Get the color string (border color). Append to attribute string
+		if (!isEqualToDefault(NODE_BORDER_PAINT) || !isEqualToDefault(NODE_BORDER_TRANSPARENCY)) {
+			Color borderColor = (Color) view.getVisualProperty(NODE_BORDER_PAINT);
+			Integer borderTransparency = ((Number)view.getVisualProperty(NODE_BORDER_TRANSPARENCY)).intValue();
+			String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
+			elementString = new StringBuilder(dotBorderColor);
+		}
+		
+		// Write node fill color
+		if (!isEqualToDefault(NODE_FILL_COLOR) || !isEqualToDefault(NODE_TRANSPARENCY)) {
+			Color fillColor = (Color) view.getVisualProperty(NODE_FILL_COLOR);
+			Integer transparency = ((Number)view.getVisualProperty(NODE_TRANSPARENCY)).intValue();
+			String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, transparency));
+			if (elementString != null) {
+				elementString.append("," + dotFillColor);
+			}
+			else {
+				elementString = new StringBuilder(dotFillColor);
+			}
+		}
+		if (elementString == null) {
+			return null;
+		}
+		return elementString.toString();
+		
+	}
+	
+	/**
+	 * Helper method that returns String that contains font face, size, color and transparency
+	 * 
+	 * @return String that defines fontname, fontcolor and fontsize attributes
+	 */
+	private String mapFontHelper() {
+		Font fontName = view.getVisualProperty(NODE_LABEL_FONT_FACE);
+		LOGGER.info("Retrieving font size...");
+		Integer fontSize = ((Number)view.getVisualProperty(NODE_LABEL_FONT_SIZE)).intValue();
+		Color fontColor = (Color)(view.getVisualProperty(NODE_LABEL_COLOR));
+		Integer fontTransparency = ((Number)view.getVisualProperty(NODE_LABEL_TRANSPARENCY)).intValue();
+		
+		return mapFont(fontName, fontSize, fontColor, fontTransparency);
+	}
+	
+	/**
+	 * Helper method that returns String that represents nodeShape 
+	 * 
+	 * @return String in form in form "shape = <shape>"
+	 */
+	private String mapShape() {
+		LOGGER.info("Preparing to get shape property");
+		
+		// Get the .dot string for the node shape. Append to attribute string
+		if (isEqualToDefault(NODE_SHAPE)) {
+			return null;
+		}
+		NodeShape shape = view.getVisualProperty(NODE_SHAPE);
+		String shapeStr = NODE_SHAPE_MAP.get(shape);
+		
+		// default if there is no match
+		if (shapeStr == null) {
+			shapeStr = "rectangle"; 
+			LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+		}
+		
+		String dotShape = String.format("shape = \"%s\"", shapeStr);
+		LOGGER.info("Appended shape attribute to .dot string. Result: " + dotShape);
+		
+		return dotShape;
+	}
+	
+	/**
 	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
 	private void populateMaps() {
@@ -127,6 +205,37 @@ public class NodePropertyMapper extends Mapper {
 		LOGGER.info("HashMaps populated");
 	}
 	
+	@Override
+	protected String mapDotStyle() {
+		LOGGER.finest("Building style string for node view...");
+		StringBuilder dotStyle = null;
+		if (!isEqualToDefault(NODE_BORDER_LINE_TYPE) || !isEqualToDefault(NODE_SHAPE)
+			|| !isEqualToDefault(NODE_VISIBLE)) {
+			LOGGER.info("Not default style attr, building node's own...");
+			LineType lineType = view.getVisualProperty(NODE_BORDER_LINE_TYPE);
+			NodeShape nodeShape = view.getVisualProperty(NODE_SHAPE);
+			String lineStr = "";
+			dotStyle = new StringBuilder();
+
+			// get .dot equivalent of line style, see if we need rounded
+			lineStr = LINE_TYPE_MAP.get(lineType);
+			if (lineStr == null) {
+				lineStr = "solid";
+				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
+			}
+			boolean rounded = nodeShape.equals(ROUND_RECTANGLE);
+			boolean isVisible = view.getVisualProperty(NODE_VISIBLE);
+			String roundedString = (rounded) ? "rounded," : "";
+			String invisString = (!isVisible) ? "invis," : "";
+           	String style = String.format("style = \"%s,%s%sfilled\"", lineStr, roundedString, invisString);
+           	dotStyle.append(style);
+		}
+		if (dotStyle == null) {
+			return null;
+		}
+		return dotStyle.toString();
+	}
+
 	/**
 	 * Returns a String that contains all relevant attributes for this element 
 	 */
@@ -184,114 +293,5 @@ public class NodePropertyMapper extends Mapper {
 		}
 		LOGGER.info("Created .dot string. Result: " + result);
 		return result;
-	}
-	
-	/**
-	 * Helper method that returns String that defines color attribute including "fillcolor=" part
-	 * 
-	 * @return String in form "color = <color>,fillcolor = <color>"
-	 */
-	private String mapColors() {
-		StringBuilder elementString = null;
-		
-		LOGGER.info("Preparing to get color properties");
-		// Get the color string (border color). Append to attribute string
-		if (!isEqualToDefault(NODE_BORDER_PAINT) || !isEqualToDefault(NODE_BORDER_TRANSPARENCY)) {
-			Color borderColor = (Color) view.getVisualProperty(NODE_BORDER_PAINT);
-			Integer borderTransparency = ((Number)view.getVisualProperty(NODE_BORDER_TRANSPARENCY)).intValue();
-			String dotBorderColor = String.format("color = \"%s\"", mapColorToDot(borderColor, borderTransparency));
-			elementString = new StringBuilder(dotBorderColor);
-		}
-		
-		// Write node fill color
-		if (!isEqualToDefault(NODE_FILL_COLOR) || !isEqualToDefault(NODE_TRANSPARENCY)) {
-			Color fillColor = (Color) view.getVisualProperty(NODE_FILL_COLOR);
-			Integer transparency = ((Number)view.getVisualProperty(NODE_TRANSPARENCY)).intValue();
-			String dotFillColor = String.format("fillcolor = \"%s\"", mapColorToDot(fillColor, transparency));
-			if (elementString != null) {
-				elementString.append("," + dotFillColor);
-			}
-			else {
-				elementString = new StringBuilder(dotFillColor);
-			}
-		}
-		if (elementString == null) {
-			return null;
-		}
-		return elementString.toString();
-		
-	}
-	
-	/**
-	 * Helper method that returns String that represents nodeShape 
-	 * 
-	 * @return String in form in form "shape = <shape>"
-	 */
-	private String mapShape() {
-		LOGGER.info("Preparing to get shape property");
-		
-		// Get the .dot string for the node shape. Append to attribute string
-		if (isEqualToDefault(NODE_SHAPE)) {
-			return null;
-		}
-		NodeShape shape = view.getVisualProperty(NODE_SHAPE);
-		String shapeStr = NODE_SHAPE_MAP.get(shape);
-		
-		// default if there is no match
-		if (shapeStr == null) {
-			shapeStr = "rectangle"; 
-			LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
-		}
-		
-		String dotShape = String.format("shape = \"%s\"", shapeStr);
-		LOGGER.info("Appended shape attribute to .dot string. Result: " + dotShape);
-		
-		return dotShape;
-	}
-	
-	/**
-	 * Helper method that returns String that contains font face, size, color and transparency
-	 * 
-	 * @return String that defines fontname, fontcolor and fontsize attributes
-	 */
-	private String mapFontHelper() {
-		Font fontName = view.getVisualProperty(NODE_LABEL_FONT_FACE);
-		LOGGER.info("Retrieving font size...");
-		Integer fontSize = ((Number)view.getVisualProperty(NODE_LABEL_FONT_SIZE)).intValue();
-		Color fontColor = (Color)(view.getVisualProperty(NODE_LABEL_COLOR));
-		Integer fontTransparency = ((Number)view.getVisualProperty(NODE_LABEL_TRANSPARENCY)).intValue();
-		
-		return mapFont(fontName, fontSize, fontColor, fontTransparency);
-	}
-
-	@Override
-	protected String mapDotStyle() {
-		LOGGER.finest("Building style string for node view...");
-		StringBuilder dotStyle = null;
-		if (!isEqualToDefault(NODE_BORDER_LINE_TYPE) || !isEqualToDefault(NODE_SHAPE)
-			|| !isEqualToDefault(NODE_VISIBLE)) {
-			LOGGER.info("Not default style attr, building node's own...");
-			LineType lineType = view.getVisualProperty(NODE_BORDER_LINE_TYPE);
-			NodeShape nodeShape = view.getVisualProperty(NODE_SHAPE);
-			String lineStr = "";
-			dotStyle = new StringBuilder();
-
-			// get .dot equivalent of line style, see if we need rounded
-			lineStr = LINE_TYPE_MAP.get(lineType);
-			if (lineStr == null) {
-				lineStr = "solid";
-				LOGGER.warning("Cytoscape property doesn't map to a .dot attribute. Setting to default");
-			}
-			boolean rounded = nodeShape.equals(ROUND_RECTANGLE);
-			boolean isVisible = view.getVisualProperty(NODE_VISIBLE);
-			String roundedString = (rounded) ? "rounded," : "";
-			String invisString = (!isVisible) ? "invis," : "";
-           	String style = String.format("style = \"%s,%s%sfilled\"", lineStr, roundedString, invisString);
-           	dotStyle.append(style);
-		}
-		if (dotStyle == null) {
-			return null;
-		}
-		return dotStyle.toString();
 	}
 }

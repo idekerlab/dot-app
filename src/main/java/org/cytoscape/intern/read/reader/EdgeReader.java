@@ -25,9 +25,9 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.tuple.Pair;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyIdentifiable;
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyRow;
+import org.cytoscape.model.CyTable;
+import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.RenderingEngineManager;
@@ -49,11 +49,9 @@ import com.alexmerz.graphviz.objects.Edge;
  */
 public class EdgeReader extends Reader{
 
-	// reference default CyEdge table for network from networkView
-	CyTable edgeTable;
-
 	// maps GraphViz arrow shapes with corresponding Cytoscape arrow shapes
 	private static final Map<String, ArrowShape> ARROW_SHAPE_MAP = new HashMap<String, ArrowShape>();
+
 	static {
 		ARROW_SHAPE_MAP.put("vee", ArrowShapeVisualProperty.ARROW);
 		ARROW_SHAPE_MAP.put("dot", ArrowShapeVisualProperty.CIRCLE);
@@ -64,12 +62,12 @@ public class EdgeReader extends Reader{
 		ARROW_SHAPE_MAP.put("none", ArrowShapeVisualProperty.NONE);
 		ARROW_SHAPE_MAP.put("tee", ArrowShapeVisualProperty.T);
 	}
-	
 	/*
 	 * maps GraphViz attributes with a single Cytoscape VisualProperty
 	 * equivalent. Other GraphViz attributes are handled separately
 	 */
 	private static final Map<String, VisualProperty<?>> DOT_TO_CYTOSCAPE = new HashMap<String, VisualProperty<?>>();
+	
 	static {
 		DOT_TO_CYTOSCAPE.put("label", EDGE_LABEL);
 		DOT_TO_CYTOSCAPE.put("xlabel", EDGE_LABEL);
@@ -80,17 +78,20 @@ public class EdgeReader extends Reader{
 		DOT_TO_CYTOSCAPE.put("arrowtail", EDGE_SOURCE_ARROW_SHAPE);
 		DOT_TO_CYTOSCAPE.put("tooltip", EDGE_TOOLTIP);
 	}
+	// reference default CyEdge table for network from networkView
+	CyTable edgeTable;
 	
 	/**
 	 * Constructs an object of type Reader.
 	 * 
-	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
-	 * @param defaultAttrs Map that contains default attributes for Reader of this type
-	 * eg. for NodeReader will be a list of default
-	 * @param rendEngMgr TODO
-	 * @param elementMap Map where keys are JPGD node objects and Values are corresponding Cytoscape CyNodes
+	 * @param defaultAttrs Map that contains default attributes for Reader
+	 * of this type eg. for NodeReader will be a list of default
+	 * @param rendEngMgr RenderingEngineManager that contains the default
+	 * VisualLexicon needed for gradient support
+	 * @param elementMap Map where keys are JPGD node objects and Values 
+	 * are corresponding Cytoscape CyNodes
 	 */
 	public EdgeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, 
 			RenderingEngineManager rendEngMgr, Map<Edge, CyEdge> elementMap) {
@@ -247,62 +248,40 @@ public class EdgeReader extends Reader{
 	}
 
 	/**
-	 * Converts the GraphViz "style" attribute into default VisualProperty
-	 * values for a Cytoscape VisualStyle
+	 * Converts a GraphViz color attribute into corresponding VisualProperty
+	 * bypass values for a Cytoscape View object. Does not support fillcolor.
 	 * 
-	 * @param attrVal String that is the value of "style" 
-	 * eg. "dashed, invis"
-	 * @param vizStyle VisualStyle that "style" is being applied to
+	 * @param attrVal GraphViz color string
+	 * @param elementView View of Cytoscape element to which a color 
+	 * VisualProperty is being set
+	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
 	 */
 	@Override
-	protected void setStyle(String attrVal, VisualStyle vizStyle) {
-		attrVal.toLowerCase();
-		String[] styleAttrs = attrVal.split(",");
+	protected void setColor(String attrVal,
+			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
 
-		for (String styleAttr : styleAttrs) {
-			styleAttr = styleAttr.trim();
-			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
-			
-			// set line type if defined
-			if (lineType != null) {
-				vizStyle.setDefaultValue(EDGE_LINE_TYPE, lineType);
+		Color color = convertColor(attrVal, colorScheme);
+		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
+		if (colorListValues != null) {
+			color = colorListValues.get(0).getLeft();
+		}
+		Integer transparency = color.getAlpha();
+
+		switch (attr) {
+			case COLOR: {
+				elementView.setLockedValue(EDGE_UNSELECTED_PAINT, color);
+				elementView.setLockedValue(EDGE_TRANSPARENCY, transparency);
+				break;
 			}
-		}
-		// make invisible if needed
-		if(attrVal.contains("invis")) {
-			vizStyle.setDefaultValue(EDGE_VISIBLE, false);
-		}
-	}
-
-	/**
-	 * Converts the GraphViz "style" attribute into VisualProperty bypass values
-	 * for a Cytoscape View object
-	 * 
-	 * @param attrVal String that is the value of "style" (eg. "dashed, round")
-	 * @param elementView view to which "style" is being applied
-	 */
-	@Override
-	protected void setStyle(String attrVal,
-			View<? extends CyIdentifiable> elementView) {
-		
-		attrVal.toLowerCase();
-		String[] styleAttrs = attrVal.split(",");
-	
-		// Default to visible
-		elementView.setLockedValue(EDGE_VISIBLE, true);
-
-		for (String styleAttr : styleAttrs) {
-			styleAttr = styleAttr.trim();
-			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
-			
-			// set line type if defined
-			if (lineType != null) {
-				elementView.setLockedValue(EDGE_LINE_TYPE, lineType);
+			case FONTCOLOR: {
+				elementView.setLockedValue(EDGE_LABEL_COLOR, color);
+				elementView.setLockedValue(EDGE_LABEL_TRANSPARENCY, transparency);
+				break;
 			}
-		}
-		// make invisible if needed
-		if(attrVal.contains("invis")) {
-			elementView.setLockedValue(EDGE_VISIBLE, false);
+			default: {
+				break;
+			}
 		}
 	}
 
@@ -348,44 +327,6 @@ public class EdgeReader extends Reader{
 		}
 	}
 
-	/**
-	 * Converts a GraphViz color attribute into corresponding VisualProperty
-	 * bypass values for a Cytoscape View object. Does not support fillcolor.
-	 * 
-	 * @param attrVal GraphViz color string
-	 * @param elementView View of Cytoscape element to which a color 
-	 * VisualProperty is being set
-	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
-	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
-	 */
-	@Override
-	protected void setColor(String attrVal,
-			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
-
-		Color color = convertColor(attrVal, colorScheme);
-		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
-		if (colorListValues != null) {
-			color = colorListValues.get(0).getLeft();
-		}
-		Integer transparency = color.getAlpha();
-
-		switch (attr) {
-			case COLOR: {
-				elementView.setLockedValue(EDGE_UNSELECTED_PAINT, color);
-				elementView.setLockedValue(EDGE_TRANSPARENCY, transparency);
-				break;
-			}
-			case FONTCOLOR: {
-				elementView.setLockedValue(EDGE_LABEL_COLOR, color);
-				elementView.setLockedValue(EDGE_LABEL_TRANSPARENCY, transparency);
-				break;
-			}
-			default: {
-				break;
-			}
-		}
-	}
-
 	@Override
 	protected void setColorDefaults(VisualStyle vizStyle, String colorScheme) {
 		String colorAttribute = defaultAttrs.get("color");
@@ -397,6 +338,66 @@ public class EdgeReader extends Reader{
 						color.getBlue(), color.getAlpha());
 			}
 			setColor(colorAttribute, vizStyle, ColorAttribute.COLOR, colorScheme);
+		}
+	}
+
+	/**
+	 * Converts the GraphViz "style" attribute into VisualProperty bypass values
+	 * for a Cytoscape View object
+	 * 
+	 * @param attrVal String that is the value of "style" (eg. "dashed, round")
+	 * @param elementView view to which "style" is being applied
+	 */
+	@Override
+	protected void setStyle(String attrVal,
+			View<? extends CyIdentifiable> elementView) {
+		
+		attrVal.toLowerCase();
+		String[] styleAttrs = attrVal.split(",");
+	
+		// Default to visible
+		elementView.setLockedValue(EDGE_VISIBLE, true);
+
+		for (String styleAttr : styleAttrs) {
+			styleAttr = styleAttr.trim();
+			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
+			
+			// set line type if defined
+			if (lineType != null) {
+				elementView.setLockedValue(EDGE_LINE_TYPE, lineType);
+			}
+		}
+		// make invisible if needed
+		if(attrVal.contains("invis")) {
+			elementView.setLockedValue(EDGE_VISIBLE, false);
+		}
+	}
+
+	/**
+	 * Converts the GraphViz "style" attribute into default VisualProperty
+	 * values for a Cytoscape VisualStyle
+	 * 
+	 * @param attrVal String that is the value of "style" 
+	 * eg. "dashed, invis"
+	 * @param vizStyle VisualStyle that "style" is being applied to
+	 */
+	@Override
+	protected void setStyle(String attrVal, VisualStyle vizStyle) {
+		attrVal.toLowerCase();
+		String[] styleAttrs = attrVal.split(",");
+
+		for (String styleAttr : styleAttrs) {
+			styleAttr = styleAttr.trim();
+			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
+			
+			// set line type if defined
+			if (lineType != null) {
+				vizStyle.setDefaultValue(EDGE_LINE_TYPE, lineType);
+			}
+		}
+		// make invisible if needed
+		if(attrVal.contains("invis")) {
+			vizStyle.setDefaultValue(EDGE_VISIBLE, false);
 		}
 	}
 

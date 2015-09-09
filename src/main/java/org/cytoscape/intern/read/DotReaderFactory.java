@@ -63,7 +63,8 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 	 * @param vizMapMgr VisualMappingManager needed for DotReaderTask
 	 * @param vizStyleFact VisualStyleFactory needed for DotReaderTask
 	 * @param gradientListener GradientListener needed for DotReaderTask
-	 * @param rendEngMgr TODO
+	 * @param rendEngMgr RenderingEngineManager that contains the default
+	 * VisualLexicon needed for gradient support
 	 */
 	public DotReaderFactory(CyFileFilter fileFilter, CyNetworkViewFactory netViewFact,
 			CyNetworkFactory netFact, CyNetworkManager netMgr, CyRootNetworkManager rootNetMgr,
@@ -94,14 +95,9 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 		this.rendEngMgr = rendEngMgr;
 	}	
 	
-	/**
-	 * Returns CyFileFilter associated with this factory
-	 * 
-	 * @return CyFileFilter for this factory
-	 */
-	@Override
-	public CyFileFilter getFileFilter() {
-		return fileFilter;
+	private boolean isDotNetwork(CyNetwork network) {
+		CyTable hidden = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
+		return hidden.getRow(network.getSUID()).get("DOT_network", Boolean.class);
 	}
 	
 	/**
@@ -121,34 +117,13 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 	}
 	
 	/**
-	 * Returns true if the factory is ready to produce a TaskIterator and false otherwise.
+	 * Returns CyFileFilter associated with this factory
 	 * 
-	 * @param inStream The InputStream to be read
-	 * @param inputName The name of the input
-	 * 
-	 * @return Boolean indicating the factory is ready to produce a TaskIterator
+	 * @return CyFileFilter for this factory
 	 */
 	@Override
-	public boolean isReady(InputStream inStream, String inputName) {
-		
-		// check file extension
-		if (inStream != null && inputName != null) {
-			LOGGER.info("Valid input is found");
-			
-			String[] parts = inputName.split(".");
-			String extension = parts[parts.length-1];
-			if (extension.matches(("gv|dot"))) {
-				
-				LOGGER.info("gv|dot extention is matched");
-				return true;
-			}
-		}		
-		return false;
-	}
-
-	private boolean isDotNetwork(CyNetwork network) {
-		CyTable hidden = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
-		return hidden.getRow(network.getSUID()).get("DOT_network", Boolean.class);
+	public CyFileFilter getFileFilter() {
+		return fileFilter;
 	}
 
 	/**
@@ -181,5 +156,31 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 				});
 			}
 		}	
+	}
+
+	/**
+	 * Returns true if the factory is ready to produce a TaskIterator and false otherwise.
+	 * 
+	 * @param inStream The InputStream to be read
+	 * @param inputName The name of the input
+	 * 
+	 * @return Boolean indicating the factory is ready to produce a TaskIterator
+	 */
+	@Override
+	public boolean isReady(InputStream inStream, String inputName) {
+		
+		// check file extension
+		if (inStream != null && inputName != null) {
+			LOGGER.info("Valid input is found");
+			
+			String[] parts = inputName.split(".");
+			String extension = parts[parts.length-1];
+			if (extension.matches(("gv|dot"))) {
+				
+				LOGGER.info("gv|dot extention is matched");
+				return true;
+			}
+		}		
+		return false;
 	}
 }

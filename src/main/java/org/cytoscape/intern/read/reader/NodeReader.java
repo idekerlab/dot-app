@@ -99,22 +99,251 @@ public class NodeReader extends Reader{
 	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
-<<<<<<< HEAD
-	 * @param defaultAttrs Map that contains default attributes
-	 * @param elementMap Map of which the keys are JPGD Node objects and the 
-	 * values are corresponding Cytoscape CyNode objects 
-=======
 	 * @param defaultAttrs Map that contains default attributes for Reader of this type
 	 * eg. for NodeReader will be a list of default
-	 * @param rendEngMgr RenderingEngineManager needed to retrieve the default VisualLexicon
+	 * @param rendEngMgr RenderingEngineManager that contains the default
+	 * VisualLexicon needed for gradient support
 	 * @param elementMap Map where keys are JPGD node objects and Values are corresponding Cytoscape CyNodes
 	 * @param gradientListener ServiceListener used to get Gradient Factories
->>>>>>> refs/heads/GradientSupport
 	 */
 	public NodeReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, RenderingEngineManager rendEngMgr, Map<Node, CyNode> elementMap, GradientListener gradientListener) {
 		super(networkView, vizStyle, defaultAttrs, rendEngMgr);
 		this.elementMap = elementMap;
 		this.gradientListener = gradientListener;
+	}
+	
+	private Point2D convertAngleToPoint(double angle) {
+		double center = 0.5;
+		if (angle == 0.0) {
+			return new Point2D.Double(center, center);
+		}
+		Point2D.Double doublePoint;
+		double x = (.5 * Math.cos(Math.toRadians(angle))) + center;
+		double y = (-.5 * Math.sin(Math.toRadians(angle))) + center;
+		doublePoint = new Point2D.Double(x, y);
+		return doublePoint;
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private void createGradient(List<Pair<Color, Float>> colorListValues,
+			View<CyNode> elementView, String styleAttribute, String gradientAngle) {
+		LOGGER.info("Creating gradient...");
+
+		LOGGER.fine("Retrieving VisualProperty NODE_CUSTOMGRAPHICS_1");
+		VisualProperty<CyCustomGraphics> nodeGradientProp = 
+				(VisualProperty<CyCustomGraphics>) vizLexicon.lookup(CyNode.class, "NODE_CUSTOMGRAPHICS_1");
+
+		if (nodeGradientProp == null) {
+			LOGGER.warning("Current Renderer doesn't support CustomGraphics");
+			return;
+		}
+
+		float start = 0;
+		float remain = 1;
+		boolean adjustStart = false;
+		boolean usingLinearFactory = true;
+		/*
+		 * Determine which Gradient graphic factory to get based on style attribute
+		 * if it contains "radial" get the radial factory
+		 * otherwise get the linear
+		 */
+
+		LOGGER.info("Retrieving Gradient factory...");
+		CyCustomGraphics2Factory<?> factory = gradientListener.getLinearFactory();
+		if (styleAttribute.contains("radial")) {
+			factory = gradientListener.getRadialFactory();
+			usingLinearFactory = false;
+			LOGGER.fine("Retrieved Radial Gradient factory.");
+		}
+		List<Color> colors = new ArrayList<Color>(colorListValues.size());
+		List<Float> weights = new ArrayList<Float>(colorListValues.size());
+
+		for (Pair<Color, Float> colorAndWeightPair : colorListValues) {
+			Color retrievedColor = colorAndWeightPair.getLeft();
+			Float retrievedWeight = colorAndWeightPair.getRight();
+			LOGGER.fine(
+				String.format("Retrieved color %s with weight %f",
+					retrievedColor, retrievedWeight)
+			);
+			colors.add(retrievedColor);
+			if (retrievedWeight == null) {
+				adjustStart = true;
+				weights.add(new Float(start));
+				continue;
+			}
+			if (adjustStart) {
+				start = remain - retrievedWeight.floatValue();
+				adjustStart = false;
+			}
+			weights.add(new Float(start));
+			start = start + retrievedWeight.floatValue();
+		}
+		if (start == 0 && remain == 1) {
+			weights = new ArrayList<Float>(colorListValues.size());
+			LOGGER.fine(
+				String.format("Each color will now take up %f of gradient", 
+					1f/colorListValues.size())
+			);
+			for (; start < remain; start += (1f/colorListValues.size())) {
+
+				weights.add(start);
+			}
+		}
+		LOGGER.info("Number of colors in gradient: " + colors.size());
+		HashMap<String, Object> gradientProps = new HashMap();
+		gradientProps.put("cy_gradientFractions", weights);
+		gradientProps.put("cy_gradientColors", colors);
+		if (usingLinearFactory) {
+			gradientProps.put("cy_angle", Double.parseDouble(gradientAngle));
+		}
+		else {
+			Point2D point = convertAngleToPoint(Double.parseDouble(gradientAngle));
+			gradientProps.put("cy_center", point);
+		}
+
+		elementView.setLockedValue(nodeGradientProp, factory.getInstance(gradientProps));
+	}
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private void createGradient(List<Pair<Color, Float>> colorListValues,
+			VisualStyle vizStyle, String styleAttribute, String gradientAngle) {
+		LOGGER.info("Retrieving VisualProperty NODE_CUSTOM_GRAPHICS_1");
+
+		VisualProperty<CyCustomGraphics> nodeGradientProp = 
+				(VisualProperty<CyCustomGraphics>) vizLexicon.lookup(CyNode.class, "NODE_CUSTOMGRAPHICS_1");
+
+		if (nodeGradientProp == null) {
+			LOGGER.warning("Current Renderer doesn't support CustomGraphics");
+			return;
+		}
+
+		float start = 0;
+		float remain = 1;
+		boolean adjustStart = false;
+		boolean usingLinearFactory = true;
+		/*
+		 * Determine which Gradient graphic factory to get based on style attribute
+		 * if it contains "radial" get the radial factory
+		 * otherwise get the linear
+		 */
+
+		CyCustomGraphics2Factory<?> factory = gradientListener.getLinearFactory();
+		if (styleAttribute.contains("radial")) {
+			factory = gradientListener.getRadialFactory();
+			usingLinearFactory = false;
+		}
+		List<Color> colors = new ArrayList<Color>(colorListValues.size());
+		List<Float> weights = new ArrayList<Float>(colorListValues.size());
+
+		for (Pair<Color, Float> colorAndWeightPair : colorListValues) {
+			colors.add(colorAndWeightPair.getLeft());
+			Float weight = colorAndWeightPair.getRight();
+			if (weight == null) {
+				adjustStart = true;
+				weights.add(new Float(start));
+				continue;
+			}
+			if (adjustStart) {
+				start = remain - weight.floatValue();
+			}
+			weights.add(new Float(start));
+			start = start + weight.floatValue();
+		}
+		if (start == 0 && remain == 1) {
+			weights = new ArrayList<Float>(colorListValues.size());
+			for (; start < remain; start += (1f/colorListValues.size())) {
+				weights.add(start);
+			}
+		}
+		LOGGER.info("Number of colors in gradient: " + colors.size());
+		HashMap<String, Object> gradientProps = new HashMap();
+		gradientProps.put("cy_gradientFractions", weights);
+		gradientProps.put("cy_gradientColors", colors);
+		if (usingLinearFactory) {
+			gradientProps.put("cy_angle", Double.parseDouble(gradientAngle));
+		}
+		else {
+			Point2D point = convertAngleToPoint(Double.parseDouble(gradientAngle));
+			gradientProps.put("cy_center", point);
+		}
+		vizStyle.setDefaultValue(nodeGradientProp, factory.getInstance(gradientProps));
+		
+		
+	}
+
+	/**
+	 * Sets VisualProperties for each node related to location of node.
+	 * Here because cannot return 2 VisualProperties from convertAttribute
+	 * and want to make exception clear
+	 * @param attrVal 
+	 * @param elementView 
+	 */
+	private void setPositions(String attrVal, View<CyNode> elementView) {
+		String[] coords = attrVal.split(",");
+		Double x = Double.parseDouble(coords[0]);
+		
+		//Y coordinate is different between GraphViz and Java.
+		Double y = -1 * Double.parseDouble(coords[1]);
+
+		//Position attributes are not set with bypasses.
+		elementView.setVisualProperty(NODE_X_LOCATION, x);
+		elementView.setVisualProperty(NODE_Y_LOCATION, y);
+	}
+
+	/**
+	 * Converts the specified GraphViz attribute and value to its Cytoscape 
+	 * equivalent VisualProperty and VisualPropertyValue. If an equivalent value
+	 * is not found, then a default Cytoscape VisualPropertyValue is used.
+	 * This method only handles GraphViz attributes that do not correspond to
+	 * more than one Cytoscape VisualProperty.
+	 * 
+	 * @param name the name of the attribute
+	 * @param val the value of the attribute
+	 * 
+	 * @return Pair object of which the left value is the VisualProperty and the right value
+	 * is the VisualPropertyValue.
+	 */
+	@Override
+	@SuppressWarnings({ "rawtypes" })
+	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
+		LOGGER.info(
+			String.format("Converting GraphViz attribute %s with value %s", name, val)
+		);
+		VisualProperty retrievedProp = DOT_TO_CYTOSCAPE.get(name);
+		Object retrievedVal = null;
+		switch(name) {
+			case "xlabel": {
+				// Fall through to label case
+			}
+			case "label" : {
+				retrievedVal = val;
+				break;
+			}
+			case "penwidth": {
+				retrievedVal = Double.parseDouble(val);
+				break;
+			}
+			case "width": {
+				//Fall through to height case
+			}
+			case "height": {
+				retrievedVal = Double.parseDouble(val) * 72.0;
+				break;
+			}
+			case "shape": {
+				retrievedVal = NODE_SHAPE_MAP.get(val);
+				break;
+			}
+			case "fontname": {
+				retrievedVal = Font.decode(val);
+				break;
+			}
+			case "fontsize": {
+				retrievedVal = Integer.parseInt(val);
+				break;
+			}
+		}
+		return Pair.of(retrievedProp, retrievedVal);
+
 	}
 	
 	/**
@@ -275,330 +504,58 @@ public class NodeReader extends Reader{
 		}
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void createGradient(List<Pair<Color, Float>> colorListValues,
-			VisualStyle vizStyle, String styleAttribute, String gradientAngle) {
-		LOGGER.info("Retrieving VisualProperty NODE_CUSTOM_GRAPHICS_1");
-
-		VisualProperty<CyCustomGraphics> nodeGradientProp = 
-				(VisualProperty<CyCustomGraphics>) vizLexicon.lookup(CyNode.class, "NODE_CUSTOMGRAPHICS_1");
-
-		if (nodeGradientProp == null) {
-			LOGGER.warning("Current Renderer doesn't support CustomGraphics");
-			return;
-		}
-
-		float start = 0;
-		float remain = 1;
-		boolean adjustStart = false;
-		boolean usingLinearFactory = true;
-		/*
-		 * Determine which Gradient graphic factory to get based on style attribute
-		 * if it contains "radial" get the radial factory
-		 * otherwise get the linear
-		 */
-
-		CyCustomGraphics2Factory<?> factory = gradientListener.getLinearFactory();
-		if (styleAttribute.contains("radial")) {
-			factory = gradientListener.getRadialFactory();
-			usingLinearFactory = false;
-		}
-		List<Color> colors = new ArrayList<Color>(colorListValues.size());
-		List<Float> weights = new ArrayList<Float>(colorListValues.size());
-
-		for (Pair<Color, Float> colorAndWeightPair : colorListValues) {
-			colors.add(colorAndWeightPair.getLeft());
-			Float weight = colorAndWeightPair.getRight();
-			if (weight == null) {
-				adjustStart = true;
-				weights.add(new Float(start));
-				continue;
-			}
-			if (adjustStart) {
-				start = remain - weight.floatValue();
-			}
-			weights.add(new Float(start));
-			start = start + weight.floatValue();
-		}
-		if (start == 0 && remain == 1) {
-			weights = new ArrayList<Float>(colorListValues.size());
-			for (; start < remain; start += (1f/colorListValues.size())) {
-				weights.add(start);
-			}
-		}
-		LOGGER.info("Number of colors in gradient: " + colors.size());
-		HashMap<String, Object> gradientProps = new HashMap();
-		gradientProps.put("cy_gradientFractions", weights);
-		gradientProps.put("cy_gradientColors", colors);
-		if (usingLinearFactory) {
-			gradientProps.put("cy_angle", Double.parseDouble(gradientAngle));
-		}
-		else {
-			Point2D point = convertAngleToPoint(Double.parseDouble(gradientAngle));
-			gradientProps.put("cy_center", point);
-		}
-		vizStyle.setDefaultValue(nodeGradientProp, factory.getInstance(gradientProps));
-		
-		
-	}
-	private Point2D convertAngleToPoint(double angle) {
-		double center = 0.5;
-		if (angle == 0.0) {
-			return new Point2D.Double(center, center);
-		}
-		Point2D.Double doublePoint;
-		double x = (.5 * Math.cos(Math.toRadians(angle))) + center;
-		double y = (-.5 * Math.sin(Math.toRadians(angle))) + center;
-		doublePoint = new Point2D.Double(x, y);
-		return doublePoint;
-	}
-
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	private void createGradient(List<Pair<Color, Float>> colorListValues,
-			View<CyNode> elementView, String styleAttribute, String gradientAngle) {
-		LOGGER.info("Creating gradient...");
-
-		LOGGER.fine("Retrieving VisualProperty NODE_CUSTOMGRAPHICS_1");
-		VisualProperty<CyCustomGraphics> nodeGradientProp = 
-				(VisualProperty<CyCustomGraphics>) vizLexicon.lookup(CyNode.class, "NODE_CUSTOMGRAPHICS_1");
-
-		if (nodeGradientProp == null) {
-			LOGGER.warning("Current Renderer doesn't support CustomGraphics");
-			return;
-		}
-
-		float start = 0;
-		float remain = 1;
-		boolean adjustStart = false;
-		boolean usingLinearFactory = true;
-		/*
-		 * Determine which Gradient graphic factory to get based on style attribute
-		 * if it contains "radial" get the radial factory
-		 * otherwise get the linear
-		 */
-
-		LOGGER.info("Retrieving Gradient factory...");
-		CyCustomGraphics2Factory<?> factory = gradientListener.getLinearFactory();
-		if (styleAttribute.contains("radial")) {
-			factory = gradientListener.getRadialFactory();
-			usingLinearFactory = false;
-			LOGGER.fine("Retrieved Radial Gradient factory.");
-		}
-		List<Color> colors = new ArrayList<Color>(colorListValues.size());
-		List<Float> weights = new ArrayList<Float>(colorListValues.size());
-
-		for (Pair<Color, Float> colorAndWeightPair : colorListValues) {
-			Color retrievedColor = colorAndWeightPair.getLeft();
-			Float retrievedWeight = colorAndWeightPair.getRight();
-			LOGGER.fine(
-				String.format("Retrieved color %s with weight %f",
-					retrievedColor, retrievedWeight)
-			);
-			colors.add(retrievedColor);
-			if (retrievedWeight == null) {
-				adjustStart = true;
-				weights.add(new Float(start));
-				continue;
-			}
-			if (adjustStart) {
-				start = remain - retrievedWeight.floatValue();
-				adjustStart = false;
-			}
-			weights.add(new Float(start));
-			start = start + retrievedWeight.floatValue();
-		}
-		if (start == 0 && remain == 1) {
-			weights = new ArrayList<Float>(colorListValues.size());
-			LOGGER.fine(
-				String.format("Each color will now take up %f of gradient", 
-					1f/colorListValues.size())
-			);
-			for (; start < remain; start += (1f/colorListValues.size())) {
-
-				weights.add(start);
-			}
-		}
-		LOGGER.info("Number of colors in gradient: " + colors.size());
-		HashMap<String, Object> gradientProps = new HashMap();
-		gradientProps.put("cy_gradientFractions", weights);
-		gradientProps.put("cy_gradientColors", colors);
-		if (usingLinearFactory) {
-			gradientProps.put("cy_angle", Double.parseDouble(gradientAngle));
-		}
-		else {
-			Point2D point = convertAngleToPoint(Double.parseDouble(gradientAngle));
-			gradientProps.put("cy_center", point);
-		}
-
-		elementView.setLockedValue(nodeGradientProp, factory.getInstance(gradientProps));
-	}
-
 	/**
-	 * Sets VisualProperties for each node related to location of node.
-	 * Here because cannot return 2 VisualProperties from convertAttribute
-	 * and want to make exception clear
-	 * @param attrVal 
-	 * @param elementView 
-	 */
-	private void setPositions(String attrVal, View<CyNode> elementView) {
-		String[] coords = attrVal.split(",");
-		Double x = Double.parseDouble(coords[0]);
-		
-		//Y coordinate is different between GraphViz and Java.
-		Double y = -1 * Double.parseDouble(coords[1]);
-
-		//Position attributes are not set with bypasses.
-		elementView.setVisualProperty(NODE_X_LOCATION, x);
-		elementView.setVisualProperty(NODE_Y_LOCATION, y);
-	}
-	
-	/**
-	 * Converts the specified GraphViz attribute and value to its Cytoscape 
-	 * equivalent VisualProperty and VisualPropertyValue. If an equivalent value
-	 * is not found, then a default Cytoscape VisualPropertyValue is used.
-	 * This method only handles GraphViz attributes that do not correspond to
-	 * more than one Cytoscape VisualProperty.
+	 * Converts a GraphViz color attribute into corresponding VisualProperty
+	 * bypass values for a Cytoscape View object
 	 * 
-	 * @param name the name of the attribute
-	 * @param val the value of the attribute
-	 * 
-	 * @return Pair object of which the left value is the VisualProperty and the right value
-	 * is the VisualPropertyValue.
+	 * @param attrVal GraphViz color string
+	 * @param elementView View of Cytoscape element to which a color 
+	 * VisualProperty is being set
+	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
 	 */
 	@Override
-	@SuppressWarnings({ "rawtypes" })
-	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
-		LOGGER.info(
-			String.format("Converting GraphViz attribute %s with value %s", name, val)
-		);
-		VisualProperty retrievedProp = DOT_TO_CYTOSCAPE.get(name);
-		Object retrievedVal = null;
-		switch(name) {
-			case "xlabel": {
-				// Fall through to label case
-			}
-			case "label" : {
-				retrievedVal = val;
-				break;
-			}
-			case "penwidth": {
-				retrievedVal = Double.parseDouble(val);
-				break;
-			}
-			case "width": {
-				//Fall through to height case
-			}
-			case "height": {
-				retrievedVal = Double.parseDouble(val) * 72.0;
-				break;
-			}
-			case "shape": {
-				retrievedVal = NODE_SHAPE_MAP.get(val);
-				break;
-			}
-			case "fontname": {
-				retrievedVal = Font.decode(val);
-				break;
-			}
-			case "fontsize": {
-				retrievedVal = Integer.parseInt(val);
-				break;
-			}
+	protected void setColor(String attrVal,
+			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
+
+		Color color = convertColor(attrVal, colorScheme);
+		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
+		if (colorListValues != null) {
+			color = colorListValues.get(0).getLeft();
 		}
-		return Pair.of(retrievedProp, retrievedVal);
-
-	}
-
-	/**
-	 * Converts the GraphViz "style" attribute into default VisualProperty
-	 * values for a Cytoscape VisualStyle
-	 * 
-	 * @param attrVal String that is the value of "style" 
-	 * eg. "dashed, rounded"
-	 * @param vizStyle VisualStyle that "style" is being applied to
-	 */
-	@Override
-	protected void setStyle(String attrVal, VisualStyle vizStyle) {
-		attrVal.toLowerCase();
-		String[] styleAttrs = attrVal.split(",");
+		Integer transparency = color.getAlpha();
 		
-		for (String styleAttr : styleAttrs) {
-			styleAttr = styleAttr.trim();
-			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
 
-			if (lineType != null) {
-				vizStyle.setDefaultValue(NODE_BORDER_LINE_TYPE, lineType);
+		switch (attr) {
+			case COLOR: {
+				elementView.setLockedValue(NODE_BORDER_PAINT, color);
+				elementView.setLockedValue(NODE_BORDER_TRANSPARENCY, transparency);
+
+				//fillcolor has already been applied, should not redo
+				//with color attribute
+				if (usedFillColor) {
+					break;
+				}
+
+			/*
+			 * color attribute used for NODE_FILL_COLOR if
+			 * fillcolor attribute not present, thus fall through
+			 * to fillcolor case
+			 */
 			}
-		}
-		
-		// check if rounded rectangle and set
-		if( attrVal.contains("rounded") && 
-				(vizStyle.getDefaultValue(NODE_SHAPE)).equals(NodeShapeVisualProperty.RECTANGLE) ) {
-				
-			vizStyle.setDefaultValue(NODE_SHAPE, NodeShapeVisualProperty.ROUND_RECTANGLE);
-			
-		}
-		// check if invisible is enabled
-		if( attrVal.contains("invis") ) {
-			vizStyle.setDefaultValue(NODE_VISIBLE, false);
-		}
-		// if node is not filled
-		if(!attrVal.contains("filled")) {
-			vizStyle.setDefaultValue(NODE_TRANSPARENCY, 0);
-		}
-	}
-
-	/**
-	 * Converts the GraphViz "style" attribute into VisualProperty bypass values
-	 * for a Cytoscape View object
-	 * 
-	 * @param attrVal String that is the value of "style" (eg. "dashed, round")
-	 * @param elementView view to which "style" is being applied
-	 */
-	@Override
-	protected void setStyle(String attrVal,
-			View<? extends CyIdentifiable> elementView) {
-
-		String[] styleAttrs = attrVal.split(",");
-		attrVal.toLowerCase();
-
-		// Get default node visibility
-		boolean isVisibleDefault = vizStyle.getDefaultValue(NODE_VISIBLE);
-		// Get default node border line type
-		LineType defaultLineType = vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE);
-
-		for (String styleAttr : styleAttrs) {
-			styleAttr = styleAttr.trim();
-
-			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
-			if (lineType != null && !lineType.equals(defaultLineType)) {
-				elementView.setLockedValue(NODE_BORDER_LINE_TYPE, lineType);
+			case FILLCOLOR: {
+				elementView.setLockedValue(NODE_FILL_COLOR, color);
+				elementView.setLockedValue(NODE_TRANSPARENCY, transparency);
+				break;
 			}
-		}
-		
-		// check if rounded rectangle and set
-		NodeShape elementShape = elementView.getVisualProperty(NODE_SHAPE);
-		NodeShape defaultShape = vizStyle.getDefaultValue(NODE_SHAPE);
-		if (attrVal.contains("rounded") && 
-				elementShape.equals(NodeShapeVisualProperty.RECTANGLE)) {
-			if (!elementShape.equals(defaultShape)) {
-				elementView.setLockedValue(NODE_SHAPE, NodeShapeVisualProperty.ROUND_RECTANGLE);
+			case FONTCOLOR: {
+				elementView.setLockedValue(NODE_LABEL_COLOR, color);
+				elementView.setLockedValue(NODE_LABEL_TRANSPARENCY, transparency);
+				break;
 			}
-		}
-		// check if invisible is enabled
-		if( attrVal.contains("invis") ) {
-			if (isVisibleDefault) {
-				elementView.setLockedValue(NODE_VISIBLE, false);
+			default: {
+				break;
 			}
-		}
-		else {
-			if (!isVisibleDefault) {
-				elementView.setLockedValue(NODE_VISIBLE, true);
-			}
-		}
-		// if node is not filled
-		if(!attrVal.contains("filled")) {
-			elementView.setLockedValue(NODE_TRANSPARENCY, 0);
 		}
 	}
 
@@ -655,62 +612,6 @@ public class NodeReader extends Reader{
 		
 	}
 
-
-	/**
-	 * Converts a GraphViz color attribute into corresponding VisualProperty
-	 * bypass values for a Cytoscape View object
-	 * 
-	 * @param attrVal GraphViz color string
-	 * @param elementView View of Cytoscape element to which a color 
-	 * VisualProperty is being set
-	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
-	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
-	 */
-	@Override
-	protected void setColor(String attrVal,
-			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
-
-		Color color = convertColor(attrVal, colorScheme);
-		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
-		if (colorListValues != null) {
-			color = colorListValues.get(0).getLeft();
-		}
-		Integer transparency = color.getAlpha();
-		
-
-		switch (attr) {
-			case COLOR: {
-				elementView.setLockedValue(NODE_BORDER_PAINT, color);
-				elementView.setLockedValue(NODE_BORDER_TRANSPARENCY, transparency);
-
-				//fillcolor has already been applied, should not redo
-				//with color attribute
-				if (usedFillColor) {
-					break;
-				}
-
-			/*
-			 * color attribute used for NODE_FILL_COLOR if
-			 * fillcolor attribute not present, thus fall through
-			 * to fillcolor case
-			 */
-			}
-			case FILLCOLOR: {
-				elementView.setLockedValue(NODE_FILL_COLOR, color);
-				elementView.setLockedValue(NODE_TRANSPARENCY, transparency);
-				break;
-			}
-			case FONTCOLOR: {
-				elementView.setLockedValue(NODE_LABEL_COLOR, color);
-				elementView.setLockedValue(NODE_LABEL_TRANSPARENCY, transparency);
-				break;
-			}
-			default: {
-				break;
-			}
-		}
-	}
-
 	@Override
 	protected void setColorDefaults(VisualStyle vizStyle, String colorScheme) {
 		String fillAttribute = defaultAttrs.get("fillcolor");
@@ -744,6 +645,100 @@ public class NodeReader extends Reader{
 				}
 			}
 			setColor(fillAttribute, vizStyle, ColorAttribute.COLOR, colorScheme);
+		}
+	}
+
+
+	/**
+	 * Converts the GraphViz "style" attribute into VisualProperty bypass values
+	 * for a Cytoscape View object
+	 * 
+	 * @param attrVal String that is the value of "style" (eg. "dashed, round")
+	 * @param elementView view to which "style" is being applied
+	 */
+	@Override
+	protected void setStyle(String attrVal,
+			View<? extends CyIdentifiable> elementView) {
+
+		String[] styleAttrs = attrVal.split(",");
+		attrVal.toLowerCase();
+
+		// Get default node visibility
+		boolean isVisibleDefault = vizStyle.getDefaultValue(NODE_VISIBLE);
+		// Get default node border line type
+		LineType defaultLineType = vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE);
+
+		for (String styleAttr : styleAttrs) {
+			styleAttr = styleAttr.trim();
+
+			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
+			if (lineType != null && !lineType.equals(defaultLineType)) {
+				elementView.setLockedValue(NODE_BORDER_LINE_TYPE, lineType);
+			}
+		}
+		
+		// check if rounded rectangle and set
+		NodeShape elementShape = elementView.getVisualProperty(NODE_SHAPE);
+		NodeShape defaultShape = vizStyle.getDefaultValue(NODE_SHAPE);
+		if (attrVal.contains("rounded") && 
+				elementShape.equals(NodeShapeVisualProperty.RECTANGLE)) {
+			if (!elementShape.equals(defaultShape)) {
+				elementView.setLockedValue(NODE_SHAPE, NodeShapeVisualProperty.ROUND_RECTANGLE);
+			}
+		}
+		// check if invisible is enabled
+		if( attrVal.contains("invis") ) {
+			if (isVisibleDefault) {
+				elementView.setLockedValue(NODE_VISIBLE, false);
+			}
+		}
+		else {
+			if (!isVisibleDefault) {
+				elementView.setLockedValue(NODE_VISIBLE, true);
+			}
+		}
+		// if node is not filled
+		if(!attrVal.contains("filled")) {
+			elementView.setLockedValue(NODE_TRANSPARENCY, 0);
+		}
+	}
+
+	/**
+	 * Converts the GraphViz "style" attribute into default VisualProperty
+	 * values for a Cytoscape VisualStyle
+	 * 
+	 * @param attrVal String that is the value of "style" 
+	 * eg. "dashed, rounded"
+	 * @param vizStyle VisualStyle that "style" is being applied to
+	 */
+	@Override
+	protected void setStyle(String attrVal, VisualStyle vizStyle) {
+		attrVal.toLowerCase();
+		String[] styleAttrs = attrVal.split(",");
+		
+		for (String styleAttr : styleAttrs) {
+			styleAttr = styleAttr.trim();
+			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
+
+			if (lineType != null) {
+				vizStyle.setDefaultValue(NODE_BORDER_LINE_TYPE, lineType);
+			}
+		}
+		
+		// check if rounded rectangle and set
+		if( attrVal.contains("rounded") && 
+				(vizStyle.getDefaultValue(NODE_SHAPE)).equals(NodeShapeVisualProperty.RECTANGLE) ) {
+				
+			vizStyle.setDefaultValue(NODE_SHAPE, NodeShapeVisualProperty.ROUND_RECTANGLE);
+			
+		}
+		// check if invisible is enabled
+		if( attrVal.contains("invis") ) {
+			vizStyle.setDefaultValue(NODE_VISIBLE, false);
+		}
+		// if node is not filled
+		if(!attrVal.contains("filled")) {
+			vizStyle.setDefaultValue(NODE_TRANSPARENCY, 0);
 		}
 	}
 }

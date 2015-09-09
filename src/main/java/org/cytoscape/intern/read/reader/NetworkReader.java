@@ -38,15 +38,10 @@ public class NetworkReader extends Reader{
 	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
-<<<<<<< HEAD
-	 * @param defaultAttrs Map that contains default attributes
-	 * @param elementMap Map of which the keys are JPGD Edge objects and the 
-	 * values are corresponding Cytoscape CyEdge objects 
-=======
 	 * @param defaultAttrs Map that contains default attributes for Reader of this type
 	 * eg. for NodeReader will be a list of default
-	 * @param rendEngMgr TODO
->>>>>>> refs/heads/GradientSupport
+	 * @param rendEngMgr RenderingEngineManager that contains the default
+	 * VisualLexicon needed for gradient support
 	 */
 	public NetworkReader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, Graph graph, RenderingEngineManager rendEngMgr) {
 		super(networkView, vizStyle, defaultAttrs, rendEngMgr);
@@ -86,22 +81,13 @@ public class NetworkReader extends Reader{
 	}
 
 	/**
-	 * Does nothing. The GraphViz style attribute does not affect the
-	 * network view
+	 * Does nothing. A network view does not set a color attribute with a
+	 * bypass.
 	 */
 	@Override
-	protected void setStyle(String attrVal, VisualStyle vizStyle) {
-		//Network doesn't have properties set with style attribute
-	}
-
-	/**
-	 * Does nothing. The GraphViz style attribute does not affect the
-	 * network view
-	 */
-	@Override
-	protected void setStyle(String attrVal,
-			View<? extends CyIdentifiable> elementView) {
-		//Network doesn't have properties set with style attribute
+	protected void setColor(String attrVal,
+			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
+		//Network doesn't set Background color with bypass
 	}
 
 	@Override
@@ -119,16 +105,6 @@ public class NetworkReader extends Reader{
 		}
 	}
 
-	/**
-	 * Does nothing. A network view does not set a color attribute with a
-	 * bypass.
-	 */
-	@Override
-	protected void setColor(String attrVal,
-			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
-		//Network doesn't set Background color with bypass
-	}
-
 	@Override
 	protected void setColorDefaults(VisualStyle vizStyle, String colorScheme) {
 		String colorAttribute = defaultAttrs.get("bgcolor");
@@ -142,5 +118,24 @@ public class NetworkReader extends Reader{
 			setColor(colorAttribute, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
 		}
 		
+	}
+
+	/**
+	 * Does nothing. The GraphViz style attribute does not affect the
+	 * network view
+	 */
+	@Override
+	protected void setStyle(String attrVal,
+			View<? extends CyIdentifiable> elementView) {
+		//Network doesn't have properties set with style attribute
+	}
+
+	/**
+	 * Does nothing. The GraphViz style attribute does not affect the
+	 * network view
+	 */
+	@Override
+	protected void setStyle(String attrVal, VisualStyle vizStyle) {
+		//Network doesn't have properties set with style attribute
 	}
 }

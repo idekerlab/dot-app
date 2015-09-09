@@ -28,6 +28,103 @@ import org.junit.Test;
 
 public class MapperTest {
 
+	//@Ignore
+	@Test 
+	public void testEdgeGetElementString() {
+		NetworkTestSupport nts = new NetworkTestSupport();
+		CyNetwork network = nts.getNetwork();
+		CyNode node = network.addNode();
+		CyNode node2 = network.addNode();
+		CyEdge edge = network.addEdge(node, node2, true);
+		TestVisualStyle vizStyle = new TestVisualStyle();
+		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
+		network.getRow(node2).set(CyNetwork.NAME, "TestNode2");
+		network.getRow(edge).set(CyNetwork.NAME, "TestEdge1");
+		CyNetworkView networkView = new TestNetworkView(network);
+		View<CyEdge> edgeView = networkView.getEdgeView(edge);
+		String label = "Hello World!";
+		String tooltip = "Hello!";
+		Double width = new Double(25);
+
+		String labelString = String.format("label = \"%s\"", label);
+		String tooltipString = String.format("tooltip = \"%s\"", tooltip);
+		String expectedDotString = null;
+		String actualDotString = null;
+		String widthString = String.format("penwidth = \"%f\"", width);
+		String fontColor = "fontcolor = \"#FF00FFFF\"";
+		String colorString = "color = \"#FFFF00FF\"";
+
+		
+		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LABEL, label);
+		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, width);
+		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP, tooltip);
+		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, new Color(0xFF, 0xFF, 0x00));
+		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LABEL_COLOR, new Color(0xFF, 0x00, 0xFF));
+		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LINE_TYPE, LineTypeVisualProperty.EQUAL_DASH);
+		labelString = String.format("label = \"%s\"", label);
+		expectedDotString = String.format("[%s,%s,%s,%s,%s,style = \"dashed\"]", labelString, widthString,
+				tooltipString, colorString,  fontColor);
+
+		Mapper mapper = new EdgePropertyMapper(edgeView, vizStyle, networkView);
+		actualDotString = mapper.getElementString();
+
+		assertEquals("Edge Cytoscape property translation failed", expectedDotString, actualDotString);
+		
+	}
+	
+	//@Ignore()
+	@Test
+	public void testModifyElementID() {
+		assertEquals("ModifyElementId is wrong", "TestNode1", Mapper.modifyElementID("TestNode1"));
+		assertEquals("ModifyElementId is wrong", ".59", Mapper.modifyElementID(".59"));
+		assertEquals("ModifyElementId is wrong", "\"9.-\"", Mapper.modifyElementID("9.-"));
+		assertEquals("ModifyElementId is wrong", "8.8", Mapper.modifyElementID("8.8"));
+		assertEquals("ModifyElementId is wrong", "\"Hello\"", Mapper.modifyElementID("\"Hello\""));
+		assertEquals("ModifyElementId is wrong", "<Hello>", Mapper.modifyElementID("<Hello>"));
+		assertEquals("ModifyElementId is wrong", "\"123baba\"", Mapper.modifyElementID("123baba"));
+		assertEquals("ModifyElementId is wrong", "\"\\\"Hi\\\"Harry\\\"\\\"\"", Mapper.modifyElementID("\"Hi\"Harry\"\""));
+		System.out.println(String.valueOf(new Character('\u2014')));
+		assertEquals("ModifyElementId is wrong", "\227", Mapper.modifyElementID("\227"));
+		
+	}
+	
+	//@Ignore
+	@Test
+	public void testNetworkGetElementString() {
+		NetworkTestSupport nts = new NetworkTestSupport();
+		CyNetwork network = nts.getNetwork();
+		CyNode node = network.addNode();
+		CyNode node2 = network.addNode();
+		TestVisualStyle vizStyle = new TestVisualStyle();
+		CyEdge edge = network.addEdge(node, node2, true);
+		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
+		network.getRow(node2).set(CyNetwork.NAME, "TestNode2");
+		network.getRow(edge).set(CyNetwork.NAME, "TestEdge1");
+		network.getRow(network).set(CyNetwork.NAME, "TestNetwork");
+		CyNetworkView networkView = new TestNetworkView(network);
+		View<CyEdge> edgeView = networkView.getEdgeView(edge);
+		String label = "Hello World!";
+		networkView.setVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_PAINT, new Color(0xAA, 0x95, 0x00, 0xFF));
+		networkView.setVisualProperty(BasicVisualLexicon.NETWORK_TITLE, label);
+		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE, ArrowShapeVisualProperty.ARROW);
+		String labelString = String.format("label = \"%s\"", label);
+		String labelLocString = String.format("labelloc = %s", "b");
+		String colorString = "bgcolor = \"#AA9500FF\"";
+		String splinesString = "splines = \"false\"";
+		String outputString = "outputorder = \"edgesfirst\"";
+		String esepString = "esep = \"0\"";
+		String marginString = "pad = \"2\"";
+		String nodeDefaults = "node [label = \"\",penwidth = \"2.000000\",height = \"0.555556\",width = \"0.833333\",tooltip = \"\",color = \"#000000FF\",fillcolor = \"#C80000FF\",shape = \"ellipse\",style = \"solid,filled\",fontname = \"SansSerif.plain\",fontsize = \"12\",fontcolor = \"#000000FF\",fixedsize = \"true\",labelloc = \"c\"]";
+		String edgeDefaults = "edge [label = \"\",penwidth = \"1.000000\",tooltip = \"\",arrowhead = \"none\",arrowtail = \"none\",color = \"#404040FF\",fontname = \"SansSerif.plain\",fontsize = \"10\",fontcolor = \"#000000FF\",style = \"solid\",dir = \"both\"]";
+		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
+				labelString, labelLocString, colorString, splinesString, outputString, esepString, marginString, nodeDefaults, edgeDefaults); 
+
+		Mapper mapper = new NetworkPropertyMapper(networkView, NetworkPropertyMapper.isDirected(networkView), "false", "b" , "c", vizStyle);
+		String actualDotString = mapper.getElementString();
+
+		assertEquals("Network Properties and Visual Style translation failed", expectedDotString, actualDotString);
+	}
+	
 	//@Ignore()
 	@Test
 	public void testNodeGetElementString() {
@@ -97,103 +194,6 @@ public class MapperTest {
 		actualDotString = mapper.getElementString();
 
 		assertEquals("Node Cytoscape property translation failed.", expectedDotString, actualDotString);
-		
-	}
-	
-	//@Ignore
-	@Test 
-	public void testEdgeGetElementString() {
-		NetworkTestSupport nts = new NetworkTestSupport();
-		CyNetwork network = nts.getNetwork();
-		CyNode node = network.addNode();
-		CyNode node2 = network.addNode();
-		CyEdge edge = network.addEdge(node, node2, true);
-		TestVisualStyle vizStyle = new TestVisualStyle();
-		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
-		network.getRow(node2).set(CyNetwork.NAME, "TestNode2");
-		network.getRow(edge).set(CyNetwork.NAME, "TestEdge1");
-		CyNetworkView networkView = new TestNetworkView(network);
-		View<CyEdge> edgeView = networkView.getEdgeView(edge);
-		String label = "Hello World!";
-		String tooltip = "Hello!";
-		Double width = new Double(25);
-
-		String labelString = String.format("label = \"%s\"", label);
-		String tooltipString = String.format("tooltip = \"%s\"", tooltip);
-		String expectedDotString = null;
-		String actualDotString = null;
-		String widthString = String.format("penwidth = \"%f\"", width);
-		String fontColor = "fontcolor = \"#FF00FFFF\"";
-		String colorString = "color = \"#FFFF00FF\"";
-
-		
-		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LABEL, label);
-		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_WIDTH, width);
-		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_TOOLTIP, tooltip);
-		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT, new Color(0xFF, 0xFF, 0x00));
-		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LABEL_COLOR, new Color(0xFF, 0x00, 0xFF));
-		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_LINE_TYPE, LineTypeVisualProperty.EQUAL_DASH);
-		labelString = String.format("label = \"%s\"", label);
-		expectedDotString = String.format("[%s,%s,%s,%s,%s,style = \"dashed\"]", labelString, widthString,
-				tooltipString, colorString,  fontColor);
-
-		Mapper mapper = new EdgePropertyMapper(edgeView, vizStyle, networkView);
-		actualDotString = mapper.getElementString();
-
-		assertEquals("Edge Cytoscape property translation failed", expectedDotString, actualDotString);
-		
-	}
-	
-	//@Ignore
-	@Test
-	public void testNetworkGetElementString() {
-		NetworkTestSupport nts = new NetworkTestSupport();
-		CyNetwork network = nts.getNetwork();
-		CyNode node = network.addNode();
-		CyNode node2 = network.addNode();
-		TestVisualStyle vizStyle = new TestVisualStyle();
-		CyEdge edge = network.addEdge(node, node2, true);
-		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
-		network.getRow(node2).set(CyNetwork.NAME, "TestNode2");
-		network.getRow(edge).set(CyNetwork.NAME, "TestEdge1");
-		network.getRow(network).set(CyNetwork.NAME, "TestNetwork");
-		CyNetworkView networkView = new TestNetworkView(network);
-		View<CyEdge> edgeView = networkView.getEdgeView(edge);
-		String label = "Hello World!";
-		networkView.setVisualProperty(BasicVisualLexicon.NETWORK_BACKGROUND_PAINT, new Color(0xAA, 0x95, 0x00, 0xFF));
-		networkView.setVisualProperty(BasicVisualLexicon.NETWORK_TITLE, label);
-		edgeView.setVisualProperty(BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE, ArrowShapeVisualProperty.ARROW);
-		String labelString = String.format("label = \"%s\"", label);
-		String labelLocString = String.format("labelloc = %s", "b");
-		String colorString = "bgcolor = \"#AA9500FF\"";
-		String splinesString = "splines = \"false\"";
-		String outputString = "outputorder = \"edgesfirst\"";
-		String esepString = "esep = \"0\"";
-		String marginString = "pad = \"2\"";
-		String nodeDefaults = "node [label = \"\",penwidth = \"2.000000\",height = \"0.555556\",width = \"0.833333\",tooltip = \"\",color = \"#000000FF\",fillcolor = \"#C80000FF\",shape = \"ellipse\",style = \"solid,filled\",fontname = \"SansSerif.plain\",fontsize = \"12\",fontcolor = \"#000000FF\",fixedsize = \"true\",labelloc = \"c\"]";
-		String edgeDefaults = "edge [label = \"\",penwidth = \"1.000000\",tooltip = \"\",arrowhead = \"none\",arrowtail = \"none\",color = \"#404040FF\",fontname = \"SansSerif.plain\",fontsize = \"10\",fontcolor = \"#000000FF\",style = \"solid\",dir = \"both\"]";
-		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
-				labelString, labelLocString, colorString, splinesString, outputString, esepString, marginString, nodeDefaults, edgeDefaults); 
-
-		Mapper mapper = new NetworkPropertyMapper(networkView, NetworkPropertyMapper.isDirected(networkView), "false", "b" , "c", vizStyle);
-		String actualDotString = mapper.getElementString();
-
-		assertEquals("Network Properties and Visual Style translation failed", expectedDotString, actualDotString);
-	}
-	
-	//@Ignore()
-	@Test
-	public void testModifyElementID() {
-		assertEquals("ModifyElementId is wrong", "TestNode1", Mapper.modifyElementID("TestNode1"));
-		assertEquals("ModifyElementId is wrong", ".59", Mapper.modifyElementID(".59"));
-		assertEquals("ModifyElementId is wrong", "\"9.-\"", Mapper.modifyElementID("9.-"));
-		assertEquals("ModifyElementId is wrong", "8.8", Mapper.modifyElementID("8.8"));
-		assertEquals("ModifyElementId is wrong", "\"Hello\"", Mapper.modifyElementID("\"Hello\""));
-		assertEquals("ModifyElementId is wrong", "<Hello>", Mapper.modifyElementID("<Hello>"));
-		assertEquals("ModifyElementId is wrong", "\"123baba\"", Mapper.modifyElementID("123baba"));
-		assertEquals("ModifyElementId is wrong", "\"\\\"Hi\\\"Harry\\\"\\\"\"", Mapper.modifyElementID("\"Hi\"Harry\"\""));
-		System.out.println(String.valueOf(new Character('\u2014')));
-		assertEquals("ModifyElementId is wrong", "\227", Mapper.modifyElementID("\227"));
 		
 	}
 }

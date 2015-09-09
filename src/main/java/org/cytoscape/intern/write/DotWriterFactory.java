@@ -25,13 +25,13 @@ import org.cytoscape.view.vizmap.VisualMappingManager;
  */
 public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	
-	private CyFileFilter fileFilter;
-	
-	private VisualMappingManager vizMapMgr;
-	
 	private static final Logger LOGGER = Logger.getLogger("org.cytoscape.intern.write.DotWriterFactory");
 	
 	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
+	
+	private CyFileFilter fileFilter;
+	
+	private VisualMappingManager vizMapMgr;
 	
 	/**
 	 * Constructs a DotWriterFactory object with a given CyFileFilter
@@ -60,16 +60,6 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	}
 
 	/**
-	 * Returns CyFileFilter associated with this factory
-	 * 
-	 * @return CyFileFilter for this factory
-	 */
-	@Override
-	public CyFileFilter getFileFilter() {
-		return fileFilter;
-	}
-	 
-	/**
 	 * Returns a task that writes a specified network to a specified stream.
 	 * Notifies user that using this option results in large loss of data and recommends
 	 * to export with view. Export will only include node and edge declarations
@@ -88,7 +78,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 				+ "Use File -> Export -> Network and View... instead to maintain visual information", Notifier.MessageType.INFO);
 		return new DotWriterTask(outStream, network);
 	}
-	
+	 
 	/**
 	 * Creates a task that writes a specified network and its view to a specified stream
 	 * 
@@ -101,5 +91,15 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	public CyWriter createWriter(OutputStream outStream, CyNetworkView view) {
 		LOGGER.info("createWriter with CyNetworkView param called");
 		return new DotWriterTask(outStream, view, vizMapMgr);
+	}
+	
+	/**
+	 * Returns CyFileFilter associated with this factory
+	 * 
+	 * @return CyFileFilter for this factory
+	 */
+	@Override
+	public CyFileFilter getFileFilter() {
+		return fileFilter;
 	}
 }

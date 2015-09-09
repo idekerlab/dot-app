@@ -37,6 +37,15 @@ public class CyActivator extends AbstractCyActivator {
 	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
 	
 	/**
+	 * Closes file handlers and shuts down app using super call
+	 */
+	@Override
+	public void shutDown() {
+		FILE_HANDLER_MGR.closeAllFileHandlers();
+		super.shutDown();
+	}
+
+	/**
 	 * Method that runs when class is activated-- will start dot app
 	 * 
 	 * @param context the OSGi context in which this class is activated
@@ -105,14 +114,5 @@ public class CyActivator extends AbstractCyActivator {
 		LOGGER.info("Registering GradientListener as OSGI service listener...");
 		registerServiceListener(context, gradientListener, "addCustomGraphicsFactory", "removeCustomGraphicsFactory", CyCustomGraphics2Factory.class);
 
-	}
-
-	/**
-	 * Closes file handlers and shuts down app using super call
-	 */
-	@Override
-	public void shutDown() {
-		FILE_HANDLER_MGR.closeAllFileHandlers();
-		super.shutDown();
 	}
 }

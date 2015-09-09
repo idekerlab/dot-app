@@ -1,13 +1,13 @@
 package org.cytoscape.intern.read.reader;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Scanner;
 import java.awt.Color;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.FileNotFoundException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Handles mapping of String colors to Java Color objects

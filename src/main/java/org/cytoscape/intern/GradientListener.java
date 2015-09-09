@@ -4,6 +4,11 @@ import java.util.Map;
 
 import org.cytoscape.view.presentation.customgraphics.CyCustomGraphics2Factory;
 
+/**
+ * Service Listener used to retrieve the Cytoscape Gradient factories
+ * @author bfitts
+ *
+ */
 public class GradientListener {
 	private static final String LINEAR_FACTORY_ID = "org.cytoscape.LinearGradient";
 	private static final String RADIAL_FACTORY_ID = "org.cytoscape.RadialGradient";
@@ -19,6 +24,13 @@ public class GradientListener {
 		}
 	}
 	        
+	public CyCustomGraphics2Factory<?> getLinearFactory() {
+		return linearFactory;
+	}
+	        
+	public CyCustomGraphics2Factory<?> getRadialFactory() {
+		return radialFactory;
+	}
 	public void removeCustomGraphicsFactory(CyCustomGraphics2Factory<?> factory, Map<Object,Object> serviceProps) {
 		if (linearFactory.equals(factory)) {
 	        this.linearFactory = null;
@@ -26,12 +38,5 @@ public class GradientListener {
 		else if (radialFactory.equals(factory)) {
 			this.radialFactory = null;
 		}
-	}
-	        
-	public CyCustomGraphics2Factory<?> getLinearFactory() {
-		return linearFactory;
-	}
-	public CyCustomGraphics2Factory<?> getRadialFactory() {
-		return radialFactory;
 	}
 }

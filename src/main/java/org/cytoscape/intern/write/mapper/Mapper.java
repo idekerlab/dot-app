@@ -56,14 +56,9 @@ import org.cytoscape.view.vizmap.VisualStyle;
  */
 public abstract class Mapper {
 
-	// maps Cytoscape properties  by their ID Strings to their .dot equivalents if relationship is simple equivalency
-	protected ArrayList<String> simpleVisPropsToDot; 
-	
-	// VisualStyle applied to the view
-	protected VisualStyle vizStyle;
-	
 	// if node width and height are locked
-	private static boolean nodeSizesLockedIsSet = false;
+	private static boolean nodeSizesLockedIsSet = false; 
+	
 	protected static boolean nodeSizesLocked;
 	
 	/*
@@ -93,7 +88,7 @@ public abstract class Mapper {
 		NODE_SHAPE_MAP.put(ROUND_RECTANGLE, "rectangle");
 		NODE_SHAPE_MAP.put(RECTANGLE, "rectangle");
 	}
-
+	
 	/**
 	 * Maps Cytoscape arrowhead types to the equivalent dot attribute
 	 */
@@ -110,16 +105,15 @@ public abstract class Mapper {
 		ARROW_SHAPE_MAP.put(ArrowShapeVisualProperty.T, "tee");
 	}
 
-	// view that this mapper object is mapping
-	protected View<? extends CyIdentifiable> view;
-	
 	// Pixel per inch scaling factor
 	protected static final double PPI = 72;
-
 	// debug logger
 	protected static final Logger LOGGER;
+
 	protected static FileHandler handler = null;
+	
 	private static final FileHandlerManager FILE_HANDLER_MGR = FileHandlerManager.getManager();
+
 	// Initialize logger with file handler
 	static {
 		LOGGER = Logger.getLogger("org.cytoscape.intern.mapper.Mapper");
@@ -137,6 +131,77 @@ public abstract class Mapper {
 		LOGGER.addHandler(handler);
 		FILE_HANDLER_MGR.registerFileHandler(handler);
 	}
+	/**
+	 * Checks whether node size is locked,
+	 * "Lock node and width height" checkbox
+	 * 
+	 * @param visualStyle VisualStyle being checked if node sizes are locked
+	 * @return true if size is locked, false if not
+	 */
+	private static boolean areNodeSizesLocked(VisualStyle visualStyle) {
+		LOGGER.info("Determining if NODE_HEIGHT/NODE_WIDTH are locked...");
+		Set<VisualPropertyDependency<?>> vizDependencies = visualStyle.getAllVisualPropertyDependencies();
+		boolean output = false;
+		
+		// go through all dependencies and find lock height and width one
+		for(VisualPropertyDependency<?> dependency: vizDependencies) {
+			LOGGER.info(dependency.getIdString());
+			if((dependency.getIdString()).equals("nodeSizeLocked")) {
+				output = dependency.isDependencyEnabled();
+			}
+		}
+
+		return output;
+	}
+	/**
+	 * Used to change an id string of a graph element to comply with dot ID requirements
+	 * Dot names must be a string of alphanumeric characters and underscores,
+	 * not beginning with a digit
+	 * 
+	 * @param id is String we are modifying
+	 * @return is .dot-compliant ID String where all leading numbers are removed
+	 * and put at the end of the string and all dis-allowed characters are replaced
+	 * with underscores
+	 */
+	public static String modifyElementID(String id) {
+		LOGGER.info("Preparing to transform ID");
+		String alphaNumRegEx = "[a-zA-Z\200-\377_][a-zA-Z\200-\377_0-9]*";
+		String numericRegEx = "[-]?([.][0-9]+|[0-9]+([.][0-9]*)?)";
+		String quotedRegEx = "\"[^\"]*(\\\")*[^\"]*\"";
+		String htmlRegEx = "<.*>";
+		if (id.matches(alphaNumRegEx)) {
+			LOGGER.info("Passed-in ID is an Alphanumeric ID");
+			return id;
+		}
+		if (id.matches(numericRegEx)) {
+			LOGGER.info("Passed-in ID is a Numeric ID");
+			return id;
+		}
+		if (id.matches(quotedRegEx)) {
+			LOGGER.info("Passed-in ID is a Quoted ID");
+			return id;
+		}
+		if (id.matches(htmlRegEx)) {
+			LOGGER.info("Passed-in ID is an HTML ID");
+			return id;
+		}
+		LOGGER.info("None of the above. Transforming to Quoted ID");
+		StringBuilder output = new StringBuilder(id.length() + 2);
+		output.append('\"');
+		// replace any quotations from name string with escaped quotes
+		id = id.replace("\"", "\\\"");
+		output.append(id);
+		output.append('\"');
+		return output.toString();
+	}
+	// maps Cytoscape properties  by their ID Strings to their .dot equivalents if relationship is simple equivalency
+	protected ArrayList<String> simpleVisPropsToDot;
+	
+	// VisualStyle applied to the view
+	protected VisualStyle vizStyle;	
+	
+	// view that this mapper object is mapping
+	protected View<? extends CyIdentifiable> view;
 	
 	/**
 	 * Constructor for Mapper objects
@@ -151,7 +216,30 @@ public abstract class Mapper {
 			nodeSizesLocked = areNodeSizesLocked(vizStyle);
 			nodeSizesLockedIsSet = true;
 		}
-	}	
+	}
+	
+	/**
+	 * Checks whether a value is equal to the default value set for a
+	 * VisualProperty by the Visual Style applied to the network
+	 * 
+	 * @param val The value being checked
+	 * @param vizProp VisualProperty against which val is being checked
+	 * @return boolean. True when value is equal, false if not
+	 */
+	protected <T> boolean isEqualToDefault(T val, VisualProperty<T> vizProp) {
+		return val.equals(vizStyle.getDefaultValue(vizProp));
+	}
+	
+	/**
+	 * Checks whether the value of a VisualProperty applied to the view is equal
+	 * to the default value set for that VP by the Visual Style applied to the network
+	 * 
+	 * @param vizProp VisualProperty being compared
+	 * @return boolean. True when value is equal, false if not
+	 */
+	protected boolean isEqualToDefault(VisualProperty<?> vizProp) {
+		return view.getVisualProperty(vizProp).equals(vizStyle.getDefaultValue(vizProp));
+	}
 	
 	/**
 	 * Given a color, returns the color in String format that .dot uses for color.
@@ -170,6 +258,12 @@ public abstract class Mapper {
 		LOGGER.info("Created .dot color attribute string. Result: " + result);
 		return result;
 	}
+	
+	/**
+	 * Returns the .dot equivalent in String form for style attribute. Only handles linestyle
+	 * Does not include "style=" bit
+	 */
+	abstract protected String mapDotStyle();
 	
 	/**
 	 * Given a font, returns the .dot equivalent in String form including the
@@ -268,36 +362,7 @@ public abstract class Mapper {
 		return returnValue.toString();		
 		
 	}
-	
-	/**
-	 * Returns the .dot equivalent in String form for style attribute. Only handles linestyle
-	 * Does not include "style=" bit
-	 */
-	abstract protected String mapDotStyle();
-	
-	/**
-	 * Checks whether the value of a VisualProperty applied to the view is equal
-	 * to the default value set for that VP by the Visual Style applied to the network
-	 * 
-	 * @param vizProp VisualProperty being compared
-	 * @return boolean. True when value is equal, false if not
-	 */
-	protected boolean isEqualToDefault(VisualProperty<?> vizProp) {
-		return view.getVisualProperty(vizProp).equals(vizStyle.getDefaultValue(vizProp));
-	}
-	
-	/**
-	 * Checks whether a value is equal to the default value set for a
-	 * VisualProperty by the Visual Style applied to the network
-	 * 
-	 * @param val The value being checked
-	 * @param vizProp VisualProperty against which val is being checked
-	 * @return boolean. True when value is equal, false if not
-	 */
-	protected <T> boolean isEqualToDefault(T val, VisualProperty<T> vizProp) {
-		return val.equals(vizStyle.getDefaultValue(vizProp));
-	}
-	
+
 	/**
 	 * Returns the String that denotes a position in .dot format
 	 * Note: Positive in graphviz is up and right, positive in cytoscape
@@ -311,71 +376,6 @@ public abstract class Mapper {
 		/*x /= PPI;
 		y /= PPI;*/
 		return String.format("%f,%f", x, -1*y);
-	}
-	
-	/**
-	 * Used to change an id string of a graph element to comply with dot ID requirements
-	 * Dot names must be a string of alphanumeric characters and underscores,
-	 * not beginning with a digit
-	 * 
-	 * @param id is String we are modifying
-	 * @return is .dot-compliant ID String where all leading numbers are removed
-	 * and put at the end of the string and all dis-allowed characters are replaced
-	 * with underscores
-	 */
-	public static String modifyElementID(String id) {
-		LOGGER.info("Preparing to transform ID");
-		String alphaNumRegEx = "[a-zA-Z\200-\377_][a-zA-Z\200-\377_0-9]*";
-		String numericRegEx = "[-]?([.][0-9]+|[0-9]+([.][0-9]*)?)";
-		String quotedRegEx = "\"[^\"]*(\\\")*[^\"]*\"";
-		String htmlRegEx = "<.*>";
-		if (id.matches(alphaNumRegEx)) {
-			LOGGER.info("Passed-in ID is an Alphanumeric ID");
-			return id;
-		}
-		if (id.matches(numericRegEx)) {
-			LOGGER.info("Passed-in ID is a Numeric ID");
-			return id;
-		}
-		if (id.matches(quotedRegEx)) {
-			LOGGER.info("Passed-in ID is a Quoted ID");
-			return id;
-		}
-		if (id.matches(htmlRegEx)) {
-			LOGGER.info("Passed-in ID is an HTML ID");
-			return id;
-		}
-		LOGGER.info("None of the above. Transforming to Quoted ID");
-		StringBuilder output = new StringBuilder(id.length() + 2);
-		output.append('\"');
-		// replace any quotations from name string with escaped quotes
-		id = id.replace("\"", "\\\"");
-		output.append(id);
-		output.append('\"');
-		return output.toString();
-	}
-
-	/**
-	 * Checks whether node size is locked,
-	 * "Lock node and width height" checkbox
-	 * 
-	 * @param visualStyle VisualStyle being checked if node sizes are locked
-	 * @return true if size is locked, false if not
-	 */
-	private static boolean areNodeSizesLocked(VisualStyle visualStyle) {
-		LOGGER.info("Determining if NODE_HEIGHT/NODE_WIDTH are locked...");
-		Set<VisualPropertyDependency<?>> vizDependencies = visualStyle.getAllVisualPropertyDependencies();
-		boolean output = false;
-		
-		// go through all dependencies and find lock height and width one
-		for(VisualPropertyDependency<?> dependency: vizDependencies) {
-			LOGGER.info(dependency.getIdString());
-			if((dependency.getIdString()).equals("nodeSizeLocked")) {
-				output = dependency.isDependencyEnabled();
-			}
-		}
-
-		return output;
 	}	
 
 	/**
