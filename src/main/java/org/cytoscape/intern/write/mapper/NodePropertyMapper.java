@@ -142,21 +142,18 @@ public class NodePropertyMapper extends Mapper {
 		        elementString.append(dotAttribute);
 		        elementString.append(",");
 		}
-		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
 		
 		// Write fillcolor and color attribute
 		String colorsString = mapColors();
 		if (colorsString != null) {
 			elementString.append(colorsString + ",");
 		}
-		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 
 		// Write nodeShape
 		String shapeString = mapShape();
 		if (shapeString != null) {
 			elementString.append(mapShape() + ",");
 		}
-		LOGGER.info("Appended shape attribute to .dot string. Result: " + elementString);
 		
 
 		// Get the .dot string for the node style. Append to attribute string
@@ -164,10 +161,8 @@ public class NodePropertyMapper extends Mapper {
 		if (styleString != null) {
 			elementString.append(styleString + ",");
 		}
-		LOGGER.info("Style info appended. Resulting String: " + elementString);
 		
 		// Append font name+size+color attributes
-		LOGGER.info("Appending font data");
 		String fontString = mapFontHelper();
 		if (fontString != null) {
 			elementString.append(fontString);

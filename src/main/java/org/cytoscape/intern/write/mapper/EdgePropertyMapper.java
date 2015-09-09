@@ -131,9 +131,7 @@ public class EdgePropertyMapper extends Mapper {
 		        elementString.append(dotAttribute);
 		        elementString.append(",");
 		}
-		LOGGER.info("Built up .dot string from simple properties. Resulting string: " + elementString);
 		
-		LOGGER.info("Preparing to get color properties");
 		// Get the color and fillcolor .dot strings. Append to attribute string
 		if (!isEqualToDefault(EDGE_STROKE_UNSELECTED_PAINT) || !isEqualToDefault(EDGE_TRANSPARENCY)) {
 			Color strokeColor = (Color) view.getVisualProperty(EDGE_STROKE_UNSELECTED_PAINT);
@@ -141,21 +139,16 @@ public class EdgePropertyMapper extends Mapper {
 			String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
 			elementString.append(dotColor + ",");
 		}
-		LOGGER.info("Appended color attributes to .dot string. Result: " + elementString);
 		
-		LOGGER.info("Preparing to map edge label Font attributes");
 		String fontString = mapFontHelper();
 		if(fontString != null) {
 			elementString.append(fontString + ",");
-			LOGGER.info("Appened label attributes to .dot string. Result: " + elementString);
 		}
 
 		// Style attr
-		LOGGER.info("Appending style attribute to .dot string");
 		String styleString = mapDotStyle();
 		if (styleString != null) {
 			elementString.append(styleString);
-			LOGGER.info("Appended style attribute. Result: " + elementString);
 		}
 		
 		if (elementString.charAt(elementString.length() - 1) == ',') {
