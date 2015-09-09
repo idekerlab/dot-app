@@ -360,12 +360,12 @@ public abstract class Reader {
 				catch (NumberFormatException exception) {
 					LOGGER.severe("Error: Color list contains invalid weight");
 				}
-				LOGGER.info(String.format("Retrieved weighted color from color list. Result: %s;%f", color.toString(), weight));
+				LOGGER.fine(String.format("Retrieved weighted color from color list. Result: %s;%f", color.toString(), weight));
 				colorAndWeightPairs.add(Pair.of(color, weight));
 			}
 			else {
 				Color color = convertColor(weightedColor);
-				LOGGER.info(String.format("Retrieved color with no weight from color list. Result: %s", color.toString()));
+				LOGGER.fine(String.format("Retrieved color with no weight from color list. Result: %s", color.toString()));
 				colorAndWeightPairs.add(Pair.of(color, (Float)null));
 			}
 			numColors++;

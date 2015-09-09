@@ -21,6 +21,7 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_Y
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -197,6 +198,12 @@ public class NodeReader extends Reader{
 			String fillAttribute = bypassAttrs.get("fillcolor");
 			String gradientAngle = bypassAttrs.get("gradientangle");
 			
+			//Attempt to get the default gradient angle
+			String defaultGradientAngle = defaultAttrs.get("gradientangle");
+			if (defaultGradientAngle == null) {
+				defaultGradientAngle = "0";
+			}
+			
 			//Assume that the "color" and "fillcolor" attributes are from
 			//the specific element
 			boolean isBypassColorAttr = true;
@@ -229,7 +236,9 @@ public class NodeReader extends Reader{
 					 * default list but the gradient style is different or angle
 					 * is different
 					 */
-					if (styleAttribute != null && !styleAttribute.equals(defaultAttrs.get("style"))) {
+					if (styleAttribute != null && 
+						(!styleAttribute.equals(defaultAttrs.get("style")) ||
+							!gradientAngle.equals(defaultGradientAngle))) {
 						createGradient(colorListValues, elementView, styleAttribute, gradientAngle);
 					}
 				}
@@ -252,14 +261,14 @@ public class NodeReader extends Reader{
 					 * default list but the gradient style is different or angle
 					 * is different
 					 */
-					if (styleAttribute != null && !styleAttribute.equals(defaultAttrs.get("style"))) {
+					if (styleAttribute != null && 
+						(!styleAttribute.equals(defaultAttrs.get("style")) ||
+							!gradientAngle.equals(defaultGradientAngle))) {
 						createGradient(colorListValues, elementView, styleAttribute, gradientAngle);
 					}
 				}
-				else {
-					if (isBypassColorAttr) {
-						setColor(colorAttribute, elementView, ColorAttribute.COLOR);
-					}
+				if (isBypassColorAttr) {
+					setColor(colorAttribute, elementView, ColorAttribute.COLOR);
 				}
 			}
 		}
@@ -281,6 +290,7 @@ public class NodeReader extends Reader{
 		float start = 0;
 		float remain = 1;
 		boolean adjustStart = false;
+		boolean usingLinearFactory = true;
 		/*
 		 * Determine which Gradient graphic factory to get based on style attribute
 		 * if it contains "radial" get the radial factory
@@ -290,6 +300,7 @@ public class NodeReader extends Reader{
 		CyCustomGraphics2Factory<?> factory = gradientListener.getLinearFactory();
 		if (styleAttribute.contains("radial")) {
 			factory = gradientListener.getRadialFactory();
+			usingLinearFactory = false;
 		}
 		List<Color> colors = new ArrayList<Color>(colorListValues.size());
 		List<Float> weights = new ArrayList<Float>(colorListValues.size());
@@ -318,16 +329,35 @@ public class NodeReader extends Reader{
 		HashMap<String, Object> gradientProps = new HashMap();
 		gradientProps.put("cy_gradientFractions", weights);
 		gradientProps.put("cy_gradientColors", colors);
-		gradientProps.put("cy_angle", Double.parseDouble(gradientAngle));
+		if (usingLinearFactory) {
+			gradientProps.put("cy_angle", Double.parseDouble(gradientAngle));
+		}
+		else {
+			Point2D point = convertAngleToPoint(Double.parseDouble(gradientAngle));
+			gradientProps.put("cy_center", point);
+		}
 		vizStyle.setDefaultValue(nodeGradientProp, factory.getInstance(gradientProps));
 		
 		
 	}
+	private Point2D convertAngleToPoint(double angle) {
+		double center = 0.5;
+		if (angle == 0.0) {
+			return new Point2D.Double(center, center);
+		}
+		Point2D.Double doublePoint;
+		double x = (.5 * Math.cos(Math.toRadians(angle))) + center;
+		double y = (-.5 * Math.sin(Math.toRadians(angle))) + center;
+		doublePoint = new Point2D.Double(x, y);
+		return doublePoint;
+	}
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void createGradient(List<Pair<Color, Float>> colorListValues,
 			View<CyNode> elementView, String styleAttribute, String gradientAngle) {
-		LOGGER.info("Retrieving VisualProperty NODE_CUSTOM_GRAPHICS_1");
+		LOGGER.info("Creating gradient...");
 
+		LOGGER.fine("Retrieving VisualProperty NODE_CUSTOMGRAPHICS_1");
 		VisualProperty<CyCustomGraphics> nodeGradientProp = 
 				(VisualProperty<CyCustomGraphics>) vizLexicon.lookup(CyNode.class, "NODE_CUSTOMGRAPHICS_1");
 
@@ -339,36 +369,51 @@ public class NodeReader extends Reader{
 		float start = 0;
 		float remain = 1;
 		boolean adjustStart = false;
+		boolean usingLinearFactory = true;
 		/*
 		 * Determine which Gradient graphic factory to get based on style attribute
 		 * if it contains "radial" get the radial factory
 		 * otherwise get the linear
 		 */
 
+		LOGGER.info("Retrieving Gradient factory...");
 		CyCustomGraphics2Factory<?> factory = gradientListener.getLinearFactory();
-		if (styleAttribute != null && styleAttribute.contains("radial")) {
+		if (styleAttribute.contains("radial")) {
 			factory = gradientListener.getRadialFactory();
+			usingLinearFactory = false;
+			LOGGER.fine("Retrieved Radial Gradient factory.");
 		}
 		List<Color> colors = new ArrayList<Color>(colorListValues.size());
 		List<Float> weights = new ArrayList<Float>(colorListValues.size());
 
 		for (Pair<Color, Float> colorAndWeightPair : colorListValues) {
-			colors.add(colorAndWeightPair.getLeft());
-			Float weight = colorAndWeightPair.getRight();
-			if (weight == null) {
+			Color retrievedColor = colorAndWeightPair.getLeft();
+			Float retrievedWeight = colorAndWeightPair.getRight();
+			LOGGER.fine(
+				String.format("Retrieved color %s with weight %f",
+					retrievedColor, retrievedWeight)
+			);
+			colors.add(retrievedColor);
+			if (retrievedWeight == null) {
 				adjustStart = true;
 				weights.add(new Float(start));
 				continue;
 			}
 			if (adjustStart) {
-				start = remain - weight.floatValue();
+				start = remain - retrievedWeight.floatValue();
+				adjustStart = false;
 			}
 			weights.add(new Float(start));
-			start = start + weight.floatValue();
+			start = start + retrievedWeight.floatValue();
 		}
 		if (start == 0 && remain == 1) {
 			weights = new ArrayList<Float>(colorListValues.size());
+			LOGGER.fine(
+				String.format("Each color will now take up %f of gradient", 
+					1f/colorListValues.size())
+			);
 			for (; start < remain; start += (1f/colorListValues.size())) {
+
 				weights.add(start);
 			}
 		}
@@ -376,7 +421,13 @@ public class NodeReader extends Reader{
 		HashMap<String, Object> gradientProps = new HashMap();
 		gradientProps.put("cy_gradientFractions", weights);
 		gradientProps.put("cy_gradientColors", colors);
-		gradientProps.put("cy_angle", Double.parseDouble(gradientAngle));
+		if (usingLinearFactory) {
+			gradientProps.put("cy_angle", Double.parseDouble(gradientAngle));
+		}
+		else {
+			Point2D point = convertAngleToPoint(Double.parseDouble(gradientAngle));
+			gradientProps.put("cy_center", point);
+		}
 
 		elementView.setLockedValue(nodeGradientProp, factory.getInstance(gradientProps));
 	}
@@ -510,22 +561,26 @@ public class NodeReader extends Reader{
 
 		// Get default node visibility
 		boolean isVisibleDefault = vizStyle.getDefaultValue(NODE_VISIBLE);
+		// Get default node border line type
+		LineType defaultLineType = vizStyle.getDefaultValue(NODE_BORDER_LINE_TYPE);
 
 		for (String styleAttr : styleAttrs) {
 			styleAttr = styleAttr.trim();
 
 			LineType lineType = LINE_TYPE_MAP.get(styleAttr);
-			if (lineType != null) {
+			if (lineType != null && !lineType.equals(defaultLineType)) {
 				elementView.setLockedValue(NODE_BORDER_LINE_TYPE, lineType);
 			}
 		}
 		
 		// check if rounded rectangle and set
-		if( attrVal.contains("rounded") && 
-				(elementView.getVisualProperty(NODE_SHAPE)).equals(NodeShapeVisualProperty.RECTANGLE) ) {
-				
-			elementView.setLockedValue(NODE_SHAPE, NodeShapeVisualProperty.ROUND_RECTANGLE);
-			
+		NodeShape elementShape = elementView.getVisualProperty(NODE_SHAPE);
+		NodeShape defaultShape = vizStyle.getDefaultValue(NODE_SHAPE);
+		if (attrVal.contains("rounded") && 
+				elementShape.equals(NodeShapeVisualProperty.RECTANGLE)) {
+			if (!elementShape.equals(defaultShape)) {
+				elementView.setLockedValue(NODE_SHAPE, NodeShapeVisualProperty.ROUND_RECTANGLE);
+			}
 		}
 		// check if invisible is enabled
 		if( attrVal.contains("invis") ) {
@@ -642,7 +697,6 @@ public class NodeReader extends Reader{
 
 	@Override
 	protected void setColorDefaults(VisualStyle vizStyle) {
-		// TODO Auto-generated method stub
 		String fillAttribute = defaultAttrs.get("fillcolor");
 		String colorAttribute = defaultAttrs.get("color");
 		String gradientAngle = defaultAttrs.get("gradientangle");
