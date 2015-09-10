@@ -133,43 +133,43 @@ public class NetworkPropertyMapper extends Mapper {
 		LOGGER.info("Building edge default string...");
 		StringBuilder edgeDefaults = new StringBuilder("edge [");
 
-		LOGGER.info("Appending label attr to default string...");
+		LOGGER.trace("Appending label attr to default string...");
 		String edgeLabel = vizStyle.getDefaultValue(EDGE_LABEL);
 		edgeLabel = edgeLabel.replace("\"", "\\\"");
 		edgeDefaults.append(
 			String.format("label = \"%s\"", edgeLabel) + ","
 		);
 
-		LOGGER.info("Appending penwidth attr to default string...");
+		LOGGER.trace("Appending penwidth attr to default string...");
 		Double width = vizStyle.getDefaultValue(EDGE_WIDTH);
 		edgeDefaults.append(String.format("penwidth = \"%f\"", width) + ",");
 
-		LOGGER.info("Appending tooltip attr to default string...");
+		LOGGER.trace("Appending tooltip attr to default string...");
 		String tooltip = vizStyle.getDefaultValue(EDGE_TOOLTIP);
 		edgeDefaults.append(String.format("tooltip = \"%s\"", tooltip) + ",");
 		
 		// block is non-functioning. only works for bypasses due to what we think is source error
-		LOGGER.info("Appending arrowhead attr to default string...");
+		LOGGER.trace("Appending arrowhead attr to default string...");
 		ArrowShape targetArrow = vizStyle.getDefaultValue(EDGE_TARGET_ARROW_SHAPE);
-		LOGGER.info("CS target/head arrow: " + targetArrow);
+		LOGGER.trace("CS target/head arrow: " + targetArrow);
 		String dotTargetArrow = ARROW_SHAPE_MAP.get(targetArrow);
-		LOGGER.info(".dot Target/head arrow: " + dotTargetArrow);
+		LOGGER.trace(".dot Target/head arrow: " + dotTargetArrow);
 		edgeDefaults.append(String.format("arrowhead = \"%s\"", dotTargetArrow) + ",");
 			
-		LOGGER.info("Appending arrowtail attr to default string...");
+		LOGGER.trace("Appending arrowtail attr to default string...");
 		ArrowShape sourceArrow = vizStyle.getDefaultValue(EDGE_SOURCE_ARROW_SHAPE);
-		LOGGER.info("CS source/tail arrow: " + sourceArrow);
+		LOGGER.trace("CS source/tail arrow: " + sourceArrow);
 		String dotSourceArrow = ARROW_SHAPE_MAP.get(sourceArrow);
-		LOGGER.info(".dot source/tail arrow: " + dotSourceArrow);
+		LOGGER.trace(".dot source/tail arrow: " + dotSourceArrow);
 		edgeDefaults.append(String.format("arrowtail = \"%s\"", dotSourceArrow) + ",");
 		
-		LOGGER.info("Appending color attr to default string...");
+		LOGGER.trace("Appending color attr to default string...");
 		Color strokeColor = (Color) vizStyle.getDefaultValue(EDGE_STROKE_UNSELECTED_PAINT);
 		Integer strokeTransparency = ((Number)vizStyle.getDefaultValue(EDGE_TRANSPARENCY)).intValue();
 		String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
 		edgeDefaults.append(dotColor + ",");
 
-		LOGGER.info("Appending fontname, fontsize, and fontcolor attrs"
+		LOGGER.trace("Appending fontname, fontsize, and fontcolor attrs"
 				+ " to default string...");
 		// Get label font information and append in proper format
 		Color labelColor = (Color) vizStyle.getDefaultValue(EDGE_LABEL_COLOR);
@@ -180,7 +180,7 @@ public class NetworkPropertyMapper extends Mapper {
 		String fontString = mapDefaultFont(labelFont, labelSize, labelColor, labelTransparency);
 		edgeDefaults.append(fontString + ",");
 		
-		LOGGER.info("Appending Default style attribute to .dot string");
+		LOGGER.trace("Appending Default style attribute to .dot string");
 		String styleString = mapDefaultEdgeDotStyle();
 		edgeDefaults.append(styleString + ",");
 		edgeDefaults.append("dir = \"both\"]");
@@ -195,7 +195,7 @@ public class NetworkPropertyMapper extends Mapper {
 	 * value for attributes
 	 */
 	private String getNodeDefaults() {
-		LOGGER.trace("Building node default string...");
+		LOGGER.info("Building node default string...");
 		StringBuilder nodeDefaults = new StringBuilder("node [");
 		
 		//Node SimpleVizProps
@@ -294,7 +294,7 @@ public class NetworkPropertyMapper extends Mapper {
 		);
 		
 		String result = nodeDefaults.toString();
-		LOGGER.info("Built node default string: " + result);
+		LOGGER.debug("Built node default string: " + result);
 		return result;
 	}
 	
@@ -335,7 +335,7 @@ public class NetworkPropertyMapper extends Mapper {
 		returnValue += "fontsize = \"" + size.toString() + "\","; 
 		returnValue += "fontcolor = \"" + mapColorToDot(color, transparency) + "\"";
 
-		LOGGER.info("Dot attributes associate with font is: " + returnValue);
+		LOGGER.debug("Dot attributes associate with font is: " + returnValue);
 			
 		return returnValue;
 	}
@@ -430,6 +430,10 @@ public class NetworkPropertyMapper extends Mapper {
 		
 		elementString.append(getNodeDefaults() + "\n");
 		elementString.append(getEdgeDefaults() + "\n");
+		
+		LOGGER.debug(
+			String.format("Built graph header: %s", elementString.toString())
+		);
 		
 		return elementString.toString();
 	}

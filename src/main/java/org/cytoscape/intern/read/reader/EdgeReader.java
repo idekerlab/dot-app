@@ -25,6 +25,7 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.tuple.Pair;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.view.model.CyNetworkView;
@@ -113,6 +114,7 @@ public class EdgeReader extends Reader{
 	 */
 	private void setWeight(String weight, View<CyEdge> elementView) {
 		//get the current row and put the weight into the row
+		LOGGER.trace("Setting weight attribute for edge");
 		CyRow currentRow = edgeTable.getRow(elementView.getModel().getSUID());
 		currentRow.set("weight", new Double(Double.parseDouble(weight)));
 	}
@@ -133,7 +135,7 @@ public class EdgeReader extends Reader{
 	@Override
 	@SuppressWarnings("rawtypes")
 	protected Pair<VisualProperty, Object> convertAttribute(String name, String val) {
-		LOGGER.info(
+		LOGGER.debug(
 			String.format("Converting GraphViz attribute %s with value %s", name, val)
 		);
 
@@ -179,7 +181,7 @@ public class EdgeReader extends Reader{
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected void setBypasses() {
-		LOGGER.trace("Setting the Bypass values for edge views...");
+		LOGGER.info("Setting the Bypass values for edge views...");
 	
 		for(Entry<? extends Object, ? extends CyIdentifiable> entry: elementMap.entrySet() ) {
 			// get map of attributes for this edge and the View for this CyEdge
@@ -192,7 +194,7 @@ public class EdgeReader extends Reader{
 			for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
 				String attrKey = attrEntry.getKey();
 				String attrVal = attrEntry.getValue();
-				LOGGER.info(
+				LOGGER.debug(
 					String.format("Converting DOT attribute: %s", attrKey)
 				);
 				
@@ -241,7 +243,7 @@ public class EdgeReader extends Reader{
 					continue;
 				}
 				LOGGER.trace("Updating Visual Style...");
-				LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
+				LOGGER.debug(String.format("Setting Visual Property %S...", vizProp));
 				elementView.setLockedValue(vizProp, val);
 			}
 		}
@@ -261,6 +263,15 @@ public class EdgeReader extends Reader{
 	protected void setColor(String attrVal,
 			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
 
+		LOGGER.trace(
+			String.format(
+				"A color attribute is being applied to edge %s. Color: %s",
+				networkView.getModel().getRow(
+					elementView.getModel()
+				).get(CyNetwork.NAME, String.class),
+				attrVal
+			)
+		);
 		Color color = convertColor(attrVal, colorScheme);
 		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
 		if (colorListValues != null) {
@@ -299,7 +310,12 @@ public class EdgeReader extends Reader{
 	protected void setColor(String attrVal, VisualStyle vizStyle,
 			ColorAttribute attr, String colorScheme) {
 	
-		LOGGER.info("Edge color: " + attrVal + " being set...");
+		LOGGER.trace(
+			String.format(
+				"A color attribute is being applied to VisualStyle. Color: %s",
+				attrVal
+			)
+		);
 		Color color = convertColor(attrVal, colorScheme);
 		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
 		if (colorListValues != null) {
@@ -309,14 +325,24 @@ public class EdgeReader extends Reader{
 
 		switch (attr) {
 			case COLOR: {
-				LOGGER.info("Edge stroke color being set to: " + color.toString());
+				LOGGER.trace(
+					String.format(
+						"Default Edge stroke color being set to %s", 
+						color.toString()
+					)
+				);
 				vizStyle.setDefaultValue(EDGE_STROKE_UNSELECTED_PAINT, color);
 				vizStyle.setDefaultValue(EDGE_UNSELECTED_PAINT, color);
 				vizStyle.setDefaultValue(EDGE_TRANSPARENCY, transparency);
 				break;
 			}
 			case FONTCOLOR: {
-				LOGGER.info("Edge font color being set to: " + color.toString());
+				LOGGER.trace(
+					String.format(
+						"Default Edge font color being set to %s", 
+						color.toString()
+					)
+				);
 				vizStyle.setDefaultValue(EDGE_LABEL_COLOR, color);
 				vizStyle.setDefaultValue(EDGE_LABEL_TRANSPARENCY, transparency);
 				break;

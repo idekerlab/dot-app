@@ -116,13 +116,13 @@ public abstract class Reader {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void setDefaults() {
-		LOGGER.trace("Setting the Default values for Visual Style...");
+		LOGGER.info("Setting the Default values for Visual Style...");
 
 		String colorScheme = defaultAttrs.get("colorscheme");
 		for (Entry<String, String> attrEntry : defaultAttrs.entrySet()) {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();
-			LOGGER.info(
+			LOGGER.debug(
 				String.format("Converting DOT attribute: %s", attrKey)
 			);
 
@@ -203,14 +203,14 @@ public abstract class Reader {
 		color = color.trim();
 
 		// Test color string against RGB regex
-		LOGGER.debug("Comparing DOT color string to #FFFFFF format");
+		LOGGER.trace("Comparing DOT color string to #FFFFFF format");
 		Matcher matcher = Pattern.compile(RGB_REGEX).matcher(color);
 		if (matcher.matches()) {
 			return Color.decode(color);
 		}
 
 		// Test color string against RGBA regex
-		LOGGER.debug("Comparing DOT color string to #FFFFFFFF format");
+		LOGGER.trace("Comparing DOT color string to #FFFFFFFF format");
 		matcher.usePattern(Pattern.compile(RGBA_REGEX));
 		if (matcher.matches()) {
 			Integer red = Integer.valueOf(matcher.group("RED"), 16);
@@ -221,7 +221,7 @@ public abstract class Reader {
 		}
 
 		// Test color string against HSB regex
-		LOGGER.debug("Comparing DOT color string to H S V format");
+		LOGGER.trace("Comparing DOT color string to H S V format");
 		matcher.usePattern(Pattern.compile(HSB_REGEX));
 		if (matcher.matches()) {
 			Float hue = Float.valueOf(matcher.group("HUE"));
@@ -231,6 +231,7 @@ public abstract class Reader {
 		}
 		// String didn't match the regexes, so test if it is a color name
 		// Read in color name files and find it in there
+		LOGGER.trace("Checking if DOT color string is a valid color name");
 		StringColor stringColor = new StringColor("svg_colors.txt", "x11_colors.txt");
 		Color output = stringColor.getColor(colorScheme, color);
 

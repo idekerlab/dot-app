@@ -149,28 +149,28 @@ public abstract class Mapper {
 	 * with underscores
 	 */
 	public static String modifyElementID(String id) {
-		LOGGER.info("Preparing to transform ID");
+		LOGGER.trace("Preparing to transform ID");
 		String alphaNumRegEx = "[a-zA-Z\200-\377_][a-zA-Z\200-\377_0-9]*";
 		String numericRegEx = "[-]?([.][0-9]+|[0-9]+([.][0-9]*)?)";
 		String quotedRegEx = "\"[^\"]*(\\\")*[^\"]*\"";
 		String htmlRegEx = "<.*>";
 		if (id.matches(alphaNumRegEx)) {
-			LOGGER.info("Passed-in ID is an Alphanumeric ID");
+			LOGGER.trace("Passed-in ID is an Alphanumeric ID");
 			return id;
 		}
 		if (id.matches(numericRegEx)) {
-			LOGGER.info("Passed-in ID is a Numeric ID");
+			LOGGER.trace("Passed-in ID is a Numeric ID");
 			return id;
 		}
 		if (id.matches(quotedRegEx)) {
-			LOGGER.info("Passed-in ID is a Quoted ID");
+			LOGGER.trace("Passed-in ID is a Quoted ID");
 			return id;
 		}
 		if (id.matches(htmlRegEx)) {
-			LOGGER.info("Passed-in ID is an HTML ID");
+			LOGGER.trace("Passed-in ID is an HTML ID");
 			return id;
 		}
-		LOGGER.info("None of the above. Transforming to Quoted ID");
+		LOGGER.trace("None of the above. Transforming to Quoted ID");
 		StringBuilder output = new StringBuilder(id.length() + 2);
 		output.append('\"');
 		// replace any quotations from name string with escaped quotes
@@ -233,7 +233,7 @@ public abstract class Mapper {
 		Integer green = color.getGreen();
 		Integer blue = color.getBlue();
 		String result = String.format("#%02X%02X%02X%02X", red, green, blue, alpha);
-		LOGGER.info("Created .dot color attribute string. Result: " + result);
+		LOGGER.debug("Created .dot color attribute string. Result: " + result);
 		return result;
 	}
 	
@@ -332,7 +332,7 @@ public abstract class Mapper {
 		}
 
 		if (returnValue == null) {
-			LOGGER.info("Font attributes are defaults");
+			LOGGER.trace("Font attributes are defaults");
 			return null;
 		}
 		LOGGER.debug("Dot attributes associate with font is: " + returnValue.toString());

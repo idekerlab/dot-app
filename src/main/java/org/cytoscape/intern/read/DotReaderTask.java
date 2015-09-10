@@ -142,14 +142,14 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 		// add each generic Edge attribute and value to map
 		for (String commonAttr : COMMON_ATTRIBUTES) {
-			LOGGER.info(String.format("Getting default edge attribute: %s", commonAttr));
+			LOGGER.trace(String.format("Getting default edge attribute: %s", commonAttr));
 			String val = graph.getGenericEdgeAttribute(commonAttr);
 			if (val != null) {
 				output.put(commonAttr, val);
 			}
 		}
 		for (String edgeAttr : EDGE_ATTRIBUTES) {
-			LOGGER.info(String.format("Getting default edge attribute: %s", edgeAttr));
+			LOGGER.trace(String.format("Getting default edge attribute: %s", edgeAttr));
 			String val = graph.getGenericEdgeAttribute(edgeAttr);
 			if (val != null) {
 				output.put(edgeAttr, val);
@@ -164,7 +164,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		
 		// add each generic Graph attribute and value to map
 		for (String graphAttr : GRAPH_ATTRIBUTES) {
-			LOGGER.info(String.format("Getting default graph attribute: %s", graphAttr));
+			LOGGER.trace(String.format("Getting default graph attribute: %s", graphAttr));
 			String val = graph.getGenericGraphAttribute(graphAttr);
 			if (val != null) {
 				output.put(graphAttr, val);
@@ -205,14 +205,14 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		// add each generic Node attribute and value to map
 		Map<String, String> output = new HashMap<String, String>();
 		for (String commonAttr : COMMON_ATTRIBUTES) {
-			LOGGER.info(String.format("Getting default node attribute: %s", commonAttr));
+			LOGGER.trace(String.format("Getting default node attribute: %s", commonAttr));
 			String val = graph.getGenericNodeAttribute(commonAttr);
 			if (val != null) {
 				output.put(commonAttr, val);
 			}
 		}
 		for (String nodeAttr : NODE_ATTRIBUTES) {
-			LOGGER.info(String.format("Getting default node attribute: %s", nodeAttr));
+			LOGGER.trace(String.format("Getting default node attribute: %s", nodeAttr));
 			String val = graph.getGenericNodeAttribute(nodeAttr);
 			if (val != null) {
 				output.put(nodeAttr, val);

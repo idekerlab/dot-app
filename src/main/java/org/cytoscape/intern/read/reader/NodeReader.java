@@ -133,7 +133,7 @@ public class NodeReader extends Reader{
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void createGradient(List<Pair<Color, Float>> colorListValues,
 			View<CyNode> elementView, String styleAttribute, String gradientAngle) {
-		LOGGER.info("Creating gradient...");
+		LOGGER.trace("Creating gradient...");
 
 		LOGGER.debug("Retrieving VisualProperty NODE_CUSTOMGRAPHICS_1");
 		VisualProperty<CyCustomGraphics> nodeGradientProp = 
@@ -154,12 +154,12 @@ public class NodeReader extends Reader{
 		 * otherwise get the linear
 		 */
 
-		LOGGER.info("Retrieving Gradient factory...");
+		LOGGER.trace("Retrieving Gradient factory...");
 		CyCustomGraphics2Factory<?> factory = gradientListener.getLinearFactory();
 		if (styleAttribute.contains("radial")) {
 			factory = gradientListener.getRadialFactory();
 			usingLinearFactory = false;
-			LOGGER.debug("Retrieved Radial Gradient factory.");
+			LOGGER.trace("Retrieved Radial Gradient factory.");
 		}
 		List<Color> colors = new ArrayList<Color>(colorListValues.size());
 		List<Float> weights = new ArrayList<Float>(colorListValues.size());
@@ -195,7 +195,7 @@ public class NodeReader extends Reader{
 				weights.add(start);
 			}
 		}
-		LOGGER.info("Number of colors in gradient: " + colors.size());
+		LOGGER.debug("Number of colors in gradient: " + colors.size());
 		HashMap<String, Object> gradientProps = new HashMap();
 		gradientProps.put("cy_gradientFractions", weights);
 		gradientProps.put("cy_gradientColors", colors);
@@ -213,8 +213,9 @@ public class NodeReader extends Reader{
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void createGradient(List<Pair<Color, Float>> colorListValues,
 			VisualStyle vizStyle, String styleAttribute, String gradientAngle) {
-		LOGGER.info("Retrieving VisualProperty NODE_CUSTOM_GRAPHICS_1");
+		LOGGER.trace("Creating gradient...");
 
+		LOGGER.debug("Retrieving VisualProperty NODE_CUSTOMGRAPHICS_1");
 		VisualProperty<CyCustomGraphics> nodeGradientProp = 
 				(VisualProperty<CyCustomGraphics>) vizLexicon.lookup(CyNode.class, "NODE_CUSTOMGRAPHICS_1");
 
@@ -233,35 +234,48 @@ public class NodeReader extends Reader{
 		 * otherwise get the linear
 		 */
 
+		LOGGER.trace("Retrieving Gradient factory...");
 		CyCustomGraphics2Factory<?> factory = gradientListener.getLinearFactory();
 		if (styleAttribute.contains("radial")) {
 			factory = gradientListener.getRadialFactory();
 			usingLinearFactory = false;
+			LOGGER.trace("Retrieved Radial Gradient factory.");
 		}
 		List<Color> colors = new ArrayList<Color>(colorListValues.size());
 		List<Float> weights = new ArrayList<Float>(colorListValues.size());
 
 		for (Pair<Color, Float> colorAndWeightPair : colorListValues) {
-			colors.add(colorAndWeightPair.getLeft());
-			Float weight = colorAndWeightPair.getRight();
-			if (weight == null) {
+			Color retrievedColor = colorAndWeightPair.getLeft();
+			Float retrievedWeight = colorAndWeightPair.getRight();
+			LOGGER.debug(
+				String.format("Retrieved color %s with weight %f",
+					retrievedColor, retrievedWeight)
+			);
+			colors.add(retrievedColor);
+			if (retrievedWeight == null) {
 				adjustStart = true;
 				weights.add(new Float(start));
 				continue;
 			}
 			if (adjustStart) {
-				start = remain - weight.floatValue();
+				start = remain - retrievedWeight.floatValue();
+				adjustStart = false;
 			}
 			weights.add(new Float(start));
-			start = start + weight.floatValue();
+			start = start + retrievedWeight.floatValue();
 		}
 		if (start == 0 && remain == 1) {
 			weights = new ArrayList<Float>(colorListValues.size());
+			LOGGER.debug(
+				String.format("Each color will now take up %f of gradient", 
+					1f/colorListValues.size())
+			);
 			for (; start < remain; start += (1f/colorListValues.size())) {
+
 				weights.add(start);
 			}
 		}
-		LOGGER.info("Number of colors in gradient: " + colors.size());
+		LOGGER.debug("Number of colors in gradient: " + colors.size());
 		HashMap<String, Object> gradientProps = new HashMap();
 		gradientProps.put("cy_gradientFractions", weights);
 		gradientProps.put("cy_gradientColors", colors);
@@ -272,10 +286,10 @@ public class NodeReader extends Reader{
 			Point2D point = convertAngleToPoint(Double.parseDouble(gradientAngle));
 			gradientProps.put("cy_center", point);
 		}
+
 		vizStyle.setDefaultValue(nodeGradientProp, factory.getInstance(gradientProps));
-		
-		
 	}
+
 
 	/**
 	 * Sets VisualProperties for each node related to location of node.
@@ -383,7 +397,7 @@ public class NodeReader extends Reader{
 			for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
 				String attrKey = attrEntry.getKey();
 				String attrVal = attrEntry.getValue();
-				LOGGER.info(
+				LOGGER.debug(
 					String.format("Converting GraphViz attribute: %s", attrKey)
 				);
 
@@ -425,13 +439,14 @@ public class NodeReader extends Reader{
 				if (vizProp == null || val == null) {
 					continue;
 				}
-				LOGGER.info("Updating Visual Style...");
-				LOGGER.info(String.format("Setting Visual Property %S...", vizProp));
+				LOGGER.trace("Updating Visual Style...");
+				LOGGER.debug(String.format("Setting Visual Property %s...", vizProp));
 				elementView.setLockedValue(vizProp, val);
 			}
 			
 			//Handle gradient creation and color setting now
 
+			LOGGER.trace("Handle style and node color attributes");
 			//Attempt to get the default gradient angle
 			String defaultGradientAngle = defaultAttrs.get("gradientangle");
 			if (defaultGradientAngle == null) {
@@ -588,7 +603,7 @@ public class NodeReader extends Reader{
 
 		switch (attr) {
 			case COLOR: {
-				LOGGER.info("Setting default values for NODE_BORDER_PAINT and"
+				LOGGER.trace("Setting default values for NODE_BORDER_PAINT and"
 						+ " NODE_BORDER_TRANSPARENCY");
 				vizStyle.setDefaultValue(NODE_BORDER_PAINT, color);
 				vizStyle.setDefaultValue(NODE_BORDER_TRANSPARENCY, transparency);
@@ -603,11 +618,15 @@ public class NodeReader extends Reader{
 				//fillcolor not present
 			}
 			case FILLCOLOR: {
+				LOGGER.trace("Setting default values for NODE_FILL_COLOR and"
+						+ " NODE_TRANSPARENCY");
 				vizStyle.setDefaultValue(NODE_FILL_COLOR, color);
 				vizStyle.setDefaultValue(NODE_TRANSPARENCY, transparency);
 				break;
 			}
 			case FONTCOLOR: {
+				LOGGER.trace("Setting default values for NODE_LABEL_FONT_COLOR and"
+						+ " NODE_LABEL_TRANSPARENCY");
 				vizStyle.setDefaultValue(NODE_LABEL_COLOR, color);
 				vizStyle.setDefaultValue(NODE_LABEL_TRANSPARENCY, transparency);
 				break;
@@ -621,6 +640,7 @@ public class NodeReader extends Reader{
 
 	@Override
 	protected void setColorDefaults(VisualStyle vizStyle, String colorScheme) {
+		LOGGER.info("Setting node property default values for color attributes");
 		String fillAttribute = defaultAttrs.get("fillcolor");
 		String colorAttribute = defaultAttrs.get("color");
 		String gradientAngle = defaultAttrs.get("gradientangle");

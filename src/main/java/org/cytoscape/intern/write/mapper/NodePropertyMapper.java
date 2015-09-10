@@ -65,7 +65,7 @@ public class NodePropertyMapper extends Mapper {
 	private String mapColors() {
 		StringBuilder elementString = null;
 		
-		LOGGER.info("Preparing to get color properties");
+		LOGGER.debug("Preparing to get color properties for a node");
 		// Get the color string (border color). Append to attribute string
 		if (!isEqualToDefault(NODE_BORDER_PAINT) || !isEqualToDefault(NODE_BORDER_TRANSPARENCY)) {
 			Color borderColor = (Color) view.getVisualProperty(NODE_BORDER_PAINT);
@@ -99,8 +99,8 @@ public class NodePropertyMapper extends Mapper {
 	 * @return String that defines fontname, fontcolor and fontsize attributes
 	 */
 	private String mapFontHelper() {
+		LOGGER.debug("Getting the label related attributes for a node");
 		Font fontName = view.getVisualProperty(NODE_LABEL_FONT_FACE);
-		LOGGER.info("Retrieving font size...");
 		Integer fontSize = ((Number)view.getVisualProperty(NODE_LABEL_FONT_SIZE)).intValue();
 		Color fontColor = (Color)(view.getVisualProperty(NODE_LABEL_COLOR));
 		Integer fontTransparency = ((Number)view.getVisualProperty(NODE_LABEL_TRANSPARENCY)).intValue();
@@ -114,7 +114,7 @@ public class NodePropertyMapper extends Mapper {
 	 * @return String in form in form "shape = <shape>"
 	 */
 	private String mapShape() {
-		LOGGER.info("Preparing to get shape property");
+		LOGGER.debug("Preparing to get shape property");
 		
 		// Get the .dot string for the node shape. Append to attribute string
 		if (isEqualToDefault(NODE_SHAPE)) {
@@ -130,7 +130,7 @@ public class NodePropertyMapper extends Mapper {
 		}
 		
 		String dotShape = String.format("shape = \"%s\"", shapeStr);
-		LOGGER.info("Appended shape attribute to .dot string. Result: " + dotShape);
+		LOGGER.debug("Appended shape attribute to .dot string. Result: " + dotShape);
 		
 		return dotShape;
 	}
@@ -165,7 +165,6 @@ public class NodePropertyMapper extends Mapper {
 
 		// Get node height and width
 		if(nodeSizesLocked) {
-			//NODE_HEIGHT = NODE_WIDTH if isLocked is true, so only use one
 			/* 
 			 * view.getVisualProperty(NODE_SIZE) does not return the actual
 			 * dimension of the node view when a mapping is applied to

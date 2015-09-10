@@ -55,7 +55,7 @@ public class EdgePropertyMapper extends Mapper {
 	
 	@SuppressWarnings("unchecked")
 	private boolean isVisible() {
-		LOGGER.info("Checking if edge should be visible");
+		LOGGER.debug("Checking if edge should be visible");
 		boolean visibleByProp = view.getVisualProperty(EDGE_VISIBLE);
 		if (!visibleByProp) {
 			LOGGER.trace("Edge not visible due to its own property.");
@@ -140,12 +140,12 @@ public class EdgePropertyMapper extends Mapper {
 	
 	@Override
 	protected String mapDotStyle() {
-		LOGGER.trace("Building style string for edge view...");
-		LOGGER.info("Determining need for style attr...");
+		LOGGER.debug("Building style string for edge view...");
+		LOGGER.trace("Determining need for style attr...");
 		StringBuilder dotStyle = null;
 		boolean isVisible = isVisible();
 		if(!isEqualToDefault(EDGE_LINE_TYPE) || !isEqualToDefault(isVisible, EDGE_VISIBLE)) {
-			LOGGER.info("Not default style attr, building edge's own...");
+			LOGGER.trace("Not default style attr, building edge's own...");
 			LineType lineType = view.getVisualProperty(EDGE_LINE_TYPE);
 			String lineStr = LINE_TYPE_MAP.get(lineType);
 			dotStyle = new StringBuilder();
@@ -170,7 +170,7 @@ public class EdgePropertyMapper extends Mapper {
 	@Override
 	public String getElementString() {
 		
-		LOGGER.info("Preparing to get .dot declaration for an edge.");
+		LOGGER.debug("Preparing to get .dot declaration for an edge.");
 
 		// Build attribute string
 		StringBuilder elementString = new StringBuilder("[");
