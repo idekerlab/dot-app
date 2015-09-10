@@ -644,7 +644,7 @@ public class NodeReader extends Reader{
 					createGradient(colorListValues, vizStyle, styleAttribute, gradientAngle);
 				}
 			}
-			setColor(fillAttribute, vizStyle, ColorAttribute.COLOR, colorScheme);
+			setColor(colorAttribute, vizStyle, ColorAttribute.COLOR, colorScheme);
 		}
 	}
 
