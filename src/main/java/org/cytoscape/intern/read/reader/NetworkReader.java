@@ -74,6 +74,12 @@ public class NetworkReader extends Reader {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();
 			if (attrKey.equals("bgcolor")) {
+				List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
+				if (colorListValues != null) {
+					Color color = colorListValues.get(0).getLeft();
+					attrVal = String.format("#%2x%2x%2x%2x", color.getRed(), color.getGreen(),
+							color.getBlue(), color.getAlpha());
+				}
 				setColor(attrVal, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
 			}
 		}
