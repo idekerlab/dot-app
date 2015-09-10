@@ -238,7 +238,16 @@ public class NodeReader extends Reader{
 				break;
 			}
 			case "shape": {
-				retrievedVal = NODE_SHAPE_MAP.get(val);
+				/* 
+				 * Loop through and use contains because
+				 * Graphviz has things like Mdiamond which is a diamond
+				 * with lines through it, this just becomes diamond
+				 */
+				for (String key: NODE_SHAPE_MAP.keySet()) {
+					if(val.contains(key)) {
+						retrievedVal = NODE_SHAPE_MAP.get(key);
+					}
+				}
 				break;
 			}
 			case "fontname": {
