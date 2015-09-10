@@ -51,6 +51,34 @@ import org.cytoscape.view.vizmap.VisualStyle;
 
 public class NetworkPropertyMapper extends Mapper {
 
+	/**
+	 * Determines whether the graph is visibly directed or not
+	 * 
+	 * @param networkView The network being tested for directedness
+	 * @return true if graph is directed, false otherwise
+	 */
+	public static boolean isDirected(CyNetworkView networkView) {
+		// get all the edge views from the current networkview
+		Collection<View<CyEdge>> edgeViews = networkView.getEdgeViews();
+		
+		/**
+		 * iterate each edgeview to check whether there is a target arrow shape
+		 * or a source arrow shape for that edge
+		 */
+		ArrowShape noArrow = NONE;
+        for (View<CyEdge> edge: edgeViews){
+        	ArrowShape sourceArrow = edge.getVisualProperty(EDGE_SOURCE_ARROW_SHAPE);
+        	ArrowShape targetArrow = edge.getVisualProperty(EDGE_TARGET_ARROW_SHAPE);
+        	if(!targetArrow.equals(noArrow) || !sourceArrow.equals(noArrow)) {
+        		//return true if there is at least one not NONE arrow shape
+        		return true;
+        	}
+        }
+        
+        // return false if the graph is undirected (has only NONE arrow shapes)
+        return false;
+	}
+	
 	private boolean directed = false;
 	
 	// Value of splines attribute
@@ -58,10 +86,10 @@ public class NetworkPropertyMapper extends Mapper {
 	
 	// Location of graph label, null if no graph label is desired
 	private String labelLoc;
-	
+
 	// Location of node label
 	private String nodeLabelLoc;
-
+	
 	/**
 	 * Constructs NetworkPropertyMapper object
 	 * @param netView view being mapped
@@ -85,72 +113,6 @@ public class NetworkPropertyMapper extends Mapper {
 	}
 	
 	/**
-	 * Returns a String that contains all relevant attributes for this element 
-	 */
-	@Override
-	public String getElementString() {
-		// Get network name from model. Remove spaces from name
-		CyNetwork network = (CyNetwork)view.getModel();
-		String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
-		// filter out disallowed chars
-		networkName = Mapper.modifyElementID(networkName);
-
-		// Build the network properties string
-		StringBuilder elementString = new StringBuilder();
-		
-		// Header of the dot file of the form (di)graph [NetworkName] {
-		String graphDeclaration = String.format("%s %s {", getDirectedString(), networkName);
-		elementString.append(graphDeclaration + "\n");
-		
-		// added outputorder = edgesfirst at the beginning of the file to make sure all the nodes 
-		// are on the top of the edges.
-		
-		// Get .dot strings for simple dot attributes. Append to attribute string
-		for (String dotAttribute : simpleVisPropsToDot) {
-		        elementString.append(dotAttribute + "\n");
-		}
-		
-		elementString.append(getNodeDefaults() + "\n");
-		elementString.append(getEdgeDefaults() + "\n");
-		
-		return elementString.toString();
-	}
-	
-	/**
-	 * Helper method to fill the hashmap instance variable with constants we need
-	 */
-	private void populateMaps() {
-		// if graph label is desired
-		if(labelLoc != null) {
-			// label attribute of graph
-			String label = view.getVisualProperty(NETWORK_TITLE);
-			label = label.replace("\"", "\\\"");
-			String dotLabel = String.format("label = \"%s\"", label);
-			simpleVisPropsToDot.add(dotLabel);
-			
-			// desired label location
-			simpleVisPropsToDot.add("labelloc = " + labelLoc);
-		}
-
-		// Background color of graph
-		Color netBgColor = (Color)view.getVisualProperty(NETWORK_BACKGROUND_PAINT);
-		String dotBgColor = String.format("bgcolor = \"%s\"", mapColorToDot(netBgColor, netBgColor.getAlpha()));
-		simpleVisPropsToDot.add(dotBgColor);
-		
-		// splines value
-		simpleVisPropsToDot.add(String.format("splines = \"%s\"", splinesVal));
-		
-		// output order
-		simpleVisPropsToDot.add("outputorder = \"edgesfirst\"");
-		
-		// esep=0 so splines can always be routed around nodes
-		simpleVisPropsToDot.add("esep = \"0\"");
-		
-		// pad so (ideally) no labels are cut off
-		simpleVisPropsToDot.add("pad = \"2\"");
-	}
-
-	/**
 	 * Returns dot string that represents if graph is directed or not
 	 * 
 	 * @return String that is either "graph" or "digraph"
@@ -158,6 +120,71 @@ public class NetworkPropertyMapper extends Mapper {
 	private String getDirectedString() {
 		String output = (directed) ? "digraph":"graph";
 		return output;
+	}
+
+	/**
+	 * Returns a string that has the edge[attrs] declaration
+	 * defines default attribute values for edges
+	 * 
+	 * @return String in form edges[attrs=..] that sets the default
+	 * value for attributes
+	 */
+	private String getEdgeDefaults() {
+		LOGGER.info("Building edge default string...");
+		StringBuilder edgeDefaults = new StringBuilder("edge [");
+
+		LOGGER.info("Appending label attr to default string...");
+		String edgeLabel = vizStyle.getDefaultValue(EDGE_LABEL);
+		edgeLabel = edgeLabel.replace("\"", "\\\"");
+		edgeDefaults.append(
+			String.format("label = \"%s\"", edgeLabel) + ","
+		);
+
+		LOGGER.info("Appending penwidth attr to default string...");
+		Double width = vizStyle.getDefaultValue(EDGE_WIDTH);
+		edgeDefaults.append(String.format("penwidth = \"%f\"", width) + ",");
+
+		LOGGER.info("Appending tooltip attr to default string...");
+		String tooltip = vizStyle.getDefaultValue(EDGE_TOOLTIP);
+		edgeDefaults.append(String.format("tooltip = \"%s\"", tooltip) + ",");
+		
+		// block is non-functioning. only works for bypasses due to what we think is source error
+		LOGGER.info("Appending arrowhead attr to default string...");
+		ArrowShape targetArrow = vizStyle.getDefaultValue(EDGE_TARGET_ARROW_SHAPE);
+		LOGGER.info("CS target/head arrow: " + targetArrow);
+		String dotTargetArrow = ARROW_SHAPE_MAP.get(targetArrow);
+		LOGGER.info(".dot Target/head arrow: " + dotTargetArrow);
+		edgeDefaults.append(String.format("arrowhead = \"%s\"", dotTargetArrow) + ",");
+			
+		LOGGER.info("Appending arrowtail attr to default string...");
+		ArrowShape sourceArrow = vizStyle.getDefaultValue(EDGE_SOURCE_ARROW_SHAPE);
+		LOGGER.info("CS source/tail arrow: " + sourceArrow);
+		String dotSourceArrow = ARROW_SHAPE_MAP.get(sourceArrow);
+		LOGGER.info(".dot source/tail arrow: " + dotSourceArrow);
+		edgeDefaults.append(String.format("arrowtail = \"%s\"", dotSourceArrow) + ",");
+		
+		LOGGER.info("Appending color attr to default string...");
+		Color strokeColor = (Color) vizStyle.getDefaultValue(EDGE_STROKE_UNSELECTED_PAINT);
+		Integer strokeTransparency = ((Number)vizStyle.getDefaultValue(EDGE_TRANSPARENCY)).intValue();
+		String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
+		edgeDefaults.append(dotColor + ",");
+
+		LOGGER.info("Appending fontname, fontsize, and fontcolor attrs"
+				+ " to default string...");
+		// Get label font information and append in proper format
+		Color labelColor = (Color) vizStyle.getDefaultValue(EDGE_LABEL_COLOR);
+		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
+		Integer labelTransparency = ((Number)vizStyle.getDefaultValue(EDGE_LABEL_TRANSPARENCY)).intValue();
+		Font labelFont = vizStyle.getDefaultValue(EDGE_LABEL_FONT_FACE);
+		Integer labelSize = ((Number)vizStyle.getDefaultValue(EDGE_LABEL_FONT_SIZE)).intValue();
+		String fontString = mapDefaultFont(labelFont, labelSize, labelColor, labelTransparency);
+		edgeDefaults.append(fontString + ",");
+		
+		LOGGER.info("Appending Default style attribute to .dot string");
+		String styleString = mapDefaultEdgeDotStyle();
+		edgeDefaults.append(styleString + ",");
+		edgeDefaults.append("dir = \"both\"]");
+		return edgeDefaults.toString();
 	}
 	
 	/**
@@ -272,63 +299,21 @@ public class NetworkPropertyMapper extends Mapper {
 	}
 	
 	/**
-	 * Returns a string that has the edge[attrs] declaration
-	 * defines default attribute values for edges
+	 * Returns "style" attribute intended for default edge declaration
 	 * 
-	 * @return String in form edges[attrs=..] that sets the default
-	 * value for attributes
+	 * @return String in form "style=..."
 	 */
-	private String getEdgeDefaults() {
-		LOGGER.info("Building edge default string...");
-		StringBuilder edgeDefaults = new StringBuilder("edge [");
-
-		String edgeLabel = vizStyle.getDefaultValue(EDGE_LABEL);
-		edgeLabel = edgeLabel.replace("\"", "\\\"");
-		edgeDefaults.append(
-			String.format("label = \"%s\"", edgeLabel) + ","
-		);
-
-		Double width = vizStyle.getDefaultValue(EDGE_WIDTH);
-		edgeDefaults.append(String.format("penwidth = \"%f\"", width) + ",");
-
-		String tooltip = vizStyle.getDefaultValue(EDGE_TOOLTIP);
-		edgeDefaults.append(String.format("tooltip = \"%s\"", tooltip) + ",");
-		
-		// block is non-functioning. only works for bypasses due to what we think is source error
-		LOGGER.trace("Appending arrowhead attr to default string...");
-		ArrowShape targetArrow = vizStyle.getDefaultValue(EDGE_TARGET_ARROW_SHAPE);
-		LOGGER.info("CS target/head arrow: " + targetArrow);
-		String dotTargetArrow = ARROW_SHAPE_MAP.get(targetArrow);
-		LOGGER.info(".dot Target/head arrow: " + dotTargetArrow);
-		edgeDefaults.append(String.format("arrowhead = \"%s\"", dotTargetArrow) + ",");
-			
-		LOGGER.trace("Appending arrowtail attr to default string...");
-		ArrowShape sourceArrow = vizStyle.getDefaultValue(EDGE_SOURCE_ARROW_SHAPE);
-		LOGGER.info("CS source/tail arrow: " + sourceArrow);
-		String dotSourceArrow = ARROW_SHAPE_MAP.get(sourceArrow);
-		LOGGER.info(".dot source/tail arrow: " + dotSourceArrow);
-		edgeDefaults.append(String.format("arrowtail = \"%s\"", dotSourceArrow) + ",");
-		
-		Color strokeColor = (Color) vizStyle.getDefaultValue(EDGE_STROKE_UNSELECTED_PAINT);
-		Integer strokeTransparency = ((Number)vizStyle.getDefaultValue(EDGE_TRANSPARENCY)).intValue();
-		String dotColor = String.format("color = \"%s\"", mapColorToDot(strokeColor, strokeTransparency));
-		edgeDefaults.append(dotColor + ",");
-
-		LOGGER.trace("Appending fontname, fontsize, and fontcolor attrs"
-				+ " to default string...");
-		// Get label font information and append in proper format
-		Color labelColor = (Color) vizStyle.getDefaultValue(EDGE_LABEL_COLOR);
-		// Set alpha (opacity) to 0 if node is invisible, translate alpha otherwise
-		Integer labelTransparency = ((Number)vizStyle.getDefaultValue(EDGE_LABEL_TRANSPARENCY)).intValue();
-		Font labelFont = vizStyle.getDefaultValue(EDGE_LABEL_FONT_FACE);
-		Integer labelSize = ((Number)vizStyle.getDefaultValue(EDGE_LABEL_FONT_SIZE)).intValue();
-		String fontString = mapDefaultFont(labelFont, labelSize, labelColor, labelTransparency);
-		edgeDefaults.append(fontString + ",");
-		
-		String styleString = mapDefaultEdgeDotStyle();
-		edgeDefaults.append(styleString + ",");
-		edgeDefaults.append("dir = \"both\"]");
-		return edgeDefaults.toString();
+	private String mapDefaultEdgeDotStyle() {
+		LineType lineType = vizStyle.getDefaultValue(EDGE_LINE_TYPE);
+		Boolean isVisible = vizStyle.getDefaultValue(EDGE_VISIBLE);
+		String lineStr = LINE_TYPE_MAP.get(lineType);
+		if (lineStr == null) {
+			lineStr = "solid";
+			LOGGER.warn("Visual Style default EDGE_LINE_TYPE doesn't map to a .dot attribute. Setting to default");
+		}
+		String invisString = (!isVisible) ? ",invis" : "";
+		String style = String.format("style = \"%s%s\"", lineStr, invisString);
+		return style;
 	}
 
 	/**
@@ -378,54 +363,74 @@ public class NetworkPropertyMapper extends Mapper {
 	}
 
 	/**
-	 * Returns "style" attribute intended for default edge declaration
-	 * 
-	 * @return String in form "style=..."
+	 * Helper method to fill the hashmap instance variable with constants we need
 	 */
-	private String mapDefaultEdgeDotStyle() {
-		LineType lineType = vizStyle.getDefaultValue(EDGE_LINE_TYPE);
-		Boolean isVisible = vizStyle.getDefaultValue(EDGE_VISIBLE);
-		String lineStr = LINE_TYPE_MAP.get(lineType);
-		if (lineStr == null) {
-			lineStr = "solid";
-			LOGGER.warn("Visual Style default EDGE_LINE_TYPE doesn't map to a .dot attribute. Setting to default");
+	private void populateMaps() {
+		// if graph label is desired
+		if(labelLoc != null) {
+			// label attribute of graph
+			String label = view.getVisualProperty(NETWORK_TITLE);
+			label = label.replace("\"", "\\\"");
+			String dotLabel = String.format("label = \"%s\"", label);
+			simpleVisPropsToDot.add(dotLabel);
+			
+			// desired label location
+			simpleVisPropsToDot.add("labelloc = " + labelLoc);
 		}
-		String invisString = (!isVisible) ? ",invis" : "";
-		String style = String.format("style = \"%s%s\"", lineStr, invisString);
-		return style;
+
+		// Background color of graph
+		Color netBgColor = (Color)view.getVisualProperty(NETWORK_BACKGROUND_PAINT);
+		String dotBgColor = String.format("bgcolor = \"%s\"", mapColorToDot(netBgColor, netBgColor.getAlpha()));
+		simpleVisPropsToDot.add(dotBgColor);
+		
+		// splines value
+		simpleVisPropsToDot.add(String.format("splines = \"%s\"", splinesVal));
+		
+		// output order
+		simpleVisPropsToDot.add("outputorder = \"edgesfirst\"");
+		
+		// esep=0 so splines can always be routed around nodes
+		simpleVisPropsToDot.add("esep = \"0\"");
+		
+		// pad so (ideally) no labels are cut off
+		simpleVisPropsToDot.add("pad = \"2\"");
 	}
 	
-	/**
-	 * Determines whether the graph is visibly directed or not
-	 * 
-	 * @param networkView The network being tested for directedness
-	 * @return true if graph is directed, false otherwise
-	 */
-	public static boolean isDirected(CyNetworkView networkView) {
-		// get all the edge views from the current networkview
-		Collection<View<CyEdge>> edgeViews = networkView.getEdgeViews();
-		
-		/**
-		 * iterate each edgeview to check whether there is a target arrow shape
-		 * or a source arrow shape for that edge
-		 */
-		ArrowShape noArrow = NONE;
-        for (View<CyEdge> edge: edgeViews){
-        	ArrowShape sourceArrow = edge.getVisualProperty(EDGE_SOURCE_ARROW_SHAPE);
-        	ArrowShape targetArrow = edge.getVisualProperty(EDGE_TARGET_ARROW_SHAPE);
-        	if(!targetArrow.equals(noArrow) || !sourceArrow.equals(noArrow)) {
-        		//return true if there is at least one not NONE arrow shape
-        		return true;
-        	}
-        }
-        
-        // return false if the graph is undirected (has only NONE arrow shapes)
-        return false;
-	}
-
 	@Override
 	protected String mapDotStyle() {
 		// NOT USED
 		return null;
+	}
+
+	/**
+	 * Returns a String that contains all relevant attributes for this element 
+	 */
+	@Override
+	public String getElementString() {
+		// Get network name from model. Remove spaces from name
+		CyNetwork network = (CyNetwork)view.getModel();
+		String networkName = network.getRow(network).get(CyNetwork.NAME, String.class);
+		// filter out disallowed chars
+		networkName = Mapper.modifyElementID(networkName);
+
+		// Build the network properties string
+		StringBuilder elementString = new StringBuilder();
+		
+		// Header of the dot file of the form (di)graph [NetworkName] {
+		String graphDeclaration = String.format("%s %s {", getDirectedString(), networkName);
+		elementString.append(graphDeclaration + "\n");
+		
+		//added outputorder = edgesfirst at the beginning of the file to make sure all the nodes 
+		//are on the top of the edges.
+		
+		// Get .dot strings for simple dot attributes. Append to attribute string
+		for (String dotAttribute : simpleVisPropsToDot) {
+		        elementString.append(dotAttribute + "\n");
+		}
+		
+		elementString.append(getNodeDefaults() + "\n");
+		elementString.append(getEdgeDefaults() + "\n");
+		
+		return elementString.toString();
 	}
 }

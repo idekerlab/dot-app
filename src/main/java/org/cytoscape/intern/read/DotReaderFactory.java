@@ -4,6 +4,7 @@ import java.io.InputStream;
 
 import javax.swing.SwingUtilities;
 
+import org.cytoscape.intern.GradientListener;
 import org.cytoscape.io.CyFileFilter;
 import org.cytoscape.io.read.InputStreamTaskFactory;
 import org.cytoscape.model.CyNetwork;
@@ -15,11 +16,11 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.model.events.NetworkViewAddedEvent;
 import org.cytoscape.view.model.events.NetworkViewAddedListener;
+import org.cytoscape.view.presentation.RenderingEngineManager;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskIterator;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,6 +49,8 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 	private CyRootNetworkManager rootNetMgr;
 	private VisualMappingManager vizMapMgr;
 	private VisualStyleFactory vizStyleFact;
+	private GradientListener gradientListener;
+	private RenderingEngineManager rendEngMgr;
 	
 	/**
 	 * Sets the DotReaderFactory with associate fileFilter
@@ -59,10 +62,13 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 	 * @param rootNetMgr CyRootNetworkManager needed for DotReaderTask
 	 * @param vizMapMgr VisualMappingManager needed for DotReaderTask
 	 * @param vizStyleFact VisualStyleFactory needed for DotReaderTask
+	 * @param gradientListener GradientListener needed for DotReaderTask
+	 * @param rendEngMgr RenderingEngineManager that contains the default
+	 * VisualLexicon needed for gradient support
 	 */
 	public DotReaderFactory(CyFileFilter fileFilter, CyNetworkViewFactory netViewFact,
 			CyNetworkFactory netFact, CyNetworkManager netMgr, CyRootNetworkManager rootNetMgr,
-			VisualMappingManager vizMapMgr, VisualStyleFactory vizStyleFact) {
+			VisualMappingManager vizMapMgr, VisualStyleFactory vizStyleFact, GradientListener gradientListener, RenderingEngineManager rendEngMgr) {
 
 		this.fileFilter = fileFilter;
 		this.netViewFact = netViewFact;
@@ -71,16 +77,13 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 		this.rootNetMgr = rootNetMgr;
 		this.vizMapMgr = vizMapMgr;
 		this.vizStyleFact = vizStyleFact;
+		this.gradientListener = gradientListener;
+		this.rendEngMgr = rendEngMgr;
 	}	
 	
-	/**
-	 * Returns CyFileFilter associated with this factory
-	 * 
-	 * @return CyFileFilter for this factory
-	 */
-	@Override
-	public CyFileFilter getFileFilter() {
-		return fileFilter;
+	private boolean isDotNetwork(CyNetwork network) {
+		CyTable hidden = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
+		return hidden.getRow(network.getSUID()).get("DOT_network", Boolean.class);
 	}
 	
 	/**
@@ -96,38 +99,17 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 		LOGGER.trace("Create TaskIterator with params");
 		
 		return new TaskIterator(new DotReaderTask(inStream, netViewFact,
-				netFact, netMgr, rootNetMgr, vizMapMgr, vizStyleFact));
+				netFact, netMgr, rootNetMgr, vizMapMgr, vizStyleFact, gradientListener, rendEngMgr));
 	}
 	
 	/**
-	 * Returns true if the factory is ready to produce a TaskIterator and false otherwise.
+	 * Returns CyFileFilter associated with this factory
 	 * 
-	 * @param inStream The InputStream to be read
-	 * @param inputName The name of the input
-	 * 
-	 * @return Boolean indicating the factory is ready to produce a TaskIterator
+	 * @return CyFileFilter for this factory
 	 */
 	@Override
-	public boolean isReady(InputStream inStream, String inputName) {
-		
-		// check file extension
-		if (inStream != null && inputName != null) {
-			LOGGER.trace("Valid input is found");
-			
-			String[] parts = inputName.split(".");
-			String extension = parts[parts.length-1];
-			if (extension.matches(("gv|dot"))) {
-				
-				LOGGER.trace("gv|dot extention is matched");
-				return true;
-			}
-		}		
-		return false;
-	}
-
-	private boolean isDotNetwork(CyNetwork network) {
-		CyTable hidden = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
-		return hidden.getRow(network.getSUID()).get("DOT_network", Boolean.class);
+	public CyFileFilter getFileFilter() {
+		return fileFilter;
 	}
 
 	/**
@@ -161,5 +143,31 @@ public class DotReaderFactory implements InputStreamTaskFactory, NetworkViewAdde
 				});
 			}
 		}	
+	}
+
+	/**
+	 * Returns true if the factory is ready to produce a TaskIterator and false otherwise.
+	 * 
+	 * @param inStream The InputStream to be read
+	 * @param inputName The name of the input
+	 * 
+	 * @return Boolean indicating the factory is ready to produce a TaskIterator
+	 */
+	@Override
+	public boolean isReady(InputStream inStream, String inputName) {
+		
+		// check file extension
+		if (inStream != null && inputName != null) {
+			LOGGER.info("Valid input is found");
+			
+			String[] parts = inputName.split(".");
+			String extension = parts[parts.length-1];
+			if (extension.matches(("gv|dot"))) {
+				
+				LOGGER.info("gv|dot extention is matched");
+				return true;
+			}
+		}		
+		return false;
 	}
 }

@@ -51,51 +51,6 @@ public class TestNetworkView implements CyNetworkView {
 	}
 
 	@Override
-	public CyNetwork getModel() {
-		return model;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T> T getVisualProperty(VisualProperty<T> arg0) {
-		T returnVal = (T)visualProperties.get(arg0);
-		return returnVal;
-	}
-
-	@Override
-	public boolean isDirectlyLocked(VisualProperty<?> arg0) {
-		return false;
-	}
-
-	@Override
-	public boolean isSet(VisualProperty<?> arg0) {
-		return false;
-	}
-
-	@Override
-	public boolean isValueLocked(VisualProperty<?> arg0) {
-		return false;
-	}
-
-	@Override
-	public <T, V extends T> void setLockedValue(
-			VisualProperty<? extends T> arg0, V arg1) {
-		
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public <T, V extends T> void setVisualProperty(
-			VisualProperty<? extends T> arg0, V arg1) {
-		visualProperties.put((VisualProperty<Object>) arg0, arg1);
-	}
-
-	@Override
-	public Long getSUID() {
-		return SUID;
-	}
-
-	@Override
 	public void dispose() {
 		
 	}
@@ -135,6 +90,11 @@ public class TestNetworkView implements CyNetworkView {
 	}
 
 	@Override
+	public CyNetwork getModel() {
+		return model;
+	}
+
+	@Override
 	public View<CyNode> getNodeView(CyNode arg0) {
 		for (View<CyNode> nodeView : nodeViews) {
 			if (nodeView.getModel().equals(arg0)) {
@@ -150,9 +110,49 @@ public class TestNetworkView implements CyNetworkView {
 	}
 
 	@Override
+	public Long getSUID() {
+		return SUID;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T> T getVisualProperty(VisualProperty<T> arg0) {
+		T returnVal = (T)visualProperties.get(arg0);
+		return returnVal;
+	}
+
+	@Override
+	public boolean isDirectlyLocked(VisualProperty<?> arg0) {
+		return false;
+	}
+
+	@Override
+	public boolean isSet(VisualProperty<?> arg0) {
+		return false;
+	}
+
+	@Override
+	public boolean isValueLocked(VisualProperty<?> arg0) {
+		return false;
+	}
+
+	@Override
+	public <T, V extends T> void setLockedValue(
+			VisualProperty<? extends T> arg0, V arg1) {
+		
+	}
+
+	@Override
 	public <T, V extends T> void setViewDefault(
 			VisualProperty<? extends T> arg0, V arg1) {
 		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <T, V extends T> void setVisualProperty(
+			VisualProperty<? extends T> arg0, V arg1) {
+		visualProperties.put((VisualProperty<Object>) arg0, arg1);
 	}
 
 	@Override

@@ -24,11 +24,6 @@ public class TestEdgeView implements View<CyEdge> {
 		}
 	}
 	@Override
-	public Long getSUID() {
-		return SUID;
-	}
-
-	@Override
 	public void clearValueLock(VisualProperty<?> arg0) {
 	}
 
@@ -39,6 +34,11 @@ public class TestEdgeView implements View<CyEdge> {
 	@Override
 	public CyEdge getModel() {
 		return model;
+	}
+
+	@Override
+	public Long getSUID() {
+		return SUID;
 	}
 
 	@SuppressWarnings("unchecked")
