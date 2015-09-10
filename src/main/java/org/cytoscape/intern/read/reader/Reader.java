@@ -5,7 +5,9 @@ import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.EQ
 import static org.cytoscape.view.presentation.property.LineTypeVisualProperty.SOLID;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -15,7 +17,9 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.presentation.RenderingEngineManager;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.vizmap.VisualStyle;
 
@@ -35,16 +39,39 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class Reader {
 	
-
 	// Logger that outputs to Cytoscape standard log file:  .../CytoscapeConfiguration/3/framework-cytoscape.log
 	protected static final Logger LOGGER = LoggerFactory.getLogger(Reader.class);
 
+	// Color enum representing the different Graphviz color attributes
+	protected static enum ColorAttribute {
+		COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
+	}
+
+	//Regex patterns for DOT color strings
+	private static final String RGB_REGEX = "^#[0-9A-Fa-f]{6}$";
+	private static final String RGBA_REGEX = "^#(?<RED>[0-9A-Fa-f]{2})"
+						   + "(?<GREEN>[0-9A-Fa-f]{2})"
+						   + "(?<BLUE>[0-9A-Fa-f]{2})"
+						   + "(?<ALPHA>[0-9A-Fa-f]{2})$";
+	private static final String HSB_REGEX = "^(?<HUE>1(?:\\.0+)?|0*(?:\\.[0-9]+))(?:,|\\s)+"
+						 + "(?<SAT>1(?:\\.0+)?|0*(?:\\.[0-9]+))(?:,|\\s)+"
+						 + "(?<VAL>1(?:\\.0+)?|0*(?:\\.[0-9]+))$";
+
+
+	// Maps lineStyle attribute values to Cytoscape values
+	protected static final Map<String, LineType> LINE_TYPE_MAP = new HashMap<String, LineType>();
+
+	static {
+		LINE_TYPE_MAP.put("dotted", DOT);
+		LINE_TYPE_MAP.put("dashed", EQUAL_DASH);
+		LINE_TYPE_MAP.put("solid", SOLID);
+	}
 	// view of network being created/modified
 	protected CyNetworkView networkView;
-
+	
 	// visualStyle being applied to network, used to set default values
 	protected VisualStyle vizStyle;
-
+	
 	//True if "fillcolor" attribute has already been consumed for VisualStyle
 	protected boolean usedDefaultFillColor = false;
 	/*
@@ -53,17 +80,9 @@ public abstract class Reader {
 	 */
 	protected Map<String, String> defaultAttrs;
 	
-	// Maps lineStyle attribute values to Cytoscape values
-	protected static final Map<String, LineType> LINE_TYPE_MAP = new HashMap<String, LineType>();
-	static {
-		LINE_TYPE_MAP.put("dotted", DOT);
-		LINE_TYPE_MAP.put("dashed", EQUAL_DASH);
-		LINE_TYPE_MAP.put("solid", SOLID);
-	}
-	
-	protected static enum ColorAttribute {
-		COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
-	}	
+	// VisualLexicon containing definitions of all VisualProperties
+	// Used for compatibility with "Ding" specific VisualProperties
+	protected VisualLexicon vizLexicon;	
 
 	/*
 	 * Contains elements of Cytoscape graph and their corresponding JPGD elements
@@ -76,14 +95,17 @@ public abstract class Reader {
 	 * 
 	 * @param networkView view of network we are creating/modifying
 	 * @param vizStyle VisualStyle that we are applying to the network
-	 * @param defaultAttrs Map that contains default attributes
-	 * 
+	 * @param defaultAttrs Map that contains default attributes for Reader of this type
+	 * eg. for NodeReader will be a list of default
+	 * @param rendEngMgr RenderingEngineManager that contains the default
+	 * VisualLexicon needed for gradient support
 	 */
-	public Reader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs) {
+	public Reader(CyNetworkView networkView, VisualStyle vizStyle, Map<String, String> defaultAttrs, RenderingEngineManager rendEngMgr) {
 
 		this.networkView = networkView;
 		this.vizStyle = vizStyle;
 		this.defaultAttrs = defaultAttrs;
+		this.vizLexicon = rendEngMgr.getDefaultVisualLexicon();
 	}
 	
 	/**
@@ -94,38 +116,33 @@ public abstract class Reader {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void setDefaults() {
-		LOGGER.trace("Setting the Default values for Visual Style...");
+		LOGGER.info("Setting the Default values for Visual Style...");
 
 		String colorScheme = defaultAttrs.get("colorscheme");
 		for (Entry<String, String> attrEntry : defaultAttrs.entrySet()) {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();
-			LOGGER.info(
+			LOGGER.debug(
 				String.format("Converting DOT attribute: %s", attrKey)
 			);
 
-			// Color switch
-			switch (attrKey) {
-				case "color": {
-					setColor(attrVal, vizStyle, ColorAttribute.COLOR, colorScheme);
-					continue;
-				}
-				case "fillcolor": {
-					setColor(attrVal, vizStyle, ColorAttribute.FILLCOLOR, colorScheme);
-					usedDefaultFillColor = true;
-					continue;
-				}
-				case "fontcolor": {
-					setColor(attrVal, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
-					continue;
-				}
-				case "bgcolor": {
-					setColor(attrVal, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
-					continue;
-				}
-			}
+			/*
+			 * label attribute may be a special case if label="\N".
+			 * In dot, \N is an escape sequence that maps the node name
+			 * to the node label. So setDefaults needs to run additional code
+			 * which should be added to NodeReader to handle the creation of
+			 * the mapping
+			 */
+			/*
+			 * if attrKey is "label"
 
-			Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
+			 *   call handleLabelDefault()
+			 *   Method will written differently for each subclass
+			 *   NodeReader will create a passthrough mapping if label="\N"
+			 *   Every other subclass will return immediately
+			 */
+
+			Pair<VisualProperty, Object> p = convertAttribute(attrKey, attrVal);
 			// if attribute cannot be converted, move on to next one
 			if (p == null) {
 				continue;
@@ -141,30 +158,135 @@ public abstract class Reader {
 			LOGGER.debug(String.format("Setting Visual Property %S...", vizProp));
 			vizStyle.setDefaultValue(vizProp, val);
 		}
-		
 		// Set style attribute here so we handle node shape dependency
-		String styleVal = defaultAttrs.get("style");
-		if(styleVal != null) {
-			setStyle(styleVal, vizStyle);
+		String styleAttribute = defaultAttrs.get("style");
+		if (styleAttribute != null) {
+			setStyle(styleAttribute, vizStyle);
 		}
+		setColorDefaults(vizStyle, colorScheme);
 	}
 
+
 	/**
-	 * Sets all the bypass Visual Properties values for View objects in
-	 * Cytoscape. Implemented in subclasses to handle different subclasses of
-	 * View objects
+	 * Converts the specified GraphViz attribute and value to its Cytoscape 
+	 * equivalent VisualProperty and VisualPropertyValue. If an equivalent value
+	 * is not found, then a default Cytoscape VisualPropertyValue is used.
+	 * This method only handles GraphViz attributes that do not correspond to
+	 * more than one Cytoscape VisualProperty.
+	 * 
+	 * @param name the name of the attribute
+	 * @param val the value of the attribute
+	 * 
+	 * @return Pair object of which the left value is the VisualProperty and the right value
+	 * is the VisualPropertyValue.
 	 */
-	abstract protected void setBypasses();
+	@SuppressWarnings("rawtypes")
+	abstract protected Pair<VisualProperty, Object> convertAttribute(String name, String val); 
+
+	/**
+	 * Converts a GraphViz color string to a Java Color object
+	 * GraphViz color formats are:
+	 * #RRGGBB (in hex)
+	 * #RRGGBBAA (in hex)
+	 * H S V (0 <= Hue, saturation, value <= 1.0)
+	 * String that is name of color from a GraphViz color scheme
+	 *  
+	 * @param color Color from dot file-- takes all color formats
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
+	 */
+	protected Color convertColor(String color, String colorScheme) {
+
+		LOGGER.info("Converting DOT color string to Java Color...");
+		LOGGER.debug("Color string: " + color);
+
+		// Remove trailing/leading whitespace
+		color = color.trim();
+
+		// Test color string against RGB regex
+		LOGGER.trace("Comparing DOT color string to #FFFFFF format");
+		Matcher matcher = Pattern.compile(RGB_REGEX).matcher(color);
+		if (matcher.matches()) {
+			return Color.decode(color);
+		}
+
+		// Test color string against RGBA regex
+		LOGGER.trace("Comparing DOT color string to #FFFFFFFF format");
+		matcher.usePattern(Pattern.compile(RGBA_REGEX));
+		if (matcher.matches()) {
+			Integer red = Integer.valueOf(matcher.group("RED"), 16);
+			Integer green = Integer.valueOf(matcher.group("GREEN"), 16);
+			Integer blue = Integer.valueOf(matcher.group("BLUE"), 16);
+			Integer alpha = Integer.valueOf(matcher.group("ALPHA"), 16);
+			return new Color(red, green, blue, alpha);
+		}
+
+		// Test color string against HSB regex
+		LOGGER.trace("Comparing DOT color string to H S V format");
+		matcher.usePattern(Pattern.compile(HSB_REGEX));
+		if (matcher.matches()) {
+			Float hue = Float.valueOf(matcher.group("HUE"));
+			Float saturation = Float.valueOf(matcher.group("SAT"));
+			Float value = Float.valueOf(matcher.group("VAL"));
+			return Color.getHSBColor(hue, saturation, value);
+		}
+		// String didn't match the regexes, so test if it is a color name
+		// Read in color name files and find it in there
+		LOGGER.trace("Checking if DOT color string is a valid color name");
+		StringColor stringColor = new StringColor("svg_colors.txt", "x11_colors.txt");
+		Color output = stringColor.getColor(colorScheme, color);
+
+		if(output != null) {
+			return output;
+		}
+		// Color was not found. Return a default color
+		LOGGER.info("DOT color string not supported. Return default color.");
+		return Color.BLUE;
+	}
 	
 	/**
-	 * Sets default VisualProperties and bypasses for each element in list.
-	 * Children classes may override this method, with a super call, to handle
-	 * exception properties such as location and edge weights
+	 * Converts a GraphViz colorlist string to a list of Pairs containing
+	 * Colors and Floats
+	 * GraphViz colorlist format is WC(:WC)*,
+	 * of which WC is C[;F],
+	 * of which C is a Graphviz color, and F is a float 0.0 <= x <= 1.0
+	 *  
+	 * @param color Graphviz colorlist
+	 * @param colorScheme Color Scheme used to translate color names
 	 */
-	public void setProperties() {
-		LOGGER.trace("Setting the properties for Visual Style...");
-		setDefaults();
-		setBypasses();
+	protected List<Pair<Color, Float>> convertColorList(String colorList, String colorScheme) {
+		LOGGER.info("Converting DOT color list to Java aray...");
+		//Split color list into weighted colors
+		if (!colorList.contains(":")) {
+			return null;
+		}
+		String[] weightedColors = colorList.split(":");
+		int numColors = 0;
+		ArrayList<Pair<Color, Float>> colorAndWeightPairs = new ArrayList<Pair<Color,Float>>(weightedColors.length);
+		for (String weightedColor : weightedColors) {
+			if (numColors == 2) {
+				break;
+			}
+			if (weightedColor.contains(";")) {
+				String[] colorAndWeight = weightedColor.split(";", 2);
+				Color color = convertColor(colorAndWeight[0], colorScheme);
+				Float weight = null;
+				try {
+					weight = Float.parseFloat(colorAndWeight[1]);
+				}
+				catch (NumberFormatException exception) {
+					LOGGER.error("Error: Color list contains invalid weight");
+				}
+				LOGGER.debug(String.format("Retrieved weighted color from color list. Result: %s;%f", color.toString(), weight));
+				colorAndWeightPairs.add(Pair.of(color, weight));
+			}
+			else {
+				Color color = convertColor(weightedColor, colorScheme);
+				LOGGER.debug(String.format("Retrieved color with no weight from color list. Result: %s", color.toString()));
+				colorAndWeightPairs.add(Pair.of(color, (Float)null));
+			}
+			numColors++;
+		}
+		return colorAndWeightPairs;
 	}
 
 	/**
@@ -191,126 +313,24 @@ public abstract class Reader {
 	}
 	
 	/**
-	 * Converts a GraphViz color string to a Java Color object
-	 * GraphViz color formats are:
-	 * #RRGGBB (in hex)
-	 * #RRGGBBAA (in hex)
-	 * H S V (0 <= Hue, saturation, value <= 1.0)
-	 * String that is name of color from a GraphViz color scheme
-	 *  
-	 * @param color Color from dot file-- takes all color formats
-	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
+	 * Sets all the bypass Visual Properties values for View objects in
+	 * Cytoscape. Implemented in subclasses to handle different subclasses of
+	 * View objects
 	 */
-	protected Color convertColor(String color, String colorScheme) {
-
-		// For testing color file reading
-		StringColor strC = new StringColor("svg_colors.txt");
-		LOGGER.debug("Converting DOT color string to Java Color...");
-		LOGGER.debug("Color string: " + color);
-
-		// Remove trailing/leading whitespace
-		color = color.trim();
-		color = color.toLowerCase();
-
-		// if color is a list-- will support later. For now, take first color  TODO
-		if(color.contains(":")) {
-			
-			String[] weightedColors = color.split(":");
-			String weightedFirstColor = weightedColors[0];
-			color = weightedFirstColor.split(";")[0];
-		}
-
-		//Regex patterns for DOT color strings
-		String rgbRegex = "^#[0-9A-Fa-f]{6}$";
-
-		String rgbaRegex = "^#(?<RED>[0-9A-Fa-f]{2})"
-						   + "(?<GREEN>[0-9A-Fa-f]{2})"
-						   + "(?<BLUE>[0-9A-Fa-f]{2})"
-						   + "(?<ALPHA>[0-9A-Fa-f]{2})$";
-
-		String hsbRegex = "^(?<HUE>1(?:\\.0+)?|0*(?:\\.[0-9]+))(?:,|\\s)+"
-						 + "(?<SAT>1(?:\\.0+)?|0*(?:\\.[0-9]+))(?:,|\\s)+"
-						 + "(?<VAL>1(?:\\.0+)?|0*(?:\\.[0-9]+))$";
-
-		// Test color string against RGB regex
-		Matcher matcher = Pattern.compile(rgbRegex).matcher(color);
-		if (matcher.matches()) {
-		LOGGER.trace("DOT color string matches #RRGGBB format");
-			return Color.decode(color);
-		}
-
-		// Test color string against RGBA regex
-		matcher.usePattern(Pattern.compile(rgbaRegex));
-		LOGGER.trace("DOT color string matches #RRGGBBAA format");
-		if (matcher.matches()) {
-			Integer red = Integer.valueOf(matcher.group("RED"), 16);
-			Integer green = Integer.valueOf(matcher.group("GREEN"), 16);
-			Integer blue = Integer.valueOf(matcher.group("BLUE"), 16);
-			Integer alpha = Integer.valueOf(matcher.group("ALPHA"), 16);
-			return new Color(red, green, blue, alpha);
-		}
-
-		// Test color string against HSB regex
-		matcher.usePattern(Pattern.compile(hsbRegex));
-		if (matcher.matches()) {
-		LOGGER.trace("DOT color string matches H S V format");
-			Float hue = Float.valueOf(matcher.group("HUE"));
-			Float saturation = Float.valueOf(matcher.group("SAT"));
-			Float value = Float.valueOf(matcher.group("VAL"));
-			return Color.getHSBColor(hue, saturation, value);
-		}
-		// if color is a string
-		else {
-			// Read in color name files and find it in there
-			StringColor stringColor = new StringColor("svg_colors.txt", "x11_colors.txt");
-			Color output = stringColor.getColor(colorScheme, color);
-
-			if(output != null) {
-				return output;
-			}
-			else {
-				// If color can't be found return a default color
-				LOGGER.info("DOT color string not supported. Return default color.");
-				return Color.BLUE;
-			}
-		}
-	}
+	abstract protected void setBypasses();
 	
 	/**
-	 * Converts the specified GraphViz attribute and value to its Cytoscape 
-	 * equivalent VisualProperty and VisualPropertyValue. If an equivalent value
-	 * is not found, then a default Cytoscape VisualPropertyValue is used.
-	 * This method only handles GraphViz attributes that do not correspond to
-	 * more than one Cytoscape VisualProperty.
-	 * 
-	 * @param name the name of the attribute
-	 * @param val the value of the attribute
-	 * 
-	 * @return Pair object of which the left value is the VisualProperty and the right value
-	 * is the VisualPropertyValue.
-	 */
-	@SuppressWarnings("rawtypes")
-	protected abstract Pair<VisualProperty, Object> convertAttribute(String name, String val);
-
-	/**
-	 * Converts the GraphViz "style" attribute into default VisualProperty
-	 * values for a Cytoscape VisualStyle
-	 * 
-	 * @param attrVal String that is the value of "style" 
-	 * eg. "dashed, rounded"
-	 * @param vizStyle VisualStyle that "style" is being applied to
-	 */
-	abstract protected void setStyle(String attrVal, VisualStyle vizStyle);
-
-	/**
-	 * Converts the GraphViz "style" attribute into VisualProperty bypass values
+	 * Converts a GraphViz color attribute into a VisualProperty bypass value
 	 * for a Cytoscape View object
 	 * 
-	 * @param attrVal String that is the value of "style" (eg. "dashed, round")
-	 * @param elementView view to which "style" is being applied
+	 * @param attrVal GraphViz color string
+	 * @param elementView View of Cytoscape element to which a color
+	 * VisualProperty is being set
+	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
+	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
 	 */
-	abstract protected void setStyle(String attrVal, View<? extends CyIdentifiable> elementView);
-
+	abstract protected void setColor(String attrVal, View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme);
+ 
 	/**
 	 * Converts a GraphViz color attribute into a default VisualProperty value
 	 * for a Cytoscape VisualStyle
@@ -323,16 +343,40 @@ public abstract class Reader {
 	abstract protected void setColor(String attrVal, VisualStyle vizStyle, ColorAttribute attr, String colorScheme);
 
 	/**
-	 * Converts a GraphViz color attribute into a VisualProperty bypass value
+	 * Sets all the default values of Color VisualProperties for the VisualStyle.
+	 * Subclasses implement this method to handle the different CyIdentifiables
+	 */
+	abstract protected void setColorDefaults(VisualStyle vizStyle, String colorScheme);
+
+	/**
+	 * Converts the GraphViz "style" attribute into VisualProperty bypass values
 	 * for a Cytoscape View object
 	 * 
-	 * @param attrVal GraphViz color string
-	 * @param elementView View of Cytoscape element to which a color
-	 * VisualProperty is being set
-	 * @param attr enum for type of color: COLOR, FILLCOLOR, FONTCOLOR, BGCOLOR
-	 * @param colorScheme Scheme from dot. Either "x11" or "svg"
+	 * @param attrVal String that is the value of "style" (eg. "dashed, round")
+	 * @param elementView view to which "style" is being applied
 	 */
-	abstract protected void setColor(String attrVal, View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme);
+	abstract protected void setStyle(String attrVal, View<? extends CyIdentifiable> elementView);
+
+	/**
+	 * Converts the GraphViz "style" attribute into default VisualProperty
+	 * values for a Cytoscape VisualStyle
+	 * 
+	 * @param attrVal String that is the value of "style" 
+	 * eg. "dashed, rounded"
+	 * @param vizStyle VisualStyle that "style" is being applied to
+	 */
+	abstract protected void setStyle(String attrVal, VisualStyle vizStyle);
+
+	/**
+	 * Sets default VisualProperties and bypasses for each element in list.
+	 * Children classes may override this method, with a super call, to handle
+	 * exception properties such as location and edge weights
+	 */
+	public void setProperties() {
+		LOGGER.info("Setting the properties for Visual Style...");
+		setDefaults();
+		setBypasses();
+	}
 }
 
 

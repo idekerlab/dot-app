@@ -22,10 +22,10 @@ import org.slf4j.LoggerFactory;
  */
 public class DotWriterFactory implements CyNetworkViewWriterFactory {
 
-	// For exporting files
+	// represents the Graphviz file format
 	private CyFileFilter fileFilter;
 	
-	// For visual styles 
+	// contains references to created VisualStyles
 	private VisualMappingManager vizMapMgr;
 	
 	// Logger that outputs to Cytoscape standard log file:  .../CytoscapeConfiguration/3/framework-cytoscape.log
@@ -45,16 +45,6 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	}
 
 	/**
-	 * Returns CyFileFilter associated with this factory
-	 * 
-	 * @return CyFileFilter for this factory
-	 */
-	@Override
-	public CyFileFilter getFileFilter() {
-		return fileFilter;
-	}
-	 
-	/**
 	 * Returns a task that writes a specified network to a specified stream.
 	 * Notifies user that using this option results in large loss of data and recommends
 	 * to export with view. Export will only include node and edge declarations
@@ -73,7 +63,7 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 				+ "Use File -> Export -> Network and View... instead to maintain visual information", Notifier.MessageType.INFO);
 		return new DotWriterTask(outStream, network);
 	}
-	
+	 
 	/**
 	 * Creates a task that writes a specified network and its view to a specified stream
 	 * 
@@ -86,5 +76,15 @@ public class DotWriterFactory implements CyNetworkViewWriterFactory {
 	public CyWriter createWriter(OutputStream outStream, CyNetworkView view) {
 		LOGGER.trace("createWriter with CyNetworkView param called");
 		return new DotWriterTask(outStream, view, vizMapMgr);
+	}
+	
+	/**
+	 * Returns CyFileFilter associated with this factory
+	 * 
+	 * @return CyFileFilter for this factory
+	 */
+	@Override
+	public CyFileFilter getFileFilter() {
+		return fileFilter;
 	}
 }
