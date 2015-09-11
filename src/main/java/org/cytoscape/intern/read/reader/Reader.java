@@ -233,6 +233,9 @@ public abstract class Reader {
 		// Read in color name files and find it in there
 		LOGGER.trace("Checking if DOT color string is a valid color name");
 		StringColor stringColor = new StringColor("svg_colors.txt", "x11_colors.txt");
+		
+		//String color names are case-insensitive
+		color = color.toLowerCase();
 		Color output = stringColor.getColor(colorScheme, color);
 
 		if(output != null) {
