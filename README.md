@@ -10,6 +10,7 @@ To use dot-app you need at least [Cytoscape 3.2.1+](http://www.cytoscape.org/)
 * [User Guide](http://chianti.ucsd.edu/dot-documents/user_guide.pdf)
 * [Information about converting to and from Graphviz format](http://chianti.ucsd.edu/dot-documents/conversion_details.pdf)
 * [Dot for Cytoscape Style Guide](http://chianti.ucsd.edu/dot-documents/style_guide.pdf)
+* [Example of automated dot-app use with cyREST](https://gist.github.com/massoudTheDude/8d87e7bf0dff13cba1d3)
 
 ## [Install to Cytoscape](http://apps.cytoscape.org/apps/dotapp)
 
