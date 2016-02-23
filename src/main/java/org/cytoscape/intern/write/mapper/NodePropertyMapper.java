@@ -24,6 +24,7 @@ import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.R
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.View;
@@ -160,7 +161,7 @@ public class NodePropertyMapper extends Mapper {
 		
 		if (!isEqualToDefault(NODE_BORDER_WIDTH)) {
 			Double borderWidth = view.getVisualProperty(NODE_BORDER_WIDTH);
-			simpleVisPropsToDot.add(String.format("penwidth = \"%f\"", borderWidth));
+			simpleVisPropsToDot.add(String.format((Locale) null, "penwidth = \"%s\"", borderWidth));
 		}
 
 		// Get node height and width
@@ -173,18 +174,18 @@ public class NodePropertyMapper extends Mapper {
 			
 			Double size = view.getVisualProperty(NODE_HEIGHT);
 			if(!isEqualToDefault(size, NODE_SIZE)){
-				simpleVisPropsToDot.add(String.format("height = \"%f\"", size/PPI));
-				simpleVisPropsToDot.add(String.format("width = \"%f\"", size/PPI));
+				simpleVisPropsToDot.add(String.format("height = \"%s\"", decimalFormatter.format(size/PPI)));
+				simpleVisPropsToDot.add(String.format("width = \"%s\"", decimalFormatter.format(size/PPI)));
 			}
 		}
 		else {
 			if(!isEqualToDefault(NODE_HEIGHT)) {
 				Double height = view.getVisualProperty(NODE_HEIGHT);
-				simpleVisPropsToDot.add(String.format("height = \"%f\"", height/PPI));
+				simpleVisPropsToDot.add(String.format("height = \"%s\"", decimalFormatter.format(height/PPI)));
 			}
 			if(!isEqualToDefault(NODE_WIDTH)) {
 				Double width = view.getVisualProperty(NODE_WIDTH);
-				simpleVisPropsToDot.add(String.format("width = \"%f\"", width/PPI));
+				simpleVisPropsToDot.add(String.format("width = \"%s\"", decimalFormatter.format(width/PPI)));
 			}
 		}
 

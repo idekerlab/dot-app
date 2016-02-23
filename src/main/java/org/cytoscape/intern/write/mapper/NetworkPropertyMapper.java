@@ -142,7 +142,7 @@ public class NetworkPropertyMapper extends Mapper {
 
 		LOGGER.trace("Appending penwidth attr to default string...");
 		Double width = vizStyle.getDefaultValue(EDGE_WIDTH);
-		edgeDefaults.append(String.format("penwidth = \"%f\"", width) + ",");
+		edgeDefaults.append(String.format("penwidth = \"%s\"", decimalFormatter.format(width)) + ",");
 
 		LOGGER.trace("Appending tooltip attr to default string...");
 		String tooltip = vizStyle.getDefaultValue(EDGE_TOOLTIP);
@@ -218,7 +218,7 @@ public class NetworkPropertyMapper extends Mapper {
 		LOGGER.trace("Appending penwidth attr to default string...");
 		Double borderWidth = vizStyle.getDefaultValue(NODE_BORDER_WIDTH);
 		nodeDefaults.append(
-			String.format("penwidth = \"%f\"", borderWidth) + ","
+			String.format("penwidth = \"%s\"", decimalFormatter.format(borderWidth)) + ","
 		);
 	
 		// set width and height, if they are locked, must set to NODE_SIZE prop
@@ -236,11 +236,11 @@ public class NetworkPropertyMapper extends Mapper {
 		width /=PPI;
 		
 		nodeDefaults.append(
-			String.format("height = \"%f\"", height) + ","
+			String.format("height = \"%s\"", decimalFormatter.format(height)) + ","
 		);
 
 		nodeDefaults.append(
-			String.format("width = \"%f\"", width) + ","
+			String.format("width = \"%s\"", decimalFormatter.format(width)) + ","
 		);
 
 		// set tooltip

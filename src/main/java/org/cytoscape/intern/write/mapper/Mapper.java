@@ -23,8 +23,11 @@ import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.T
 
 import java.awt.Color;
 import java.awt.Font;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Set;
 
 import org.cytoscape.model.CyEdge;
@@ -38,7 +41,6 @@ import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.vizmap.VisualPropertyDependency;
 import org.cytoscape.view.vizmap.VisualStyle;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,6 +67,14 @@ public abstract class Mapper {
 	// If node width and height are locked
 	private static boolean nodeSizesLockedIsSet = false;
 	protected static boolean nodeSizesLocked;
+	
+	// Object that formats all of the numbers. Decimal separator is forced to '.' for GraphViz
+	protected static DecimalFormat decimalFormatter = new DecimalFormat("#0.000000;-#0.000000");
+	static {
+		DecimalFormatSymbols formatSymbols = decimalFormatter.getDecimalFormatSymbols();
+		formatSymbols.setDecimalSeparator('.');
+		decimalFormatter.setDecimalFormatSymbols(formatSymbols);
+	}
 	
 	/*
 	 * Maps Cytoscape line types to the equivalent string used in .dot
@@ -353,7 +363,7 @@ public abstract class Mapper {
 	protected String mapPosition(Double x, Double y) {
 		/*x /= PPI;
 		y /= PPI;*/
-		return String.format("%f,%f", x, -1*y);
+		return String.format("%s,%s", decimalFormatter.format(x), decimalFormatter.format(-1*y));
 	}	
 
 	/**
