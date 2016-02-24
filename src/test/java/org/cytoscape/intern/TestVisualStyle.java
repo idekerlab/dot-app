@@ -98,8 +98,7 @@ public class TestVisualStyle implements VisualStyle {
 
 	@Override
 	public <V, S extends V> void setDefaultValue(VisualProperty<V> arg0, S arg1) {
-		// TODO Auto-generated method stub
-
+		vizPropDefaults.put(arg0, arg1);
 	}
 
 	@Override

@@ -24,7 +24,6 @@ import static org.cytoscape.view.presentation.property.NodeShapeVisualProperty.R
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.View;
@@ -161,7 +160,7 @@ public class NodePropertyMapper extends Mapper {
 		
 		if (!isEqualToDefault(NODE_BORDER_WIDTH)) {
 			Double borderWidth = view.getVisualProperty(NODE_BORDER_WIDTH);
-			simpleVisPropsToDot.add(String.format((Locale) null, "penwidth = \"%s\"", borderWidth));
+			simpleVisPropsToDot.add(String.format("penwidth = \"%s\"", decimalFormatter.format(borderWidth)));
 		}
 
 		// Get node height and width

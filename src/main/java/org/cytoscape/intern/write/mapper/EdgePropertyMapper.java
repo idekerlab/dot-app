@@ -164,7 +164,7 @@ public class EdgePropertyMapper extends Mapper {
 		return dotStyle.toString();
 	}
 
-	/**
+	/*
 	 * Returns a String that contains all relevant attributes for this element 
 	 */
 	@Override

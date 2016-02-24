@@ -96,6 +96,8 @@ public class MapperTest {
 		CyNode node = network.addNode();
 		CyNode node2 = network.addNode();
 		TestVisualStyle vizStyle = new TestVisualStyle();
+		vizStyle.setDefaultValue(BasicVisualLexicon.NODE_BORDER_WIDTH, new Double(1.25));
+		vizStyle.setDefaultValue(BasicVisualLexicon.EDGE_WIDTH, new Double(1.25));
 		CyEdge edge = network.addEdge(node, node2, true);
 		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
 		network.getRow(node2).set(CyNetwork.NAME, "TestNode2");
@@ -114,8 +116,8 @@ public class MapperTest {
 		String outputString = "outputorder = \"edgesfirst\"";
 		String esepString = "esep = \"0\"";
 		String marginString = "pad = \"2\"";
-		String nodeDefaults = "node [label = \"\",penwidth = \"2.000000\",height = \"0.555556\",width = \"0.833333\",tooltip = \"\",color = \"#000000FF\",fillcolor = \"#C80000FF\",shape = \"ellipse\",style = \"solid,filled\",fontname = \"SansSerif.plain\",fontsize = \"12\",fontcolor = \"#000000FF\",fixedsize = \"true\",labelloc = \"c\"]";
-		String edgeDefaults = "edge [label = \"\",penwidth = \"1.000000\",tooltip = \"\",arrowhead = \"none\",arrowtail = \"none\",color = \"#404040FF\",fontname = \"SansSerif.plain\",fontsize = \"10\",fontcolor = \"#000000FF\",style = \"solid\",dir = \"both\"]";
+		String nodeDefaults = "node [label = \"\",penwidth = \"1.250000\",height = \"0.555556\",width = \"0.833333\",tooltip = \"\",color = \"#000000FF\",fillcolor = \"#C80000FF\",shape = \"ellipse\",style = \"solid,filled\",fontname = \"SansSerif.plain\",fontsize = \"12\",fontcolor = \"#000000FF\",fixedsize = \"true\",labelloc = \"c\"]";
+		String edgeDefaults = "edge [label = \"\",penwidth = \"1.250000\",tooltip = \"\",arrowhead = \"none\",arrowtail = \"none\",color = \"#404040FF\",fontname = \"SansSerif.plain\",fontsize = \"10\",fontcolor = \"#000000FF\",style = \"solid\",dir = \"both\"]";
 		String expectedDotString = String.format("digraph TestNetwork {\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n", 
 				labelString, labelLocString, colorString, splinesString, outputString, esepString, marginString, nodeDefaults, edgeDefaults); 
 
