@@ -112,7 +112,7 @@ public class EdgePropertyMapper extends Mapper {
 
 		if (!isEqualToDefault(EDGE_WIDTH)) {
 			Double width = view.getVisualProperty(EDGE_WIDTH);
-			simpleVisPropsToDot.add(String.format("penwidth = \"%f\"", width));
+			simpleVisPropsToDot.add(String.format("penwidth = \"%s\"", decimalFormatter.format(width)));
 		}
 
 		if (!isEqualToDefault(EDGE_TOOLTIP)) {
@@ -164,7 +164,7 @@ public class EdgePropertyMapper extends Mapper {
 		return dotStyle.toString();
 	}
 
-	/**
+	/*
 	 * Returns a String that contains all relevant attributes for this element 
 	 */
 	@Override
