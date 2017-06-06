@@ -86,7 +86,8 @@ public class NodeReader extends Reader{
 		DOT_TO_CYTOSCAPE.put("fontname", NODE_LABEL_FONT_FACE);
 		DOT_TO_CYTOSCAPE.put("fontsize", NODE_LABEL_FONT_SIZE);
 	}
-	
+	// Variable for DOT's dpi attr
+	private static final int PPI = 96;
 	// true if "fillcolor" attribute has already been consumed for a node
 	private boolean usedFillColor = false;
 	
@@ -347,7 +348,7 @@ public class NodeReader extends Reader{
 				//Fall through to height case
 			}
 			case "height": {
-				retrievedVal = Double.parseDouble(val) * 72.0;
+				retrievedVal = Double.parseDouble(val) * PPI;
 				break;
 			}
 			case "shape": {
@@ -652,6 +653,7 @@ public class NodeReader extends Reader{
 		LOGGER.info("Setting node property default values for color attributes");
 		String fillAttribute = defaultAttrs.get("fillcolor");
 		String colorAttribute = defaultAttrs.get("color");
+		String fontColorAttribute = defaultAttrs.get("fontcolor");
 		String gradientAngle = defaultAttrs.get("gradientangle");
 		String styleAttribute = defaultAttrs.get("style");
 		if (fillAttribute != null) {
@@ -681,6 +683,9 @@ public class NodeReader extends Reader{
 				}
 			}
 			setColor(colorAttribute, vizStyle, ColorAttribute.COLOR, colorScheme);
+		}
+		if (fontColorAttribute != null) {
+			setColor(fontColorAttribute, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
 		}
 	}
 

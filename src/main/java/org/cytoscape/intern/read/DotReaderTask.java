@@ -1,5 +1,7 @@
 package org.cytoscape.intern.read;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -24,11 +26,25 @@ import org.cytoscape.model.subnetwork.CySubNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.presentation.RenderingEngineManager;
+import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualPropertyDependency;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskMonitor;
+
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_WIDTH;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_FILL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_WIDTH;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_HEIGHT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_FACE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_LABEL_FONT_SIZE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_COLOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
 
 import com.alexmerz.graphviz.ParseException;
 import com.alexmerz.graphviz.Parser;
@@ -95,6 +111,9 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	// RenderingEngineManager used to get VisualLexicon
 	// Used to check compatibility with Non BVL Visual Properties
 	private RenderingEngineManager rendEngMr;
+	
+	// Value used to convert DOT's width and height values from inches to pixels
+	private static final int PPI = 96;
 	
 	/**
 	 * Constructs a DotReaderTask object for importing a dot file
@@ -338,6 +357,22 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		vizStyle.setTitle(
 			String.format("%s vizStyle", getGraphName(graph))
 		);
+		
+		// Setting the default values of the visual style to use
+		int defaultFontSize = 14;
+		Font defaultFont = new Font("Serif", Font.PLAIN, defaultFontSize);
+		vizStyle.setDefaultValue(NODE_SHAPE, NodeShapeVisualProperty.ELLIPSE);
+		vizStyle.setDefaultValue(NODE_BORDER_PAINT, Color.BLACK);
+		vizStyle.setDefaultValue(NODE_BORDER_WIDTH, 1.0);
+		vizStyle.setDefaultValue(NODE_FILL_COLOR, Color.LIGHT_GRAY);
+		vizStyle.setDefaultValue(NODE_LABEL_COLOR, Color.BLACK);
+		vizStyle.setDefaultValue(NODE_LABEL_FONT_FACE, defaultFont);
+		vizStyle.setDefaultValue(NODE_LABEL_FONT_SIZE, defaultFontSize);
+		vizStyle.setDefaultValue(NODE_HEIGHT, 0.5 * PPI);
+		vizStyle.setDefaultValue(NODE_WIDTH, 0.75 * PPI);
+		vizStyle.setDefaultValue(EDGE_LABEL_COLOR, Color.BLACK);
+		vizStyle.setDefaultValue(EDGE_LABEL_FONT_FACE, defaultFont);
+		vizStyle.setDefaultValue(EDGE_LABEL_FONT_SIZE, defaultFontSize);
 		//Enable "Custom Graphics fit to Node" and "Edge color to arrows" dependency
 		//Also disable "Lock Node height and width"
 		for (VisualPropertyDependency<?> dep : vizStyle.getAllVisualPropertyDependencies()) {

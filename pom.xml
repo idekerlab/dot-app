@@ -28,6 +28,26 @@
 		plugins that control very specific phases of the build. -->
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-install-plugin</artifactId>
+				<version>2.4</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>install-file</goal>
+						</goals>
+						<configuration>
+							<groupId>com.alexmerz</groupId>
+							<artifactId>jpgd</artifactId>
+							<version>0.8.6</version>
+							<packaging>jar</packaging>
+							<file>${basedir}/lib/com.alexmerz/graphviz/0.8.6/com.alexmerz.graphviz.jar</file>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<!-- The maven-compiler-plugin configures the Java compiler Maven uses 
 				to build the project. -->
 			<plugin>
@@ -56,8 +76,7 @@
 						<Bundle-Version>${project.version}</Bundle-Version>
 
 						<!-- This tells the bundle plugin which packages should not be exported. -->
-						<Private-Package>org.cytoscape.intern.*</Private-Package>
-						<Include-Resource>{maven-resources}, @./jars/com.alexmerz.graphviz.jar</Include-Resource>
+						<Private-Package>org.cytoscape.intern.*,com.alexmerz.graphviz.*</Private-Package>
 						<Embed-Dependency>commons-lang3;scope=compile|runtime</Embed-Dependency>
 						<Bundle-Activator>org.cytoscape.intern.DotActivator</Bundle-Activator>
 					</instructions>
@@ -65,12 +84,52 @@
 			</plugin>
 
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.apache.maven.plugins
+										</groupId>
+										<artifactId>
+											maven-install-plugin
+										</artifactId>
+										<versionRange>
+											[2.4,)
+										</versionRange>
+										<goals>
+											<goal>install-file</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<!-- These are repositories Maven uses to download Cytoscape API JARs we 
 		use in our app. -->
 	<repositories>
 
+		<repository>
+			<id>lib-repo</id>
+			<name>3rd Party Libs</name>
+			<url>${basedir}\lib\</url>
+		</repository>
 		<repository>
 			<id>cytoscape_snapshots</id>
 			<snapshots>
@@ -94,6 +153,8 @@
 			<name>Cytoscape Releases</name>
 			<url>http://code.cytoscape.org/nexus/content/repositories/releases/</url>
 		</repository>
+		
+		
 
 	</repositories>
 
@@ -196,7 +257,11 @@
 			<version>1.5.3</version>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>com.alexmerz</groupId>
+			<artifactId>jpgd</artifactId>
+			<version>0.8.6</version>
+		</dependency>
 	</dependencies>
   
 </project>

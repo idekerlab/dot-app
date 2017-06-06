@@ -32,10 +32,10 @@ public class GradientListener {
 		return radialFactory;
 	}
 	public void removeCustomGraphicsFactory(CyCustomGraphics2Factory<?> factory, Map<Object,Object> serviceProps) {
-		if (linearFactory.equals(factory)) {
+		if (linearFactory != null && linearFactory.equals(factory)) {
 	        this.linearFactory = null;
 		}
-		else if (radialFactory.equals(factory)) {
+		else if (radialFactory != null && radialFactory.equals(factory)) {
 			this.radialFactory = null;
 		}
 	}
