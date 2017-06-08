@@ -32,7 +32,6 @@ public class TestVisualStyle implements VisualStyle {
 	}
 	@Override
 	public void addVisualMappingFunction(VisualMappingFunction<?, ?> arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -43,19 +42,16 @@ public class TestVisualStyle implements VisualStyle {
 
 	@Override
 	public void apply(CyNetworkView arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void apply(CyRow arg0, View<? extends CyIdentifiable> arg1) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public Collection<VisualMappingFunction<?, ?>> getAllVisualMappingFunctions() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -67,32 +63,27 @@ public class TestVisualStyle implements VisualStyle {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <V> V getDefaultValue(VisualProperty<V> arg0) {
-		// TODO Auto-generated method stub
 		return (V)vizPropDefaults.get(arg0);
 	}
 
 	@Override
 	public String getTitle() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public <V> VisualMappingFunction<?, V> getVisualMappingFunction(
 			VisualProperty<V> arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void removeVisualMappingFunction(VisualProperty<?> arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void removeVisualPropertyDependency(VisualPropertyDependency<?> arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -103,7 +94,6 @@ public class TestVisualStyle implements VisualStyle {
 
 	@Override
 	public void setTitle(String arg0) {
-		// TODO Auto-generated method stub
 
 	}
 

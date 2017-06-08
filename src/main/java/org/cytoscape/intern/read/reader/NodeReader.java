@@ -86,8 +86,8 @@ public class NodeReader extends Reader{
 		DOT_TO_CYTOSCAPE.put("fontname", NODE_LABEL_FONT_FACE);
 		DOT_TO_CYTOSCAPE.put("fontsize", NODE_LABEL_FONT_SIZE);
 	}
-	// Variable for DOT's dpi attr
-	private static final int PPI = 96;
+	// Value used to convert DOT's width and height values from inches to points
+	private static final int PPI = 72;
 	// true if "fillcolor" attribute has already been consumed for a node
 	private boolean usedFillColor = false;
 	

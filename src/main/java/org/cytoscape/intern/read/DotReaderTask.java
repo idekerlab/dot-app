@@ -45,6 +45,8 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_L
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_COLOR;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_UNSELECTED_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT;
 
 import com.alexmerz.graphviz.ParseException;
 import com.alexmerz.graphviz.Parser;
@@ -112,8 +114,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	// Used to check compatibility with Non BVL Visual Properties
 	private RenderingEngineManager rendEngMr;
 	
-	// Value used to convert DOT's width and height values from inches to pixels
-	private static final int PPI = 96;
+	// Value used to convert DOT's width and height values from inches to points
+	private static final int PPI = 72;
 	
 	/**
 	 * Constructs a DotReaderTask object for importing a dot file
@@ -373,6 +375,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		vizStyle.setDefaultValue(EDGE_LABEL_COLOR, Color.BLACK);
 		vizStyle.setDefaultValue(EDGE_LABEL_FONT_FACE, defaultFont);
 		vizStyle.setDefaultValue(EDGE_LABEL_FONT_SIZE, defaultFontSize);
+		vizStyle.setDefaultValue(EDGE_UNSELECTED_PAINT, Color.BLACK);
+		vizStyle.setDefaultValue(EDGE_STROKE_UNSELECTED_PAINT, Color.BLACK);
 		//Enable "Custom Graphics fit to Node" and "Edge color to arrows" dependency
 		//Also disable "Lock Node height and width"
 		for (VisualPropertyDependency<?> dep : vizStyle.getAllVisualPropertyDependencies()) {
