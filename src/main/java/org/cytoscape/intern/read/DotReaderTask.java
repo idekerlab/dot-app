@@ -47,6 +47,7 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_L
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_UNSELECTED_PAINT;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_WIDTH;
 
 import com.alexmerz.graphviz.ParseException;
 import com.alexmerz.graphviz.Parser;
@@ -377,6 +378,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		vizStyle.setDefaultValue(EDGE_LABEL_FONT_SIZE, defaultFontSize);
 		vizStyle.setDefaultValue(EDGE_UNSELECTED_PAINT, Color.BLACK);
 		vizStyle.setDefaultValue(EDGE_STROKE_UNSELECTED_PAINT, Color.BLACK);
+		vizStyle.setDefaultValue(EDGE_WIDTH, 1.0);
 		//Enable "Custom Graphics fit to Node" and "Edge color to arrows" dependency
 		//Also disable "Lock Node height and width"
 		for (VisualPropertyDependency<?> dep : vizStyle.getAllVisualPropertyDependencies()) {
