@@ -356,6 +356,7 @@ public class EdgeReader extends Reader{
 	@Override
 	protected void setColorDefaults(VisualStyle vizStyle, String colorScheme) {
 		String colorAttribute = defaultAttrs.get("color");
+		String fontColorAttribute = defaultAttrs.get("fontcolor");
 		if (colorAttribute != null) {
 			List<Pair<Color, Float>> colorListValues = convertColorList(colorAttribute, colorScheme);
 			if (colorListValues != null) {
@@ -364,6 +365,9 @@ public class EdgeReader extends Reader{
 						color.getBlue(), color.getAlpha());
 			}
 			setColor(colorAttribute, vizStyle, ColorAttribute.COLOR, colorScheme);
+		}
+		if (fontColorAttribute != null) {
+			setColor(fontColorAttribute, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
 		}
 	}
 
