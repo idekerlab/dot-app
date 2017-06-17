@@ -1,3 +1,21 @@
+/**************************
+ * Copyright © 2015-2017 Braxton Fitts, Ziran Zhang, Massoud Maher
+ * 
+ * This file is part of dot-app.
+ * dot-app is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * dot-app is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with dot-app.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.cytoscape.intern.read.reader;
 
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NODE_BORDER_LINE_TYPE;
@@ -86,7 +104,8 @@ public class NodeReader extends Reader{
 		DOT_TO_CYTOSCAPE.put("fontname", NODE_LABEL_FONT_FACE);
 		DOT_TO_CYTOSCAPE.put("fontsize", NODE_LABEL_FONT_SIZE);
 	}
-	
+	// Value used to convert DOT's width and height values from inches to points
+	private static final int PPI = 72;
 	// true if "fillcolor" attribute has already been consumed for a node
 	private boolean usedFillColor = false;
 	
@@ -347,7 +366,7 @@ public class NodeReader extends Reader{
 				//Fall through to height case
 			}
 			case "height": {
-				retrievedVal = Double.parseDouble(val) * 72.0;
+				retrievedVal = Double.parseDouble(val) * PPI;
 				break;
 			}
 			case "shape": {
@@ -652,6 +671,7 @@ public class NodeReader extends Reader{
 		LOGGER.info("Setting node property default values for color attributes");
 		String fillAttribute = defaultAttrs.get("fillcolor");
 		String colorAttribute = defaultAttrs.get("color");
+		String fontColorAttribute = defaultAttrs.get("fontcolor");
 		String gradientAngle = defaultAttrs.get("gradientangle");
 		String styleAttribute = defaultAttrs.get("style");
 		if (fillAttribute != null) {
@@ -681,6 +701,9 @@ public class NodeReader extends Reader{
 				}
 			}
 			setColor(colorAttribute, vizStyle, ColorAttribute.COLOR, colorScheme);
+		}
+		if (fontColorAttribute != null) {
+			setColor(fontColorAttribute, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
 		}
 	}
 

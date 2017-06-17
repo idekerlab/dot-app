@@ -1,3 +1,21 @@
+/**************************
+ * Copyright © 2015-2017 Braxton Fitts, Ziran Zhang, Massoud Maher
+ * 
+ * This file is part of dot-app.
+ * dot-app is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * dot-app is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with dot-app.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.cytoscape.intern;
 
 import java.util.Collection;
@@ -32,7 +50,6 @@ public class TestVisualStyle implements VisualStyle {
 	}
 	@Override
 	public void addVisualMappingFunction(VisualMappingFunction<?, ?> arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -43,19 +60,16 @@ public class TestVisualStyle implements VisualStyle {
 
 	@Override
 	public void apply(CyNetworkView arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void apply(CyRow arg0, View<? extends CyIdentifiable> arg1) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public Collection<VisualMappingFunction<?, ?>> getAllVisualMappingFunctions() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -67,32 +81,27 @@ public class TestVisualStyle implements VisualStyle {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <V> V getDefaultValue(VisualProperty<V> arg0) {
-		// TODO Auto-generated method stub
 		return (V)vizPropDefaults.get(arg0);
 	}
 
 	@Override
 	public String getTitle() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public <V> VisualMappingFunction<?, V> getVisualMappingFunction(
 			VisualProperty<V> arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void removeVisualMappingFunction(VisualProperty<?> arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void removeVisualPropertyDependency(VisualPropertyDependency<?> arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -103,7 +112,6 @@ public class TestVisualStyle implements VisualStyle {
 
 	@Override
 	public void setTitle(String arg0) {
-		// TODO Auto-generated method stub
 
 	}
 

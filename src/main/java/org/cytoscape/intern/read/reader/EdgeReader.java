@@ -1,3 +1,21 @@
+/**************************
+ * Copyright © 2015-2017 Braxton Fitts, Ziran Zhang, Massoud Maher
+ * 
+ * This file is part of dot-app.
+ * dot-app is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * dot-app is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with dot-app.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.cytoscape.intern.read.reader;
 
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL;
@@ -356,6 +374,7 @@ public class EdgeReader extends Reader{
 	@Override
 	protected void setColorDefaults(VisualStyle vizStyle, String colorScheme) {
 		String colorAttribute = defaultAttrs.get("color");
+		String fontColorAttribute = defaultAttrs.get("fontcolor");
 		if (colorAttribute != null) {
 			List<Pair<Color, Float>> colorListValues = convertColorList(colorAttribute, colorScheme);
 			if (colorListValues != null) {
@@ -364,6 +383,9 @@ public class EdgeReader extends Reader{
 						color.getBlue(), color.getAlpha());
 			}
 			setColor(colorAttribute, vizStyle, ColorAttribute.COLOR, colorScheme);
+		}
+		if (fontColorAttribute != null) {
+			setColor(fontColorAttribute, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
 		}
 	}
 
