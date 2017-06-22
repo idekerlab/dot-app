@@ -133,7 +133,7 @@ public abstract class Reader {
 	 * properties, and EdgeReader sets all edge properties)
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void setDefaults() {
+	protected void setDefaults() {
 		LOGGER.info("Setting the Default values for Visual Style...");
 
 		String colorScheme = defaultAttrs.get("colorscheme");
@@ -143,22 +143,6 @@ public abstract class Reader {
 			LOGGER.debug(
 				String.format("Converting DOT attribute: %s", attrKey)
 			);
-
-			/*
-			 * label attribute may be a special case if label="\N".
-			 * In dot, \N is an escape sequence that maps the node name
-			 * to the node label. So setDefaults needs to run additional code
-			 * which should be added to NodeReader to handle the creation of
-			 * the mapping
-			 */
-			/*
-			 * if attrKey is "label"
-
-			 *   call handleLabelDefault()
-			 *   Method will written differently for each subclass
-			 *   NodeReader will create a passthrough mapping if label="\N"
-			 *   Every other subclass will return immediately
-			 */
 
 			Pair<VisualProperty, Object> p = convertAttribute(attrKey, attrVal);
 			// if attribute cannot be converted, move on to next one
@@ -173,7 +157,7 @@ public abstract class Reader {
 				continue;
 			}
 			LOGGER.trace("Updating Visual Style...");
-			LOGGER.debug(String.format("Setting Visual Property %S...", vizProp));
+			LOGGER.debug("Setting Visual Property {} with value {}", vizProp, val);
 			vizStyle.setDefaultValue(vizProp, val);
 		}
 		// Set style attribute here so we handle node shape dependency
