@@ -74,10 +74,13 @@ public class EdgeReader extends Reader{
 	static {
 		ARROW_SHAPE_MAP.put("vee", ArrowShapeVisualProperty.ARROW);
 		ARROW_SHAPE_MAP.put("dot", ArrowShapeVisualProperty.CIRCLE);
+		ARROW_SHAPE_MAP.put("odot", ArrowShapeVisualProperty.CIRCLE);
 		ARROW_SHAPE_MAP.put("normal", ArrowShapeVisualProperty.DELTA);
+		ARROW_SHAPE_MAP.put("onormal", ArrowShapeVisualProperty.DELTA);
 		ARROW_SHAPE_MAP.put("diamond", ArrowShapeVisualProperty.DIAMOND);
-		ARROW_SHAPE_MAP.put("ornormal", ArrowShapeVisualProperty.HALF_BOTTOM);
-		ARROW_SHAPE_MAP.put("olnormal", ArrowShapeVisualProperty.HALF_TOP);
+		ARROW_SHAPE_MAP.put("odiamond", ArrowShapeVisualProperty.DIAMOND);
+		ARROW_SHAPE_MAP.put("rvee", ArrowShapeVisualProperty.HALF_BOTTOM);
+		ARROW_SHAPE_MAP.put("lvee", ArrowShapeVisualProperty.HALF_TOP);
 		ARROW_SHAPE_MAP.put("none", ArrowShapeVisualProperty.NONE);
 		ARROW_SHAPE_MAP.put("tee", ArrowShapeVisualProperty.T);
 	}

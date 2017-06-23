@@ -82,10 +82,14 @@ public class NodeReader extends Reader{
 		NODE_SHAPE_MAP.put("triangle", NodeShapeVisualProperty.TRIANGLE);
 		NODE_SHAPE_MAP.put("diamond", NodeShapeVisualProperty.DIAMOND);
 		NODE_SHAPE_MAP.put("ellipse", NodeShapeVisualProperty.ELLIPSE);
+		NODE_SHAPE_MAP.put("circle", NodeShapeVisualProperty.ELLIPSE);
 		NODE_SHAPE_MAP.put("hexagon", NodeShapeVisualProperty.HEXAGON);
 		NODE_SHAPE_MAP.put("octagon", NodeShapeVisualProperty.OCTAGON);
 		NODE_SHAPE_MAP.put("parallelogram", NodeShapeVisualProperty.PARALLELOGRAM);
-		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.RECTANGLE);     
+		NODE_SHAPE_MAP.put("rectangle", NodeShapeVisualProperty.RECTANGLE);
+		NODE_SHAPE_MAP.put("box", NodeShapeVisualProperty.RECTANGLE);
+		NODE_SHAPE_MAP.put("rect", NodeShapeVisualProperty.RECTANGLE);
+		NODE_SHAPE_MAP.put("square", NodeShapeVisualProperty.RECTANGLE);
 	}
 	
 	/*
@@ -108,6 +112,8 @@ public class NodeReader extends Reader{
 	private static final int PPI = 72;
 	// true if "fillcolor" attribute has already been consumed for a node
 	private boolean usedFillColor = false;
+	// true if the default shapes for nodes are regular polygons
+	private boolean isDefaultRegularShape = false;
 	
 	//Used to retrieve CyCustomGraphics2Factories used for gradients;
 	private GradientListener gradientListener;
@@ -294,7 +300,8 @@ public class NodeReader extends Reader{
 				weights.add(start);
 			}
 		}
-		LOGGER.debug("Number of colors in gradient: " + colors.size());
+		LOGGER.debug("Number of colors in gradient: {}", colors.size());
+		LOGGER.debug("Angle of gradient: {}", gradientAngle);
 		HashMap<String, Object> gradientProps = new HashMap();
 		gradientProps.put("cy_gradientFractions", weights);
 		gradientProps.put("cy_gradientColors", colors);
@@ -396,6 +403,53 @@ public class NodeReader extends Reader{
 	}
 	
 	/**
+	 * Sets all the default Visual Properties values for Cytoscape View Objects
+	 * corresponding to CyNode objects in the elementMap
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Override
+	protected void setDefaults() {
+		super.setDefaults();
+		LOGGER.debug("Adjusting node size if supposed to be regular polygon");
+		//Handle node size change if shape is a regular polygon
+		if (defaultAttrs.containsKey("shape")) {
+			String shape = defaultAttrs.get("shape");
+			LOGGER.debug("Shape set as default for nodes is {}", shape);
+			if (shape.contains("square") || shape.contains("circle")) {
+				isDefaultRegularShape = true;
+				if (defaultAttrs.containsKey("width")) {
+					String width = defaultAttrs.get("width");
+					if (defaultAttrs.containsKey("height")) {
+						String height = defaultAttrs.get("height");
+						if (Double.parseDouble(width) > Double.parseDouble(height)) {
+							Pair<VisualProperty, Object> p = convertAttribute("height", width);
+							LOGGER.debug("Fixing node's height to equal node's width");
+							vizStyle.setDefaultValue(p.getLeft(), p.getRight());
+						} else if (Double.parseDouble(width) < Double.parseDouble(height)) {
+							Pair<VisualProperty, Object> p = convertAttribute("width", height);
+							LOGGER.debug("Fixing node's width to equal node's height");
+							vizStyle.setDefaultValue(p.getLeft(), p.getRight());
+						}
+					} else {
+						Pair<VisualProperty, Object> p = convertAttribute("height", width);
+						LOGGER.debug("Fixing node's height to equal node's width");
+						vizStyle.setDefaultValue(p.getLeft(), p.getRight());
+					}
+				} else if (defaultAttrs.containsKey("height")) {
+					String height = defaultAttrs.get("height");
+					Pair<VisualProperty, Object> p = convertAttribute("width", height);
+					LOGGER.debug("Fixing node's width to equal node's height");
+					vizStyle.setDefaultValue(p.getLeft(), p.getRight());
+				} else {
+					//Change the implicit default height to the implicit default width since width is greater
+					LOGGER.debug("Fixing node's height to equal node's width");
+					Double width = vizStyle.getDefaultValue(NODE_WIDTH);
+					vizStyle.setDefaultValue(NODE_HEIGHT, width);
+				}
+			}
+		}
+	}
+	/**
 	 * Sets all the bypass Visual Properties values for Cytoscape View objects
 	 * corresponding to CyNode objects in the elementMap
 	 */
@@ -421,6 +475,8 @@ public class NodeReader extends Reader{
 			String colorAttribute = null;
 			String fillAttribute = null;
 			String gradientAngle = null;
+			boolean isRegularShape = isDefaultRegularShape;
+			
 
 			for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
 				String attrKey = attrEntry.getKey();
@@ -455,9 +511,14 @@ public class NodeReader extends Reader{
 					gradientAngle = attrVal;
 					continue;
 				}
+				if (attrKey.equals("shape") && !(attrVal.contains("square") || attrVal.contains("circle"))) {
+					LOGGER.debug("Shape of node is not regular polygon");
+					//Flag code to skip regular shape specific code after iterating through DOT attributes
+					isRegularShape = false;
+				}
 
 				// handle simple attributes
-				Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
+				Pair<VisualProperty, Object> p = convertAttribute(attrKey, attrVal);
 				if (p == null) {
 					continue;
 				}
@@ -472,6 +533,33 @@ public class NodeReader extends Reader{
 				elementView.setLockedValue(vizProp, val);
 			}
 			
+			//Handle node height change if shape is regular polygon
+			if (isRegularShape) {
+				if (bypassAttrs.containsKey("width")) {
+					String width = bypassAttrs.get("width");
+					if (bypassAttrs.containsKey("height")) {
+						String height = bypassAttrs.get("height");
+						if (Double.parseDouble(width) > Double.parseDouble(height)) {
+							Pair<VisualProperty, Object> p = convertAttribute("height", width);
+							LOGGER.debug("Fixing node's height to equal node's width");
+							elementView.setLockedValue(p.getLeft(), p.getRight());
+						} else if (Double.parseDouble(width) < Double.parseDouble(height)) {
+							Pair<VisualProperty, Object> p = convertAttribute("width", height);
+							LOGGER.debug("Fixing node's width to equal node's height");
+							elementView.setLockedValue(p.getLeft(), p.getRight());
+						}
+					} else {
+						Pair<VisualProperty, Object> p = convertAttribute("height", width);
+						LOGGER.debug("Fixing node's height to equal node's width");
+						elementView.setLockedValue(p.getLeft(), p.getRight());
+					}
+				} else if (bypassAttrs.containsKey("height")) {
+					String height = bypassAttrs.get("height");
+					Pair<VisualProperty, Object> p = convertAttribute("width", height);
+					LOGGER.debug("Fixing node's width to equal node's height");
+					elementView.setLockedValue(p.getLeft(), p.getRight());
+				}
+			}
 			//Handle gradient creation and color setting now
 
 			LOGGER.trace("Handle style and node color attributes");
@@ -498,6 +586,7 @@ public class NodeReader extends Reader{
 				fillAttribute = defaultAttrs.get("fillcolor");
 			}
 			
+			//Use style attribute to perform visual transformations of node
 			if (styleAttribute != null) {
 				setStyle(styleAttribute, elementView);
 			}
@@ -691,7 +780,7 @@ public class NodeReader extends Reader{
 			List<Pair<Color, Float>> colorListValues = convertColorList(colorAttribute, colorScheme);
 			if (colorListValues != null) {
 				Color color = colorListValues.get(0).getLeft();
-				colorAttribute = String.format("#%2x%2x%2x%2x", color.getRed(), color.getGreen(),
+				colorAttribute = String.format("#%02x%02x%02x%02x", color.getRed(), color.getGreen(),
 						color.getBlue(), color.getAlpha());
 				if (gradientAngle == null) {
 					gradientAngle = "0";
@@ -745,7 +834,7 @@ public class NodeReader extends Reader{
 			}
 		}
 		// check if invisible is enabled
-		if( attrVal.contains("invis") ) {
+		if (attrVal.contains("invis")) {
 			if (isVisibleDefault) {
 				elementView.setLockedValue(NODE_VISIBLE, false);
 			}

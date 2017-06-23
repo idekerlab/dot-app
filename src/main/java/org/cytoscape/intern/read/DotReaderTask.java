@@ -44,6 +44,7 @@ import org.cytoscape.model.subnetwork.CySubNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.presentation.RenderingEngineManager;
+import org.cytoscape.view.presentation.property.ArrowShapeVisualProperty;
 import org.cytoscape.view.presentation.property.NodeShapeVisualProperty;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualPropertyDependency;
@@ -64,6 +65,8 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_L
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_FACE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_LABEL_FONT_SIZE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_UNSELECTED_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_STROKE_UNSELECTED_PAINT;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_WIDTH;
 
@@ -396,6 +399,8 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		vizStyle.setDefaultValue(EDGE_LABEL_FONT_SIZE, defaultFontSize);
 		vizStyle.setDefaultValue(EDGE_UNSELECTED_PAINT, Color.BLACK);
 		vizStyle.setDefaultValue(EDGE_STROKE_UNSELECTED_PAINT, Color.BLACK);
+		vizStyle.setDefaultValue(EDGE_TARGET_ARROW_SHAPE, ArrowShapeVisualProperty.DELTA);
+		vizStyle.setDefaultValue(EDGE_SOURCE_ARROW_SHAPE, ArrowShapeVisualProperty.DELTA);
 		vizStyle.setDefaultValue(EDGE_WIDTH, 1.0);
 		//Enable "Custom Graphics fit to Node" and "Edge color to arrows" dependency
 		//Also disable "Lock Node height and width"
