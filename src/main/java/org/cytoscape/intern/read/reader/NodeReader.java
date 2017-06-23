@@ -481,9 +481,7 @@ public class NodeReader extends Reader{
 			for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
 				String attrKey = attrEntry.getKey();
 				String attrVal = attrEntry.getValue();
-				LOGGER.debug(
-					String.format("Converting GraphViz attribute: %s", attrKey)
-				);
+				LOGGER.debug("Converting GraphViz attribute: {}", attrKey);
 
 				
 				//These attributes require special handling
@@ -496,16 +494,16 @@ public class NodeReader extends Reader{
 					continue;
 				}
 				if (attrKey.equals("color")) {
-					colorAttribute = attrVal;
+					colorAttribute = (attrVal.equals("")) ? "black" : attrVal;
 					continue;
 				}
 				if (attrKey.equals("fillcolor")) {
-					fillAttribute = attrVal;
+					fillAttribute = (attrVal.equals("")) ? "lightgrey" : attrVal;
 					continue;
 				}
 				if (attrKey.equals("fontcolor")) {
-					setColor(attrVal, elementView, ColorAttribute.FONTCOLOR, colorScheme);
-					continue;
+					String fontAttr = (attrVal.equals("")) ? "black" : attrVal;
+					setColor(fontAttr, elementView, ColorAttribute.FONTCOLOR, colorScheme);
 				}
 				if (attrKey.equals("gradientangle")) {
 					gradientAngle = attrVal;
@@ -529,7 +527,7 @@ public class NodeReader extends Reader{
 					continue;
 				}
 				LOGGER.trace("Updating Visual Style...");
-				LOGGER.debug(String.format("Setting Visual Property %s...", vizProp));
+				LOGGER.debug("Setting Visual Property {}", vizProp);
 				elementView.setLockedValue(vizProp, val);
 			}
 			
@@ -586,11 +584,6 @@ public class NodeReader extends Reader{
 				fillAttribute = defaultAttrs.get("fillcolor");
 			}
 			
-			//Use style attribute to perform visual transformations of node
-			if (styleAttribute != null) {
-				setStyle(styleAttribute, elementView);
-			}
-
 			//handle "fillcolor" attribute first since "color" can replace it
 			//if not found
 			if (fillAttribute != null) {
@@ -639,6 +632,10 @@ public class NodeReader extends Reader{
 				if (isBypassColorAttr) {
 					setColor(colorAttribute, elementView, ColorAttribute.COLOR, colorScheme);
 				}
+			}
+			//Use style attribute to perform visual transformations of node
+			if (styleAttribute != null) {
+				setStyle(styleAttribute, elementView);
 			}
 		}
 	}
@@ -764,6 +761,7 @@ public class NodeReader extends Reader{
 		String gradientAngle = defaultAttrs.get("gradientangle");
 		String styleAttribute = defaultAttrs.get("style");
 		if (fillAttribute != null) {
+			fillAttribute = (fillAttribute.equals("")) ? "lightgrey" : fillAttribute;
 			usedDefaultFillColor = true;
 			List<Pair<Color, Float>> colorListValues = convertColorList(fillAttribute, colorScheme);
 			if (colorListValues != null) {
@@ -777,6 +775,7 @@ public class NodeReader extends Reader{
 			}
 		}
 		if (colorAttribute != null) {
+			colorAttribute = (colorAttribute.equals("")) ? "black" : colorAttribute;
 			List<Pair<Color, Float>> colorListValues = convertColorList(colorAttribute, colorScheme);
 			if (colorListValues != null) {
 				Color color = colorListValues.get(0).getLeft();
@@ -792,6 +791,7 @@ public class NodeReader extends Reader{
 			setColor(colorAttribute, vizStyle, ColorAttribute.COLOR, colorScheme);
 		}
 		if (fontColorAttribute != null) {
+			fontColorAttribute = (fontColorAttribute.equals("")) ? "black" : fontColorAttribute;
 			setColor(fontColorAttribute, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
 		}
 	}
@@ -808,6 +808,7 @@ public class NodeReader extends Reader{
 	protected void setStyle(String attrVal,
 			View<? extends CyIdentifiable> elementView) {
 
+		LOGGER.debug("Setting style for node {}. Style string: {}", elementView, attrVal);
 		String[] styleAttrs = attrVal.split(",");
 
 		// Get default node visibility
@@ -845,8 +846,10 @@ public class NodeReader extends Reader{
 			}
 		}
 		// if node is not filled
+		LOGGER.debug("Checking if style string contains filled. {}", attrVal.contains("filled"));
 		if(!attrVal.contains("filled")) {
 			elementView.setLockedValue(NODE_TRANSPARENCY, 0);
+			LOGGER.debug("Did transparency get set to 0 for node {}? {}", elementView, elementView.getVisualProperty(NODE_TRANSPARENCY).intValue() == 0);
 		}
 	}
 

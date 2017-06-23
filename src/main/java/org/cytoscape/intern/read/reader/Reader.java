@@ -160,12 +160,13 @@ public abstract class Reader {
 			LOGGER.debug("Setting Visual Property {} with value {}", vizProp, val);
 			vizStyle.setDefaultValue(vizProp, val);
 		}
+		
+		setColorDefaults(vizStyle, colorScheme);
 		// Set style attribute here so we handle node shape dependency
 		String styleAttribute = defaultAttrs.get("style");
 		if (styleAttribute != null) {
 			setStyle(styleAttribute, vizStyle);
 		}
-		setColorDefaults(vizStyle, colorScheme);
 	}
 
 
@@ -244,8 +245,8 @@ public abstract class Reader {
 			return output;
 		}
 		// Color was not found. Return a default color
-		LOGGER.info("DOT color string not supported. Return default color.");
-		return Color.BLUE;
+		LOGGER.info("DOT color string not supported.");
+		return null;
 	}
 	
 	/**

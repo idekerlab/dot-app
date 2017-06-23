@@ -340,6 +340,9 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 	 */
 	private void importNode(Node node, CyNetwork network) {
 		// add cyNode and set name
+		if (node.isSubgraph()) {
+			return;
+		}
 		CyNode cyNode = network.addNode();
 		String nodeName = getNodeName(node);
 		network.getDefaultNodeTable().getRow(cyNode.getSUID()).set(CyNetwork.NAME, nodeName);
@@ -512,7 +515,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 					);
 	
 					// import nodes
-					ArrayList<Node> nodeList = graph.getNodes(true);
+					ArrayList<Node> nodeList = graph.getNodes(false);
 					monitor.setStatusMessage("Importing nodes...");
 					for (Node node : nodeList) {
 						if(!cancelled) {
