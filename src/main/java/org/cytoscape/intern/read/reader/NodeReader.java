@@ -483,52 +483,55 @@ public class NodeReader extends Reader{
 				String attrVal = attrEntry.getValue();
 				LOGGER.debug("Converting GraphViz attribute: {}", attrKey);
 
-				
-				//These attributes require special handling
-				if (attrKey.equals("style")) {
-					styleAttribute = attrVal;
-					continue;
+				switch (attrKey) {
+					case "style": {
+						styleAttribute = attrVal;
+						continue;
+					}
+					case "pos": {
+						setPositions(attrVal, elementView);
+						continue;
+					}
+					case "color": {
+						colorAttribute = (attrVal.equals("")) ? "black" : attrVal;
+						continue;
+					}
+					case "fillcolor": {
+						fillAttribute = (attrVal.equals("")) ? "lightgrey" : attrVal;
+						continue;
+					}
+					case "fontcolor": {
+						String fontAttr = (attrVal.equals("")) ? "black" : attrVal;
+						setColor(fontAttr, elementView, ColorAttribute.FONTCOLOR, colorScheme);
+					}
+					case "gradientangle": {
+						gradientAngle = attrVal;
+						continue;
+					}
+					case "shape": {
+						if (!(attrVal.contains("square") || attrVal.contains("circle"))) {
+							LOGGER.debug("Shape of node is not regular polygon");
+							//Flag code to skip regular shape specific code after iterating through DOT attributes
+							isRegularShape = false;
+						}
+					}
+					default: {
+						// handle simple attributes
+						Pair<VisualProperty, Object> p = convertAttribute(attrKey, attrVal);
+						if (p == null) {
+							continue;
+						}
+	
+						VisualProperty vizProp = p.getLeft();
+						Object val = p.getRight();
+						if (vizProp == null || val == null) {
+							continue;
+						}
+						LOGGER.trace("Updating Visual Style...");
+						LOGGER.debug("Setting Visual Property {}", vizProp);
+						elementView.setLockedValue(vizProp, val);
+					}
 				}
-				if (attrKey.equals("pos")) {
-					setPositions(attrVal, elementView);
-					continue;
-				}
-				if (attrKey.equals("color")) {
-					colorAttribute = (attrVal.equals("")) ? "black" : attrVal;
-					continue;
-				}
-				if (attrKey.equals("fillcolor")) {
-					fillAttribute = (attrVal.equals("")) ? "lightgrey" : attrVal;
-					continue;
-				}
-				if (attrKey.equals("fontcolor")) {
-					String fontAttr = (attrVal.equals("")) ? "black" : attrVal;
-					setColor(fontAttr, elementView, ColorAttribute.FONTCOLOR, colorScheme);
-				}
-				if (attrKey.equals("gradientangle")) {
-					gradientAngle = attrVal;
-					continue;
-				}
-				if (attrKey.equals("shape") && !(attrVal.contains("square") || attrVal.contains("circle"))) {
-					LOGGER.debug("Shape of node is not regular polygon");
-					//Flag code to skip regular shape specific code after iterating through DOT attributes
-					isRegularShape = false;
-				}
-
-				// handle simple attributes
-				Pair<VisualProperty, Object> p = convertAttribute(attrKey, attrVal);
-				if (p == null) {
-					continue;
-				}
-
-				VisualProperty vizProp = p.getLeft();
-				Object val = p.getRight();
-				if (vizProp == null || val == null) {
-					continue;
-				}
-				LOGGER.trace("Updating Visual Style...");
-				LOGGER.debug("Setting Visual Property {}", vizProp);
-				elementView.setLockedValue(vizProp, val);
 			}
 			
 			//Handle node height change if shape is regular polygon
