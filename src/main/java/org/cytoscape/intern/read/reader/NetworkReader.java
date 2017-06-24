@@ -111,8 +111,9 @@ public class NetworkReader extends Reader {
 		//overrides the defaults set in setDefault()
 		LOGGER.trace("Setting the Bypass values for Visual Style...");
 
-		String colorScheme = graph.getAttributes().get("colorscheme");
-		for (Entry<String, String> attrEntry : graph.getAttributes().entrySet()) {
+		Map<String, String> bypassAttrs = graph.getAttributes();
+		String colorScheme = bypassAttrs.containsKey("colorscheme") ? bypassAttrs.get("colorscheme") : null;
+		for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();
 			if (attrKey.equals("bgcolor")) {
@@ -154,15 +155,15 @@ public class NetworkReader extends Reader {
 
 	@Override
 	protected void setColorDefaults(VisualStyle vizStyle, String colorScheme) {
-		String colorAttribute = defaultAttrs.get("bgcolor");
-		if (colorAttribute != null) {
-			List<Pair<Color, Float>> colorListValues = convertColorList(colorAttribute, colorScheme);
-			if (colorListValues != null) {
-				Color color = colorListValues.get(0).getLeft();
-				colorAttribute = String.format("#%02x%02x%02x%02x", color.getRed(), color.getGreen(),
+		String colorAttr = defAttrs.containsKey("bgcolor") ? defAttrs.get("bgcolor") : null;
+		if (colorAttr != null) {
+			List<Pair<Color, Float>> colorListVals = convertColorList(colorAttr, colorScheme);
+			if (colorListVals != null) {
+				Color color = colorListVals.get(0).getLeft();
+				colorAttr = String.format("#%02x%02x%02x%02x", color.getRed(), color.getGreen(),
 						color.getBlue(), color.getAlpha());
 			}
-			setColor(colorAttribute, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
+			setColor(colorAttr, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
 		}
 		
 	}

@@ -203,7 +203,7 @@ public class EdgeReader extends Reader{
 	 */
 	protected void setDefaults() {
 		super.setDefaults();
-		String dir = defaultAttrs.containsKey("dir") ? defaultAttrs.get("dir") : "";
+		String dir = defAttrs.containsKey("dir") ? defAttrs.get("dir") : "";
 		switch (dir) {
 			case "forward" : {
 				vizStyle.setDefaultValue(EDGE_SOURCE_ARROW_SHAPE, ArrowShapeVisualProperty.NONE);
@@ -327,9 +327,9 @@ public class EdgeReader extends Reader{
 			)
 		);
 		Color color = convertColor(attrVal, colorScheme);
-		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
-		if (colorListValues != null) {
-			color = colorListValues.get(0).getLeft();
+		List<Pair<Color, Float>> colorListVals = convertColorList(attrVal, colorScheme);
+		if (colorListVals != null) {
+			color = colorListVals.get(0).getLeft();
 		}
 		Integer transparency = color.getAlpha();
 
@@ -371,32 +371,22 @@ public class EdgeReader extends Reader{
 			)
 		);
 		Color color = convertColor(attrVal, colorScheme);
-		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
-		if (colorListValues != null) {
-			color = colorListValues.get(0).getLeft();
+		List<Pair<Color, Float>> colorListVals = convertColorList(attrVal, colorScheme);
+		if (colorListVals != null) {
+			color = colorListVals.get(0).getLeft();
 		}
 		Integer transparency = color.getAlpha();
 
 		switch (attr) {
 			case COLOR: {
-				LOGGER.trace(
-					String.format(
-						"Default Edge stroke color being set to %s", 
-						color.toString()
-					)
-				);
+				LOGGER.trace("Default Edge stroke color being set to {}", color.toString());
 				vizStyle.setDefaultValue(EDGE_STROKE_UNSELECTED_PAINT, color);
 				vizStyle.setDefaultValue(EDGE_UNSELECTED_PAINT, color);
 				vizStyle.setDefaultValue(EDGE_TRANSPARENCY, transparency);
 				break;
 			}
 			case FONTCOLOR: {
-				LOGGER.trace(
-					String.format(
-						"Default Edge font color being set to %s", 
-						color.toString()
-					)
-				);
+				LOGGER.trace("Default Edge stroke color being set to {}", color.toString());
 				vizStyle.setDefaultValue(EDGE_LABEL_COLOR, color);
 				vizStyle.setDefaultValue(EDGE_LABEL_TRANSPARENCY, transparency);
 				break;
@@ -409,19 +399,19 @@ public class EdgeReader extends Reader{
 
 	@Override
 	protected void setColorDefaults(VisualStyle vizStyle, String colorScheme) {
-		String colorAttribute = defaultAttrs.get("color");
-		String fontColorAttribute = defaultAttrs.get("fontcolor");
-		if (colorAttribute != null) {
-			List<Pair<Color, Float>> colorListValues = convertColorList(colorAttribute, colorScheme);
-			if (colorListValues != null) {
-				Color color = colorListValues.get(0).getLeft();
-				colorAttribute = String.format("#%2x%2x%2x%2x", color.getRed(), color.getGreen(),
+		String colorAttr = defAttrs.get("color");
+		String fontColorAttr = defAttrs.get("fontcolor");
+		if (colorAttr != null) {
+			List<Pair<Color, Float>> colorListVals = convertColorList(colorAttr, colorScheme);
+			if (colorListVals != null) {
+				Color color = colorListVals.get(0).getLeft();
+				colorAttr = String.format("#%02x%02x%02x%02x", color.getRed(), color.getGreen(),
 						color.getBlue(), color.getAlpha());
 			}
-			setColor(colorAttribute, vizStyle, ColorAttribute.COLOR, colorScheme);
+			setColor(colorAttr, vizStyle, ColorAttribute.COLOR, colorScheme);
 		}
-		if (fontColorAttribute != null) {
-			setColor(fontColorAttribute, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
+		if (fontColorAttr != null) {
+			setColor(fontColorAttr, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
 		}
 	}
 
