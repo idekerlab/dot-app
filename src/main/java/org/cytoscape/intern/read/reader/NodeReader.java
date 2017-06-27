@@ -81,8 +81,10 @@ public class NodeReader extends Reader{
 	static {
 		NODE_SHAPE_MAP.put("triangle", NodeShapeVisualProperty.TRIANGLE);
 		NODE_SHAPE_MAP.put("diamond", NodeShapeVisualProperty.DIAMOND);
+		NODE_SHAPE_MAP.put("Mdiamond", NodeShapeVisualProperty.DIAMOND);
 		NODE_SHAPE_MAP.put("ellipse", NodeShapeVisualProperty.ELLIPSE);
 		NODE_SHAPE_MAP.put("circle", NodeShapeVisualProperty.ELLIPSE);
+		NODE_SHAPE_MAP.put("Mcircle", NodeShapeVisualProperty.ELLIPSE);
 		NODE_SHAPE_MAP.put("hexagon", NodeShapeVisualProperty.HEXAGON);
 		NODE_SHAPE_MAP.put("octagon", NodeShapeVisualProperty.OCTAGON);
 		NODE_SHAPE_MAP.put("parallelogram", NodeShapeVisualProperty.PARALLELOGRAM);
@@ -90,6 +92,7 @@ public class NodeReader extends Reader{
 		NODE_SHAPE_MAP.put("box", NodeShapeVisualProperty.RECTANGLE);
 		NODE_SHAPE_MAP.put("rect", NodeShapeVisualProperty.RECTANGLE);
 		NODE_SHAPE_MAP.put("square", NodeShapeVisualProperty.RECTANGLE);
+		NODE_SHAPE_MAP.put("Msquare", NodeShapeVisualProperty.RECTANGLE);
 	}
 	
 	/*
