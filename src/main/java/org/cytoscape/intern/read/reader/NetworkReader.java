@@ -19,6 +19,9 @@
 package org.cytoscape.intern.read.reader;
 
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_BACKGROUND_PAINT;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_SOURCE_ARROW_SHAPE;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_TARGET_ARROW_SHAPE;
+import static org.cytoscape.view.presentation.property.ArrowShapeVisualProperty.NONE;
 
 import java.awt.Color;
 import java.util.List;
@@ -76,6 +79,27 @@ public class NetworkReader extends Reader {
 	}
 
 	/**
+	 * Sets all the default Visual Properties values of the Cytoscape
+	 * VisualStyle. Subclasses handle different visual properties
+	 * (eg. NetworkReader sets all network props, NodeReader sets all node
+	 * properties, and EdgeReader sets all edge properties)
+	 */
+	protected void setDefaults() {
+		super.setDefaults();
+		int type = graph.getType();
+		switch (type) {
+			case Graph.DIRECTED: {
+				vizStyle.setDefaultValue(EDGE_SOURCE_ARROW_SHAPE, NONE);
+				break;
+			}
+			case Graph.UNDIRECTED: {
+				vizStyle.setDefaultValue(EDGE_SOURCE_ARROW_SHAPE, NONE);
+				vizStyle.setDefaultValue(EDGE_TARGET_ARROW_SHAPE, NONE);
+				break;
+			}
+		}
+	}
+	/**
 	 * Overwrites the default VisualProperty values for the Cytoscape VisualStyle
 	 * that came from converting the default attribute list with new values from
 	 * converting the attribute list from the JPGD object that corresponds to
@@ -87,15 +111,16 @@ public class NetworkReader extends Reader {
 		//overrides the defaults set in setDefault()
 		LOGGER.trace("Setting the Bypass values for Visual Style...");
 
-		String colorScheme = graph.getAttributes().get("colorscheme");
-		for (Entry<String, String> attrEntry : graph.getAttributes().entrySet()) {
+		Map<String, String> bypassAttrs = graph.getAttributes();
+		String colorScheme = bypassAttrs.containsKey("colorscheme") ? bypassAttrs.get("colorscheme") : null;
+		for (Entry<String, String> attrEntry : bypassAttrs.entrySet()) {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();
 			if (attrKey.equals("bgcolor")) {
 				List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
 				if (colorListValues != null) {
 					Color color = colorListValues.get(0).getLeft();
-					attrVal = String.format("#%2x%2x%2x%2x", color.getRed(), color.getGreen(),
+					attrVal = String.format("#%02x%02x%02x%02x", color.getRed(), color.getGreen(),
 							color.getBlue(), color.getAlpha());
 				}
 				setColor(attrVal, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
@@ -130,15 +155,15 @@ public class NetworkReader extends Reader {
 
 	@Override
 	protected void setColorDefaults(VisualStyle vizStyle, String colorScheme) {
-		String colorAttribute = defaultAttrs.get("bgcolor");
-		if (colorAttribute != null) {
-			List<Pair<Color, Float>> colorListValues = convertColorList(colorAttribute, colorScheme);
-			if (colorListValues != null) {
-				Color color = colorListValues.get(0).getLeft();
-				colorAttribute = String.format("#%2x%2x%2x%2x", color.getRed(), color.getGreen(),
+		String colorAttr = defAttrs.containsKey("bgcolor") ? defAttrs.get("bgcolor") : null;
+		if (colorAttr != null) {
+			List<Pair<Color, Float>> colorListVals = convertColorList(colorAttr, colorScheme);
+			if (colorListVals != null) {
+				Color color = colorListVals.get(0).getLeft();
+				colorAttr = String.format("#%02x%02x%02x%02x", color.getRed(), color.getGreen(),
 						color.getBlue(), color.getAlpha());
 			}
-			setColor(colorAttribute, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
+			setColor(colorAttr, vizStyle, ColorAttribute.BGCOLOR, colorScheme);
 		}
 		
 	}

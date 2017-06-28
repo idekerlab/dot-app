@@ -196,6 +196,31 @@ public class EdgeReader extends Reader{
 	}
 
 	/**
+	 * Sets all the default Visual Properties values of the Cytoscape
+	 * VisualStyle. Subclasses handle different visual properties
+	 * (eg. NetworkReader sets all network props, NodeReader sets all node
+	 * properties, and EdgeReader sets all edge properties)
+	 */
+	protected void setDefaults() {
+		super.setDefaults();
+		String dir = defAttrs.containsKey("dir") ? defAttrs.get("dir") : "";
+		switch (dir) {
+			case "forward" : {
+				vizStyle.setDefaultValue(EDGE_SOURCE_ARROW_SHAPE, ArrowShapeVisualProperty.NONE);
+				break;
+			}
+			case "back" : {
+				vizStyle.setDefaultValue(EDGE_TARGET_ARROW_SHAPE, ArrowShapeVisualProperty.NONE);
+				break;
+			}
+			case "none" : {
+				vizStyle.setDefaultValue(EDGE_SOURCE_ARROW_SHAPE, ArrowShapeVisualProperty.NONE);
+				vizStyle.setDefaultValue(EDGE_TARGET_ARROW_SHAPE, ArrowShapeVisualProperty.NONE);
+				break;
+			}
+		}
+	}
+	/**
 	 * Sets all the bypass Visual Properties values for Cytoscape View objects
 	 * corresponding to CyEdge objects
 	 */
@@ -207,7 +232,7 @@ public class EdgeReader extends Reader{
 		for(Entry<? extends Object, ? extends CyIdentifiable> entry: elementMap.entrySet() ) {
 			// get map of attributes for this edge and the View for this CyEdge
 			Map<String, String> bypassAttrs = getAttrMap(entry.getKey());
-			String colorScheme = bypassAttrs.get("colorscheme");
+			String colorScheme = bypassAttrs.containsKey("colorscheme") ? bypassAttrs.get("colorscheme") : null;
 			CyEdge element = (CyEdge)entry.getValue();
 			View<CyEdge> elementView = networkView.getEdgeView(element);
 			
@@ -218,54 +243,62 @@ public class EdgeReader extends Reader{
 				LOGGER.debug(
 					String.format("Converting DOT attribute: %s", attrKey)
 				);
-				
-				// Handle special cases
-				if(attrKey.equals("style")) {
-					setStyle(attrVal, elementView);
-					continue;
-				}
-				if(attrKey.equals("weight")){
-					setWeight(attrVal, elementView);
-					continue;
-				}
-				if (attrKey.equals("color") || attrKey.equals("fillcolor")
-						|| attrKey.equals("fontcolor")) {
-					switch (attrKey) {
-						case "fillcolor": {
-							// DO NOTHING. Can't handle arrow colors yet.
-							break;
-						}
-						case "color": {
-							setColor(attrVal, elementView, ColorAttribute.COLOR, colorScheme);
-							break;
-						}
-						case "fontcolor": {
-							setColor(attrVal, elementView, ColorAttribute.FONTCOLOR, colorScheme);
-							break;
-						}
-				
+				switch (attrKey) {
+					case "style" : {
+						setStyle(attrVal, elementView);
+						continue;
 					}
-					continue;
+					case "weight" : {
+						setWeight(attrVal, elementView);
+						continue;
+					}
+					case "color" : {
+						setColor(attrVal, elementView, ColorAttribute.COLOR, colorScheme);
+						continue;
+					}
+					case "fillcolor" : {
+						continue;
+					}
+					case "fontcolor" : {
+						setColor(attrVal, elementView, ColorAttribute.FONTCOLOR, colorScheme);
+						continue;
+					}
+					case "dir" : {
+						switch (attrVal) {
+							case "forward" : {
+								elementView.setLockedValue(EDGE_SOURCE_ARROW_SHAPE, ArrowShapeVisualProperty.NONE);
+								break;
+							}
+							case "back" : {
+								elementView.setLockedValue(EDGE_TARGET_ARROW_SHAPE, ArrowShapeVisualProperty.NONE);
+								break;
+							}
+							case "none" : {
+								elementView.setLockedValue(EDGE_SOURCE_ARROW_SHAPE, ArrowShapeVisualProperty.NONE);
+								elementView.setLockedValue(EDGE_TARGET_ARROW_SHAPE, ArrowShapeVisualProperty.NONE);
+								break;
+							}
+						}
+					}
+					default : {
+						Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
+						if (p == null) {
+							// Abort if conversion not found
+							continue;
+						}
+	
+						// Apply the VisualProperty
+						VisualProperty vizProp = p.getLeft();
+						Object val = p.getRight();
+						if (vizProp == null || val == null) {
+							// Abort if conversion not found
+							continue;
+						}
+						LOGGER.trace("Updating Visual Style...");
+						LOGGER.debug(String.format("Setting Visual Property %S...", vizProp));
+						elementView.setLockedValue(vizProp, val);
+					}
 				}
-				
-				// handle normal cases
-				// get corresponding VisualProperty
-				Pair<VisualProperty, Object> p = convertAttribute(attrEntry.getKey(), attrEntry.getValue());
-				if (p == null) {
-					// Abort if conversion not found
-					continue;
-				}
-
-				// Apply the VisualProperty
-				VisualProperty vizProp = p.getLeft();
-				Object val = p.getRight();
-				if (vizProp == null || val == null) {
-					// Abort if conversion not found
-					continue;
-				}
-				LOGGER.trace("Updating Visual Style...");
-				LOGGER.debug(String.format("Setting Visual Property %S...", vizProp));
-				elementView.setLockedValue(vizProp, val);
 			}
 		}
 	}
@@ -294,9 +327,9 @@ public class EdgeReader extends Reader{
 			)
 		);
 		Color color = convertColor(attrVal, colorScheme);
-		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
-		if (colorListValues != null) {
-			color = colorListValues.get(0).getLeft();
+		List<Pair<Color, Float>> colorListVals = convertColorList(attrVal, colorScheme);
+		if (colorListVals != null) {
+			color = colorListVals.get(0).getLeft();
 		}
 		Integer transparency = color.getAlpha();
 
@@ -338,32 +371,22 @@ public class EdgeReader extends Reader{
 			)
 		);
 		Color color = convertColor(attrVal, colorScheme);
-		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
-		if (colorListValues != null) {
-			color = colorListValues.get(0).getLeft();
+		List<Pair<Color, Float>> colorListVals = convertColorList(attrVal, colorScheme);
+		if (colorListVals != null) {
+			color = colorListVals.get(0).getLeft();
 		}
 		Integer transparency = color.getAlpha();
 
 		switch (attr) {
 			case COLOR: {
-				LOGGER.trace(
-					String.format(
-						"Default Edge stroke color being set to %s", 
-						color.toString()
-					)
-				);
+				LOGGER.trace("Default Edge stroke color being set to {}", color.toString());
 				vizStyle.setDefaultValue(EDGE_STROKE_UNSELECTED_PAINT, color);
 				vizStyle.setDefaultValue(EDGE_UNSELECTED_PAINT, color);
 				vizStyle.setDefaultValue(EDGE_TRANSPARENCY, transparency);
 				break;
 			}
 			case FONTCOLOR: {
-				LOGGER.trace(
-					String.format(
-						"Default Edge font color being set to %s", 
-						color.toString()
-					)
-				);
+				LOGGER.trace("Default Edge stroke color being set to {}", color.toString());
 				vizStyle.setDefaultValue(EDGE_LABEL_COLOR, color);
 				vizStyle.setDefaultValue(EDGE_LABEL_TRANSPARENCY, transparency);
 				break;
@@ -376,19 +399,19 @@ public class EdgeReader extends Reader{
 
 	@Override
 	protected void setColorDefaults(VisualStyle vizStyle, String colorScheme) {
-		String colorAttribute = defaultAttrs.get("color");
-		String fontColorAttribute = defaultAttrs.get("fontcolor");
-		if (colorAttribute != null) {
-			List<Pair<Color, Float>> colorListValues = convertColorList(colorAttribute, colorScheme);
-			if (colorListValues != null) {
-				Color color = colorListValues.get(0).getLeft();
-				colorAttribute = String.format("#%2x%2x%2x%2x", color.getRed(), color.getGreen(),
+		String colorAttr = defAttrs.get("color");
+		String fontColorAttr = defAttrs.get("fontcolor");
+		if (colorAttr != null) {
+			List<Pair<Color, Float>> colorListVals = convertColorList(colorAttr, colorScheme);
+			if (colorListVals != null) {
+				Color color = colorListVals.get(0).getLeft();
+				colorAttr = String.format("#%02x%02x%02x%02x", color.getRed(), color.getGreen(),
 						color.getBlue(), color.getAlpha());
 			}
-			setColor(colorAttribute, vizStyle, ColorAttribute.COLOR, colorScheme);
+			setColor(colorAttr, vizStyle, ColorAttribute.COLOR, colorScheme);
 		}
-		if (fontColorAttribute != null) {
-			setColor(fontColorAttribute, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
+		if (fontColorAttr != null) {
+			setColor(fontColorAttr, vizStyle, ColorAttribute.FONTCOLOR, colorScheme);
 		}
 	}
 

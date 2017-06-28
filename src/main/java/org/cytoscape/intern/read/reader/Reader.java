@@ -91,12 +91,12 @@ public abstract class Reader {
 	protected VisualStyle vizStyle;
 	
 	//True if "fillcolor" attribute has already been consumed for VisualStyle
-	protected boolean usedDefaultFillColor = false;
+	protected boolean hasUsedDefFill = false;
 	/*
 	 * Map of explicitly defined default attributes
 	 * key is attribute name, value is value
 	 */
-	protected Map<String, String> defaultAttrs;
+	protected Map<String, String> defAttrs;
 	
 	// VisualLexicon containing definitions of all VisualProperties
 	// Used for compatibility with "Ding" specific VisualProperties
@@ -122,7 +122,7 @@ public abstract class Reader {
 
 		this.networkView = networkView;
 		this.vizStyle = vizStyle;
-		this.defaultAttrs = defaultAttrs;
+		this.defAttrs = defaultAttrs;
 		this.vizLexicon = rendEngMgr.getDefaultVisualLexicon();
 	}
 	
@@ -136,8 +136,8 @@ public abstract class Reader {
 	protected void setDefaults() {
 		LOGGER.info("Setting the Default values for Visual Style...");
 
-		String colorScheme = defaultAttrs.get("colorscheme");
-		for (Entry<String, String> attrEntry : defaultAttrs.entrySet()) {
+		String colorScheme = defAttrs.containsKey("colorscheme") ? defAttrs.get("colorscheme") : null;
+		for (Entry<String, String> attrEntry : defAttrs.entrySet()) {
 			String attrKey = attrEntry.getKey();
 			String attrVal = attrEntry.getValue();
 			LOGGER.debug(
@@ -160,12 +160,11 @@ public abstract class Reader {
 			LOGGER.debug("Setting Visual Property {} with value {}", vizProp, val);
 			vizStyle.setDefaultValue(vizProp, val);
 		}
-		// Set style attribute here so we handle node shape dependency
-		String styleAttribute = defaultAttrs.get("style");
-		if (styleAttribute != null) {
-			setStyle(styleAttribute, vizStyle);
-		}
+		
 		setColorDefaults(vizStyle, colorScheme);
+		// Set style attribute here so we handle node shape dependency
+		String styleAttr = defAttrs.containsKey("style") ? defAttrs.get("style") : "";
+		setStyle(styleAttr, vizStyle);
 	}
 
 
@@ -205,14 +204,14 @@ public abstract class Reader {
 		color = color.trim();
 
 		// Test color string against RGB regex
-		LOGGER.trace("Comparing DOT color string to #FFFFFF format");
+		LOGGER.trace("Comparing DOT color string to #RRGGBB format");
 		Matcher matcher = Pattern.compile(RGB_REGEX).matcher(color);
 		if (matcher.matches()) {
 			return Color.decode(color);
 		}
 
 		// Test color string against RGBA regex
-		LOGGER.trace("Comparing DOT color string to #FFFFFFFF format");
+		LOGGER.trace("Comparing DOT color string to #RRGGBBAA format");
 		matcher.usePattern(Pattern.compile(RGBA_REGEX));
 		if (matcher.matches()) {
 			Integer red = Integer.valueOf(matcher.group("RED"), 16);
@@ -244,8 +243,8 @@ public abstract class Reader {
 			return output;
 		}
 		// Color was not found. Return a default color
-		LOGGER.info("DOT color string not supported. Return default color.");
-		return Color.BLUE;
+		LOGGER.info("DOT color string not supported.");
+		return null;
 	}
 	
 	/**
@@ -266,32 +265,32 @@ public abstract class Reader {
 		}
 		String[] weightedColors = colorList.split(":");
 		int numColors = 0;
-		ArrayList<Pair<Color, Float>> colorAndWeightPairs = new ArrayList<Pair<Color,Float>>(weightedColors.length);
+		ArrayList<Pair<Color, Float>> colorWeightPairs = new ArrayList<Pair<Color,Float>>(weightedColors.length);
 		for (String weightedColor : weightedColors) {
 			if (numColors == 2) {
 				break;
 			}
 			if (weightedColor.contains(";")) {
-				String[] colorAndWeight = weightedColor.split(";", 2);
-				Color color = convertColor(colorAndWeight[0], colorScheme);
+				String[] color_weight = weightedColor.split(";", 2);
+				Color color = convertColor(color_weight[0], colorScheme);
 				Float weight = null;
 				try {
-					weight = Float.parseFloat(colorAndWeight[1]);
+					weight = Float.parseFloat(color_weight[1]);
 				}
 				catch (NumberFormatException exception) {
 					LOGGER.error("Error: Color list contains invalid weight");
 				}
 				LOGGER.debug(String.format("Retrieved weighted color from color list. Result: %s;%f", color.toString(), weight));
-				colorAndWeightPairs.add(Pair.of(color, weight));
+				colorWeightPairs.add(Pair.of(color, weight));
 			}
 			else {
 				Color color = convertColor(weightedColor, colorScheme);
 				LOGGER.debug(String.format("Retrieved color with no weight from color list. Result: %s", color.toString()));
-				colorAndWeightPairs.add(Pair.of(color, (Float)null));
+				colorWeightPairs.add(Pair.of(color, (Float)null));
 			}
 			numColors++;
 		}
-		return colorAndWeightPairs;
+		return colorWeightPairs;
 	}
 
 	/**
