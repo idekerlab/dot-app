@@ -103,7 +103,7 @@ public class StringColor {
 		}
 		
 		Map<String, Color> map = colorMap.get(colorScheme);
-		return map.get(name);
+		return map.get(name.toLowerCase());
 	}
 	
 }

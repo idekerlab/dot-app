@@ -317,16 +317,14 @@ public class EdgeReader extends Reader{
 	protected void setColor(String attrVal,
 			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
 
-		LOGGER.trace(
-			String.format(
-				"A color attribute is being applied to edge %s. Color: %s",
-				networkView.getModel().getRow(
-					elementView.getModel()
-				).get(CyNetwork.NAME, String.class),
-				attrVal
-			)
+		LOGGER.trace("A color attribute is being applied to edge {}. Color: {}",
+			networkView.getModel().getRow(elementView.getModel()).get(CyNetwork.NAME, String.class),
+			attrVal
 		);
 		Color color = convertColor(attrVal, colorScheme);
+		if (color == null) {
+			return;
+		}
 		List<Pair<Color, Float>> colorListVals = convertColorList(attrVal, colorScheme);
 		if (colorListVals != null) {
 			color = colorListVals.get(0).getLeft();
@@ -364,13 +362,11 @@ public class EdgeReader extends Reader{
 	protected void setColor(String attrVal, VisualStyle vizStyle,
 			ColorAttribute attr, String colorScheme) {
 	
-		LOGGER.trace(
-			String.format(
-				"A color attribute is being applied to VisualStyle. Color: %s",
-				attrVal
-			)
-		);
+		LOGGER.trace("A color attribute is being applied to VisualStyle. Color: {}", attrVal);
 		Color color = convertColor(attrVal, colorScheme);
+		if (color == null) {
+			return;
+		}
 		List<Pair<Color, Float>> colorListVals = convertColorList(attrVal, colorScheme);
 		if (colorListVals != null) {
 			color = colorListVals.get(0).getLeft();
