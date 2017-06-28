@@ -78,12 +78,15 @@ public abstract class Reader {
 
 	// Maps lineStyle attribute values to Cytoscape values
 	protected static final Map<String, LineType> LINE_TYPE_MAP = new HashMap<String, LineType>();
-
 	static {
 		LINE_TYPE_MAP.put("dotted", DOT);
 		LINE_TYPE_MAP.put("dashed", EQUAL_DASH);
 		LINE_TYPE_MAP.put("solid", SOLID);
 	}
+	
+	// Maps string color names to Java Color objects
+	protected static StringColor stringColors;
+
 	// view of network being created/modified
 	protected CyNetworkView networkView;
 	
@@ -107,6 +110,7 @@ public abstract class Reader {
 	 * is null for NetworkReader. Is initialized on Node, Edge Reader
 	 */
 	protected Map<? extends Object, ? extends CyIdentifiable> elementMap;
+	
 
 	/**
 	 * Constructs an object of type Reader.
@@ -230,19 +234,18 @@ public abstract class Reader {
 			Float value = Float.valueOf(matcher.group("VAL"));
 			return Color.getHSBColor(hue, saturation, value);
 		}
+		
 		// String didn't match the regexes, so test if it is a color name
 		// Read in color name files and find it in there
 		LOGGER.trace("Checking if DOT color string is a valid color name");
-		StringColor stringColor = new StringColor("svg_colors.txt", "x11_colors.txt");
-		
-		//String color names are case-insensitive
-		color = color.toLowerCase();
-		Color output = stringColor.getColor(colorScheme, color);
-
+		if (stringColors == null) {
+			stringColors = new StringColor("svg_colors.txt", "x11_colors.txt");
+		}
+		Color output = stringColors.getColor(colorScheme, color);
 		if(output != null) {
 			return output;
 		}
-		// Color was not found. Return a default color
+		// Color was not found
 		LOGGER.info("DOT color string not supported.");
 		return null;
 	}

@@ -142,6 +142,9 @@ public class NetworkReader extends Reader {
 	protected void setColor(String attrVal, VisualStyle vizStyle,
 			ColorAttribute attr, String colorScheme) {
 		Color color = convertColor(attrVal, colorScheme);
+		if (color == null) {
+			return;
+		}
 		switch (attr) {
 			case BGCOLOR: {
 				vizStyle.setDefaultValue(NETWORK_BACKGROUND_PAINT, color);

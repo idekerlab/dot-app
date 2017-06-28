@@ -659,6 +659,9 @@ public class NodeReader extends Reader{
 			View<? extends CyIdentifiable> elementView, ColorAttribute attr, String colorScheme) {
 
 		Color color = convertColor(attrVal, colorScheme);
+		if (color == null) {
+			return;
+		}
 		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
 		if (colorListValues != null) {
 			color = colorListValues.get(0).getLeft();
@@ -713,6 +716,9 @@ public class NodeReader extends Reader{
 			ColorAttribute attr, String colorScheme) {
 
 		Color color = convertColor(attrVal, colorScheme);
+		if (color == null) {
+			return;
+		}
 		List<Pair<Color, Float>> colorListValues = convertColorList(attrVal, colorScheme);
 		if (colorListValues != null) {
 			color = colorListValues.get(0).getLeft();
