@@ -28,26 +28,6 @@
 		plugins that control very specific phases of the build. -->
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-install-plugin</artifactId>
-				<version>2.4</version>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>install-file</goal>
-						</goals>
-						<configuration>
-							<groupId>com.alexmerz</groupId>
-							<artifactId>jpgd</artifactId>
-							<version>0.8.6</version>
-							<packaging>jar</packaging>
-							<file>${basedir}/lib/com.alexmerz/graphviz/0.8.6/com.alexmerz.graphviz.jar</file>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 			<!-- The maven-compiler-plugin configures the Java compiler Maven uses 
 				to build the project. -->
 			<plugin>
@@ -84,41 +64,6 @@
 			</plugin>
 
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-install-plugin
-										</artifactId>
-										<versionRange>
-											[2.4,)
-										</versionRange>
-										<goals>
-											<goal>install-file</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 
 	<!-- These are repositories Maven uses to download Cytoscape API JARs we 
@@ -128,7 +73,7 @@
 		<repository>
 			<id>lib-repo</id>
 			<name>3rd Party Libs</name>
-			<url>${basedir}\lib\</url>
+			<url>file://${basedir}/lib/</url>
 		</repository>
 		<repository>
 			<id>cytoscape_snapshots</id>
