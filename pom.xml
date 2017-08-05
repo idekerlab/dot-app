@@ -17,6 +17,7 @@
 		<maven-bundle-plugin.version>2.3.4</maven-bundle-plugin.version>
 		<osgi.api.version>4.2.0</osgi.api.version>
 		<slf4jVersion>1.6.1</slf4jVersion>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<!-- "packaging" tells Maven what sort of thing you want to build. If we 
