@@ -1,4 +1,4 @@
-Copyright © 2015-2017 Braxton Fitts, Ziran Zhang, Massoud Maher
+Copyright Â© 2015-2017 Braxton Fitts, Ziran Zhang, Massoud Maher
 
 GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007

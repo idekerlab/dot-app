@@ -1,5 +1,5 @@
 /**************************
- * Copyright © 2015-2017 Braxton Fitts, Ziran Zhang, Massoud Maher
+ * Copyright Â© 2015-2017 Braxton Fitts, Ziran Zhang, Massoud Maher
  * 
  * This file is part of dot-app.
  * dot-app is free software: you can redistribute it and/or modify
