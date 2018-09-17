@@ -513,9 +513,12 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 						String.format("DOT_network identifier written. Result: %s",
 							networkTable.getRow(network.getSUID()).get("DOT_network", Boolean.class))
 					);
-	
-					// import nodes
+					
 					ArrayList<Node> nodeList = graph.getNodes(false);
+					ArrayList<Edge> edgeList = graph.getEdges();
+	
+					
+					// import nodes
 					monitor.setStatusMessage("Importing nodes...");
 					for (Node node : nodeList) {
 						if(!cancelled) {
@@ -527,8 +530,13 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 					}
 				
 					monitor.setProgress(0.5);
+					
 					// import edges
-					ArrayList<Edge> edgeList = graph.getEdges();
+					// Add edges that are defined in subgraphs to the import list
+					for (Graph subgraph : graph.getSubgraphs()) {
+						edgeList.addAll(subgraph.getEdges());
+					}
+					
 					monitor.setStatusMessage("Importing edges...");
 					for(Edge edge : edgeList) {
 						if(!cancelled) {
