@@ -1,340 +1,340 @@
 graph "lesmis.gml" {
-bgcolor = "#666666FF"
+bgcolor = "#333333FF"
 splines = "false"
 outputorder = "edgesfirst"
 esep = "0"
 pad = "2"
-node [label = "",penwidth = "4.000000",height = "0.694444",width = "0.694444",tooltip = "",color = "#000000FF",fillcolor = "#00CCCCFF",shape = "ellipse",style = "solid,filled",fontname = "FreeSans",fontsize = "14",fontcolor = "#FFFFFFFF",fixedsize = "true",labelloc = "c"]
-edge [label = "",penwidth = "1.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#404040FF",fontname = "SansSerif.plain",fontsize = "10",fontcolor = "#000000FF",style = "solid",dir = "both"]
-"MotherPlutarch§12653" [label = "MotherPlutarch",height = "0.208333",width = "0.208333",pos = "-37.164013,419.926819",fontsize = "6"]
-"Gribier§12631" [label = "Gribier",height = "0.208333",width = "0.208333",pos = "282.226523,-104.972733",fontsize = "6"]
-"Jondrette§12632" [label = "Jondrette",height = "0.208333",width = "0.208333",pos = "158.976445,502.348739",fontsize = "6"]
-"Mabeuf§12643" [label = "Mabeuf",height = "0.386905",width = "0.386905",pos = "9.180470,267.042786"]
-"Myriel§12586" [label = "Myriel",height = "0.369048",width = "0.369048",pos = "100.816624,-349.576462",fontsize = "13"]
-"BaronessT§12642" [label = "BaronessT",height = "0.226190",width = "0.226190",pos = "-135.397594,202.816578",fontsize = "6"]
-"MmeBurgon§12633" [label = "MmeBurgon",height = "0.226190",width = "0.226190",pos = "109.533680,377.228714",fontsize = "6"]
-"Enjolras§12644" [label = "Enjolras",height = "0.458333",width = "0.458333",pos = "70.397312,134.293419",fontsize = "17"]
-"Simplice§12617" [label = "Simplice",height = "0.261905",width = "0.261905",pos = "-147.103130,-87.543320",fontsize = "8"]
-"Labarre§12596" [label = "Labarre",height = "0.208333",width = "0.208333",pos = "172.144673,-96.499405",fontsize = "6"]
-"Claquesous§12656" [label = "Claquesous",height = "0.369048",width = "0.369048",pos = "15.612843,46.259094",fontsize = "13"]
-"Scaufflaire§12618" [label = "Scaufflaire",height = "0.208333",width = "0.208333",pos = "-153.663952,-165.200028",fontsize = "6"]
-"Woman1§12619" [label = "Woman1",height = "0.226190",width = "0.226190",pos = "69.880360,-93.807175",fontsize = "6"]
-"Perpetue§12616" [label = "Perpetue",height = "0.226190",width = "0.226190",pos = "-277.960033,-103.287399",fontsize = "6"]
-"Napoleon§12587" [label = "Napoleon",height = "0.208333",width = "0.208333",pos = "233.448780,-345.671799",fontsize = "6"]
-"Fameuil§12604" [label = "Fameuil",height = "0.315476",width = "0.315476",pos = "-280.962780,63.445572",fontsize = "10"]
-"Toussaint§12658" [label = "Toussaint",height = "0.244048",width = "0.244048",pos = "-137.205822,-38.464905",fontsize = "7"]
-"Cosette§12612" [label = "Cosette",height = "0.386905",width = "0.386905",pos = "-74.481762,14.994873"]
-"Cochepaille§12624" [label = "Cochepaille",height = "0.297619",width = "0.297619",pos = "29.315205,-192.317734",fontsize = "10"]
-"Pontmercy§12625" [label = "Pontmercy",height = "0.244048",width = "0.244048",pos = "136.695652,90.163391",fontsize = "7"]
-"MmeHucheloup§12662" [label = "MmeHucheloup",height = "0.315476",width = "0.315476",pos = "197.033581,147.194362",fontsize = "10"]
-"Blacheville§12605" [label = "Blacheville",height = "0.315476",width = "0.315476",pos = "-272.929638,0.375549",fontsize = "10"]
-"Fauchelevent§12614" [label = "Fauchelevent",height = "0.261905",width = "0.261905",pos = "130.609700,-56.794983",fontsize = "8"]
-"Geborand§12591" [label = "Geborand",height = "0.208333",width = "0.208333",pos = "177.681019,-494.330429",fontsize = "6"]
-"MotherInnocent§12630" [label = "MotherInnocent",height = "0.226190",width = "0.226190",pos = "161.886296,-164.096543",fontsize = "6"]
-"Zephine§12608" [label = "Zephine",height = "0.315476",width = "0.315476",pos = "-328.119945,-12.133042",fontsize = "10"]
-"Champmathieu§12621" [label = "Champmathieu",height = "0.297619",width = "0.297619",pos = "-18.754284,-241.749405",fontsize = "10"]
-"Listolier§12603" [label = "Listolier",height = "0.315476",width = "0.315476",pos = "-282.647045,125.413460",fontsize = "10"]
-"Marguerite§12598" [label = "Marguerite",height = "0.226190",width = "0.226190",pos = "-189.747051,-107.687393",fontsize = "6"]
-"Combeferre§12645" [label = "Combeferre",height = "0.386905",width = "0.386905",pos = "60.877201,251.135151"]
-"OldMan§12595" [label = "OldMan",height = "0.208333",width = "0.208333",pos = "-5.483165,-433.701950",fontsize = "6"]
-"Bossuet§12650" [label = "Bossuet",height = "0.422619",width = "0.422619",pos = "116.251118,139.376808",fontsize = "15"]
-"Child1§12659" [label = "Child1",height = "0.226190",width = "0.226190",pos = "17.806721,350.093857",fontsize = "6"]
-"Favourite§12606" [label = "Favourite",height = "0.315476",width = "0.315476",pos = "-340.978222,101.344269",fontsize = "10"]
-"Dahlia§12607" [label = "Dahlia",height = "0.315476",width = "0.315476",pos = "-357.802135,41.875488",fontsize = "10"]
-"Valjean§12597" [label = "Valjean",height = "0.833333",width = "0.833333",pos = "-4.795299,-66.602188",fontsize = "35"]
-"MmePontmercy§12638" [label = "MmePontmercy",height = "0.226190",width = "0.226190",pos = "243.672184,77.137581",fontsize = "6"]
-"Boulatruelle§12626" [label = "Boulatruelle",height = "0.208333",width = "0.208333",pos = "153.707035,31.578110",fontsize = "6"]
-"Montparnasse§12657" [label = "Montparnasse",height = "0.351190",width = "0.351190",pos = "-54.492962,59.185409",fontsize = "12"]
-"Fantine§12609" [label = "Fantine",height = "0.458333",width = "0.458333",pos = "-186.770214,5.019607",fontsize = "17"]
-"Child2§12660" [label = "Child2",height = "0.226190",width = "0.226190",pos = "-73.603710,318.342262",fontsize = "6"]
-"Marius§12641" [label = "Marius",height = "0.529762",width = "0.529762",pos = "10.528004,134.388351",fontsize = "20"]
-"Babet§12655" [label = "Babet",height = "0.369048",width = "0.369048",pos = "33.200306,91.274994",fontsize = "13"]
-"Prouvaire§12646" [label = "Prouvaire",height = "0.351190",width = "0.351190",pos = "159.735737,279.447609",fontsize = "12"]
-"Bahorel§12649" [label = "Bahorel",height = "0.404762",width = "0.404762",pos = "126.665348,233.643322",fontsize = "15"]
-"CountessDeLo§12590" [label = "CountessDeLo",height = "0.208333",width = "0.208333",pos = "103.091130,-495.935043",fontsize = "6"]
-"Joly§12651" [label = "Joly",height = "0.404762",width = "0.404762",pos = "143.852711,188.476588",fontsize = "15"]
-"Tholomyes§12602" [label = "Tholomyes",height = "0.351190",width = "0.351190",pos = "-201.766918,82.843445",fontsize = "12"]
-"LtGillenormand§12640" [label = "LtGillenormand",height = "0.261905",width = "0.261905",pos = "32.117756,0.390259",fontsize = "8"]
-"Bamatabois§12615" [label = "Bamatabois",height = "0.333333",width = "0.333333",pos = "-81.375072,-124.180283",fontsize = "11"]
-"Gillenormand§12635" [label = "Gillenormand",height = "0.315476",width = "0.315476",pos = "-62.479015,104.795395",fontsize = "10"]
-"Brujon§12661" [label = "Brujon",height = "0.315476",width = "0.315476",pos = "-89.207866,155.139370",fontsize = "10"]
-"Judge§12620" [label = "Judge",height = "0.297619",width = "0.297619",pos = "-92.984081,-188.325791",fontsize = "10"]
-"Courfeyrac§12648" [label = "Courfeyrac",height = "0.422619",width = "0.422619",pos = "87.584080,204.687013",fontsize = "15"]
-"MmeDeR§12599" [label = "MmeDeR",height = "0.208333",width = "0.208333",pos = "82.140843,-174.140854",fontsize = "6"]
-"MmeThenardier§12610" [label = "MmeThenardier",height = "0.386905",width = "0.386905",pos = "-108.049572,101.198921"]
-"Chenildieu§12623" [label = "Chenildieu",height = "0.297619",width = "0.297619",pos = "-18.535381,-159.023148",fontsize = "10"]
-"Champtercier§12592" [label = "Champtercier",height = "0.208333",width = "0.208333",pos = "42.018269,-484.779343",fontsize = "6"]
-"Magnon§12636" [label = "Magnon",height = "0.226190",width = "0.226190",pos = "-198.467418,183.134593",fontsize = "6"]
-"MlleGillenormand§12637" [label = "MlleGillenormand",height = "0.315476",width = "0.315476",pos = "91.794270,36.894409",fontsize = "10"]
-"Count§12594" [label = "Count",height = "0.208333",width = "0.208333",pos = "237.185414,-417.144638",fontsize = "6"]
-"MlleVaubois§12639" [label = "MlleVaubois",height = "0.208333",width = "0.208333",pos = "255.968392,3.907730",fontsize = "6"]
-"Anzelma§12628" [label = "Anzelma",height = "0.244048",width = "0.244048",pos = "-95.058178,234.497951",fontsize = "7"]
-"Woman2§12629" [label = "Woman2",height = "0.244048",width = "0.244048",pos = "-95.835735,-81.985336",fontsize = "7"]
-"Cravatte§12593" [label = "Cravatte",height = "0.208333",width = "0.208333",pos = "167.109989,-432.980026",fontsize = "6"]
-"Brevet§12622" [label = "Brevet",height = "0.297619",width = "0.297619",pos = "-76.540203,-248.039841",fontsize = "10"]
-"Thenardier§12611" [label = "Thenardier",height = "0.476190",width = "0.476190",pos = "-19.325695,85.748146",fontsize = "18"]
-"Gueulemer§12654" [label = "Gueulemer",height = "0.369048",width = "0.369048",pos = "-99.413830,51.656051",fontsize = "13"]
-"MmeMagloire§12589" [label = "MmeMagloire",height = "0.244048",width = "0.244048",pos = "28.769398,-261.451645",fontsize = "7"]
-"Eponine§12627" [label = "Eponine",height = "0.386905",width = "0.386905",pos = "-30.472301,181.158188"]
-"Isabeau§12600" [label = "Isabeau",height = "0.208333",width = "0.208333",pos = "118.952824,-131.406876",fontsize = "6"]
-"Javert§12613" [label = "Javert",height = "0.494048",width = "0.494048",pos = "-23.313915,-8.678314",fontsize = "19"]
-"Gervais§12601" [label = "Gervais",height = "0.208333",width = "0.208333",pos = "-141.546825,-222.947128",fontsize = "6"]
-"Gavroche§12634" [label = "Gavroche",height = "0.583333",width = "0.583333",pos = "29.004689,182.595998",fontsize = "23"]
-"Feuilly§12647" [label = "Feuilly",height = "0.386905",width = "0.386905",pos = "95.542652,287.024467"]
-"Grantaire§12652" [label = "Grantaire",height = "0.369048",width = "0.369048",pos = "194.199673,226.124451",fontsize = "13"]
-"MlleBaptistine§12588" [label = "MlleBaptistine",height = "0.244048",width = "0.244048",pos = "107.219853,-230.163986",fontsize = "7"]
-"Bossuet§12650" -- "Feuilly§12647" 
-"Babet§12655" -- "Eponine§12627" 
-"Dahlia§12607" -- "Blacheville§12605" 
-"Grantaire§12652" -- "Bahorel§12649" 
-"Bamatabois§12615" -- "Javert§12613" 
-"Bahorel§12649" -- "Feuilly§12647" 
-"Valjean§12597" -- "MlleBaptistine§12588" 
-"Marius§12641" -- "Gillenormand§12635" 
-"Joly§12651" -- "Bossuet§12650" 
-"Joly§12651" -- "Feuilly§12647" 
-"Zephine§12608" -- "Dahlia§12607" 
-"Napoleon§12587" -- "Myriel§12586" 
-"Cochepaille§12624" -- "Bamatabois§12615" 
-"Anzelma§12628" -- "Thenardier§12611" 
-"MmeMagloire§12589" -- "Myriel§12586" 
-"Enjolras§12644" -- "Valjean§12597" 
-"Brevet§12622" -- "Bamatabois§12615" 
-"Favourite§12606" -- "Tholomyes§12602" 
-"Marius§12641" -- "Tholomyes§12602" 
-"Bossuet§12650" -- "Enjolras§12644" 
-"Babet§12655" -- "Javert§12613" 
-"Courfeyrac§12648" -- "Mabeuf§12643" 
-"Javert§12613" -- "Thenardier§12611" 
-"Brujon§12661" -- "Babet§12655" 
-"Dahlia§12607" -- "Fameuil§12604" 
-"Favourite§12606" -- "Fameuil§12604" 
-"Bossuet§12650" -- "Combeferre§12645" 
-"Gueulemer§12654" -- "Eponine§12627" 
-"Cosette§12612" -- "Valjean§12597" 
-"Joly§12651" -- "Prouvaire§12646" 
-"Chenildieu§12623" -- "Judge§12620" 
-"Courfeyrac§12648" -- "Gavroche§12634" 
-"Javert§12613" -- "Valjean§12597" 
-"Fantine§12609" -- "Listolier§12603" 
-"Feuilly§12647" -- "Prouvaire§12646" 
-"Grantaire§12652" -- "Courfeyrac§12648" 
-"Zephine§12608" -- "Fameuil§12604" 
-"Marius§12641" -- "Gavroche§12634" 
-"Courfeyrac§12648" -- "Combeferre§12645" 
-"Champmathieu§12621" -- "Valjean§12597" 
-"MotherInnocent§12630" -- "Fauchelevent§12614" 
-"Claquesous§12656" -- "Babet§12655" 
-"MmeThenardier§12610" -- "Fantine§12609" 
-"Cosette§12612" -- "Tholomyes§12602" 
-"Fauchelevent§12614" -- "Valjean§12597" 
-"Grantaire§12652" -- "Joly§12651" 
-"Brujon§12661" -- "Gavroche§12634" 
-"Simplice§12617" -- "Fantine§12609" 
-"Joly§12651" -- "Bahorel§12649" 
-"Cosette§12612" -- "MmeThenardier§12610" 
-"Javert§12613" -- "MmeThenardier§12610" 
-"Grantaire§12652" -- "Combeferre§12645" 
-"Grantaire§12652" -- "Feuilly§12647" 
-"Pontmercy§12625" -- "Thenardier§12611" 
-"Mabeuf§12643" -- "Eponine§12627" 
-"Fameuil§12604" -- "Tholomyes§12602" 
-"Bamatabois§12615" -- "Fantine§12609" 
-"Grantaire§12652" -- "Gavroche§12634" 
-"Gueulemer§12654" -- "Javert§12613" 
-"Fantine§12609" -- "Blacheville§12605" 
-"Fantine§12609" -- "Favourite§12606" 
-"Child2§12660" -- "Gavroche§12634" 
-"Gavroche§12634" -- "Valjean§12597" 
-"Gribier§12631" -- "Fauchelevent§12614" 
-"LtGillenormand§12640" -- "Cosette§12612" 
-"Combeferre§12645" -- "Marius§12641" 
-"Woman1§12619" -- "Javert§12613" 
-"Woman2§12629" -- "Cosette§12612" 
-"MlleBaptistine§12588" -- "Myriel§12586" 
-"MlleGillenormand§12637" -- "Valjean§12597" 
-"Marius§12641" -- "MlleGillenormand§12637" 
-"Gavroche§12634" -- "Thenardier§12611" 
-"Cochepaille§12624" -- "Chenildieu§12623" 
-"Gueulemer§12654" -- "MmeThenardier§12610" 
-"Bossuet§12650" -- "Valjean§12597" 
-"Gillenormand§12635" -- "Cosette§12612" 
-"Chenildieu§12623" -- "Bamatabois§12615" 
-"Judge§12620" -- "Bamatabois§12615" 
-"Zephine§12608" -- "Favourite§12606" 
-"Brujon§12661" -- "Montparnasse§12657" 
-"Anzelma§12628" -- "MmeThenardier§12610" 
-"Gueulemer§12654" -- "Gavroche§12634" 
-"MlleGillenormand§12637" -- "Gillenormand§12635" 
-"Listolier§12603" -- "Tholomyes§12602" 
-"Dahlia§12607" -- "Favourite§12606" 
-"Marius§12641" -- "Eponine§12627" 
-"Enjolras§12644" -- "Mabeuf§12643" 
-"Bossuet§12650" -- "Gavroche§12634" 
-"Fameuil§12604" -- "Listolier§12603" 
-"Eponine§12627" -- "MmeThenardier§12610" 
-"Claquesous§12656" -- "Valjean§12597" 
-"MmeThenardier§12610" -- "Valjean§12597" 
-"Child1§12659" -- "Gavroche§12634" 
-"BaronessT§12642" -- "Gillenormand§12635" 
-"Woman2§12629" -- "Javert§12613" 
-"Fantine§12609" -- "Tholomyes§12602" 
-"Grantaire§12652" -- "Enjolras§12644" 
-"Brujon§12661" -- "Eponine§12627" 
-"Mabeuf§12643" -- "Marius§12641" 
-"Claquesous§12656" -- "Gueulemer§12654" 
-"Fantine§12609" -- "Fameuil§12604" 
-"Bossuet§12650" -- "Marius§12641" 
-"Zephine§12608" -- "Blacheville§12605" 
-"Bahorel§12649" -- "Marius§12641" 
-"Perpetue§12616" -- "Fantine§12609" 
-"Champmathieu§12621" -- "Judge§12620" 
-"Dahlia§12607" -- "Listolier§12603" 
-"Child2§12660" -- "Child1§12659" 
-"Montparnasse§12657" -- "Babet§12655" 
-"MlleVaubois§12639" -- "MlleGillenormand§12637" 
-"Bossuet§12650" -- "Prouvaire§12646" 
-"Montparnasse§12657" -- "Thenardier§12611" 
-"Claquesous§12656" -- "Eponine§12627" 
-"Bossuet§12650" -- "Bahorel§12649" 
-"Valjean§12597" -- "Myriel§12586" 
-"MmeHucheloup§12662" -- "Gavroche§12634" 
-"Champmathieu§12621" -- "Bamatabois§12615" 
-"Woman2§12629" -- "Valjean§12597" 
-"Babet§12655" -- "Thenardier§12611" 
-"MmeDeR§12599" -- "Valjean§12597" 
-"Zephine§12608" -- "Tholomyes§12602" 
-"Fantine§12609" -- "Marguerite§12598" 
-"Claquesous§12656" -- "Enjolras§12644" 
-"Brevet§12622" -- "Judge§12620" 
-"Claquesous§12656" -- "MmeThenardier§12610" 
-"LtGillenormand§12640" -- "MlleGillenormand§12637" 
-"Chenildieu§12623" -- "Champmathieu§12621" 
-"Magnon§12636" -- "Gillenormand§12635" 
-"Thenardier§12611" -- "Fantine§12609" 
-"Marguerite§12598" -- "Valjean§12597" 
-"Fantine§12609" -- "Dahlia§12607" 
-"Boulatruelle§12626" -- "Thenardier§12611" 
-"Gervais§12601" -- "Valjean§12597" 
-"Joly§12651" -- "Gavroche§12634" 
-"Chenildieu§12623" -- "Valjean§12597" 
-"Joly§12651" -- "Enjolras§12644" 
-"Bossuet§12650" -- "Mabeuf§12643" 
-"Magnon§12636" -- "MmeThenardier§12610" 
-"Valjean§12597" -- "Labarre§12596" 
-"Gueulemer§12654" -- "Valjean§12597" 
-"Valjean§12597" -- "MmeMagloire§12589" 
-"MmePontmercy§12638" -- "Pontmercy§12625" 
-"Joly§12651" -- "Combeferre§12645" 
-"Woman1§12619" -- "Valjean§12597" 
-"Courfeyrac§12648" -- "Eponine§12627" 
-"Cosette§12612" -- "Thenardier§12611" 
-"Brevet§12622" -- "Champmathieu§12621" 
-"MmeHucheloup§12662" -- "Bahorel§12649" 
-"Toussaint§12658" -- "Javert§12613" 
-"Gueulemer§12654" -- "Thenardier§12611" 
-"MmeHucheloup§12662" -- "Bossuet§12650" 
-"Enjolras§12644" -- "Gavroche§12634" 
-"Blacheville§12605" -- "Tholomyes§12602" 
-"Fantine§12609" -- "Valjean§12597" 
-"Brujon§12661" -- "Claquesous§12656" 
-"MotherPlutarch§12653" -- "Mabeuf§12643" 
-"Babet§12655" -- "MmeThenardier§12610" 
-"Judge§12620" -- "Valjean§12597" 
-"Dahlia§12607" -- "Tholomyes§12602" 
-"Bahorel§12649" -- "Prouvaire§12646" 
-"Scaufflaire§12618" -- "Valjean§12597" 
-"Combeferre§12645" -- "Enjolras§12644" 
-"Grantaire§12652" -- "Bossuet§12650" 
-"Brevet§12622" -- "Valjean§12597" 
-"Zephine§12608" -- "Listolier§12603" 
-"Thenardier§12611" -- "MmeThenardier§12610" 
-"MmePontmercy§12638" -- "MlleGillenormand§12637" 
-"Cochepaille§12624" -- "Judge§12620" 
-"Fantine§12609" -- "Zephine§12608" 
-"Thenardier§12611" -- "Valjean§12597" 
-"Joly§12651" -- "Marius§12641" 
-"Isabeau§12600" -- "Valjean§12597" 
-"Simplice§12617" -- "Javert§12613" 
-"MotherInnocent§12630" -- "Valjean§12597" 
-"Feuilly§12647" -- "Mabeuf§12643" 
-"Simplice§12617" -- "Valjean§12597" 
-"Fauchelevent§12614" -- "Javert§12613" 
-"Mabeuf§12643" -- "Gavroche§12634" 
-"MmeHucheloup§12662" -- "Courfeyrac§12648" 
-"Blacheville§12605" -- "Listolier§12603" 
-"MlleGillenormand§12637" -- "Cosette§12612" 
-"Bahorel§12649" -- "Gavroche§12634" 
-"Babet§12655" -- "Gueulemer§12654" 
-"Geborand§12591" -- "Myriel§12586" 
-"Babet§12655" -- "Valjean§12597" 
-"Javert§12613" -- "Fantine§12609" 
-"Joly§12651" -- "Courfeyrac§12648" 
-"Marius§12641" -- "Thenardier§12611" 
-"Montparnasse§12657" -- "Eponine§12627" 
-"MmeHucheloup§12662" -- "Joly§12651" 
-"CountessDeLo§12590" -- "Myriel§12586" 
-"Blacheville§12605" -- "Fameuil§12604" 
-"Brujon§12661" -- "Thenardier§12611" 
-"Toussaint§12658" -- "Valjean§12597" 
-"MmeHucheloup§12662" -- "Grantaire§12652" 
-"OldMan§12595" -- "Myriel§12586" 
-"BaronessT§12642" -- "Marius§12641" 
-"Bahorel§12649" -- "Combeferre§12645" 
-"Enjolras§12644" -- "Marius§12641" 
-"Babet§12655" -- "Gavroche§12634" 
-"Enjolras§12644" -- "Javert§12613" 
-"LtGillenormand§12640" -- "Gillenormand§12635" 
-"Toussaint§12658" -- "Cosette§12612" 
-"Gavroche§12634" -- "MmeBurgon§12633" 
-"Champtercier§12592" -- "Myriel§12586" 
-"Claquesous§12656" -- "Javert§12613" 
-"MmeBurgon§12633" -- "Jondrette§12632" 
-"Feuilly§12647" -- "Marius§12641" 
-"Javert§12613" -- "Cosette§12612" 
-"Prouvaire§12646" -- "Enjolras§12644" 
-"Feuilly§12647" -- "Combeferre§12645" 
-"Marius§12641" -- "LtGillenormand§12640" 
-"Montparnasse§12657" -- "Javert§12613" 
-"Feuilly§12647" -- "Gavroche§12634" 
-"Bahorel§12649" -- "Mabeuf§12643" 
-"Simplice§12617" -- "Perpetue§12616" 
-"Montparnasse§12657" -- "Claquesous§12656" 
-"Marius§12641" -- "Cosette§12612" 
-"Favourite§12606" -- "Listolier§12603" 
-"Eponine§12627" -- "Thenardier§12611" 
-"Courfeyrac§12648" -- "Enjolras§12644" 
-"Count§12594" -- "Myriel§12586" 
-"Gavroche§12634" -- "Javert§12613" 
-"Prouvaire§12646" -- "Gavroche§12634" 
-"Brujon§12661" -- "Gueulemer§12654" 
-"Montparnasse§12657" -- "Valjean§12597" 
-"Feuilly§12647" -- "Enjolras§12644" 
-"Montparnasse§12657" -- "Gavroche§12634" 
-"Courfeyrac§12648" -- "Feuilly§12647" 
-"Cochepaille§12624" -- "Champmathieu§12621" 
-"Bahorel§12649" -- "Courfeyrac§12648" 
-"Bahorel§12649" -- "Enjolras§12644" 
-"Grantaire§12652" -- "Prouvaire§12646" 
-"Bossuet§12650" -- "Courfeyrac§12648" 
-"Chenildieu§12623" -- "Brevet§12622" 
-"Gillenormand§12635" -- "Valjean§12597" 
-"Claquesous§12656" -- "Thenardier§12611" 
-"Combeferre§12645" -- "Gavroche§12634" 
-"Cochepaille§12624" -- "Brevet§12622" 
-"Marius§12641" -- "Valjean§12597" 
-"Anzelma§12628" -- "Eponine§12627" 
-"Favourite§12606" -- "Blacheville§12605" 
-"Marius§12641" -- "Pontmercy§12625" 
-"Prouvaire§12646" -- "Combeferre§12645" 
-"Cravatte§12593" -- "Myriel§12586" 
-"Combeferre§12645" -- "Mabeuf§12643" 
-"Montparnasse§12657" -- "Gueulemer§12654" 
-"MmeMagloire§12589" -- "MlleBaptistine§12588" 
-"Bamatabois§12615" -- "Valjean§12597" 
-"Joly§12651" -- "Mabeuf§12643" 
-"Courfeyrac§12648" -- "Prouvaire§12646" 
-"Cochepaille§12624" -- "Valjean§12597" 
-"Courfeyrac§12648" -- "Marius§12641" 
-"MmeHucheloup§12662" -- "Enjolras§12644" 
+node [label = "",penwidth = "8.000000",height = "0.277778",width = "0.277778",tooltip = "",color = "#FFFFFFFF",fillcolor = "#3D9AFFFF",shape = "ellipse",style = "solid,filled",fontname = "SansSerif.plain",fontsize = "24",fontcolor = "#FF9999FF",fixedsize = "true",labelloc = "c"]
+edge [label = "",penwidth = "2.000000",tooltip = "",arrowhead = "none",arrowtail = "none",color = "#003399FF",fontname = "SansSerif.plain",fontsize = "24",fontcolor = "#000000FF",style = "solid",dir = "both"]
+"Myriel§1798" [label = "Myriel",pos = "11.372304,870.375170"]
+"Napoleon§1799" [label = "Napoleon",pos = "155.313944,870.375170"]
+"MlleBaptistine§1800" [label = "MlleBaptistine",pos = "254.068009,422.889903"]
+"MmeMagloire§1801" [label = "MmeMagloire",pos = "401.653002,468.300670"]
+"CountessDeLo§1802" [label = "CountessDeLo",pos = "101.118448,982.913275"]
+"Geborand§1803" [label = "Geborand",pos = "-20.657725,1010.707892"]
+"Champtercier§1804" [label = "Champtercier",pos = "-118.314633,932.829106"]
+"Cravatte§1805" [label = "Cravatte",pos = "-118.314633,807.921233"]
+"Count§1806" [label = "Count",pos = "-20.657725,730.042447"]
+"OldMan§1807" [label = "OldMan",pos = "101.118448,757.837064"]
+"Labarre§1808" [label = "Labarre",pos = "253.274140,165.452861"]
+"Valjean§1809" [label = "Valjean",pos = "213.348614,42.574729"]
+"Marguerite§1810" [label = "Marguerite",pos = "483.013960,-472.080631"]
+"MmeDeR§1811" [label = "MmeDeR",pos = "108.822232,118.517591"]
+"Isabeau§1812" [label = "Isabeau",pos = "108.822232,-33.368133"]
+"Gervais§1813" [label = "Gervais",pos = "253.274140,-80.303403"]
+"Tholomyes§1814" [label = "Tholomyes",pos = "134.864746,-481.541208"]
+"Listolier§1815" [label = "Listolier",pos = "184.059744,-648.047353"]
+"Fameuil§1816" [label = "Fameuil",pos = "223.794165,-648.047353"]
+"Blacheville§1817" [label = "Blacheville",pos = "272.989162,-755.897925"]
+"Favourite§1818" [label = "Favourite",pos = "134.864746,-718.055619"]
+"Dahlia§1819" [label = "Dahlia",pos = "344.889544,-625.341970"]
+"Zephine§1820" [label = "Zephine",pos = "346.781659,-665.076391"]
+"Fantine§1821" [label = "Fantine",pos = "276.773393,-477.756977"]
+"MmeThenardier§1822" [label = "MmeThenardier",pos = "87.561864,-420.993518"]
+"Thenardier§1823" [label = "Thenardier",pos = "-8.936016,-398.288135"]
+"Cosette§1824" [label = "Cosette",pos = "97.022440,-275.300641"]
+"Javert§1825" [label = "Javert",pos = "106.483017,-343.416791"]
+"Fauchelevent§1826" [label = "Fauchelevent",pos = "465.984922,-328.279869"]
+"Bamatabois§1827" [label = "Bamatabois",pos = "452.740115,-175.018530"]
+"Perpetue§1828" [label = "Perpetue",pos = "522.748381,-568.578511"]
+"Simplice§1829" [label = "Simplice",pos = "361.918581,-388.827558"]
+"Scaufflaire§1830" [label = "Scaufflaire",pos = "342.550328,42.574729"]
+"Woman1§1831" [label = "Woman1",pos = "-56.238899,-44.462575"]
+"Judge§1832" [label = "Judge",pos = "539.777419,87.985496"]
+"Champmathieu§1833" [label = "Champmathieu",pos = "657.088567,-122.039302"]
+"Brevet§1834" [label = "Brevet",pos = "539.777419,-25.541422"]
+"Chenildieu§1835" [label = "Chenildieu",pos = "623.030492,-44.462575"]
+"Cochepaille§1836" [label = "Cochepaille",pos = "674.117605,33.114152"]
+"Pontmercy§1837" [label = "Pontmercy",pos = "8.093021,-137.176224"]
+"Boulatruelle§1838" [label = "Boulatruelle",pos = "-101.649666,-693.458121"]
+"Eponine§1839" [label = "Eponine",pos = "-150.844663,-305.574485"]
+"Anzelma§1840" [label = "Anzelma",pos = "-90.296974,-593.176010"]
+"Woman2§1841" [label = "Woman2",pos = "318.399929,-269.624295"]
+"MotherInnocent§1842" [label = "MotherInnocent",pos = "660.872798,-273.408525"]
+"Gribier§1843" [label = "Gribier",pos = "710.067795,-439.914671"]
+"Jondrette§1844" [label = "Jondrette",pos = "-824.437708,-473.972746"]
+"MmeBurgon§1845" [label = "MmeBurgon",pos = "-584.139066,-403.964481"]
+"Gavroche§1846" [label = "Gavroche",pos = "-266.263696,-303.682370"]
+"Gillenormand§1847" [label = "Gillenormand",pos = "91.346094,-175.018530"]
+"Magnon§1848" [label = "Magnon",pos = "238.931087,-315.035062"]
+"MlleGillenormand§1849" [label = "MlleGillenormand",pos = "6.200906,105.014533"]
+"MmePontmercy§1850" [label = "MmePontmercy",pos = "174.599167,260.167987"]
+"MlleVaubois§1851" [label = "MlleVaubois",pos = "27.014174,379.371251"]
+"LtGillenormand§1852" [label = "LtGillenormand",pos = "-69.483706,16.085115"]
+"Marius§1853" [label = "Marius",pos = "-111.110242,-165.557954"]
+"BaronessT§1854" [label = "BaronessT",pos = "-126.247165,122.043571"]
+"Mabeuf§1855" [label = "Mabeuf",pos = "-237.881967,-33.109883"]
+"Enjolras§1856" [label = "Enjolras",pos = "-224.637160,-176.910645"]
+"Combeferre§1857" [label = "Combeferre",pos = "-376.006383,-29.325653"]
+"Prouvaire§1858" [label = "Prouvaire",pos = "-487.641186,-169.342184"]
+"Feuilly§1859" [label = "Feuilly",pos = "-296.537541,-89.873342"]
+"Courfeyrac§1860" [label = "Courfeyrac",pos = "-341.948308,-203.400260"]
+"Bahorel§1861" [label = "Bahorel",pos = "-340.056193,-243.134681"]
+"Bossuet§1862" [label = "Bossuet",pos = "-336.271962,-87.981227"]
+"Joly§1863" [label = "Joly",pos = "-376.006383,-157.989492"]
+"Grantaire§1864" [label = "Grantaire",pos = "-483.856955,-122.039302"]
+"MotherPlutarch§1865" [label = "MotherPlutarch",pos = "-383.574844,209.080874"]
+"Gueulemer§1866" [label = "Gueulemer",pos = "-69.483706,-396.396019"]
+"Babet§1867" [label = "Babet",pos = "-42.994092,-468.296401"]
+"Claquesous§1868" [label = "Claquesous",pos = "-60.023129,-286.653332"]
+"Montparnasse§1869" [label = "Montparnasse",pos = "-141.384087,-390.719674"]
+"Toussaint§1870" [label = "Toussaint",pos = "272.989162,-199.616029"]
+"Child1§1871" [label = "Child1",pos = "-413.848689,-528.844090"]
+"Child2§1872" [label = "Child2",pos = "-453.583110,-525.059859"]
+"Brujon§1873" [label = "Brujon",pos = "-215.176583,-502.354476"]
+"MmeHucheloup§1874" [label = "MmeHucheloup",pos = "-466.827917,-286.653332"]
+"Feuilly§1859" -- "Combeferre§1857" 
+"Feuilly§1859" -- "Mabeuf§1855" 
+"Feuilly§1859" -- "Marius§1853" 
+"Courfeyrac§1860" -- "Marius§1853" 
+"Courfeyrac§1860" -- "Enjolras§1856" 
+"Courfeyrac§1860" -- "Combeferre§1857" 
+"Courfeyrac§1860" -- "Gavroche§1846" 
+"Courfeyrac§1860" -- "Mabeuf§1855" 
+"Courfeyrac§1860" -- "Eponine§1839" 
+"Courfeyrac§1860" -- "Feuilly§1859" 
+"Courfeyrac§1860" -- "Prouvaire§1858" 
+"Bahorel§1861" -- "Combeferre§1857" 
+"Bahorel§1861" -- "Gavroche§1846" 
+"Bahorel§1861" -- "Courfeyrac§1860" 
+"Bahorel§1861" -- "Mabeuf§1855" 
+"Bahorel§1861" -- "Enjolras§1856" 
+"Bahorel§1861" -- "Feuilly§1859" 
+"Bahorel§1861" -- "Prouvaire§1858" 
+"Bahorel§1861" -- "Marius§1853" 
+"Bossuet§1862" -- "Marius§1853" 
+"Bossuet§1862" -- "Courfeyrac§1860" 
+"Bossuet§1862" -- "Gavroche§1846" 
+"Bossuet§1862" -- "Bahorel§1861" 
+"Bossuet§1862" -- "Enjolras§1856" 
+"Bossuet§1862" -- "Feuilly§1859" 
+"Bossuet§1862" -- "Prouvaire§1858" 
+"Bossuet§1862" -- "Combeferre§1857" 
+"Bossuet§1862" -- "Mabeuf§1855" 
+"Bossuet§1862" -- "Valjean§1809" 
+"Joly§1863" -- "Bahorel§1861" 
+"Joly§1863" -- "Bossuet§1862" 
+"Joly§1863" -- "Gavroche§1846" 
+"Joly§1863" -- "Courfeyrac§1860" 
+"Joly§1863" -- "Enjolras§1856" 
+"Joly§1863" -- "Feuilly§1859" 
+"Joly§1863" -- "Prouvaire§1858" 
+"Joly§1863" -- "Combeferre§1857" 
+"Joly§1863" -- "Mabeuf§1855" 
+"Joly§1863" -- "Marius§1853" 
+"Grantaire§1864" -- "Bossuet§1862" 
+"Grantaire§1864" -- "Enjolras§1856" 
+"Grantaire§1864" -- "Combeferre§1857" 
+"Grantaire§1864" -- "Courfeyrac§1860" 
+"Grantaire§1864" -- "Joly§1863" 
+"Grantaire§1864" -- "Gavroche§1846" 
+"Grantaire§1864" -- "Bahorel§1861" 
+"Grantaire§1864" -- "Feuilly§1859" 
+"Grantaire§1864" -- "Prouvaire§1858" 
+"MotherPlutarch§1865" -- "Mabeuf§1855" 
+"Gueulemer§1866" -- "Thenardier§1823" 
+"Gueulemer§1866" -- "Valjean§1809" 
+"Gueulemer§1866" -- "MmeThenardier§1822" 
+"Gueulemer§1866" -- "Javert§1825" 
+"Gueulemer§1866" -- "Gavroche§1846" 
+"Gueulemer§1866" -- "Eponine§1839" 
+"Babet§1867" -- "Thenardier§1823" 
+"Babet§1867" -- "Gueulemer§1866" 
+"Babet§1867" -- "Valjean§1809" 
+"Babet§1867" -- "MmeThenardier§1822" 
+"Babet§1867" -- "Javert§1825" 
+"Babet§1867" -- "Gavroche§1846" 
+"Babet§1867" -- "Eponine§1839" 
+"Claquesous§1868" -- "Thenardier§1823" 
+"Claquesous§1868" -- "Babet§1867" 
+"Claquesous§1868" -- "Gueulemer§1866" 
+"Claquesous§1868" -- "Valjean§1809" 
+"Claquesous§1868" -- "MmeThenardier§1822" 
+"Claquesous§1868" -- "Javert§1825" 
+"Claquesous§1868" -- "Eponine§1839" 
+"Claquesous§1868" -- "Enjolras§1856" 
+"Montparnasse§1869" -- "Javert§1825" 
+"Montparnasse§1869" -- "Babet§1867" 
+"Montparnasse§1869" -- "Gueulemer§1866" 
+"Montparnasse§1869" -- "Claquesous§1868" 
+"Montparnasse§1869" -- "Valjean§1809" 
+"Montparnasse§1869" -- "Gavroche§1846" 
+"Montparnasse§1869" -- "Eponine§1839" 
+"Montparnasse§1869" -- "Thenardier§1823" 
+"Toussaint§1870" -- "Cosette§1824" 
+"Toussaint§1870" -- "Javert§1825" 
+"Toussaint§1870" -- "Valjean§1809" 
+"Child1§1871" -- "Gavroche§1846" 
+"Child2§1872" -- "Gavroche§1846" 
+"Child2§1872" -- "Child1§1871" 
+"Brujon§1873" -- "Babet§1867" 
+"Brujon§1873" -- "Gueulemer§1866" 
+"Brujon§1873" -- "Thenardier§1823" 
+"Brujon§1873" -- "Gavroche§1846" 
+"Brujon§1873" -- "Eponine§1839" 
+"Brujon§1873" -- "Claquesous§1868" 
+"Brujon§1873" -- "Montparnasse§1869" 
+"MmeHucheloup§1874" -- "Bossuet§1862" 
+"MmeHucheloup§1874" -- "Joly§1863" 
+"MmeHucheloup§1874" -- "Grantaire§1864" 
+"MmeHucheloup§1874" -- "Bahorel§1861" 
+"MmeHucheloup§1874" -- "Courfeyrac§1860" 
+"MmeHucheloup§1874" -- "Gavroche§1846" 
+"MmeHucheloup§1874" -- "Enjolras§1856" 
+"Napoleon§1799" -- "Myriel§1798" 
+"MlleBaptistine§1800" -- "Myriel§1798" 
+"MmeMagloire§1801" -- "Myriel§1798" 
+"MmeMagloire§1801" -- "MlleBaptistine§1800" 
+"CountessDeLo§1802" -- "Myriel§1798" 
+"Geborand§1803" -- "Myriel§1798" 
+"Champtercier§1804" -- "Myriel§1798" 
+"Cravatte§1805" -- "Myriel§1798" 
+"Count§1806" -- "Myriel§1798" 
+"OldMan§1807" -- "Myriel§1798" 
+"Valjean§1809" -- "Labarre§1808" 
+"Valjean§1809" -- "MmeMagloire§1801" 
+"Valjean§1809" -- "MlleBaptistine§1800" 
+"Valjean§1809" -- "Myriel§1798" 
+"Marguerite§1810" -- "Valjean§1809" 
+"MmeDeR§1811" -- "Valjean§1809" 
+"Isabeau§1812" -- "Valjean§1809" 
+"Gervais§1813" -- "Valjean§1809" 
+"Listolier§1815" -- "Tholomyes§1814" 
+"Fameuil§1816" -- "Tholomyes§1814" 
+"Fameuil§1816" -- "Listolier§1815" 
+"Blacheville§1817" -- "Tholomyes§1814" 
+"Blacheville§1817" -- "Listolier§1815" 
+"Blacheville§1817" -- "Fameuil§1816" 
+"Favourite§1818" -- "Tholomyes§1814" 
+"Favourite§1818" -- "Listolier§1815" 
+"Favourite§1818" -- "Fameuil§1816" 
+"Favourite§1818" -- "Blacheville§1817" 
+"Dahlia§1819" -- "Tholomyes§1814" 
+"Dahlia§1819" -- "Listolier§1815" 
+"Dahlia§1819" -- "Fameuil§1816" 
+"Dahlia§1819" -- "Blacheville§1817" 
+"Dahlia§1819" -- "Favourite§1818" 
+"Zephine§1820" -- "Tholomyes§1814" 
+"Zephine§1820" -- "Listolier§1815" 
+"Zephine§1820" -- "Fameuil§1816" 
+"Zephine§1820" -- "Blacheville§1817" 
+"Zephine§1820" -- "Favourite§1818" 
+"Zephine§1820" -- "Dahlia§1819" 
+"Fantine§1821" -- "Tholomyes§1814" 
+"Fantine§1821" -- "Listolier§1815" 
+"Fantine§1821" -- "Fameuil§1816" 
+"Fantine§1821" -- "Blacheville§1817" 
+"Fantine§1821" -- "Favourite§1818" 
+"Fantine§1821" -- "Dahlia§1819" 
+"Fantine§1821" -- "Zephine§1820" 
+"Fantine§1821" -- "Marguerite§1810" 
+"Fantine§1821" -- "Valjean§1809" 
+"MmeThenardier§1822" -- "Fantine§1821" 
+"MmeThenardier§1822" -- "Valjean§1809" 
+"Thenardier§1823" -- "MmeThenardier§1822" 
+"Thenardier§1823" -- "Fantine§1821" 
+"Thenardier§1823" -- "Valjean§1809" 
+"Cosette§1824" -- "MmeThenardier§1822" 
+"Cosette§1824" -- "Valjean§1809" 
+"Cosette§1824" -- "Tholomyes§1814" 
+"Cosette§1824" -- "Thenardier§1823" 
+"Javert§1825" -- "Valjean§1809" 
+"Javert§1825" -- "Fantine§1821" 
+"Javert§1825" -- "Thenardier§1823" 
+"Javert§1825" -- "MmeThenardier§1822" 
+"Javert§1825" -- "Cosette§1824" 
+"Fauchelevent§1826" -- "Valjean§1809" 
+"Fauchelevent§1826" -- "Javert§1825" 
+"Bamatabois§1827" -- "Fantine§1821" 
+"Bamatabois§1827" -- "Javert§1825" 
+"Bamatabois§1827" -- "Valjean§1809" 
+"Perpetue§1828" -- "Fantine§1821" 
+"Simplice§1829" -- "Perpetue§1828" 
+"Simplice§1829" -- "Valjean§1809" 
+"Simplice§1829" -- "Fantine§1821" 
+"Simplice§1829" -- "Javert§1825" 
+"Scaufflaire§1830" -- "Valjean§1809" 
+"Woman1§1831" -- "Valjean§1809" 
+"Woman1§1831" -- "Javert§1825" 
+"Judge§1832" -- "Valjean§1809" 
+"Judge§1832" -- "Bamatabois§1827" 
+"Champmathieu§1833" -- "Valjean§1809" 
+"Champmathieu§1833" -- "Judge§1832" 
+"Champmathieu§1833" -- "Bamatabois§1827" 
+"Brevet§1834" -- "Judge§1832" 
+"Brevet§1834" -- "Champmathieu§1833" 
+"Brevet§1834" -- "Valjean§1809" 
+"Brevet§1834" -- "Bamatabois§1827" 
+"Chenildieu§1835" -- "Judge§1832" 
+"Chenildieu§1835" -- "Champmathieu§1833" 
+"Chenildieu§1835" -- "Brevet§1834" 
+"Chenildieu§1835" -- "Valjean§1809" 
+"Chenildieu§1835" -- "Bamatabois§1827" 
+"Cochepaille§1836" -- "Judge§1832" 
+"Cochepaille§1836" -- "Champmathieu§1833" 
+"Cochepaille§1836" -- "Brevet§1834" 
+"Cochepaille§1836" -- "Chenildieu§1835" 
+"Cochepaille§1836" -- "Valjean§1809" 
+"Cochepaille§1836" -- "Bamatabois§1827" 
+"Pontmercy§1837" -- "Thenardier§1823" 
+"Boulatruelle§1838" -- "Thenardier§1823" 
+"Eponine§1839" -- "MmeThenardier§1822" 
+"Eponine§1839" -- "Thenardier§1823" 
+"Anzelma§1840" -- "Eponine§1839" 
+"Anzelma§1840" -- "Thenardier§1823" 
+"Anzelma§1840" -- "MmeThenardier§1822" 
+"Woman2§1841" -- "Valjean§1809" 
+"Woman2§1841" -- "Cosette§1824" 
+"Woman2§1841" -- "Javert§1825" 
+"MotherInnocent§1842" -- "Fauchelevent§1826" 
+"MotherInnocent§1842" -- "Valjean§1809" 
+"Gribier§1843" -- "Fauchelevent§1826" 
+"MmeBurgon§1845" -- "Jondrette§1844" 
+"Gavroche§1846" -- "MmeBurgon§1845" 
+"Gavroche§1846" -- "Thenardier§1823" 
+"Gavroche§1846" -- "Javert§1825" 
+"Gavroche§1846" -- "Valjean§1809" 
+"Gillenormand§1847" -- "Cosette§1824" 
+"Gillenormand§1847" -- "Valjean§1809" 
+"Magnon§1848" -- "Gillenormand§1847" 
+"Magnon§1848" -- "MmeThenardier§1822" 
+"MlleGillenormand§1849" -- "Gillenormand§1847" 
+"MlleGillenormand§1849" -- "Cosette§1824" 
+"MlleGillenormand§1849" -- "Valjean§1809" 
+"MmePontmercy§1850" -- "MlleGillenormand§1849" 
+"MmePontmercy§1850" -- "Pontmercy§1837" 
+"MlleVaubois§1851" -- "MlleGillenormand§1849" 
+"LtGillenormand§1852" -- "MlleGillenormand§1849" 
+"LtGillenormand§1852" -- "Gillenormand§1847" 
+"LtGillenormand§1852" -- "Cosette§1824" 
+"Marius§1853" -- "MlleGillenormand§1849" 
+"Marius§1853" -- "Gillenormand§1847" 
+"Marius§1853" -- "Pontmercy§1837" 
+"Marius§1853" -- "LtGillenormand§1852" 
+"Marius§1853" -- "Cosette§1824" 
+"Marius§1853" -- "Valjean§1809" 
+"Marius§1853" -- "Tholomyes§1814" 
+"Marius§1853" -- "Thenardier§1823" 
+"Marius§1853" -- "Eponine§1839" 
+"Marius§1853" -- "Gavroche§1846" 
+"BaronessT§1854" -- "Gillenormand§1847" 
+"BaronessT§1854" -- "Marius§1853" 
+"Mabeuf§1855" -- "Marius§1853" 
+"Mabeuf§1855" -- "Eponine§1839" 
+"Mabeuf§1855" -- "Gavroche§1846" 
+"Enjolras§1856" -- "Marius§1853" 
+"Enjolras§1856" -- "Gavroche§1846" 
+"Enjolras§1856" -- "Javert§1825" 
+"Enjolras§1856" -- "Mabeuf§1855" 
+"Enjolras§1856" -- "Valjean§1809" 
+"Combeferre§1857" -- "Enjolras§1856" 
+"Combeferre§1857" -- "Marius§1853" 
+"Combeferre§1857" -- "Gavroche§1846" 
+"Combeferre§1857" -- "Mabeuf§1855" 
+"Prouvaire§1858" -- "Gavroche§1846" 
+"Prouvaire§1858" -- "Enjolras§1856" 
+"Prouvaire§1858" -- "Combeferre§1857" 
+"Feuilly§1859" -- "Gavroche§1846" 
+"Feuilly§1859" -- "Enjolras§1856" 
+"Feuilly§1859" -- "Prouvaire§1858" 
 }

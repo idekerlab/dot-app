@@ -570,13 +570,15 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		catch(ParseException e){
 			//Invalid sequence of tokens found in file
 			LOGGER.error(e.getMessage());
-			throw new RuntimeException("Sorry! File did not comply to dot language syntax");
+			throw new RuntimeException("Sorry! Unable to parse input file."
+					+ "Try running Graphviz's neato utility on the file to get a compatible file.");
 		}
 		catch (TokenMgrError e) {
 			// Cytoscape is able to continue running even if this error is thrown
 			// Invalid token found in file
 			LOGGER.error(e.getMessage());
-			throw new RuntimeException("Sorry! File did not comply to dot language syntax");
+			throw new RuntimeException("Sorry! Unable to parse input file."
+					+ "Try running Graphviz's neato utility on the file to get a compatible file.");
 		}
 	}	
 }

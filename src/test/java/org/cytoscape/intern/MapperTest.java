@@ -62,7 +62,7 @@ public class MapperTest {
 		View<CyEdge> edgeView = networkView.getEdgeView(edge);
 		String label = "Hello World!";
 		String tooltip = "Hello!";
-		Double width = new Double(25);
+		Double width = Double.valueOf(25.0);
 
 		String labelString = String.format("label = \"%s\"", label);
 		String tooltipString = String.format("tooltip = \"%s\"", tooltip);
@@ -101,7 +101,7 @@ public class MapperTest {
 		assertEquals("ModifyElementId is wrong", "<Hello>", Mapper.modifyElementID("<Hello>"));
 		assertEquals("ModifyElementId is wrong", "\"123baba\"", Mapper.modifyElementID("123baba"));
 		assertEquals("ModifyElementId is wrong", "\"\\\"Hi\\\"Harry\\\"\\\"\"", Mapper.modifyElementID("\"Hi\"Harry\"\""));
-		System.out.println(String.valueOf(new Character('\u2014')));
+		System.out.println(String.valueOf(Character.valueOf('\u2014')));
 		assertEquals("ModifyElementId is wrong", "\227", Mapper.modifyElementID("\227"));
 		
 	}
@@ -114,8 +114,8 @@ public class MapperTest {
 		CyNode node = network.addNode();
 		CyNode node2 = network.addNode();
 		TestVisualStyle vizStyle = new TestVisualStyle();
-		vizStyle.setDefaultValue(BasicVisualLexicon.NODE_BORDER_WIDTH, new Double(1.25));
-		vizStyle.setDefaultValue(BasicVisualLexicon.EDGE_WIDTH, new Double(1.25));
+		vizStyle.setDefaultValue(BasicVisualLexicon.NODE_BORDER_WIDTH, Double.valueOf(1.25));
+		vizStyle.setDefaultValue(BasicVisualLexicon.EDGE_WIDTH, Double.valueOf(1.25));
 		CyEdge edge = network.addEdge(node, node2, true);
 		network.getRow(node).set(CyNetwork.NAME, "TestNode1");
 		network.getRow(node2).set(CyNetwork.NAME, "TestNode2");
@@ -173,8 +173,8 @@ public class MapperTest {
 
 		String escLabel = label.replace("\"", "\\\"");
 		String labelString = String.format("label = \"%s\"", escLabel);
-		String heightString = String.format("height = \"%f\"", new Double(46.99)/72.0);
-		String widthString = String.format("width = \"%f\"", new Double(35.55)/72.0);
+		String heightString = String.format("height = \"%f\"", 46.99/72.0);
+		String widthString = String.format("width = \"%f\"", 35.55/72.0);
 		String tooltipString = String.format("tooltip = \"%s\"", tooltip);
 		String fillColorString = "fillcolor = \"#95DDEEFF\"";
 		String expectedDotString = null;
@@ -187,27 +187,27 @@ public class MapperTest {
 		
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL, label);
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_TOOLTIP, tooltip);
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_HEIGHT, new Double(46.99));
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_WIDTH, new Double(35.55));
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_X_LOCATION, new Double(0));
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION, new Double(0));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_HEIGHT, Double.valueOf(46.99));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_WIDTH, Double.valueOf(35.55));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_X_LOCATION, Double.valueOf(0));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION, Double.valueOf(0));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR, new Color(0x95, 0xDD, 0xEE));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_FACE, new Font(Font.DIALOG, Font.PLAIN, 21));
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_SIZE, new Integer(21));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_FONT_SIZE, Integer.valueOf(21));
 		nodeView.setVisualProperty(BasicVisualLexicon.NODE_LABEL_COLOR, new Color(0xFF, 0xFF, 0x00));
-		nodeView.setVisualProperty(BasicVisualLexicon.NODE_VISIBLE, new Boolean(false));
+		nodeView.setVisualProperty(BasicVisualLexicon.NODE_VISIBLE, Boolean.FALSE);
 		
 		/* original, had to move pos around
 		expectedDotString = String.format("[%s,%s,%s,"
 				+ "pos = \"%f,%f\",%s,%s,%s]",
 				labelString, tooltipString, fillColorString,
-				new Double(0), new Double(0) * -1.0,fontString, fontSizeString, fontColor); 
+				Double.valueOf(0), Double.valueOf(0) * -1.0,fontString, fontSizeString, fontColor); 
 		*/
 
 		expectedDotString = String.format("[%s,%s,%s,%s,"
 				+ "pos = \"%f,%f\",%s,%s,%s,%s,%s]",
 				labelString, heightString, widthString, tooltipString,
-				new Double(0), new Double(0) * -1.0, fillColorString, styleString, fontString, fontSizeString, fontColor); 
+				Double.valueOf(0), Double.valueOf(0) * -1.0, fillColorString, styleString, fontString, fontSizeString, fontColor); 
 		
 	
 		Mapper mapper = new NodePropertyMapper(nodeView, vizStyle, "t");
