@@ -31,7 +31,7 @@ import org.junit.Test;
 
 public class FileOutputTest {
 
-	//@Ignore("Used for testing after a file is made")
+	@Ignore("Used for testing after a file is made")
 	@Test
 	public void testOutput() {
 		InputStream expectedFile = ClassLoader.getSystemResourceAsStream("expected_dot_files/karate.gv");

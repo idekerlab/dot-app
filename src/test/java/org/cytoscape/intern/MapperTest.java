@@ -101,6 +101,7 @@ public class MapperTest {
 		assertEquals("ModifyElementId is wrong", "<Hello>", Mapper.modifyElementID("<Hello>"));
 		assertEquals("ModifyElementId is wrong", "\"123baba\"", Mapper.modifyElementID("123baba"));
 		assertEquals("ModifyElementId is wrong", "\"\\\"Hi\\\"Harry\\\"\\\"\"", Mapper.modifyElementID("\"Hi\"Harry\"\""));
+		assertEquals("ModifyElementId is wrong", "\"\\\\\\\"b\\\\\\\"\"", Mapper.modifyElementID("\\\"b\\\""));
 		System.out.println(String.valueOf(Character.valueOf('\u2014')));
 		assertEquals("ModifyElementId is wrong", "\227", Mapper.modifyElementID("\227"));
 		

@@ -158,8 +158,10 @@ public class DotWriterTask implements CyWriter {
 		CyNetwork networkModel = networkView.getModel();
 		String nodeID = networkModel.getRow(node).get(CyNetwork.NAME,
 				String.class);
-		nodeID = String.format("\"%s§%s\"", nodeID, nodeSUID);
+		nodeID = String.format("%s\247%s", nodeID, nodeSUID);
 		nodeID = Mapper.modifyElementID(nodeID);
+		if (!nodeID.startsWith("\"") && !nodeID.endsWith("\""))
+			nodeID = String.format("\"%s\"", nodeID);
 		return nodeID;
 	}
 

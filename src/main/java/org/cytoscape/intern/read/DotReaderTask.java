@@ -20,6 +20,7 @@ package org.cytoscape.intern.read;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -279,7 +280,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 			return idString;
 		}
 		else if (!labelString.equals("")) {
-			String[] parts = labelString.split("§");
+			String[] parts = labelString.split("\247");
 			return parts[0];
 		}
 		return null;
@@ -570,15 +571,23 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		catch(ParseException e){
 			//Invalid sequence of tokens found in file
 			LOGGER.error(e.getMessage());
-			throw new RuntimeException("Sorry! Unable to parse input file."
+			throw new RuntimeException("Sorry! Unable to parse input file. "
 					+ "Try running Graphviz's neato utility on the file to get a compatible file.");
 		}
 		catch (TokenMgrError e) {
 			// Cytoscape is able to continue running even if this error is thrown
 			// Invalid token found in file
 			LOGGER.error(e.getMessage());
-			throw new RuntimeException("Sorry! Unable to parse input file."
+			throw new RuntimeException("Sorry! Unable to parse input file. "
 					+ "Try running Graphviz's neato utility on the file to get a compatible file.");
+		}
+		finally {
+			try {
+				inStreamReader.close();
+			} catch (IOException e) {
+				LOGGER.error(e.getMessage());
+				throw new RuntimeException("Sorry! Error occurred while attempting to close stream.");
+			}
 		}
 	}	
 }

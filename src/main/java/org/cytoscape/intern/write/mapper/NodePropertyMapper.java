@@ -164,6 +164,7 @@ public class NodePropertyMapper extends Mapper {
 		// determine if using exlabel attribute or not
 		String nodeLabel = view.getVisualProperty(NODE_LABEL);
 		// Replace quotes with escaped quotes if any
+		nodeLabel = nodeLabel.replace("\\", "\\\\");
 		nodeLabel = nodeLabel.replace("\"", "\\\"");
 		// if internal label
 		if (!isEqualToDefault(NODE_LABEL)) {

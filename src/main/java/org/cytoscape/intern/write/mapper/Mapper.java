@@ -201,6 +201,7 @@ public abstract class Mapper {
 		StringBuilder output = new StringBuilder(id.length() + 2);
 		output.append('\"');
 		// replace any quotations from name string with escaped quotes
+		id = id.replace("\\", "\\\\");
 		id = id.replace("\"", "\\\"");
 		output.append(id);
 		output.append('\"');
