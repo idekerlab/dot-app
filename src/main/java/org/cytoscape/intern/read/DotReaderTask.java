@@ -1,5 +1,5 @@
 /**************************
- * Copyright © 2015-2017 Braxton Fitts, Ziran Zhang, Massoud Maher
+ * Copyright © 2015-2020 Braxton Fitts, Ziran Zhang, Massoud Maher
  * 
  * This file is part of dot-app.
  * dot-app is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@ import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -162,7 +163,7 @@ public class DotReaderTask extends AbstractCyNetworkReader {
 		super(inStream, netViewFact, netFact, netMgr, rootNetMgr);
 		
 		// Initialize variables
-		inStreamReader = new InputStreamReader(inStream);
+		inStreamReader = new InputStreamReader(inStream, Charset.forName("UTF-8"));
 		this.vizMapMgr = vizMapMgr;
 		this.vizStyleFact = vizStyleFact;
 		this.gradientListener = gradientListener;

@@ -1,5 +1,5 @@
 /**************************
- * Copyright © 2015-2017 Braxton Fitts, Ziran Zhang, Massoud Maher
+ * Copyright © 2015-2020 Braxton Fitts, Ziran Zhang, Massoud Maher
  * 
  * This file is part of dot-app.
  * dot-app is free software: you can redistribute it and/or modify
@@ -21,6 +21,7 @@ package org.cytoscape.intern.write;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -127,7 +128,7 @@ public class DotWriterTask implements CyWriter {
 	 */
 	public DotWriterTask(OutputStream output, CyNetwork network) {
 		super();
-		outputWriter = new OutputStreamWriter(output);
+		outputWriter = new OutputStreamWriter(output, Charset.forName("UTF-8"));
 		this.network = network;
 
 		LOGGER.info("DotWriterTask constructed");
@@ -145,8 +146,9 @@ public class DotWriterTask implements CyWriter {
 	public DotWriterTask(OutputStream output, CyNetworkView networkView,
 			VisualMappingManager vizMapMgr) {
 
-		outputWriter = new OutputStreamWriter(output);
+		outputWriter = new OutputStreamWriter(output, Charset.forName("UTF-8"));
 		this.networkView = networkView;
+		this.network = networkView.getModel();
 		this.vizStyle = vizMapMgr.getVisualStyle(networkView);
 		directed = NetworkPropertyMapper.isDirected(networkView);
 
@@ -155,8 +157,7 @@ public class DotWriterTask implements CyWriter {
 
 	private String buildNodeID(CyNode node) {
 		Long nodeSUID = node.getSUID();
-		CyNetwork networkModel = networkView.getModel();
-		String nodeID = networkModel.getRow(node).get(CyNetwork.NAME,
+		String nodeID = network.getRow(node).get(CyNetwork.NAME,
 				String.class);
 		nodeID = String.format("%s\247%s", nodeID, nodeSUID);
 		nodeID = Mapper.modifyElementID(nodeID);

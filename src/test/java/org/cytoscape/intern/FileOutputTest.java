@@ -1,5 +1,5 @@
 /**************************
- * Copyright © 2015-2017 Braxton Fitts, Ziran Zhang, Massoud Maher
+ * Copyright © 2015-2020 Braxton Fitts, Ziran Zhang, Massoud Maher
  * 
  * This file is part of dot-app.
  * dot-app is free software: you can redistribute it and/or modify
@@ -25,19 +25,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
 public class FileOutputTest {
 
-	@Ignore("Used for testing after a file is made")
+	//@Ignore("Used for testing after a file is made")
 	@Test
 	public void testOutput() {
 		InputStream expectedFile = ClassLoader.getSystemResourceAsStream("expected_dot_files/karate.gv");
 		InputStream actualFile = ClassLoader.getSystemResourceAsStream("actual_dot_files/karate.gv");
-		BufferedReader expectedReader = new BufferedReader(new InputStreamReader(expectedFile));
-		BufferedReader actualReader = new BufferedReader(new InputStreamReader(actualFile));
+		BufferedReader expectedReader = new BufferedReader(new InputStreamReader(expectedFile, Charset.forName("UTF-8")));
+		BufferedReader actualReader = new BufferedReader(new InputStreamReader(actualFile, Charset.forName("UTF-8")));
 		String expectedRead;
 		String actualRead;
 		try {

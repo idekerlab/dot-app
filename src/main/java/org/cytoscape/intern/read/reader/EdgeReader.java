@@ -1,5 +1,5 @@
 /**************************
- * Copyright © 2015-2017 Braxton Fitts, Ziran Zhang, Massoud Maher
+ * Copyright © 2015-2020 Braxton Fitts, Ziran Zhang, Massoud Maher
  * 
  * This file is part of dot-app.
  * dot-app is free software: you can redistribute it and/or modify
@@ -163,6 +163,9 @@ public class EdgeReader extends Reader{
 		VisualProperty retrievedProp = DOT_TO_CYTOSCAPE.get(name);
 		Object retrievedVal = null;
 		switch(name) {
+			case "tooltip": {
+				// Fall through to label case
+			}
 			case "xlabel": {
 				// Fall through to label case
 			}
